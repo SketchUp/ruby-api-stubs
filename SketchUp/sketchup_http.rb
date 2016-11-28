@@ -1,6 +1,5 @@
 # Copyright:: Copyright 2016 Trimble Inc.
 # License:: The MIT License (MIT)
-# Generated:: 2016-11-25 18:30
 
 module Sketchup::Http
 
@@ -13,6 +12,7 @@ module Sketchup::Http
   PATCH = nil # Stub value.
   POST = nil # Stub value.
   PUT = nil # Stub value.
+
   STATUS_CANCELED = nil # Stub value.
   STATUS_FAILED = nil # Stub value.
   STATUS_PENDING = nil # Stub value.

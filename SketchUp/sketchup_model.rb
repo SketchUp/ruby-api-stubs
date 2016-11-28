@@ -1,6 +1,5 @@
 # Copyright:: Copyright 2016 Trimble Inc.
 # License:: The MIT License (MIT)
-# Generated:: 2016-11-25 18:30
 
 class Sketchup::Model
 
@@ -10,6 +9,7 @@ class Sketchup::Model
   MakeTrial = nil # Stub value.
   ProLicensed = nil # Stub value.
   ProTrial = nil # Stub value.
+
   VERSION_2013 = nil # Stub value.
   VERSION_2014 = nil # Stub value.
   VERSION_2015 = nil # Stub value.

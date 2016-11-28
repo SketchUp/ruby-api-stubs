@@ -1,6 +1,5 @@
 # Copyright:: Copyright 2016 Trimble Inc.
 # License:: The MIT License (MIT)
-# Generated:: 2016-11-25 18:30
 
 class Sketchup::DimensionLinear < Sketchup::Dimension
 
@@ -9,6 +8,7 @@ class Sketchup::DimensionLinear < Sketchup::Dimension
   ALIGNED_TEXT_ABOVE = nil # Stub value.
   ALIGNED_TEXT_CENTER = nil # Stub value.
   ALIGNED_TEXT_OUTSIDE = nil # Stub value.
+
   TEXT_CENTERED = nil # Stub value.
   TEXT_OUTSIDE_END = nil # Stub value.
   TEXT_OUTSIDE_START = nil # Stub value.

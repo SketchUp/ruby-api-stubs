@@ -1,6 +1,5 @@
 # Copyright:: Copyright 2016 Trimble Inc.
 # License:: The MIT License (MIT)
-# Generated:: 2016-11-25 18:30
 
 class Sketchup::ViewObserver
 

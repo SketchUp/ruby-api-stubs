@@ -1,6 +1,5 @@
 # Copyright:: Copyright 2016 Trimble Inc.
 # License:: The MIT License (MIT)
-# Generated:: 2016-11-25 18:30
 
 class Sketchup::Material < Sketchup::Entity
 
@@ -12,6 +11,7 @@ class Sketchup::Material < Sketchup::Entity
 
   COLORIZE_SHIFT = nil # Stub value.
   COLORIZE_TINT = nil # Stub value.
+
   MATERIAL_COLORIZED_TEXTURED = nil # Stub value.
   MATERIAL_SOLID = nil # Stub value.
   MATERIAL_TEXTURED = nil # Stub value.
