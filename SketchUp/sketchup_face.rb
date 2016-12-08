@@ -306,7 +306,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   # @return instances - An array of ComponentInstance objects that
   #   are currently glued to the face.
   #
-  # @version SketchUp 7.0.10247 (M1)
+  # @version SketchUp 7.0 M1
   def get_glued_instances
   end
 

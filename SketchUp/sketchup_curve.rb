@@ -103,7 +103,7 @@ class Sketchup::Curve < Sketchup::Entity
   #
   # @return [Boolean] 
   #
-  # @version SketchUp 7.1 (M1)
+  # @version SketchUp 7.1 M1
   def is_polygon?
   end
 

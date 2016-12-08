@@ -387,7 +387,7 @@ module UI
   #
   # @return [Float] 
   #
-  # @version SketchUp 2017M0
+  # @version SketchUp 2017
   def self.scale_factor
   end
 

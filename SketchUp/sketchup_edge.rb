@@ -290,137 +290,129 @@ class Sketchup::Edge < Sketchup::Drawingelement
   def other_vertex(vertex1)
   end
 
-  # The reversed_in? method is used to determine if the EdgeUse object is
-  # traversed in the corresponding direction as its corresponding edge.
+  # The {#reversed_in?} method is used to determine if the edge is reversed in
+  # a face's bounding loop.
   #
   # @example 
   #   model = Sketchup.active_model
   #   entities = model.active_entities
-  #   pts = []
-  #   pts[0] = [0, 0, 0]
-  #   pts[1] = [9, 0, 0]
-  #   pts[2] = [9, 9, 0]
-  #   pts[3] = [0, 9, 0]
+  #   points = []
+  #   points[0] = [0, 0, 0]
+  #   points[1] = [9, 0, 0]
+  #   points[2] = [9, 9, 0]
+  #   points[3] = [0, 9, 0]
   #   # Add the face to the entities in the model
-  #   face = entities.add_face pts
+  #   face = entities.add_face(points)
   #   edge = face.edges[0]
-  #   begin
-  #     # When the geometry is a 2d rectangle with four edges, the face itself
-  #     # is entities[4]
-  #     status = edge.reversed_in? face
-  #   rescue
-  #     UI.messagebox $!.message
+  #   if edge.reversed_in?(face)
+  #     face.reverse!
   #   end
   #
-  # @param face
-  #   The Face object that is bounded by the edge.
-  #
-  # @return status - true if the edge is reversed, nil if it is not
-  #   reversed.
+  # @param [Sketchup::Face] face
+  #   The face that is bounded by the edge.
   #
   # @return [Boolean] 
+  #
+  # @return [Boolean] +true+ if the edge is reversed, +false+ if it is not
+  #   reversed. +nil+ if the edge and face is not connected.
+  #
+  # @see Sketchup::EdgeUse
+  #
+  # @see Sketchup::Loop
   #
   # @version SketchUp 6.0
   def reversed_in?(face)
   end
 
-  # The smooth= method is used to set the edge to be smooth.
+  # The {#smooth=} method is used to set the edge to be smooth.
+  # 
+  # A smooth edge will cause the shading between connected faces to blend to a
+  # smooth transition. The edge will still be visible.
   #
   # @example 
-  #   entity = Sketchup.active_model.entities.add_line([0,0,0],[100,100,0])
-  #   # Examine the current smooth setting on an edge.
-  #   status = entity.smooth?
-  #   if (status)
-  #     # If true, set it to false
-  #     UI.messagebox "Smooth"
-  #     status = entity.smooth="false"
-  #   else
-  #     # if false, set it to true
-  #     UI.messagebox "Not Smooth"
-  #     status = entity.smooth="true"
-  #   end
+  #   edge = Sketchup.active_model.entities.add_line([0,0,0], [100,100,0])
+  #   # Soft and Smooth are normally set in pairs.
+  #   edge.soft = true
+  #   edge.smooth = true
   #
-  # @param value
-  #   true if you want the edge to be smooth, false if you do
-  #   not want the edge to be smooth.
+  # @note The soft and smooth properties are normally set in pairs. You can
+  #   observer this when the Soften/Smooth Edges feature or holding down Ctrl
+  #   when using the Eraser Tool.
   #
-  # @return status - true if successful, false if unsuccessful
+  # @param [Boolean] value
+  #
+  # @return [Boolean] 
+  #
+  # @see https://help.sketchup.com/en/article/3000097
   #
   # @version SketchUp 6.0
   def smooth=(value)
   end
 
-  # The smooth? method is used to retrieve the current smooth setting for an
+  # The {#smooth?} method is used to retrieve the current smooth setting for an
   # edge.
+  # 
+  # A smooth edge will cause the shading between connected faces to blend to a
+  # smooth transition. The edge will still be visible.
   #
   # @example 
-  #   entity = Sketchup.active_model.entities.add_line([0,0,0],[100,100,0])
-  #   # Examine the current smooth setting on an edge.
-  #   status = entity.smooth?
-  #   if (status)
-  #     # If true, set it to false
-  #     UI.messagebox "Smooth"
-  #     status = entity.smooth="false"
-  #   else
-  #     # if false, set it to true
-  #     UI.messagebox "Not Smooth"
-  #     status = entity.smooth="true"
-  #   end
-  #
-  # @return status - true if smooth, false if not smooth
+  #   edge = Sketchup.active_model.entities.add_line([0,0,0], [100,100,0])
+  #   # Soft and Smooth are normally set in pairs.
+  #   edge.smooth = !edge.smooth?
+  #   edge.soft = edge.smooth?
   #
   # @return [Boolean] 
+  #
+  # @see https://help.sketchup.com/en/article/3000097
   #
   # @version SketchUp 6.0
   def smooth?
   end
 
-  # The smooth= method is used to set the edge to be soft.
+  # The {#soft=} method is used to set the edge to be soft.
+  # 
+  # A soft edge will cause the connected faces to be treated as a surface. This
+  # means that if you have Hidden Geometry off and select one face it will also
+  # select all faces connected with soft edges. A soft edge will also appear
+  # hidden.
   #
   # @example 
-  #   entity = Sketchup.active_model.entities.add_line([0,0,0],[100,100,0])
-  #   # Examine the current soft setting on an edge.
-  #   status = entity.soft?
-  #   if (status)
-  #     # If true, set it to false
-  #     UI.messagebox "Soft"
-  #     status = entity.soft="false"
-  #   else
-  #     # if false, set it to true
-  #     UI.messagebox "Not Soft"
-  #     status = entity.soft="true"
-  #   end
+  #   edge = Sketchup.active_model.entities.add_line([0,0,0], [100,100,0])
+  #   # Soft and Smooth are normally set in pairs.
+  #   edge.soft = true
+  #   edge.smooth = true
   #
-  # @param value
-  #   true if you want the edge to be soft, false if you
-  #   do not want the edge to be soft.
+  # @note The soft and smooth properties are normally set in pairs. You can
+  #   observer this when the Soften/Smooth Edges feature or holding down Ctrl
+  #   when using the Eraser Tool.
   #
-  # @return status - true if successful, false if unsuccessful
+  # @param [Boolean] value
+  #
+  # @return [Boolean] 
+  #
+  # @see https://help.sketchup.com/en/article/3000097
   #
   # @version SketchUp 6.0
   def soft=(value)
   end
 
-  # The soft? method is used to retrieve the current smooth setting for an edge.
-  # A soft edge is automatically hidden unless it is shows up as a profile edge.
+  # The {#soft?} method is used to retrieve the current smooth setting for an
+  # edge.
+  # 
+  # A soft edge will cause the connected faces to be treated as a surface. This
+  # means that if you have Hidden Geometry off and select one face it will also
+  # select all faces connected with soft edges. A soft edge will also appear
+  # hidden.
   #
   # @example 
-  #   entity = Sketchup.active_model.entities.add_line([0,0,0],[100,100,0])
-  #   # Examine the current soft setting on an edge.
-  #   status = entity.soft?
-  #   if (status)
-  #     # If true, set it to false
-  #     UI.messagebox "Soft"
-  #     status = entity.soft="false"
-  #   else
-  #     # if false, set it to true
-  #     UI.messagebox "Not Soft"
-  #     status = entity.soft="true"
-  #   end
-  #
-  # @return status - true if soft, false if not soft
+  #   edge = Sketchup.active_model.entities.add_line([0,0,0], [100,100,0])
+  #   # Soft and Smooth are normally set in pairs.
+  #   edge.soft = !edge.soft?
+  #   edge.smooth = edge.soft?
   #
   # @return [Boolean] 
+  #
+  # @see https://help.sketchup.com/en/article/3000097
   #
   # @version SketchUp 6.0
   def soft?

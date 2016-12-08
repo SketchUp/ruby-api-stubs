@@ -14,7 +14,7 @@ module Sketchup::RegionalSettings
   #
   # @return [String] the decimal separator character
   #
-  # @version SketchUp 2016M1
+  # @version SketchUp 2016 M1
   def self.decimal_separator
   end
 
@@ -29,7 +29,7 @@ module Sketchup::RegionalSettings
   #
   # @return [String] the list separator character
   #
-  # @version SketchUp 2016M1
+  # @version SketchUp 2016 M1
   def self.list_separator
   end
 

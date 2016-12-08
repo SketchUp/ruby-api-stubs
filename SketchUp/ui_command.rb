@@ -114,12 +114,9 @@ class UI::Command
   def menu_text=(menuitem)
   end
 
-  # The set_validation_proc method allows you to change whether the command
+  # The {#set_validation_proc} method allows you to change whether the command
   # is enabled, checked, etc. based on the user state. For example, you might
   # want your command to be disabled unless the user has a current selection.
-  # 
-  # Your procedure should return either MF_ENABLED, MF_DISABLED, MF_CHECKED,
-  # MF_UNCHECKED, or MF_GRAYED.
   #
   # @example 
   #   # Create a command object.
@@ -134,16 +131,17 @@ class UI::Command
   #       MF_ENABLED
   #     end
   #   }
-  #   UI.menu("Draw").add_item cmd
+  #   UI.menu("Draw").add_item(cmd)
   #
-  # @param title.
-  #
-  # @return command - a Command object
+  # @return [UI::Command] 
   #
   # @version SketchUp 6.0
   #
-  # @yield 
-  def set_validation_proc(title)
+  # @yield []
+  #
+  # @yieldreturn [Integer] +MF_ENABLED+, +MF_DISABLED+, +MF_CHECKED+,
+  #   +MF_UNCHECKED+, or +MF_GRAYED+
+  def set_validation_proc
   end
 
   # The small_icon method returns the icon file for the command's

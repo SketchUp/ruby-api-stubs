@@ -408,7 +408,9 @@ class Sketchup::Model
   # For SketchUp Pro 7.1+, valid extensions include dae, kmz, 3ds, dwg,
   # dxf, fbx, obj, wrl, and xsi. SketchUp Free only supports dae and kmz.
   # 
-  # SketchUp Pro 2016+ includes PDF export capability.
+  # Format Support Changes:
+  # * SketchUp 7.1 added COLLADA (.dae) export capability.
+  # * SketchUp Pro 2016+ includes PDF export capability.
   # 
   # The optional second parameter can be either:
   # - a boolean flag, which instructs the exporter to display a summary dialog after export
@@ -494,7 +496,7 @@ class Sketchup::Model
   #
   # @return status - true if successful, false if unsuccessful
   #
-  # @version SketchUp 6.0 / for COLLADA(.dae) SketchUp 7.1
+  # @version SketchUp 6.0
   def export(filename, options)
   end
 
@@ -1241,57 +1243,73 @@ class Sketchup::Model
   def shadow_info
   end
 
-  # The start_operation method is used to notify Edit > Undo that a new
+  # The {#start_operation} method is used to notify SketchUp that a new
   # operation (which can be undone) is starting.
   # 
-  # The String is a description for the operation that is displayed adjacent to
-  # the Edit > Undo menu item.
+  # The +op_name+ argument is a description for the operation that is displayed
+  # adjacent to the Edit > Undo menu item. Make sure to provide a user friendly
+  # name for your operation.
   # 
   # Starting with SketchUp 7.0, there are three additional booleans that one can
-  # pass in when starting an operation. All three default to false.
+  # pass in when starting an operation. It is recommended to always set
+  # +disable_ui+ to +true+. It's left to +false+ for default for compatibility
+  # reasons.
   #
-  # @example 
+  # @example Observer Operation since SU2016
+  #   class MyDefinitionsObserver < Sketchup::DefinitionObserver
+  #     def onComponentAdded(definitions, definition)
+  #       return if definition.deleted?
+  #       # The operation name won't be displayed when the fourth argument is
+  #       # +true+. It will absorb into the previous operation.
+  #       definition.model.start_operation('Tag It', true, false, true)
+  #       definition.set_attribute('MyExtension', 'Tag', 'You are it')
+  #       definition.model.commit_operation
+  #     end
+  #   end
+  #   
+  #   observer = MyDefinitionsObserver.new
   #   model = Sketchup.active_model
-  #   status = model.start_operation('Generate House', true)
+  #   model.definitions.add_observer(observer)
+  #
+  # @example Typical Operation
+  #   model = Sketchup.active_model
+  #   model.start_operation('Generate House', true)
+  #   model.entities.add_line([0, 0, 0], [9, 0, 0])
+  #   model.entities.add_line([9, 0, 0], [9, 0, 9])
+  #   model.commit_operation
   #
   # @note Operations in SketchUp are sequential and cannot be nested. If you start a
   #   new Ruby operation while another is still open, you will implicitly close
   #   the first one.
   #
-  # @param prev_trans
-  #   boolean - if set to true, then this operation will
-  #   make the <i>previous</i> one transparent, which
-  #   functionally means that your new operation will be
-  #   combined with whatever the user did last. This is
-  #   particularly useful for creating observers that react
-  #   to user actions without littering the undo stack with
-  #   extra steps that Ruby is performing.
+  # @param [Boolean] transparent
+  #   if set to true, then this operation will
+  #   append to the previous operation. This is particularly useful for
+  #   creating observers that react to user actions without littering the
+  #   undo stack with extra steps that Ruby is performing.
   #
-  # @param op_name
-  #   String name of the operation
+  # @param [Boolean] next_transparent
+  #   <b>Deprecated!</b> if set to true, then
+  #   whatever operation comes after this one will be appended into one
+  #   combined operation, allowing the user the undo both actions with a
+  #   single undo command. This flag is a highly difficult one, since there
+  #   are so many ways that a SketchUp user can interrupt a given operation
+  #   with one of their own. <b>Use extreme caution</b> and test thoroughly
+  #   when setting this to true.
   #
-  # @param transparent
-  #   boolean - if set to true, then this operation will be
-  #   made  "transparent", which functionally means that
-  #   whatever operation comes after this one will be
-  #   appended into one combined operation, allowing the user
-  #   the undo both actions with a single undo command.
-  #   This flag is a highly difficult one, since there are so
-  #   many ways that a SketchUp user can interrupt a given
-  #   operation with one of their own. Use extreme caution
-  #   and test thoroughly when setting this to true.
+  # @param [Boolean] disable_ui
+  #   if set to true, then SketchUp's tendency to
+  #   update the user interface after each geometry change will be
+  #   suppressed. This can result in much faster Ruby code execution if the
+  #   operation involves updating the model in any way.
   #
-  # @param disable_ui
-  #   boolean - if set to true, then SketchUp's tendency to
-  #   update the user interface after each geometry change
-  #   will be suppressed. This can result in much faster Ruby
-  #   code execution if the operation involves updating the
-  #   model in any way.
+  # @param [String] op_name
+  #   name of the operation visible in the UI
   #
-  # @return status - true if successful, false if unsuccessful
+  # @return [Boolean] +true+ if successful, +false+ if unsuccessful
   #
-  # @version SketchUp 6.0, added 2nd to 4th params in SketchUp 7.0
-  def start_operation(op_name, disable_ui, transparent, prev_transparent)
+  # @version SketchUp 6.0
+  def start_operation(op_name, disable_ui = false, next_transparent = false, transparent = false)
   end
 
   # The styles method retrieves the styles associated with the model.
