@@ -230,9 +230,6 @@ class Geom::Point3d
   end
 
   # The new method is used to create a new 3D point.
-  # 
-  # With no arguments, this creates a point at the origin (0,0,0). With two
-  # values, it creates a point at (x,y,0).
   #
   # @example 
   #   # No arguments, creates a point at the origin [0,0,0]
@@ -245,19 +242,44 @@ class Geom::Point3d
   #   # values to a variable as an array:
   #   pt3 = [100,200,300]
   #
-  # @param x
-  #   The location along the x axis.
+  # @overload initialize
+  # 
+  #   @return [Geom::Point3d]
   #
-  # @param y
-  #   The location along the y axis.
+  # @overload initialize(x, y, z = 0.0)
+  # 
+  #   @param [Numeric] x  The location along the x axis.
+  #   @param [Numeric] y  The location along the y axis.
+  #   @param [Numeric] z  The location along the z axis.
+  #   @return [Geom::Point3d]
   #
-  # @param z
-  #   The location along the z axis.
+  # @overload initialize(point3d)
+  # 
+  #   @param [Geom::Point3d] point3d
+  #   @return [Geom::Point3d]
   #
-  # @return point - the newly created Point3d object
+  # @overload initialize(vertex)
+  # 
+  #   @param [Sketchup::Vertex] vertex
+  #   @return [Geom::Point3d]
+  #
+  # @overload initialize(array2d)
+  # 
+  #   @param [Array(Numeric, Numeric)] array2d
+  #   @return [Geom::Point3d]
+  #
+  # @overload initialize(input_point)
+  # 
+  #   @param [Sketchup::InputPoint] input_point
+  #   @return [Geom::Point3d]
+  #
+  # @overload initialize(array3d)
+  # 
+  #   @param [Array(Numeric, Numeric, Numeric)] array3d
+  #   @return [Geom::Point3d]
   #
   # @version SketchUp 6.0
-  def initialize(x, y, z)
+  def initialize(*args)
   end
 
   # The inspect method is used to format a 3D point as a string.
@@ -403,25 +425,24 @@ class Geom::Point3d
   def project_to_plane(plane)
   end
 
-  # The set! method is used to set the values of the Point3d.
+  # The {#set!} method is used to set the values of the Point3d.
   #
   # @example 
   #   point = Geom::Point3d.new 10,10,10
   #   point = point.set! 100,200,300
   #
-  # @param x
-  #   The location along the x axis .
+  # @overload set!(point3d)
+  # 
+  #   @param [Geom::Point3d] point3d
+  #   @return [Geom::Point3d]
   #
-  # @param y
-  #   The location along the y axis.
-  #
-  # @param z
-  #   The location along the z axis.
-  #
-  # @return point - the newly created Point3d object
+  # @overload set!(array3d)
+  # 
+  #   @param [Array(Numeric, Numeric, Numeric)] array3d
+  #   @return [Geom::Point3d]
   #
   # @version SketchUp 6.0
-  def set!(x, y, z)
+  def set!(*args)
   end
 
   # The to_a method is used to convert the point to an array of 3 numbers
