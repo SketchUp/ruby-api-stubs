@@ -384,22 +384,23 @@ class UI::WebDialog
   def set_background_color(color)
   end
 
-  # The set_file method is used to identify a local HTML file to display in the
-  # webdialog.
+  # The #{set_file} method is used to identify a local HTML file to display in
+  # the webdialog.
   #
   # @example 
-  #   dialog.set_file "c:\\mypage.html"
+  #   file = File.join(__dir__, 'mypage.html')
+  #   dialog.set_file(file)
   #
-  # @param filename
+  # @param [String] filename
   #   The filename for the webdialog file (HTML file).
   #
-  # @param [optional] path
+  # @param [String] path
   #   A path that filename is relative to.
   #
-  # @return nil
+  # @return [nil] 
   #
   # @version SketchUp 6.0
-  def set_file(filename, path)
+  def set_file(filename, path = nil)
   end
 
   # The set_full_security method is used to place the WebDialog into a higher
