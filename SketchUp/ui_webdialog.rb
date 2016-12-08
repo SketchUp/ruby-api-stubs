@@ -138,10 +138,7 @@ class UI::WebDialog
   def get_element_value(element_id)
   end
 
-  # The new method is used to create a new webdialog.
-  # 
-  # Default width is 250. Default height is 250. Default left is 0. Default top
-  # is 0. WebDialogs are resizable by default.
+  # The +new+ method is used to create a new webdialog.
   # 
   # Since SU2017 the position and size of the dialog is DPI aware - it will scale
   # to the DPI of the monitor automatically. Specify units as they would be on a
@@ -157,38 +154,46 @@ class UI::WebDialog
   #   dlg.set_url "http://www.sketchup.com"
   #   dlg.show
   #
-  # @param pref_key
-  #   The registry entry where the location and size of the
-  #   dialog will be saved. If preferences_key is not included,
-  #   the location and size will not be stored.
+  # @overload initialize(dialog_title = "", scrollable = true, pref_key = nil, width = 250, height = 250, left = 0, top = 0, resizable = true)
+  # 
+  #   @param [String] dialog_title   The title to be displayed in the webdialog.
+  #   @param [Boolean] scrollable    true if you want to allow scrollbars, false
+  #                                  if you do not want to allow scrollbars.
+  #   @param [String, nil] pref_key  The registry entry where the location and
+  #                                  size of the dialog will be saved.
+  #                                  If preferences_key is not included, the
+  #                                  location and size will not be stored.
+  #   @param [Integer] width         The width of the webdialog.
+  #   @param [Integer] height        The height of the webdialog.
+  #   @param [Integer] left          The number of pixels from the left.
+  #   @param [Integer] top           The number of pixels from the top.
+  #   @param [Integer] resizable     true if you want the webdialog to be resizable,
+  #                                  false if not.
+  #   @return [UI::WebDialog]
   #
-  # @param dialog_title
-  #   The title to be displayed in the webdialog.
-  #
-  # @param scrollable
-  #   true if you want to allow scrollbars, false if you do
-  #   not want to allow scrollbars.
-  #
-  # @param width
-  #   The width of the webdialog.
-  #
-  # @param resizable
-  #   true if you want the webdialog to be resizable,
-  #   false if not.
-  #
-  # @param height
-  #   The height of the webdialog.
-  #
-  # @param left
-  #   The number of pixels from the left.
-  #
-  # @param top
-  #   The number of pixels from the top.
-  #
-  # @return dialog - the newly created WebDialog object.
+  # @overload initialize(properties)
+  # 
+  #   @version SketchUp 7.0
+  #   @param [Hash] properties  A hash containing the initial properties of
+  #                             the newly created dialog.
+  #   @option properties [String] :dialog_title
+  #   @option properties [String] :preferences_key
+  #   @option properties [Boolean] :scrollable
+  #   @option properties [Boolean] :resizable (true)
+  #   @option properties [Integer] :width (250)
+  #   @option properties [Integer] :height (250)
+  #   @option properties [Integer] :left (0)
+  #   @option properties [Integer] :top (0)
+  #   @option properties [Integer] :min_width (0)
+  #   @option properties [Integer] :min_height (0)
+  #   @option properties [Integer] :max_width (-1)
+  #   @option properties [Integer] :max_height (-1)
+  #   @option properties [Integer] :full_security (false)
+  #   @option properties [Integer] :mac_only_use_nswindow (false)
+  #   @return [UI::WebDialog]
   #
   # @version SketchUp 6.0
-  def initialize(dialog_title, scrollable, pref_key, width, height, left, top, resizable)
+  def initialize(*args)
   end
 
   # The max_height method is used to get the maximum height that the user is
