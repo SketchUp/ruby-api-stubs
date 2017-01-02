@@ -1,6 +1,10 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# A number of methods have been added to the Ruby Numeric class to do units
+# conversions.
+#
+# @version SketchUp 6.0
 class Numeric
 
   # Instance Methods

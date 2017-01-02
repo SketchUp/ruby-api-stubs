@@ -1,6 +1,10 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The UI module contains a number of methods for creating simple UI elements
+# from a SketchUp Ruby script.
+#
+# @version SketchUp 6.0
 module UI
 
   # Class Methods

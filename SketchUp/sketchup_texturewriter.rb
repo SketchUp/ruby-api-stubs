@@ -1,6 +1,29 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The TextureWriter class is used primarily for writing the textures used in a
+# SketchUp model out to files as part of an export for use in another
+# application. These methods are usually invoked in this order:
+# 
+#   - 1. load - load one or more textures from a model into the TextureWriter.
+#   - 2. write_all or write - write the texture(s) to file.
+#
+# @example 
+#   # This code snippet sets up a texture writer and some variables that are
+#   # used in the following texture writer examples.
+#   # Assumptions:
+#   # 1) The active model contains at least one entity at the root level of the
+#   #    following types: component instance, group, or image.
+#   # 2) The active model contains at least one face at the root level.
+#   model = Sketchup.active_model
+#   entities = model.entities
+#   faces = entities.grep(Sketchup::Face)
+#   texturable_entities = entities.select{ |ent|
+#       (ent.is_a?(Sketchup::ComponentInstance) ||
+#        ent.is_a?(Sketchup::Group) || ent.is_a?(Sketchup::Image)) }
+#   tw = Sketchup.create_texture_writer
+#
+# @version SketchUp 6.0
 class Sketchup::TextureWriter
 
   # Instance Methods

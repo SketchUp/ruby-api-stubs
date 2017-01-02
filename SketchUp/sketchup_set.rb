@@ -1,6 +1,42 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The set class represents a collection of unique objects. This class is useful
+# for keeping track of a group of related entities, kind of like a selection
+# set that stays around for as long as you need it to.
+# 
+# To make a set of your own, create an empty one using Sketchup::Set.new, and
+# then add items to it.
+# Note that in SketchUp 2014 this class was changed from Set to Sketchup::Set
+# in order to avoid conflict with the Ruby Standard Library. The Sketchup::Set
+# class is deprecated and new extensions should make use of Ruby's Set class
+# unless they need backward compatibility.
+# 
+# If you want to ensure backwards compatibility you can use this shim:
+#
+# @example 
+#   module Example
+#   
+#     # Shim for the Set class which was moved in SketchUp 2014
+#     if defined?(Sketchup::Set)
+#       Set = Sketchup::Set
+#     end
+#   
+#     def self.test_set_shim
+#       s = Set.new
+#       s.insert('Hello')
+#       s.insert('World')
+#       puts s.to_a
+#     end
+#   
+#   end
+#
+# @example 
+#   my_set = Sketchup::Set.new
+#   my_set.insert entity1
+#   my_set.insert entity2
+#
+# @version SketchUp 6.0
 class Sketchup::Set
 
   # Instance Methods

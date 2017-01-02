@@ -1,6 +1,23 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# This observer interface is implemented to react to pages events. To
+# implement this observer, create a Ruby class of this type, override the
+# desired methods, and add an instance of the observer to the objects of
+# interests.
+#
+# @example 
+#   # This is an example of an observer that watches the pages for new ones.
+#   class MyPagesObserver < Sketchup::PagesObserver
+#     def onElementAdded(pages, page)
+#       puts "onElementAdded: #{page}"
+#     end
+#   end
+#   
+#   # Attach the observer.
+#   Sketchup.active_model.pages.add_observer(MyPagesObserver.new)
+#
+# @version SketchUp 6.0
 class Sketchup::PagesObserver < Sketchup::EntitiesObserver
 
   # Instance Methods

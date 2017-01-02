@@ -1,6 +1,10 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Dimension class provides base functionality for classes DimensionLinear
+# and DimensionRadial. It's not instantiable.
+#
+# @version SketchUp 2014
 class Sketchup::Dimension < Sketchup::Drawingelement
 
   # Constants

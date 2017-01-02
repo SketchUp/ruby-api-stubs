@@ -1,6 +1,11 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# An OptionsProvider class provides various kinds of options on a Model. You
+# get an OptionsProvider from the OptionsManager. The options are given as
+# name/value pairs.
+#
+# @version SketchUp 6.0
 class Sketchup::OptionsProvider
 
   # Includes

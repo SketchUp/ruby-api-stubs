@@ -1,6 +1,12 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Page class contains methods to extract information and modify the
+# properties of an individual page.
+# 
+# Note that inside the SketchUp user interface pages are called "Scenes".
+#
+# @version SketchUp 6.0
 class Sketchup::Page < Sketchup::Entity
 
   # Instance Methods

@@ -1,6 +1,34 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# This is the base class for all SketchUp entities. Entities are basically
+# anything that can be contained in a model, including Drawingelements
+# such as Edges, SectionPlanes, Groups, etc. and entities that relate to
+# those Drawingelements, such as Loops, Layers, etc.
+# 
+# Keep in mind that the methods below are available on all subclasses.
+# For example, an Edge's parent class is Drawingelement, and a
+# Drawingelement's parent class is Entity. Therefore an Edge has all of the
+# methods defined in Drawingelement and Entity.
+# 
+# The Object.is_a? method is the common way of determining what sort of Entity
+# you're dealing with.
+#
+# @example 
+#   # Count how many faces are in the current selection.
+#   selection = Sketchup.active_model.selection
+#   face_count = 0
+#   
+#   # Look at all of the entities in the selection.
+#   selection.each { |entity|
+#     if entity.is_a? Sketchup::Face
+#       face_count = face_count + 1
+#     end
+#   }
+#   
+#   UI.messagebox("There are " + face_count.to_s + " faces selected.")
+#
+# @version SketchUp 6.0
 class Sketchup::Entity
 
   # Instance Methods

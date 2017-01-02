@@ -1,6 +1,9 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The DimensionLinear class represents linear dimensions.
+#
+# @version SketchUp 2014
 class Sketchup::DimensionLinear < Sketchup::Dimension
 
   # Constants

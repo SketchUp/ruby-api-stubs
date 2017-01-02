@@ -1,6 +1,10 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# Loop is a low level topology class that will not need to be used often. A
+# Loop is a chain of Edges that bound a Face.
+#
+# @version SketchUp 6.0
 class Sketchup::Loop < Sketchup::Entity
 
   # Instance Methods

@@ -1,6 +1,14 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The ComponentInstance class is used to represent component instances of a
+# component definition or components that have been dragged from the Component
+# Browser and placed (thus, instanced) within the Model. Therefore, the
+# ComponentInstance class contains a reference to a corresponding
+# ComponentDefinition object and a Transformation object (which contains the
+# location of the component in the Drawing Window).
+#
+# @version SketchUp 6.0
 class Sketchup::ComponentInstance < Sketchup::Drawingelement
 
   # Instance Methods

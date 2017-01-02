@@ -1,6 +1,13 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Sketchup::Licensing::ExtensionLicense class is used to store extension
+# license information. An instance of this class is returned by
+# Sketchup::Licensing.get_extension_license. Note that this is a temporary
+# object representing the extension licensing state for the moment it was
+# returned. It will not reflect any licensing state changes that may occur.
+#
+# @version SketchUp 2015
 class Sketchup::Licensing::ExtensionLicense
 
   # Instance Methods

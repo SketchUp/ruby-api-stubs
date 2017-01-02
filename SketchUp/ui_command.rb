@@ -1,6 +1,38 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Command class is the preferred class for adding tools to the menus and
+# Ruby toolbars. For example, you could add a menu item and pass it a code
+# block directly, or you could first create a Command.
+# 
+# Using Commands gives you greater control over how the item works in the UI,
+# and it allows multiple spots in the UI to call the same code. For example,
+# You might want a toolbar button and a context-click menu item to both point
+# to the same command, and to control the tooltip and its "graying" from
+# a single spot in your code.
+#
+# @example 
+#   # You can add menu items as procedure blocks, as shown here, but
+#   # you have no control over whether it is grayed out, for example.
+#   UI.menu("Draw").add_item("My Procedure") {
+#     UI.messagebox("My Procedure")
+#   }
+#   
+#   # Better to create a command object.
+#   cmd = UI::Command.new("Tester") {
+#     UI.messagebox("My Command")
+#   }
+#   cmd.menu_text = "My Command"
+#   cmd.set_validation_proc {
+#     if Sketchup.active_model.selection.length == 0
+#       MF_GRAYED
+#     else
+#       MF_ENABLED
+#     end
+#   }
+#   UI.menu("Draw").add_item cmd
+#
+# @version SketchUp 6.0
 class UI::Command
 
   # Class Methods

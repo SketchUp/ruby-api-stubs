@@ -1,6 +1,34 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The SketchUp Array class adds additional methods to the standard Ruby Array
+# class. Specifically, it contains methods allowing an
+# array to behave just as a {Geom::Vector3d} or {Geom::Point3d} object
+# (which can be thought of as arrays of 3 coordinate values). Therefore, you
+# can use the Array class in place of a {Geom::Point3d} or {Geom::Vector3d} as
+# a way to pass coordinate values.
+#
+# @example 
+#   # An array of 3 values can represent a 1" long vector pointing straight
+#   # up in the z-direction.
+#   array = [0, 0, 1]
+#   
+#   # An array of 3 values can also represent a point 1" above the origin in
+#   # the z direction. (Note that this is the exact same array.)
+#   array = [0, 0, 1]
+#   
+#   # How it is interpreted is based on context. For example, this code will
+#   # create a construction point at position 0, 0, 1, since in this context
+#   # a Point3d is expected.
+#   entities = Sketchup.active_model.entities
+#   construction_point = entities.add_cpoint(array)
+#   
+#   # Whereas this will move our construction point 1" upward, since in this
+#   # context a Vector3d is expected.
+#   transformation = Geom::Transformation.new(array)
+#   entities.transform_entities(transformation, construction_point)
+#
+# @version SketchUp 6.0
 class Array
 
   # Instance Methods
@@ -128,9 +156,9 @@ class Array
   # The {#dot} method is used to compute the dot product between two vectors.
   #
   # @example 
-  #   vector = Geom::Vector3d.new(0, 1, 0)
-  #   array = [1, 0, 0]
-  #   # This will return a Float, in this case 22.0
+  #   vector = Geom::Vector3d.new(12, 12, 0)
+  #   array = [12, 0, 0]
+  #   # This will return a Float, in this case 144.0
   #   dot_product = array.dot(vector)
   #
   # @param [Geom::Vector3d] vector

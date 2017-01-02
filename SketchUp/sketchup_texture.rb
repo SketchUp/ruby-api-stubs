@@ -1,6 +1,12 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Texture class contains methods for obtaining information about textures
+# that are part of your materials in your model (within the In-Model section
+# of the Materials Browser). Remember, textures are repeatable images that
+# "tile" when painted on a surface.
+#
+# @version SketchUp 6.0
 class Sketchup::Texture < Sketchup::Entity
 
   # Instance Methods

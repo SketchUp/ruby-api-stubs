@@ -1,6 +1,14 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Styles class contains methods for manipulating a collection of styles in
+# a model. Typically, you will access this via the active_model:
+#
+# @example 
+#   styles = Sketchup.active_model.styles
+#   UI.messagebox "There are " + styles.count.to_s + " styles in your model."
+#
+# @version SketchUp 6.0
 class Sketchup::Styles < Sketchup::Entity
 
   # Includes

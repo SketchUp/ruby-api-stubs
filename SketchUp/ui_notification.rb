@@ -1,6 +1,12 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# UI::Notification objects allows you to show native notifications in the
+# desktop, they are positioned in the top right of your screen, they can be
+# customized to have a message, icon and accept and/or dismiss buttons with
+# callback blocks.
+#
+# @version SketchUp 2017
 class UI::Notification
 
   # Instance Methods

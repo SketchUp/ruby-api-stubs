@@ -1,6 +1,9 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The ClassificationSchema class represent schemas loaded in the model.
+#
+# @version SketchUp 2015
 class Sketchup::ClassificationSchema
 
   # Includes

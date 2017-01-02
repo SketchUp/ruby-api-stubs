@@ -1,6 +1,10 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The DimensionRadial class represents radius and diameter dimensions on
+# arcs and circles.
+#
+# @version SketchUp 2014
 class Sketchup::DimensionRadial < Sketchup::Dimension
 
   # Instance Methods

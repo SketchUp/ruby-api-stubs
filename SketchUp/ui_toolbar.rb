@@ -1,6 +1,28 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Toolbar class contains methods to create and manipulate SketchUp
+# toolbars in Ruby. Toolbars are collections of buttons that you can use
+# to activate custom Tools or ruby scripts.
+# 
+# Also see the Command object for details on creating "commands" which
+# can be called from your toolbars.
+#
+# @example 
+#   toolbar = UI::Toolbar.new "Test"
+#   # This toolbar icon simply displays Hello World on the screen
+#   cmd = UI::Command.new("Test") {
+#     UI.messagebox "Hello World"
+#   }
+#   cmd.small_icon = "ToolPencilSmall.png"
+#   cmd.large_icon = "ToolPencilLarge.png"
+#   cmd.tooltip = "Test Toolbars"
+#   cmd.status_bar_text = "Testing the toolbars class"
+#   cmd.menu_text = "Test"
+#   toolbar = toolbar.add_item cmd
+#   toolbar.show
+#
+# @version SketchUp 6.0
 class UI::Toolbar
 
   # Includes

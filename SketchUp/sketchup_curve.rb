@@ -1,6 +1,17 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Curve class is used by SketchUp to unite a series of Edge objects into
+# one conceptual entity. Since SketchUp is a surface modeler, all circles,
+# arcs, and arbitrary curves are really just edges that are bound together in
+# sequence.
+# 
+# There is a subclass of Curve called ArcCurve, which is any curve that makes
+# up part of a circle. You can think of ArcCurves as entities that were created
+# with SketchUp's Arc or Circle drawing tools and Curves as entities that were
+# created with the Freehand drawing tool.
+#
+# @version SketchUp 6.0
 class Sketchup::Curve < Sketchup::Entity
 
   # Instance Methods

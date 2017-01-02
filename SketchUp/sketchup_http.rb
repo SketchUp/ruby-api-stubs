@@ -1,6 +1,11 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The {Sketchup::Http} module provides interfaces to create asynchronous HTTP
+# requests. This is an alternative to the Net::Http module that comes with
+# Ruby StdLib - which is known to have issues within SketchUp.
+#
+# @version SketchUp 2017
 module Sketchup::Http
 
   # Constants

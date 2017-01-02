@@ -1,6 +1,16 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Pages class contains methods for manipulating a collection of Pages
+# (scenes) in a model.
+# 
+# You get a handle to this collection by calling Model.pages.
+#
+# @example 
+#   model = Sketchup.active_model
+#   pages = model.pages
+#
+# @version SketchUp 6.0
 class Sketchup::Pages < Sketchup::Entity
 
   # Includes

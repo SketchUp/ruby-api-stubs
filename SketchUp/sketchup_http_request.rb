@@ -1,6 +1,9 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# Http::Request objects allows you to send HTTP request to HTTP servers.
+#
+# @version SketchUp 2017
 class Sketchup::Http::Request
 
   # Instance Methods

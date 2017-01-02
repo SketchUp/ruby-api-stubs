@@ -1,6 +1,16 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The PickHelper class is used to pick entities that reside under the current
+# cursor location. PickHelper and InputPoint are similar, but InputPoint also
+# uses inferencing. You can retrieve a PickHelper object using the pick_helper
+# method on a View object.
+# 
+# Entities that are picked (found under the
+# cursor when a mouse or keyboard event occurs), are called Pick Records and
+# are placed in an indexed list.
+#
+# @version SketchUp 6.0
 class Sketchup::PickHelper
 
   # Constants

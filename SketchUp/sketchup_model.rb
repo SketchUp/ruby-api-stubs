@@ -1,6 +1,42 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# This is the interface to a SketchUp model. The model is the 3D drawing that
+# the user is working with, and it serves as the "entry point" for most Ruby
+# API interactions. The Sketchup.active_model method gives you a handle to the
+# current model, and from there you can use the model-level methods to start
+# getting information and making changes.
+# 
+# Constants:
+# Product Family
+# - Model::ProTrial
+# - Model::ProLicensed
+# - Model::MakeTrial
+# - Model::MakeTrialExpired
+#
+# @example 
+#   # Grab a handle to the currently active model (aka the one the user is
+#   # looking at in SketchUp.)
+#   model = Sketchup.active_model
+#   
+#   # Grab other handles to commonly used collections inside the model.
+#   entities = model.entities
+#   layers = model.layers
+#   materials = model.materials
+#   component_definitions = model.definitions
+#   selection = model.selection
+#   
+#   # Now that we have our handles, we can start pulling objects and making
+#   # method calls that are useful.
+#   first_entity = entities[0]
+#   UI.messagebox("First thing in your model is a #{first_entity.typename}")
+#   
+#   number_materials = materials.length
+#   UI.messagebox("Your model has #{number_materials} materials.")
+#   
+#   new_edge = entities.add_line([0,0,0], [500,500,0])
+#
+# @version SketchUp 6.0
 class Sketchup::Model
 
   # Constants

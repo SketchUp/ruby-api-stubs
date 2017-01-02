@@ -1,6 +1,15 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Ruby HtmlDialog class allows you to create and interact with HTML dialog
+# boxes from Ruby. This is the best way to generate complex, embedded UIs
+# inside SketchUp, but it does generally require HTML and JavaScript expertise.
+# 
+# If your goal is to simple display a website to your users, consider using
+# {UI#openURL}, which will show them a web page in their default browser rather
+# than inside a dialog in SketchUp.
+#
+# @version SketchUp 2017
 class UI::HtmlDialog
 
   # Constants

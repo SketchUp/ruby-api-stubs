@@ -1,6 +1,32 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Point3d class allows you to work with a point in 3D space.
+# The point is basically just a series of values representing x, y and z
+# coordinates.
+# 
+# The values are specified as [x,y,z]. For example [100,200,300].
+# To create a point call Geom::Point3d.new, where the creation method
+# can take a variety of arguments:
+# 
+# In addition to the methods below, there are a series of geometry
+# related methods that are on the Array class, since Point3d objects
+# can also be represented as a 3-element Array. These Array-level methods are
+# for operations such as determining if a point is on a line, on a plane, etc.
+# See the Array class for details.
+#
+# @example 
+#   # No arguments, creates a point at the origin [0,0,0]
+#   pt1 = Geom::Point3d.new
+#   
+#   # Creates a point at x of 100, y of 200, z of 300.
+#   pt2 = Geom::Point3d.new(100,200,300)
+#   
+#   # You can also create a point directly by simply assigning the x, y and z
+#   # values to a variable as an array:
+#   pt3 = [100,200,300]
+#
+# @version SketchUp 6.0
 class Geom::Point3d
 
   # Class Methods

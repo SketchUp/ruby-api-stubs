@@ -1,6 +1,17 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The AttributeDictionary class allows you to attach arbitrary collections of
+# attributes to a SketchUp entity. The attributes are defined by key/value
+# pairs where the keys are strings.  An Entity or Model object can have any
+# number of AttributeDictionary objects (see the AttributeDictionaries class).
+# 
+# The Entity class is a popular parent class in SketchUp, meaning you can
+# attach attribute dictionaries to almost anything, from geometric items
+# like edges and faces and components to more conceptual things like pages
+# or materials.
+#
+# @version SketchUp 6.0
 class Sketchup::AttributeDictionary < Sketchup::Entity
 
   # Includes

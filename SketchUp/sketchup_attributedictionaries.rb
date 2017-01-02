@@ -1,6 +1,25 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The AttributeDictionaries class is a collection of all of the
+# AttributeDictionary objects that are attached to a given Entity object.
+# 
+# The Entity class is a popular parent class in SketchUp, meaning you can
+# attach AttributeDictionaries to almost anything, from geometric items
+# like edges and faces and components to more conceptual things like pages
+# or materials.
+# 
+# You access this class not by performing an AttributeDictionaries.new but
+# by grabbing a handle from an existing entity.
+#
+# @example 
+#   # Grab the first entity from the model.
+#   my_layer = Sketchup.active_model.entities[0]
+#   
+#   # Grab a handle to its attribute dictionaries.
+#   attrdicts = my_layer.attribute_dictionaries
+#
+# @version SketchUp 6.0
 class Sketchup::AttributeDictionaries < Sketchup::Entity
 
   # Includes

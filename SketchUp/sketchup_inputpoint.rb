@@ -1,6 +1,16 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The InputPoint used to pick entities that reside under the current cursor
+# location. InputPoint and PickHelper are similar, but InputPoint also uses
+# inferencing.   Only tools react to cursor location. Therefore, most of the
+# methods in this class are only useful in the context of a tool you are
+# writing. For example, if you want to determine the entity that you just
+# clicked on with the mouse, you would use InputPoint.pick from within your
+# onLMouseButton method in a tool. See the example script linetool.rb for
+# examples of using the InputPoint class.
+#
+# @version SketchUp 6.0
 class Sketchup::InputPoint
 
   # Instance Methods

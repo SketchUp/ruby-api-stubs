@@ -1,6 +1,24 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# This observer interface is implemented to react to changes to the shadow
+# settings. To implement this observer, create a Ruby class of this type,
+# override the desired methods, and add an instance of the observer to the
+# {Sketchup::ShadowInfo} object.
+#
+# @example 
+#   # This is an example of an observer that watches the selection for
+#   # changes.
+#   class MyShadowInfoObserver < Sketchup::ShadowInfoObserver
+#     def onShadowInfoChanged(shadow_info, type)
+#       puts "onShadowInfoChanged: #{type}"
+#     end
+#   end
+#   
+#   # Attach the observer.
+#   Sketchup.active_model.shadow_info.add_observer(MyShadowInfoObserver.new)
+#
+# @version SketchUp 6.0
 class Sketchup::ShadowInfoObserver
 
   # Instance Methods

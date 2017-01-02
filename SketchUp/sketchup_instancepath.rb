@@ -1,6 +1,10 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The {Sketchup::InstancePath} class represent the instance path to a given
+# entity within the model hierarchy.
+#
+# @version SketchUp 2017
 class Sketchup::InstancePath
 
   # Includes

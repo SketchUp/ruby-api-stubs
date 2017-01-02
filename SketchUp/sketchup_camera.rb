@@ -1,6 +1,24 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Camera class contains methods for creating and manipulating a camera.
+# The camera in SketchUp is the "point of view" from which you look at the
+# model.
+#
+# @example 
+#   # Create a camera from scratch with an "eye" position in
+#   # x, y, z coordinates, a "target" position that
+#   # defines what to look at, and an "up" vector.
+#   eye = [1000,1000,1000]
+#   target = [0,0,0]
+#   up = [0,0,1]
+#   my_camera = Sketchup::Camera.new eye, target, up
+#   
+#   # Get a handle to the current view and change its camera.
+#   view = Sketchup.active_model.active_view
+#   view.camera = my_camera
+#
+# @version SketchUp 6.0
 class Sketchup::Camera
 
   # Instance Methods

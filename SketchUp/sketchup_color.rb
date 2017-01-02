@@ -1,6 +1,28 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Color class is used to create and manipulate colors within SketchUp
+# models.
+# 
+# For methods that accept a Color object, such as the
+# face.material method, you can pass in an actual Color object, or an object
+# that can be converted to a Color. For example:
+# 
+# SketchUp ships with several built in colors in the Materials Browser.
+# These colors are listed in the following table.
+# 
+# {include:file:assets/colors.html}
+#
+# @example 
+#   face.material = Sketchup::Color.new(255, 0, 0)
+#   face.material = 255
+#   face.material = 0xff
+#   face.material = "red"
+#   face.material = "#ff0000"
+#   face.material = [1.0, 0.0, 0.0]
+#   face.material = [255, 0, 0]
+#
+# @version SketchUp 6.0
 class Sketchup::Color
 
   # Class Methods

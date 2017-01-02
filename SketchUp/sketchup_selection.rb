@@ -1,6 +1,18 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# A set of the currently selected entities. Use the Model.selection method
+# to get a Selection object.  Note that the order of entities
+# (<code>selection[0]</code>, <code>selection[1]</code> and so on) in the set
+# is in no particular order and should not be assumed to be in the same order
+# as the user selected the entities.
+#
+# @example 
+#   # Get a handle to the selection set.
+#   model = Sketchup.active_model
+#   selection = model.selection
+#
+# @version SketchUp 6.0
 class Sketchup::Selection
 
   # Includes

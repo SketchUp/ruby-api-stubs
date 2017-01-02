@@ -1,6 +1,24 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# This observer interface is implemented to react to selection events. To
+# implement this observer, create a Ruby class of this type, override the
+# desired methods, and add an instance of the observer to the objects of
+# interests.
+#
+# @example 
+#   # This is an example of an observer that watches the selection for
+#   # changes.
+#   class MySelectionObserver < Sketchup::SelectionObserver
+#     def onSelectionBulkChange(selection)
+#       puts "onSelectionBulkChange: #{selection}"
+#     end
+#   end
+#   
+#   # Attach the observer.
+#   Sketchup.active_model.selection.add_observer(MySelectionObserver.new)
+#
+# @version SketchUp 6.0
 class Sketchup::SelectionObserver
 
   # Instance Methods

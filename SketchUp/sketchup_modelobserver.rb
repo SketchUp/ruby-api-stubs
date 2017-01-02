@@ -1,6 +1,33 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# This observer interface is implemented to react to model events. To
+# implement this observer, create a Ruby class of this type, override the
+# desired methods, and add an instance of the observer to the model.
+# 
+# Note that the observers related to transactions (aka undoable operations)
+# are primarily for reporting and debugging. Performing any edit operations
+# of your own (such as modifying the model) inside the observer callback
+# should be avoided, as it could cause crashes or model corruption. The most
+# common use for these callbacks is to help debug problems where your
+# Ruby script's {Sketchup::Model#start_operation} and
+# {Sketchup::Model#commit_operation} calls are somehow conflicting with
+# SketchUp's native undo operations. You can set up an observer set to watch
+# precisely what is going on.
+#
+# @example 
+#   # This is an example of an observer that watches the
+#   # component placement event.
+#   class MyModelObserver < Sketchup::ModelObserver
+#     def onPlaceComponent(instance)
+#       puts "onPlaceComponent: #{instance}"
+#     end
+#   end
+#   
+#   # Attach the observer.
+#   Sketchup.active_model.add_observer(MyModelObserver.new)
+#
+# @version SketchUp 6.0
 class Sketchup::ModelObserver
 
   # Instance Methods

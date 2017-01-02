@@ -1,6 +1,10 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The OptionsManager class manages various kinds of OptionsProviders on a
+# Model.
+#
+# @version SketchUp 6.0
 class Sketchup::OptionsManager
 
   # Includes

@@ -1,6 +1,9 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# An Image object represents a raster image placed in the Model.
+#
+# @version SketchUp 6.0
 class Sketchup::Image < Sketchup::Drawingelement
 
   # Instance Methods

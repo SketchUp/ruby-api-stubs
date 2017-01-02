@@ -1,6 +1,9 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# A Vertex. A Vertex represents the end of an Edge or a point inside a Face.
+#
+# @version SketchUp 6.0
 class Sketchup::Vertex < Sketchup::Entity
 
   # Instance Methods

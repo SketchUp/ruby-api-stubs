@@ -1,6 +1,12 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Vector3d class is used to represent vectors in a 3 dimensional space.
+# Vectors in SketchUp have a direction and a length, but not a starting point.
+# 
+# There are numerous tutorials on 3D vectors available on the internet.
+#
+# @version SketchUp 6.0
 class Geom::Vector3d
 
   # Class Methods

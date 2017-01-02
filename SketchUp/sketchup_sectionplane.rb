@@ -1,6 +1,13 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The SectionPlane class represents a section plane in a SketchUp model. Note
+# that prior to SketchUp 2014 there was no way to create a SectionPlane object
+# using Ruby. For older versions of SketchUp, you must manually create a
+# section plane with the Section Plane Tool in SketchUp and then query the
+# entities array to find the SectionPlane object.
+#
+# @version SketchUp 6.0
 class Sketchup::SectionPlane < Sketchup::Drawingelement
 
   # Instance Methods

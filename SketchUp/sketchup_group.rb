@@ -1,6 +1,17 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# A Group class contains methods for manipulating groups of entities.
+# 
+# Groups in SketchUp are very similar to Components, except that there is no
+# instancing of groups. That means that you always will have one and only one
+# of each of your groups. (In the actual implementation, SketchUp keeps track
+# of groups as a special kind of Component that combines properties of
+# definitions and instances, which is why you will see deprecated methods
+# like Group.make_unique, and the class of observer you attach to Groups are
+# ComponentInstance observers.)
+#
+# @version SketchUp 6.0
 class Sketchup::Group < Sketchup::Drawingelement
 
   # Instance Methods

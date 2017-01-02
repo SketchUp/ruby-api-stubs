@@ -1,6 +1,10 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The String class contains a method used to parse a string as a length value.
+# All string arguments in Ruby API expect utf-8 strings.
+#
+# @version SketchUp 6.0
 class String
 
   # Instance Methods

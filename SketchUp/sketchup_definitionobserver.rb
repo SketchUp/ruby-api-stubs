@@ -1,6 +1,24 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# This observer interface is implemented to react to component definition
+# events. To implement this observer, create a Ruby class of this type,
+# override the desired methods, and add an instance of the observer to the
+# definitions of interests.
+#
+# @example 
+#   # This is an example of an observer that watches a specific definition
+#   # for new component insertions.
+#   class MyDefObserver < Sketchup::DefinitionObserver
+#     def onComponentInstanceAdded(definition, instance)
+#       puts "onComponentInstanceAdded(#{definition}, #{instance})"
+#     end
+#   end
+#   
+#   # Attach the observer
+#   Sketchup.active_model.definitions[0].add_observer(MyDefObserver.new)
+#
+# @version SketchUp 6.0
 class Sketchup::DefinitionObserver < Sketchup::EntityObserver
 
   # Instance Methods

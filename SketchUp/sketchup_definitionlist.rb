@@ -1,6 +1,11 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# A DefinitionList object holds a list of all of the ComponentDefinition
+# objects in a model. This class contains methods for  adding and retrieving
+# definitions from the list.
+#
+# @version SketchUp 6.0
 class Sketchup::DefinitionList < Sketchup::Entity
 
   # Includes

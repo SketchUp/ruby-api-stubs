@@ -1,6 +1,15 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# A collection of Materials objects. Each model contains a Materials collection
+# that can be accessed via Model.materials.
+#
+# @example 
+#   # Get a handle to all the materials in the current model.
+#   model = Sketchup.active_model
+#   materials = model.materials
+#
+# @version SketchUp 6.0
 class Sketchup::Materials < Sketchup::Entity
 
   # Includes

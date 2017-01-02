@@ -1,6 +1,44 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The ShadowInfo class contains method to extract the shadow information for a
+# model. The majority of the shadow information returned exists in the Model
+# Info > Location and Model Info > Shadows dialogs inside SketchUp.
+# 
+# The following shadow information keys are maintained in SketchUp:
+# 
+# - +City+ (in Model Info > Geo-location > Set Manual Location...) Note that 'City' is called 'Location' in the UI
+# - +Country+ (in Model Info > Geo-location > Set Manual Location...)
+# - +Dark+ (in Window > Shadows)
+# - +DayOfYear+
+# - +DaylightSavings+
+# - +DisplayNorth+ (in View > Toolbars > Solar North) Note that 'Toolbar' is called 'Tool Palettes' on Mac
+# - +DisplayOnAllFaces+ (in Window > Shadows)
+# - +DisplayOnGroundPlane+ (in Window > Shadows)
+# - +DisplayShadows+ (in Window > Shadows)
+# - +EdgesCastShadows+ (in Window > Shadows)
+# - +Latitude+ (in Model Info > Geo-location > Set Manual Location...)
+# - +Light+ (in Window > Shadows)
+# - +Longitude+ (in Model Info > Geo-location > Set Manual Location...)
+# - +North+ Angle (in View > Toolbars > Solar North) Note that 'Toolbar' is called 'Tool Palettes' on Mac
+# - +ShadowTime+ (in Window > Shadows)
+# - +ShadowTime_time_t+ (ShadowTime in Epoch time)
+# - +SunDirection+ (Generated based on ShadowTime)
+# - +SunRise+ (Generated based on ShadowTime)
+# - +SunRise_time_t+ (SunRise in Epoch time)
+# - +SunSet+ (Generated based on ShadowTime)
+# - +SunSet_time_t+ (SunSet in Epoch time)
+# - +TZOffset+ (in Window > Shadows)
+# - +UseSunForAllShading+ (in Window > Shadows)
+# 
+# You access the ShadowInfo object by calling Model.shadow_info:
+#
+# @example 
+#   model = Sketchup.active_model
+#   shadowinfo = model.shadow_info
+#   UI.messagebox("My city is: " + shadowinfo["City"].to_s)
+#
+# @version SketchUp 6.0
 class Sketchup::ShadowInfo < Sketchup::Entity
 
   # Includes

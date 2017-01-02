@@ -1,6 +1,9 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The UTM class lets you work with UTM map coordinates.
+#
+# @version SketchUp 6.0
 class Geom::UTM
 
   # Instance Methods

@@ -1,6 +1,11 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# Http::Response objects allows you to get the response information from the
+# server, you can only receive the Http::Response if you have attached a
+# callback block when calling start from the Http::Request object.
+#
+# @version SketchUp 2017
 class Sketchup::Http::Response
 
   # Instance Methods

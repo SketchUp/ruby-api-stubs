@@ -1,6 +1,34 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# Bounding boxes are three-dimensional boxes (eight corners), aligned with the
+# global axes, that surround entities within your model. There is a default
+# bounding box for any new model that will surround all entities,
+# including all groups and components. Additionally, there are
+# bounding boxes for Drawingelement objects, including components and groups.
+# Bounding boxes are only large enough to exactly bound the entities within
+# your model, group, or component.
+# 
+# You can also create arbitrary BoundingBox objects by calling BoundingBox.new.
+#
+# @example 
+#   # You can get the bounding box on a model.
+#   model = Sketchup.active_model
+#   model_bb = model.bounds
+#   
+#   # Or you can get the bounding box on any Drawingelement object.
+#   first_entity = model.entities[0]
+#   first_entity_bb = first_entity.bounds
+#   
+#   # Or you can create an empty bounding box of your own.
+#   boundingbox = Geom::BoundingBox.new
+#
+# @note that the bounding box returned for face-me components is the center of
+#   its entire range of motion. This behavior changed in SketchUp 7.1. In 7.0
+#   and earlier, the .bounds method would return the bounds around the
+#   face-me component's current, visible center.
+#
+# @version SketchUp 6.0
 class Geom::BoundingBox
 
   # Instance Methods

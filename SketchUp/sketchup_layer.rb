@@ -1,6 +1,28 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Layer class contains methods modifying and extracting information for a
+# layer.
+# 
+# By default, a SketchUp model has one layer, Layer 0 (zero), which is the base
+# layer. You can't delete or rename Layer 0. Unlike certain other CAD software
+# packages, entities associated with different layers in SketchUp still
+# intersect with each other. (If you want collections of entities to not
+# intersect, place them in Groups instead.)
+# 
+# Layers are commonly used to organize your model and control the visibility
+# of related groups and components. For example, you could make all of your
+# wall and roof entities different groups, associate layers with those groups,
+# and then hide those layers so as to display just the floor plan in the model.
+# 
+# You can programatically create a new layer by calling the Layers.add method.
+#
+# @example 
+#   model = Sketchup.active_model
+#   layers = model.layers
+#   new_layer = layers.add "test layer"
+#
+# @version SketchUp 6.0
 class Sketchup::Layer < Sketchup::Entity
 
   # Includes

@@ -1,6 +1,9 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# Faces in SketchUp are flat, 2-sided polygons with 3 or more sides.
+#
+# @version SketchUp 6.0
 class Sketchup::Face < Sketchup::Drawingelement
 
   # Constants
@@ -220,36 +223,43 @@ class Sketchup::Face < Sketchup::Drawingelement
   def edges
   end
 
-  # The followme method is used to create a shape by making the face follow along
-  # an array of edges.
+  # The {#followme} method is used to create a shape by making the face follow
+  # along an array of edges.
   #
   # @example 
   #   model = Sketchup.active_model
   #   entities = model.active_entities
-  #   point1 = Geom::Point3d.new(0, 0, 0)
-  #   point2 = Geom::Point3d.new(0, 0, 100)
+  #   
   #   depth = 100
   #   width = 100
-  #   pts = []
-  #   pts[0] = [0, 0, 0]
-  #   pts[1] = [width, 0, 0]
-  #   pts[2] = [width, depth, 0]
-  #   pts[3] = [0, depth, 0]
   #   
   #   # Add the face to the entities in the model
-  #   face = entities.add_face(pts)
+  #   points = [
+  #     Geom::Point3d.new(0, 0, 0),
+  #     Geom::Point3d.new(width, 0, 0),
+  #     Geom::Point3d.new(width, depth, 0),
+  #     Geom::Point3d.new(0, depth, 0)
+  #   ]
+  #   face = entities.add_face(points)
   #   
   #   # Add the line which we will "follow" to the entities in the model
-  #   line = entities.add_line(point1, point2)
-  #   status = face.followme(line)
+  #   point1 = Geom::Point3d.new(0, 0, 0)
+  #   point2 = Geom::Point3d.new(0, 0, 100)
+  #   edge = entities.add_line(point1, point2)
+  #   face.followme(edge)
   #
-  # @param edge
-  #   An Edge object or an array of edge objects to follow.
+  # @overload followme(edges)
+  # 
+  #   @param [Array<Sketchup::Edge>] edges  An array of edge objects to follow.
+  #   @return [Boolean]
   #
-  # @return status - true if successful, false if unsuccessful
+  # @overload followme(edge)
+  # 
+  #   @param [Sketchup::Edge] edge  An edge to follow.
+  #   @return [Boolean]
   #
   # @version SketchUp 6.0
-  def followme(edge)
+  def followme(*args)
   end
 
   # The get_UVHelper object is used to retrieve a UVHelper object for use in
@@ -434,16 +444,16 @@ class Sketchup::Face < Sketchup::Drawingelement
   end
 
   # The mesh method creates a polygon mesh that represents the face. See the
-  # PolygonMesh class for more information.
+  # {Geom::PolygonMesh} class for more information.
   # 
   # Valid flags are:
   # 
-  #   - 0: Include PolygonMeshPoints,
-  #   - 1: Include PolygonMeshUVQFront,
-  #   - 2: Include PolygonMeshUVQBack,
-  #   - 4: Include PolygonMeshNormals.
+  # - +0+: Include PolygonMeshPoints,
+  # - +1+: Include PolygonMeshUVQFront,
+  # - +2+: Include PolygonMeshUVQBack,
+  # - +4+: Include PolygonMeshNormals.
   # 
-  # Add these numbers together to combine flags. A value of 7 will include all
+  # Use bitwise OR to combine flags. A value of +7+ will include all
   # flags, for example.
   #
   # @example 
@@ -459,12 +469,18 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   
   #   # Add the face to the entities in the model
   #   face = entities.add_face(pts)
-  #   mesh = face.mesh(7)
+  #   
+  #   kPoints = 0
+  #   kUVQFront = 1
+  #   kUVQBack = 2
+  #   kNormals = 4
+  #   flags = kPoints | kUVQFront | kUVQBack | kNormals # equals to 7
+  #   mesh = face.mesh(flags)
   #
-  # @param flags
-  #   One or more flags used to generate a mesh (see comments).
+  # @param [Integer] flags
+  #   One or more flags used to generate a mesh.
   #
-  # @return mesh - a PolygonMesh object if successful
+  # @return [Geom::PolygonMesh] 
   #
   # @version SketchUp 6.0
   def mesh(flags = 0)

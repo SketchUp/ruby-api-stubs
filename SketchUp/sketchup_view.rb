@@ -1,6 +1,17 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# This class contains methods to manipulate the current point of view of the
+# model. The drawing methods here (draw_line, draw_polyline, etc) are meant to
+# be invoked within a tool's Tool.draw method. Calling them outside Tool.draw
+# will have no effect.
+# 
+# You access the View by calling the Model.active_view method.
+#
+# @example 
+#   view = Sketchup.active_model.active_view
+#
+# @version SketchUp 6.0
 class Sketchup::View
 
   # Instance Methods

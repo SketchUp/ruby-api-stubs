@@ -1,6 +1,21 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Material class represents a texture or color that can be applied to
+# Drawingelements. It is most often applied to Faces.
+# 
+# You can pass any object that can be used as a material to a method that
+# requires a material. Objects include actual materials, color, and classes
+# that can be converted to a color.
+# 
+# The following are valid (assuming the existence of a Material mat1.)
+#
+# @example 
+#   face.material = mat1
+#   face.material = "red"
+#   face.material = 0xff0000
+#
+# @version SketchUp 6.0
 class Sketchup::Material < Sketchup::Entity
 
   # Includes

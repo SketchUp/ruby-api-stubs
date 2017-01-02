@@ -1,6 +1,12 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# Drawingelement is a base class for an item in the model that can be
+# displayed. These items include edges, construction points, construction
+# lines, and images. Arc curves and arcs are not included because they are not
+# drawing elements by themselves, but are a composition of edges.
+#
+# @version SketchUp 6.0
 class Sketchup::Drawingelement < Sketchup::Entity
 
   # Instance Methods

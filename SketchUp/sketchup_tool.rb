@@ -1,6 +1,38 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# Tool is the interface that you implement to create a SketchUp tool.
+# See the file Plugins/Examples/linetool.rb (in your SketchUp install
+# directory) for an example of how to create a custom tool in Ruby.
+# 
+# To create a new tool in Ruby, you must define a new class that implements
+# the methods for the events that you want to respond to. You do not have
+# to implement methods for every possible event that a Tool can respond to.
+# 
+# Once you have defined a tool class, you select that tool by creating an
+# instance of it and passing it to {Sketchup::Model#select_tool}. For
+# example:
+# 
+#   class MyTool
+#     def activate
+#       puts 'Your tool has been activated.'
+#     end
+#   end
+# 
+#   my_tool = MyTool.new
+#   Sketchup.active_model.select_tool(my_tool)
+# 
+# The following table contains several constants you can use when check for
+# certain key presses inside the keyboard handling callbacks:
+# 
+# - +CONSTRAIN_MODIFIER_KEY+ = Shift Key
+# - +CONSTRAIN_MODIFIER_MASK+ = Shift Key
+# - +COPY_MODIFIER_KEY+ = Menu on Mac, Ctrl on PC
+# - +COPY_MODIFIER_MASK+ = Alt on Mac, Ctrl on PC
+# - +ALT_MODIFIER_KEY+ = Command on Mac, Menu on PC
+# - +ALT_MODIFIER_MASK+ = Command on Mac, Alt on PC
+#
+# @version SketchUp 6.0
 class Sketchup::Tool
 
   # Instance Methods

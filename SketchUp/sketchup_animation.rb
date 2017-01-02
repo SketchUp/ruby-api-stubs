@@ -1,6 +1,38 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The {Sketchup::Animation} interface is implemented to create animations
+# inside SketchUp. At any given time, a single animation can be active on a
+# {Sketchup::View}. To make your own, build a Ruby class that contains the
+# methods described below:
+# 
+#   # This is an example of a simple animation that floats the camera up to
+#   # a z position of 200". The only required method for an animation is
+#   # nextFrame. It is called whenever you need to show the next frame of
+#   # the animation. If nextFrame returns false, the animation will stop.
+#   class FloatUpAnimation
+#     def nextFrame(view)
+#       new_eye = view.camera.eye
+#       new_eye.z = new_eye.z + 1.0
+#       view.camera.set(new_eye, view.camera.target, view.camera.up)
+#       view.show_frame
+#       return new_eye.z < 500.0
+#     end
+#   end
+# 
+#   # This adds an item to the Camera menu to activate our custom animation.
+#   UI.menu("Camera").add_item("Run Float Up Animation") {
+#     Sketchup.active_model.active_view.animation = FloatUpAnimation.new
+#   }
+# 
+# {Sketchup::Animation} objects are activated by using the
+# {Sketchup::View#animation=} method on a {Sketchup::View}
+# object. To stop an animation set the view's animation object to +nil+, like
+# so:
+# 
+#   Sketchup.active_model.active_view.animation = nil
+#
+# @version SketchUp 6.0
 class Sketchup::Animation
 
   # Instance Methods

@@ -1,6 +1,30 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Geom module defines a number of Module methods that let you perform
+# different geometric operations.
+# 
+# The methods in this module take lines
+# and planes as arguments. There is no special class for representing lines or
+# planes. Arrays are used for both.
+# 
+# A line can be represented as either an Array of a point and a
+# vector, or as an Array of two points.
+#   line1 = [Geom::Point3d.new(0, 0, 0), Geom::Vector3d.new(0, 0, 1)]
+#   line2 = [Geom::Point3d.new(0, 0, 0), Geom::Point3d.new(0, 0, 100)]
+# 
+# A plane can be represented as either an Array
+# of a point and a vector, or as an Array of 4 numbers that give the
+# coefficients of a plane equation.
+#   plane1 = [Geom::Point3d.new(0, 0, 0), Geom::Vector3d.new(0, 0, 1)]
+#   plane2 = [0, 0, 1, 0]
+# 
+# There are several good books on 3D math if you are new to
+# the concepts of a line, plane, and vector.
+#
+# @note Lines and Planes are infinite.
+#
+# @version SketchUp 6.0
 module Geom
 
   # Class Methods

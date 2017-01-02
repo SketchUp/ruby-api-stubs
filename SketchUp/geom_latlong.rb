@@ -1,6 +1,10 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The LatLong class contains various methods for creating and manipulating
+# latitude and longitude coordinates.
+#
+# @version SketchUp 6.0
 class Geom::LatLong
 
   # Instance Methods

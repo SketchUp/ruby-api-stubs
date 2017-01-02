@@ -1,6 +1,35 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Sketchup module contains a number of important utility methods for use in
+# your Ruby scripts. Many of the classes in the API are implemented beneath
+# this module. You can think of the Sketchup module as the "root" of the
+# application tree. Most ruby calls start from the currently active model, and
+# this is accessed via the Sketchup.active_model method.
+#
+# @example 
+#   # Grab a handle to the currently active model (aka the one the user is
+#   # looking at in SketchUp.)
+#   model = Sketchup.active_model
+#   
+#   # Grab other handles to commonly used collections inside the model.
+#   entities = model.entities
+#   layers = model.layers
+#   materials = model.materials
+#   component_definitions = model.definitions
+#   selection = model.selection
+#   
+#   # Now that we have our handles, we can start pulling objects and making
+#   # method calls that are useful.
+#   first_entity = entities[0]
+#   UI.messagebox("First thing in your model is a " + first_entity.typename)
+#   
+#   number_materials = materials.length
+#   UI.messagebox("Your model has " + number_materials.to_s + " materials.")
+#   
+#   new_edge = entities.add_line( [0,0,0], [500,500,0])
+#
+# @version SketchUp 6.0
 module Sketchup
 
   # Class Methods

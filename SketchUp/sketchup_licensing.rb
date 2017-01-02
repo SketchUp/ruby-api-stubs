@@ -1,6 +1,16 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Sketchup::Licensing module contains methods for extensions purchased
+# from Extension Warehouse to check their licensing status. It is advised
+# to place these calls inside encrypted Ruby (.rbe) files. This API is also
+# exposed via the SketchUp C API. Extensions that already use native code
+# should prefer using the native API, which should be more secure than their
+# Ruby API counterparts.
+# 
+# See the {Licensing Tutorial}[../tutorial_licensing] for more details.
+#
+# @version SketchUp 2015
 module Sketchup::Licensing
 
   # Constants

@@ -1,6 +1,44 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Ruby WebDialog class allows you to create and interact with DHTML dialog
+# boxes from Ruby.
+# 
+# If your goal is to simply display a website to your users, consider using
+# UI.getURL, which will show them a web page in their default browser rather
+# than inside a dialog in SketchUp.
+# 
+# See this blog post for a detailed, step-by-step example:
+# http://sketchupapi.blogspot.com/2008/02/sharing-data-between-sketchup-ruby-and.html
+# 
+# Under Windows the IE render mode is different in webdialogs than from what
+# you see in the normal browser. It will by default pick an older render mode
+# and different versions of SketchUp will use different modes. In order to
+# reliably control the render mode of your webdialogs under Windows you need to
+# insert a special META compatibility tag:
+# 
+#   // To always force the latest version available:
+#   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+# 
+#   // To lock to a specific IE version:
+#   <meta http-equiv="X-UA-Compatible" content="IE=8"/>
+# 
+# Starting with SketchUp 2013, you can embed a special HTML link in your dialog
+# that will launch Extension Warehouse and show a specified extension's page.
+# This can be useful if your extension has a dependency on another one and you
+# would like to direct the user to install that extension.
+# 
+# For example, to launch an extension's page whose URL is:
+# http://extensions.sketchup.com/en/content/advanced-camera-tools
+# The link would be:
+#
+# @deprecated Please use {UI::HtmlDialog} that was introduced in
+#   SketchUp 2017.
+#
+# @example 
+#   <a href="skp:launchEW@advanced-camera-tools">Get Advanced Camera Tools</a>
+#
+# @version SketchUp 6.0
 class UI::WebDialog
 
   # Instance Methods

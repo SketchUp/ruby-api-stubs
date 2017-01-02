@@ -1,6 +1,59 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# This observer interface is implemented to react to tool events. To implement
+# this observer, create a Ruby class of this type, override the desired
+# methods, and add an instance of the observer to the {Sketchup::Tools} object.
+# 
+# Some of the code below mentions +tool_names+ and +tool_ids+. Here is a list
+# of the common tool IDs and names:
+# 
+# - +21013+ = 3DTextTool
+# - +21065+ = ArcTool
+# - +10523+ = CameraDollyTool
+# - +10508+ = CameraOrbitTool
+# - +10525+ = CameraPanTool
+# - +21169+ = PositionCameraTool
+# - +10520+ = CameraWalkTool
+# - +10509+ = CameraZoomTool
+# - +10526+ = CameraZoomWindowTool
+# - +21096+ = CircleTool
+# - +21013+ = ComponentTool
+# - +21126+ = ComponentCSTool
+# - +21410+ = DimensionTool
+# - +21019+ = EraseTool
+# - +21031+ = FreehandTool
+# - +21525+ = ExtrudeTool
+# - +21126+ = SketchCSTool
+# - +21048+ = MoveTool
+# - +21024+ = MeasureTool
+# - +21100+ = OffsetTool
+# - +21074+ = PaintTool
+# - +21013+ = PasteTool
+# - +21095+ = PolyTool
+# - +21515+ = PositionTextureTool
+# - +21041+ = PushPullTool
+# - +21057+ = ProtractorTool
+# - +21094+ = RectangleTool
+# - +21129+ = RotateTool
+# - +21236+ = ScaleTool
+# - +21022+ = SelectionTool
+# - +21337+ = SectionPlaneTool
+# - +21020+ = SketchTool
+# - +21405+ = TextTool
+#
+# @example 
+#   # This is an example of an observer that watches tool interactions.
+#   class MyToolsObserver < Sketchup::ToolsObserver
+#     def onActiveToolChanged(tools, tool_name, tool_id)
+#       puts "onActiveToolChanged: #{tool_name}"
+#     end
+#   end
+#   
+#   # Attach the observer.
+#   Sketchup.active_model.tools.add_observer(MyToolsObserver.new)
+#
+# @version SketchUp 6.0
 class Sketchup::ToolsObserver
 
   # Instance Methods

@@ -1,6 +1,39 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The SketchupExtension class contains methods allowing you to create and
+# manipulate SketchUp extensions. Extensions are Ruby scripts that can be
+# loaded and unloaded using the Extension manager (Extensions panel of the
+# Preferences dialog box). Generally you should register your ruby scripts as
+# an extension to give SketchUp users the ability to disable it through the
+# user interface.
+# 
+# The idea here is to take the ruby script that actually creates your
+# functionality and place it in a folder somewhere outside of the /Plugins
+# folder, most commonly a subdirectory like /Plugins/MyExtension. Then
+# you create a new ruby script inside the /Plugins directory that will
+# set up the extension entry and load your original script if the user
+# has your extension turned on.
+# 
+# Here is an example extension loading script. For this example, the
+# following code would be saved in /Plugins/StairTools.rb, and the
+# actual plugin itself would live in /Plugins/StairTools/core.rb.
+# 
+# You can find two example extensions that ship with SketchUp,
+# su_dynamiccomponents.rb and su_sandboxtools.rb, under the /Plugins/ folder.
+#
+# @example 
+#   # Create an entry in the Extension list that loads a script called
+#   # core.rb.
+#   require 'sketchup.rb'
+#   require 'extensions.rb'
+#   
+#   stair_extension = SketchupExtension.new('Stair Tools", "StairTools/core.rb')
+#   stair_extension.version = '1.0'
+#   stair_extension.description = 'Tools to draw stairs automatically.'
+#   Sketchup.register_extension(stair_extension, true)
+#
+# @version SketchUp 6.0
 class SketchupExtension
 
   # Instance Methods

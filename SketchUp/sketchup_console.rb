@@ -1,6 +1,30 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Console class is used by SketchUp to direct $stdout and $stderr to the
+# Ruby Console. It is a singleton class that only has one instance available.
+# This instance is accessible via the SKETCHUP_CONSOLE constant.
+# 
+# In SketchUp 2014 methods were added to allow developers to control the
+# visibility of the Ruby Console.
+# 
+# Also note that in SketchUp 2014, writing to the console does not work from
+# within Ruby threads other than the main thread. So the following code will
+# not produce any output.
+#
+# @example 
+#   t = Thread.new { puts 'This will not be written to the console.' }
+#   t.join
+#
+# @example 
+#   # By default $stdout is directed to SKETCHUP_CONSOLE.
+#   p $stdout
+#   
+#   # $stdout can however be redirected so the safe way to access the
+#   # SketchUp console is by using the SKETCHUP_CONSOLE constant.
+#   p SKETCHUP_CONSOLE
+#
+# @version SketchUp 2014
 class Sketchup::Console
 
   # Instance Methods

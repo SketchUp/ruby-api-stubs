@@ -1,6 +1,13 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Tools class contains methods to manipulate a collection of SketchUp
+# tools. You access this collection by calling the Model.tools method.
+#
+# @example 
+#   tools = Sketchup.active_model.tools
+#
+# @version SketchUp 6.0
 class Sketchup::Tools
 
   # Instance Methods

@@ -1,6 +1,32 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# An ArcCurve is a Curve that makes up part of a circle. This is the
+# underlying class for circles as well.
+# 
+# You can think of ArcCurves as entities that were created with SketchUp's
+# Arc or Circle drawing tools and Curves as entities that were created with
+# the Freehand drawing tool.
+# 
+# However, keep in mind that all Curves in SketchUp are really edges with
+# some extra data attached to them. When you use the API to draw a Curve or
+# ArcCurve, you are really drawing edges.
+# 
+# ArcCurve is a subclass of Curve, so all of the methods that are available
+# to Curves are also available to ArcCurves.
+#
+# @example 
+#   # Draw a circle on the ground plane around the origin.
+#   center_point = Geom::Point3d.new(0,0,0)
+#   normal_vector = Geom::Vector3d.new(0,0,1)
+#   radius = 10
+#   
+#   entities = Sketchup.active_model.entities
+#   edgearray = entities.add_circle center_point, normal_vector, radius
+#   first_edge = edgearray[0]
+#   arccurve = first_edge.curve
+#
+# @version SketchUp 6.0
 class Sketchup::ArcCurve < Sketchup::Curve
 
   # Instance Methods

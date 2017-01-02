@@ -1,6 +1,14 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The ExtensionsManager class provides a way of accessing the
+# SketchupExtensions that have been registered via the
+# Sketchup.register_extension method.
+# 
+# There is only one ExtensionsManager available. You access it via the
+# Sketchup.extensions method.
+#
+# @version SketchUp 8.0 M2
 class Sketchup::ExtensionsManager
 
   # Includes

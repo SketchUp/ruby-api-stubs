@@ -1,6 +1,10 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Classifications class is a container/manager for all classifications in
+# a model.
+#
+# @version SketchUp 2015
 class Sketchup::Classifications
 
   # Includes

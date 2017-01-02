@@ -1,6 +1,13 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The {Sketchup::RegionalSettings} module contains methods getting information about the
+# user's locale settings.
+# 
+# Note that when you convert between units and strings you don't need to parse
+# it yourself and you can instead use {String#to_l} and {Length#to_s}.
+#
+# @version SketchUp 2016 M1
 module Sketchup::RegionalSettings
 
   # Class Methods

@@ -1,6 +1,9 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Text class contains method to manipulate a Text entity object.
+#
+# @version SketchUp 6.0
 class Sketchup::Text < Sketchup::Drawingelement
 
   # Instance Methods

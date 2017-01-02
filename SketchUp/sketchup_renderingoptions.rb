@@ -1,6 +1,81 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The RenderingOptions class contains method to extract the rendering
+# information for a model. The majority of the rendering information returned
+# exists in the Styles dialog. The following
+# rendering information keys are maintained in SketchUp:
+# 
+# - +BackgroundColor+
+# - +BandColor+
+# - +ConstructionColor+
+# - +DepthQueWidth+
+# - +DisplayColorByLayer+
+# - +DisplayFog+
+# - +DisplayInstanceAxes+
+# - +DisplayWatermarks+
+# - +DrawDepthQue+
+# - +DrawGround+
+# - +DrawHidden+
+# - +DrawHorizon+
+# - +DrawLineEnds+
+# - +DrawProfilesOnly+
+# - +DrawSilhouettes+
+# - +DrawUnderground+
+# - +EdgeColorMode+
+# - +EdgeDisplayMode+
+# - +EdgeType+
+# - +ExtendLines+
+# - +FaceBackColor+
+# - +FaceColorMode+
+# - +FaceFrontColor+
+# - +FogColor+
+# - +FogEndDist+
+# - +FogStartDist+
+# - +FogUseBkColor+
+# - +ForegroundColor+
+# - +GroundColor+
+# - +GroundTransparency+
+# - +HideConstructionGeometry+
+# - +HighlightColor+
+# - +HorizonColor+
+# - +InactiveHidden+
+# - +InstanceHidden+
+# - +JitterEdges+
+# - +LineEndWidth+
+# - +LineExtension+
+# - +LockedColor+
+# - +MaterialTransparency+
+# - +ModelTransparency+
+# - +RenderMode+
+# - +SectionActiveColor+
+# - +SectionCutWidth+
+# - +SectionDefaultCutColor+
+# - +SectionInactiveColor+
+# - +ShowViewName+
+# - +SilhouetteWidth+
+# - +SkyColor+
+# - +Texture+
+# - +TransparencySort+ SketchUp 2017 treats Medium transparency as Faster.
+# 
+# Added in SketchUp 7:
+# - +DisplayDims+
+# - +DisplaySketchAxes+
+# - +DisplayText+
+# 
+# Added in SketchUp 8:
+# - +InactiveFade+
+# - +InstanceFade+
+# 
+# Added in SketchUp 2014:
+# - +DisplaySectionPlanes+
+# 
+# Added in SketchUp 2015:
+# - +DisplaySectionCuts+
+# - +DrawBackEdges+
+# - +SectionCutDrawEdges+
+#
+# @version SketchUp 6.0
 class Sketchup::RenderingOptions < Sketchup::Entity
 
   # Includes

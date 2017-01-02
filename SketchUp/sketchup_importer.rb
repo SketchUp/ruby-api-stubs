@@ -1,6 +1,65 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Importer interface lets you build your own importers for SketchUp. To
+# use this, you create a subclass of Importer and implement all of the
+# methods described below. This will make your importer appear in the list
+# that users see under File > Import, and you can use Ruby to do all of the
+# work of opening the file and creating whatever you need inside SketchUp.
+# 
+# Here is an example of a complete script that imports a .txt file and
+# displays its contents in a messagebox.
+#
+# @example 
+#   class TextImporter < Sketchup::Importer
+#   
+#     # This method is called by SketchUp to determine the description that
+#     # appears in the File > Import dialog's pulldown list of valid
+#     # importers.
+#     def description
+#       return "Custom Text Importer (*.txt)"
+#     end
+#   
+#     # This method is called by SketchUp to determine what file extension
+#     # is associated with your importer.
+#     def file_extension
+#       return "txt"
+#     end
+#   
+#     # This method is called by SketchUp to get a unique importer id.
+#     def id
+#       return "com.sketchup.importers.custom_txt"
+#     end
+#   
+#     # This method is called by SketchUp to determine if the "Options"
+#     # button inside the File > Import dialog should be enabled while your
+#     # importer is selected.
+#     def supports_options?
+#       return true
+#     end
+#   
+#     # This method is called by SketchUp when the user clicks on the
+#     # "Options" button inside the File > Import dialog. You can use it to
+#     # gather and store settings for your importer.
+#     def do_options
+#       # In a real use you would probably store this information in an
+#       # instance variable.
+#       my_settings = UI.inputbox(['My Import Option:'], ['1'],
+#         "Import Options")
+#     end
+#   
+#     # This method is called by SketchUp after the user has selected a file
+#     # to import. This is where you do the real work of opening and
+#     # processing the file.
+#     def load_file(file_path, status)
+#       UI.messagebox(file_path)
+#       return 0 # 0 is the code for a successful import
+#     end
+#   end
+#   
+#   Sketchup.register_importer(TextImporter.new)
+#
+# @version SketchUp 6.0
 class Sketchup::Importer
 
   # Constants

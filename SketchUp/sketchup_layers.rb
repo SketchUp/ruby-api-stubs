@@ -1,6 +1,14 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Layers collection allows you to see and manage all of the layers in a
+# model. You get a pointer to the Layers object from within the Model.
+#
+# @example 
+#   model = Sketchup.active_model
+#   layers = model.layers
+#
+# @version SketchUp 6.0
 class Sketchup::Layers < Sketchup::Entity
 
   # Includes

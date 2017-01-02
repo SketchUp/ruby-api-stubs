@@ -1,6 +1,19 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Style class contains methods for modifying information about a specific
+# style. Styles are a collection of display settings that tell SketchUp how to
+# draw the model.
+#
+# @example 
+#   # Get a handle to the styles collection.
+#   styles = Sketchup.active_model.styles
+#   
+#   # Display the name of the first style.
+#   first_style = styles[0]
+#   UI.messagebox("Your first style is named " + first_style.name.to_s)
+#
+# @version SketchUp 6.0
 class Sketchup::Style < Sketchup::Entity
 
   # Instance Methods

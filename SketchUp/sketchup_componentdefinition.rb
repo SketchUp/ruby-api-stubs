@@ -1,6 +1,18 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The ComponentDefinition class is used to define the contents for a SketchUp
+# component. Components are a collection of entities that can be instanced
+# and reused multiple times throughout a model. For example, you could
+# draw a chair once, turn it into a component, and then use 6 instances of
+# it to surround a table. Edits to the original "definition" will then
+# propagate across all of its instances.
+# 
+# The ComponentDefinition class contains the global entities and settings
+# for each definition. See the ComponentInstance class for how each copy
+# is defined.
+#
+# @version SketchUp 6.0
 class Sketchup::ComponentDefinition < Sketchup::Drawingelement
 
   # Includes

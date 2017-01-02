@@ -1,6 +1,22 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# This observer interface is implemented to react to layers events. To
+# implement this observer, create a Ruby class of this type, override the
+# desired methods, and add an instance of the observer to the objects of
+# interests.
+#
+# @example 
+#   class MyLayersObserver < Sketchup::LayersObserver
+#     def onLayerAdded(layers, layer)
+#       puts "onLayerAdded: #{layer.name}"
+#     end
+#   end
+#   
+#   Sketchup.active_model.layers.add_observer(MyLayersObserver.new)
+#   Sketchup.active_model.layers.add("Hello World")
+#
+# @version SketchUp 6.0
 class Sketchup::LayersObserver
 
   # Instance Methods

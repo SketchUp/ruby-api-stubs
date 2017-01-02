@@ -1,6 +1,10 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Edge class contains methods modifying and extracting information for
+# edges.
+#
+# @version SketchUp 6.0
 class Sketchup::Edge < Sketchup::Drawingelement
 
   # Instance Methods

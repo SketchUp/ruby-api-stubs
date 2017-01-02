@@ -1,6 +1,37 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# This observer interface is implemented to react to application events.
+# This interface is often used to attach other observers to models as they
+# are opened or started.
+# This ensures that your observers are watching all open models.
+# 
+# For example, when one attaches a {Sketchup::SelectionObserver}, it is only
+# attached to the {Sketchup::Selection} collection of a given model. If a 2nd
+# model is opened, the new model's selection changes will not fire selection
+# callbacks unless you've attached a {Sketchup::SelectionObserver} to the new
+# model as well. By watching for {#onNewModel}, you can be sure to do so.
+# 
+# To implement this observer, create a Ruby class of this type, override the
+# desired methods, and add an instance of the observer to the
+# application class.
+#
+# @example 
+#   # This is an example of an observer that watches the application for
+#   # new models and shows a messagebox.
+#   class MyAppObserver < Sketchup::AppObserver
+#     def onNewModel(model)
+#       puts "onNewModel: #{model}"
+#   
+#       # Here is where one might attach other observers to the new model.
+#       model.selection.add_observer(MySelectionObserver.new)
+#     end
+#   end
+#   
+#   # Attach the observer
+#   Sketchup.add_observer(MyAppObserver.new)
+#
+# @version SketchUp 6.0
 class Sketchup::AppObserver
 
   # Instance Methods

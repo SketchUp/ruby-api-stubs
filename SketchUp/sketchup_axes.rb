@@ -1,6 +1,19 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# SketchUp's drawing axes consist of three colored lines (red, green, blue),
+# usually perpendicular to each other, displayed in the drawing area. The
+# exception is when the user open an instance with a non-orthogonal
+# transformation. The root model transformation is always orthogonal.
+# 
+# The drawing axes are used by drawing tools to align the geometry it creates
+# as well as affecting the inference engine.
+# 
+# The plane where the red and green axes lines lie is called the ground plane.
+# The term origin, is used to define the place where all of axes lines start or
+# originate.
+#
+# @version SketchUp 2016
 class Sketchup::Axes < Sketchup::Entity
 
   # Instance Methods

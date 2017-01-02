@@ -1,6 +1,11 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The ConstructionLine class contains methods for modifying construction
+# lines.  Construction lines can be infinite in length, semi-infinite (i.e.
+# infinite in one direction) or finite.
+#
+# @version SketchUp 6.0
 class Sketchup::ConstructionLine < Sketchup::Drawingelement
 
   # Instance Methods

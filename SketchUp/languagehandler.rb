@@ -1,6 +1,33 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The LanguageHandler class contains methods used to help make SketchUp
+# extensions easier to localize across different languages. It looks for
+# translated resources within the Resources folder in the extension's directory
+# structure. All translated resources should be located within the appropriate
+# language folder and encoded in UTF-8. The strings file should include
+# "key"="value" string pairs in the following format:
+#
+# @example Example code that uses LanguageHandler:
+#   # Create a global language handler object
+#   swiveldriver_langHandler = LanguageHandler.new('swiveldriver.strings')
+#   
+#   # Get localized string
+#   localizedStr = swiveldriver_langHandler.GetString('String 1')
+#
+# @example 
+#   "String 1"="Localized String 1";
+#   "String 2"="Localized String 2";
+#
+# @example Here's an example extension directory structure:
+#   gocorp_swiveldriver.rb <- creates the SketchupExtension instance
+#   gocorp_swiveldriver/
+#   gocorp_swiveldriver/Resources/
+#   gocorp_swiveldriver/Resources/en/swiveldriver.strings <- OPTIONAL localization files by language code
+#   gocorp_swiveldriver/Resources/fr/swiveldriver.strings
+#   gocorp_swiveldriver/Resources/es/swiveldriver.strings
+#
+# @version SketchUp 2014
 class LanguageHandler
 
   # Instance Methods

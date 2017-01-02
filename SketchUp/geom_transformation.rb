@@ -1,6 +1,17 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# Transformations are a standard construct in the 3D world for representing
+# the position, rotation, and sizing of a given entity. In the SketchUp
+# world, {Sketchup::ComponentInstance} and {Sketchup::Group} have a
+# +.transformation+ method that reports their current state and various methods
+# (+.move!+, +transformation=+, etc.) that allow them to be manipulated.
+# 
+# Use of the transformation class requires a knowledge of geometrical
+# transformations in 3 dimensions which is covered extensively on
+# the Internet.
+#
+# @version SketchUp 6.0
 class Geom::Transformation
 
   # Class Methods

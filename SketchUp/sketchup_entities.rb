@@ -1,6 +1,10 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Entities class is a container class for all entities in a model (it is a
+# collection of Entity objects).
+#
+# @version SketchUp 6.0
 class Sketchup::Entities
 
   # Includes
@@ -393,22 +397,21 @@ class Sketchup::Entities
   def add_face(some_entities)
   end
 
-  # The add_faces_from_mesh method is used to add Face objects to the collection
-  # of entities from a PolygonMesh.
+  # The {#add_faces_from_mesh} method is used to add Face objects to the
+  # collection of entities from a PolygonMesh.
   # 
-  # The 2nd through 4th parameters are optional. The smooth_flags parameter
-  # can contain any of the following values if passed. The constants were added
-  # in SketchUp 2014. For previous versions, numeric values have to be specified
-  # instead of the Ruby constants.
+  # The +smooth_flags+ parameter can contain any of the following values if
+  # passed. The constants were added in SketchUp 2014. For previous versions,
+  # numeric values have to be specified instead of the Ruby constants.
   # 
-  #   - 0: Geom::PolygonMesh::NO_SMOOTH_OR_HIDE
-  #   - 1: Geom::PolygonMesh::HIDE_BASED_ON_INDEX (Negative point index will hide the edge.)
-  #   - 2: Geom::PolygonMesh::SOFTEN_BASED_ON_INDEX (Negative point index will soften the edge.)
-  #   - 4: Geom::PolygonMesh::AUTO_SOFTEN (Interior edges are softened.)
-  #   - 8: Geom::PolygonMesh::SMOOTH_SOFT_EDGES (All soft edges will also be smooth.)
+  # - 0: {Geom::PolygonMesh::NO_SMOOTH_OR_HIDE}
+  # - 1: {Geom::PolygonMesh::HIDE_BASED_ON_INDEX} (Negative point index will hide the edge.)
+  # - 2: {Geom::PolygonMesh::SOFTEN_BASED_ON_INDEX} (Negative point index will soften the edge.)
+  # - 4: {Geom::PolygonMesh::AUTO_SOFTEN} (Interior edges are softened.)
+  # - 8: {Geom::PolygonMesh::SMOOTH_SOFT_EDGES} (All soft edges will also be smooth.)
   # 
-  # The 3rd and 4th parameters will accept a Material object or a string name
-  # of a material currently in the model.
+  # The 3rd and 4th parameters will accept a {sketchup::Material} object or a
+  # string name of a material currently in the model.
   #
   # @example 
   #   pm = Geom::PolygonMesh.new
@@ -418,8 +421,8 @@ class Sketchup::Entities
   #   pm.add_point([ 0,10, 0]) # 4
   #   pm.add_point([20, 0, 5]) # 5
   #   pm.add_point([20,10, 5]) # 6
-  #   pm.add_polygon(1,-2,3,4)
-  #   pm.add_polygon(2,5,6,-3)
+  #   pm.add_polygon(1, -2, 3, 4)
+  #   pm.add_polygon(2, 5,6, -3)
   #   
   #   # Create a new group that we will populate with the mesh.
   #   group = Sketchup.active_model.entities.add_group
@@ -427,23 +430,21 @@ class Sketchup::Entities
   #   smooth_flags = Geom::PolygonMesh::NO_SMOOTH_OR_HIDE
   #   group.entities.add_faces_from_mesh(pm, smooth_flags, material)
   #
-  # @param polygonmesh
-  #   A Polygon mesh object.
+  # @param [Geom::PolygonMesh] polygonmesh
   #
-  # @param smooth_flags
-  #   An integer containing flags for soften
-  #   and smooth settings.
+  # @param [Integer] smooth_flags
+  #   flags for softening and smoothing of edges.
   #
-  # @param b_material
-  #   Material object to paint back faces with.
+  # @param [Sketchup::Material, String] b_material
+  #   material to paint back faces with.
   #
-  # @param f_material
-  #   Material object to paint front faces with.
+  # @param [Sketchup::Material, String] f_material
+  #   material to paint front faces with.
   #
-  # @return faces - an array of Face objects if successful
+  # @return [Integer] Number of faces created
   #
   # @version SketchUp 6.0
-  def add_faces_from_mesh(polymesh, smooth_flags = AUTO_SOFTEN|SMOOTH_SOFT_EDGES, f_material = nil, b_material = nil)
+  def add_faces_from_mesh(polymesh, smooth_flags = Geom::PolygonMesh::AUTO_SOFTEN|Geom::PolygonMesh::SMOOTH_SOFT_EDGES, f_material = nil, b_material = nil)
   end
 
   # The add_group method is used to create an empty group or a group with
@@ -779,24 +780,24 @@ class Sketchup::Entities
   def erase_entities(entities)
   end
 
-  # The fill_from_mesh method is used to add faces and edges to the collection of
-  # entities from a PolygonMesh. It requires that the entities collection to be
-  # filled is empty. It has higher performance than add_faces_from_mesh, but
-  # does less error checking as it builds the geometry.
+  # The {#fill_from_mesh} method is used to add faces and edges to the collection
+  # of entities from a {Geom::PolygonMesh}. It requires that the entities
+  # collection to be filled is empty. It has higher performance than
+  # {#add_faces_from_mesh}, but does less error checking as it builds the
+  # geometry.
   # 
-  # The 2nd through 5th parameters are optional. The smooth_flags parameter
-  # can contain any of the following values if passed. The constants were added
-  # in SketchUp 2014. For previous versions, numeric values have to be specified
-  # instead of the Ruby constants.
+  # The +smooth_flags+ parameter can contain any of the following values if
+  # passed. The constants were added in SketchUp 2014. For previous versions,
+  # numeric values have to be specified instead of the Ruby constants:
   # 
-  #   - 0: Geom::PolygonMesh::NO_SMOOTH_OR_HIDE
-  #   - 1: Geom::PolygonMesh::HIDE_BASED_ON_INDEX (Negative point index will hide the edge.)
-  #   - 2: Geom::PolygonMesh::SOFTEN_BASED_ON_INDEX (Negative point index will soften the edge.)
-  #   - 4: Geom::PolygonMesh::AUTO_SOFTEN (Interior edges are softened.)
-  #   - 8: Geom::PolygonMesh::SMOOTH_SOFT_EDGES (All soft edges will also be smooth.)
+  # - 0: {Geom::PolygonMesh::NO_SMOOTH_OR_HIDE}
+  # - 1: {Geom::PolygonMesh::HIDE_BASED_ON_INDEX} (Negative point index will hide the edge.)
+  # - 2: {Geom::PolygonMesh::SOFTEN_BASED_ON_INDEX} (Negative point index will soften the edge.)
+  # - 4: {Geom::PolygonMesh::AUTO_SOFTEN} (Interior edges are softened.)
+  # - 8: {Geom::PolygonMesh::SMOOTH_SOFT_EDGES} (All soft edges will also be smooth.)
   # 
-  # The 4rd and 5th parameters will accept a Material object or a string name
-  # of a material currently in the model.
+  # The 4rd and 5th parameters will accept a {Sketchup::Material} object or a
+  # string name of a material currently in the model.
   #
   # @example 
   #   pm = Geom::PolygonMesh.new
@@ -806,8 +807,8 @@ class Sketchup::Entities
   #   pm.add_point([ 0,10, 0]) # 4
   #   pm.add_point([20, 0, 5]) # 5
   #   pm.add_point([20,10, 5]) # 6
-  #   pm.add_polygon(1,-2,3,4)
-  #   pm.add_polygon(2,5,6,-3)
+  #   pm.add_polygon(1, -2, 3, 4)
+  #   pm.add_polygon(2, 5, 6, -3)
   #   
   #   # Create a new group that we will populate with the mesh.
   #   group = Sketchup.active_model.entities.add_group
@@ -815,28 +816,26 @@ class Sketchup::Entities
   #   smooth_flags = Geom::PolygonMesh::HIDE_BASED_ON_INDEX
   #   group.entities.fill_from_mesh(pm, true, smooth_flags, material)
   #
-  # @param [optional] weld_vertices
-  #   Boolean. This argument has no effect and is
-  #   kept for compatibility reasons. Points are always
+  # @param [Boolean] weld_vertices
+  #   This argument has no effect and is kept for
+  #   compatibility reasons. Points are always
   #   merged.
   #
-  # @param polygonmesh
-  #   A Polygon mesh object.
+  # @param [Geom::PolygonMesh] polygonmesh
   #
-  # @param [optional] smooth_flags
-  #   An integer containing flags for soften
-  #   and smooth settings.
+  # @param [Integer] smooth_flags
+  #   flags for softening and smoothing of edges.
   #
-  # @param [optional] b_material
-  #   Material object to paint back faces with.
+  # @param [Sketchup::Material, String] b_material
+  #   material to paint back faces with.
   #
-  # @param [optional] f_material
-  #   Material object to paint front faces with.
+  # @param [Sketchup::Material, String] f_material
+  #   material to paint front faces with.
   #
-  # @return status - true if successful
+  # @return [Boolean] 
   #
   # @version SketchUp 6.0
-  def fill_from_mesh(polymesh, weld_vertices, smooth_flags = AUTO_SOFTEN|SMOOTH_SOFT_EDGES, f_material = nil, b_material = nil)
+  def fill_from_mesh(polymesh, weld_vertices = true, smooth_flags = Geom::PolygonMesh::AUTO_SOFTEN|Geom::PolygonMesh::SMOOTH_SOFT_EDGES, f_material = nil, b_material = nil)
   end
 
   # The intersect_with method is used to intersect an entities, component

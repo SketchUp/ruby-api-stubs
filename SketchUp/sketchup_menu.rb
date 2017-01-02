@@ -1,6 +1,9 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# An interface to a menu.
+#
+# @version SketchUp 6.0
 class Sketchup::Menu
 
   # Instance Methods

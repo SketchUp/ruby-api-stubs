@@ -1,6 +1,21 @@
-# Copyright:: Copyright 2016 Trimble Inc.
+# Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
+# The Behavior class is used to control the "behavior" of components, which
+# roughly correlates to the series of options that you see in the
+# Components dialog under the "edit" tab, such as whether it casts shadows,
+# glues to walls, etc.
+# 
+# A Behavior object is accessed from a ComponentDefinition object, not created
+# with a Behavior.new call.
+#
+# @example 
+#   # Grab the Behavior object from the first component definition.
+#   model = Sketchup.active_model
+#   definition = model.definitions[0]
+#   behavior = definition.behavior
+#
+# @version SketchUp 6.0
 class Sketchup::Behavior < Sketchup::Entity
 
   # Instance Methods
