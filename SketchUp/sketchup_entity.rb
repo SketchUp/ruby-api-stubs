@@ -5,27 +5,27 @@
 # anything that can be contained in a model, including Drawingelements
 # such as Edges, SectionPlanes, Groups, etc. and entities that relate to
 # those Drawingelements, such as Loops, Layers, etc.
-# 
+#
 # Keep in mind that the methods below are available on all subclasses.
 # For example, an Edge's parent class is Drawingelement, and a
 # Drawingelement's parent class is Entity. Therefore an Edge has all of the
 # methods defined in Drawingelement and Entity.
-# 
+#
 # The Object.is_a? method is the common way of determining what sort of Entity
 # you're dealing with.
 #
-# @example 
+# @example
 #   # Count how many faces are in the current selection.
 #   selection = Sketchup.active_model.selection
 #   face_count = 0
-#   
+#
 #   # Look at all of the entities in the selection.
 #   selection.each { |entity|
 #     if entity.is_a? Sketchup::Face
 #       face_count = face_count + 1
 #     end
 #   }
-#   
+#
 #   UI.messagebox("There are " + face_count.to_s + " faces selected.")
 #
 # @version SketchUp 6.0
@@ -35,7 +35,7 @@ class Sketchup::Entity
 
   # The add_observer method is used to add an observer to the current object.
   #
-  # @example 
+  # @example
   #   entity = Sketchup.active_model.entities[0]
   #   if entity.valid?
   #     status = entity.add_observer observer
@@ -53,7 +53,7 @@ class Sketchup::Entity
   # The attribute_dictionaries method is used to retrieve the
   # AttributeDictionaries collection attached to the entity.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -63,10 +63,10 @@ class Sketchup::Entity
   #   pts[1] = [width, 0, 0]
   #   pts[2] = [width, depth, 0]
   #   pts[3] = [0, depth, 0]
-  #   
+  #
   #   # Add the face to the entities in the model
   #   face = entities.add_face pts
-  #   
+  #
   #   # I just happen to know that the second and third entities in the
   #   # entities objects are edges.
   #   entity1 = entities[1]
@@ -87,7 +87,7 @@ class Sketchup::Entity
   # The attribute_dictionary method is used to retrieve an attribute dictionary
   # with a given name that is attached to an Entity.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -97,10 +97,10 @@ class Sketchup::Entity
   #   pts[1] = [width, 0, 0]
   #   pts[2] = [width, depth, 0]
   #   pts[3] = [0, depth, 0]
-  #   
+  #
   #   # Add the face to the entities in the model
   #   face = entities.add_face pts
-  #   
+  #
   #   # I just happen to know that the second and third entities in the
   #   # entities objects are edges.
   #   entity1 = entities[1]
@@ -122,12 +122,12 @@ class Sketchup::Entity
   end
 
   # The delete_attribute method is used to delete an attribute from an entity.
-  # 
+  #
   # If only the dictionary_name is given, then it deletes the entire
   # AttributeDictionary. Otherwise, delete_attribute deletes the attribute with
   # the given key from the given dictionary.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -139,7 +139,7 @@ class Sketchup::Entity
   #   pts[3] = [0, depth, 0]
   #   # Add the face to the entities in the model
   #   face = entities.add_face pts
-  #   
+  #
   #   # I just happen to know that the second and third entities in the
   #   # entities objects are edges.
   #   entity1 = entities[1]
@@ -161,7 +161,7 @@ class Sketchup::Entity
   # The deleted? method is used to determine if your entity is still valid (not
   # deleted by another script, for example.)
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -171,7 +171,7 @@ class Sketchup::Entity
   #   pts[1] = [width, 0, 0]
   #   pts[2] = [width, depth, 0]
   #   pts[3] = [0, depth, 0]
-  #   
+  #
   #   # Add the face to the entities in the model
   #   face = entities.add_face pts
   #   entity1 = entities[1]
@@ -179,17 +179,17 @@ class Sketchup::Entity
   #
   # @return status - true if deleted, false if not deleted
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def deleted?
   end
 
   # The entityID method is used to retrieve a unique ID assigned to an entity.
-  # 
+  #
   # The entityID is not persistent between sessions.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -199,7 +199,7 @@ class Sketchup::Entity
   #   pts[1] = [width, 0, 0]
   #   pts[2] = [width, depth, 0]
   #   pts[3] = [0, depth, 0]
-  #   
+  #
   #   # Add the face to the entities in the model
   #   face = entities.add_face pts
   #   entity1 = entities[1]
@@ -213,14 +213,14 @@ class Sketchup::Entity
 
   # The get_attribute method is used to retrieve the value of an attribute in
   # the entity's attribute dictionary.
-  # 
+  #
   # If the third parameter, default_value, is not passed and there is no
   # attribute that matches the given name, it returns nil.
-  # 
+  #
   # If default_value is provided and there is no matching attribute it returns
   # the given value. It does not create an attribute with that name though.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -230,10 +230,10 @@ class Sketchup::Entity
   #   pts[1] = [width, 0, 0]
   #   pts[2] = [width, depth, 0]
   #   pts[3] = [0, depth, 0]
-  #   
+  #
   #   # Add the face to the entities in the model
   #   face = entities.add_face pts
-  #   
+  #
   #   # I just happen to know that the second and third entities in the
   #   # entities objects are edges.
   #   entity1 = entities[1]
@@ -258,7 +258,7 @@ class Sketchup::Entity
 
   # The to_s method is used to retrieve the string representation of the entity.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -268,10 +268,10 @@ class Sketchup::Entity
   #   pts[1] = [width, 0, 0]
   #   pts[2] = [width, depth, 0]
   #   pts[3] = [0, depth, 0]
-  #   
+  #
   #   # Add the face to the entities in the model
   #   face = entities.add_face pts
-  #   
+  #
   #   # I just happen to know that the second and third entities in the
   #   # entities objects are edges.
   #   entity1 = entities[1]
@@ -286,7 +286,7 @@ class Sketchup::Entity
 
   # The model method is used to retrieve the model for the entity.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -296,10 +296,10 @@ class Sketchup::Entity
   #   pts[1] = [width, 0, 0]
   #   pts[2] = [width, depth, 0]
   #   pts[3] = [0, depth, 0]
-  #   
+  #
   #   # Add the face to the entities in the model
   #   face = entities.add_face pts
-  #   
+  #
   #   # I just happen to know that the second and third entities in the
   #   # entities objects are edges.
   #   entity1 = entities[1]
@@ -312,11 +312,11 @@ class Sketchup::Entity
   end
 
   # The parent method is used to retrieve the parent of the entity.
-  # 
+  #
   # The parent will be a ComponentDefinition, a Group, or a Model, whatever
   # the entity is contained within.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -326,10 +326,10 @@ class Sketchup::Entity
   #   pts[1] = [width, 0, 0]
   #   pts[2] = [width, depth, 0]
   #   pts[3] = [0, depth, 0]
-  #   
+  #
   #   # Add the face to the entities in the model
   #   face = entities.add_face pts
-  #   
+  #
   #   # I just happen to know that the second and third entities in the
   #   # entities objects are edges.
   #   entity1 = entities[1]
@@ -344,10 +344,10 @@ class Sketchup::Entity
 
   # The {#persistent_id} method is used to retrieve a unique persistent id
   # assigned to an entity.
-  # 
+  #
   # The persistent id persistent between sessions.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   pts = [
@@ -356,7 +356,7 @@ class Sketchup::Entity
   #     Geom::Point3d.new(9, 9, 0)
   #     Geom::Point3d.new(0, 9, 0)
   #   ]
-  #   
+  #
   #   # Add the face to the entities in the model
   #   group = entities.add_group
   #   face = group.entities.add_face(pts)
@@ -373,7 +373,7 @@ class Sketchup::Entity
   # The remove_observer method is used to remove an observer from the current
   # object.
   #
-  # @example 
+  # @example
   #   entity = Sketchup.active_model.entities[0]
   #   if entity.valid?
   #     status = entity.remove_observer observer
@@ -390,14 +390,14 @@ class Sketchup::Entity
 
   # The set attribute is used to set the value of an attribute in an attribute
   # dictionary with the given name.
-  # 
+  #
   # This method will create a new AttributeDictionary if none exists.
-  # 
+  #
   # Note, a bug prior to SketchUp 2015 would corrupt the model if the key is
   # an empty string. This also includes values that will evaluate to empty
   # strings, such as nil.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -407,10 +407,10 @@ class Sketchup::Entity
   #   pts[1] = [width, 0, 0]
   #   pts[2] = [width, depth, 0]
   #   pts[3] = [0, depth, 0]
-  #   
+  #
   #   # Add the face to the entities in the model
   #   face = entities.add_face pts
-  #   
+  #
   #   # I just happen to know that the second and third entities in the
   #   # entities objects are edges.
   #   entity1 = entities[1]
@@ -433,7 +433,7 @@ class Sketchup::Entity
 
   # The to_s method is used to retrieve the string representation of the entity.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -443,10 +443,10 @@ class Sketchup::Entity
   #   pts[1] = [width, 0, 0]
   #   pts[2] = [width, depth, 0]
   #   pts[3] = [0, depth, 0]
-  #   
+  #
   #   # Add the face to the entities in the model
   #   face = entities.add_face pts
-  #   
+  #
   #   # I just happen to know that the second and third entities in the
   #   # entities objects are edges.
   #   entity1 = entities[1]
@@ -462,7 +462,7 @@ class Sketchup::Entity
   # The typename method retrieves the type of the entity, which will be a string
   # such as "Face", "Edge", or "Group".
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -472,10 +472,10 @@ class Sketchup::Entity
   #   pts[1] = [width, 0, 0]
   #   pts[2] = [width, depth, 0]
   #   pts[3] = [0, depth, 0]
-  #   
+  #
   #   # Add the face to the entities in the model
   #   face = entities.add_face pts
-  #   
+  #
   #   # I just happen to know that the second and third entities in the
   #   # entities objects are edges.
   #   entity1 = entities[1]
@@ -489,10 +489,10 @@ class Sketchup::Entity
 
   # The valid? method is used to determine if your entity is still valid (not
   # deleted by another script, for example.)
-  # 
+  #
   # This method is functionally identical to the deleted? method.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -502,7 +502,7 @@ class Sketchup::Entity
   #   pts[1] = [width, 0, 0]
   #   pts[2] = [width, depth, 0]
   #   pts[3] = [0, depth, 0]
-  #   
+  #
   #   # Add the face to the entities in the model
   #   face = entities.add_face pts
   #   entity1 = entities[1]
@@ -510,7 +510,7 @@ class Sketchup::Entity
   #
   # @return status - true if deleted, false if not deleted
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def valid?

@@ -5,7 +5,7 @@
 # information for a model. The majority of the rendering information returned
 # exists in the Styles dialog. The following
 # rendering information keys are maintained in SketchUp:
-# 
+#
 # - +BackgroundColor+
 # - +BandColor+
 # - +ConstructionColor+
@@ -57,19 +57,19 @@
 # - +SkyColor+
 # - +Texture+
 # - +TransparencySort+ SketchUp 2017 treats Medium transparency as Faster.
-# 
+#
 # Added in SketchUp 7:
 # - +DisplayDims+
 # - +DisplaySketchAxes+
 # - +DisplayText+
-# 
+#
 # Added in SketchUp 8:
 # - +InactiveFade+
 # - +InstanceFade+
-# 
+#
 # Added in SketchUp 2014:
 # - +DisplaySectionPlanes+
-# 
+#
 # Added in SketchUp 2015:
 # - +DisplaySectionCuts+
 # - +DrawBackEdges+
@@ -148,7 +148,7 @@ class Sketchup::RenderingOptions < Sketchup::Entity
 
   # The each_key method iterates through all of the rendering options keys.
   #
-  # @example 
+  # @example
   #   Sketchup.active_model.rendering_options.each_key { |key|
   #     puts key
   #   }
@@ -163,7 +163,7 @@ class Sketchup::RenderingOptions < Sketchup::Entity
 
   # The keys method returns an array with all of the attribute keys.
   #
-  # @example 
+  # @example
   #   keys = Sketchup.active_model.rendering_options.keys
   #
   # @return keys - an array of keys
@@ -177,7 +177,7 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   # The set value [] method is used to get the value in the array of
   # rendering options.
   #
-  # @example 
+  # @example
   #   result = Sketchup.active_model.rendering_options["DisplayInstanceAxes"]
   #
   # @param key
@@ -192,7 +192,7 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   # The set value []= method is used to set the value in the array of
   # rendering options.
   #
-  # @example 
+  # @example
   #   Sketchup.active_model.rendering_options["DisplayInstanceAxes"] = false
   #
   # @param key
@@ -209,7 +209,7 @@ class Sketchup::RenderingOptions < Sketchup::Entity
 
   # The add_observer method is used to add an observer to the current object.
   #
-  # @example 
+  # @example
   #   observer = Sketchup::RenderingOptionsObserver.new # Dummy observer.
   #   result = Sketchup.active_model.rendering_options.add_observer(observer)
   #
@@ -224,7 +224,7 @@ class Sketchup::RenderingOptions < Sketchup::Entity
 
   # The {#count} method is inherited from the +Enumerable+ mix-in module.
   #
-  # @example 
+  # @example
   #   options = Sketchup.active_model.rendering_options
   #   number = options.count
   #
@@ -236,7 +236,7 @@ class Sketchup::RenderingOptions < Sketchup::Entity
 
   # An alias for each. See RenderingOptions.each.
   #
-  # @example 
+  # @example
   #   Sketchup.active_model.rendering_options.each_pair { |key, value|
   #     puts "#{key} : #{value}"
   #   }
@@ -249,7 +249,7 @@ class Sketchup::RenderingOptions < Sketchup::Entity
 
   # The each_key method iterates through all of the rendering options keys.
   #
-  # @example 
+  # @example
   #   Sketchup.active_model.rendering_options.each_key { |key|
   #     puts key
   #   }
@@ -264,7 +264,7 @@ class Sketchup::RenderingOptions < Sketchup::Entity
 
   # An alias for each. See RenderingOptions.each.
   #
-  # @example 
+  # @example
   #   Sketchup.active_model.rendering_options.each_pair { |key, value|
   #     puts "#{key} : #{value}"
   #   }
@@ -277,7 +277,7 @@ class Sketchup::RenderingOptions < Sketchup::Entity
 
   # The keys method returns an array with all of the attribute keys.
   #
-  # @example 
+  # @example
   #   keys = Sketchup.active_model.rendering_options.keys
   #
   # @return keys - an array of keys
@@ -288,10 +288,10 @@ class Sketchup::RenderingOptions < Sketchup::Entity
 
   # The {#length} method returns the number of options in the rendering options
   # collection
-  # 
+  #
   # The {#size} method is an alias for {#length}.
   #
-  # @example 
+  # @example
   #   options = Sketchup.active_model.rendering_options
   #   number = options.length
   #
@@ -304,7 +304,7 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   # The remove_observer method is used to remove an observer from the current
   # object.
   #
-  # @example 
+  # @example
   #   observer = Sketchup::RenderingOptionsObserver.new # Dummy observer.
   #   options = Sketchup.active_model.rendering_options
   #   options.add_observer(observer)
@@ -321,10 +321,10 @@ class Sketchup::RenderingOptions < Sketchup::Entity
 
   # The {#length} method returns the number of options in the rendering options
   # collection
-  # 
+  #
   # The {#size} method is an alias for {#length}.
   #
-  # @example 
+  # @example
   #   options = Sketchup.active_model.rendering_options
   #   number = options.length
   #

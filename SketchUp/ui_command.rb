@@ -4,20 +4,20 @@
 # The Command class is the preferred class for adding tools to the menus and
 # Ruby toolbars. For example, you could add a menu item and pass it a code
 # block directly, or you could first create a Command.
-# 
+#
 # Using Commands gives you greater control over how the item works in the UI,
 # and it allows multiple spots in the UI to call the same code. For example,
 # You might want a toolbar button and a context-click menu item to both point
 # to the same command, and to control the tooltip and its "graying" from
 # a single spot in your code.
 #
-# @example 
+# @example
 #   # You can add menu items as procedure blocks, as shown here, but
 #   # you have no control over whether it is grayed out, for example.
 #   UI.menu("Draw").add_item("My Procedure") {
 #     UI.messagebox("My Procedure")
 #   }
-#   
+#
 #   # Better to create a command object.
 #   cmd = UI::Command.new("Tester") {
 #     UI.messagebox("My Command")
@@ -39,12 +39,12 @@ class UI::Command
 
   # The new method is used to create a new command.
   #
-  # @example 
+  # @example
   #   UI.menu("Draw").add_separator
-  #   
+  #
   #   # Adds a Test submenu to the Draw menu where the Tester menu item appears
   #   testmenu = UI.menu("Draw").add_submenu("Test")
-  #   
+  #
   #   # This menu item simply displays Hello World on the screen when clicked.
   #   cmd = UI::Command.new("Tester") { UI.messagebox("Hello World") }
   #   testmenu.add_item cmd
@@ -67,7 +67,7 @@ class UI::Command
   # The large_icon method returns the icon file for the command's
   # large icon.
   #
-  # @example 
+  # @example
   #   toolbar = UI::Toolbar.new "Test"
   #   # This command displays Hello World on the screen when clicked
   #   cmd = UI::Command.new("Test") { UI.messagebox("Hello World") }
@@ -86,13 +86,13 @@ class UI::Command
   # The large_icon= method is used to identify the icon file for the command's
   # large icon. large icons should be 24x24 pixel images for best display
   # quality.
-  # 
+  #
   # Since SketchUp 2016 it is possible to provide vector images for the cursors.
   # SVG format for Windows and PDF format for OS X. Since the vector images scale
   # for both small and large icon sizes, you may choose to use only one vector
   # image for both variants.
   #
-  # @example 
+  # @example
   #   toolbar = UI::Toolbar.new "Test"
   #   # This command displays Hello World on the screen when clicked
   #   cmd = UI::Command.new("Test") { UI.messagebox("Hello World") }
@@ -112,7 +112,7 @@ class UI::Command
 
   # The menu_text method returns the menu item name for the command.
   #
-  # @example 
+  # @example
   #   add_separator_to_menu("Draw")
   #   # Adds a Test submenu to the Draw menu where the Tester menu item appears
   #   testmenu = UI.menu("Draw").add_submenu("Test")
@@ -129,7 +129,7 @@ class UI::Command
 
   # The menu_text= method is used to set the menu item name for the command.
   #
-  # @example 
+  # @example
   #   add_separator_to_menu("Draw")
   #   # Adds a Test submenu to the Draw menu where the Tester menu item appears
   #   testmenu = UI.menu("Draw").add_submenu("Test")
@@ -150,7 +150,7 @@ class UI::Command
   # is enabled, checked, etc. based on the user state. For example, you might
   # want your command to be disabled unless the user has a current selection.
   #
-  # @example 
+  # @example
   #   # Create a command object.
   #   cmd = UI::Command.new("Tester") {
   #     UI.messagebox("My Command")
@@ -165,7 +165,7 @@ class UI::Command
   #   }
   #   UI.menu("Draw").add_item(cmd)
   #
-  # @return [UI::Command] 
+  # @return [UI::Command]
   #
   # @version SketchUp 6.0
   #
@@ -179,7 +179,7 @@ class UI::Command
   # The small_icon method returns the icon file for the command's
   # small icon.
   #
-  # @example 
+  # @example
   #   toolbar = UI::Toolbar.new "Test"
   #   # This toolbar command displays Hello World on the screen when clicked.
   #   cmd = UI::Command.new("Tester") { UI.messagebox("Hello World") }
@@ -198,13 +198,13 @@ class UI::Command
   # The small_icon= method is used to identify the icon file for the command's
   # small icon. Small icons should be 16x16 pixel images for best display
   # quality.
-  # 
+  #
   # Since SketchUp 2016 it is possible to provide vector images for the cursors.
   # SVG format for Windows and PDF format for OS X. Since the vector images scale
   # for both small and large icon sizes, you may choose to use only one vector
   # image for both variants.
   #
-  # @example 
+  # @example
   #   toolbar = UI::Toolbar.new "Test"
   #   # This toolbar command displays Hello World on the screen when clicked.
   #   cmd = UI::Command.new("Tester") { UI.messagebox("Hello World") }
@@ -225,7 +225,7 @@ class UI::Command
   # The status_bar_text method returns the status bar text for the
   # command.
   #
-  # @example 
+  # @example
   #   toolbar = UI::Toolbar.new "Test"
   #   # This toolbar tool simply displays Hello World on the screen
   #   # when clicked
@@ -246,7 +246,7 @@ class UI::Command
   # The status_bar_text= method is used to set the status bar text for the
   # command.
   #
-  # @example 
+  # @example
   #   toolbar = UI::Toolbar.new "Test"
   #   # This toolbar tool simply displays Hello World on the screen when clicked
   #   cmd = UI::Command.new("Tester") { UI.messagebox("Hello World") }
@@ -268,7 +268,7 @@ class UI::Command
 
   # The tooltip method returns command item's tooltip text.
   #
-  # @example 
+  # @example
   #   toolbar = UI::Toolbar.new "Test"
   #   # This command displays Hello World on the screen when clicked
   #   cmd = UI::Command.new("Test") { UI.messagebox("Hello World") }
@@ -287,7 +287,7 @@ class UI::Command
   # will appear when the command is attached to a tool bar and the user hovers
   # their cursor over the icon.
   #
-  # @example 
+  # @example
   #   toolbar = UI::Toolbar.new "Test"
   #   # This command displays Hello World on the screen when clicked
   #   cmd = UI::Command.new("Test") { UI.messagebox("Hello World") }

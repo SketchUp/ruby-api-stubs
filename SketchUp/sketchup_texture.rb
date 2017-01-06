@@ -14,7 +14,7 @@ class Sketchup::Texture < Sketchup::Entity
   # The average_color method retrieves a color object with the average color
   # found in the texture.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   materials=model.materials
   #   # Adds a material as an in model material
@@ -44,7 +44,7 @@ class Sketchup::Texture < Sketchup::Entity
   # The filename method retrieves the entire path, including the file, for a
   # texture object.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   materials=model.materials
   #   # Adds a material as an in model material
@@ -73,7 +73,7 @@ class Sketchup::Texture < Sketchup::Entity
   # The height method is used to get the height of a repeatable texture image,
   # in inches.
   #
-  # @example 
+  # @example
   #   height = texture.height
   #
   # @return height - the height, in inches, of the texture pattern
@@ -85,7 +85,7 @@ class Sketchup::Texture < Sketchup::Entity
   # The image_height method retrieves the height of the repeatable texture
   # image, in pixels.
   #
-  # @example 
+  # @example
   #   imageheight = texture.image_height
   #   if (imageheight)
   #     UI.messagebox imageheight
@@ -103,7 +103,7 @@ class Sketchup::Texture < Sketchup::Entity
   # The image_width method retrieves the width of the repeatable texture image,
   # in pixels.
   #
-  # @example 
+  # @example
   #   imagewidth = texture.image_width
   #   if (imagewidth)
   #     UI.messagebox imagewidth
@@ -121,16 +121,16 @@ class Sketchup::Texture < Sketchup::Entity
   # The size= method allows you to set the size of the repeatable texture image,
   # in inches,
   #
-  # @example 
+  # @example
   #   size = texture.size = 60
   #   imagewidth = texture.width
-  #   
+  #
   #   if (imagewidth)
   #     UI.messagebox imagewidth
   #   else
   #     UI.messagebox "Failure"
   #   end
-  #   
+  #
   #   # Using two values which will not preserve ratio
   #   width_height = texture.size = [10,100]
   #   if (width_height)
@@ -158,7 +158,7 @@ class Sketchup::Texture < Sketchup::Entity
 
   # The valid? method ensures that a texture is valid.
   #
-  # @example 
+  # @example
   #   status = texture.valid?
   #   if (status)
   #     UI.messagebox status
@@ -168,7 +168,7 @@ class Sketchup::Texture < Sketchup::Entity
   #
   # @return status - true if valid, false if invalid.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def valid?
@@ -177,7 +177,7 @@ class Sketchup::Texture < Sketchup::Entity
   # The width method is used to get the width of a repeatable texture image,
   # in inches.
   #
-  # @example 
+  # @example
   #   width = texture.width
   #
   # @return width - the width, in inches, of the texture pattern
@@ -189,7 +189,7 @@ class Sketchup::Texture < Sketchup::Entity
   # Writes the texture to file with option to preserve the color adjustments made
   # by the material.
   #
-  # @example 
+  # @example
   #   material = Sketchup.active_model.materials[0]
   #   basename = File.basename(material.texture.filename)
   #   filename = File.join(Sketchup.temp_dir, basename)

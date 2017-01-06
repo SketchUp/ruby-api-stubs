@@ -4,11 +4,11 @@
 # The Toolbar class contains methods to create and manipulate SketchUp
 # toolbars in Ruby. Toolbars are collections of buttons that you can use
 # to activate custom Tools or ruby scripts.
-# 
+#
 # Also see the Command object for details on creating "commands" which
 # can be called from your toolbars.
 #
-# @example 
+# @example
 #   toolbar = UI::Toolbar.new "Test"
 #   # This toolbar icon simply displays Hello World on the screen
 #   cmd = UI::Command.new("Test") {
@@ -33,7 +33,7 @@ class UI::Toolbar
 
   # The new method creates a new Toolbar object.
   #
-  # @example 
+  # @example
   #   toolbar = UI::Toolbar.new "Test"
   #
   # @param toolbarname
@@ -49,7 +49,7 @@ class UI::Toolbar
 
   # The add_item method is used to add an item to the toolbar.
   #
-  # @example 
+  # @example
   #   toolbar = toolbar.add_item command
   #
   # @param command
@@ -64,7 +64,7 @@ class UI::Toolbar
 
   # The add_separator method is used to add a line separator to the toolbar.
   #
-  # @example 
+  # @example
   #   toolbar = toolbar.add_separator
   #
   # @return toolbar - the toolbar where the line separator was just
@@ -76,7 +76,7 @@ class UI::Toolbar
 
   # The {#count} method is inherited from the +Enumerable+ mix-in module.
   #
-  # @example 
+  # @example
   #   number = toolbar.count
   #
   # @return integer
@@ -88,7 +88,7 @@ class UI::Toolbar
   # The each method is used to iterate through all of the commands
   # attached to a toolbar.
   #
-  # @example 
+  # @example
   #   toolbar = UI::Toolbar.new "Test"
   #   # This command displays Hello World on the screen when clicked
   #   cmd = UI::Command.new("Test") { UI.messagebox("Hello World") }
@@ -112,10 +112,10 @@ class UI::Toolbar
 
   # The get_last_state method is used to determine if the toolbar was hidden or
   # visible in the previous session of SketchUp.
-  # 
+  #
   # Valid states are 1 for visible, 0 for hidden, -1 for before never shown.
   #
-  # @example 
+  # @example
   #   state = toolbar.get_last_state
   #
   # @return state - the last state of the toolbar (see comments)
@@ -126,7 +126,7 @@ class UI::Toolbar
 
   # The hide method is used to hide the toolbar on the user interface.
   #
-  # @example 
+  # @example
   #   toolbar = UI::Toolbar.new "Test"
   #   # This toolbar icon simply displays Hello World on the screen
   #   cmd = UI::Command.new("Test") {
@@ -150,10 +150,10 @@ class UI::Toolbar
   end
 
   # The {#length} method returns the number of items in the toolbar.
-  # 
+  #
   # The {#size} method is an alias of {#length}.
   #
-  # @example 
+  # @example
   #   number = toolbar.length
   #
   # @return integer
@@ -164,7 +164,7 @@ class UI::Toolbar
 
   # The name method returns the name of the toolbar.
   #
-  # @example 
+  # @example
   #   toolbar = UI::Toolbar.new "Test"
   #   # This command displays Hello World on the screen when clicked
   #   cmd = UI::Command.new("Test") { UI.messagebox("Hello World") }
@@ -183,7 +183,7 @@ class UI::Toolbar
   # The restore method is used to reposition the toolbar to its previous
   # location and show if not hidden.
   #
-  # @example 
+  # @example
   #   toolbar.restore
   #
   # @return nil
@@ -194,7 +194,7 @@ class UI::Toolbar
 
   # The show method is used to display the toolbar in the user interface.
   #
-  # @example 
+  # @example
   #   toolbar = UI::Toolbar.new "Test"
   #   # This toolbar icon simply displays Hello World on the screen
   #   cmd = UI::Command.new("Test") {
@@ -215,10 +215,10 @@ class UI::Toolbar
   end
 
   # The {#length} method returns the number of items in the toolbar.
-  # 
+  #
   # The {#size} method is an alias of {#length}.
   #
-  # @example 
+  # @example
   #   number = toolbar.length
   #
   # @return integer
@@ -229,12 +229,12 @@ class UI::Toolbar
 
   # The visible? method is used to find out if a toolbar is currently visible.
   #
-  # @example 
+  # @example
   #   visible = toolbar.visible?
   #
   # @return true if visible
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def visible?

@@ -5,7 +5,7 @@
 # (UV coordinates) of a texture on a face. This class is particularly useful
 # in determining how textures that have been manipulated using the Texture
 # Tweaker should appear when exported to another file type
-# 
+#
 # Use the Face.get_UVHelper method to create a UVHelper for a given face.
 # See the TextureWriter class as well.
 #
@@ -17,7 +17,7 @@ class Sketchup::UVHelper
   # The get_back_UVQ method is used to get the UV coordinates for the back of a
   # face.
   #
-  # @example 
+  # @example
   #   uv_helper = face.get_UVHelper true, true, my_texture_writer
   #   face.outer_loop.vertices.each do |vert|
   #     uvq = uv_help.get_back_UVQ(vert.position)
@@ -39,7 +39,7 @@ class Sketchup::UVHelper
   # The get_front_UVQ method is used to get the UV coordinates for a front of a
   # face.
   #
-  # @example 
+  # @example
   #   uv_helper = face.get_UVHelper true, true, my_texture_writer
   #   face.outer_loop.vertices.each do |vert|
   #     uvq = uv_helper.get_front_UVQ(vert.position)

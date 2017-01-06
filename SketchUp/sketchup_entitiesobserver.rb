@@ -6,7 +6,7 @@
 # type, override the desired methods, and add an instance of the observer to
 # the objects of interests.
 #
-# @example 
+# @example
 #   # This is an example of an observer that watches the entities collection
 #   # new added elements and writes a message on the console.
 #   class MyEntitiesObserver < Sketchup::EntitiesObserver
@@ -14,7 +14,7 @@
 #       puts "onElementAdded: #{entity}"
 #     end
 #   end
-#   
+#
 #   # Attach the observer
 #   Sketchup.active_model.entities.add_observer(MyEntitiesObserver.new)
 #
@@ -31,7 +31,7 @@ class Sketchup::EntitiesObserver
   # The {#onActiveSectionPlaneChanged} method is invoked when a section plane
   # within this entities is activated or the active one is deactivated.
   #
-  # @example 
+  # @example
   #   def onActiveSectionPlaneChanged(entities)
   #     sp = entities.active_section_plane
   #     if sp.nil?
@@ -43,7 +43,7 @@ class Sketchup::EntitiesObserver
   #
   # @param [Sketchup::Entities] entities
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 2014
   def onActiveSectionPlaneChanged(entities)
@@ -52,7 +52,7 @@ class Sketchup::EntitiesObserver
   # The onElementAdded method is invoked when a single element is added
   # to the {Sketchup::Entities} collection.
   #
-  # @example 
+  # @example
   #   def onElementAdded(entities, entity)
   #     puts "onElementAdded: #{entity}"
   #   end
@@ -61,7 +61,7 @@ class Sketchup::EntitiesObserver
   #
   # @param [Sketchup::Entity] entity
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onElementAdded(entities, entity)
@@ -70,7 +70,7 @@ class Sketchup::EntitiesObserver
   # The {#onElementModified} method is invoked whenever one or more elements in
   # the collection are modified.
   #
-  # @example 
+  # @example
   #   def onElementModified(entities, entity)
   #     puts "onElementModified: #{entity}"
   #   end
@@ -79,7 +79,7 @@ class Sketchup::EntitiesObserver
   #
   # @param [Sketchup::Entity] entity
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 8.0
   def onElementModified(entities, entity)
@@ -90,7 +90,7 @@ class Sketchup::EntitiesObserver
   # deleted and should not be used in anyway except to know that the entity has
   # been deleted.
   #
-  # @example 
+  # @example
   #   def onElementRemoved(entities, entity_id)
   #     puts "onElementRemoved: #{entity_id}"
   #   end
@@ -101,7 +101,7 @@ class Sketchup::EntitiesObserver
   #   The id of the entity that was
   #   deleted/removed.
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onElementRemoved(entities, entity)
@@ -109,14 +109,14 @@ class Sketchup::EntitiesObserver
 
   # The {#onEraseEntities} method is invoked when one or more entities are erased.
   #
-  # @example 
+  # @example
   #   def onEraseEntities(entities)
   #     puts "onEraseEntities: #{entities}"
   #   end
   #
   # @param [Sketchup::Entities] entities
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onEraseEntities(entities)

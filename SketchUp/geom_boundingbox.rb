@@ -8,18 +8,18 @@
 # bounding boxes for Drawingelement objects, including components and groups.
 # Bounding boxes are only large enough to exactly bound the entities within
 # your model, group, or component.
-# 
+#
 # You can also create arbitrary BoundingBox objects by calling BoundingBox.new.
 #
-# @example 
+# @example
 #   # You can get the bounding box on a model.
 #   model = Sketchup.active_model
 #   model_bb = model.bounds
-#   
+#
 #   # Or you can get the bounding box on any Drawingelement object.
 #   first_entity = model.entities[0]
 #   first_entity_bb = first_entity.bounds
-#   
+#
 #   # Or you can create an empty bounding box of your own.
 #   boundingbox = Geom::BoundingBox.new
 #
@@ -36,12 +36,12 @@ class Geom::BoundingBox
   # The add method is used to add a point, vertex, or other bounding boxes to the
   # bounding box. The size of the bounding box will increase as necessary to
   # accommodate the new items.
-  # 
+  #
   # Adding one point to an empty bounding box does not increase the size of the
   # bounding box. You must add at least two points before methods such as
   # BoundingBox.diagonal will return a size greater than zero.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   boundingbox = model.bounds
   #   point1 = Geom::Point3d.new(100, 200, 300)
@@ -49,11 +49,11 @@ class Geom::BoundingBox
   #   boundingbox.add(point1, point2)
   #
   # @overload add(point_or_bb)
-  # 
+  #
   #   @param [Geom::Point3d, Geom::BoundingBox, Sketchup::Vertex] point_or_bb
   #
   # @overload add(points_or_bb)
-  # 
+  #
   #   @param [Array<Geom::Point3d, Geom::BoundingBox, Sketchup::Vertex>]
   #     points_or_bb
   #
@@ -66,7 +66,7 @@ class Geom::BoundingBox
   # The center method is used to retrieve the Point3d object at the center of
   # the bounding box.
   #
-  # @example 
+  # @example
   #   boundingbox = Geom::BoundingBox.new
   #   boundingbox.add([100, 200, -400], [200, 400, 100])
   #   # This will return a point Point3d(150, 300, -150).
@@ -80,17 +80,17 @@ class Geom::BoundingBox
   end
 
   # The clear method is used to clear a bounding box.
-  # 
+  #
   # A cleared BoundingBox does not have a size greater than zero until you add
   # at least two points or another bounding box.
   #
-  # @example 
+  # @example
   #   boundingbox = Geom::BoundingBox.new
   #   boundingbox.add([100, 200, -400], [200, 400, 100])
-  #   
+  #
   #   # This will return false.
   #   boundingbox.empty?
-  #   
+  #
   #   boundingbox.clear
   #   # This will return true.
   #   boundingbox.empty?
@@ -104,7 +104,7 @@ class Geom::BoundingBox
   # This method is used to determine if a bounding box contains a specific
   # Point3d or BoundingBox object.
   #
-  # @example 
+  # @example
   #   boundingbox = Geom::BoundingBox.new
   #   boundingbox.add([100, 200, -400], [200, 400, 100])
   #   # This will return false.
@@ -117,7 +117,7 @@ class Geom::BoundingBox
   # @return status - true if successful (bounding box contains a
   #   Point3d or BoundingBox object), or false if unsuccessful.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def contains?(point_or_bb)
@@ -125,11 +125,11 @@ class Geom::BoundingBox
 
   # The corner method is used to retrieve a point object at a specified corner
   # of the bounding box.
-  # 
+  #
   # There are 8 corners to a bounding box, identified by the numbers 0 through 7.
   # Points are returned in the currently set units (inches, by default). These
   # are which index refers to which corner:
-  # 
+  #
   #   - 0 = [0, 0, 0] (left front bottom)
   #   - 1 = [1, 0, 0] (right front bottom)
   #   - 2 = [0, 1, 0] (left back bottom)
@@ -139,7 +139,7 @@ class Geom::BoundingBox
   #   - 6 = [0, 1, 1] (left back top)
   #   - 7 = [1, 1, 1] (right back top)
   #
-  # @example 
+  # @example
   #   boundingbox = Geom::BoundingBox.new
   #   boundingbox.add([100, 200, -400], [200, 400, 100])
   #   # This will return Point3d(100, 200, -400).
@@ -158,10 +158,10 @@ class Geom::BoundingBox
   end
 
   # The depth method is used to retrieve the depth of the bounding box.
-  # 
+  #
   # The depth is returned in the currently set units (inches, by default).
   #
-  # @example 
+  # @example
   #   boundingbox = Geom::BoundingBox.new
   #   boundingbox.add([100, 200, -400], [200, 400, 100])
   #   # This will return a Length of 500.0.
@@ -175,10 +175,10 @@ class Geom::BoundingBox
 
   # The diagonal method is used to get the length of the diagonal of the
   # bounding box.
-  # 
+  #
   # The diagonal is returned in the currently set units (inches, by default).
   #
-  # @example 
+  # @example
   #   boundingbox = Geom::BoundingBox.new
   #   boundingbox.add([100, 200, -400], [200, 400, 100])
   #   # This will return a point a Length of ~547.72.
@@ -195,7 +195,7 @@ class Geom::BoundingBox
   # if the bounds have not been set.) This returns the opposite of the valid?
   # method.
   #
-  # @example 
+  # @example
   #   boundingbox = Geom::BoundingBox.new
   #   boundingbox.add([100, 200, -400], [200, 400, 100])
   #   # This will return false.
@@ -204,17 +204,17 @@ class Geom::BoundingBox
   # @return status - true if the bounding box is empty, false if it
   #   is not empty
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def empty?
   end
 
   # The height method is used to retrieve the height of the bounding box.
-  # 
+  #
   # The height is returned in the currently set units (inches, by default).
   #
-  # @example 
+  # @example
   #   boundingbox = Geom::BoundingBox.new
   #   boundingbox.add([100, 200, -400], [200, 400, 100])
   #   # This will return a Length of 200.0.
@@ -228,7 +228,7 @@ class Geom::BoundingBox
 
   # The new method is used to create a new, empty, bounding box.
   #
-  # @example 
+  # @example
   #   boundingbox = Geom::BoundingBox.new
   #
   # @return boundingbox - a BoundingBox object if successful
@@ -240,7 +240,7 @@ class Geom::BoundingBox
   # The intersect method is used to retrieve a bounding box that is the result
   # of intersecting one bounding box with another.
   #
-  # @example 
+  # @example
   #   boundingbox1 = Geom::BoundingBox.new
   #   boundingbox1.add([100, 200, -400], [200, 400, 300])
   #   boundingbox2 = Geom::BoundingBox.new
@@ -265,11 +265,11 @@ class Geom::BoundingBox
 
   # The max method is used to retrieve the Point3d object where x, y and z are
   # maximum in the bounding box.
-  # 
+  #
   # If you attempt to call the max method on an empty bounding box, you will
   # receive a very large negative number.
   #
-  # @example 
+  # @example
   #   boundingbox = Geom::BoundingBox.new
   #   boundingbox.add([100, 200, -400], [700, 900, 800], [200, 400, 100])
   #   # This will return a point Point3d(700, 900, 800).
@@ -285,7 +285,7 @@ class Geom::BoundingBox
   # The min method is used to retrieve the Point3d where x, y and z are minimum
   # in the bounding box.
   #
-  # @example 
+  # @example
   #   boundingbox = Geom::BoundingBox.new
   #   boundingbox.add([100, 200, -400], [700, 900, 800], [200, 400, 100])
   #   # This will return a point Point3d(100, 200, -400).
@@ -301,7 +301,7 @@ class Geom::BoundingBox
   # The valid method is used to determine if a bounding box is valid (contains
   # points).
   #
-  # @example 
+  # @example
   #   boundingbox = Geom::BoundingBox.new
   #   boundingbox.add([100, 200, -400], [200, 400, 100])
   #   # This will return true.
@@ -310,17 +310,17 @@ class Geom::BoundingBox
   # @return status - true if the bounding box is valid (not empty),
   #   false if it is not valid (empty)
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def valid?
   end
 
   # The width method is used to retrieve the width of the bounding box.
-  # 
+  #
   # The width is returned in the currently set units (inches, by default).
   #
-  # @example 
+  # @example
   #   boundingbox = Geom::BoundingBox.new
   #   boundingbox.add([100, 200, -400], [200, 400, 100])
   #   # This will return a Length of 100.0.

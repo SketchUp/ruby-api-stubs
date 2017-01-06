@@ -14,12 +14,12 @@ class UI::Notification
   # Gets the icon name, this is the path that will be used to get the icon from
   # the file system path.
   #
-  # @example 
+  # @example
   #   notification = UI::Notification.new(sketchup_extension, "Hello world", "/path/to/icon", "icon Tooltip")
   #   puts "Icon Name: #{notification.icon_name}"
   #   notification.show
   #
-  # @return [String] 
+  # @return [String]
   #
   # @version SketchUp 2017
   def icon_name
@@ -28,7 +28,7 @@ class UI::Notification
   # Sets the icon path, this icon will be loaded from the path give, the path
   # has to be a local filesystem path.
   #
-  # @example 
+  # @example
   #   notification = UI::Notification.new(sketchup_extension, "Hello world")
   #   notification.icon_name = "/path/to/icon"
   #   notification.show
@@ -36,7 +36,7 @@ class UI::Notification
   # @param [String] icon_name
   #   String providing the icon filesystem path.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 2017
   def icon_name=(icon_name)
@@ -45,12 +45,12 @@ class UI::Notification
   # Gets the icon Tooltip, this is the string that appear when the mouse is over
   # the icon.
   #
-  # @example 
+  # @example
   #   notification = UI::Notification.new(sketchup_extension, "Hello world", "/path/to/icon", "icon Tooltip")
   #   puts "Tooltip: " notification.icon_tooltip
   #   notification.show
   #
-  # @return [String] 
+  # @return [String]
   #
   # @version SketchUp 2017
   def icon_tooltip
@@ -59,7 +59,7 @@ class UI::Notification
   # Sets the icon Tooltip, this string will appear when the mouse is over the
   # icon.
   #
-  # @example 
+  # @example
   #   notification = UI::Notification.new(sketchup_extension, "Hello world")
   #   notification.icon_tooltip = "icon Tooltip"
   #   notification.show
@@ -67,17 +67,17 @@ class UI::Notification
   # @param [String] icon_tooltip
   #   String providing the new icon Tooltip.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 2017
   def icon_tooltip=(icon_tooltip)
   end
 
   # The new method is used to create a new {UI::Notification}.
-  # 
+  #
   # In order to insert line breaks into the message you need to use +\\r\\n+.
   #
-  # @example 
+  # @example
   #   notification = UI::Notification.new(sketchup_extension, "Hello world", "/path/to/icon", "icon Tooltip")
   #   notification.show
   #
@@ -94,7 +94,7 @@ class UI::Notification
   #   Required sketchup_extension
   #   to identify the sender.
   #
-  # @return [UI::Notification] 
+  # @return [UI::Notification]
   #
   # @version SketchUp 2017
   def initialize(sketchup_extension, message, icon_name, icon_tooltip)
@@ -102,12 +102,12 @@ class UI::Notification
 
   # Gets the message as string.
   #
-  # @example 
+  # @example
   #   notification = UI::Notification.new(sketchup_extension)
   #   puts "This is the current message: ${notification.message}"
   #   notification.show
   #
-  # @return [String] 
+  # @return [String]
   #
   # @version SketchUp 2017
   def message
@@ -116,7 +116,7 @@ class UI::Notification
   # Sets a new message, notifications are meant for quick & brief messages,
   # remember that they are dismissed automatically.
   #
-  # @example 
+  # @example
   #   notification = UI::Notification.new(sketchup_extension)
   #   notification.message = "Hello world"
   #   notification.show
@@ -124,7 +124,7 @@ class UI::Notification
   # @param [String] message
   #   String providing the new message.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 2017
   def message=(message)
@@ -133,7 +133,7 @@ class UI::Notification
   # Shows a button in the notification with the given title and callback block,
   # both arguments are required.
   #
-  # @example 
+  # @example
   #   notification = UI::Notification.new(sketchup_extension, "Hello world")
   #   notification.on_accept("Accept")  do |notification, title|
   #      puts "The user pressed [#{title}] with message #{notification.message}"
@@ -150,7 +150,7 @@ class UI::Notification
   # @raise [RuntimeError] When calling on_accept when the notification has
   #   already been shown.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 2017
   def on_accept(title, block)
@@ -158,14 +158,14 @@ class UI::Notification
 
   # Returns the accept's button title.
   #
-  # @example 
+  # @example
   #   notification = UI::Notification.new(sketchup_extension, "Hello world")
   #   notification.on_accept("Accept")  do |notification, title|
   #      puts "The user pressed #{notification.on_accept_title}"
   #   end
   #   notification.show
   #
-  # @return [String] 
+  # @return [String]
   #
   # @version SketchUp 2017
   def on_accept_title
@@ -174,7 +174,7 @@ class UI::Notification
   # Shows a button in the notification with the given title and callback block,
   # both arguments are required.
   #
-  # @example 
+  # @example
   #   notification = UI::Notification.new(sketchup_extension, "Hello world")
   #   notification.on_dismiss("Close")  do |notification, title|
   #      puts "The user pressed [#{title}] with message #{notification.message}"
@@ -191,7 +191,7 @@ class UI::Notification
   # @raise [RuntimeError] When calling on_dismiss when the notification has
   #   already been shown.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 2017
   def on_dismiss(title, block)
@@ -199,14 +199,14 @@ class UI::Notification
 
   # Returns the dismiss's button title.
   #
-  # @example 
+  # @example
   #   notification = UI::Notification.new(sketchup_extension, "Hello world")
   #   notification.on_dismiss("Close")  do |notification, title|
   #      puts "The user pressed #{notification.on_dismiss_title}"
   #   end
   #   notification.show
   #
-  # @return [String] 
+  # @return [String]
   #
   # @version SketchUp 2017
   def on_dismiss_title
@@ -216,11 +216,11 @@ class UI::Notification
   # be ordered from top to bottom if multiple notifications are shown, it will
   # automatically be dismissed if no action is taken.
   #
-  # @example 
+  # @example
   #   notification = UI::Notification.new(sketchup_extension, "Hello world")
   #   notification.show
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 2017
   def show

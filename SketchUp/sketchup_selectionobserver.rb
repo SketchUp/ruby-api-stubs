@@ -6,7 +6,7 @@
 # desired methods, and add an instance of the observer to the objects of
 # interests.
 #
-# @example 
+# @example
 #   # This is an example of an observer that watches the selection for
 #   # changes.
 #   class MySelectionObserver < Sketchup::SelectionObserver
@@ -14,7 +14,7 @@
 #       puts "onSelectionBulkChange: #{selection}"
 #     end
 #   end
-#   
+#
 #   # Attach the observer.
 #   Sketchup.active_model.selection.add_observer(MySelectionObserver.new)
 #
@@ -24,7 +24,7 @@ class Sketchup::SelectionObserver
   # Instance Methods
 
   #
-  # @example 
+  # @example
   #   def onSelectionAdded(selection, entity)
   #     puts "onSelectionAdded: #{entity}"
   #   end
@@ -36,7 +36,7 @@ class Sketchup::SelectionObserver
   #
   # @param [Sketchup::Entity] element
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @see onSelectionBulkChange
   #
@@ -46,19 +46,19 @@ class Sketchup::SelectionObserver
 
   # The {#onSelectionBulkChange} method is called whenever items are added or
   # removed from the selection set.
-  # 
+  #
   # The {#onSelectionBulkChange} callback will not trigger if the selection
   # is cleared by clicking on empty model space. Use the {#onSelectionCleared}
   # method to catch this case.
   #
-  # @example 
+  # @example
   #   def onSelectionBulkChange(selection)
   #     puts "onSelectionRemoved: #{selection}"
   #   end
   #
   # @param [Sketchup::Selection] selection
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onSelectionBulkChange(selection)
@@ -67,21 +67,21 @@ class Sketchup::SelectionObserver
   # The {#onSelectionCleared} method is called when the selection is completely
   # emptied.
   #
-  # @example 
+  # @example
   #   def onSelectionCleared(selection)
   #     puts "onSelectionCleared: #{selection}"
   #   end
   #
   # @param [Sketchup::Selection] selection
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onSelectionCleared(selection)
   end
 
   #
-  # @example 
+  # @example
   #   class MySelectionObserver < Sketchup::SelectionObserver
   #     # Note that there is a bug that prevent this from being called. Instead
   #     # listen to onSelectedRemoved until the bug is fixed.
@@ -95,7 +95,7 @@ class Sketchup::SelectionObserver
   #       onSelectionRemoved(selection, entity)
   #     end
   #   end
-  #   
+  #
   #   # Attach the observer.
   #   Sketchup.active_model.selection.add_observer(MySelectionObserver.new)
   #
@@ -106,7 +106,7 @@ class Sketchup::SelectionObserver
   #
   # @param [Sketchup::Selection] selection
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onSelectionRemoved(selection, entity)

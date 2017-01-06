@@ -4,7 +4,7 @@
 # The Layers collection allows you to see and manage all of the layers in a
 # model. You get a pointer to the Layers object from within the Model.
 #
-# @example 
+# @example
 #   model = Sketchup.active_model
 #   layers = model.layers
 #
@@ -18,10 +18,10 @@ class Sketchup::Layers < Sketchup::Entity
   # Instance Methods
 
   # The [] method is used to retrieve a layer by index or name.
-  # 
+  #
   # The {#at} method is an alias for {#[]}.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   layers = model.layers
   #   new_layer = layers.add "test layer"
@@ -39,11 +39,11 @@ class Sketchup::Layers < Sketchup::Entity
   end
 
   # The add method is used to add a new layer.
-  # 
+  #
   # If you give the name of a Layer that is already defined, it will return the
   # existing Layer rather than adding a new one.
   #
-  # @example 
+  # @example
   #   layers = Sketchup.active_model.layers
   #   layer = layers.add("Test Layer")
   #
@@ -58,7 +58,7 @@ class Sketchup::Layers < Sketchup::Entity
 
   # The add_observer method is used to add an observer to the layers collection.
   #
-  # @example 
+  # @example
   #   layers = Sketchup.active_model.layers
   #   status = layers.add_observer observer
   #
@@ -72,10 +72,10 @@ class Sketchup::Layers < Sketchup::Entity
   end
 
   # The [] method is used to retrieve a layer by index or name.
-  # 
+  #
   # The {#at} method is an alias for {#[]}.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   layers = model.layers
   #   new_layer = layers.add "test layer"
@@ -93,7 +93,7 @@ class Sketchup::Layers < Sketchup::Entity
   end
 
   #
-  # @example 
+  # @example
   #   layers = Sketchup.active_model.layers
   #   number = layers.count
   #
@@ -111,7 +111,7 @@ class Sketchup::Layers < Sketchup::Entity
 
   # The each method is used to iterate through all of the layers.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   layers = model.layers
   #   layers.add("test layer")
@@ -124,10 +124,10 @@ class Sketchup::Layers < Sketchup::Entity
   end
 
   # The {#length} method retrieves the number of layers.
-  # 
+  #
   # The {#size} method is an alias for {#length} added in SketchUp 2014.
   #
-  # @example 
+  # @example
   #   layers = Sketchup.active_model.layers
   #   number = layers.length
   #
@@ -139,7 +139,7 @@ class Sketchup::Layers < Sketchup::Entity
 
   # The purged_unused method is used to remove unused layers.
   #
-  # @example 
+  # @example
   #   layers = Sketchup.active_model.layers
   #   status = layers.purge_unused
   #
@@ -151,18 +151,18 @@ class Sketchup::Layers < Sketchup::Entity
 
   # Remove the given layer from the model, optionally removing the geometry.
   #
-  # @example 
+  # @example
   #   # Remove layer by layer reference.
   #   layer = Sketchup.active_model.layers.add("MyLayer")
   #   Sketchup.active_model.layers.remove(layer)
-  #   
+  #
   #   # Remove layer by name.
   #   Sketchup.active_model.layers.add("MyLayer")
   #   Sketchup.active_model.layers.remove("MyLayer")
-  #   
+  #
   #   # Remove layer by index.
   #   Sketchup.active_model.layers.remove(1)
-  #   
+  #
   #   # Remove layer and the entities on the layer.
   #   edge = Sketchup.active_model.entities.add_line([0, 0, 0], [9, 9, 9])
   #   edge.layer = Sketchup.active_model.layers.add("MyLayer")
@@ -185,7 +185,7 @@ class Sketchup::Layers < Sketchup::Entity
   # The remove_observer method is used to remove an observer from the current
   # object.
   #
-  # @example 
+  # @example
   #   layers = Sketchup.active_model.layers
   #   status = layers.remove_observer observer
   #
@@ -199,10 +199,10 @@ class Sketchup::Layers < Sketchup::Entity
   end
 
   # The {#length} method retrieves the number of layers.
-  # 
+  #
   # The {#size} method is an alias for {#length} added in SketchUp 2014.
   #
-  # @example 
+  # @example
   #   layers = Sketchup.active_model.layers
   #   number = layers.length
   #
@@ -215,7 +215,7 @@ class Sketchup::Layers < Sketchup::Entity
   # The unique_name method can be used to get a string that will be a unique
   # layer name inside this collection.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   layers = model.layers
   #   # Will return "Joe" since there are probably no other layers named that.

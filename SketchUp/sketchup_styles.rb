@@ -4,7 +4,7 @@
 # The Styles class contains methods for manipulating a collection of styles in
 # a model. Typically, you will access this via the active_model:
 #
-# @example 
+# @example
 #   styles = Sketchup.active_model.styles
 #   UI.messagebox "There are " + styles.count.to_s + " styles in your model."
 #
@@ -19,7 +19,7 @@ class Sketchup::Styles < Sketchup::Entity
 
   # The [] method is used to retrieves a style by either name or index.
   #
-  # @example 
+  # @example
   #   styles = Sketchup.active_model.styles
   #   style1 = styles[0]
   #   style2 = styles["name"]
@@ -35,7 +35,7 @@ class Sketchup::Styles < Sketchup::Entity
 
   # The active_style method is used to retrieve the active style.
   #
-  # @example 
+  # @example
   #   styles = Sketchup.active_model.styles
   #   style = styles.active_style
   #   UI.messagebox('The active style is: ' + active_style.name)
@@ -49,7 +49,7 @@ class Sketchup::Styles < Sketchup::Entity
   # The active_style_changed method tells you if the active style has been
   # edited by the user since it was last saved.
   #
-  # @example 
+  # @example
   #   styles = Sketchup.active_model.styles
   #   user_made_change = styles.active_style_changed
   #   UI.messagebox ('The active style was edited: ' + user_made_change.to_s)
@@ -63,7 +63,7 @@ class Sketchup::Styles < Sketchup::Entity
 
   # The add_style method is used to create and load a style from the given file.
   #
-  # @example 
+  # @example
   #   styles = Sketchup.active_model.styles
   #   status = styles.add_style "c:\\MyStyle.style", true
   #   UI.messagebox ('A style was added: ' + status.to_s)
@@ -82,7 +82,7 @@ class Sketchup::Styles < Sketchup::Entity
   end
 
   #
-  # @example 
+  # @example
   #   styles = Sketchup.active_model.styles
   #   number = styles.count
   #
@@ -98,7 +98,7 @@ class Sketchup::Styles < Sketchup::Entity
 
   # The each method is used to iterate through styles.
   #
-  # @example 
+  # @example
   #   styles = Sketchup.active_model.styles
   #   styles.each {| style |
   #     UI.messagebox('style: ' + style.name)
@@ -114,10 +114,10 @@ class Sketchup::Styles < Sketchup::Entity
 
   # The {#size} method is used to retrieve the number of styles in the
   # collection.
-  # 
+  #
   # The {#length} method is an alias of {#size}.
   #
-  # @example 
+  # @example
   #   styles = Sketchup.active_model.styles
   #   number = styles.size
   #
@@ -133,7 +133,7 @@ class Sketchup::Styles < Sketchup::Entity
 
   # The purge_unused method is used to remove unused styles from the model.
   #
-  # @example 
+  # @example
   #   styles = Sketchup.active_model.styles
   #   status = styles.purge_unused
   #   UI.messagebox ('Purging Unused styles status: ' + status.to_s)
@@ -146,7 +146,7 @@ class Sketchup::Styles < Sketchup::Entity
 
   # The selected_style method is used to retrieve the currently selected style.
   #
-  # @example 
+  # @example
   #   styles = Sketchup.active_model.styles
   #   style = styles.selected_style
   #   UI.messagebox ('The selected style is: ' + style.name)
@@ -159,7 +159,7 @@ class Sketchup::Styles < Sketchup::Entity
 
   # The selected_style= method is used to set the currently selected style.
   #
-  # @example 
+  # @example
   #   styles = Sketchup.active_model.styles
   #   styles.selected_style = styles[styles.count -1]
   #
@@ -174,10 +174,10 @@ class Sketchup::Styles < Sketchup::Entity
 
   # The {#size} method is used to retrieve the number of styles in the
   # collection.
-  # 
+  #
   # The {#length} method is an alias of {#size}.
   #
-  # @example 
+  # @example
   #   styles = Sketchup.active_model.styles
   #   number = styles.size
   #
@@ -190,7 +190,7 @@ class Sketchup::Styles < Sketchup::Entity
   # The update_selected_style method returns true if the selected style
   # was changed (e.g. the user selected a different style).
   #
-  # @example 
+  # @example
   #   styles = Sketchup.active_model.styles
   #   success = styles.update_selected_style
   #   UI.messagebox ('The selected style was switched: ' + success.to_s)

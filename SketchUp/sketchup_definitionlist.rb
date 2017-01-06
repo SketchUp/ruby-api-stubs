@@ -19,7 +19,7 @@ class Sketchup::DefinitionList < Sketchup::Entity
   # represents the GUID (a unique internal identifier), or a string that is
   # the name of the definition.
   #
-  # @example 
+  # @example
   #   path=Sketchup.find_support_file "Bed.skp",
   #     "Components/Components Sampler/"
   #   model = Sketchup.active_model
@@ -28,17 +28,17 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #   component = definitions[0]
   #
   # @overload [](index)
-  # 
+  #
   #   @param [Integer] index The index for a specific component definition.
   #   @return [Sketchup::ComponentDefinition, nil]
   #
   # @overload [](guid)
-  # 
+  #
   #   @param [String] guid The name of an existing component definition.
   #   @return [Sketchup::ComponentDefinition, nil]
   #
   # @overload [](name)
-  # 
+  #
   #   @param [String] name The unique GUID for the component definition.
   #   @return [Sketchup::ComponentDefinition, nil]
   #
@@ -49,7 +49,7 @@ class Sketchup::DefinitionList < Sketchup::Entity
   # The add method is used to add a new component definition to the definition
   # list with the given name.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   definitions = model.definitions
   #   componentdefinition = definitions.add "BedTraditional"
@@ -68,7 +68,7 @@ class Sketchup::DefinitionList < Sketchup::Entity
 
   # The add_observer method is used to add an observer to the current object.
   #
-  # @example 
+  # @example
   #   definitions = Sketchup.active_model.definitions
   #   status = definitions.add_observer observer
   #
@@ -86,7 +86,7 @@ class Sketchup::DefinitionList < Sketchup::Entity
   # represents the GUID (a unique internal identifier), or a string that is
   # the name of the definition.
   #
-  # @example 
+  # @example
   #   path=Sketchup.find_support_file "Bed.skp",
   #     "Components/Components Sampler/"
   #   model = Sketchup.active_model
@@ -95,17 +95,17 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #   component = definitions[0]
   #
   # @overload [](index)
-  # 
+  #
   #   @param [Integer] index The index for a specific component definition.
   #   @return [Sketchup::ComponentDefinition, nil]
   #
   # @overload [](guid)
-  # 
+  #
   #   @param [String] guid The name of an existing component definition.
   #   @return [Sketchup::ComponentDefinition, nil]
   #
   # @overload [](name)
-  # 
+  #
   #   @param [String] name The unique GUID for the component definition.
   #   @return [Sketchup::ComponentDefinition, nil]
   #
@@ -114,7 +114,7 @@ class Sketchup::DefinitionList < Sketchup::Entity
   end
 
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   definitions = model.definitions
   #   number = definitions.count
@@ -123,7 +123,7 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #   +Enumable+ mix-in module. Prior to that the {#count} method is an alias
   #   for {#length}.
   #
-  # @return [Integer] 
+  # @return [Integer]
   #
   # @see #length
   #
@@ -133,10 +133,10 @@ class Sketchup::DefinitionList < Sketchup::Entity
 
   # The each method is used to iterate through all of the component definitions
   # in the definition list.
-  # 
+  #
   # Throws an exception if there are no component definitions.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   definitions = model.definitions
   #   definitions.add("BedTraditional")
@@ -153,10 +153,10 @@ class Sketchup::DefinitionList < Sketchup::Entity
 
   # The {#length} method is used to retrieve number of component definitions in
   # the list.
-  # 
+  #
   # The {#size} method is an alias for {#length} added in SketchUp 2014.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   definitions = model.definitions
   #   number = definitions.length
@@ -170,7 +170,7 @@ class Sketchup::DefinitionList < Sketchup::Entity
 
   # The load method is used to load a component from a file.
   #
-  # @example 
+  # @example
   #   path=Sketchup.find_support_file "Bed.skp",
   #     "Components/Components Sampler/"
   #   model = Sketchup.active_model
@@ -192,44 +192,44 @@ class Sketchup::DefinitionList < Sketchup::Entity
   # given, or an error occurs during retrieval from url and a
   # load_handler was not given. Optional second parameter load_handler can be
   # used to pass in a ruby object that responds to the following methods:
-  # 
+  #
   #   - cancelled?(a_boolean)
   #   - onPercentChange(a_float)
   #   - onSuccess()
   #   - onFailure(message_string)
   #
-  # @example 
+  # @example
   #   class LoadHandler
-  #   
+  #
   #     attr :error
-  #   
+  #
   #     def onPercentChange(percent)
   #       Sketchup::set_status_text("LOADING: #{percent}%")
   #     end
-  #   
+  #
   #     def cancelled?
   #       # You could, for example, show a messagebox after X seconds asking if the
   #       # user wants to cancel the download. If this method returns true, then
   #       # the download cancels.
   #       return false
   #     end
-  #   
+  #
   #     def onSuccess
   #       Sketchup::set_status_text('')
   #     end
-  #   
+  #
   #     def onFailure(error_message)
   #       self.error = error_message
   #       Sketchup::set_status_text('')
   #     end
-  #   
+  #
   #   end
-  #   
+  #
   #   # Replace this with a real URL...
   #   url = 'http://www.sketchup.com/model.skp'
   #   model = Sketchup.active_model
   #   definition = model.definitions.load_from_url(url, load_handler)
-  #   
+  #
   #   if definition.nil?
   #     puts "Error: #{load_handler.error}"
   #   end
@@ -250,7 +250,7 @@ class Sketchup::DefinitionList < Sketchup::Entity
 
   # The purge_unused method is used to remove the unused component definitions.
   #
-  # @example 
+  # @example
   #   definitions = Sketchup.active_model.definitions
   #   definitions.purge_unused
   #
@@ -263,7 +263,7 @@ class Sketchup::DefinitionList < Sketchup::Entity
   # The remove_observer method is used to remove an observer from the current
   # object.
   #
-  # @example 
+  # @example
   #   definitions = Sketchup.active_model.definitions
   #   status = definitions.remove_observer observer
   #
@@ -278,10 +278,10 @@ class Sketchup::DefinitionList < Sketchup::Entity
 
   # The {#length} method is used to retrieve number of component definitions in
   # the list.
-  # 
+  #
   # The {#size} method is an alias for {#length} added in SketchUp 2014.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   definitions = model.definitions
   #   number = definitions.length
@@ -296,7 +296,7 @@ class Sketchup::DefinitionList < Sketchup::Entity
   # The unique_name is used to generate a unique name for a definition based on
   # a base_name string. For example, a base_name of "Joe" might return "Joe #2"
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   definitions = model.definitions
   #   new_name = definitions.unique_name "My Base Name"

@@ -25,7 +25,7 @@ class Sketchup::DimensionLinear < Sketchup::Dimension
   # - DimensionLinear::ALIGNED_TEXT_CENTER
   # - DimensionLinear::ALIGNED_TEXT_OUTSIDE
   #
-  # @example 
+  # @example
   #   pos = dim.aligned_text_position
   #   if pos == Sketchup::DimensionLinear::ALIGNED_TEXT_ABOVE
   #     puts 'Text is above'
@@ -48,7 +48,7 @@ class Sketchup::DimensionLinear < Sketchup::Dimension
   # - DimensionLinear::ALIGNED_TEXT_CENTER
   # - DimensionLinear::ALIGNED_TEXT_OUTSIDE
   #
-  # @example 
+  # @example
   #   dim.aligned_text_position = Sketchup::DimensionLinear::ALIGNED_TEXT_CENTER
   #
   # @param pos
@@ -63,7 +63,7 @@ class Sketchup::DimensionLinear < Sketchup::Dimension
   # The end method returns the point or entity the dimension is referencing at
   # its end.
   #
-  # @example 
+  # @example
   #   arr = dim.end
   #   if arr[0].nil?
   #     puts "No attached entity. Point is #{arr[1]}"
@@ -82,7 +82,7 @@ class Sketchup::DimensionLinear < Sketchup::Dimension
   # The end= method is used to set the end point of the dimension and/or the
   # entity it is referencing.
   #
-  # @example 
+  # @example
   #   # Reference a point
   #   dim.end = [50, 10, 0]
   #   # Reference end vertex of an edge
@@ -112,7 +112,7 @@ class Sketchup::DimensionLinear < Sketchup::Dimension
   # reference line to the dimension line measured from the 'start' reference
   # point.
   #
-  # @example 
+  # @example
   #   vec = dim.offset_vector
   #   puts "Offset vector is #{vec.to_s}"
   #
@@ -126,7 +126,7 @@ class Sketchup::DimensionLinear < Sketchup::Dimension
   # reference line to the dimension line measured from the 'start' reference
   # point.
   #
-  # @example 
+  # @example
   #   dim.offset_vector = Geom::Vector3d.new(0, 0, 10)
   #   # or
   #   dim.offset_vector = [0, 0, 10]
@@ -144,7 +144,7 @@ class Sketchup::DimensionLinear < Sketchup::Dimension
   # The start method returns the point or entity the dimension is referencing at
   # its start.
   #
-  # @example 
+  # @example
   #   arr = dim.start
   #   if arr[0].nil?
   #     puts "No attached entity. Point is #{arr[1]}"
@@ -163,7 +163,7 @@ class Sketchup::DimensionLinear < Sketchup::Dimension
   # The start= method is used to set the start point of the dimension and/or
   # the entity it is referencing.
   #
-  # @example 
+  # @example
   #   # Reference a point
   #   dim.start = [50, 10, 0]
   #   # Reference end vertex of an edge
@@ -195,7 +195,7 @@ class Sketchup::DimensionLinear < Sketchup::Dimension
   # - DimensionLinear::TEXT_CENTERED
   # - DimensionLinear::TEXT_OUTSIDE_END
   #
-  # @example 
+  # @example
   #   pos = dim.text_position
   #   if pos == Sketchup::DimensionLinear::TEXT_OUTSIDE_START
   #     puts 'Text position is Outside start'
@@ -217,7 +217,7 @@ class Sketchup::DimensionLinear < Sketchup::Dimension
   # - DimensionLinear::TEXT_CENTERED
   # - DimensionLinear::TEXT_OUTSIDE_END
   #
-  # @example 
+  # @example
   #   dim.text_position = Sketchup::DimensionLinear::TEXT_CENTERED
   #
   # @param pos

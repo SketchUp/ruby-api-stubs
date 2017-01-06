@@ -6,14 +6,14 @@
 # desired methods, and add an instance of the observer to the objects of
 # interests.
 #
-# @example 
+# @example
 #   # This is an example of an observer that watches the pages for new ones.
 #   class MyPagesObserver < Sketchup::PagesObserver
 #     def onElementAdded(pages, page)
 #       puts "onElementAdded: #{page}"
 #     end
 #   end
-#   
+#
 #   # Attach the observer.
 #   Sketchup.active_model.pages.add_observer(MyPagesObserver.new)
 #
@@ -24,14 +24,14 @@ class Sketchup::PagesObserver < Sketchup::EntitiesObserver
 
   # The {#onContentsModified} method is invoked whenever the pages change.
   #
-  # @example 
+  # @example
   #   def onContentsModified(pages)
   #     puts "onContentsModified: #{pages}"
   #   end
   #
   # @param [Sketchup::Pages] pages
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onContentsModified(pages)
@@ -40,7 +40,7 @@ class Sketchup::PagesObserver < Sketchup::EntitiesObserver
   # The {#onElementAdded} method is invoked when an element is added to a
   # {Sketchup::Pages} object.
   #
-  # @example 
+  # @example
   #   def onElementAdded(pages, page)
   #     puts "onElementAdded: #{page}"
   #   end
@@ -49,7 +49,7 @@ class Sketchup::PagesObserver < Sketchup::EntitiesObserver
   #
   # @param [Sketchup::Page] page
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onElementAdded(pages, page)
@@ -58,7 +58,7 @@ class Sketchup::PagesObserver < Sketchup::EntitiesObserver
   # The {#onElementRemoved} method is invoked when an element is removed from a
   # {Sketchup::Pages} object.
   #
-  # @example 
+  # @example
   #   def onElementRemoved(pages, page)
   #     puts "onElementRemoved: #{page}"
   #   end
@@ -67,7 +67,7 @@ class Sketchup::PagesObserver < Sketchup::EntitiesObserver
   #
   # @param [Sketchup::Page] page
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onElementRemoved(pages, page)

@@ -14,7 +14,7 @@ class Sketchup::Drawingelement < Sketchup::Entity
   # The bounds method is used to retrieve the BoundingBox for an drawing
   # element.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -39,7 +39,7 @@ class Sketchup::Drawingelement < Sketchup::Entity
 
   # The casts_shadows= method is used to set the Drawingelement to cast shadows.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -51,7 +51,7 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #   pts[3] = [0, depth, 100]
   #   # Add the face to the entities in the model.
   #   face = entities.add_face pts
-  #   
+  #
   #   # Make the face not cast shadows.
   #   status = face.casts_shadows = false
   #   UI.messagebox status.to_s
@@ -70,7 +70,7 @@ class Sketchup::Drawingelement < Sketchup::Entity
   # The casts_shadows? method is used to determine if the Drawingelement is
   # casting shadows.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -88,17 +88,17 @@ class Sketchup::Drawingelement < Sketchup::Entity
   # @return status - true if the Drawingelement is casting shadows,
   #   false if unsuccessful.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def casts_shadows?
   end
 
   # The erase! method is used to erase an element from the model.
-  # 
+  #
   # Erasing an Edge also erases all of the Face objects that use the Edge.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -120,7 +120,7 @@ class Sketchup::Drawingelement < Sketchup::Entity
 
   # The hidden= method is used to set the hidden status for an element.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -147,10 +147,10 @@ class Sketchup::Drawingelement < Sketchup::Entity
   end
 
   # The hidden? method is used to determine if the element is hidden.
-  # 
+  #
   # Hidden elements are still in the model, but they are not displayed.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -167,7 +167,7 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #
   # @return status -true if hidden, false if not hidden
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def hidden?
@@ -176,7 +176,7 @@ class Sketchup::Drawingelement < Sketchup::Entity
   # The layer method is used to retrieve the Layer object of the drawing
   # element.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -197,11 +197,11 @@ class Sketchup::Drawingelement < Sketchup::Entity
   end
 
   # The layer= method is used to set the layer for the drawing element.
-  # 
+  #
   # An exception is raised if you give a string that doesn't match any layer
   # name.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -230,7 +230,7 @@ class Sketchup::Drawingelement < Sketchup::Entity
   # The material method is used to retrieve the material for the drawing
   # element.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -253,7 +253,7 @@ class Sketchup::Drawingelement < Sketchup::Entity
   # The material= method is used to set the material for the drawing
   # element.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -289,7 +289,7 @@ class Sketchup::Drawingelement < Sketchup::Entity
   # The receive_shadows= method is used to set the Drawingelement to receive
   # shadows.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -301,7 +301,7 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #   pts[3] = [0, depth, 100]
   #   # Add the face to the entities in the model.
   #   face = entities.add_face pts
-  #   
+  #
   #   # Make the face not receive shadows.
   #   status = face.receives_shadows = false
   #   UI.messagebox status.to_s
@@ -319,7 +319,7 @@ class Sketchup::Drawingelement < Sketchup::Entity
   # The receive_shadows? method is used to determine if the Drawingelement is
   # receiving shadows.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -337,7 +337,7 @@ class Sketchup::Drawingelement < Sketchup::Entity
   # @return status - true if the Drawingelement is receiving
   #   shadows, false if unsuccessful.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def receives_shadows?
@@ -346,7 +346,7 @@ class Sketchup::Drawingelement < Sketchup::Entity
   # The visible= method is used to set the visible status for an element. This
   # method performs an opposite function to the hidden= method.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -373,7 +373,7 @@ class Sketchup::Drawingelement < Sketchup::Entity
 
   # The visible? method is used to get the visible status for an element.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -391,7 +391,7 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #
   # @return visibility - true if visible, false if not
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def visible?

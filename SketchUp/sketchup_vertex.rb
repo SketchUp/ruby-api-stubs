@@ -11,7 +11,7 @@ class Sketchup::Vertex < Sketchup::Entity
   # The common_edge method is used to find a common edge that is defined by this
   # vertex and another vertex
   #
-  # @example 
+  # @example
   #   edge = entities[0]
   #   # returns array of vertices that make up the line
   #   verticies = edge.vertices
@@ -38,7 +38,7 @@ class Sketchup::Vertex < Sketchup::Entity
   # The curve_interior? method is used to determine if this vertex is on the
   # interior of a Curve.
   #
-  # @example 
+  # @example
   #   edge = entities[0]
   #   # returns array of vertices that make up the line
   #   verticies = edge.vertices
@@ -54,7 +54,7 @@ class Sketchup::Vertex < Sketchup::Entity
   # @return status - true if it is used by exactly two edges which
   #   are both part of the same curve.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def curve_interior?
@@ -62,7 +62,7 @@ class Sketchup::Vertex < Sketchup::Entity
 
   # The edges method is used to retrieve an Array of edges that use the Vertex.
   #
-  # @example 
+  # @example
   #   edge = entities[0]
   #   # Returns array of vertices that make up the line.
   #   verticies = edge.vertices
@@ -77,7 +77,7 @@ class Sketchup::Vertex < Sketchup::Entity
 
   # The faces method is used to retrieve an Array of faces that use the vertex.
   #
-  # @example 
+  # @example
   #   edge = entities[0]
   #   # Returns array of vertices that make up the line.
   #   verticies = edge.vertices
@@ -93,7 +93,7 @@ class Sketchup::Vertex < Sketchup::Entity
 
   # The loops method is used to retrieve an Array of loops that use the vertex.
   #
-  # @example 
+  # @example
   #   edge = entities[0]
   #   # Returns array of vertices that make up the line.
   #   verticies = edge.vertices
@@ -109,7 +109,7 @@ class Sketchup::Vertex < Sketchup::Entity
 
   # The position method is used to retrieve the Point3d position of a vertex.
   #
-  # @example 
+  # @example
   #   edge = entities[0]
   #   # Returns array of vertices that make up the line.
   #   verticies = edge.vertices
@@ -126,7 +126,7 @@ class Sketchup::Vertex < Sketchup::Entity
   # The used_by? method is used to determine if the Vertex is used by a given
   # Edge or Face.
   #
-  # @example 
+  # @example
   #   used = vertex1.used_by? my_face
   #
   # @param face_or_edge
@@ -134,7 +134,7 @@ class Sketchup::Vertex < Sketchup::Entity
   #
   # @return used - true if the Vertex is used in the given entity.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def used_by?(face_or_edge)

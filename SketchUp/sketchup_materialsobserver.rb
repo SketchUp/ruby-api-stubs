@@ -6,13 +6,13 @@
 # desired methods, and add an instance of the observer to the objects of
 # interests.
 #
-# @example 
+# @example
 #   class MyMaterialsObserver < Sketchup::MaterialsObserver
 #     def onMaterialAdd(materials, material)
 #       puts "onMaterialAdd: #{material}"
 #     end
 #   end
-#   
+#
 #   Sketchup.active_model.materials.add_observer(MyMaterialsObserver.new)
 #
 # @note The callback +onMaterialRemoveAll+ has been deprecated, we recommend using
@@ -25,7 +25,7 @@ class Sketchup::MaterialsObserver
 
   # The {#onMaterialAdd} method is invoked whenever a new material is added.
   #
-  # @example 
+  # @example
   #   def onMaterialAdd(materials, material)
   #     puts "onMaterialAdd: #{material}"
   #   end
@@ -34,7 +34,7 @@ class Sketchup::MaterialsObserver
   #
   # @param [Sketchup::Material] material
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onMaterialAdd(materials, material)
@@ -43,7 +43,7 @@ class Sketchup::MaterialsObserver
   # The {#onMaterialChange} method is invoked whenever a material's texture image
   # is altered.
   #
-  # @example 
+  # @example
   #   def onMaterialChange(materials, material)
   #     puts "onMaterialChange: #{material}"
   #   end
@@ -52,7 +52,7 @@ class Sketchup::MaterialsObserver
   #
   # @param [Sketchup::Material] material
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onMaterialChange(materials, material)
@@ -63,7 +63,7 @@ class Sketchup::MaterialsObserver
   # manually painting something, but it could also be when faces are split,
   # pasted, push-pulled, deleted, etc.
   #
-  # @example 
+  # @example
   #   def onMaterialRefChange(materials, material)
   #     puts "onMaterialRefChange: #{material}"
   #   end
@@ -72,7 +72,7 @@ class Sketchup::MaterialsObserver
   #
   # @param [Sketchup::Material] material
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onMaterialRefChange(materials, material)
@@ -80,7 +80,7 @@ class Sketchup::MaterialsObserver
 
   # The {#onMaterialRemove} method is invoked whenever a material is deleted.
   #
-  # @example 
+  # @example
   #   def onMaterialRemove(materials, material)
   #     puts "onMaterialRemove: #{material}"
   #   end
@@ -89,7 +89,7 @@ class Sketchup::MaterialsObserver
   #
   # @param [Sketchup::Material] material
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onMaterialRemove(materials, material)
@@ -97,11 +97,11 @@ class Sketchup::MaterialsObserver
 
   # The {#onMaterialSetCurrent} method is invoked whenever a different material
   # is selected in the Materials dialog.
-  # 
+  #
   # The materials parameter might be Nil when the material is picked from the
   # materials libraries and not yet added to the model.
   #
-  # @example 
+  # @example
   #   def onMaterialSetCurrent(materials, material)
   #     puts "onMaterialSetCurrent: #{material}"
   #   end
@@ -110,7 +110,7 @@ class Sketchup::MaterialsObserver
   #
   # @param [Sketchup::Material] material
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onMaterialSetCurrent(materials, material)
@@ -119,7 +119,7 @@ class Sketchup::MaterialsObserver
   # The {#onMaterialUndoRedo} method is invoked whenever a material is altered
   # and then those changes are undone or redone.
   #
-  # @example 
+  # @example
   #   def onMaterialUndoRedo(materials, material)
   #     puts "onMaterialUndoRedo: #{material}"
   #   end
@@ -132,7 +132,7 @@ class Sketchup::MaterialsObserver
   #
   # @param [Sketchup::Materials] materials
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onMaterialUndoRedo(materials, material)

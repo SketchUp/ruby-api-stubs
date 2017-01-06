@@ -5,14 +5,14 @@
 # this observer, create a Ruby class of this type, override the desired
 # methods, and add an instance of the observer to the view object.
 #
-# @example 
+# @example
 #   # This is an example of an observer that watches tool interactions.
 #   class MyViewObserver < Sketchup::ViewObserver
 #     def onViewChanged(view)
 #       puts "onViewChanged: #{view}"
 #     end
 #   end
-#   
+#
 #   # Attach the observer.
 #   Sketchup.active_model.active_view.add_observer(MyViewObserver.new)
 #
@@ -24,14 +24,14 @@ class Sketchup::ViewObserver
   # The {#onViewChanged} method is called whenever the view is altered, such as
   # when the user uses the Pan, Orbit, or Zoom tools are used.
   #
-  # @example 
+  # @example
   #   def onViewChanged(view)
   #     pust "onViewChanged: #{view}"
   #   end
   #
   # @param [Sketchup::View] view
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onViewChanged(view)

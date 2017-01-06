@@ -2,7 +2,7 @@
 # License:: The MIT License (MIT)
 
 # A Group class contains methods for manipulating groups of entities.
-# 
+#
 # Groups in SketchUp are very similar to Components, except that there is no
 # instancing of groups. That means that you always will have one and only one
 # of each of your groups. (In the actual implementation, SketchUp keeps track
@@ -19,7 +19,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   # The add_observer method is used to add a ComponentInstance observer to the
   # group.
   #
-  # @example 
+  # @example
   #   # Add a group to the model.
   #   group = Sketchup.active_model.entities.add_group
   #   group.entities.add_line([0,0,0],[100,100,100])
@@ -37,7 +37,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   # The copy method is used to create a new Group object that is a copy of the
   # group.
   #
-  # @example 
+  # @example
   #   # Add a group to the model.
   #   group = Sketchup.active_model.entities.add_group
   #   group.entities.add_line([0,0,0],[100,100,100])
@@ -52,7 +52,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   # The definition method is used to retrieve the component definition for this
   # group.
   #
-  # @example 
+  # @example
   #   group = Sketchup.active_model.entities.add_group
   #   definition = group.definition
   #
@@ -65,7 +65,7 @@ class Sketchup::Group < Sketchup::Drawingelement
 
   # The description method is used to retrieve the description for the group.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -77,10 +77,10 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   pts[3] = [0, depth, 0]
   #   # Add the group to the entities in the model
   #   group = entities.add_group
-  #   
+  #
   #   # Get the entities within the group
   #   entities2 = group.entities
-  #   
+  #
   #   # Add a face to within the group
   #   face = entities2.add_face pts
   #   group.description = "This is a Group with a 2d Face"
@@ -94,7 +94,7 @@ class Sketchup::Group < Sketchup::Drawingelement
 
   # The description= method is used to set the description for the group.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -104,13 +104,13 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   pts[1] = [width, 0, 0]
   #   pts[2] = [width, depth, 0]
   #   pts[3] = [0, depth, 0]
-  #   
+  #
   #   # Add the group to the entities in the model
   #   group = entities.add_group
-  #   
+  #
   #   # Get the entities within the group
   #   entities2 = group.entities
-  #   
+  #
   #   # Add a face to within the group
   #   face = entities2.add_face pts
   #   group.description = "This is a Group with a 2d Face"
@@ -133,7 +133,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   # The entities method is used to retrieve a collection of entities in the
   # group.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -145,10 +145,10 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   pts[3] = [0, depth, 0]
   #   # Add the group to the entities in the model
   #   group = entities.add_group
-  #   
+  #
   #   # Get the entities within the group
   #   entities2 = group.entities
-  #   
+  #
   #   # Add a face to within the group
   #   face = entities2.add_face pts
   #   entities = group.entities
@@ -167,7 +167,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   # The equals? method is used to determine if a group is geometrically
   # equivalent to another group.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   group1 = entities[0]
   #   group2 = entities[1]
@@ -179,7 +179,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   # @return status - true if the groups are geometrically
   #   equivalent. Otherwise false.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 8.0
   def equals?(group)
@@ -187,11 +187,11 @@ class Sketchup::Group < Sketchup::Drawingelement
 
   # The explode method is used to explode the group into individual entities.
   #
-  # @example 
+  # @example
   #   # Add a group to the model.
   #   group = Sketchup.active_model.entities.add_group
   #   group.entities.add_line([0,0,0],[100,100,100])
-  #   
+  #
   #   array = group.explode
   #   if array
   #     UI.messagebox "Exploded the group"
@@ -209,7 +209,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   # The guid method is used to get the base 64 encoded unique id
   # for this SketchUp object.
   #
-  # @example 
+  # @example
   #   # Add a group to the model.
   #   group = Sketchup.active_model.entities.add_group
   #   group.entities.add_line([0,0,0],[100,100,100])
@@ -225,7 +225,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   # groups representing manifold solid volumes (this & arg).  If the specified
   # objects (this and arg) do not represent manifold volumes, this method fails.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   group1 = entities[0]
   #   group2 = entities[1]
@@ -248,12 +248,12 @@ class Sketchup::Group < Sketchup::Drawingelement
   # scale. For components, you can get a similar result by checking
   # my_instance.definition.bounds.
   #
-  # @example 
+  # @example
   #   # Add a group to the model.
   #   group = Sketchup.active_model.entities.add_group
   #   group.entities.add_line([0,0,0],[100,100,100])
   #   transformation = Geom::Transformation.new([100,0,0])
-  #   
+  #
   #   # Note that local_bounds_1 and local_bounds_2 will be identical, since
   #   # they both find the bounding box in group's untransformed state.
   #   local_bounds_1 = group.local_bounds
@@ -268,7 +268,7 @@ class Sketchup::Group < Sketchup::Drawingelement
 
   # The locked= method is used to lock a group.
   #
-  # @example 
+  # @example
   #   # Add a group to the model.
   #   group = Sketchup.active_model.entities.add_group
   #   group.entities.add_line([0,0,0],[100,100,100])
@@ -284,7 +284,7 @@ class Sketchup::Group < Sketchup::Drawingelement
 
   # The locked? method is used to determine if a group is locked.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -294,7 +294,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   pts[1] = [width, 0, 0]
   #   pts[2] = [width, depth, 0]
   #   pts[3] = [0, depth, 0]
-  #   
+  #
   #   # Add the group to the entities in the model
   #   group = entities.add_group
   #   status = group.locked?
@@ -302,14 +302,14 @@ class Sketchup::Group < Sketchup::Drawingelement
   #
   # @return status - true if the group is locked, false if not.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def locked?
   end
 
   # The make_unique method is used to force a group to have a unique definition.
-  # 
+  #
   # Copying a group using the copy tool in SketchUp will create copies of the
   # group that share a common definition until an instance is edited manually or
   # this method is used. If multiple copies are made, all copies share a
@@ -317,7 +317,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   # method used on them. This method ensures that the group uses a unique
   # definition entry in the drawing database.
   #
-  # @example 
+  # @example
   #   # Assume we have 2 groups, one copied from the other and sharing definitions
   #   groups = Sketchup.active_model.entities.grep(Sketchup::Group)
   #   groups[0].make_unique
@@ -333,7 +333,7 @@ class Sketchup::Group < Sketchup::Drawingelement
 
   # The manifold? method is used to determine if a group is manifold.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   definition = Sketchup.active_model.definitions[0]
   #   transformation = Geom::Transformation.new([0,0,0])
@@ -343,19 +343,19 @@ class Sketchup::Group < Sketchup::Drawingelement
   # @return status - true if the group is manifold.
   #   false if the group is not manifold.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 8.0
   def manifold?
   end
 
   # The move! method is used to apply a transformation to the group.
-  # 
+  #
   # This method is the same as the transform! method except that it does not
   # record the move in an undo operation. This method is useful for
   # transparently moving things during an animation.
   #
-  # @example 
+  # @example
   #   point = Geom::Point3d.new 500,500,500
   #   t = Geom::Transformation.new point
   #   depth = 100
@@ -367,13 +367,13 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   pts[1] = [width, 0, 0]
   #   pts[2] = [width, depth, 0]
   #   pts[3] = [0, depth, 0]
-  #   
+  #
   #   # Add the group to the entities in the model
   #   group = entities.add_group
-  #   
+  #
   #   # Get the entities within the group
   #   entities2 = group.entities
-  #   
+  #
   #   # Add a face to within the group
   #   face = entities2.add_face pts
   #   UI.messagebox "Group before Move"
@@ -396,7 +396,7 @@ class Sketchup::Group < Sketchup::Drawingelement
 
   # The name method is used to retrieve the name of the group.
   #
-  # @example 
+  # @example
   #   # Add a group to the model.
   #   group = Sketchup.active_model.entities.add_group
   #   group.entities.add_line([0,0,0],[100,100,100])
@@ -411,7 +411,7 @@ class Sketchup::Group < Sketchup::Drawingelement
 
   # The name= method is used to set the description for the group.
   #
-  # @example 
+  # @example
   #   # Add a group to the model.
   #   group = Sketchup.active_model.entities.add_group
   #   group.entities.add_line([0,0,0],[100,100,100])
@@ -431,7 +431,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   # representing manifold solid volumes (this || arg).  If the specified objects
   # (this and arg) do not represent manifold volumes, this method fails.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   group1 = entities[0]
   #   group2 = entities[1]
@@ -451,7 +451,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   # The remove_observer method is used to remove a ComponentInstance observer
   # from the group.
   #
-  # @example 
+  # @example
   #   group = Sketchup.active_model.entities[0]
   #   if group != nil
   #     if group.is_a? Sketchup::Group
@@ -471,16 +471,16 @@ class Sketchup::Group < Sketchup::Drawingelement
   # The show_differences method is used to determine if a group is
   # geometrically equivalent to another group and in addition move the non-
   # matching and matching geometry to new layers.
-  # 
+  #
   # This method will move both groups to Layer0.  Geometry that is the same
   # in both groups will be moved to a new layer named group_name + "_same".
   # Geometry that is not the same will be moved to a layer named group_name +
   # "_diff".
-  # 
+  #
   # If verbose is true, a list of all the geometry that is different
   # from one group to the other is displayed texturally in the Ruby Console.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   group1 = entities[0]
   #   group2 = entities[1]
@@ -505,7 +505,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   # specified objects (this and arg) do not represent manifold volumes,
   # this method fails.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   group1 = entities[0]
   #   group2 = entities[1]
@@ -530,7 +530,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   # groups representing manifold solid volumes (this - arg).  If the specified
   # objects (this and arg) do not represent manifold volumes, this method fails.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   group1 = entities[0]
   #   group2 = entities[1]
@@ -550,11 +550,11 @@ class Sketchup::Group < Sketchup::Drawingelement
   # The to_component method is used to convert the group to a component
   # instance.
   #
-  # @example 
+  # @example
   #   # Add a group to the model.
   #   group = Sketchup.active_model.entities.add_group
   #   group.entities.add_line([0,0,0],[100,100,100])
-  #   
+  #
   #   # change the group to a component instance
   #   group.to_component
   #
@@ -566,7 +566,7 @@ class Sketchup::Group < Sketchup::Drawingelement
 
   # The transform! method is used to apply a transformation to a group.
   #
-  # @example 
+  # @example
   #   point = Geom::Point3d.new 500,500,500
   #   t = Geom::Transformation.new point
   #   depth = 100
@@ -578,13 +578,13 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   pts[1] = [width, 0, 0]
   #   pts[2] = [width, depth, 0]
   #   pts[3] = [0, depth, 0]
-  #   
+  #
   #   # Add the group to the entities in the model
   #   group = entities.add_group
-  #   
+  #
   #   # Get the entities within the group
   #   entities2 = group.entities
-  #   
+  #
   #   # Add a face to within the group
   #   face = entities2.add_face pts
   #   UI.messagebox "Group before Move"
@@ -608,11 +608,11 @@ class Sketchup::Group < Sketchup::Drawingelement
   # The transformation method is used to retrieve the transformation for the
   # group.
   #
-  # @example 
+  # @example
   #   # Add a group to the model.
   #   group = Sketchup.active_model.entities.add_group
   #   group.entities.add_line([0,0,0],[100,100,100])
-  #   
+  #
   #   trans = group.transformation
   #
   # @return transformation - a Transformation object if successful
@@ -624,11 +624,11 @@ class Sketchup::Group < Sketchup::Drawingelement
   # The transformation= method is used to set the transformation for the
   # group.
   #
-  # @example 
+  # @example
   #   # Add a group to the model.
   #   group = Sketchup.active_model.entities.add_group
   #   group.entities.add_line([0,0,0],[100,100,100])
-  #   
+  #
   #   new_transform = Geom::Transformation.new([100,0,0])
   #   group.transformation = new_transform
   #
@@ -646,7 +646,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   # the specified objects (this and arg) do not represent manifold volumes, this
   # method fails.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   group1 = entities[0]
   #   group2 = entities[1]
@@ -667,7 +667,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   # representing manifold solid volumes (this | arg).  If the specified
   # objects (this and arg) do not represent manifold volumes, this method fails.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   group1 = entities[0]
   #   group2 = entities[1]
@@ -687,7 +687,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   # The volume method is used to compute the volume of this group if and only
   # if this group is manifold.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   definition = Sketchup.active_model.definitions[0]
   #   transformation = Geom::Transformation.new([0,0,0])

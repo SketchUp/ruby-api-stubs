@@ -17,10 +17,10 @@ class Sketchup::Entities
   # entities. The index is a number between +0+ and entities.length - 1. In
   # general, it is preferable to use the {#each} method to iterate though all
   # of the entities in the collection as it will be much more efficient.
-  # 
+  #
   # The {#at} method is an alias of {#[]}
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   entity0 = entities[0]
   #   if (entity0)
@@ -42,7 +42,7 @@ class Sketchup::Entities
   # The active_section_plane method is used to access the currently active
   # section plane in the Entities object.
   #
-  # @example 
+  # @example
   #   sp = Sketchup.active_model.entities.active_section_plane
   #   puts "Active section plane is #{sp}" if !sp.nil?
   #
@@ -55,7 +55,7 @@ class Sketchup::Entities
   # The active_section_plane= method is used to set the active section plane in
   # the Entities object.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   sp = entities.add_section_plane([50, 50, 0], [1.0, 1.0, 0])
   #   entities.active_section_plane = sp
@@ -73,7 +73,7 @@ class Sketchup::Entities
   # The add_3d_text is used to create 3D text. It will be added as edges and
   # faces drawn at the origin.
   #
-  # @example 
+  # @example
   #   # Draw the word "test" at the origin of the model, aligned left, in
   #   # Arial Bold, not italics, 1" in size, best tolerance quality, filled,
   #   # with an extrusion size of 5".
@@ -123,7 +123,7 @@ class Sketchup::Entities
 
   # The add_arc method is used to create an arc curve segment.
   #
-  # @example 
+  # @example
   #   centerpoint = Geom::Point3d.new
   #   # Create a circle perpendicular to the normal or Z axis
   #   vector = Geom::Vector3d.new 0,0,1
@@ -163,7 +163,7 @@ class Sketchup::Entities
 
   # The add_circle method is used to create a circle.
   #
-  # @example 
+  # @example
   #   centerpoint = Geom::Point3d.new
   #   # Create a circle perpendicular to the normal or Z axis
   #   vector = Geom::Vector3d.new 0,0,1
@@ -192,7 +192,7 @@ class Sketchup::Entities
 
   # The add_cline method is used to create a construction line.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   point1 = Geom::Point3d.new(0,0,0)
@@ -226,7 +226,7 @@ class Sketchup::Entities
 
   # The add_cpoint method is used to create a construction point.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   point1 = Geom::Point3d.new(100,200,300)
@@ -248,11 +248,11 @@ class Sketchup::Entities
   end
 
   # The add_curve method is used to create a curve from a collection of edges.
-  # 
+  #
   # The arguments are either Points or an Array of Points. At least 2 points are
   # required.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   curve = entities.add_curve [0,0,0], [0,10,0], [1,20,0]
   #
@@ -269,7 +269,7 @@ class Sketchup::Entities
 
   # The add_dimension_linear method adds a linear dimension to the entities.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   # From point to point
   #   dim = entities.add_dimension_linear [50, 10, 0], [100, 10, 0], [0, 20, 0]
@@ -311,7 +311,7 @@ class Sketchup::Entities
   # The add_dimension_radial method adds a radial dimension (i.e arc/circle
   # radius/diameter dimension) to the entities.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   # Create a circle
   #   centerpoint = Geom::Point3d.new(10, 10, 0)
@@ -337,7 +337,7 @@ class Sketchup::Entities
   # The add_edges method is used to add a set of connected edges to the entities
   # array.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   point1 = Geom::Point3d.new(0,0,0)
@@ -356,20 +356,20 @@ class Sketchup::Entities
 
   # The add_face method is used to create a face. You can call this method a
   # number of ways:
-  # 
+  #
   #   - entities.add_face(edge1, edge2, edge3, ...)
   #   - entities.add_face(edgearray)
   #   - entities.add_face(pt1, pt2, pt3, ...)
   #   - entities.add_face([pt1, pt2, pt3,...])
   #   - entities.add_face(curve)
-  # 
+  #
   # For the last form that takes a Curve, the curve must be closed - like a
   # circle.
-  # 
+  #
   # Note that a special case exists for any face created on the ground plane, in
   # which case the vertex order is ignored and the face is always facing down.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -399,21 +399,21 @@ class Sketchup::Entities
 
   # The {#add_faces_from_mesh} method is used to add Face objects to the
   # collection of entities from a PolygonMesh.
-  # 
+  #
   # The +smooth_flags+ parameter can contain any of the following values if
   # passed. The constants were added in SketchUp 2014. For previous versions,
   # numeric values have to be specified instead of the Ruby constants.
-  # 
+  #
   # - 0: {Geom::PolygonMesh::NO_SMOOTH_OR_HIDE}
   # - 1: {Geom::PolygonMesh::HIDE_BASED_ON_INDEX} (Negative point index will hide the edge.)
   # - 2: {Geom::PolygonMesh::SOFTEN_BASED_ON_INDEX} (Negative point index will soften the edge.)
   # - 4: {Geom::PolygonMesh::AUTO_SOFTEN} (Interior edges are softened.)
   # - 8: {Geom::PolygonMesh::SMOOTH_SOFT_EDGES} (All soft edges will also be smooth.)
-  # 
+  #
   # The 3rd and 4th parameters will accept a {sketchup::Material} object or a
   # string name of a material currently in the model.
   #
-  # @example 
+  # @example
   #   pm = Geom::PolygonMesh.new
   #   pm.add_point([ 0, 0, 0]) # 1
   #   pm.add_point([10, 0, 0]) # 2
@@ -423,7 +423,7 @@ class Sketchup::Entities
   #   pm.add_point([20,10, 5]) # 6
   #   pm.add_polygon(1, -2, 3, 4)
   #   pm.add_polygon(2, 5,6, -3)
-  #   
+  #
   #   # Create a new group that we will populate with the mesh.
   #   group = Sketchup.active_model.entities.add_group
   #   material = Sketchup.active_model.materials.add('green')
@@ -449,12 +449,12 @@ class Sketchup::Entities
 
   # The add_group method is used to create an empty group or a group with
   # entities.
-  # 
+  #
   # NOTE: calling add_group with entities in its parameters has been known to
   # crash SketchUp before version 8.0. It is preferable to create an empty
   # group and then add things to its Entities collection.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   group = entities.add_group
@@ -474,12 +474,12 @@ class Sketchup::Entities
   end
 
   # The add_image method is used to add an image to the collection of entities.
-  # 
+  #
   # The width and height are measured in model units (i.e. inches). If the
   # height is not given, then it is computed from the width to preserve the
   # aspect ratio of the image.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   point = Geom::Point3d.new 10,20,30
@@ -513,7 +513,7 @@ class Sketchup::Entities
   # The add_instance method adds a component instance to the collection of
   # entities.
   #
-  # @example 
+  # @example
   #   point = Geom::Point3d.new 10,20,30
   #   transform = Geom::Transformation.new point
   #   model = Sketchup.active_model
@@ -547,10 +547,10 @@ class Sketchup::Entities
   # sense, which is an invisible object represented by an Array of a point
   # and a vector. (See the Array class for more information on geometric lines in
   # SketchUp.)
-  # 
+  #
   # This method is the same as add_edges method, but returns a single edge.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   point1 = Geom::Point3d.new(0,0,0)
@@ -576,7 +576,7 @@ class Sketchup::Entities
 
   # The add_ngon method is used to create a multi-sided polygon.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   center = Geom::Point3d.new
   #   normal = Geom::Vector3d.new(0,0,1)
@@ -605,7 +605,7 @@ class Sketchup::Entities
 
   # The add_observer method is used to add an observer to the current object.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   status = entities.add_observer observer
   #
@@ -620,7 +620,7 @@ class Sketchup::Entities
 
   # The add_section_plane method adds a section plane object to the entities.
   #
-  # @example 
+  # @example
   #   # Create a section plane
   #   model = Sketchup.active_model
   #   sp = model.entities.add_section_plane([50, 50, 0], [1.0, 1.0, 0])
@@ -643,7 +643,7 @@ class Sketchup::Entities
 
   # The add_text method adds a note or label text entity to the entities
   #
-  # @example 
+  # @example
   #   coordinates = [10, 10, 10]
   #   model = Sketchup.active_model
   #   entities = model.entities
@@ -669,10 +669,10 @@ class Sketchup::Entities
   # entities. The index is a number between +0+ and entities.length - 1. In
   # general, it is preferable to use the {#each} method to iterate though all
   # of the entities in the collection as it will be much more efficient.
-  # 
+  #
   # The {#at} method is an alias of {#[]}
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   entity0 = entities[0]
   #   if (entity0)
@@ -694,7 +694,7 @@ class Sketchup::Entities
   # The clear! method is used to remove all entities from the collection of
   # entities.
   #
-  # @example 
+  # @example
   #   coordinates = [10, 10, 10]
   #   model = Sketchup.active_model
   #   entities = model.entities
@@ -710,7 +710,7 @@ class Sketchup::Entities
   end
 
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.entities
   #   entities.add_cpoint([10, 10, 10])
@@ -720,7 +720,7 @@ class Sketchup::Entities
   #   +Enumable+ mix-in module. Prior to that the {#count} method is an alias
   #   for {#length}.
   #
-  # @return [Integer] 
+  # @return [Integer]
   #
   # @see #length
   #
@@ -731,7 +731,7 @@ class Sketchup::Entities
   # The each method is used to iterate through the entities in the collection of
   # entities.
   #
-  # @example 
+  # @example
   #   coordinates = [10, 10, 10]
   #   model = Sketchup.active_model
   #   entities = model.entities
@@ -751,7 +751,7 @@ class Sketchup::Entities
   # The erase_entities method is used to erase one or more entities from the
   # model.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -761,10 +761,10 @@ class Sketchup::Entities
   #   pts[1] = [width, 0, 0]
   #   pts[2] = [width, depth, 0]
   #   pts[3] = [0, depth, 0]
-  #   
+  #
   #   # Add the face to the entities in the model
   #   face = entities.add_face pts
-  #   
+  #
   #   # I just happen to know that the second entity in the
   #   # entities objects is an edge, so erase it.
   #   UI.messagebox entities
@@ -785,21 +785,21 @@ class Sketchup::Entities
   # collection to be filled is empty. It has higher performance than
   # {#add_faces_from_mesh}, but does less error checking as it builds the
   # geometry.
-  # 
+  #
   # The +smooth_flags+ parameter can contain any of the following values if
   # passed. The constants were added in SketchUp 2014. For previous versions,
   # numeric values have to be specified instead of the Ruby constants:
-  # 
+  #
   # - 0: {Geom::PolygonMesh::NO_SMOOTH_OR_HIDE}
   # - 1: {Geom::PolygonMesh::HIDE_BASED_ON_INDEX} (Negative point index will hide the edge.)
   # - 2: {Geom::PolygonMesh::SOFTEN_BASED_ON_INDEX} (Negative point index will soften the edge.)
   # - 4: {Geom::PolygonMesh::AUTO_SOFTEN} (Interior edges are softened.)
   # - 8: {Geom::PolygonMesh::SMOOTH_SOFT_EDGES} (All soft edges will also be smooth.)
-  # 
+  #
   # The 4rd and 5th parameters will accept a {Sketchup::Material} object or a
   # string name of a material currently in the model.
   #
-  # @example 
+  # @example
   #   pm = Geom::PolygonMesh.new
   #   pm.add_point([ 0, 0, 0]) # 1
   #   pm.add_point([10, 0, 0]) # 2
@@ -809,7 +809,7 @@ class Sketchup::Entities
   #   pm.add_point([20,10, 5]) # 6
   #   pm.add_polygon(1, -2, 3, 4)
   #   pm.add_polygon(2, 5, 6, -3)
-  #   
+  #
   #   # Create a new group that we will populate with the mesh.
   #   group = Sketchup.active_model.entities.add_group
   #   material = Sketchup.active_model.materials.add('red')
@@ -832,7 +832,7 @@ class Sketchup::Entities
   # @param [Sketchup::Material, String] f_material
   #   material to paint front faces with.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def fill_from_mesh(polymesh, weld_vertices = true, smooth_flags = Geom::PolygonMesh::AUTO_SOFTEN|Geom::PolygonMesh::SMOOTH_SOFT_EDGES, f_material = nil, b_material = nil)
@@ -841,7 +841,7 @@ class Sketchup::Entities
   # The intersect_with method is used to intersect an entities, component
   # instance, or group object with a entities object.
   #
-  # @example 
+  # @example
   #   entities.intersect_with recurse, transformation1, entities1,
   #     transformation2, hidden, entities2
   #
@@ -875,10 +875,10 @@ class Sketchup::Entities
 
   # The {#length} method is used to retrieve the number of entities in the
   # collection of entities.
-  # 
+  #
   # The {#size} method is an alias for {#length} added in SketchUp 2014.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.entities
   #   entities.add_cpoint([10, 10, 10])
@@ -894,7 +894,7 @@ class Sketchup::Entities
   # The model method is used to retrieve the model that contains the collection
   # of entities.
   #
-  # @example 
+  # @example
   #   coordinates = [10, 10, 10]
   #   model = Sketchup.active_model
   #   entities = model.entities
@@ -913,7 +913,7 @@ class Sketchup::Entities
   # collection of entities. A parent can be either a Model or
   # ComponentDefinition object.
   #
-  # @example 
+  # @example
   #   coordinates = [10, 10, 10]
   #   model = Sketchup.active_model
   #   entities = model.entities
@@ -931,7 +931,7 @@ class Sketchup::Entities
   # The remove_observer method is used to remove an observer from the current
   # object.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   status = entities.remove_observer observer
   #
@@ -946,10 +946,10 @@ class Sketchup::Entities
 
   # The {#length} method is used to retrieve the number of entities in the
   # collection of entities.
-  # 
+  #
   # The {#size} method is an alias for {#length} added in SketchUp 2014.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.entities
   #   entities.add_cpoint([10, 10, 10])
@@ -965,7 +965,7 @@ class Sketchup::Entities
   # The transform_by_vectors method is used to apply several vectors to several
   # sub-entities all at once.
   #
-  # @example 
+  # @example
   #   # Need better Ruby example.
   #   entities = entities.transform_by_vectors sub_entities, vector_array
   #
@@ -983,7 +983,7 @@ class Sketchup::Entities
 
   # The transform_entities method is used to apply a transform to several
   # sub-entities all at once.
-  # 
+  #
   # Important note: If you apply a transformation to entities that are
   # not in the current edit context (i.e. faces that are inside a group),
   # SketchUp will apply the transformation incorrectly, since the geometry
@@ -991,15 +991,15 @@ class Sketchup::Entities
   # for this by watching the Model.edit_transform and Model.active_path. See
   # ModelObserver.onActivePathChanged for more information.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   entities.add_line([0,0,0],[100,100,100])
   #   entities.add_line([0,0,0],[200,-10,-10])
-  #   
+  #
   #   entities_to_transform = []
   #   entities_to_transform.push(entities[0])
   #   entities_to_transform.push(entities[1])
-  #   
+  #
   #   transform = Geom::Transformation.new([100,0,0])
   #   entities.transform_entities(transform, ent1, ent2, ent3)
   #

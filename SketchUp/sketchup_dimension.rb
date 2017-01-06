@@ -19,7 +19,7 @@ class Sketchup::Dimension < Sketchup::Drawingelement
 
   # The add_observer method is used to add a DimensionObserver to the dimension.
   #
-  # @example 
+  # @example
   #   observer = MyDimObserver.new
   #   dim = Sketchup.active_model.entities.add_dimension_linear([50, 10, 0],
   #         [100, 10, 0], [0, 20, 0])
@@ -46,7 +46,7 @@ class Sketchup::Dimension < Sketchup::Drawingelement
   # - +Dimension::ARROW_CLOSED+
   # - +Dimension::ARROW_OPEN+
   #
-  # @example 
+  # @example
   #   type = dim.arrow_type
   #   if type == Sketchup::Dimension::ARROW_CLOSED
   #     puts "Arrow type is closed"
@@ -66,7 +66,7 @@ class Sketchup::Dimension < Sketchup::Drawingelement
   # - +Dimension::ARROW_CLOSED+
   # - +Dimension::ARROW_OPEN+
   #
-  # @example 
+  # @example
   #   dim.arrow_type = Sketchup::Dimension::ARROW_CLOSED
   #
   # @param type
@@ -81,7 +81,7 @@ class Sketchup::Dimension < Sketchup::Drawingelement
   # The has_aligned_text= method accepts true or false indicating whether the
   # dimension's text is aligned to the dimension or to the screen.
   #
-  # @example 
+  # @example
   #   dim.has_aligned_text = true
   #
   # @param [Boolean] value
@@ -95,13 +95,13 @@ class Sketchup::Dimension < Sketchup::Drawingelement
   # The has_aligned_text method is used to determine whether the dimension's text
   # is aligned to the dimension or to the screen.
   #
-  # @example 
+  # @example
   #   aligned = dim.has_aligned_text?
   #
   # @return status - true if text is aligned to the dimension.
   #   False if dimension text is aligned to the screen.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 2014
   def has_aligned_text?
@@ -110,7 +110,7 @@ class Sketchup::Dimension < Sketchup::Drawingelement
   # The plane method is used to retrieve the plane of the dimension. Refer to the
   # Geom module for information on how planes are represented.
   #
-  # @example 
+  # @example
   #   plane = dim.plane
   #
   # @return the plane of the dimension
@@ -124,7 +124,7 @@ class Sketchup::Dimension < Sketchup::Drawingelement
   # will be removed as a DimensionObserver. If not, the base
   # Entity.remove_observer will be called.
   #
-  # @example 
+  # @example
   #   observer = MyDimObserver.new
   #   dim = Sketchup.active_model.entities.add_dimension_linear([50, 10, 0],
   #         [100, 10, 0], [0, 20, 0])
@@ -142,7 +142,7 @@ class Sketchup::Dimension < Sketchup::Drawingelement
 
   # The text method is used to retrieve the dimension text.
   #
-  # @example 
+  # @example
   #   dimtext = dim.text
   #
   # @return the dimension text
@@ -153,7 +153,7 @@ class Sketchup::Dimension < Sketchup::Drawingelement
 
   # The text= method is used to set an override on the dimension text.
   #
-  # @example 
+  # @example
   #   dim.text= "text"
   #
   # @param [String] text

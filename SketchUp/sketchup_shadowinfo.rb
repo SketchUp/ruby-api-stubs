@@ -4,9 +4,9 @@
 # The ShadowInfo class contains method to extract the shadow information for a
 # model. The majority of the shadow information returned exists in the Model
 # Info > Location and Model Info > Shadows dialogs inside SketchUp.
-# 
+#
 # The following shadow information keys are maintained in SketchUp:
-# 
+#
 # - +City+ (in Model Info > Geo-location > Set Manual Location...) Note that 'City' is called 'Location' in the UI
 # - +Country+ (in Model Info > Geo-location > Set Manual Location...)
 # - +Dark+ (in Window > Shadows)
@@ -30,10 +30,10 @@
 # - +SunSet_time_t+ (SunSet in Epoch time)
 # - +TZOffset+ (in Window > Shadows)
 # - +UseSunForAllShading+ (in Window > Shadows)
-# 
+#
 # You access the ShadowInfo object by calling Model.shadow_info:
 #
-# @example 
+# @example
 #   model = Sketchup.active_model
 #   shadowinfo = model.shadow_info
 #   UI.messagebox("My city is: " + shadowinfo["City"].to_s)
@@ -49,7 +49,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
 
   # The each_key method iterates through all of the shadow information keys.
   #
-  # @example 
+  # @example
   #   shadowinfo.each_key { |key| UI.messagebox(key) }
   #
   # @return nil
@@ -63,7 +63,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   # The keys method is a class method that returns an array with all of the
   # attribute keys
   #
-  # @example 
+  # @example
   #   keys = Sketchup::ShadowInfo.keys
   #
   # @return keys - an array of keys
@@ -76,7 +76,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
 
   # The [] method retrieves a value from the array of keys
   #
-  # @example 
+  # @example
   #   value = shadowinfo["key"]
   #
   # @param key
@@ -91,7 +91,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   # The set value []= method is used to set the value in the array of shadow
   # info options.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   shadowinfo = model.shadow_info
   #   value = shadowinfo["City"]
@@ -114,7 +114,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
 
   # The add_observer method is used to add an observer to the current object.
   #
-  # @example 
+  # @example
   #   status = object.add_observer observer
   #
   # @param observer
@@ -128,7 +128,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
 
   # The count method is inherited from the Enumerable mix-in module.
   #
-  # @example 
+  # @example
   #   shadow_info = Sketchup.active_model.shadow_info
   #   number = shadow_info.count
   #
@@ -140,7 +140,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
 
   # An alias for each. See ShadowInfo.each.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   shadowinfo = model.shadow_info
   #   shadowinfo.each_pair { |key, value|
@@ -151,7 +151,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   #
   # @version SketchUp 6.0
   #
-  # @yield [key, value] 
+  # @yield [key, value]
   #
   # @yieldparam key
   #   A variables that will hold each key as it is found.
@@ -163,7 +163,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
 
   # The each_key method iterates through all of the shadow information keys.
   #
-  # @example 
+  # @example
   #   shadowinfo.each_key { |key| UI.messagebox(key) }
   #
   # @return nil
@@ -176,7 +176,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
 
   # An alias for each. See ShadowInfo.each.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   shadowinfo = model.shadow_info
   #   shadowinfo.each_pair { |key, value|
@@ -187,7 +187,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   #
   # @version SketchUp 6.0
   #
-  # @yield [key, value] 
+  # @yield [key, value]
   #
   # @yieldparam key
   #   A variables that will hold each key as it is found.
@@ -200,7 +200,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   # The keys method is a class method that returns an array with all of the
   # attribute keys
   #
-  # @example 
+  # @example
   #   keys = Sketchup::ShadowInfo.keys
   #
   # @return keys - an array of keys
@@ -211,10 +211,10 @@ class Sketchup::ShadowInfo < Sketchup::Entity
 
   # The {#length} method returns the number of options in the shadow options
   # collection
-  # 
+  #
   # The {#size} method is an alias for {#length}.
   #
-  # @example 
+  # @example
   #   shadow_info = Sketchup.active_model.shadow_info
   #   number = shadow_info.length
   #
@@ -227,7 +227,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   # The remove_observer method is used to remove an observer from the current
   # object.
   #
-  # @example 
+  # @example
   #   status = object.remove_observer observer
   #
   # @param observer
@@ -241,10 +241,10 @@ class Sketchup::ShadowInfo < Sketchup::Entity
 
   # The {#length} method returns the number of options in the shadow options
   # collection
-  # 
+  #
   # The {#size} method is an alias for {#length}.
   #
-  # @example 
+  # @example
   #   shadow_info = Sketchup.active_model.shadow_info
   #   number = shadow_info.length
   #

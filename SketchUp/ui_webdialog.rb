@@ -3,31 +3,31 @@
 
 # The Ruby WebDialog class allows you to create and interact with DHTML dialog
 # boxes from Ruby.
-# 
+#
 # If your goal is to simply display a website to your users, consider using
 # UI.getURL, which will show them a web page in their default browser rather
 # than inside a dialog in SketchUp.
-# 
+#
 # See this blog post for a detailed, step-by-step example:
 # http://sketchupapi.blogspot.com/2008/02/sharing-data-between-sketchup-ruby-and.html
-# 
+#
 # Under Windows the IE render mode is different in webdialogs than from what
 # you see in the normal browser. It will by default pick an older render mode
 # and different versions of SketchUp will use different modes. In order to
 # reliably control the render mode of your webdialogs under Windows you need to
 # insert a special META compatibility tag:
-# 
+#
 #   // To always force the latest version available:
 #   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-# 
+#
 #   // To lock to a specific IE version:
 #   <meta http-equiv="X-UA-Compatible" content="IE=8"/>
-# 
+#
 # Starting with SketchUp 2013, you can embed a special HTML link in your dialog
 # that will launch Extension Warehouse and show a specified extension's page.
 # This can be useful if your extension has a dependency on another one and you
 # would like to direct the user to install that extension.
-# 
+#
 # For example, to launch an extension's page whose URL is:
 # http://extensions.sketchup.com/en/content/advanced-camera-tools
 # The link would be:
@@ -35,7 +35,7 @@
 # @deprecated Please use {UI::HtmlDialog} that was introduced in
 #   SketchUp 2017.
 #
-# @example 
+# @example
 #   <a href="skp:launchEW@advanced-camera-tools">Get Advanced Camera Tools</a>
 #
 # @version SketchUp 6.0
@@ -45,23 +45,23 @@ class UI::WebDialog
 
   # The add_action_callback method establishes a Ruby callback method that your
   # web dialog can call to perform some function.
-  # 
+  #
   # Use the skp:callback_method_name to invoke the callback method from your
   # webdialog. Your JavaScript in the webdialog will invoke the callback method
   # with a string representing arguments to the callback method.
-  # 
+  #
   # Note that you're sending data down to Ruby as a single string that's
   # passed via the window.location bar. In Internet Explorer on PC, there is
   # a length limit of 2038 characters for this bar, so if you're
   # needing to pass large data down you might consider using get_element_value
   # to pull in a longer string from a hidden input field in the HTML.
   #
-  # @example 
+  # @example
   #   # In Ruby code...
   #   dlg.add_action_callback("ruby_messagebox") {|dialog, params|
   #     UI.messagebox("You called ruby_messagebox with: " + params.to_s)
   #   }
-  #   
+  #
   #   # JavaScript inside the page loaded into the WebDialog:
   #   # window.location = 'skp:ruby_messagebox@Hello World';
   #
@@ -73,7 +73,7 @@ class UI::WebDialog
   #
   # @version SketchUp 6.0
   #
-  # @yield [dialog, params] 
+  # @yield [dialog, params]
   #
   # @yieldparam params
   #   Any parameters passed to the dialog from HTML.
@@ -90,7 +90,7 @@ class UI::WebDialog
   # exists. If the webdialog is local, no remote host is allowed unless you use
   # this method.
   #
-  # @example 
+  # @example
   #   dialog.allow_actions_from_host("sketchup.com")
   #
   # @param hostname
@@ -107,7 +107,7 @@ class UI::WebDialog
   # the windows on the desktop. See show_modal for how to ensure that your
   # WedDialogs are on top.
   #
-  # @example 
+  # @example
   #   dialog.bring_to_front
   #
   # @return nil
@@ -118,7 +118,7 @@ class UI::WebDialog
 
   # The close method is used to close the webdialog.
   #
-  # @example 
+  # @example
   #   dialog.close
   #
   # @return nil
@@ -130,7 +130,7 @@ class UI::WebDialog
   # The execute_script method is used to execute a JavaScript string on the web
   # dialog.
   #
-  # @example 
+  # @example
   #   js_command = "document.getElementById('id').innerHTML = '<b>Hi!</b>'"
   #   dialog.execute_script(js_command)
   #
@@ -146,7 +146,7 @@ class UI::WebDialog
   # The get_default_dialog_color method is used to get the default dialog color
   # for the web dialog.
   #
-  # @example 
+  # @example
   #   dialog.get_default_dialog_color
   #   #ece9d8
   #
@@ -160,10 +160,10 @@ class UI::WebDialog
   # The get_element_value method is used to get a value, with a given
   # element_id, from the web dialog's DOM.
   #
-  # @example 
+  # @example
   #   # In Ruby code:
   #   dialog.get_element_value("myTextInput")
-  #   
+  #
   #   # In webdialog's HTML:
   #   <input type="text" id="myTextInput" value="hello">
   #
@@ -177,23 +177,23 @@ class UI::WebDialog
   end
 
   # The +new+ method is used to create a new webdialog.
-  # 
+  #
   # Since SU2017 the position and size of the dialog is DPI aware - it will scale
   # to the DPI of the monitor automatically. Specify units as they would be on a
   # traditional low-DPI monitor.
-  # 
+  #
   # Note that the browser which is embedded inside the dialog depends on the
   # user's OS. On Mac, Safari is embedded, while on the PC whatever version of
   # Internet Explorer is installed will be embedded.
   #
-  # @example 
+  # @example
   #   dlg = UI::WebDialog.new("Show sketchup.com", true,
   #     "ShowSketchupDotCom", 739, 641, 150, 150, true);
   #   dlg.set_url "http://www.sketchup.com"
   #   dlg.show
   #
   # @overload initialize(dialog_title = "", scrollable = true, pref_key = nil, width = 250, height = 250, left = 0, top = 0, resizable = true)
-  # 
+  #
   #   @param [String] dialog_title   The title to be displayed in the webdialog.
   #   @param [Boolean] scrollable    true if you want to allow scrollbars, false
   #                                  if you do not want to allow scrollbars.
@@ -210,7 +210,7 @@ class UI::WebDialog
   #   @return [UI::WebDialog]
   #
   # @overload initialize(properties)
-  # 
+  #
   #   @version SketchUp 7.0
   #   @param [Hash] properties  A hash containing the initial properties of
   #                             the newly created dialog.
@@ -237,7 +237,7 @@ class UI::WebDialog
   # The max_height method is used to get the maximum height that the user is
   # allowed to resize the dialog to.
   #
-  # @example 
+  # @example
   #   max = dialog.max_height
   #
   # @return height - the maximum height in pixels
@@ -249,7 +249,7 @@ class UI::WebDialog
   # The max_height= method is used to set the maximum height that the user is
   # allowed to resize the dialog to.
   #
-  # @example 
+  # @example
   #   dialog.max_height = 400
   #
   # @param height
@@ -264,7 +264,7 @@ class UI::WebDialog
   # The max_width method is used to get the maximum width that the user is
   # allowed to resize the dialog to.
   #
-  # @example 
+  # @example
   #   max = dialog.max_width
   #
   # @return width - the maximum width in pixels
@@ -276,7 +276,7 @@ class UI::WebDialog
   # The max_width= method is used to set the maximum width that the user is
   # allowed to resize the dialog to.
   #
-  # @example 
+  # @example
   #   dialog.max_width = 500
   #
   # @param width
@@ -291,7 +291,7 @@ class UI::WebDialog
   # The min_width method is used to get the minimum height that the user is
   # allowed to resize the dialog to.
   #
-  # @example 
+  # @example
   #   min = dialog.min_height
   #
   # @return height - the minimum height in pixels
@@ -303,7 +303,7 @@ class UI::WebDialog
   # The min_height= method is used to set the minimum height that the user is
   # allowed to resize the dialog to.
   #
-  # @example 
+  # @example
   #   dialog.min_height = 100
   #
   # @param height
@@ -318,7 +318,7 @@ class UI::WebDialog
   # The min_width method is used to get the minimum width that the user is
   # allowed to resize the dialog to.
   #
-  # @example 
+  # @example
   #   min = dialog.min_width
   #
   # @return width - the minimum width in pixels
@@ -330,7 +330,7 @@ class UI::WebDialog
   # The min_width= method is used to set the minimum width that the user is
   # allowed to resize the dialog to.
   #
-  # @example 
+  # @example
   #   dialog.min_width = 200
   #
   # @param width
@@ -346,7 +346,7 @@ class UI::WebDialog
   # and back buttons are visible at the top of the WebDialog on the mac. This
   # method has no use on the PC, as these buttons are never displayed.
   #
-  # @example 
+  # @example
   #   dialog.navigation_buttons_enabled = false
   #
   # @param nav_buttons
@@ -361,15 +361,15 @@ class UI::WebDialog
   # The navigation_buttons_enabled? method is used to get whether the home, next,
   # and back buttons are visible at the top of the WebDialog on the mac. This
   # method has no use on the PC, as these buttons are never displayed.
-  # 
+  #
   # On the mac, this defaults to true for new WebDialogs.
   #
-  # @example 
+  # @example
   #   nav_buttons = dialog.navigation_buttons_enabled?
   #
   # @return nav_buttons - true if the buttons are visible.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 7.0
   def navigation_buttons_enabled?
@@ -378,7 +378,7 @@ class UI::WebDialog
   # The post_url method is used to send the data to a url using the HTTP POST
   # method.
   #
-  # @example 
+  # @example
   #   data = dialog.post_url("http://www.mydomain.com/formchecker.cgi",data)
   #
   # @param url
@@ -398,7 +398,7 @@ class UI::WebDialog
   # currently in. On a retina screen Mac, this ratio will be greater than 1.0.
   # On Windows this always return 1.0.
   #
-  # @example 
+  # @example
   #   factor = dialog.screen_scale_factor
   #
   # @return screen scale factor
@@ -410,7 +410,7 @@ class UI::WebDialog
   # The set_background_color method is used to set the background color for the
   # webdialog.
   #
-  # @example 
+  # @example
   #   dlg.set_background_color("f3f0f0")
   #
   # @param color
@@ -425,7 +425,7 @@ class UI::WebDialog
   # The #{set_file} method is used to identify a local HTML file to display in
   # the webdialog.
   #
-  # @example 
+  # @example
   #   file = File.join(__dir__, 'mypage.html')
   #   dialog.set_file(file)
   #
@@ -435,7 +435,7 @@ class UI::WebDialog
   # @param [String] path
   #   A path that filename is relative to.
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def set_file(filename, path = nil)
@@ -445,7 +445,7 @@ class UI::WebDialog
   # security mode where remote URLs and plugins (such as Flash) are not allowed
   # inside the browser. This defaults to false when a new WebDialog is created.
   #
-  # @example 
+  # @example
   #   dialog.set_full_security
   #
   # @return dialog - the updated WebDialog
@@ -457,7 +457,7 @@ class UI::WebDialog
   # The set_html method is used to load a webdialog with a string of provided
   # HTML.
   #
-  # @example 
+  # @example
   #   html= '<b>Hello world!</b>'
   #   dialog.set_html(html)
   #
@@ -473,7 +473,7 @@ class UI::WebDialog
   # The set_on_close method is used to establish one or more activities to
   # perform when the dialog closes (such as saving values stored in the dialog).
   #
-  # @example 
+  # @example
   #   dialog.set_on_close{ UI.messagebox("Closing the webDialog") }
   #
   # @return nil
@@ -487,7 +487,7 @@ class UI::WebDialog
   # The set_position method is used to set the position of the webdialog
   # relative to the screen, in pixels.
   #
-  # @example 
+  # @example
   #   dialog.set_position(100,50)
   #
   # @param left
@@ -504,7 +504,7 @@ class UI::WebDialog
 
   # The set_size method is used to set the size of the webdialog, in pixels.
   #
-  # @example 
+  # @example
   #   dialog.set_size(320,240)
   #
   # @param w
@@ -522,7 +522,7 @@ class UI::WebDialog
   # The set_url method is used to load a webdialog with the content at a
   # specific URL. This method allows you to load web sites in a webdialog.
   #
-  # @example 
+  # @example
   #   dialog.set_url "http://www.sketchup.com"
   #
   # @param url
@@ -536,7 +536,7 @@ class UI::WebDialog
 
   # The show method is used to display a non-modal dialog box.
   #
-  # @example 
+  # @example
   #   dialog.show {
   #     dialog.execute_script("alert(10)");
   #   }
@@ -556,7 +556,7 @@ class UI::WebDialog
   # performed elsewhere inside SketchUp. On the Mac, "modal" WebDialogs do not
   # behave this way, but instead are "always on top" of other windows.
   #
-  # @example 
+  # @example
   #   dialog.show_modal {
   #     dialog.execute_script("alert(10)");
   #   }
@@ -572,12 +572,12 @@ class UI::WebDialog
 
   # The visible? method is used to tell if the webdialog is currently shown.
   #
-  # @example 
+  # @example
   #   vis = dialog.visible?
   #
   # @return visibility - true if visible.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def visible?
@@ -586,7 +586,7 @@ class UI::WebDialog
   # The write_image method is used to grab a portion of the web dialog screen and
   # save the image to the given file path.
   #
-  # @example 
+  # @example
   #   dialog.write_image('c:/grab.jpg', 70, 0, 0, 100, 100)
   #   dialog.write_image('c:/grab.png', 4, 0, 0, 100, 100)
   #

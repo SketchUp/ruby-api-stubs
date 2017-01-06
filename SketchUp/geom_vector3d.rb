@@ -3,7 +3,7 @@
 
 # The Vector3d class is used to represent vectors in a 3 dimensional space.
 # Vectors in SketchUp have a direction and a length, but not a starting point.
-# 
+#
 # There are numerous tutorials on 3D vectors available on the internet.
 #
 # @version SketchUp 6.0
@@ -14,15 +14,15 @@ class Geom::Vector3d
   # The linear_combination method is used to create a new vector as a linear
   # combination of other vectors. This method is generally used to get a vector
   # at some percentage between two vectors.
-  # 
+  #
   # A linear combination is a standard term for vector math. It is defined as
   # point = weight1 * point1 + weight2 * point2.
-  # 
+  #
   # In addition to the 4-argument form detailed here, you may also call this
   # method with 6 parameters in the form of:
   #   - vec = Geom::Vector3d.linear_combination(x, xaxis, y, yaxis, z, zaxis)
   #
-  # @example 
+  # @example
   #   # Create a vector that is a 50%/50% linear combination of two others.
   #   vec1 = Geom::Vector3d.new 3,0,0
   #   vec2 = Geom::Vector3d.new 0,3,0
@@ -51,7 +51,7 @@ class Geom::Vector3d
 
   # The dot method is used to compute the dot product between two vectors.
   #
-  # @example 
+  # @example
   #   vector = Geom::Vector3d.new 0,0,1
   #   vector2 = Geom::Vector3d.new 0,1,0
   #   d = vector.dot vector2
@@ -66,17 +66,17 @@ class Geom::Vector3d
   end
 
   # The cross method is used to compute the cross product between two vectors.
-  # 
+  #
   # The cross product, also called the vector product, is an operation on two
   # vectors. The cross product of two vectors produces a third vector which is
   # perpendicular to the plane in which the first two lie.
   #
-  # @example 
+  # @example
   #   vector1 = Geom::Vector3d.new(1,0,0)
   #   vector2 = Geom::Vector3d.new(0,1,0)
   #   vector3 = vector1 * vector2
   #
-  # @example 
+  # @example
   #   vector = Geom::Vector3d.new(1,0,0)
   #   vector2 = Geom::Vector3d.new(0,1,0)
   #   vector3 = vector.cross(vector2)
@@ -92,7 +92,7 @@ class Geom::Vector3d
 
   # The - method is used to add a vector to this one.
   #
-  # @example 
+  # @example
   #   vector = Geom::Vector3d.new 0,0,2
   #   vector2 = Geom::Vector3d.new 0,1,0
   #   new_vector = vector + vector2
@@ -108,7 +108,7 @@ class Geom::Vector3d
 
   # The - method is used to subtract a vector from this one.
   #
-  # @example 
+  # @example
   #   vector = Geom::Vector3d.new 0,0,2
   #   vector2 = Geom::Vector3d.new 0,1,0
   #   new_vector = vector - vector2
@@ -125,7 +125,7 @@ class Geom::Vector3d
   # The < method is used to determine if a vector's x, y or z value is less
   # than another vector's x, y or z value.
   #
-  # @example 
+  # @example
   #   vector = Geom::Vector3d.new 0,0,2
   #   vector2 = Geom::Vector3d.new 0,1,0
   #   lt = vector < vector2
@@ -142,7 +142,7 @@ class Geom::Vector3d
   # The == method is used to determine if two vectors are equal to within
   # tolerance.
   #
-  # @example 
+  # @example
   #   vector = Geom::Vector3d.new 1,0,0
   #   vector2 = Geom::Vector3d.new 0,1,0
   #   status = vector == vector2
@@ -161,14 +161,14 @@ class Geom::Vector3d
 
   # The [] method is used to access the coordinates of a vector as if it was an
   # Array. The index must be 0, 1 or 2.
-  # 
+  #
   # The following are equivalent:
   #
-  # @example 
+  # @example
   #   x = vector.x
   #   x = vector[0]
   #
-  # @example 
+  # @example
   #   vector = Geom::Vector3d.new 1,0,0
   #   value = vector[0]
   #   if (value)
@@ -189,7 +189,7 @@ class Geom::Vector3d
   # The []= method is used to set the coordinates of a vector as if it was an
   # Array. The value of i must be 0, 1 or 2.
   #
-  # @example 
+  # @example
   #   value = vector[i] = coordinate
   #
   # @param coordinate
@@ -204,7 +204,7 @@ class Geom::Vector3d
   # The angle_between method is used to compute the angle (in radians) between
   # this vector and another vector.
   #
-  # @example 
+  # @example
   #   vector1 = Geom::Vector3d.new 1,0,0
   #   vector2 = Geom::Vector3d.new 0,1,0
   #   angle = vector1.angle_between vector2
@@ -220,10 +220,10 @@ class Geom::Vector3d
 
   # The axes method is used to compute an arbitrary set of axes with the given
   # vector as the z-axis direction.
-  # 
+  #
   # Returns an Array of three vectors [xaxis, yaxis, zaxis]
   #
-  # @example 
+  # @example
   #   vector = Geom::Vector3d.new 1,0,0
   #   a = vector.axes
   #
@@ -234,10 +234,10 @@ class Geom::Vector3d
   end
 
   # The clone method is used to make a copy of a vector.
-  # 
+  #
   # This method is equivalent to vec2 = Geom::Vector3d.new(vec)
   #
-  # @example 
+  # @example
   #   vector = Geom::Vector3d.new 1,0,0
   #   vector2 = vector.clone
   #
@@ -249,17 +249,17 @@ class Geom::Vector3d
   end
 
   # The cross method is used to compute the cross product between two vectors.
-  # 
+  #
   # The cross product, also called the vector product, is an operation on two
   # vectors. The cross product of two vectors produces a third vector which is
   # perpendicular to the plane in which the first two lie.
   #
-  # @example 
+  # @example
   #   vector1 = Geom::Vector3d.new(1,0,0)
   #   vector2 = Geom::Vector3d.new(0,1,0)
   #   vector3 = vector1 * vector2
   #
-  # @example 
+  # @example
   #   vector = Geom::Vector3d.new(1,0,0)
   #   vector2 = Geom::Vector3d.new(0,1,0)
   #   vector3 = vector.cross(vector2)
@@ -275,7 +275,7 @@ class Geom::Vector3d
 
   # The dot method is used to compute the dot product between two vectors.
   #
-  # @example 
+  # @example
   #   vector = Geom::Vector3d.new 0,0,1
   #   vector2 = Geom::Vector3d.new 0,1,0
   #   d = vector.dot vector2
@@ -291,7 +291,7 @@ class Geom::Vector3d
 
   # The new method is used to create a new vector.
   #
-  # @example 
+  # @example
   #   # A vector that runs up the Z axis.
   #   vector = Geom::Vector3d.new 0,0,1
   #   if (vector)
@@ -301,16 +301,16 @@ class Geom::Vector3d
   #   end
   #
   # @overload initialize
-  # 
+  #
   #   @return [Geom::Vector3d]
   #
   # @overload initialize(vector2)
-  # 
+  #
   #   @param vector2       A Vector3d object.
   #   @return [Geom::Vector3d]
   #
   # @overload initialize(x, y, z)
-  # 
+  #
   #   @param x             A X value.
   #   @param y             A Y value.
   #   @param z             A Z value.
@@ -323,7 +323,7 @@ class Geom::Vector3d
   # The inspect method is used to inspect the contents of a vector as a
   # friendly string.
   #
-  # @example 
+  # @example
   #   vector = Geom::Vector3d.new 0,0,1
   #   out_string = vector.inspect
   #   puts out_string
@@ -336,7 +336,7 @@ class Geom::Vector3d
 
   # The length method is used to retrieve the length of the vector.
   #
-  # @example 
+  # @example
   #   vector = Geom::Vector3d.new 0,0,1
   #   l = vector.length
   #
@@ -349,7 +349,7 @@ class Geom::Vector3d
   # The length= method is used to set the length of the vector. The length must
   # be greater than 0.
   #
-  # @example 
+  # @example
   #   vector = Geom::Vector3d.new 0,0,1
   #   l = vector.length
   #   UI.messagebox l
@@ -367,7 +367,7 @@ class Geom::Vector3d
   # The normalize method is used to return a vector that is a unit vector
   # of another.
   #
-  # @example 
+  # @example
   #   vector = Geom::Vector3d.new 0,0,2
   #   vector2 = vector.normalize
   #
@@ -379,10 +379,10 @@ class Geom::Vector3d
 
   # The normalize! method is used to convert a vector into a unit vector,
   # in place.
-  # 
+  #
   # Another way to do this is vec.length = 1
   #
-  # @example 
+  # @example
   #   vector = Geom::Vector3d.new 0,0,2
   #   vector.normalize!
   #
@@ -395,7 +395,7 @@ class Geom::Vector3d
   # The parallel method is used to determine if this vector is parallel to
   # another vector to within tolerance.
   #
-  # @example 
+  # @example
   #   status = vector.parallel? vector2
   #
   # @param vector2
@@ -404,7 +404,7 @@ class Geom::Vector3d
   # @return status - true if vector and vector2 are parallel. False
   #   if they are not parallel.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def parallel?(vector2)
@@ -413,7 +413,7 @@ class Geom::Vector3d
   # The perpendicular? method is used to determine if this vector is
   # perpendicular to another vector to within tolerance.
   #
-  # @example 
+  # @example
   #   vector = Geom::Vector3d.new 0,0,1
   #   vector2 = Geom::Vector3d.new 0,1,0
   #   status = vector.perpendicular? vector2
@@ -424,7 +424,7 @@ class Geom::Vector3d
   # @return status - true if vector and vector2 are parallel. False
   #   if they are not parallel.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def perpendicular?(vector2)
@@ -433,7 +433,7 @@ class Geom::Vector3d
   # The reverse method is used to return a new vector that is the reverse
   # of this vector, while leaving the original unchanged.
   #
-  # @example 
+  # @example
   #   vector2 = vector.reverse
   #
   # @return vector2 - a Vector3d object that is the reverse of
@@ -445,7 +445,7 @@ class Geom::Vector3d
 
   # The reverse! method is used to reverse the vector in place.
   #
-  # @example 
+  # @example
   #   vector.reverse!
   #
   # @return vector2 - a Vector3d object that is the reverse of
@@ -458,7 +458,7 @@ class Geom::Vector3d
   # The samedirection? method is used to determine if this vector is parallel to
   # and in the same direction as another vector to within tolerance.
   #
-  # @example 
+  # @example
   #   vector = Geom::Vector3d.new 0,0,1
   #   vector2 = Geom::Vector3d.new 0,1,0
   #   status = vector.samedirection? vector2
@@ -469,7 +469,7 @@ class Geom::Vector3d
   # @return status - true if vector and vector2 are in the same
   #   direction. False if they are not in the same direction.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def samedirection?(vector2)
@@ -487,19 +487,19 @@ class Geom::Vector3d
   #   vec.set!([x, y, z])
   #   vec.set!(vec2)
   #
-  # @example 
+  # @example
   #   vector = Geom::Vector3d.new 0,0,1
   #   vector.set! 1,0,0
   #
   # @overload set!(x, y, z)
-  # 
+  #
   #   @param x             The x value for the vector.
   #   @param y             The y value for the vector.
   #   @param z             The z value for the vector.
   #   @return              vector - The newly set Vector3d object
   #
   # @overload set!(vector2)
-  # 
+  #
   #   @param vector2       A Vector3d object.
   #   @return              vector - The newly set Vector3d object
   #
@@ -510,7 +510,7 @@ class Geom::Vector3d
   # The to_a method retrieves the coordinates of the vector in an Array
   # [x, y, z].
   #
-  # @example 
+  # @example
   #   a = vector.to_a
   #
   # @return a - the coordinates of the vector in an array
@@ -521,7 +521,7 @@ class Geom::Vector3d
 
   # The to_s method is used to format the vector as a String.
   #
-  # @example 
+  # @example
   #   vector = Geom::Vector3d.new 0,0,1
   #   out_string = vector.to_s
   #   puts out_string
@@ -534,7 +534,7 @@ class Geom::Vector3d
 
   # Apply a Transformation to a vector. The vector itself is modified.
   #
-  # @example 
+  # @example
   #   vector.transform! transformation
   #
   # @param transform
@@ -549,7 +549,7 @@ class Geom::Vector3d
   # Apply a Transformation to a vector, returning a new vector. The original
   # vector is unchanged by this method.
   #
-  # @example 
+  # @example
   #   vector2 = vector.transform! transformation
   #
   # @param transform
@@ -562,17 +562,17 @@ class Geom::Vector3d
   end
 
   # The unitvector? method is used to see if the vector is a unit vector.
-  # 
+  #
   # This is equivalent to vec.length == 1.0
   #
-  # @example 
+  # @example
   #   vector = Geom::Vector3d.new 0,0,1
   #   status = vector.unitvector?
   #
   # @return status - true if the vector is a unit vector. False if
   #   the vector is not a unit vector.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def unitvector?
@@ -581,7 +581,7 @@ class Geom::Vector3d
   # The valid? method is used to verify if a vector is valid. A vector is valid
   # if its length is not zero.
   #
-  # @example 
+  # @example
   #   # A zero length vector will be invalid
   #   vector = Geom::Vector3d.new 0,0,0
   #   status = vector.valid?
@@ -592,7 +592,7 @@ class Geom::Vector3d
   # @return status - true if the vector is valid. false if the
   #   vector is not valid.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def valid?
@@ -600,7 +600,7 @@ class Geom::Vector3d
 
   # The x method is used to retrieve the x coordinate of the vector.
   #
-  # @example 
+  # @example
   #   x = vector.x
   #
   # @return x - the x coordinate of the vector
@@ -611,7 +611,7 @@ class Geom::Vector3d
 
   # The x= method is used to set the x coordinate of the vector.
   #
-  # @example 
+  # @example
   #   vector = Geom::Vector3d.new 1,2,3
   #   x = vector.x = 10
   #
@@ -626,7 +626,7 @@ class Geom::Vector3d
 
   # The y method is used to retrieve the y coordinate of the vector.
   #
-  # @example 
+  # @example
   #   vector = Geom::Vector3d.new 1,2,3
   #   y = vector.y
   #
@@ -638,7 +638,7 @@ class Geom::Vector3d
 
   # Set the y coordinate of the vector.
   #
-  # @example 
+  # @example
   #   vector = Geom::Vector3d.new 1,2,3
   #   y = vector.y = 10
   #
@@ -653,7 +653,7 @@ class Geom::Vector3d
 
   # Get the z coordinate of the vector.
   #
-  # @example 
+  # @example
   #   vector = Geom::Vector3d.new 1,2,3
   #   z = vector.z
   #
@@ -665,7 +665,7 @@ class Geom::Vector3d
 
   # Set the z coordinate of the vector.
   #
-  # @example 
+  # @example
   #   vector = Geom::Vector3d.new 1,2,3
   #   z = vector.z = 10
   #

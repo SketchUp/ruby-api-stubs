@@ -20,7 +20,7 @@ class Sketchup::Face < Sketchup::Drawingelement
 
   # The all_connected method retrieves all of the entities connected to a face.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -30,7 +30,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   pts[1] = [width, 0, 0]
   #   pts[2] = [width, depth, 0]
   #   pts[3] = [0, depth, 0]
-  #   
+  #
   #   # Add the face to the entities in the model
   #   face = entities.add_face(pts)
   #   connected = face.all_connected
@@ -42,7 +42,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   end
 
   # The area method is used to retrieve the area of a face in current units.
-  # 
+  #
   # You can pass in an optional Transformation (or an array that can represent a
   # transformation), to correct for a parent group's transformation. For example,
   # if a face is inside of a group that is scaled to 200%, the area method will
@@ -50,7 +50,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   # object to this method, you can account for that to get the "visual" area
   # of the face.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -65,12 +65,12 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   area = face.area
   #
   # @overload area
-  # 
+  #
   #   @return              area - the area of the face in current units (if
   #                        successful)
   #
   # @overload area(transform)
-  # 
+  #
   #   @param transform     A Transformation object or array that can
   #                        be interpreted as a Transformation object.
   #   @return              area - the area of the face in current units (if
@@ -83,7 +83,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   # The back_material method is used to retrieve the material assigned to the
   # back side of the face.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -93,10 +93,10 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   pts[1] = [width, 0, 0]
   #   pts[2] = [width, depth, 0]
   #   pts[3] = [0, depth, 0]
-  #   
+  #
   #   # Add the face to the entities in the model
   #   face = entities.add_face(pts)
-  #   
+  #
   #   # Add a material to the back face, then check to see that it was added
   #   face.back_material = "red"
   #   material = face.back_material
@@ -111,7 +111,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   # The back_material= method is used to set the material assigned to the back
   # side of the face.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -137,14 +137,14 @@ class Sketchup::Face < Sketchup::Drawingelement
 
   # The classify_point method is used to determine if a given Point3d is on the
   # referenced Face.
-  # 
+  #
   # It is important that return value comparisons be made against the
   # symbolic constants (i.e. {Sketchup::Face::PointUnknown},
   # {Sketchup::Face::PointInside}, {Sketchup::Face::PointOnVertex}, etc.) rather
   # than the absolute integer values as these values may change from one
   # release to the next.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   pts = []
@@ -152,38 +152,38 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   pts[1] = [9, 0, 0]
   #   pts[2] = [9, 9, 0]
   #   pts[3] = [0, 9, 0]
-  #   
+  #
   #   # Add the face to the entities in the model
   #   face = entities.add_face(pts)
-  #   
+  #
   #   # Check a point that should be outside the face.
   #   pt = Geom::Point3d.new(50, 50, 0)
   #   result = face.classify_point(pt)
   #   if result == Sketchup::Face::PointOutside
   #     puts "#{pt.to_s} is outside the face"
   #   end
-  #   
+  #
   #   # Check a point that should be outside inside the face.
   #   pt = Geom::Point3d.new(1, 1, 0)
   #   result = face.classify_point(pt)
   #   if result == Sketchup::Face::PointInside
   #     puts "#{pt.to_s} is inside the face"
   #   end
-  #   
+  #
   #   # Check a point that should be on the vertex of the face.
   #   pt = Geom::Point3d.new(0, 0, 0)
   #   result = face.classify_point(pt)
   #   if result == Sketchup::Face::PointOnVertex
   #     puts "#{pt.to_s} is on a vertex"
   #   end
-  #   
+  #
   #   # Check a point that should be on the edge of the face.
   #   pt = Geom::Point3d.new(0, 1, 0)
   #   result = face.classify_point(pt)
   #   if result == Sketchup::Face::PointOnEdge
   #     puts "#{pt.to_s} is on an edge of the face"
   #   end
-  #   
+  #
   #   # Check a point that should be off the plane of the face.
   #   pt = Geom::Point3d.new(1, 1, 10)
   #   result = face.classify_point(pt)
@@ -203,7 +203,7 @@ class Sketchup::Face < Sketchup::Drawingelement
 
   # The edges method is used to get an array of edges that bound the face.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -226,13 +226,13 @@ class Sketchup::Face < Sketchup::Drawingelement
   # The {#followme} method is used to create a shape by making the face follow
   # along an array of edges.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
-  #   
+  #
   #   depth = 100
   #   width = 100
-  #   
+  #
   #   # Add the face to the entities in the model
   #   points = [
   #     Geom::Point3d.new(0, 0, 0),
@@ -241,7 +241,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #     Geom::Point3d.new(0, depth, 0)
   #   ]
   #   face = entities.add_face(points)
-  #   
+  #
   #   # Add the line which we will "follow" to the entities in the model
   #   point1 = Geom::Point3d.new(0, 0, 0)
   #   point2 = Geom::Point3d.new(0, 0, 100)
@@ -249,12 +249,12 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   face.followme(edge)
   #
   # @overload followme(edges)
-  # 
+  #
   #   @param [Array<Sketchup::Edge>] edges  An array of edge objects to follow.
   #   @return [Boolean]
   #
   # @overload followme(edge)
-  # 
+  #
   #   @param [Sketchup::Edge] edge  An edge to follow.
   #   @return [Boolean]
   #
@@ -265,7 +265,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   # The get_UVHelper object is used to retrieve a UVHelper object for use in
   # texture manipulation on a face.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   pts = []
@@ -273,7 +273,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   pts[1] = [9, 0, 0]
   #   pts[2] = [9, 9, 0]
   #   pts[3] = [0, 9, 0]
-  #   
+  #
   #   # Add the face to the entities in the model
   #   face = entities.add_face(pts)
   #   tw = Sketchup.create_texture_writer
@@ -299,7 +299,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   # The get_glued_instances method returns an Array any ComponentInstances
   # that are glued to the face.
   #
-  # @example 
+  # @example
   #   # Create a series of points that define a new face.
   #   model = Sketchup.active_model
   #   entities = model.active_entities
@@ -308,7 +308,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   pts[1] = [9, 0, 0]
   #   pts[2] = [9, 9, 0]
   #   pts[3] = [0, 9, 0]
-  #   
+  #
   #   # Add the face to the entities in the model
   #   face = entities.add_face(pts)
   #   glued_array = face.get_glued_instances
@@ -323,33 +323,33 @@ class Sketchup::Face < Sketchup::Drawingelement
   # The get_texture_projection method will return a vector representing the
   # projection for either the front or back side of the face.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   materials = model.materials
-  #   
+  #
   #   # Create a face and add it to the model entities
   #   pts = []
   #   pts[0] = [0, 0, 1]
   #   pts[1] = [10, 0, 1]
   #   pts[2] = [10, 10, 1]
   #   face = entities.add_face(pts)
-  #   
+  #
   #   # Export an image to use as a texture
   #   path = Sketchup.temp_dir
   #   full_name = File.join(path, "temp_image.jpg")
   #   model.active_view.write_image(full_name, 500, 500, false, 0.0)
-  #   
+  #
   #   # Create a material and assign the texture to it
   #   material = materials.add("Test Material")
   #   material.texture = full_name
-  #   
+  #
   #   # Assign the new material to our face we created
   #   face.material = material
-  #   
+  #
   #   # Set the projection of the applied material
   #   face.set_texture_projection(face.normal, true)
-  #   
+  #
   #   # Get the projection of the applied material
   #   vector = face.get_texture_projection(true)
   #
@@ -365,7 +365,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   # The loops method is used to get an array of all of the loops that bound the
   # face.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -375,7 +375,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   pts[1] = [width, 0, 0]
   #   pts[2] = [width, depth, 0]
   #   pts[3] = [0, depth, 0]
-  #   
+  #
   #   # Add the face to the entities in the model
   #   face = entities.add_face(pts)
   #   loops = face.loops
@@ -390,7 +390,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   # front of the face. (This method is inherited from the Drawingelement
   # parent class.)
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -400,10 +400,10 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   pts[1] = [width, 0, 0]
   #   pts[2] = [width, depth, 0]
   #   pts[3] = [0, depth, 0]
-  #   
+  #
   #   # Add the face to the entities in the model
   #   face = entities.add_face(pts)
-  #   
+  #
   #   # Add a material to the face, then check to see that it was added
   #   face.material = "red"
   #   material = face.material
@@ -419,7 +419,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   # side of the face. (This method is inherited from the Drawingelement
   # parent class.)
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -445,18 +445,18 @@ class Sketchup::Face < Sketchup::Drawingelement
 
   # The mesh method creates a polygon mesh that represents the face. See the
   # {Geom::PolygonMesh} class for more information.
-  # 
+  #
   # Valid flags are:
-  # 
+  #
   # - +0+: Include PolygonMeshPoints,
   # - +1+: Include PolygonMeshUVQFront,
   # - +2+: Include PolygonMeshUVQBack,
   # - +4+: Include PolygonMeshNormals.
-  # 
+  #
   # Use bitwise OR to combine flags. A value of +7+ will include all
   # flags, for example.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -466,10 +466,10 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   pts[1] = [width, 0, 0]
   #   pts[2] = [width, depth, 0]
   #   pts[3] = [0, depth, 0]
-  #   
+  #
   #   # Add the face to the entities in the model
   #   face = entities.add_face(pts)
-  #   
+  #
   #   kPoints = 0
   #   kUVQFront = 1
   #   kUVQBack = 2
@@ -480,7 +480,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   # @param [Integer] flags
   #   One or more flags used to generate a mesh.
   #
-  # @return [Geom::PolygonMesh] 
+  # @return [Geom::PolygonMesh]
   #
   # @version SketchUp 6.0
   def mesh(flags = 0)
@@ -489,7 +489,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   # The normal method is used to retrieve the 3D vector normal to the face in
   # the front direction.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -499,7 +499,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   pts[1] = [width, 0, 0]
   #   pts[2] = [width, depth, 0]
   #   pts[3] = [0, depth, 0]
-  #   
+  #
   #   # Add the face to the entities in the model
   #   face = entities.add_face(pts)
   #   normal = face.normal
@@ -512,7 +512,7 @@ class Sketchup::Face < Sketchup::Drawingelement
 
   # This method is used to retrieve the outer loop that bounds the face.
   #
-  # @example 
+  # @example
   #   # Create a series of points that define a new face.
   #   model = Sketchup.active_model
   #   entities = model.active_entities
@@ -521,7 +521,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   pts[1] = [9, 0, 0]
   #   pts[2] = [9, 9, 0]
   #   pts[3] = [0, 9, 0]
-  #   
+  #
   #   # Add the face to the entities in the model
   #   face = entities.add_face(pts)
   #   loop = face.outer_loop
@@ -536,7 +536,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   # The plane method is used to retrieve the plane of the face. See the Array
   # class for information on how planes are stored.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -546,7 +546,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   pts[1] = [width, 0, 0]
   #   pts[2] = [width, depth, 0]
   #   pts[3] = [0, depth, 0]
-  #   
+  #
   #   # Add the face to the entities in the model
   #   face = entities.add_face(pts)
   #   plane = face.plane
@@ -558,17 +558,17 @@ class Sketchup::Face < Sketchup::Drawingelement
   end
 
   # The position_material method is used to position a material on a face.
-  # 
+  #
   # The pt_array must contain 2, 4, 6 or 8 points. The points are used in pairs
   # to tell where a point in the texture image is positioned on the Face. The
   # first point in each pair is a 3D point in the model. It should be a point on
   # the Face. The second point in each pair of points is a 2D point that gives
   # the (u,v) coordinates of a point in the image to match up with the 3D point.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
-  #   
+  #
   #   # Create a face and add it to the model entities
   #   pts = []
   #   pts[0] = [0, 0, 1]
@@ -576,19 +576,19 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   pts[2] = [9, 9, 1]
   #   pts[3] = [0, 9, 1]
   #   face = entities.add_face(pts)
-  #   
+  #
   #   # Export an image to use as a texture
   #   path = Sketchup.temp_dir
   #   full_name = File.join(path, "temp_image.jpg")
   #   model.active_view.write_image(full_name, 500, 500, false, 0.0)
-  #   
+  #
   #   # Create a material and assign the texture to it
   #   material = model.materials.add("Test Material")
   #   material.texture = full_name
-  #   
+  #
   #   # Assign the new material to our face we created
   #   face.material = material
-  #   
+  #
   #   pt_array = []
   #   pt_array[0] = Geom::Point3d.new(3,0,0)
   #   pt_array[1] = Geom::Point3d.new(0,0,0)
@@ -612,10 +612,10 @@ class Sketchup::Face < Sketchup::Drawingelement
   end
 
   # The pushpull method is used to perform a push/pull on a face.
-  # 
+  #
   # The distance is measured in the direction that the face normal is pointing.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -646,7 +646,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   # The reverse! method is used to reverse the face's orientation, meaning the
   # front becomes the back.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -670,30 +670,30 @@ class Sketchup::Face < Sketchup::Drawingelement
   # The set_texture_projection method is used to set the texture projection
   # direction.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   materials = model.materials
-  #   
+  #
   #   # Create a face and add it to the model entities
   #   pts = []
   #   pts[0] = [0, 0, 1]
   #   pts[1] = [10, 0, 1]
   #   pts[2] = [10, 10, 1]
   #   face = entities.add_face(pts)
-  #   
+  #
   #   # Export an image to use as a texture
   #   path = Sketchup.temp_dir
   #   full_name = File.join(path, "temp_image.jpg")
   #   model.active_view.write_image(full_name, 500, 500, false, 0.0)
-  #   
+  #
   #   # Create a material and assign the testure to it.
   #   material = materials.add("Test Material")
   #   material.texture = full_name
-  #   
+  #
   #   # Assign the new material to our face we created
   #   face.material = material
-  #   
+  #
   #   # Returns nil if not successful, path if successful
   #   result = face.set_texture_projection(face.normal, true)
   #
@@ -713,7 +713,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   # The vertices method is used to get an array of all of the vertices that
   # bound the face.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -723,7 +723,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   pts[1] = [width, 0, 0]
   #   pts[2] = [width, depth, 0]
   #   pts[3] = [0, depth, 0]
-  #   
+  #
   #   # Add the face to the entities in the model
   #   face = entities.add_face(pts)
   #   vertices = face.vertices

@@ -15,7 +15,7 @@ class Sketchup::Licensing::ExtensionLicense
   # The days_remaining method is used to get the number of days remaining until
   # license expiration.
   #
-  # @example 
+  # @example
   #   ext_id = "4e215280-dd23-40c4-babb-b8a8dd29d5ee"
   #   ext_lic = Sketchup::Licensing.get_extension_license(ext_id)
   #   if ext_lic.days_remaining != 0
@@ -33,7 +33,7 @@ class Sketchup::Licensing::ExtensionLicense
   # failure to acquire a license. This is meant to aid in debugging only.
   # Extensions should not rely on any exact error description.
   #
-  # @example 
+  # @example
   #   ext_id = "4e215280-dd23-40c4-babb-b8a8dd29d5ee"
   #   ext_lic = Sketchup::Licensing.get_extension_license(ext_id)
   #   if !ext_lic.licensed?
@@ -49,7 +49,7 @@ class Sketchup::Licensing::ExtensionLicense
   # The licensed? method is used to decide whether the extension is licensed to
   # run or not.
   #
-  # @example 
+  # @example
   #   ext_id = "4e215280-dd23-40c4-babb-b8a8dd29d5ee"
   #   ext_lic = Sketchup::Licensing.get_extension_license(ext_id)
   #   if ext_lic.licensed?
@@ -59,7 +59,7 @@ class Sketchup::Licensing::ExtensionLicense
   # @return Boolean - true if the extension is allowed to run, false
   #   if it is not licensed and should quit.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 2015
   def licensed?
@@ -69,7 +69,7 @@ class Sketchup::Licensing::ExtensionLicense
   # These should be used for informational purposes only and not to decide if
   # the extension is licensed to run. For that, please use the licensed? method.
   #
-  # @example 
+  # @example
   #   ext_id = "4e215280-dd23-40c4-babb-b8a8dd29d5ee"
   #   ext_lic = Sketchup::Licensing.get_extension_license(ext_id)
   #   if ext_lic.state == Sketchup::Licensing::TRIAL_EXPIRED

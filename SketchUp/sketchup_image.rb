@@ -10,14 +10,14 @@ class Sketchup::Image < Sketchup::Drawingelement
 
   # The explode method is used to explode an image into a face with a texture
   # on it.
-  # 
+  #
   # Note that current versions of SketchUp will return an empty array here.
   # To work around this limitation you can iterate over your entities collection
   # to determine which new entities were created.
-  # 
+  #
   # Versions prior to SketchUp 2015 returned an empty array due to a bug.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   path = "Plugins/su_dynamiccomponents/images"
   #   image_file = Sketchup.find_support_file("report_tool.png", path)
@@ -32,10 +32,10 @@ class Sketchup::Image < Sketchup::Drawingelement
   end
 
   # The height method is used to retrieve the height of the image.
-  # 
+  #
   # The height is given in inches.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   path = Sketchup.find_support_file "report_tool.png", "Tools/DynamicComponents/images"
   #   pt = Geom::Point3d.new
@@ -55,10 +55,10 @@ class Sketchup::Image < Sketchup::Drawingelement
   end
 
   # The height= method is used to set the height of the image.
-  # 
+  #
   # The height is set in inches.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   path = Sketchup.find_support_file "report_tool.png", "Tools/DynamicComponents/images"
   #   pt = Geom::Point3d.new
@@ -84,7 +84,7 @@ class Sketchup::Image < Sketchup::Drawingelement
   # The normal method is used to retrieve the 3D Vector that is perpendicular to
   # the plane of the image.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   path = Sketchup.find_support_file "report_tool.png", "Tools/DynamicComponents/images"
   #   pt = Geom::Point3d.new
@@ -106,7 +106,7 @@ class Sketchup::Image < Sketchup::Drawingelement
   # The origin method is used to retrieve the 3D point that defines the origin
   # of the image.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   path = Sketchup.find_support_file "report_tool.png", "Tools/DynamicComponents/images"
   #   pt = Geom::Point3d.new
@@ -128,7 +128,7 @@ class Sketchup::Image < Sketchup::Drawingelement
 
   # The origin= method is used to set the 3D point as the origin of the image.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   path = Sketchup.find_support_file "report_tool.png", "Tools/DynamicComponents/images"
   #   pt = Geom::Point3d.new
@@ -155,7 +155,7 @@ class Sketchup::Image < Sketchup::Drawingelement
 
   # The path method is used to retrieve the path of the file defining the image.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   path = Sketchup.find_support_file "report_tool.png", "Tools/DynamicComponents/images"
   #   pt = Geom::Point3d.new
@@ -177,7 +177,7 @@ class Sketchup::Image < Sketchup::Drawingelement
   # The pixelheight method is used to retrieve the height of the image file in
   # pixels.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   path = Sketchup.find_support_file "report_tool.png", "Tools/DynamicComponents/images"
   #   pt = Geom::Point3d.new
@@ -200,7 +200,7 @@ class Sketchup::Image < Sketchup::Drawingelement
   # The pixelwidth method is used to retrieve the width of the image file in
   # pixels.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   path = Sketchup.find_support_file "report_tool.png", "Tools/DynamicComponents/images"
   #   pt = Geom::Point3d.new
@@ -221,7 +221,7 @@ class Sketchup::Image < Sketchup::Drawingelement
 
   # The size= method is used to set the width and height of the image, in inches.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   path = Sketchup.find_support_file "report_tool.png", "Tools/DynamicComponents/images"
   #   pt = Geom::Point3d.new
@@ -250,7 +250,7 @@ class Sketchup::Image < Sketchup::Drawingelement
 
   # The transform! method is used to apply a transformation to the image.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   path = Sketchup.find_support_file "report_tool.png", "Tools/DynamicComponents/images"
   #   point = Geom::Point3d.new 100,100,100
@@ -278,14 +278,14 @@ class Sketchup::Image < Sketchup::Drawingelement
   # The transformation method is used to retrieve the transformation for the
   # image.
   #
-  # @example 
+  # @example
   #   # Add an image to the model.
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   path = Sketchup.find_support_file('report_tool.png', 'Plugins/su_dynamiccomponents/images')
   #   point = Geom::Point3d.new(100,100,100)
   #   image = entities.add_image(path, point, 300)
-  #   
+  #
   #   trans = image.transformation
   #
   # @return transformation - a Transformation object if successful
@@ -297,14 +297,14 @@ class Sketchup::Image < Sketchup::Drawingelement
   # The transformation= method is used to set the transformation for the
   # image.
   #
-  # @example 
+  # @example
   #   # Add an image to the model.
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   path = Sketchup.find_support_file('report_tool.png', 'Plugins/su_dynamiccomponents/images')
   #   point = Geom::Point3d.new(100,100,100)
   #   image = entities.add_image(path, point, 300)
-  #   
+  #
   #   new_transform = Geom::Transformation.new([100,0,0])
   #   image.transformation = new_transform
   #
@@ -318,10 +318,10 @@ class Sketchup::Image < Sketchup::Drawingelement
   end
 
   # The width method is used to retrieve the width of the image.
-  # 
+  #
   # The width is given in inches.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   path = Sketchup.find_support_file "report_tool.png",
   #     "Tools/DynamicComponents/images"
@@ -342,10 +342,10 @@ class Sketchup::Image < Sketchup::Drawingelement
   end
 
   # The width= method is used to set the width of the image.
-  # 
+  #
   # The width is set in inches.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   path = Sketchup.find_support_file "report_tool.png", "Tools/DynamicComponents/images"
   #   pt = Geom::Point3d.new
@@ -371,7 +371,7 @@ class Sketchup::Image < Sketchup::Drawingelement
   # The zrotation method is used to get the angle that the image is rotated
   # about the normal vector from an arbitrary X axis.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   path = Sketchup.find_support_file "report_tool.png", "Tools/DynamicComponents/images"
   #   pt = Geom::Point3d.new

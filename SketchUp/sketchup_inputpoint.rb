@@ -17,7 +17,7 @@ class Sketchup::InputPoint
 
   # The == method is used to determine if two input points are the same.
   #
-  # @example 
+  # @example
   #   view = Sketchup.active_model.active_view
   #   x = 100
   #   y = 100
@@ -39,11 +39,11 @@ class Sketchup::InputPoint
   end
 
   # The clear method is used to clear the input point.
-  # 
+  #
   # This sets it to an empty state. After calling this, valid? will return
   # false.
   #
-  # @example 
+  # @example
   #   view = Sketchup.active_model.active_view
   #   x = 100
   #   y = 100
@@ -61,7 +61,7 @@ class Sketchup::InputPoint
   # The copy! method is used to copy the data from a second input point into
   # this input point.
   #
-  # @example 
+  # @example
   #   view = Sketchup.active_model.active_view
   #   x = 100
   #   y = 100
@@ -82,21 +82,21 @@ class Sketchup::InputPoint
 
   # The degrees_of_freedom method retrieves the number of degrees of freedom
   # there are for an input point.
-  # 
+  #
   # If you are just getting a point in space, then the degrees_of_freedom will
   # be 3 - meaning that there is nothing about the point that would constrain
   # its position.
-  # 
+  #
   # If you are on a face, then the degrees_of_freedom will be 2
   # meaning that you can only move on the plane of the face.
-  # 
+  #
   # If you are on an Edge or an axis, then the degrees_of_freedom will be 1
   # meaning that you can only move in the direction of the edge or axis.
-  # 
+  #
   # If you get an end point of an Edge, or an intersection point, then the
   # degrees_of_freedom will be 0.
   #
-  # @example 
+  # @example
   #   view = Sketchup.active_model.active_view
   #   x = 100
   #   y = 100
@@ -111,12 +111,12 @@ class Sketchup::InputPoint
 
   # The depth method retrieves the depth of an inference if it is coming from a
   # component.
-  # 
+  #
   # If the InputPoint is not getting a position from inside a component, this
   # method will return 0. Otherwise it returns the depth of the entity in a
   # nested component that is providing the position.
   #
-  # @example 
+  # @example
   #   view = Sketchup.active_model.active_view
   #   x = 100
   #   y = 100
@@ -132,10 +132,10 @@ class Sketchup::InputPoint
 
   # The display? method is used to determine if the input point has anything to
   # draw.
-  # 
+  #
   # If the method returns true, then the draw method will draw something.
   #
-  # @example 
+  # @example
   #   view = Sketchup.active_model.active_view
   #   x = 100
   #   y = 100
@@ -145,19 +145,19 @@ class Sketchup::InputPoint
   # @return status - true if the draw method will draw something,
   #   false if the draw method has nothing to draw
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def display?
   end
 
   # The draw method is used to draw the input point.
-  # 
+  #
   # This is useful for showing an InputPoint from within the draw method of a
   # tool that you have implemented in Ruby. Additional examples are available in
   # the Plugins/examples directory.
   #
-  # @example 
+  # @example
   #   view = Sketchup.active_model.active_view
   #   x = 100
   #   y = 100
@@ -176,7 +176,7 @@ class Sketchup::InputPoint
   # The edge method is used to retrieve the edge if the input point is getting
   # its position from a point on an Edge.
   #
-  # @example 
+  # @example
   #   view = Sketchup.active_model.active_view
   #   x = 100
   #   y = 100
@@ -192,10 +192,10 @@ class Sketchup::InputPoint
 
   # The face method retrieves the face if the input point is getting its
   # position from a face.
-  # 
+  #
   # Otherwise it returns nil.
   #
-  # @example 
+  # @example
   #   view = Sketchup.active_model.active_view
   #   x = 100
   #   y = 100
@@ -211,9 +211,9 @@ class Sketchup::InputPoint
 
   # The new method is used to create a new InputPoint object.
   #
-  # @example 
+  # @example
   #   ip1 = Sketchup::InputPoint.new
-  #   
+  #
   #   # Or you can construct it at an arbitrary location.
   #   starting_point = Geom::Point3d.new(100, 200, 300)
   #   ip2 = Sketchup::InputPoint.new(starting_point)
@@ -230,21 +230,21 @@ class Sketchup::InputPoint
   end
 
   # The {#instance_path} method retrieves the instance path for the picked point.
-  # 
+  #
   # The returned instance_path is a copy of what the input point is holding on to
   # at the moment you access it. Your copy will not update if you make new picks
   # with the input point.
-  # 
+  #
   # If there has been no valid pick it will return `nil`.
   #
-  # @example 
+  # @example
   #   view = Sketchup.active_model.active_view
   #   x = 100
   #   y = 100
   #   ip = view.inputpoint(x, y)
   #   instance_path = ip.instance_path
   #
-  # @return [Sketchup::InstancePath, nil] 
+  # @return [Sketchup::InstancePath, nil]
   #
   # @version SketchUp 2017
   def instance_path
@@ -252,16 +252,16 @@ class Sketchup::InputPoint
 
   # The pick method is used to get the input point at a specific screen
   # position.
-  # 
+  #
   # The first form just uses the screen position to compute the InputPoint. It
   # is used when you don't want the InputPoint to be dependent on another
   # InputPoint.
-  # 
+  #
   # The second form uses the screen position and another InputPoint. It will
   # find additional inferences such as along one of the axis directions from the
   # first point.
   #
-  # @example 
+  # @example
   #   view = Sketchup.active_model.active_view
   #   x = 100
   #   y = 100
@@ -292,7 +292,7 @@ class Sketchup::InputPoint
 
   # The position method is used to get the 3D point from the input point.
   #
-  # @example 
+  # @example
   #   view = Sketchup.active_model.active_view
   #   x = 100
   #   y = 100
@@ -309,7 +309,7 @@ class Sketchup::InputPoint
   # The tooltip method is used to retrieve the string that is the tool tip to
   # display for the input point.
   #
-  # @example 
+  # @example
   #   view = Sketchup.active_model.active_view
   #   x = 100
   #   y = 100
@@ -326,18 +326,18 @@ class Sketchup::InputPoint
 
   # The transformation method retrieves the Transformation object for the input
   # point.
-  # 
+  #
   # If the InputPoint object is getting its position from something inside of a
   # component instance, this method returns the Transformation of the component
   # instance. Otherwise it returns the identity Transformation.
-  # 
+  #
   # Note that the position method on a input point always returns a point that is
   # transformed into model space. If you are using the edge, face or vertex
   # method on the InputPoint though, you will probably need to use the
   # transformation method to transform the data that you get back from the
   # selected entity.
   #
-  # @example 
+  # @example
   #   view = Sketchup.active_model.active_view
   #   x = 100
   #   y = 100
@@ -353,10 +353,10 @@ class Sketchup::InputPoint
   end
 
   # The valid? method is used to determine if an input point has valid data.
-  # 
+  #
   # You must have called the pick method to set the data before it is valid.
   #
-  # @example 
+  # @example
   #   view = Sketchup.active_model.active_view
   #   x = 100
   #   y = 100
@@ -366,7 +366,7 @@ class Sketchup::InputPoint
   # @return status - true if the input point has valid data, false
   #   if it does not have valid data.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def valid?
@@ -376,7 +376,7 @@ class Sketchup::InputPoint
   # InputPoint is on the end of a line, then it will return the Vertex. If the
   # InputPoint does not select any vertices this method returns nil.
   #
-  # @example 
+  # @example
   #   view = Sketchup.active_model.active_view
   #   x = 100
   #   y = 100

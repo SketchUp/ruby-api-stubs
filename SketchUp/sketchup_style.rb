@@ -5,10 +5,10 @@
 # style. Styles are a collection of display settings that tell SketchUp how to
 # draw the model.
 #
-# @example 
+# @example
 #   # Get a handle to the styles collection.
 #   styles = Sketchup.active_model.styles
-#   
+#
 #   # Display the name of the first style.
 #   first_style = styles[0]
 #   UI.messagebox("Your first style is named " + first_style.name.to_s)
@@ -20,7 +20,7 @@ class Sketchup::Style < Sketchup::Entity
 
   # The description method is used to retrieve the description for a style.
   #
-  # @example 
+  # @example
   #   style = Sketchup.active_model.styles[0]
   #   UI.messagebox("Your first style description is: " +
   #                 style.description.to_s)
@@ -33,7 +33,7 @@ class Sketchup::Style < Sketchup::Entity
 
   # The description= method is used to set a description for a style.
   #
-  # @example 
+  # @example
   #   style = Sketchup.active_model.styles[0]
   #   style.description = "My new style description."
   #   UI.messagebox('My new style description is: ' + style.description)
@@ -49,7 +49,7 @@ class Sketchup::Style < Sketchup::Entity
 
   # The name method is used to retrieve the name for a style.
   #
-  # @example 
+  # @example
   #   name = style.name
   #
   # @return name - the name for the style.
@@ -60,7 +60,7 @@ class Sketchup::Style < Sketchup::Entity
 
   # The name= method is used to set the name for a style.
   #
-  # @example 
+  # @example
   #   style = Sketchup.active_model.styles[0]
   #   style.name = 'My Very Own Style'
   #   UI.messagebox('My new style name is: ' + style.name)

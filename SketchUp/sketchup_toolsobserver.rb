@@ -4,10 +4,10 @@
 # This observer interface is implemented to react to tool events. To implement
 # this observer, create a Ruby class of this type, override the desired
 # methods, and add an instance of the observer to the {Sketchup::Tools} object.
-# 
+#
 # Some of the code below mentions +tool_names+ and +tool_ids+. Here is a list
 # of the common tool IDs and names:
-# 
+#
 # - +21013+ = 3DTextTool
 # - +21065+ = ArcTool
 # - +10523+ = CameraDollyTool
@@ -42,14 +42,14 @@
 # - +21020+ = SketchTool
 # - +21405+ = TextTool
 #
-# @example 
+# @example
 #   # This is an example of an observer that watches tool interactions.
 #   class MyToolsObserver < Sketchup::ToolsObserver
 #     def onActiveToolChanged(tools, tool_name, tool_id)
 #       puts "onActiveToolChanged: #{tool_name}"
 #     end
 #   end
-#   
+#
 #   # Attach the observer.
 #   Sketchup.active_model.tools.add_observer(MyToolsObserver.new)
 #
@@ -62,12 +62,12 @@ class Sketchup::ToolsObserver
   # override the {#onActiveToolChanged} method to receive tool change
   # notifications.
   #
-  # @example 
+  # @example
   #   def onActiveToolChanged(tools, tool_name, tool_id)
   #     tool_name = fix_mac_tool_name(tool_name)
   #     puts "onActiveToolChanged: #{tool_name}"
   #   end
-  #   
+  #
   #   # Returns the "correct" tool name to account for mac API differences.
   #   #
   #   #   Args:
@@ -107,7 +107,7 @@ class Sketchup::ToolsObserver
   # @param [Sketchup::Tools] tools
   #   A Tools object.
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onActiveToolChanged(tools, tool_name, tool_id)
@@ -119,7 +119,7 @@ class Sketchup::ToolsObserver
   # interaction, you will need to experiment with the tool state to determine
   # which states you care about. There is little consistency tool to tool.
   #
-  # @example 
+  # @example
   #   def onToolStateChanged(tools, tool_name, tool_id, tool_state)
   #     puts "onToolStateChanged: #{tool_name}:#{tool_state}"
   #   end
@@ -145,7 +145,7 @@ class Sketchup::ToolsObserver
   # @param [String] tool_name
   #   The name of the tool.
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onToolStateChanged(tools, tool_name, tool_id, tool_state)

@@ -12,7 +12,7 @@ class String
   # The to_l method is used to convert a string to a length. The returned length
   # is expressed in the Model units.
   #
-  # @example 
+  # @example
   #   length = "5'".to_l
   #
   # @return length - the length value

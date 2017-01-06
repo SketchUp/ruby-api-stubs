@@ -4,11 +4,11 @@
 # The TextureWriter class is used primarily for writing the textures used in a
 # SketchUp model out to files as part of an export for use in another
 # application. These methods are usually invoked in this order:
-# 
+#
 #   - 1. load - load one or more textures from a model into the TextureWriter.
 #   - 2. write_all or write - write the texture(s) to file.
 #
-# @example 
+# @example
 #   # This code snippet sets up a texture writer and some variables that are
 #   # used in the following texture writer examples.
 #   # Assumptions:
@@ -30,10 +30,10 @@ class Sketchup::TextureWriter
 
   # The {#length} method is used to determine the number of textures loaded into
   # the texture writer.
-  # 
+  #
   # The {#count} method is an alias for {#length}.
   #
-  # @example 
+  # @example
   #   length = tw.length
   #   tw.load(texturable_entities[0])
   #   if length < tw.length
@@ -50,7 +50,7 @@ class Sketchup::TextureWriter
   # The filename method is used to retrieve the original filename for a
   # particular texture.
   #
-  # @example 
+  # @example
   #   index = tw.load(texturable_entities[0])
   #   filename = tw.filename(index)
   #   puts("filename = #{filename}")
@@ -73,23 +73,23 @@ class Sketchup::TextureWriter
   # The handle method is used to retrieve a handle or index for a specific
   # texture in the texture writer.
   #
-  # @example 
+  # @example
   #   load_front_face = true
   #   tw.load(faces[0], load_front_face)
   #   handle = tw.handle(faces[0],load_front_face)
   #
-  # @example 
+  # @example
   #   tw.load(texturable_entities[0])
   #   handle = tw.handle(texturable_entities[0])
   #
   # @overload handle(entity)
-  # 
+  #
   #   @param [Sketchup::Entity] entity A image, component instance, group, or
   #                                    layer.
   #   @return [Integer] handle - the index for the entity in the texture writer.
   #
   # @overload handle(face, side)
-  # 
+  #
   #   @param [Sketchup::Face] face A face.
   #   @param [Boolean] side        Specifies one of the sides of the face
   #                                (true if front, false if back.)
@@ -101,10 +101,10 @@ class Sketchup::TextureWriter
 
   # The {#length} method is used to determine the number of textures loaded into
   # the texture writer.
-  # 
+  #
   # The {#count} method is an alias for {#length}.
   #
-  # @example 
+  # @example
   #   length = tw.length
   #   tw.load(texturable_entities[0])
   #   if length < tw.length
@@ -121,10 +121,10 @@ class Sketchup::TextureWriter
   # The load method is used to load one or more textures into the texture writer
   # for writing out to a file.
   #
-  # @example 
+  # @example
   #   index = tw.load(faces[0], true)
   #
-  # @example 
+  # @example
   #   index = tw.load(texturable_entities[0])
   #
   # @note If you are passing a face in as the entity argument when loading a
@@ -133,14 +133,14 @@ class Sketchup::TextureWriter
   #   loaded from.
   #
   # @overload load(entity)
-  # 
+  #
   #   @param [Sketchup::Entity] entity Image, component instance, group, or layer
   #                                      to load.
   #   @return [Integer] handle - the index or handle of the entity that was
   #                     loaded
   #
   # @overload load(face, side)
-  # 
+  #
   #   @param [Sketchup::Face] face A face to load.
   #   @param [Boolean] side        A boolean used to indicate the side of the
   #                                face being loaded (true if front, false if
@@ -155,15 +155,15 @@ class Sketchup::TextureWriter
   # The write method is used to write an individual textures, within the texture
   # writer, to a file. An entity's texture must have been loaded into the texture
   # writer before this method can be used to write it's texture.
-  # 
+  #
   # This method will return one of the following status messages. (These are
   # constants that are defined by the API.)
-  # 
+  #
   #   - 0 = FILE_WRITE_OK
   #   - 1 = FILE_WRITE_FAILED_INVALID_TIFF
   #   - 2 = FILE_WRITE_FAILED_UNKNOWN
   #
-  # @example 
+  # @example
   #   tw.load(faces[0], true)
   #   if tw.write(faces[0], true, "C:\\textures\\Face.png") == FILE_WRITE_OK
   #     puts("PNG file successfully written.")
@@ -175,7 +175,7 @@ class Sketchup::TextureWriter
   #     puts("TIFF file successfully written.")
   #   end
   #
-  # @example 
+  # @example
   #   tw.load(texturable_entities[0])
   #   if tw.write(texturable_entities[0], "C:\\textures\\A.jpg") == FILE_WRITE_OK
   #     puts("JPEG file successfully written.")
@@ -187,7 +187,7 @@ class Sketchup::TextureWriter
   #   before writing it.
   #
   # @overload write(entity, filename)
-  # 
+  #
   #   @param [Sketchup::Entity] entity An image, component instance, group, or
   #                                    layer to write.
   #   @param [String] filename         The name of the file to contain the
@@ -195,7 +195,7 @@ class Sketchup::TextureWriter
   #   @return [Integer] status - one of three status messages (see comments.)
   #
   # @overload write(entity, side, filename)
-  # 
+  #
   #   @param [Sketchup::Entity] entity A face to write.
   #   @param [Boolean] side            A boolean used to indicate the side of the
   #                                    face being written (true if front, false
@@ -210,12 +210,12 @@ class Sketchup::TextureWriter
 
   # The write_all method is used to write all of the textures within the texture
   # writer to files. It will return one of three status numbers:
-  # 
+  #
   #   - 0 = FILE_WRITE_OK
   #   - 1 = FILE_WRITE_FAILED_INVALID_TIFF
   #   - 2 = FILE_WRITE_FAILED_UNKNOWN
   #
-  # @example 
+  # @example
   #   tw.load(texturable_entities[0]
   #   tw.load(faces[0], false)
   #   if tw.write_all("C:\\textures\\", true) == FILE_WRITE_OK

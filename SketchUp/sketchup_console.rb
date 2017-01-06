@@ -4,22 +4,22 @@
 # The Console class is used by SketchUp to direct $stdout and $stderr to the
 # Ruby Console. It is a singleton class that only has one instance available.
 # This instance is accessible via the SKETCHUP_CONSOLE constant.
-# 
+#
 # In SketchUp 2014 methods were added to allow developers to control the
 # visibility of the Ruby Console.
-# 
+#
 # Also note that in SketchUp 2014, writing to the console does not work from
 # within Ruby threads other than the main thread. So the following code will
 # not produce any output.
 #
-# @example 
+# @example
 #   t = Thread.new { puts 'This will not be written to the console.' }
 #   t.join
 #
-# @example 
+# @example
 #   # By default $stdout is directed to SKETCHUP_CONSOLE.
 #   p $stdout
-#   
+#
 #   # $stdout can however be redirected so the safe way to access the
 #   # SketchUp console is by using the SKETCHUP_CONSOLE constant.
 #   p SKETCHUP_CONSOLE
@@ -31,7 +31,7 @@ class Sketchup::Console
 
   # Clears the contents of SketchUp's Ruby Console.
   #
-  # @example 
+  # @example
   #   SKETCHUP_CONSOLE.clear
   #
   # @return true.
@@ -42,7 +42,7 @@ class Sketchup::Console
 
   # Hides the SketchUp Ruby Console.
   #
-  # @example 
+  # @example
   #   SKETCHUP_CONSOLE.hide
   #
   # @return true.
@@ -53,7 +53,7 @@ class Sketchup::Console
 
   # Displays the SketchUp Ruby Console.
   #
-  # @example 
+  # @example
   #   SKETCHUP_CONSOLE.show
   #
   # @return true.
@@ -64,12 +64,12 @@ class Sketchup::Console
 
   # Returns the visibility state of the SketchUp Ruby Console.
   #
-  # @example 
+  # @example
   #   puts SKETCHUP_CONSOLE.visible?
   #
   # @return true if visible, false if not.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 2014
   def visible?

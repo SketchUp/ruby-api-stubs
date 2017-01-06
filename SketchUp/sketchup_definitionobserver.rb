@@ -6,7 +6,7 @@
 # override the desired methods, and add an instance of the observer to the
 # definitions of interests.
 #
-# @example 
+# @example
 #   # This is an example of an observer that watches a specific definition
 #   # for new component insertions.
 #   class MyDefObserver < Sketchup::DefinitionObserver
@@ -14,7 +14,7 @@
 #       puts "onComponentInstanceAdded(#{definition}, #{instance})"
 #     end
 #   end
-#   
+#
 #   # Attach the observer
 #   Sketchup.active_model.definitions[0].add_observer(MyDefObserver.new)
 #
@@ -26,7 +26,7 @@ class Sketchup::DefinitionObserver < Sketchup::EntityObserver
   # The {#onComponentInstanceAdded} method is called when a new component
   # instance is added to a model.
   #
-  # @example 
+  # @example
   #   def onComponentInstanceAdded(definition, instance)
   #     puts "onComponentInstanceAdded(#{definition}, #{instance})"
   #   end
@@ -38,7 +38,7 @@ class Sketchup::DefinitionObserver < Sketchup::EntityObserver
   # @param [Sketchup::ComponentInstance] instance
   #   The added instance
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onComponentInstanceAdded(definition, instance)
@@ -46,11 +46,11 @@ class Sketchup::DefinitionObserver < Sketchup::EntityObserver
 
   # The {#onComponentInstanceRemoved} method is called when a component
   # instance is removed from a model.
-  # 
+  #
   # implemented, this method is fired on a Move + Copy operation even
   # though no {Sketchup::ComponentInstance} is apparently removed.
   #
-  # @example 
+  # @example
   #   def onComponentInstanceRemoved(definition, instance)
   #     puts "onComponentInstanceRemoved(#{definition}, #{instance})"
   #   end
@@ -64,7 +64,7 @@ class Sketchup::DefinitionObserver < Sketchup::EntityObserver
   #   The definition of the
   #   instance removed
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onComponentInstanceRemoved(definition, instance)

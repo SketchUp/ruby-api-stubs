@@ -13,7 +13,7 @@ class Sketchup::ConstructionLine < Sketchup::Drawingelement
   # The direction method retrieves a 3D vector in the direction of the
   # construction line.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   point1 = Geom::Point3d.new(0,0,0)
@@ -35,12 +35,12 @@ class Sketchup::ConstructionLine < Sketchup::Drawingelement
   # The direction= method is used to set the direction of the construction line
   # to a 3D vector.
   #
-  # @example 
+  # @example
   #   # Draw a construction line that points diagonally.
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   constline = entities.add_cline([10,10,10], [200,200,200])
-  #   
+  #
   #   # Create a new direction that is straight up, and redirect the line.
   #   new_direction = [0, 0, 1]
   #   constline.direction = new_direction
@@ -57,10 +57,10 @@ class Sketchup::ConstructionLine < Sketchup::Drawingelement
 
   # The end method retrieves the end point of a construction line in the form of
   # a 3D point.
-  # 
+  #
   # If the construction line is infinite at the end, this returns nil.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   point1 = Geom::Point3d.new(0,0,0)
@@ -77,10 +77,10 @@ class Sketchup::ConstructionLine < Sketchup::Drawingelement
 
   # The end= method is used to set the end point of the construction line. This
   # method will make the length finite at the end.
-  # 
+  #
   # Set the end to nil to make the construction line infinite at the end.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   point1 = Geom::Point3d.new(0,0,0)
@@ -91,13 +91,13 @@ class Sketchup::ConstructionLine < Sketchup::Drawingelement
   #   # Will display point2
   #
   # @overload end=(point)
-  # 
+  #
   #   @param [Geom::Point3d] point The Point3d object to set for the end point
   #     of the construction line.
   #   @return              point - a Point3d object if successful or nil
   #
   # @overload end=(nil)
-  # 
+  #
   #   @param [nil] nil Sets the end point to infinite.
   #   @return              point - a Point3d object if successful or nil
   #
@@ -108,7 +108,7 @@ class Sketchup::ConstructionLine < Sketchup::Drawingelement
   # The position method is used to retrieve a 3D point used to create a
   # construction line on an infinite construction line.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   point1 = Geom::Point3d.new(0,0,0)
@@ -127,7 +127,7 @@ class Sketchup::ConstructionLine < Sketchup::Drawingelement
   # The position= method is used to set a 3D point that the construction passes
   # through
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   point1 = Geom::Point3d.new(0,0,0)
@@ -150,7 +150,7 @@ class Sketchup::ConstructionLine < Sketchup::Drawingelement
   # The reverse! method is used to reverse the direction of the construction
   # line.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   point1 = Geom::Point3d.new(0,0,0)
@@ -166,10 +166,10 @@ class Sketchup::ConstructionLine < Sketchup::Drawingelement
 
   # The start method is used to retrieve the starting point of a construction
   # line.
-  # 
+  #
   # If the construction line is infinite at the start, this returns nil.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   point1 = Geom::Point3d.new(0,0,0)
@@ -186,11 +186,11 @@ class Sketchup::ConstructionLine < Sketchup::Drawingelement
 
   # The start= method is used to set the start point of a construction line
   # making the line's length finite at the start.
-  # 
+  #
   # Setting the start to nil will make the construction line infinite at the
   # start.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   point1 = Geom::Point3d.new(0,0,0)
@@ -200,13 +200,13 @@ class Sketchup::ConstructionLine < Sketchup::Drawingelement
   #   startofline = constline.start = point3
   #
   # @overload start=(point)
-  # 
+  #
   #   @param [Geom::Point3d] point The Point3d object to set for the start point
   #     of the construction line.
   #   @return              point - a Point3d object if successful or nil
   #
   # @overload start=(nil)
-  # 
+  #
   #   @param [nil] nil Sets the start point to infinite.
   #   @return              point - a Point3d object if successful or nil
   #
@@ -217,7 +217,7 @@ class Sketchup::ConstructionLine < Sketchup::Drawingelement
   # The stipple method is used to retrieve the stipple pattern used to display
   # the construction line.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   point1 = Geom::Point3d.new(0,0,0)
@@ -239,7 +239,7 @@ class Sketchup::ConstructionLine < Sketchup::Drawingelement
   # - <code>"_"</code> (Long Dashes Line),
   # - <code>"-.-"</code> (Dash Dot Dash Line).
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   point1 = Geom::Point3d.new(0,0,0)

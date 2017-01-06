@@ -14,7 +14,7 @@ class Sketchup::InstancePath
   # Instance Methods
 
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   group = model.entities.add_group
   #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
@@ -32,7 +32,7 @@ class Sketchup::InstancePath
 
   # The elements of an instance path can be accessed like an array.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   group = model.entities.add_group
   #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
@@ -48,7 +48,7 @@ class Sketchup::InstancePath
   #
   # @raise [IndexError] if the given index is out of bounds
   #
-  # @return [Sketchup::Entity] 
+  # @return [Sketchup::Entity]
   #
   # @version SketchUp 2017
   def [](index)
@@ -56,7 +56,7 @@ class Sketchup::InstancePath
 
   # The yielded entities will start with the root and end with the leaf.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   group = model.entities.add_group
   #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
@@ -67,7 +67,7 @@ class Sketchup::InstancePath
   #
   # @raise [TypeError] if the instance path refer to deleted entities.
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 2017
   #
@@ -76,7 +76,7 @@ class Sketchup::InstancePath
   end
 
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   group = model.entities.add_group
   #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
@@ -87,7 +87,7 @@ class Sketchup::InstancePath
   #
   # @raise [TypeError] if the instance path refer to deleted entities.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 2017
   def empty?
@@ -95,7 +95,7 @@ class Sketchup::InstancePath
 
   # Returns `true` if the instance path contain the given object.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   group = model.entities.add_group
   #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
@@ -108,14 +108,14 @@ class Sketchup::InstancePath
   #
   # @raise [TypeError] if the instance path refer to deleted entities.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 2017
   def include?(object)
   end
 
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   group = model.entities.add_group
   #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
@@ -128,7 +128,7 @@ class Sketchup::InstancePath
   # @raise [ArgumentError] if the instance path isn't composed of instances and
   #   an optional leaf entity.
   #
-  # @return [Sketchup::InstancePath] 
+  # @return [Sketchup::InstancePath]
   #
   # @version SketchUp 2017
   def initialize(path)
@@ -137,10 +137,10 @@ class Sketchup::InstancePath
   # The leaf of an instance path is the last element which can be any entity
   # that can be represented in the model. This is normally a
   # {Sketchup::Drawingelement}, but could be a {Sketchup::Vertex}.
-  # 
+  #
   # An instance can also be a leaf.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   group = model.entities.add_group
   #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
@@ -149,7 +149,7 @@ class Sketchup::InstancePath
   #
   # @raise [TypeError] if the instance path refer to deleted entities.
   #
-  # @return [Sketchup::Entity] 
+  # @return [Sketchup::Entity]
   #
   # @version SketchUp 2017
   def leaf
@@ -157,7 +157,7 @@ class Sketchup::InstancePath
 
   # {#length} is and alias of {#size}.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   group = model.entities.add_group
   #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
@@ -168,7 +168,7 @@ class Sketchup::InstancePath
   #
   # @raise [TypeError] if the instance path refer to deleted entities.
   #
-  # @return [Integer] 
+  # @return [Integer]
   #
   # @version SketchUp 2017
   def length
@@ -177,7 +177,7 @@ class Sketchup::InstancePath
   # The serialized version of an instance path is the persistent ids of its
   # entities concatenated with a period.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   group = model.entities.add_group
   #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
@@ -186,7 +186,7 @@ class Sketchup::InstancePath
   #
   # @raise [TypeError] if the instance path refer to deleted entities.
   #
-  # @return [String] 
+  # @return [String]
   #
   # @see Sketchup::Model#instance_path_from_pid_path
   #
@@ -198,7 +198,7 @@ class Sketchup::InstancePath
   # root. This will be a group or component instance. If you have a non-instance
   # as a leaf with no other parent component this will return `nil`.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   group = model.entities.add_group
   #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
@@ -207,7 +207,7 @@ class Sketchup::InstancePath
   #
   # @raise [TypeError] if the instance path refer to deleted entities.
   #
-  # @return [Sketchup::Group, Sketchup::ComponentInstance, nil] 
+  # @return [Sketchup::Group, Sketchup::ComponentInstance, nil]
   #
   # @version SketchUp 2017
   def root
@@ -215,7 +215,7 @@ class Sketchup::InstancePath
 
   # {#length} is and alias of {#size}.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   group = model.entities.add_group
   #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
@@ -226,14 +226,14 @@ class Sketchup::InstancePath
   #
   # @raise [TypeError] if the instance path refer to deleted entities.
   #
-  # @return [Integer] 
+  # @return [Integer]
   #
   # @version SketchUp 2017
   def size
   end
 
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   group = model.entities.add_group
   #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
@@ -252,7 +252,7 @@ class Sketchup::InstancePath
   #   @return [Sketchup::Transformation] the combined transformation up to the
   #     the leaf entity.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   group = model.entities.add_group
   #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
@@ -276,10 +276,10 @@ class Sketchup::InstancePath
 
   # An instance path is valid if it has at least one element and consist of
   # groups and instances with exception of the leaf which can be any entity.
-  # 
+  #
   # This method doesn't check if the path can actually be looked up in the model.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   group = model.entities.add_group
   #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
@@ -288,7 +288,7 @@ class Sketchup::InstancePath
   #     # do something...
   #   end
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 2017
   def valid?

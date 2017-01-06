@@ -11,11 +11,11 @@
 # @example Example code that uses LanguageHandler:
 #   # Create a global language handler object
 #   swiveldriver_langHandler = LanguageHandler.new('swiveldriver.strings')
-#   
+#
 #   # Get localized string
 #   localizedStr = swiveldriver_langHandler.GetString('String 1')
 #
-# @example 
+# @example
 #   "String 1"="Localized String 1";
 #   "String 2"="Localized String 2";
 #
@@ -36,7 +36,7 @@ class LanguageHandler
   # language SketchUp is currently running in, and the available translations
   # in the Resources folder.
   #
-  # @example 
+  # @example
   #   swiveldriver_langHandler = LanguageHandler.new('swiveldriver.strings')
   #   localized_string = swiveldriver_langHandler['String 1']
   #
@@ -51,7 +51,7 @@ class LanguageHandler
 
   # The new method is used to create a new LanguageHandler object.
   #
-  # @example 
+  # @example
   #   swiveldriver_langHandler = LanguageHandler.new('swiveldriver.strings')
   #
   # @param filename
@@ -67,7 +67,7 @@ class LanguageHandler
   # Returns a string containing the path to the given filename if it can be found
   # in the Resources folder.
   #
-  # @example 
+  # @example
   #   swiveldriver_langHandler = LanguageHandler.new('swiveldriver.strings')
   #   image = swiveldriver_langHandler.resource_path('fancy_image.png')
   #
@@ -79,7 +79,7 @@ class LanguageHandler
 
   # Returns a Hash object containing the localization dictionary.
   #
-  # @example 
+  # @example
   #   swiveldriver_langHandler = LanguageHandler.new('swiveldriver.strings')
   #   hash = swiveldriver_langHandler.strings
   #

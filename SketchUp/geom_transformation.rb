@@ -6,7 +6,7 @@
 # world, {Sketchup::ComponentInstance} and {Sketchup::Group} have a
 # +.transformation+ method that reports their current state and various methods
 # (+.move!+, +transformation=+, etc.) that allow them to be manipulated.
-# 
+#
 # Use of the transformation class requires a knowledge of geometrical
 # transformations in 3 dimensions which is covered extensively on
 # the Internet.
@@ -20,14 +20,14 @@ class Geom::Transformation
   # to an arbitrary coordinate system defined by an origin and three axis
   # vectors.
   #
-  # @example 
+  # @example
   #   # Creates a transformation that "flips" the axes from XYZ to XZY. Something
   #   # one often need for importers/exporters when dealing with applications
   #   # that threat Y as "up".
   #   tr = Geom::Transformation.axes(ORIGIN, X_AXIS, Z_AXIS, Y_AXIS.reverse)
   #
   # @overload axes(origin, xaxis, yaxis, zaxis)
-  # 
+  #
   #   @param [Geom::Point3d] origin
   #   @param [Geom::Vector3d] xaxis
   #   @param [Geom::Vector3d] yaxis
@@ -35,7 +35,7 @@ class Geom::Transformation
   #   @return [Geom::Transformation]
   #
   # @overload axes(origin, xaxis, yaxis)
-  # 
+  #
   #   When the Z axis is omitted and arbitrary axis is computed from the X and Y
   #   axes.
   #   @param [Geom::Point3d] origin
@@ -51,11 +51,11 @@ class Geom::Transformation
 
   # The interpolate method is used to create a new transformation that is the
   # result of interpolating between two other transformations.
-  # 
+  #
   # Parameter is a weight (between 0.0 and 1.0) that identifies whether to favor
   # transformation1 or transformation2.
   #
-  # @example 
+  # @example
   #   origin = Geom::Point3d.new(0, 0, 0)
   #   x = Geom::Vector3d.new(0, 1, 0)
   #   y = Geom::Vector3d.new(1, 0, 0)
@@ -73,7 +73,7 @@ class Geom::Transformation
   # @param [Float] weight
   #   A value between 0.0 and 1.0 (see comments).
   #
-  # @return [Geom::Transformation] 
+  # @return [Geom::Transformation]
   #
   # @version SketchUp 6.0
   def self.interpolate(transform1, transform2, weight)
@@ -81,10 +81,10 @@ class Geom::Transformation
 
   # The rotation method is used to create a transformation that does rotation
   # about an axis.
-  # 
+  #
   # The axis is defined by a point and a vector. The angle is given in radians.
   #
-  # @example 
+  # @example
   #   point = Geom::Point3d.new(10, 20, 0)
   #   vector = Geom::Vector3d.new(0, 0, 1)
   #   angle = 45.degrees # Return 45 degrees in radians.
@@ -97,7 +97,7 @@ class Geom::Transformation
   # @param [Float] angle
   #   The angle in radians.
   #
-  # @return [Geom::Transformation] 
+  # @return [Geom::Transformation]
   #
   # @version SketchUp 6.0
   def self.rotation(point, vector, angle)
@@ -105,13 +105,13 @@ class Geom::Transformation
 
   # The scaling method is used to create a transformation that does scaling.
   #
-  # @example 
+  # @example
   #   point = Geom::Point3d.new(20, 30, 0)
   #   scale = 10
   #   tr = Geom::Transformation.scaling(point, scale)
   #
   # @overload scaling(scale)
-  # 
+  #
   #   @note This might yield an unexpected transformation. It sets the 16th value
   #     to the scaling factor. Something not all extensions reading the
   #     transformation expects. Consider using +scaling(xscale, yscale, zscale)+
@@ -121,7 +121,7 @@ class Geom::Transformation
   #   @return [Geom::Transformation]
   #
   # @overload scaling(xscale, yscale, zscale)
-  # 
+  #
   #   With three arguments, it does a non-uniform scale about the origin.
   #   @param [Float] xscale  The scale factor in the x direction for the transform.
   #   @param [Float] yscale  The scale factor in the y direction for the transform.
@@ -129,7 +129,7 @@ class Geom::Transformation
   #   @return [Geom::Transformation]
   #
   # @overload scaling(point, xscale, yscale, zscale)
-  # 
+  #
   #   With four arguments it does a non-uniform scale about an arbitrary point.
   #   @param [Geom::Point3d] point
   #   @param [Float] xscale  The scale factor in the x direction for the transform.
@@ -138,7 +138,7 @@ class Geom::Transformation
   #   @return [Geom::Transformation]
   #
   # @overload scaling(point, scale)
-  # 
+  #
   #   With two arguments, it does a uniform scale about an arbitrary point.
   #   @param [Geom::Point3d] point
   #   @param [Float] scale  The global scale factor for the transform.
@@ -151,17 +151,17 @@ class Geom::Transformation
   # The translation method is used to create a transformation that does
   # translation.
   #
-  # @example 
+  # @example
   #   vector = Geom::Vector3d.new(0, 1, 0)
   #   tr = Geom::Transformation.translation(vector)
   #
   # @overload translation(vector)
-  # 
+  #
   #   @param [Geom::Vector3d] vector
   #   @return [Geom::Transformation]
   #
   # @overload translation(point)
-  # 
+  #
   #   @param [Geom::Point3d] point
   #   @return [Geom::Transformation]
   #
@@ -173,7 +173,7 @@ class Geom::Transformation
 
   # The {#*} method is used to do matrix multiplication using the transform.
   #
-  # @example 
+  # @example
   #   point1 = Geom::Point3d.new(10, 20, 30)
   #   point2 = Geom::Point3d.new(2, 2, 2)
   #   tr = Geom::Transformation.new(point1)
@@ -181,32 +181,32 @@ class Geom::Transformation
   #   point3 = tr * point2
   #
   # @overload *(point)
-  # 
+  #
   #   @param [Geom::Point3d] point
   #   @return [Geom::Point3d]
   #
   # @overload *(vector)
-  # 
+  #
   #   @param [Geom::Vector3d] vector
   #   @return [Geom::Vector3d]
   #
   # @overload *(transformation)
-  # 
+  #
   #   @param [Geom::Transformation] transformation
   #   @return [Geom::Transformation]
   #
   # @overload *(plane)
-  # 
+  #
   #   @param [Array<Float, Float, Float, Float>] plane
   #   @return [Array<Float, Float, Float, Float>] transformed plane
   #
   # @overload *(plane)
-  # 
+  #
   #   @param [Array<Geom::Point3d, Geom::Vector3d>] plane
   #   @return [Array<Float, Float, Float, Float>] transformed plane
   #
   # @overload *(point)
-  # 
+  #
   #   @param [Array<Float, Float, Float>] point
   #   @return [Geom::Point3d]
   #
@@ -216,12 +216,12 @@ class Geom::Transformation
 
   # The {#clone} method is used to create a copy of a transformation.
   #
-  # @example 
+  # @example
   #   point = Geom::Point3d.new(10, 20, 30)
   #   tr1 = Geom::Transformation.new(point)
   #   tr2 = tr1.clone
   #
-  # @return [Geom::Transformation] 
+  # @return [Geom::Transformation]
   #
   # @version SketchUp 6.0
   def clone
@@ -230,21 +230,21 @@ class Geom::Transformation
   # The {#identity?} method is used to determine if a transformation is the
   # {IDENTITY} transform.
   #
-  # @example 
+  # @example
   #   tr = Geom::Transformation.new(ORIGIN)
   #   # Returns false.
   #   status = tr.identity?
   #
-  # @example 
+  # @example
   #   # Returns true.
   #   status = IDENTITY.identity?
   #
-  # @example 
+  # @example
   #   tr = Geom::Transformation.new
   #   # Returns true.
   #   status = tr.identity?
   #
-  # @example 
+  # @example
   #   point = Geom::Point3d.new(10, 20, 30)
   #   tr = Geom::Transformation.new(point)
   #   # Returns false.
@@ -256,50 +256,50 @@ class Geom::Transformation
   #
   # @return [Boolean] +true+ if the transformation is the identity
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def identity?
   end
 
   # The new method is used to create a new transformation.
-  # 
+  #
   # You can use this method or one of the more specific methods for creating
   # specific kinds of Transformations.
   #
-  # @example 
+  # @example
   #   point = Geom::Point3d.new(10, 20, 30)
   #   tr = Geom::Transformation.new(point)
   #
   # @overload initialize
-  # 
+  #
   #   @return [Geom::Transformation] identity Transformation.
   #
   # @overload initialize(point)
-  # 
+  #
   #   Translates the origin to point.
   #   @param [Geom::Point3d] point
   #   @return [Geom::Transformation]
   #
   # @overload initialize(vector)
-  # 
+  #
   #   @param [Geom::Vector3d] vector
   #   @return [Geom::Transformation]
   #
   # @overload initialize(transform)
-  # 
+  #
   #   Creates a Transformation that is a copy of another Transformation. This is
   #   equivalent to {#clone}.
   #   @param [Geom::Transformation] transform
   #   @return [Geom::Transformation]
   #
   # @overload initialize(array)
-  # 
+  #
   #   @param [Array<Float>] Creates a Transformation from a 16 element Array.
   #   @return [Geom::Transformation]
   #
   # @overload initialize(xaxis, yaxis, zaxis, origin)
-  # 
+  #
   #   @param [Geom::Vector3d] xaxis
   #   @param [Geom::Vector3d] yaxis
   #   @param [Geom::Vector3d] zaxis
@@ -307,7 +307,7 @@ class Geom::Transformation
   #   @return [Geom::Transformation]
   #
   # @overload initialize(origin, zaxis)
-  # 
+  #
   #   Creates a Transformation where origin is the new origin, and zaxis is the
   #   z axis. The x and y axes are determined using an arbitrary axis rule.
   #   @param [Geom::Point3d] origin
@@ -315,7 +315,7 @@ class Geom::Transformation
   #   @return [Geom::Transformation]
   #
   # @overload initialize(origin, xaxis, yaxis)
-  # 
+  #
   #   Creates a Transformation given a new origin, x axis and y axis.
   #   @param [Geom::Point3d] origin
   #   @param [Geom::Vector3d] xaxis
@@ -323,7 +323,7 @@ class Geom::Transformation
   #   @return [Geom::Transformation]
   #
   # @overload initialize(pt, axis, angle)
-  # 
+  #
   #   Creates a Transformation that rotates by angle (given in radians) about a
   #   line defined by pt and axis.
   #   @param [Geom::Point3d] origin
@@ -332,7 +332,7 @@ class Geom::Transformation
   #   @return [Geom::Transformation]
   #
   # @overload initialize(scale)
-  # 
+  #
   #   Creates a transformation that does uniform scaling.
   #   @param [Float] scale
   #   @return [Geom::Transformation]
@@ -343,12 +343,12 @@ class Geom::Transformation
 
   # The {#inverse} method is used to retrieve the inverse of a transformation.
   #
-  # @example 
+  # @example
   #   point = Geom::Point3d.new(10, 20, 30)
   #   tr1 = Geom::Transformation.new(point)
   #   tr2 = tr1.inverse
   #
-  # @return [Geom::Transformation] 
+  # @return [Geom::Transformation]
   #
   # @version SketchUp 6.0
   def inverse
@@ -356,12 +356,12 @@ class Geom::Transformation
 
   # The {#invert!} method sets the transformation to its inverse.
   #
-  # @example 
+  # @example
   #   point = Geom::Point3d.new(10, 20, 30)
   #   tr = Geom::Transformation.new(point)
   #   tr.invert!
   #
-  # @return [Geom::Transformation] 
+  # @return [Geom::Transformation]
   #
   # @version SketchUp 6.0
   def invert!
@@ -369,7 +369,7 @@ class Geom::Transformation
 
   # The {#origin} method retrieves the origin of a rigid transformation.
   #
-  # @example 
+  # @example
   #   point1 = Geom::Point3d.new(10, 20, 30)
   #   tr = Geom::Transformation.new(point1)
   #   point2 = tr.origin
@@ -381,37 +381,37 @@ class Geom::Transformation
   end
 
   # The {#set!} method is used to set this transformation to match another one.
-  # 
+  #
   # The argument is anything that can be converted into a transformation.
   #
-  # @example 
+  # @example
   #   point1 = Geom::Point3d.new(10, 20, 30)
   #   tr1 = Geom::Transformation.new(point)
   #   point2 = Geom::Point3d.new(60, 40, 70)
   #   tr1.set!(point2)
   #
   # @overload set!(transformation)
-  # 
+  #
   #   @param [Geom::Transformation] transformation
   #   @return [Geom::Transformation]
   #
   # @overload set!(point)
-  # 
+  #
   #   @param [Geom::Point3d] point
   #   @return [Geom::Transformation]
   #
   # @overload set!(scale)
-  # 
+  #
   #   @param [Float] scale
   #   @return [Geom::Transformation]
   #
   # @overload set!(matrix)
-  # 
+  #
   #   @param [Array<Float>] matrix  Array of 16 floats.
   #   @return [Geom::Transformation]
   #
   # @overload set!(vector)
-  # 
+  #
   #   @param [Geom::Vector3d] vector
   #   @return [Geom::Transformation]
   #
@@ -422,13 +422,13 @@ class Geom::Transformation
   # The {#to_a} method retrieves a 16 element array which contains the values that
   # define the transformation.
   #
-  # @example 
+  # @example
   #   point = Geom::Point3d.new(10, 20, 30)
   #   tr = Geom::Transformation.new(point)
   #   # This splits the 16 items into a string of 4x4 elements for easier reading.
   #   str4x4 = tr.to_a.each_slice(4).inject { |str, row| "#{str}\r\n#{row}" }
   #
-  # @return [Array<Float>] 
+  # @return [Array<Float>]
   #
   # @version SketchUp 6.0
   def to_a
@@ -436,12 +436,12 @@ class Geom::Transformation
 
   # The {#xaxis} method retrieves the x axis of a rigid transformation.
   #
-  # @example 
+  # @example
   #   point = Geom::Point3d.new(10, 20, 30)
   #   tr = Geom::Transformation.new(point)
   #   x = tr.xaxis
   #
-  # @return [Geom::Vector3d] 
+  # @return [Geom::Vector3d]
   #
   # @version SketchUp 6.0
   def xaxis
@@ -449,12 +449,12 @@ class Geom::Transformation
 
   # The {#yaxis} method retrieves the y axis of a rigid transformation.
   #
-  # @example 
+  # @example
   #   point = Geom::Point3d.new(10, 20, 30)
   #   tr = Geom::Transformation.new(point)
   #   x = tr.yaxis
   #
-  # @return [Geom::Vector3d] 
+  # @return [Geom::Vector3d]
   #
   # @version SketchUp 6.0
   def yaxis
@@ -462,12 +462,12 @@ class Geom::Transformation
 
   # The {#zaxis} method retrieves the z axis of a rigid transformation.
   #
-  # @example 
+  # @example
   #   point = Geom::Point3d.new(10, 20, 30)
   #   tr = Geom::Transformation.new(point)
   #   x = tr.zaxis
   #
-  # @return [Geom::Vector3d] 
+  # @return [Geom::Vector3d]
   #
   # @version SketchUp 6.0
   def zaxis

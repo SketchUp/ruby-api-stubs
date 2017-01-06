@@ -14,14 +14,14 @@ class Sketchup::Http::Response
   # using the charset provided in the Content-Type of the server response, if
   # no charset is specified, ASCII-8BIT will be used.
   #
-  # @example 
+  # @example
   #   request = Sketchup::Http::Request.new("http://localhost:8080")
-  #   
+  #
   #   request.start do |request, response|
   #     puts "body: " + response.body
   #   end
   #
-  # @return [String] 
+  # @return [String]
   #
   # @version SketchUp 2017
   def body
@@ -29,16 +29,16 @@ class Sketchup::Http::Response
 
   # Returns the http headers that were sent by the server.
   #
-  # @example 
+  # @example
   #   request = Sketchup::Http::Request.new("http://localhost:8080")
-  #   
+  #
   #   request.start do |request, response|
   #     response.headers.each do |key, value|
   #       puts "#{key}: #{value}"
   #     end
   #   end
   #
-  # @return [Hash] 
+  # @return [Hash]
   #
   # @version SketchUp 2017
   def headers
@@ -46,14 +46,14 @@ class Sketchup::Http::Response
 
   # Returns the HTTP response status code as defined in rfc2616.
   #
-  # @example 
+  # @example
   #   request = Sketchup::Http::Request.new("http://localhost:8080")
-  #   
+  #
   #   request.start do |request, response|
   #     puts "http status code: #{response.status_code}"
   #   end
   #
-  # @return [int] 
+  # @return [int]
   #
   # @version SketchUp 2017
   def status_code

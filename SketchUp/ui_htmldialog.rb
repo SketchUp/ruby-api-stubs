@@ -4,7 +4,7 @@
 # The Ruby HtmlDialog class allows you to create and interact with HTML dialog
 # boxes from Ruby. This is the best way to generate complex, embedded UIs
 # inside SketchUp, but it does generally require HTML and JavaScript expertise.
-# 
+#
 # If your goal is to simple display a website to your users, consider using
 # {UI#openURL}, which will show them a web page in their default browser rather
 # than inside a dialog in SketchUp.
@@ -22,14 +22,14 @@ class UI::HtmlDialog
 
   # The {#add_action_callback} method establishes a Ruby callback method that your
   # html dialog can call to perform some function.
-  # 
+  #
   # Use the +sketchup.callback_method_name+ to invoke the callback method from your
   # html dialog. Your JavaScript in the html dialog will invoke the callback with
   # the same number of arguments.
-  # 
+  #
   # The call is asynchronous. JavaScript call might return before Ruby callback
   # even called. Use +onCompleted+ callback to get notified for completion.
-  # 
+  #
   # Basic types such as booleans, numbers, strings, arrays and hashes are
   # automatically converted between Ruby and JavaScript.
   #
@@ -57,7 +57,7 @@ class UI::HtmlDialog
   #
   # @version SketchUp 2017
   #
-  # @yield [action_context, ...] 
+  # @yield [action_context, ...]
   #
   # @yieldparam [Object] action_context
   #   action_context  Currently unused.
@@ -70,10 +70,10 @@ class UI::HtmlDialog
   # The {#bring_to_front} method is used to bring the window to the front,
   # putting it on top of other windows even if its minimized.
   #
-  # @example 
+  # @example
   #   dialog.bring_to_front
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 2017
   def bring_to_front
@@ -83,10 +83,10 @@ class UI::HtmlDialog
   # model window. If there is no active model window, this function doesn't do
   # anything.
   #
-  # @example 
+  # @example
   #   dialog.center
   #
-  # @return [true] 
+  # @return [true]
   #
   # @version SketchUp 2017
   def center
@@ -94,10 +94,10 @@ class UI::HtmlDialog
 
   # The {#close} method is used to close a dialog box.
   #
-  # @example 
+  # @example
   #   dialog.close
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 2017
   def close
@@ -106,34 +106,34 @@ class UI::HtmlDialog
   # The {#execute_script} method is used to execute a JavaScript string on the
   # html dialog asynchronously.
   #
-  # @example 
+  # @example
   #   js_command = "document.getElementById('id').innerHTML = '<b>Hi!</b>'"
   #   dialog.execute_script(js_command)
   #
   # @param [String] script
   #   The JavaScript script to execute on the HtmlDialog.
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 2017
   def execute_script(script)
   end
 
   # The new method is used to create a new HtmlDialog.
-  # 
+  #
   # The +properties+ hash accepts an optional key +style+ where the value is
   # one of:
-  # 
+  #
   # [+UI::HtmlDialog::STYLE_DIALOG+]   HtmlDialog stays at the top of SketchUp.
-  # 
+  #
   # [+UI::HtmlDialog::STYLE_WINDOW+]   HtmlDialog can go behind SketchUp and
   #                                    doesn't disappear when SketchUp looses
   #                                    focus.
-  # 
+  #
   # [+UI::HtmlDialog::STYLE_UTILITY+]  HtmlDialog is shown with small titlebar
   #                                    and stays on top of SketchUp.
   #
-  # @example 
+  # @example
   #   dialog = UI::HtmlDialog.new(
   #   {
   #     :dialog_title => "Dialog Example",
@@ -153,9 +153,9 @@ class UI::HtmlDialog
   #   dialog.set_url("http://www.sketchup.com")
   #   dialog.show
   #
-  # @option properties [Integer] :width (250) 
+  # @option properties [Integer] :width (250)
   #
-  # @option properties [Integer] :max_height (-1) 
+  # @option properties [Integer] :max_height (-1)
   #
   # @option properties [String] :dialog_title
   #
@@ -163,27 +163,27 @@ class UI::HtmlDialog
   #
   # @option properties [Boolean] :scrollable
   #
-  # @option properties [Boolean] :resizable (true) 
+  # @option properties [Boolean] :resizable (true)
   #
-  # @option properties [Integer] :height (250) 
+  # @option properties [Integer] :height (250)
   #
-  # @option properties [Integer] :max_width (-1) 
+  # @option properties [Integer] :max_width (-1)
   #
-  # @option properties [Integer] :left (0) 
+  # @option properties [Integer] :left (0)
   #
-  # @option properties [Integer] :top (0) 
+  # @option properties [Integer] :top (0)
   #
-  # @option properties [Integer] :min_width (0) 
+  # @option properties [Integer] :min_width (0)
   #
-  # @option properties [Integer] :min_height (0) 
+  # @option properties [Integer] :min_height (0)
   #
-  # @option properties [Integer] :style (UI::HtmlDialog::STYLE_DIALOG) 
+  # @option properties [Integer] :style (UI::HtmlDialog::STYLE_DIALOG)
   #
   # @param [Hash] properties
   #   A hash containing the initial properties of
   #   the newly created dialog.
   #
-  # @return [HtmlDialog] 
+  # @return [HtmlDialog]
   #
   # @version SketchUp 2017
   def initialize(properties)
@@ -193,10 +193,10 @@ class UI::HtmlDialog
   # before closing, this block has to return a boolean, if the block returns
   # false the close will be canceled.
   #
-  # @example 
+  # @example
   #   dialog.set_can_close { false }
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 2017
   #
@@ -208,13 +208,13 @@ class UI::HtmlDialog
   # The {#set_file} method is used to identify a local HTML file to display in the
   # HtmlDialog.
   #
-  # @example 
+  # @example
   #   dialog.set_file("c:/mypage.html")
   #
   # @param [String] filename
   #   The filename for the HtmlDialog file (HTML file)
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 2017
   def set_file(filename)
@@ -223,7 +223,7 @@ class UI::HtmlDialog
   # The {#set_html} method is used to load a HtmlDialog with a string of provided
   # HTML.
   #
-  # @example 
+  # @example
   #   html = '<b>Hello world!</b>'
   #   dialog.set_html(html)
   #
@@ -231,7 +231,7 @@ class UI::HtmlDialog
   #   A string of valid html to display in your
   #   HtmlDialog.
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 2017
   def set_html(html_string)
@@ -241,10 +241,10 @@ class UI::HtmlDialog
   # executed when a dialog is already in the process of closing, do any last
   # minute operations within this block such as saving the current state.
   #
-  # @example 
+  # @example
   #   dialog.set_on_closed { save_selection }
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 2017
   def set_on_closed
@@ -253,7 +253,7 @@ class UI::HtmlDialog
   # The {#set_position} method is used to set the position of the HtmlDialog
   # relative to the screen, in pixels.
   #
-  # @example 
+  # @example
   #   dialog.set_position(100, 50)
   #
   # @param [Integer] left
@@ -262,7 +262,7 @@ class UI::HtmlDialog
   # @param [Integer] top
   #   The number of pixels from the top of the screen.
   #
-  # @return [true] 
+  # @return [true]
   #
   # @version SketchUp 2017
   def set_position(left, top)
@@ -270,7 +270,7 @@ class UI::HtmlDialog
 
   # The {#set_size} method is used to set the size of the HtmlDialog, in pixels.
   #
-  # @example 
+  # @example
   #   dialog.set_size(320, 240)
   #
   # @param [Integer] width
@@ -279,7 +279,7 @@ class UI::HtmlDialog
   # @param [Integer] height
   #   Height of the HtmlDialog.
   #
-  # @return [true] 
+  # @return [true]
   #
   # @version SketchUp 2017
   def set_size(width, height)
@@ -288,13 +288,13 @@ class UI::HtmlDialog
   # The {#set_url} method is used to load a HtmlDialog with the content at a
   # specific URL. This method allows you to load web sites in a HtmlDialog.
   #
-  # @example 
+  # @example
   #   dialog.set_url("http://www.sketchup.com")
   #
   # @param [String] url
   #   The URL for a specific web site.
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 2017
   def set_url(url)
@@ -302,10 +302,10 @@ class UI::HtmlDialog
 
   # The {#show} method is used to display a non-modal dialog box.
   #
-  # @example 
+  # @example
   #   dialog.show
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 2017
   def show
@@ -313,10 +313,10 @@ class UI::HtmlDialog
 
   # The {#show_modal} method is used to display a modal dialog box.
   #
-  # @example 
+  # @example
   #   dialog.show_modal
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 2017
   def show_modal
@@ -326,7 +326,7 @@ class UI::HtmlDialog
   # alive, if the dialog is minimized or not visible on the screen this will
   # still return +true+.
   #
-  # @example 
+  # @example
   #   if dialog.visible?
   #     dialog.bring_to_front
   #   else
@@ -337,7 +337,7 @@ class UI::HtmlDialog
   #
   # @return [Boolean] Returns true if the dialog is open.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 2017
   def visible?

@@ -7,7 +7,7 @@
 # draw a chair once, turn it into a component, and then use 6 instances of
 # it to surround a table. Edits to the original "definition" will then
 # propagate across all of its instances.
-# 
+#
 # The ComponentDefinition class contains the global entities and settings
 # for each definition. See the ComponentInstance class for how each copy
 # is defined.
@@ -24,7 +24,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   # The <=> method is used to compare two ComponentDefinition objects for
   # sorting. The comparison is done based on the component name.
   #
-  # @example 
+  # @example
   #   c1=Sketchup.find_support_file "Bed.skp",
   #     "Components/Components Sampler/"
   #   c2=Sketchup.find_support_file "Fence.skp",
@@ -46,7 +46,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   # The == method is used to test if two ComponentDefinition objects are the
   # same (based on their address in memory).
   #
-  # @example 
+  # @example
   #   c1=Sketchup.find_support_file "Bed.skp",
   #     "Components/Components Sampler/"
   #   c2=Sketchup.find_support_file "Fence.skp",
@@ -67,10 +67,10 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
 
   # The add_classification method is used to add a given classification to
   # the component.
-  # 
+  #
   # Note that you cannot classify image definitions.
   #
-  # @example 
+  # @example
   #   definition = Sketchup.active_model.definitions.first
   #   success = definition.add_classification("IFC 2x3", "IfcDoor")
   #
@@ -88,7 +88,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
 
   # The add_observer method is used to add an observer to the current object.
   #
-  # @example 
+  # @example
   #   componentdefinition = Sketchup.active_model.definitions[0]
   #   status = componentdefinition.add_observer observer
   #
@@ -104,7 +104,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   # The behavior method is used to retrieve the Behavior object associated with
   # a component definition.
   #
-  # @example 
+  # @example
   #   path = Sketchup.find_support_file "Bed.skp",
   #     "Components/Components Sampler/"
   #   model = Sketchup.active_model
@@ -123,7 +123,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   # the total number of instances placed in the model as it doesn't take into
   # account instances inside unused definitions.
   #
-  # @example 
+  # @example
   #   path = Sketchup.find_support_file('Bed.skp',
   #     'Components/Components Sampler/')
   #   definitions = Sketchup.active_model.definitions
@@ -141,7 +141,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   # component instances in a model using this component definition. This method
   # takes into account the full hierarchy of the model.
   #
-  # @example 
+  # @example
   #   path = Sketchup.find_support_file('Bed.skp',
   #     'Components/Components Sampler/')
   #   definitions = Sketchup.active_model.definitions
@@ -157,10 +157,10 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
 
   # The description method is used to retrieve the description of the component
   # definition.
-  # 
+  #
   # Component definitions do not have a description, by default.
   #
-  # @example 
+  # @example
   #   # Get the description
   #   componentdefinition = Sketchup.active_model.definitions[0]
   #   description = componentdefinition.description
@@ -175,7 +175,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   # The description= method is used to set the description for the component
   # definition.
   #
-  # @example 
+  # @example
   #   componentdefinition = Sketchup.active_model.definitions[0]
   #   componentdefinition.description = "This is a traditional bed"
   #   description = componentdefinition.description
@@ -192,7 +192,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   # The entities method retrieves a collection of all the entities in the
   # component definition
   #
-  # @example 
+  # @example
   #   componentdefinition = Sketchup.active_model.definitions[0]
   #   entities = componentdefinition.entities
   #
@@ -205,10 +205,10 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   # The get_classification_value method is used to retrieve the value from
   # a classification attribute given a key path.
   #
-  # @example 
+  # @example
   #   definition = Sketchup.active_model.definitions.first
   #   definition.add_classification("IFC 2x3", "IfcDoor")
-  #   
+  #
   #   path = ["IFC 2x3", "IfcDoor", "ObjectType", "IfcLabel"]
   #   value = definition.get_classification_value(path)
   #
@@ -224,7 +224,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   # The group? method is used to determine if this component definition is used
   # to hold the elements of a group.
   #
-  # @example 
+  # @example
   #   path = Sketchup.find_support_file "Bed.skp",
   #     "Components/Components Sampler/"
   #   model = Sketchup.active_model
@@ -235,7 +235,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   # @return status - true if the definition is used to hold a
   #   group, false if the definition does not hold a group.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def group?
@@ -245,7 +245,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   # definition. The guid changes after the component definition is modified and
   # the component edit is exited.
   #
-  # @example 
+  # @example
   #   componentdefinition = Sketchup.active_model.definitions[0]
   #   guid = componentdefinition.guid
   #
@@ -258,14 +258,14 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   # The hidden method is used to determine if this component definition should
   # be hidden on the component browser.
   #
-  # @example 
+  # @example
   #   componentdefinition = Sketchup.active_model.definitions[0]
   #   status = componentdefinition.hidden?
   #
   # @return status - true if the definition should be hidden, false
   #   if the definition should not be hidden
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def hidden?
@@ -274,7 +274,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   # The image? method is used to determine if this component definition is used
   # to define an image.
   #
-  # @example 
+  # @example
   #   componentdefinition = Sketchup.active_model.definitions[0]
   #   status = componentdefinition.image?
   #   if (status)
@@ -288,7 +288,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   image, false if the component definition does not
   #   define an image.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def image?
@@ -297,7 +297,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   # The insertion_point method is used to retrieve the Point3d object where the
   # component was inserted.
   #
-  # @example 
+  # @example
   #   point = Geom::Point3d.new 10,20,30
   #   transform = Geom::Transformation.new point
   #   model = Sketchup.active_model
@@ -318,7 +318,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
 
   # Sets the insertion point of your definition.
   #
-  # @example 
+  # @example
   #   point = Geom::Point3d.new(10, 20, 0)
   #   componentdefinition = Sketchup.active_model.definitions[0]
   #   componentdefinition.insertion_point = point
@@ -336,7 +336,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   # The instances method is used to return any array of ComponentInstancesfor
   # this ComponentDefinition.
   #
-  # @example 
+  # @example
   #   componentdefinition = Sketchup.active_model.definitions[0]
   #   instances = componentdefinition.instances
   #
@@ -350,7 +350,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   # The internal? method is used to determine if the component definition is
   # internal to the Component Browser
   #
-  # @example 
+  # @example
   #   point = Geom::Point3d.new 10,20,30
   #   transform = Geom::Transformation.new point
   #   model = Sketchup.active_model
@@ -365,7 +365,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   to SketchUp's Component Browser.  False if the
   #   component definition is not internal to SketchUp.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def internal?
@@ -374,12 +374,12 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   # Invalidates the bounding box of your definition. This command forces the
   # update of the bounding box of definition while inside an operation.
   # See Model.start_operation for how to start an operation.
-  # 
+  #
   # This method is useful if you make changes to your geometry using the Ruby
   # API and then need to know your bounding box size. This method forces
   # SketchUp to recalculate the definition's bounding box when you choose.
   #
-  # @example 
+  # @example
   #   componentdefinition = Sketchup.active_model.definitions[0]
   #   componentdefinition.invalidate_bounds
   #
@@ -391,7 +391,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
 
   # The name method retrieves the name of the component definition.
   #
-  # @example 
+  # @example
   #   path = Sketchup.find_support_file "Bed.skp",
   #     "Components/Components Sampler/"
   #   model = Sketchup.active_model
@@ -407,7 +407,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
 
   # The name= method is used to set the name of the component definition.
   #
-  # @example 
+  # @example
   #   path = Sketchup.find_support_file "Bed.skp",
   #     "Components/Components Sampler/"
   #   model = Sketchup.active_model
@@ -425,10 +425,10 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   end
 
   # The path method is used to retrieve the path where the component was loaded.
-  # 
+  #
   # Returns nil if it is an internal component.
   #
-  # @example 
+  # @example
   #   path = Sketchup.find_support_file "Bed.skp",
   #     "Components/Components Sampler/"
   #   model = Sketchup.active_model
@@ -448,7 +448,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   # you've used the API to change the geometry of your component and would
   # like the thumbnail to match.
   #
-  # @example 
+  # @example
   #   componentdefinition = Sketchup.active_model.definitions[0]
   #   componentdefinition.refresh_thumbnail
   #
@@ -460,10 +460,10 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
 
   # The remove_classification method is used to remove a given classification
   # from the component.
-  # 
+  #
   # Note that you cannot classify image definitions.
   #
-  # @example 
+  # @example
   #   definition = Sketchup.active_model.definitions.first
   #   success = definition.remove_classification("IFC 2x3", "IfcDoor")
   #
@@ -484,7 +484,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   # The remove_observer method is used to remove an observer from the current
   # object.
   #
-  # @example 
+  # @example
   #   componentdefinition = Sketchup.active_model.definitions[0]
   #   status = componentdefinition.remove_observer observer
   #
@@ -500,7 +500,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   # The save_as method is used to save your definition as a SketchUp file at the
   # specified file destination.
   #
-  # @example 
+  # @example
   #   my_definition = Sketchup.active_model.definitions[0]
   #   success = my_definition.save_as "c:\\myComponent.skp"
   #
@@ -517,7 +517,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   # file extension of filePath. Supported image formats are bmp, jpg, png,
   # tif, pct, and gif.
   #
-  # @example 
+  # @example
   #   componentdefinition = Sketchup.active_model.definitions[0]
   #   componentdefinition.save_thumbnail "test_thumb.png"
   #
@@ -532,10 +532,10 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   # The set_classification_value method is used to set the value of a
   # classification attribute given a key path.
   #
-  # @example 
+  # @example
   #   definition = Sketchup.active_model.definitions.first
   #   definition.add_classification("IFC 2x3", "IfcDoor")
-  #   
+  #
   #   path = ["IFC 2x3", "IfcDoor", "ObjectType", "IfcLabel"]
   #   success = definition.set_classification_value(path, "Room 101")
   #

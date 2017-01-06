@@ -7,16 +7,16 @@
 # the triangles that make up a 15-sided SketchUp face by using this class, or
 # write a SketchupImporter that reads a data file, creates a mesh from it,
 # and draws faces based on the mesh.
-# 
+#
 # You can construct a mesh manually using the methods of this class, or you
 # can get a mesh from a face by calling the Face.mesh method. See
 # Entities.add_faces_from_mesh for an easy way to convert a mesh back into
 # faces.
 #
-# @example 
+# @example
 #   # Grab a mesh from a given face.
 #   my_mesh = some_face.mesh
-#   
+#
 #   # Create a new group that we will populate with the mesh.
 #   group = Sketchup.active_model.entities.add_group
 #   group.add_faces_from_mesh(my_mesh)
@@ -35,10 +35,10 @@ class Geom::PolygonMesh
   # Instance Methods
 
   # The {#add_point} method is used to add a point to the mesh.
-  # 
+  #
   # The index can be used for creating polygons.
   #
-  # @example 
+  # @example
   #   mesh = Geom::PolygonMesh.new
   #   point = Geom::Point3d.new(0, 1, 2)
   #   index = mesh.add_point(point)
@@ -53,7 +53,7 @@ class Geom::PolygonMesh
 
   # The {#add_polygon} method is used for adding a polygon to a polygon mesh.
   #
-  # @example 
+  # @example
   #   mesh = Geom::PolygonMesh.new
   #   point1 = Geom::Point3d.new(0, 1, 2)
   #   point2 = Geom::Point3d.new(1, 0, 2)
@@ -72,7 +72,7 @@ class Geom::PolygonMesh
 
   # The {#count_points} method is used to count the number of points in a mesh.
   #
-  # @example 
+  # @example
   #   mesh = Geom::PolygonMesh.new
   #   point = Geom::Point3d.new(0, 1, 2)
   #   mesh.add_point(point)
@@ -86,7 +86,7 @@ class Geom::PolygonMesh
 
   # The {#count_polygons} count the number of polygons in the mesh.
   #
-  # @example 
+  # @example
   #   mesh = Geom::PolygonMesh.new
   #   point1 = Geom::Point3d.new(0, 1, 2)
   #   point2 = Geom::Point3d.new(1, 0, 2)
@@ -104,21 +104,21 @@ class Geom::PolygonMesh
   # optional and are just used as a hint to decide how much space to
   # pre-allocate to speed up adding points and polygons.
   #
-  # @example 
+  # @example
   #   mesh = Geom::PolygonMesh.new
   #
   # @overload initialize
-  # 
+  #
   #   @return [Geom::PolygonMesh]
   #
   # @overload initialize(numpts, numpolys)
-  # 
+  #
   #   @param [Integer] numpts    How many points will be in the mesh.
   #   @param [Integer] numpolys  How many polygons will be in the mesh.
   #   @return [Geom::PolygonMesh]
   #
   # @overload initialize(numpts)
-  # 
+  #
   #   @param [Integer] numpts    How many points will be in the mesh.
   #   @return [Geom::PolygonMesh]
   #
@@ -130,7 +130,7 @@ class Geom::PolygonMesh
   # particular index in the mesh. This only works for meshes retrieved from
   # {Sketchup::Face#mesh} with the +PolygonMeshNormals+ flag.
   #
-  # @example 
+  # @example
   #   flags = 4 # PolygonMeshNormals
   #   mesh = face.mesh(flags)
   #   normal = mesh.normal_at(1)
@@ -141,7 +141,7 @@ class Geom::PolygonMesh
   #   The index in the mesh for the vertex normal to be
   #   retrieved
   #
-  # @return [Geom::Vector3d, nil] 
+  # @return [Geom::Vector3d, nil]
   #
   # @version SketchUp 6.0
   def normal_at(index)
@@ -150,7 +150,7 @@ class Geom::PolygonMesh
   # The {#point_at} method is used to retrieve the point at a specific index in
   # the mesh.
   #
-  # @example 
+  # @example
   #   mesh = Geom::PolygonMesh.new
   #   point1 = Geom::Point3d.new(0, 1, 2)
   #   point2 = Geom::Point3d.new(10, 20, 30)
@@ -163,7 +163,7 @@ class Geom::PolygonMesh
   # @param [Integer] index
   #   The index in the mesh for the point to be retrieved
   #
-  # @return [Geom::Point3d, nil] 
+  # @return [Geom::Point3d, nil]
   #
   # @version SketchUp 6.0
   def point_at(index)
@@ -172,7 +172,7 @@ class Geom::PolygonMesh
   # The {#point_index} method is used to retrieve the index of a point in the
   # mesh.
   #
-  # @example 
+  # @example
   #   mesh = Geom::PolygonMesh.new
   #   point1 = Geom::Point3d.new(0, 1, 2)
   #   point2 = Geom::Point3d.new(10, 20, 30)
@@ -193,7 +193,7 @@ class Geom::PolygonMesh
   # The {#points} method is used to retrieve an array of points (vertices) in the
   # mesh
   #
-  # @example 
+  # @example
   #   mesh = Geom::PolygonMesh.new
   #   point1 = Geom::Point3d.new(0, 1, 2)
   #   point2 = Geom::Point3d.new(10, 20, 30)
@@ -202,7 +202,7 @@ class Geom::PolygonMesh
   #   # Returns array of points in the mesh.
   #   points = mesh.points
   #
-  # @return [Array<Geom::Point3d>] 
+  # @return [Array<Geom::Point3d>]
   #
   # @version SketchUp 6.0
   def points
@@ -210,7 +210,7 @@ class Geom::PolygonMesh
 
   # The {#polygon_at} method is used to retrieve an array of vertex index values
   # for a polygon at a specific index.
-  # 
+  #
   # Index is 1 based (starts at 1).  The returned array can contain negative
   # values with the sign indicating a hidden edge. For example, a return value
   # of +[-1, 2, 3]+ indicates that the edge from +1+ to +2+ is hidden.
@@ -218,7 +218,7 @@ class Geom::PolygonMesh
   # positive value of the index value in the polygon array.  So if you
   # get +[-1, 2,3]+ use +1+ as the argument to {#point_at}.
   #
-  # @example 
+  # @example
   #   mesh = Geom::PolygonMesh.new
   #   point1 = Geom::Point3d.new(0, 1, 2)
   #   point2 = Geom::Point3d.new(1, 0, 2)
@@ -229,7 +229,7 @@ class Geom::PolygonMesh
   # @param [Integer] index
   #   The index of the desired polygon.
   #
-  # @return [Array<Geom::Point3d>, nil] 
+  # @return [Array<Geom::Point3d>, nil]
   #
   # @version SketchUp 6.0
   def polygon_at(index)
@@ -238,7 +238,7 @@ class Geom::PolygonMesh
   # The {#polygon_points_at} method is used to retrieve the points for a polygon
   # that is at a specific index in the mesh.
   #
-  # @example 
+  # @example
   #   mesh = Geom::PolygonMesh.new
   #   point1 = Geom::Point3d.new(0, 1, 2)
   #   point2 = Geom::Point3d.new(1, 0, 2)
@@ -249,7 +249,7 @@ class Geom::PolygonMesh
   # @param [Integer] index
   #   An index for a polygon in the mesh.
   #
-  # @return [Array<Geom::Point3d>, nil] 
+  # @return [Array<Geom::Point3d>, nil]
   #
   # @version SketchUp 6.0
   def polygon_points_at(index)
@@ -257,15 +257,15 @@ class Geom::PolygonMesh
 
   # The {#polygons} method is used to retrieve an array of all polygons in the
   # mesh.
-  # 
+  #
   # The returned array can contain negative values with the sign indicating a
   # hidden edge. For example, a return value of +[-1, 2, 3]+ indicates that the
   # edge from +1+ to +2+ is hidden.
   #
-  # @example 
+  # @example
   #   polygons = polygonmesh.polygons
   #
-  # @return [Array<Integer>] 
+  # @return [Array<Integer>]
   #
   # @version SketchUp 6.0
   def polygons
@@ -274,7 +274,7 @@ class Geom::PolygonMesh
   # The {#set_point} method is used to set the point at a specific index in the
   # mesh.
   #
-  # @example 
+  # @example
   #   mesh = Geom::PolygonMesh.new
   #   point1 = Geom::Point3d.new(0, 1, 2)
   #   point2 = Geom::Point3d.new(10, 20, 30)
@@ -287,7 +287,7 @@ class Geom::PolygonMesh
   # @param [Geom::Point3d] point
   #   A Point3d object to set at the index.
   #
-  # @return [Geom::PolygonMesh] 
+  # @return [Geom::PolygonMesh]
   #
   # @version SketchUp 6.0
   def set_point(index, point)
@@ -295,20 +295,20 @@ class Geom::PolygonMesh
 
   # The {#set_uv} method is used to define UV mapping coordinates to points in
   # the mesh.
-  # 
+  #
   # Beware that the polygons connected to the point will share UV coordiates so
   # UV mapping coordinates needs to be continuous across the polygon mesh.
-  # 
+  #
   # When setting the UV for a point one need to make sure to have the correct
   # index for the point. It's therefore best to add the points using {#add_point}
   # and use the index it returns for following calls to set_uv and
   # {#add_polygon}.
-  # 
+  #
   # If you are not able to calculate how many points there will be in your mesh
   # make sure to not specify an index in {#set_uv} higher than the number of
   # times you have called {#set_uv}.
   #
-  # @example 
+  # @example
   #   mesh = Geom::PolygonMesh.new(4)
   #   # Create points for a triangle.
   #   point1 = Geom::Point3d.new(0, 0, 0)
@@ -342,7 +342,7 @@ class Geom::PolygonMesh
   # @param [Integer] index
   #   An Integer representing the UV index.
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 2014
   def set_uv(index, point)
@@ -350,7 +350,7 @@ class Geom::PolygonMesh
 
   # The {#transform!} method is used to apply a transformation to a mesh.
   #
-  # @example 
+  # @example
   #   point1 = Geom::Point3d.new(100, 200, 300)
   #   tr = Geom::Transformation.new(point1)
   #   mesh = Geom::PolygonMesh.new
@@ -360,7 +360,7 @@ class Geom::PolygonMesh
   #
   # @param [Geom::Transformation] transformation
   #
-  # @return [Geom::PolygonMesh] 
+  # @return [Geom::PolygonMesh]
   #
   # @version SketchUp 6.0
   def transform!(transform)
@@ -368,19 +368,19 @@ class Geom::PolygonMesh
 
   # The {#uv_at} method is used to access a uv (texture coordinates) at a
   # specific index.
-  # 
+  #
   # "UVs" is a way of referring to the u,v texture coordinates (as
   # opposed to the X, Y, and Z axis that you construct your meshes on), which
   # are points defining 1-by-1 positions within an image. These coordinates
   # connect to points in your 3D model, to position an image texture onto it's
   # surface (similar to virtual "thumb tacks")
-  # 
+  #
   # These coordinates pin an exact spot on an image that you wish to use to
   # texture your model to a specific point on an object's surface. Between these
   # points, your software will stretch the image smoothly. This is what is
   # referred to as UV mapping.
   #
-  # @example 
+  # @example
   #   point = mesh.uv_at(1, true)
   #
   # @param [Integer] index
@@ -401,14 +401,14 @@ class Geom::PolygonMesh
   # The {#uvs} method is used to retrieve an array of uv coordinates in the
   # mesh.
   #
-  # @example 
+  # @example
   #   # Get a mesh with front and back UVs.
   #   mesh = face.mesh(1 | 2)
   #   uvs = mesh.uvs
   #
   # @param [Boolean] front
   #
-  # @return [Array<Geom::Point3d>] 
+  # @return [Array<Geom::Point3d>]
   #
   # @version SketchUp 6.0
   def uvs(front)

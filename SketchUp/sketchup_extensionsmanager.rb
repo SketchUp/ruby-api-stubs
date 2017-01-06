@@ -4,7 +4,7 @@
 # The ExtensionsManager class provides a way of accessing the
 # SketchupExtensions that have been registered via the
 # Sketchup.register_extension method.
-# 
+#
 # There is only one ExtensionsManager available. You access it via the
 # Sketchup.extensions method.
 #
@@ -19,7 +19,7 @@ class Sketchup::ExtensionsManager
 
   # The [] method is used to get an extension by name, index or ID.
   #
-  # @example 
+  # @example
   #   manager = Sketchup.extensions
   #   extension = manager[0]
   #   if (extension)
@@ -27,10 +27,10 @@ class Sketchup::ExtensionsManager
   #   else
   #     UI.messagebox "Failure"
   #   end
-  #   
+  #
   #   # You can also get extensions by name.
   #   solarnorth = manager['Solar North Toolbar']
-  #   
+  #
   #   # You can also get extensions by ID.
   #   my_extension = manager['2475A758-6503-46D5-AC5E-16AEA0A3162A']
   #
@@ -45,7 +45,7 @@ class Sketchup::ExtensionsManager
   end
 
   #
-  # @example 
+  # @example
   #   manager = Sketchup.extensions
   #   number = manager.count
   #
@@ -64,7 +64,7 @@ class Sketchup::ExtensionsManager
 
   # The each method is used to iterate through extensions.
   #
-  # @example 
+  # @example
   #   manager = Sketchup.extensions
   #   # Retrieves each extension
   #   manager.each { |extension| UI.messagebox extension.name }
@@ -81,7 +81,7 @@ class Sketchup::ExtensionsManager
   # The keys method is used to get a list of keys in the ExtensionsManager,
   # which are the same as the names of the extensions.
   #
-  # @example 
+  # @example
   #   manager = Sketchup.extensions
   #   keys = manager.keys
   #   for key in keys
@@ -96,10 +96,10 @@ class Sketchup::ExtensionsManager
 
   # The length method returns the number of SketchupExtension objects inside
   # this ExtensionsManager.
-  # 
+  #
   # The {#size} method is an alias for {#length}.
   #
-  # @example 
+  # @example
   #   manager = Sketchup.extensions
   #   number = manager.length
   #
@@ -112,10 +112,10 @@ class Sketchup::ExtensionsManager
 
   # The length method returns the number of SketchupExtension objects inside
   # this ExtensionsManager.
-  # 
+  #
   # The {#size} method is an alias for {#length}.
   #
-  # @example 
+  # @example
   #   manager = Sketchup.extensions
   #   number = manager.length
   #

@@ -14,7 +14,7 @@ class Sketchup::ConstructionPoint < Sketchup::Drawingelement
   # The position method is used to retrieve a Point3d used to create a
   # construction point.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   point1 = Geom::Point3d.new(10,0,0)

@@ -6,13 +6,13 @@
 # desired methods, and add an instance of the observer to the objects of
 # interests.
 #
-# @example 
+# @example
 #   class MyLayersObserver < Sketchup::LayersObserver
 #     def onLayerAdded(layers, layer)
 #       puts "onLayerAdded: #{layer.name}"
 #     end
 #   end
-#   
+#
 #   Sketchup.active_model.layers.add_observer(MyLayersObserver.new)
 #   Sketchup.active_model.layers.add("Hello World")
 #
@@ -24,13 +24,13 @@ class Sketchup::LayersObserver
   # The {#onCurrentLayerChanged} method is called when the user selects a
   # different active layer.
   #
-  # @example 
+  # @example
   #   class MyLayersObserver < Sketchup::LayersObserver
   #     def onCurrentLayerChanged(layers, layer)
   #       puts "onCurrentLayerChanged: #{layer.name}"
   #     end
   #   end
-  #   
+  #
   #   Sketchup.active_model.layers.add_observer(MyLayersObserver.new)
   #   layer = Sketchup.active_model.layers.add("Hello World")
   #   Sketchup.active_model.active_layer = layer
@@ -39,7 +39,7 @@ class Sketchup::LayersObserver
   #
   # @param [Sketchup::Layer] layer
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onCurrentLayerChanged(layers, layer)
@@ -47,13 +47,13 @@ class Sketchup::LayersObserver
 
   # The {#onLayerAdded} method is called when a new layer is added to a model.
   #
-  # @example 
+  # @example
   #   class MyLayersObserver < Sketchup::LayersObserver
   #     def onLayerAdded(layers, layer)
   #       puts "onLayerAdded: #{layer.name}"
   #     end
   #   end
-  #   
+  #
   #   Sketchup.active_model.layers.add_observer(MyLayersObserver.new)
   #   Sketchup.active_model.layers.add("Hello World")
   #
@@ -61,7 +61,7 @@ class Sketchup::LayersObserver
   #
   # @param [Sketchup::Layer] layer
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onLayerAdded(layers, layer)
@@ -69,11 +69,11 @@ class Sketchup::LayersObserver
 
   # The {#onLayerChanged} method is called when a layer is changed.
   #
-  # @example 
+  # @example
   #   def onLayerChanged(layers, layer)
   #     puts "onLayerChanged: #{layer.name}"
   #   end
-  #   
+  #
   #   Sketchup.active_model.layers.add_observer(MyLayersObserver.new)
   #   layer = Sketchup.active_model.layers.add("Hello World")
   #   layer.name = "Hello Universe"
@@ -82,7 +82,7 @@ class Sketchup::LayersObserver
   #
   # @param [Sketchup::Layer] layer
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 2014
   def onLayerChanged(layers, layer)
@@ -90,13 +90,13 @@ class Sketchup::LayersObserver
 
   # The {#onLayerRemoved} method is called when a layer is removed from a model.
   #
-  # @example 
+  # @example
   #   class MyLayersObserver < Sketchup::LayersObserver
   #     def onLayerRemoved(layers, layer)
   #       puts "onLayerRemoved: #{layer.name}"
   #     end
   #   end
-  #   
+  #
   #   Sketchup.active_model.layers.add_observer(MyLayersObserver.new)
   #   layer = Sketchup.active_model.layers.add("Hello World")
   #   Sketchup.active_model.layers.remove(layer)
@@ -105,7 +105,7 @@ class Sketchup::LayersObserver
   #
   # @param [Sketchup::Layer] layer
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onLayerRemoved(layers, layer)
@@ -114,20 +114,20 @@ class Sketchup::LayersObserver
   # The {#onRemoveAllLayers} method is called when all layer are removed from a
   # model.
   #
-  # @example 
+  # @example
   #   class MyLayersObserver < Sketchup::LayersObserver
   #     def onRemoveAllLayers(layers)
   #       puts "onRemoveAllLayers: #{layers}"
   #     end
   #   end
-  #   
+  #
   #   Sketchup.active_model.layers.add_observer(MyLayersObserver.new)
   #   layer = Sketchup.active_model.layers.add("Hello World")
   #   Sketchup.active_model.layers.remove(layer)
   #
   # @param [Sketchup::Layers] layers
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onRemoveAllLayers(layers)

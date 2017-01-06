@@ -6,13 +6,13 @@
 # override the desired methods, and add an instance of the observer to the
 # collection of interest.
 #
-# @example 
+# @example
 #   class MyDefinitionsObserver < Sketchup::DefinitionsObserver
 #     def onComponentAdded(definitions, definition)
 #       puts "onComponentAdded: #{definition.name}"
 #     end
 #   end
-#   
+#
 #   Sketchup.active_model.definitions.add_observer(MyDefinitionsObserver.new)
 #
 # @version SketchUp 6.0
@@ -23,7 +23,7 @@ class Sketchup::DefinitionsObserver
   # The {#onComponentAdded} method is called whenever a definition is added to
   # the definitions collection.
   #
-  # @example 
+  # @example
   #   def onComponentAdded(definitions, definition)
   #     puts "onComponentAdded: #{definition}"
   #   end
@@ -32,7 +32,7 @@ class Sketchup::DefinitionsObserver
   #
   # @param [Sketchup::ComponentDefinition] definition
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onComponentAdded(definitions, definition)
@@ -40,11 +40,11 @@ class Sketchup::DefinitionsObserver
 
   # The {#onComponentPropertiesChanged} method is called whenever a definition's
   # name or description are changed.
-  # 
+  #
   # This does not fire when "Glue To", "Cuts Opening", or "Face Camera" settings
   # are changed.
   #
-  # @example 
+  # @example
   #   def onComponentPropertiesChanged(definitions, definition)
   #     puts "onComponentPropertiesChanged: #{definition}"
   #   end
@@ -53,7 +53,7 @@ class Sketchup::DefinitionsObserver
   #
   # @param [Sketchup::ComponentDefinition] definition
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onComponentPropertiesChanged(definitions, definition)
@@ -62,7 +62,7 @@ class Sketchup::DefinitionsObserver
   # The {#onComponentAdded} method is called whenever a definition is removed
   # from the definitions collection.
   #
-  # @example 
+  # @example
   #   def onComponentRemoved(definitions, definition)
   #     puts "onComponentRemoved: #{definition}"
   #   end
@@ -73,7 +73,7 @@ class Sketchup::DefinitionsObserver
   #
   # @param [Sketchup::DefinitionList] definitions
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onComponentRemoved(definitions, definition)
@@ -84,7 +84,7 @@ class Sketchup::DefinitionsObserver
   # are just a special kind of definition that is allowed to only have a single
   # instance.)
   #
-  # @example 
+  # @example
   #   def onComponentTypeChanged(definitions, definition)
   #     puts "onComponentTypeChanged: #{definition}"
   #   end
@@ -93,7 +93,7 @@ class Sketchup::DefinitionsObserver
   #
   # @param [Sketchup::ComponentDefinition] definition
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onComponentTypeChanged(definitions, definition)

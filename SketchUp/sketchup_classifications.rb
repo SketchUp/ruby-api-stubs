@@ -15,10 +15,10 @@ class Sketchup::Classifications
 
   # The [] method is used to get a classification schema by name or index.
   #
-  # @example 
+  # @example
   #   # Get schema by name:
   #   schema = Sketchup.active_model.classifications["IFC 2x3"]
-  #   
+  #
   #   # Get schema by index:
   #   schema = Sketchup.active_model.classifications[1]
   #
@@ -34,7 +34,7 @@ class Sketchup::Classifications
 
   # The each method is used to iterate through loaded classification schemas.
   #
-  # @example 
+  # @example
   #   Sketchup.active_model.classifications.each { |schema|
   #     puts schema.name
   #   }
@@ -51,7 +51,7 @@ class Sketchup::Classifications
   # The keys method is used to get a list of keys in the Classifications class,
   # which are the same as the names of the schemas.
   #
-  # @example 
+  # @example
   #   schema_names = Sketchup.active_model.classifications.keys
   #
   # @return keys - Array of string keys
@@ -62,7 +62,7 @@ class Sketchup::Classifications
 
   # The length method returns the number of loaded classification schemas.
   #
-  # @example 
+  # @example
   #   Sketchup.active_model.classifications.size
   #
   # @return integer - number of ClassificationSchema object
@@ -74,7 +74,7 @@ class Sketchup::Classifications
   # The load_schema method is used to load a classification schema into a
   # model.
   #
-  # @example 
+  # @example
   #   c = Sketchup.active_model.classifications
   #   file = Sketchup.find_support_file('IFC 4.skc', 'Classifications')
   #   status = c.load_schema(file) if !file.nil?
@@ -90,7 +90,7 @@ class Sketchup::Classifications
 
   # The length method returns the number of loaded classification schemas.
   #
-  # @example 
+  # @example
   #   Sketchup.active_model.classifications.size
   #
   # @return integer - number of ClassificationSchema object
@@ -102,7 +102,7 @@ class Sketchup::Classifications
   # The unload_schema method is used to unload a classification schema that was
   # previously loaded into a model.
   #
-  # @example 
+  # @example
   #   c = Sketchup.active_model.classifications
   #   status = c.unload_schema('IFC 2x3')
   #

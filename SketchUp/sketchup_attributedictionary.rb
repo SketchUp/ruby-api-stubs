@@ -5,7 +5,7 @@
 # attributes to a SketchUp entity. The attributes are defined by key/value
 # pairs where the keys are strings.  An Entity or Model object can have any
 # number of AttributeDictionary objects (see the AttributeDictionaries class).
-# 
+#
 # The Entity class is a popular parent class in SketchUp, meaning you can
 # attach attribute dictionaries to almost anything, from geometric items
 # like edges and faces and components to more conceptual things like pages
@@ -22,12 +22,12 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
 
   # The [] method is used to retrieve the attribute with a given key.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   value = model.set_attribute "testdictionary", "test", 115
   #   attrdicts = model.attribute_dictionaries
   #   attrdict = attrdicts["testdictionary"]
-  #   
+  #
   #   # value will contain 115
   #   value = attrdict["test"]
   #
@@ -43,10 +43,10 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
 
   # The set value ([]=) method is used to set the value of an attribute with a
   # given key.
-  # 
+  #
   # Creates a new attribute for the given key if needed.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   value = model.set_attribute "testdictionary", "test", 110
   #   attrdicts = model.attribute_dictionaries
@@ -71,7 +71,7 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
 
   # The count method is inherited from the Enumerable mix-in module.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   model.set_attribute('Example', 'Hello', 'World')
   #   dictionary = model.attribute_dictionary('Example')
@@ -85,13 +85,13 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
 
   # The delete_key method is used to delete an attribute with a given key.
   #
-  # @example 
+  # @example
   #   create_if_nil = true
   #   model = Sketchup.active_model
   #   attrdict = model.attribute_dictionary "test_dict", create_if_nil
   #   attrdict["attr_one"] = "one"
   #   attrdict["attr_two"] = "two"
-  #   
+  #
   #   # Gets an array of values
   #   attrdict = model.attribute_dictionaries['test_dict']
   #   value = attrdict.delete_key("attr_one")
@@ -106,16 +106,16 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
   end
 
   # An alias for each. See AttributeDictionary.each.
-  # 
+  #
   # Throws an exception if there are no keys.
   #
-  # @example 
+  # @example
   #   create_if_nil = true
   #   model = Sketchup.active_model
   #   attrdict = model.attribute_dictionary "test_dict", create_if_nil
   #   attrdict["attr_one"] = "one"
   #   attrdict["attr_two"] = "two"
-  #   
+  #
   #   # iterates through all attributes and prints the key to the screen
   #   attrdict = model.attribute_dictionaries['test_dict']
   #   attrdict.each_pair { | key, value |
@@ -133,16 +133,16 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
 
   # The each_key method is used to iterate through all of the attribute keys.
   # This is the same method as AttributeDictionary.each.
-  # 
+  #
   # Throws an exception if there are no keys.
   #
-  # @example 
+  # @example
   #   create_if_nil = true
   #   model = Sketchup.active_model
   #   attrdict = model.attribute_dictionary "test_dict", create_if_nil
   #   attrdict["attr_one"] = "one"
   #   attrdict["attr_two"] = "two"
-  #   
+  #
   #   # iterates through all attributes and prints the key to the screen
   #   attrdict = model.attribute_dictionaries['test_dict']
   #   attrdict.each_key { | key | UI.messagebox key }
@@ -156,16 +156,16 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
   end
 
   # An alias for each. See AttributeDictionary.each.
-  # 
+  #
   # Throws an exception if there are no keys.
   #
-  # @example 
+  # @example
   #   create_if_nil = true
   #   model = Sketchup.active_model
   #   attrdict = model.attribute_dictionary "test_dict", create_if_nil
   #   attrdict["attr_one"] = "one"
   #   attrdict["attr_two"] = "two"
-  #   
+  #
   #   # iterates through all attributes and prints the key to the screen
   #   attrdict = model.attribute_dictionaries['test_dict']
   #   attrdict.each_pair { | key, value |
@@ -183,13 +183,13 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
 
   # The keys method is used to retrieve an array with all of the attribute keys.
   #
-  # @example 
+  # @example
   #   create_if_nil = true
   #   model = Sketchup.active_model
   #   attrdict = model.attribute_dictionary "test_dict", create_if_nil
   #   attrdict["attr_one"] = "one"
   #   attrdict["attr_two"] = "two"
-  #   
+  #
   #   # Gets an array of keys
   #   attrdict = model.attribute_dictionaries['test_dict']
   #   keys = attrdict.keys
@@ -203,10 +203,10 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
 
   # The {#length} method is used to retrieve the size (number of elements) of an
   # attribute dictionary.
-  # 
+  #
   # The {#size} method is an alias for {#length}.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   model.set_attribute('Example', 'Hello', 'World')
   #   dictionary = model.attribute_dictionary('Example')
@@ -221,13 +221,13 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
 
   # The name method is used to retrieve the name of an attribute dictionary.
   #
-  # @example 
+  # @example
   #   create_if_nil = true
   #   model = Sketchup.active_model
   #   attrdict = model.attribute_dictionary "test_dict", create_if_nil
   #   attrdict["attr_one"] = "one"
   #   attrdict["attr_two"] = "two"
-  #   
+  #
   #   # Show the name.
   #   UI.messagebox attrdict.name
   #
@@ -240,10 +240,10 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
 
   # The {#length} method is used to retrieve the size (number of elements) of an
   # attribute dictionary.
-  # 
+  #
   # The {#size} method is an alias for {#length}.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   model.set_attribute('Example', 'Hello', 'World')
   #   dictionary = model.attribute_dictionary('Example')
@@ -259,13 +259,13 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
   # The values method is used to retrieve an array with all of the attribute
   # values.
   #
-  # @example 
+  # @example
   #   create_if_nil = true
   #   model = Sketchup.active_model
   #   attrdict = model.attribute_dictionary "test_dict", create_if_nil
   #   attrdict["attr_one"] = "one"
   #   attrdict["attr_two"] = "two"
-  #   
+  #
   #   # Gets an array of values
   #   attrdict = model.attribute_dictionaries['test_dict']
   #   values = attrdict.values

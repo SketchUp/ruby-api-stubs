@@ -6,7 +6,7 @@
 # override the desired methods, and add an instance of the observer to the
 # {Sketchup::ShadowInfo} object.
 #
-# @example 
+# @example
 #   # This is an example of an observer that watches the selection for
 #   # changes.
 #   class MyShadowInfoObserver < Sketchup::ShadowInfoObserver
@@ -14,7 +14,7 @@
 #       puts "onShadowInfoChanged: #{type}"
 #     end
 #   end
-#   
+#
 #   # Attach the observer.
 #   Sketchup.active_model.shadow_info.add_observer(MyShadowInfoObserver.new)
 #
@@ -27,7 +27,7 @@ class Sketchup::ShadowInfoObserver
   # setting inside the Shadows and Model Info dialogs. The type parameter
   # contains a number identifying which option was altered. Here are the types to
   # expect:
-  # 
+  #
   # - 0 = Time/Date sliders
   # - 1 = Display Shadows checkbox
   # - 2 = Light/Dark sliders
@@ -38,7 +38,7 @@ class Sketchup::ShadowInfoObserver
   # - 9 = Display on Ground checkbox
   # - 10 = Display on Faces checkbox
   #
-  # @example 
+  # @example
   #   def onShadowInfoChanged(shadow_info, type)
   #     puts "onShadowInfoChanged: #{type}"
   #   end
@@ -48,7 +48,7 @@ class Sketchup::ShadowInfoObserver
   # @param [Integer] type
   #   A number identifying which setting was changed.
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onShadowInfoChanged(type)

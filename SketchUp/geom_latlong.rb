@@ -11,7 +11,7 @@ class Geom::LatLong
 
   # The new method creates a LatLong object.
   #
-  # @example 
+  # @example
   #   ll = [40.01700, 105.28300]
   #   latlong = Geom::LatLong.new(ll)
   #   if (latlong)
@@ -31,7 +31,7 @@ class Geom::LatLong
 
   # The Latitude method retrieves the latitude coordinate from a LatLong object.
   #
-  # @example 
+  # @example
   #   ll = [40.01700, 105.28300]
   #   latlong = Geom::LatLong.new(ll)
   #   latitude = latlong.latitude
@@ -50,7 +50,7 @@ class Geom::LatLong
   # The Latitude method retrieves the longitude coordinate from a LatLong
   # object.
   #
-  # @example 
+  # @example
   #   ll = [40.01700, 105.28300]
   #   latlong = Geom::LatLong.new(ll)
   #   longitude = latlong.longitude
@@ -68,7 +68,7 @@ class Geom::LatLong
 
   # The to_a method converts a LatLong object to an array of two values.
   #
-  # @example 
+  # @example
   #   ll = [40.01700, 105.28300]
   #   latlong = Geom::LatLong.new(ll)
   #   a = latlong.to_a
@@ -86,7 +86,7 @@ class Geom::LatLong
 
   # The to_a method converts a LatLong object to a string.
   #
-  # @example 
+  # @example
   #   ll = [40.01700, 105.28300]
   #   latlong = Geom::LatLong.new(ll)
   #   s = latlong.to_s
@@ -104,7 +104,7 @@ class Geom::LatLong
 
   # The to_utm method converts a LatLong object to an array of two values.
   #
-  # @example 
+  # @example
   #   ll = [40.01700, 105.28300]
   #   latlong = Geom::LatLong.new(ll)
   #   utm = latlong.to_utm

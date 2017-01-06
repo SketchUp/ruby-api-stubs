@@ -5,10 +5,10 @@
 # usually perpendicular to each other, displayed in the drawing area. The
 # exception is when the user open an instance with a non-orthogonal
 # transformation. The root model transformation is always orthogonal.
-# 
+#
 # The drawing axes are used by drawing tools to align the geometry it creates
 # as well as affecting the inference engine.
-# 
+#
 # The plane where the red and green axes lines lie is called the ground plane.
 # The term origin, is used to define the place where all of axes lines start or
 # originate.
@@ -20,7 +20,7 @@ class Sketchup::Axes < Sketchup::Entity
 
   # The axes method returns the vectors representing the directions of the axes.
   #
-  # @example 
+  # @example
   #   xaxis, yaxis, zaxis = Sketchup.active_model.axes.axes
   #
   # @return Array - an array of three vectors.
@@ -31,7 +31,7 @@ class Sketchup::Axes < Sketchup::Entity
 
   # The origin method returns the origin of the axes.
   #
-  # @example 
+  # @example
   #   point = Sketchup.active_model.axes.origin
   #
   # @return Point3d - the origin for the axes.
@@ -43,7 +43,7 @@ class Sketchup::Axes < Sketchup::Entity
   # The set method allows the axes to be manipulated. The axes must always be
   # orthogonal, otherwise an error is thrown.
   #
-  # @example 
+  # @example
   #   xaxis = Geom::Vector3d.new(3, 5, 0)
   #   yaxis = xaxis * Z_AXIS
   #   Sketchup.active_model.axes.set([10,0,0], xaxis, yaxis, Z_AXIS)
@@ -69,7 +69,7 @@ class Sketchup::Axes < Sketchup::Entity
   # The sketch_plane method returns a plane representing the ground plane of the
   # axes.
   #
-  # @example 
+  # @example
   #   plane = Sketchup.active_model.axes.sketch_plane
   #
   # @return Array - of 4 numbers that give the coefficients of a
@@ -81,7 +81,7 @@ class Sketchup::Axes < Sketchup::Entity
 
   # The axes method returns the origin and vectors representing the axes.
   #
-  # @example 
+  # @example
   #   point, xaxis, yaxis, zaxis = Sketchup.active_model.axes.to_a
   #
   # @return Array - an array of a point and three vectors.
@@ -93,7 +93,7 @@ class Sketchup::Axes < Sketchup::Entity
   # The transformation method returns the transformation of the axes. This is
   # useful when creating tools that respect the model's drawing axes.
   #
-  # @example 
+  # @example
   #   # Point for a rectangle.
   #   points = [
   #     Geom::Point3d.new( 0,  0, 0),
@@ -115,7 +115,7 @@ class Sketchup::Axes < Sketchup::Entity
 
   # The xaxis method returns the x axis of the axes.
   #
-  # @example 
+  # @example
   #   vector = Sketchup.active_model.axes.xaxis
   #
   # @return Vector3d - the x axis for the axes.
@@ -126,7 +126,7 @@ class Sketchup::Axes < Sketchup::Entity
 
   # The yaxis method returns the y axis of the axes.
   #
-  # @example 
+  # @example
   #   vector = Sketchup.active_model.axes.yaxis
   #
   # @return Vector3d - the y axis for the axes.
@@ -137,7 +137,7 @@ class Sketchup::Axes < Sketchup::Entity
 
   # The zaxis method returns the z axis of the axes.
   #
-  # @example 
+  # @example
   #   vector = Sketchup.active_model.axes.zaxis
   #
   # @return Vector3d - the z axis for the axes.

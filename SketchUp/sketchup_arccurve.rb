@@ -3,24 +3,24 @@
 
 # An ArcCurve is a Curve that makes up part of a circle. This is the
 # underlying class for circles as well.
-# 
+#
 # You can think of ArcCurves as entities that were created with SketchUp's
 # Arc or Circle drawing tools and Curves as entities that were created with
 # the Freehand drawing tool.
-# 
+#
 # However, keep in mind that all Curves in SketchUp are really edges with
 # some extra data attached to them. When you use the API to draw a Curve or
 # ArcCurve, you are really drawing edges.
-# 
+#
 # ArcCurve is a subclass of Curve, so all of the methods that are available
 # to Curves are also available to ArcCurves.
 #
-# @example 
+# @example
 #   # Draw a circle on the ground plane around the origin.
 #   center_point = Geom::Point3d.new(0,0,0)
 #   normal_vector = Geom::Vector3d.new(0,0,1)
 #   radius = 10
-#   
+#
 #   entities = Sketchup.active_model.entities
 #   edgearray = entities.add_circle center_point, normal_vector, radius
 #   first_edge = edgearray[0]
@@ -34,7 +34,7 @@ class Sketchup::ArcCurve < Sketchup::Curve
   # The center method is used to retrieve the Point3d that is at the center of
   # the circular arc.
   #
-  # @example 
+  # @example
   #   centerpoint = Geom::Point3d.new
   #   # Create a circle perpendicular to the normal or Z axis
   #   vector = Geom::Vector3d.new 0,0,1
@@ -56,7 +56,7 @@ class Sketchup::ArcCurve < Sketchup::Curve
   # The end_angle method is used to retrieve the angle of the end of the arc
   # measured from the X axis in radians.
   #
-  # @example 
+  # @example
   #   # Create a 1/2 circle, normal to the Z axis
   #   center = Geom::Point3d.new
   #   normal = Geom::Vector3d.new 0,0,1
@@ -79,7 +79,7 @@ class Sketchup::ArcCurve < Sketchup::Curve
   # The normal method retrieves a Vector3d that is perpendicular to the plane of
   # the arc.
   #
-  # @example 
+  # @example
   #   centerpoint = Geom::Point3d.new
   #   # Create a circle perpendicular to the normal or Z axis
   #   vector = Geom::Vector3d.new 0,0,1
@@ -98,10 +98,10 @@ class Sketchup::ArcCurve < Sketchup::Curve
   end
 
   # The plane method is used to retrieve the plane of the arc.
-  # 
+  #
   # Refer to the Geom module for instructions to create a plane.
   #
-  # @example 
+  # @example
   #   centerpoint = Geom::Point3d.new
   #   # Create a circle perpendicular to the normal or Z axis
   #   vector = Geom::Vector3d.new 0,0,1
@@ -121,7 +121,7 @@ class Sketchup::ArcCurve < Sketchup::Curve
 
   # The radius method is used to retrieve the radius of the arc.
   #
-  # @example 
+  # @example
   #   centerpoint = Geom::Point3d.new
   #   # Create a circle perpendicular to the normal or Z axis
   #   vector = Geom::Vector3d.new 0,0,1
@@ -142,7 +142,7 @@ class Sketchup::ArcCurve < Sketchup::Curve
   # The start_angle method is used to retrieve the angle of the start of the
   # arc, measured from the X axis in radians.
   #
-  # @example 
+  # @example
   #   # Create a 1/4 circle, radius of 5, normal to the Z axis
   #   center = Geom::Point3d.new 0, 0, -1
   #   normal = Geom::Vector3d.new 0,0,1
@@ -166,7 +166,7 @@ class Sketchup::ArcCurve < Sketchup::Curve
   # the curve. Note that the length of the returned vector is equal to the radius
   # of the underlying curve.
   #
-  # @example 
+  # @example
   #   centerpoint = Geom::Point3d.new
   #   # Create a circle perpendicular to the normal or Z axis
   #   vector = Geom::Vector3d.new 0,0,1
@@ -188,7 +188,7 @@ class Sketchup::ArcCurve < Sketchup::Curve
   # the curve. Note that the length of the returned vector is equal to the radius
   # of the underlying curve.
   #
-  # @example 
+  # @example
   #   centerpoint = Geom::Point3d.new
   #   # Create a circle perpendicular to the normal or Z axis
   #   vector = Geom::Vector3d.new 0,0,1

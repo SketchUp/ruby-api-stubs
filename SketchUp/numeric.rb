@@ -11,7 +11,7 @@ class Numeric
 
   # The cm method is used to convert from centimeters to inches.
   #
-  # @example 
+  # @example
   #   cm = 10
   #   inches = cm.cm
   #
@@ -22,10 +22,10 @@ class Numeric
   end
 
   # The degrees method is used to convert from degrees to radians.
-  # 
+  #
   # For example 90.degrees would return 1.5707963267949
   #
-  # @example 
+  # @example
   #   degrees = 90
   #   radians = degrees.degrees
   #
@@ -37,7 +37,7 @@ class Numeric
 
   # The feet method is used to convert from feet to inches.
   #
-  # @example 
+  # @example
   #   feet = 1
   #   inches = feet.feet
   #
@@ -49,7 +49,7 @@ class Numeric
 
   # The to_l is used to convert from a number to a length.
   #
-  # @example 
+  # @example
   #   number = 12
   #   length = number.to_l
   #
@@ -61,7 +61,7 @@ class Numeric
 
   # The km method is used to convert from kilometers to inches.
   #
-  # @example 
+  # @example
   #   value = 1
   #   inches = value.km
   #
@@ -73,7 +73,7 @@ class Numeric
 
   # The m method is used to convert meters to inches.
   #
-  # @example 
+  # @example
   #   meters = 1
   #   inches = meters.m
   #
@@ -85,7 +85,7 @@ class Numeric
 
   # The mile method is used to convert from miles to inches.
   #
-  # @example 
+  # @example
   #   miles = 1
   #   inches = miles.mile
   #
@@ -96,11 +96,11 @@ class Numeric
   end
 
   # The mm method is used to convert a number to millimeters.
-  # 
+  #
   # It returns a Length value which is the same length as the given value. For
   # example len = 25.4.mm returns 1 inch.
   #
-  # @example 
+  # @example
   #   value = 10
   #   mm = value.mm
   #
@@ -111,10 +111,10 @@ class Numeric
   end
 
   # The radians method is used to convert from radians to degrees.
-  # 
+  #
   # For example, 1.5707963267949.radians would return 90.0
   #
-  # @example 
+  # @example
   #   radians = 1.5707963267949
   #   degrees = radians.radians
   #
@@ -126,7 +126,7 @@ class Numeric
 
   # The to_cm method is used to convert from inches to centimeters.
   #
-  # @example 
+  # @example
   #   inches = 1
   #   cm = inches.to_cm
   #
@@ -138,7 +138,7 @@ class Numeric
 
   # The to_feet method is used to convert from inches to feet.
   #
-  # @example 
+  # @example
   #   inches = 12
   #   feet = inches.to_feet
   #
@@ -149,10 +149,10 @@ class Numeric
   end
 
   # The to_inch method converts from inches to inches.
-  # 
+  #
   # This does not change the value.
   #
-  # @example 
+  # @example
   #   inches = 12
   #   inches = inches.to_inch
   #
@@ -164,7 +164,7 @@ class Numeric
 
   # The to_km method is used to convert from inches to kilometers.
   #
-  # @example 
+  # @example
   #   inches = 1
   #   km = inches.to_km
   #
@@ -176,7 +176,7 @@ class Numeric
 
   # The to_l is used to convert from a number to a length.
   #
-  # @example 
+  # @example
   #   number = 12
   #   length = number.to_l
   #
@@ -188,7 +188,7 @@ class Numeric
 
   # The to_m method is used to convert from inches to meters.
   #
-  # @example 
+  # @example
   #   inches = 12
   #   meters = inches.to_m
   #
@@ -200,7 +200,7 @@ class Numeric
 
   # The to_mile method is used to convert from inches to miles.
   #
-  # @example 
+  # @example
   #   inches = 10000
   #   miles = inches.to_mile
   #
@@ -212,7 +212,7 @@ class Numeric
 
   # The to_mm method is used to convert from inches to millimeters.
   #
-  # @example 
+  # @example
   #   inches = 1
   #   mm = inches.to_mm
   #
@@ -224,7 +224,7 @@ class Numeric
 
   # The to_yard method is used to convert from inches to yards.
   #
-  # @example 
+  # @example
   #   inches = 10000
   #   yards = inches.to_yard
   #
@@ -236,7 +236,7 @@ class Numeric
 
   # The yard method is used to convert from yards to inches.
   #
-  # @example 
+  # @example
   #   yards = 1.to_l
   #   inches = yards.yard
   #

@@ -12,10 +12,10 @@ class Geom::UTM
   # UTM objects by calling the method Model.point_to_utm instead of calling this
   # method.
   #
-  # @example 
+  # @example
   #   # Create a copy of an existing UTM object.
   #   utm = Geom::UTM.new utm2
-  #   
+  #
   #   # Create a new UTM object from scratch.
   #   utm = Geom::UTM.new 13, "T", 475849.37521, 4429682.73749
   #
@@ -42,7 +42,7 @@ class Geom::UTM
   # elements are the zone number, the zone letter, the x coordinate and the y
   # coordinate.
   #
-  # @example 
+  # @example
   #   # Create a new UTM object from scratch.
   #   utm = Geom::UTM.new 13, "T", 475849.37521, 4429682.73749
   #   a = utm.to_a
@@ -56,7 +56,7 @@ class Geom::UTM
   # The to_latlong method is used to convert UTM coordinates to latitude
   # and longitude. See the LatLong class for more information.
   #
-  # @example 
+  # @example
   #   # Create a new UTM object from scratch.
   #   utm = Geom::UTM.new 13, "T", 475849.37521, 4429682.73749
   #   ll = utm.to_latlong
@@ -69,7 +69,7 @@ class Geom::UTM
 
   # The to_s method is used to retrieve a string representation of a UTM.
   #
-  # @example 
+  # @example
   #   # Create a new UTM object from scratch.
   #   utm = Geom::UTM.new 13, "T", 475849.37521, 4429682.73749
   #   string = utm.to_s
@@ -82,7 +82,7 @@ class Geom::UTM
 
   # The x method returns the UTM x coordinate.
   #
-  # @example 
+  # @example
   #   # Create a new UTM object from scratch.
   #   utm = Geom::UTM.new 13, "T", 475849.37521, 4429682.73749
   #   x = utm.x
@@ -95,7 +95,7 @@ class Geom::UTM
 
   # The x method returns the UTM y coordinate.
   #
-  # @example 
+  # @example
   #   # Create a new UTM object from scratch.
   #   utm = Geom::UTM.new 13, "T", 475849.37521, 4429682.73749
   #   y = utm.y
@@ -108,7 +108,7 @@ class Geom::UTM
 
   # The zone_letter method returns the UTM zone letter.
   #
-  # @example 
+  # @example
   #   # Create a new UTM object from scratch.
   #   utm = Geom::UTM.new 13, "T", 475849.37521, 4429682.73749
   #   zl = utm.zone_letter
@@ -121,7 +121,7 @@ class Geom::UTM
 
   # The zone_number method returns the UTM zone number.
   #
-  # @example 
+  # @example
   #   # Create a new UTM object from scratch.
   #   utm = Geom::UTM.new 13, "T", 475849.37521, 4429682.73749
   #   zn = utm.zone_number

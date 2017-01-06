@@ -9,14 +9,14 @@ class Sketchup::Menu
   # Instance Methods
 
   # The add_item menu item is used to add a menu item to the specified menu.
-  # 
+  #
   # This method takes a block that defines the action to perform when the menu
   # item is selected.
-  # 
+  #
   # The item id that is returned can be used when adding an optional
   # validation procedure for the menu item.
   #
-  # @example 
+  # @example
   #   plugins_menu = UI.menu("Plugins")
   #   item = plugins_menu.add_item("Test") { test }
   #   if (item)
@@ -39,7 +39,7 @@ class Sketchup::Menu
 
   # The add_separator method is used to add a menu separator to a menu.
   #
-  # @example 
+  # @example
   #   plugins_menu = UI.menu("Plugins")
   #   plugins_menu.add_separator
   #
@@ -51,7 +51,7 @@ class Sketchup::Menu
 
   # The add_submenu method is used to add a sub-menu to a menu.
   #
-  # @example 
+  # @example
   #   plugins_menu = UI.menu("Plugins")
   #   submenu = plugins_menu.add_submenu("Test")
   #   submenu.add_item("Hello World") {
@@ -71,7 +71,7 @@ class Sketchup::Menu
   # procedure. Your procedure should return either MF_ENABLED, MF_DISABLED,
   # MF_CHECKED, MF_UNCHECKED, or MF_GRAYED.
   #
-  # @example 
+  # @example
   #   plugins_menu = UI.menu("Plugins")
   #   item = plugins_menu.add_item("Test") { UI.messagebox "My Test Item"}
   #   status = plugins_menu.set_validation_proc(item)  {

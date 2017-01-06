@@ -5,7 +5,7 @@
 # inside SketchUp. At any given time, a single animation can be active on a
 # {Sketchup::View}. To make your own, build a Ruby class that contains the
 # methods described below:
-# 
+#
 #   # This is an example of a simple animation that floats the camera up to
 #   # a z position of 200". The only required method for an animation is
 #   # nextFrame. It is called whenever you need to show the next frame of
@@ -19,17 +19,17 @@
 #       return new_eye.z < 500.0
 #     end
 #   end
-# 
+#
 #   # This adds an item to the Camera menu to activate our custom animation.
 #   UI.menu("Camera").add_item("Run Float Up Animation") {
 #     Sketchup.active_model.active_view.animation = FloatUpAnimation.new
 #   }
-# 
+#
 # {Sketchup::Animation} objects are activated by using the
 # {Sketchup::View#animation=} method on a {Sketchup::View}
 # object. To stop an animation set the view's animation object to +nil+, like
 # so:
-# 
+#
 #   Sketchup.active_model.active_view.animation = nil
 #
 # @version SketchUp 6.0
@@ -40,11 +40,11 @@ class Sketchup::Animation
   # The {#nextFrame} method is invoked by SketchUp to tell the animation to
   # display its next frame. This method should set up the camera and then call
   # {Sketchup::View#show_frame}.
-  # 
+  #
   # The {#nextFrame} method is the only required method of the
   # {Sketchup::Animation} interface that you must implement.
   #
-  # @example 
+  # @example
   #   def nextFrame(view)
   #     # Insert your handler code for updating the camera or other entities.
   #     view.show_frame
@@ -65,13 +65,13 @@ class Sketchup::Animation
   end
 
   # The {#pause} method is invoked by SketchUp when the animation is paused.
-  # 
+  #
   # This method is optional (you do not need to implement this method unless you
   # want to perform some specialized function when the animation is paused). You
   # cannot call this method in your code explicitly and expect an animation to
   # pause, only certain SketchUp events cause the method to be called.
   #
-  # @example 
+  # @example
   #   def pause
   #     # Insert handler code for whatever you need to do when it is paused.
   #   end
@@ -80,7 +80,7 @@ class Sketchup::Animation
   #   with the Ruby API in the current version, so this method is probably not
   #   useful to you.
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def pause
@@ -88,13 +88,13 @@ class Sketchup::Animation
 
   # The {#resume} method is invoked by SketchUp when the animation is resumed
   # after being paused.
-  # 
+  #
   # This method is optional (you do not need to implement this method unless you
   # want to perform some specialized function when the animation is resumed).
   # You cannot call this method in your code explicitly and expect an animation
   # to stop, only certain SketchUp events cause the method to be called.
   #
-  # @example 
+  # @example
   #   def resume
   #     # Insert your handler code for whatever you need to do as you resume.
   #   end
@@ -103,24 +103,24 @@ class Sketchup::Animation
   #   with the Ruby API in the current version, so this method is probably not
   #   useful to you.
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def resume
   end
 
   # The {#stop} method is invoked by SketchUp when the animation is stopped.
-  # 
+  #
   # This method is optional (you do not need to implement this method unless you
   # want to perform some specialized function when the animation is stopped). You
   # cannot call this method in your code explicitly and expect an animation to
   # stop, only certain SketchUp events cause the method to be called.
-  # 
+  #
   # Perhaps the most common way for this method to be called is when your Ruby
   # code sets {Sketchup::View#animation=} to +nil+. See the class comments for
   # an example of this.
   #
-  # @example 
+  # @example
   #   def stop
   #     # Insert your handler code for cleaning up after your animation.
   #   end
@@ -128,7 +128,7 @@ class Sketchup::Animation
   # @note Do not call +view.animation = nil+ within this method! This will cause
   #   a recursive loop and crash SketchUp.
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def stop

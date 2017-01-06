@@ -4,34 +4,34 @@
 # The set class represents a collection of unique objects. This class is useful
 # for keeping track of a group of related entities, kind of like a selection
 # set that stays around for as long as you need it to.
-# 
+#
 # To make a set of your own, create an empty one using Sketchup::Set.new, and
 # then add items to it.
 # Note that in SketchUp 2014 this class was changed from Set to Sketchup::Set
 # in order to avoid conflict with the Ruby Standard Library. The Sketchup::Set
 # class is deprecated and new extensions should make use of Ruby's Set class
 # unless they need backward compatibility.
-# 
+#
 # If you want to ensure backwards compatibility you can use this shim:
 #
-# @example 
+# @example
 #   module Example
-#   
+#
 #     # Shim for the Set class which was moved in SketchUp 2014
 #     if defined?(Sketchup::Set)
 #       Set = Sketchup::Set
 #     end
-#   
+#
 #     def self.test_set_shim
 #       s = Set.new
 #       s.insert('Hello')
 #       s.insert('World')
 #       puts s.to_a
 #     end
-#   
+#
 #   end
 #
-# @example 
+# @example
 #   my_set = Sketchup::Set.new
 #   my_set.insert entity1
 #   my_set.insert entity2
@@ -43,7 +43,7 @@ class Sketchup::Set
 
   # The clear method is used to clear all objects out of the set.
   #
-  # @example 
+  # @example
   #   set = Sketchup::Set.new
   #   toolbar = UI::Toolbar.new "Test"
   #   set.insert toolbar
@@ -67,7 +67,7 @@ class Sketchup::Set
 
   # The contains? method is an alias for include?. See also Set.include?
   #
-  # @example 
+  # @example
   #   set = Sketchup::Set.new
   #   toolbar = UI::Toolbar.new "Test"
   #   set.insert toolbar
@@ -83,7 +83,7 @@ class Sketchup::Set
   # @return status - true if the set contains the object, false if
   #   the set does not contain the object.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def contains?(object)
@@ -91,7 +91,7 @@ class Sketchup::Set
 
   # The delete object is used to delete or remove an object from the set.
   #
-  # @example 
+  # @example
   #   set = Sketchup::Set.new
   #   toolbar = UI::Toolbar.new "Test"
   #   set.insert toolbar
@@ -118,7 +118,7 @@ class Sketchup::Set
 
   # The each method is used to iterate through all of the objects in the set.
   #
-  # @example 
+  # @example
   #   set = Sketchup::Set.new
   #   toolbar = UI::Toolbar.new "Test"
   #   set.insert toolbar
@@ -126,13 +126,13 @@ class Sketchup::Set
   #
   # @version SketchUp 6.0
   #
-  # @yield [item] 
+  # @yield [item]
   def each
   end
 
   # The empty? method is used to determine whether the set is empty.
   #
-  # @example 
+  # @example
   #   set = Sketchup::Set.new
   #   toolbar = UI::Toolbar.new "Test"
   #   set.insert toolbar
@@ -146,7 +146,7 @@ class Sketchup::Set
   # @return status - true if the set is empty, false if it is not
   #   empty.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def empty?
@@ -154,7 +154,7 @@ class Sketchup::Set
 
   # The contains? method is an alias for include?. See also Set.include?
   #
-  # @example 
+  # @example
   #   set = Sketchup::Set.new
   #   toolbar = UI::Toolbar.new "Test"
   #   set.insert toolbar
@@ -170,7 +170,7 @@ class Sketchup::Set
   # @return status - true if the set contains the object, false if
   #   the set does not contain the object.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def include?(object)
@@ -178,7 +178,7 @@ class Sketchup::Set
 
   # The insert method is used to insert an object into the set.
   #
-  # @example 
+  # @example
   #   set = Sketchup::Set.new
   #   toolbar = UI::Toolbar.new "Test"
   #   set.insert toolbar
@@ -199,7 +199,7 @@ class Sketchup::Set
 
   # The length method is an alias for size. See also Set.size.
   #
-  # @example 
+  # @example
   #   set = Sketchup::Set.new
   #   toolbar = UI::Toolbar.new "Test"
   #   set.insert toolbar
@@ -218,7 +218,7 @@ class Sketchup::Set
 
   # The length method is an alias for size. See also Set.size.
   #
-  # @example 
+  # @example
   #   set = Sketchup::Set.new
   #   toolbar = UI::Toolbar.new "Test"
   #   set.insert toolbar
@@ -237,7 +237,7 @@ class Sketchup::Set
 
   # The to_a method is used to get an Array of the entities in your Set.
   #
-  # @example 
+  # @example
   #   set = Sketchup::Set.new
   #   set.insert('Hello')
   #   set.insert('World')

@@ -5,7 +5,7 @@
 # one conceptual entity. Since SketchUp is a surface modeler, all circles,
 # arcs, and arbitrary curves are really just edges that are bound together in
 # sequence.
-# 
+#
 # There is a subclass of Curve called ArcCurve, which is any curve that makes
 # up part of a circle. You can think of ArcCurves as entities that were created
 # with SketchUp's Arc or Circle drawing tools and Curves as entities that were
@@ -19,7 +19,7 @@ class Sketchup::Curve < Sketchup::Entity
   # The count_edges method is used to retrieve the number of Edge objects that
   # make up the Curve.
   #
-  # @example 
+  # @example
   #   centerpoint = Geom::Point3d.new
   #   # Create a circle perpendicular to the normal or Z axis
   #   vector = Geom::Vector3d.new 0,0,1
@@ -40,7 +40,7 @@ class Sketchup::Curve < Sketchup::Entity
   # The each_edge method is used to iterate through all of the Edge objects in
   # the curve.
   #
-  # @example 
+  # @example
   #   centerpoint = Geom::Point3d.new
   #   # Create a circle perpendicular to the normal or Z axis
   #   vector = Geom::Vector3d.new 0,0,1
@@ -62,7 +62,7 @@ class Sketchup::Curve < Sketchup::Entity
   # The edges method is used to retrieve an array of Edge objects that make up
   # the Curve.
   #
-  # @example 
+  # @example
   #   centerpoint = Geom::Point3d.new
   #   # Create a circle perpendicular to the normal or Z axis
   #   vector = Geom::Vector3d.new 0,0,1
@@ -82,7 +82,7 @@ class Sketchup::Curve < Sketchup::Entity
 
   # The first_edge method is used to retrieve the first edge of the curve.
   #
-  # @example 
+  # @example
   #   centerpoint = Geom::Point3d.new
   #   # Create a circle perpendicular to the normal or Z axis
   #   vector = Geom::Vector3d.new 0,0,1
@@ -101,7 +101,7 @@ class Sketchup::Curve < Sketchup::Entity
   end
 
   #
-  # @example 
+  # @example
   #   # Create a polygon and check its edge
   #   ents = Sketchup.active_model.entities
   #   ents.add_ngon [0, 0, 0], [0, 0, 1], 10, 6
@@ -112,7 +112,7 @@ class Sketchup::Curve < Sketchup::Entity
   # @return True if this edge was originally created by the polygon
   #   tool, otherwise false.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 7.1 M1
   def is_polygon?
@@ -120,7 +120,7 @@ class Sketchup::Curve < Sketchup::Entity
 
   # The last_edge method is used to retrieve the last edge of the curve.
   #
-  # @example 
+  # @example
   #   centerpoint = Geom::Point3d.new
   #   # Create a circle perpendicular to the normal or Z axis
   #   vector = Geom::Vector3d.new 0,0,1
@@ -140,7 +140,7 @@ class Sketchup::Curve < Sketchup::Entity
 
   # The length method retrieves the length of the curve.
   #
-  # @example 
+  # @example
   #   centerpoint = Geom::Point3d.new
   #   # Create a circle perpendicular to the normal or Z axis
   #   vector = Geom::Vector3d.new 0,0,1
@@ -161,7 +161,7 @@ class Sketchup::Curve < Sketchup::Entity
 
   # The vertices method retrieves a collection of all vertices in a curve.
   #
-  # @example 
+  # @example
   #   # Need example ruby code here.
   #
   # @param point_array
@@ -175,7 +175,7 @@ class Sketchup::Curve < Sketchup::Entity
 
   # The vertices method retrieves a collection of all vertices in a curve.
   #
-  # @example 
+  # @example
   #   centerpoint = Geom::Point3d.new
   #   # Create a circle perpendicular to the normal or Z axis
   #   vector = Geom::Vector3d.new 0,0,1

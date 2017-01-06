@@ -5,10 +5,10 @@
 # model. The drawing methods here (draw_line, draw_polyline, etc) are meant to
 # be invoked within a tool's Tool.draw method. Calling them outside Tool.draw
 # will have no effect.
-# 
+#
 # You access the View by calling the Model.active_view method.
 #
-# @example 
+# @example
 #   view = Sketchup.active_model.active_view
 #
 # @version SketchUp 6.0
@@ -18,7 +18,7 @@ class Sketchup::View
 
   # The add_observer method is used to add an observer to the current object.
   #
-  # @example 
+  # @example
   #   view = Sketchup.active_model.active_view
   #   status = view.add_observer observer
   #
@@ -34,7 +34,7 @@ class Sketchup::View
   # The animation= method is used to set an animation that is displayed for a
   # view. See Animation for details on how to create an animation object.
   #
-  # @example 
+  # @example
   #   animation = ViewSpinner.new
   #   model = Sketchup.active_model
   #   view = model.active_view
@@ -58,7 +58,7 @@ class Sketchup::View
   # current model in the view. This can be used to estimate the frame rate for
   # an animation.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   view = model.active_view
   #   time = view.average_refresh_time
@@ -71,7 +71,7 @@ class Sketchup::View
 
   # The camera method is used to retrieve the camera for the view.
   #
-  # @example 
+  # @example
   #   camera = view.camera
   #
   # @return camera - a Camera object
@@ -84,7 +84,7 @@ class Sketchup::View
   # time is given, then it will animate the transition from the current camera
   # to the new one.
   #
-  # @example 
+  # @example
   #   camera2 = Sketchup.Camera.new
   #   model = Sketchup.active_model
   #   view = model.active_view
@@ -106,7 +106,7 @@ class Sketchup::View
   # The center method is used to retrieve the coordinates of the center of the
   # view in pixels. It is returned as an array of 2 values for x and y.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   view = model.active_view
   #   c = view.center
@@ -124,14 +124,14 @@ class Sketchup::View
   # uses a Camera with a fixed aspect ratio, then the corners are the corners of
   # the viewing are of the camera which might be different than the actual
   # corners of the view itself.
-  # 
+  #
   # The index numbers are as follows:
   #  - 0: top left,
   #  - 1: top right,
   #  - 2: bottom left,
   #  - 3: bottom right.
   #
-  # @example 
+  # @example
   #   point = view.corner index
   #
   # @param index
@@ -147,51 +147,51 @@ class Sketchup::View
   # The {#draw} method is used to do basic drawing. This method can only be
   # called from within the {Tool#draw} method of a tool that you implement in
   # Ruby.
-  # 
+  #
   # The following constants are all OpenGL terms and have been externalized to
   # Ruby. Here is a summary of their meanings:
-  # 
+  #
   # [GL_POINTS]
   #   Treats each vertex as a single point. Vertex n defines point n. N
   #   points are drawn.
-  # 
+  #
   # [GL_LINES]
   #   Treats each pair of vertices as
   #   an independent line segment. Vertices 2n-1 and 2n define line n. N/2 lines
   #   are drawn.
-  # 
+  #
   # [GL_LINE_STRIP]
   #   Draws a connected group of line
   #   segments from the first vertex to the last. Vertices n and n+1 define
   #   line n. N-1 lines are drawn.
-  # 
+  #
   # [GL_LINE_LOOP]
   #   Draws a connected group of line segments from the first vertex to the last,
   #   then back to the first. Vertices n and n+1 define line n. The last line,
   #   however, is defined by vertices N and 1. N lines are drawn.
-  # 
+  #
   # [GL_TRIANGLES]
   #   Treats each triplet of vertices as an independent
   #   triangle. Vertices 3n-2, 3n-1, and 3n define triangle n. N/3 triangles are
   #   drawn.
-  # 
+  #
   # [GL_TRIANGLE_STRIP]
   #   Draws a connected group of triangles. One triangle is defined for each
   #   vertex presented after the first two vertices. For odd n, vertices n, n+1,
   #   and n+2 define triangle n. For even n, vertices n+1, n, and n+2 define
   #   triangle n. N-2 triangles are drawn.
-  # 
+  #
   # [GL_TRIANGLE_FAN]
   #   Draws a connected group of triangles.
   #   One triangle is defined for each vertex presented after the first two
   #   vertices. Vertices 1, n+1, and n+2 define triangle n. N-2 triangles are
   #   drawn.
-  # 
+  #
   # [GL_QUADS]
   #   Treats each group of four vertices as an
   #   independent quadrilateral. Vertices 4n-3, 4n-2, 4n-1, and 4n define
   #   quadrilateral n. N/4 quadrilaterals are drawn.
-  # 
+  #
   # [GL_QUAD_STRIP]
   #   Draws a connected group of quadrilaterals. One quadrilateral is
   #   defined for each pair of vertices presented after the first pair.
@@ -199,12 +199,12 @@ class Sketchup::View
   #   quadrilaterals are drawn. Note that the order in which vertices are used to
   #   construct a quadrilateral from strip data is different from that used with
   #   independent data.
-  # 
+  #
   # [GL_POLYGON]
   #   Draws a single, convex polygon. Vertices 1
   #   through N define this polygon.
   #
-  # @example 
+  # @example
   #   points = [
   #     Geom::Point3d.new(0, 0, 0),
   #     Geom::Point3d.new(9, 0, 0),
@@ -223,7 +223,7 @@ class Sketchup::View
   #
   # @param [Array<Geom::Point3d>] points
   #
-  # @return [Sketchup::View] 
+  # @return [Sketchup::View]
   #
   # @see Tool#getExtents
   #
@@ -233,7 +233,7 @@ class Sketchup::View
 
   # The {#draw2d} method is used to draw in screen space (using 2D screen
   # coordinates) instead of 3D space.
-  # 
+  #
   # The second parameter is an {Array} of {Geom::Point3d} objects (or several
   # individual {Geom::Point3d} objects). These {Geom::Point3d} objects are in
   # screen space, not 3D space.
@@ -241,7 +241,7 @@ class Sketchup::View
   # drawing area. The Y value corresponds to the number of pixels down from
   # the top of the drawing area. The Z value is not used.
   #
-  # @example 
+  # @example
   #   points = [
   #     Geom::Point3d.new(0, 0, 0),
   #     Geom::Point3d.new(8, 0, 0),
@@ -267,11 +267,11 @@ class Sketchup::View
   end
 
   # The draw_lines method is used to draw disconnected lines.
-  # 
+  #
   # You must have an even number of points. This method is usually  invoked
   # within the draw method of a tool.
   #
-  # @example 
+  # @example
   #   point4 = Geom::Point3d.new 0,0,0
   #   point5 = Geom::Point3d.new 100,100,100
   #   # returns a view
@@ -279,12 +279,12 @@ class Sketchup::View
   #   status = view.draw_lines point4, point5
   #
   # @overload draw_lines(point_list, ...)
-  # 
+  #
   #   @param point_list    An even number of Point3d objects.
   #   @return              view - a View object
   #
   # @overload draw_lines(pts)
-  # 
+  #
   #   @param pts           An array of Point3d objects.
   #   @return              view - a View object
   #
@@ -293,11 +293,11 @@ class Sketchup::View
   end
 
   # The draw_lines method is used to draw disconnected lines.
-  # 
+  #
   # You must have an even number of points. This method is usually  invoked
   # within the draw method of a tool.
   #
-  # @example 
+  # @example
   #   point4 = Geom::Point3d.new 0,0,0
   #   point5 = Geom::Point3d.new 100,100,100
   #   # returns a view
@@ -305,12 +305,12 @@ class Sketchup::View
   #   status = view.draw_lines point4, point5
   #
   # @overload draw_lines(point_list, ...)
-  # 
+  #
   #   @param point_list    An even number of Point3d objects.
   #   @return              view - a View object
   #
   # @overload draw_lines(pts)
-  # 
+  #
   #   @param pts           An array of Point3d objects.
   #   @return              view - a View object
   #
@@ -319,10 +319,10 @@ class Sketchup::View
   end
 
   # This method is used to draw points.
-  # 
+  #
   # This method is usually invoked within the draw method of a tool.
   #
-  # @example 
+  # @example
   #   point3 = Geom::Point3d.new 0,0,0
   #   # returns a view
   #   status = view.draw_points point3, 10, 1, "red"
@@ -349,10 +349,10 @@ class Sketchup::View
 
   # The draw_polyline method is used to draw a series of connected line segments
   # from pt1 to pt2 to pt3, and so on.
-  # 
+  #
   # This method is usually invoked within the draw method of a tool.
   #
-  # @example 
+  # @example
   #   point12 = Geom::Point3d.new 0,0,0
   #   point13 = Geom::Point3d.new 10,10,10
   #   point14 = Geom::Point3d.new 20,20,20
@@ -360,12 +360,12 @@ class Sketchup::View
   #   status = view.draw_polyline point12, point13, point14, point15
   #
   # @overload draw_polyline(point_list, ...)
-  # 
+  #
   #   @param point_list    An even number of Point3d objects.
   #   @return              view - a View object
   #
   # @overload draw_polyline(pts)
-  # 
+  #
   #   @param pts           An array of Point3d objects.
   #   @return              view - a View object
   #
@@ -376,14 +376,14 @@ class Sketchup::View
   # This method is used to draw text on the screen and is usually invoked within
   # the draw method of a tool.
   #
-  # @example 
+  # @example
   #   view = Sketchup.active_model.active_view
-  #   
+  #
   #   # This works in all SketchUp versions and draws the text using the
   #   # default font, color and size.
   #   point = Geom::Point3d.new(200, 100, 0)
   #   view.draw_text(point, "This is a test")
-  #   
+  #
   #   # This works in SketchUp 2016 and up.
   #   options = {
   #     :font => "Arial",
@@ -393,7 +393,7 @@ class Sketchup::View
   #   }
   #   point = Geom::Point3d.new(200, 200, 0)
   #   view.draw_text(point, "This is another\ntest", options)
-  #   
+  #
   #   # You can also use Ruby 2.0's named arguments:
   #   point = Geom::Point3d.new(200, 200, 0)
   #   view.draw_text(point, "Hello world!", color: "Red")
@@ -426,7 +426,7 @@ class Sketchup::View
   #   A Point3d object representing a 2D coordinate
   #   in view space.
   #
-  # @return [Sketchup::View] 
+  # @return [Sketchup::View]
   #
   # @version SketchUp 6.0
   def draw_text(point, text, options = {})
@@ -434,10 +434,10 @@ class Sketchup::View
 
   # The drawing_color method is used to set the color that is used for drawing
   # to the view.
-  # 
+  #
   # This method is usually invoked within the draw method of a tool.
   #
-  # @example 
+  # @example
   #   view = view.drawing_color = color
   #
   # @param color
@@ -453,11 +453,11 @@ class Sketchup::View
   # performance when a model is large and view refresh time is slow. For
   # example, if you were using a Ruby script to animate the camera through
   # a large scene, you may want to set dynamic to true during that time.
-  # 
+  #
   # See also camera.rb which is part of the film and stage ruby
   # scripts.
   #
-  # @example 
+  # @example
   #   view.dynamic = true
   #
   # @param value
@@ -472,7 +472,7 @@ class Sketchup::View
   # The field_of_view method is used get the view's field of view setting, in
   # degrees.
   #
-  # @example 
+  # @example
   #   fov = Sketchup.active_model.active_view.field_of_view
   #
   # @return fov - the field of view
@@ -484,7 +484,7 @@ class Sketchup::View
   # The field_of_view= method is used set the view's field of view setting,
   # in degrees.
   #
-  # @example 
+  # @example
   #   my_view = Sketchup.active_model.active_view
   #   my_view.field_of_view = 45
   #   my_view.invalidate
@@ -500,11 +500,11 @@ class Sketchup::View
 
   # The guess_target method is used to guess at what the user is looking at when
   # you have a perspective view.
-  # 
+  #
   # This method is useful when writing a viewing tool. See also camera.rb which
   # is part of the film and stage ruby scripts.
   #
-  # @example 
+  # @example
   #   target = view.guess_target
   #
   # @return target - a Point3d object representing the point in the
@@ -517,26 +517,26 @@ class Sketchup::View
   # The inference_locked? method is used to determine if inference locking is on
   # for the view.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   view = model.active_view
   #   status = view.inference_locked
   #
   # @return status - true if locked, false if unlocked
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def inference_locked?
   end
 
   # The inputpoint method is used to retrieve an input point.
-  # 
+  #
   # This will normally be used inside one of the mouse event handling methods in
   # a tool. Usually, it is preferable to create the InputPoint first and then
   # use the pick method on it.
   #
-  # @example 
+  # @example
   #   inputpoint = view.inputpoint x, y, inputpoint1
   #
   # @param x
@@ -556,7 +556,7 @@ class Sketchup::View
 
   # The invalidate method is used mark the view as in need of a redraw.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   view = model.active_view
   #   invalidated_view = view.invalidate
@@ -573,7 +573,7 @@ class Sketchup::View
   # The last_refresh_time method is used to retrieve the time for the last full
   # view refresh.
   #
-  # @example 
+  # @example
   #   time = view.last_refresh_time
   #
   # @return time - time in milliseconds
@@ -590,10 +590,10 @@ class Sketchup::View
   #   "_" (Long Dashes Line),
   #   "-.-" (Dash Dot Dash Line),
   #   "" (Solid Line).
-  # 
+  #
   # This method is usually invoked within the draw method of a tool.
   #
-  # @example 
+  # @example
   #   point8 = Geom::Point3d.new 0,0,0
   #   point9 = Geom::Point3d.new 100,100,100
   #   view.line_stipple = "-.-"
@@ -610,10 +610,10 @@ class Sketchup::View
 
   # The line_width= method is used to set the line width to use for drawing. The
   # value is a Double indicating the desired width in pixels.
-  # 
+  #
   # This method is usually invoked within the draw method of a tool.
   #
-  # @example 
+  # @example
   #   view.line_width = width
   #
   # @param width
@@ -626,14 +626,14 @@ class Sketchup::View
   end
 
   # The lock_inference method is used to lock or unlock an inference.
-  # 
+  #
   # This method will typically be called from inside a tool class when the user
   # presses the shift key.
-  # 
+  #
   # With no arguments it unlocks all inferences. With one or two arguments, it
   # locks the inference based on the given InputPoint(s).
   #
-  # @example 
+  # @example
   #   view = view.lock_inference
   #   view = view.lock_inference inputpoint
   #   view = view.lock_inference inputpoint1, inputpoint2
@@ -652,7 +652,7 @@ class Sketchup::View
 
   # The model method is used to retrieve the model for the current view.
   #
-  # @example 
+  # @example
   #   model = view.model
   #
   # @return model - the model for this view
@@ -663,20 +663,20 @@ class Sketchup::View
 
   # The pick_helper method is used to retrieve a pick helper for the view. See
   # the PickHelper class for information on pick helpers.
-  # 
+  #
   # This call returns an initialized PickHelper.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   view = model.active_view
   #   ph = view.pick_helper
   #
   # @overload pick_helper
-  # 
+  #
   #   @return              pickhelper - a PickHelper object
   #
   # @overload pick_helper(x, y, aperture = 0)
-  # 
+  #
   #   @param [Integer] x
   #   @param [Integer] y
   #   @param [Integer] aperture
@@ -689,16 +689,16 @@ class Sketchup::View
   # The pickray method is used to retrieve a ray passing through a given screen
   # position in the viewing direction.
   #
-  # @example 
+  # @example
   #   ray = view.pickray x, y
   #
   # @overload pickray(screen_point)
-  # 
+  #
   #   @param [Array(Integer, Integer)] screen_point
   #   @return              ray - a ray
   #
   # @overload pickray(x, y)
-  # 
+  #
   #   @param [Integer] x
   #   @param [Integer] y
   #   @return              ray - a ray
@@ -709,11 +709,11 @@ class Sketchup::View
 
   # The pixels_to_model method is used to compute a model size from a pixel size
   # at a given point.
-  # 
+  #
   # This method is useful for deciding how big to draw something based on a
   # desired size in pixels.
   #
-  # @example 
+  # @example
   #   size = view.pixels_to_model pixels, point
   #
   # @param pixels
@@ -730,7 +730,7 @@ class Sketchup::View
 
   # The refresh method is used to immediately force a redraw of the view.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   view = model.active_view
   #   refreshed_view = view.refresh
@@ -748,7 +748,7 @@ class Sketchup::View
   # The remove_observer method is used to remove an observer from the current
   # object.
   #
-  # @example 
+  # @example
   #   view = Sketchup.active_model.active_view
   #   status = view.remove_observer observer
   #
@@ -763,12 +763,12 @@ class Sketchup::View
 
   # The screen_coords method is used to retrieve the screen coordinates of the
   # given point on the screen.
-  # 
+  #
   # The x and y values returned correspond to the x and y screen coordinates.
   # Ignore the z values.  If the referenced point is not in the current
   # viewport,  the x and/or y value may be negative.
   #
-  # @example 
+  # @example
   #   point = view.screen_coords(ORIGIN)
   #
   # @param point3d
@@ -783,10 +783,10 @@ class Sketchup::View
   # Set the drawing color for the view based on the direction of a line that you
   # want to draw. These colors will match the axes colors in the SketchUp model
   # (typically blue for straight up and down, etc.)
-  # 
+  #
   # This method is usually invoked within the draw method of a tool.
   #
-  # @example 
+  # @example
   #   view = view.set_color_from_line point1, point2
   #
   # @param point1
@@ -803,11 +803,11 @@ class Sketchup::View
 
   # The show_frame method is used to show a frame of an Animation object in the
   # current view.
-  # 
+  #
   # You can supply an optional delay in seconds to wait before showing the next
   # frame. This can be useful to control the speed at which the animation runs.
   #
-  # @example 
+  # @example
   #   status = view.show_frame &lt;delay
   #
   # @param delay
@@ -822,7 +822,7 @@ class Sketchup::View
   # Set a tooltip to display in the view. This is useful for displaying tooltips
   # in a tool that you write in Ruby.
   #
-  # @example 
+  # @example
   #   tooltip = view.tooltip = string
   #
   # @param string
@@ -837,7 +837,7 @@ class Sketchup::View
   # The vpheight method is used to retrieve the height of the viewport for the
   # view.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   view = model.active_view
   #   height = view.vpheight
@@ -851,7 +851,7 @@ class Sketchup::View
   # The vpwidth method is used to retrieve the width of the viewport for the
   # view.
   #
-  # @example 
+  # @example
   #   width = view.vpwidth
   #
   # @return width - the width of the viewport in pixels.
@@ -861,11 +861,11 @@ class Sketchup::View
   end
 
   # The write_image method is used to write the current view to an image file.
-  # 
+  #
   # All arguments except for the filename are optional.
-  # 
+  #
   # If antialias is specified, it should be either true or false.
-  # 
+  #
   # If a hash is passed as the first parameter, then the contents of that hash
   # define how the image is exported.
   # The keys are:
@@ -877,7 +877,7 @@ class Sketchup::View
   #                    between 0.0 and 1.0
   #  - transparent     true or false
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -930,7 +930,7 @@ class Sketchup::View
 
   # The zoom method is used to zoom in or out by some zoom factor.
   #
-  # @example 
+  # @example
   #   view = view.zoom factor
   #   view = view.zoom selection
   #   view = view.zoom entity
@@ -949,7 +949,7 @@ class Sketchup::View
   # The zoom_extents method is used to zoom to the extents about the entire
   # model, as if the user has selected the zoom extents command from the menu.
   #
-  # @example 
+  # @example
   #   view = Sketchup.active_model.active_view
   #   new_view = view.zoom_extents
   #

@@ -15,7 +15,7 @@ class Sketchup::ClassificationSchema
   # The <=> method is used to compare two ClassificationSchema objects for
   # sorting. The comparison is done based on the schema name.
   #
-  # @example 
+  # @example
   #   schema1 = Sketchup.active_model.classifications["IFC 2x3"]
   #   schema2 = Sketchup.active_model.classifications["gbXML"]
   #   # Returns -1
@@ -36,7 +36,7 @@ class Sketchup::ClassificationSchema
 
   # The name method returns the name of the schema.
   #
-  # @example 
+  # @example
   #   Sketchup.active_model.classifications.each { |schema|
   #     puts schema.name
   #   }
@@ -49,7 +49,7 @@ class Sketchup::ClassificationSchema
 
   # The namespace method returns the namespace of the schema.
   #
-  # @example 
+  # @example
   #   Sketchup.active_model.classifications.each { |schema|
   #     puts schema.namespace
   #   }

@@ -3,14 +3,14 @@
 
 # This observer interface is implemented to react to changes in dimension text.
 #
-# @example 
+# @example
 #   # This is an example of a DimensionObserver
 #   class MyDimensionObserver < Sketchup::DimensionObserver
 #     def onTextChanged(dimension)
 #       puts "onTextChanged: #{dimension}, new_text= #{dimension.text}"
 #     end
 #   end
-#   
+#
 #   # Attach the observer. (Assumes there is a dimension in the model root.)
 #   dim = Sketchup.active_model.entities.grep(Sketchup::Dimension).first
 #   dim.add_observer(MyDimensionObserver.new)
@@ -22,7 +22,7 @@ class Sketchup::DimensionObserver
 
   # The {#onTextChanged} method is invoked when your entity is erased.
   #
-  # @example 
+  # @example
   #   def onTextChanged(dimension)
   #     puts "onTextChanged: #{dimension}, new_text= #{dimension.text}"
   #   end

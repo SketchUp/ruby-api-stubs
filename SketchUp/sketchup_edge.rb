@@ -12,7 +12,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   # The all_connected method retrieves all of the entities connected to an edge,
   # including the edge itself.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -44,7 +44,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   # The common_face method is used to identify a face that is common to two
   # edges.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -82,7 +82,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   # to, if any. Note that if the edge is part of an arc instead of a random
   # curve, then this method will return an ArcCurve object.
   #
-  # @example 
+  # @example
   #   edge = Sketchup.active_model.entities.add_line([0,0,0],[100,100,0])
   #   curve = edge.curve
   #   if (curve)
@@ -101,7 +101,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
 
   # The end method is used to retrieve the Vertex object at the end of the edge.
   #
-  # @example 
+  # @example
   #   edge = Sketchup.active_model.entities.add_line([0,0,0],[100,100,0])
   #   vertex = edge.end
   #   if (vertex)
@@ -127,7 +127,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   # The explode_curve method is used to explode an edge as though it were an
   # ArcCurve.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -157,7 +157,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
 
   # The faces method is used to retrieve all of the faces common to the edge.
   #
-  # @example 
+  # @example
   #   edge = Sketchup.active_model.entities.add_line([0,0,0],[100,100,0])
   #   faces = edge.faces
   #   if (faces)
@@ -180,7 +180,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   # the edges, but if you call find_faces on one of the edges, the triangle will
   # be filled in.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -211,7 +211,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
 
   # The length method is used to retrieve the length of an edge in current
   # units.
-  # 
+  #
   # You can pass in an optional Transformation (or an array that can represent a
   # transformation), to correct for a parent group's transformation. For example,
   # if an edge is inside of a group that is scaled to 200%, the length method
@@ -219,7 +219,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   # transformation object to this method, you can account for that to get the
   # "visual" length of the edge.
   #
-  # @example 
+  # @example
   #   edge = Sketchup.active_model.entities.add_line([0,0,0],[100,100,0])
   #   length = edge.length
   #   if (length)
@@ -227,11 +227,11 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #   end
   #
   # @overload length
-  # 
+  #
   #   @return              length - the length of the edge in current units
   #
   # @overload length(transform)
-  # 
+  #
   #   @param transform     A Transformation object or array that can
   #                        be interpreted as a Transformation object.
   #   @return              length - the length of the edge in current units
@@ -245,7 +245,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   # an Array with a Point3d and a Vector3d. See the Geom module and the Array
   # class for more information on lines.
   #
-  # @example 
+  # @example
   #   edge = Sketchup.active_model.entities.add_line([0,0,0],[100,100,0])
   #   # Returns a 3D ray
   #   line = edge.line
@@ -265,7 +265,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   # The other_vertex method is used to find the opposite vertex given one vertex
   # of the edge.
   #
-  # @example 
+  # @example
   #   edge = Sketchup.active_model.entities.add_line([0,0,0],[100,100,0])
   #   # Get the end vertex of an edge
   #   vertex = edge.end
@@ -297,7 +297,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   # The {#reversed_in?} method is used to determine if the edge is reversed in
   # a face's bounding loop.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   points = []
@@ -315,7 +315,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   # @param [Sketchup::Face] face
   #   The face that is bounded by the edge.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @return [Boolean] +true+ if the edge is reversed, +false+ if it is not
   #   reversed. +nil+ if the edge and face is not connected.
@@ -329,11 +329,11 @@ class Sketchup::Edge < Sketchup::Drawingelement
   end
 
   # The {#smooth=} method is used to set the edge to be smooth.
-  # 
+  #
   # A smooth edge will cause the shading between connected faces to blend to a
   # smooth transition. The edge will still be visible.
   #
-  # @example 
+  # @example
   #   edge = Sketchup.active_model.entities.add_line([0,0,0], [100,100,0])
   #   # Soft and Smooth are normally set in pairs.
   #   edge.soft = true
@@ -345,7 +345,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #
   # @param [Boolean] value
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @see https://help.sketchup.com/en/article/3000097
   #
@@ -355,17 +355,17 @@ class Sketchup::Edge < Sketchup::Drawingelement
 
   # The {#smooth?} method is used to retrieve the current smooth setting for an
   # edge.
-  # 
+  #
   # A smooth edge will cause the shading between connected faces to blend to a
   # smooth transition. The edge will still be visible.
   #
-  # @example 
+  # @example
   #   edge = Sketchup.active_model.entities.add_line([0,0,0], [100,100,0])
   #   # Soft and Smooth are normally set in pairs.
   #   edge.smooth = !edge.smooth?
   #   edge.soft = edge.smooth?
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @see https://help.sketchup.com/en/article/3000097
   #
@@ -374,13 +374,13 @@ class Sketchup::Edge < Sketchup::Drawingelement
   end
 
   # The {#soft=} method is used to set the edge to be soft.
-  # 
+  #
   # A soft edge will cause the connected faces to be treated as a surface. This
   # means that if you have Hidden Geometry off and select one face it will also
   # select all faces connected with soft edges. A soft edge will also appear
   # hidden.
   #
-  # @example 
+  # @example
   #   edge = Sketchup.active_model.entities.add_line([0,0,0], [100,100,0])
   #   # Soft and Smooth are normally set in pairs.
   #   edge.soft = true
@@ -392,7 +392,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #
   # @param [Boolean] value
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @see https://help.sketchup.com/en/article/3000097
   #
@@ -402,19 +402,19 @@ class Sketchup::Edge < Sketchup::Drawingelement
 
   # The {#soft?} method is used to retrieve the current smooth setting for an
   # edge.
-  # 
+  #
   # A soft edge will cause the connected faces to be treated as a surface. This
   # means that if you have Hidden Geometry off and select one face it will also
   # select all faces connected with soft edges. A soft edge will also appear
   # hidden.
   #
-  # @example 
+  # @example
   #   edge = Sketchup.active_model.entities.add_line([0,0,0], [100,100,0])
   #   # Soft and Smooth are normally set in pairs.
   #   edge.soft = !edge.soft?
   #   edge.smooth = edge.soft?
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @see https://help.sketchup.com/en/article/3000097
   #
@@ -424,15 +424,15 @@ class Sketchup::Edge < Sketchup::Drawingelement
 
   # The split method is used to  to split an edge into to or more distinct
   # edges. If a Point3d is given, it must be a point that is on the Edge.
-  # 
+  #
   # If a Float is given, it is a number between 0 and 1 that gives the
   # relative position along the edge at which to split it.  For example,
   # edge.split(0.5) will split the Edge at its midpoint. This split position
   # is measured from the Edge.start.
-  # 
+  #
   # Returns the new Edge that was created as a result of splitting this one.
   #
-  # @example 
+  # @example
   #   # Split a line in half.
   #   edge = Sketchup.active_model.entities.add_line([0,0,0],[100,100,0])
   #   new_edge = edge.split 0.5
@@ -452,7 +452,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   # The end method is used to retrieve the Vertex object at the start of the
   # edge.
   #
-  # @example 
+  # @example
   #   edge = Sketchup.active_model.entities.add_line([0,0,0],[100,100,0])
   #   vertex = edge.start
   #   if (vertex)
@@ -478,7 +478,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   # The used_by? method is used to see if an edge is used by a given Face or
   # Vertex.
   #
-  # @example 
+  # @example
   #   edge = Sketchup.active_model.entities.add_line([0,0,0],[100,100,0])
   #   # Returns a vertex
   #   vertex = edge.start
@@ -496,7 +496,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   # @return status - true if the face belongs to the element,
   #   false if not.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def used_by?(element)
@@ -504,7 +504,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
 
   # The vertices method is used to retrieve the vertices on the edge.
   #
-  # @example 
+  # @example
   #   edge = Sketchup.active_model.entities.add_line([0,0,0],[100,100,0])
   #   vertices = edge.vertices
   #

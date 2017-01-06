@@ -7,27 +7,27 @@
 # Preferences dialog box). Generally you should register your ruby scripts as
 # an extension to give SketchUp users the ability to disable it through the
 # user interface.
-# 
+#
 # The idea here is to take the ruby script that actually creates your
 # functionality and place it in a folder somewhere outside of the /Plugins
 # folder, most commonly a subdirectory like /Plugins/MyExtension. Then
 # you create a new ruby script inside the /Plugins directory that will
 # set up the extension entry and load your original script if the user
 # has your extension turned on.
-# 
+#
 # Here is an example extension loading script. For this example, the
 # following code would be saved in /Plugins/StairTools.rb, and the
 # actual plugin itself would live in /Plugins/StairTools/core.rb.
-# 
+#
 # You can find two example extensions that ship with SketchUp,
 # su_dynamiccomponents.rb and su_sandboxtools.rb, under the /Plugins/ folder.
 #
-# @example 
+# @example
 #   # Create an entry in the Extension list that loads a script called
 #   # core.rb.
 #   require 'sketchup.rb'
 #   require 'extensions.rb'
-#   
+#
 #   stair_extension = SketchupExtension.new('Stair Tools", "StairTools/core.rb')
 #   stair_extension.version = '1.0'
 #   stair_extension.description = 'Tools to draw stairs automatically.'
@@ -42,12 +42,12 @@ class SketchupExtension
   # interpreted. This is the equivalent of checking the extension's checkbox
   # in the Preferences > Extensions list.
   #
-  # @example 
+  # @example
   #   # This will register the extension, a necessary step for it to appear
   #   # in SketchUp's Preferences > Extensions list
   #   ext_c = SketchupExtension.new('Stair Tools C', 'StairTools/core.rb')
   #   Sketchup.register_extension(ext_c, false)
-  #   
+  #
   #   # And this will load the extension.
   #   ext_c.check
   #
@@ -60,7 +60,7 @@ class SketchupExtension
   # The copyright method returns the copyright string which appears beneath
   # an extension inside the Extensions Manager dialog.
   #
-  # @example 
+  # @example
   #   # Create an entry in the Extension list that loads a script called
   #   # core.rb.
   #   extension = SketchupExtension.new('Stair Tools', 'StairTools/core.rb')
@@ -76,7 +76,7 @@ class SketchupExtension
   # The copyright= method sets the copyright string which appears beneath
   # an extension inside the Extensions Manager dialog.
   #
-  # @example 
+  # @example
   #   # Create an entry in the Extension list that loads a script called
   #   # core.rb.
   #   extension = SketchupExtension.new('Stair Tools', 'StairTools/core.rb')
@@ -95,7 +95,7 @@ class SketchupExtension
   # The creator method returns the creator string which appears beneath
   # an extension inside the Extensions Manager dialog.
   #
-  # @example 
+  # @example
   #   # Create an entry in the Extension list that loads a script called
   #   # core.rb.
   #   extension = SketchupExtension.new('Stair Tools', 'StairTools/core.rb')
@@ -111,7 +111,7 @@ class SketchupExtension
   # The creator= method sets the creator string which appears beneath
   # an extension inside the Extensions Manager dialog.
   #
-  # @example 
+  # @example
   #   # Create an entry in the Extension list that loads a script called
   #   # core.rb.
   #   extension = SketchupExtension.new('Stair Tools', 'StairTools/core.rb')
@@ -130,7 +130,7 @@ class SketchupExtension
   # The description method returns the long description which appears beneath
   # an extension inside the Extensions Manager dialog.
   #
-  # @example 
+  # @example
   #   # Create an entry in the Extension list that loads a script called
   #   # core.rb.
   #   extension = SketchupExtension.new('Stair Tools', 'StairTools/core.rb')
@@ -146,7 +146,7 @@ class SketchupExtension
   # The description= method sets the long description which appears beneath
   # an extension inside the Extensions Manager dialog.
   #
-  # @example 
+  # @example
   #   # Create an entry in the Extension list that loads a script called
   #   # core.rb.
   #   extension = SketchupExtension.new('Stair Tools', 'StairTools/core.rb')
@@ -184,11 +184,11 @@ class SketchupExtension
   # Extension Manager dialog until your register it with the
   # Sketchup.register_extension method.
   #
-  # @example 
+  # @example
   #   # Create an entry in the Extension list that loads a script called
   #   # core.rb.
   #   extension = SketchupExtension.new('Stair Tools', 'StairTools/core.rb')
-  #   
+  #
   #   # Then be sure to register it. By passing a 2nd param of true, you're
   #   # telling SketchUp to load the extension by default.
   #   Sketchup.register_extension(extension, true)
@@ -208,7 +208,7 @@ class SketchupExtension
 
   # Returns whether the extension is set to load when SketchUp starts up.
   #
-  # @example 
+  # @example
   #   ext = SketchupExtension.new('Stair Tools', 'StairTools/core.rb')
   #   UI.messagebox("load_on_start? is false: #{ext.load_on_start?.to_s}")
   #   Sketchup.register_extension(ext, true)
@@ -216,7 +216,7 @@ class SketchupExtension
   #
   # @return boolean - true if the extension loads on startup.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 8.0 M2
   def load_on_start?
@@ -225,7 +225,7 @@ class SketchupExtension
   # Returns whether the extension is currently loaded, meaning the actual ruby
   # script that implements the extension has been evaluated.
   #
-  # @example 
+  # @example
   #   ext = SketchupExtension.new('Stair Tools', 'StairTools/core.rb')
   #   UI.messagebox("loaded? is false: #{ext.loaded?.to_s}")
   #   Sketchup.register_extension ext, true
@@ -233,7 +233,7 @@ class SketchupExtension
   #
   # @return boolean - true if the extension has been loaded
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 8.0 M2
   def loaded?
@@ -242,7 +242,7 @@ class SketchupExtension
   # The name method returns the name which appears for
   # an extension inside the Extensions Manager dialog.
   #
-  # @example 
+  # @example
   #   # Create an entry in the Extension list that loads a script called
   #   # core.rb.
   #   extension = SketchupExtension.new('Stair Tools', 'StairTools/core.rb')
@@ -257,7 +257,7 @@ class SketchupExtension
   # The name= method sets the name which appears for
   # an extension inside the Extensions Manager dialog.
   #
-  # @example 
+  # @example
   #   # Create an entry in the Extension list that loads a script called
   #   # core.rb.
   #   extension = SketchupExtension.new('Stair Tools', 'StairTools/core.rb')
@@ -275,7 +275,7 @@ class SketchupExtension
   # Returns whether the extension has been registered via
   # Sketchup.register_extension.
   #
-  # @example 
+  # @example
   #   ext = SketchupExtension.new('Stair Tools', 'StairTools/core.rb')
   #   UI.messagebox("My registered? is false: #{ext.registered?.to_s}")
   #   Sketchup.register_extension(ext, true)
@@ -283,7 +283,7 @@ class SketchupExtension
   #
   # @return boolean - true if the extension has been registered.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 8.0 M2
   def registered?
@@ -291,12 +291,12 @@ class SketchupExtension
 
   # Unloads the extension. This is the equivalent of unchecking the extension's
   # checkbox in the Preferences > Extensions list.
-  # 
+  #
   # Note that technically the extension is not "unloaded" in the sense that it
   # stops running during the current SketchUp session, but the next time the
   # user restarts SketchUp, the extension will not be active.
   #
-  # @example 
+  # @example
   #   # This unloads all extensions. The next time SketchUp starts, none of
   #   # the extensions will be active.
   #   Sketchup.extensions.each { |extension|
@@ -312,7 +312,7 @@ class SketchupExtension
   # The version method returns the version which appears beneath
   # an extension inside the Extensions Manager dialog.
   #
-  # @example 
+  # @example
   #   # Create an entry in the Extension list that loads a script called
   #   # core.rb.
   #   extension = SketchupExtension.new('Stair Tools', 'StairTools/core.rb')
@@ -328,7 +328,7 @@ class SketchupExtension
   # The version method sets the version which appears beneath
   # an extension inside the Extensions Manager dialog.
   #
-  # @example 
+  # @example
   #   # Create an entry in the Extension list that loads a script called
   #   # core.rb.
   #   extension = SketchupExtension.new('Stair Tools', 'StairTools/core.rb')

@@ -4,7 +4,7 @@
 # The Tools class contains methods to manipulate a collection of SketchUp
 # tools. You access this collection by calling the Model.tools method.
 #
-# @example 
+# @example
 #   tools = Sketchup.active_model.tools
 #
 # @version SketchUp 6.0
@@ -14,7 +14,7 @@ class Sketchup::Tools
 
   # The active_tool_id method is used to retrieve the active tool's id.
   #
-  # @example 
+  # @example
   #   tools = Sketchup.active_model.tools
   #   id = tools.active_tool_id
   #
@@ -26,7 +26,7 @@ class Sketchup::Tools
 
   # The active_tool_name method is used to retrieve the active tool's name.
   #
-  # @example 
+  # @example
   #   tools = Sketchup.active_model.tools
   #   if tools.active_tool_id.equal? 0
   #     puts "Tools collection is empty"
@@ -42,7 +42,7 @@ class Sketchup::Tools
 
   # The add_observer method is used to add an observer to the current object.
   #
-  # @example 
+  # @example
   #   tools = Sketchup.active_model.tools
   #   observer = Sketchup::ToolsObserver.new
   #   status = tools.add_observer observer
@@ -58,7 +58,7 @@ class Sketchup::Tools
 
   # The model method is used to get the model associated with this tools object.
   #
-  # @example 
+  # @example
   #   tools = Sketchup.active_model.tools
   #   model = tools.model
   #
@@ -71,7 +71,7 @@ class Sketchup::Tools
 
   # The pop_tool method is used to pop the last pushed tool on the tool stack.
   #
-  # @example 
+  # @example
   #   tools = Sketchup.active_model.tools
   #   tool = tools.pop_tool
   #
@@ -86,7 +86,7 @@ class Sketchup::Tools
   # The push_tool method is used to push (aka activate) a user-defined tool.
   # See the Tool interface for details on creating your own SketchUp tool.
   #
-  # @example 
+  # @example
   #   tools = Sketchup.active_model.tools
   #   status = tools.push_tool tool
   #
@@ -102,7 +102,7 @@ class Sketchup::Tools
   # The remove_observer method is used to remove an observer from the current
   # object.
   #
-  # @example 
+  # @example
   #   tools = Sketchup.active_model.tools
   #   observer = Sketchup::ToolsObserver.new
   #   tools.add_observer observer

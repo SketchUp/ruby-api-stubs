@@ -6,7 +6,7 @@
 # desired methods, and add an instance of the observer to the objects of
 # interests.
 #
-# @example 
+# @example
 #   # This is an example of an observer that watches the rendering options
 #   # for changes.
 #   class MyRenderingOptionsObserver < Sketchup::RenderingOptionsObserver
@@ -14,7 +14,7 @@
 #       puts "onRenderingOptionsChanged(#{rendering_options}, #{type})"
 #     end
 #   end
-#   
+#
 #   # Attach the observer.
 #   rendering_options = Sketchup.active_model.rendering_options
 #   rendering_options.add_observer(MyRenderingOptionsObserver.new)
@@ -25,7 +25,7 @@ class Sketchup::RenderingOptionsObserver
   # The onRenderingOptionsChanged method is invoked whenever the user changes
   # their rendering options.
   #
-  # @example 
+  # @example
   #   def onRenderingOptionsChanged(rendering_options, type)
   #     puts "onRenderingOptionsChanged(#{rendering_options}, #{type})"
   #   end

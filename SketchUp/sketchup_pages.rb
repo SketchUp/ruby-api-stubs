@@ -3,10 +3,10 @@
 
 # The Pages class contains methods for manipulating a collection of Pages
 # (scenes) in a model.
-# 
+#
 # You get a handle to this collection by calling Model.pages.
 #
-# @example 
+# @example
 #   model = Sketchup.active_model
 #   pages = model.pages
 #
@@ -23,7 +23,7 @@ class Sketchup::Pages < Sketchup::Entity
   # observer that is called with each frame of an animation, meaning the
   # end user has clicked on a Scene tab (aka Page) inside SketchUp and
   # the camera is animating to that scene.
-  # 
+  #
   # The argument is an object that implements a method frameChange with the
   # following form:
   # This method is called during a slide show or creation of an animation after
@@ -32,30 +32,30 @@ class Sketchup::Pages < Sketchup::Entity
   # frameChange method are the Page that you transition from (fromPage), the Page
   # that you transition to (toPage), and a percent_done between 0.0 and 1.0 that
   # tell you the percentage of the way between the two pages.
-  # 
+  #
   # By watching the percent_done for 1.0, you can activate Ruby code that
   # executes as soon as the user's camera has finished animating.
-  # 
+  #
   # The method returns an integer id that can be stored and later used to remove
   # the observer with the Pages.remove_frame_change_observer method.
-  # 
+  #
   # Note: In SketchUp 6 and 7, the fromPage argument into the callback does not
   # appear to be populated on the PC. You can store a variable that keeps track
   # of the toPage and then use that on a subsequent Scene selection to determine
   # the last Page that the user was on.
   #
-  # @example 
+  # @example
   #   # Define the event hangler object.
   #   class FrameChangeObserver
   #     def frameChange(fromPage, toPage, percent_done)
   #       # Actual code here.
   #     end
   #   end
-  #   
+  #
   #   # Then attach it to the global Pages object.
   #   id = Sketchup::Pages.add_frame_change_observer(FrameChangeObserver.new)
   #
-  # @example 
+  # @example
   #   id = Sketchup::Pages.add_frame_change_observer(FrameChangeObserver.new)
   #
   # @param object
@@ -69,11 +69,11 @@ class Sketchup::Pages < Sketchup::Entity
 
   # The remove_frame_change_observer method is used to remove a frame change
   # observer
-  # 
+  #
   # The argument is the number returned from the call to
   # add_frame_change_observer.
   #
-  # @example 
+  # @example
   #   Sketchup::Pages.remove_frame_change_observer id
   #
   # @param observer_id
@@ -89,7 +89,7 @@ class Sketchup::Pages < Sketchup::Entity
 
   # The [] method retrieves a page by either name or index.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   status = pages.add "Page 1"
@@ -111,19 +111,19 @@ class Sketchup::Pages < Sketchup::Entity
   end
 
   # The add method is used to add an empty Page object to the collection.
-  # 
+  #
   # If no name is given, then a new name is generated using the default name for
   # new Pages. If a name is given, then a new Page with that name is
   # added.
-  # 
+  #
   # If the flags parameter is given, it controls which properties are saved with
   # the Page. See the Page.update method for a description of the flags that can
   # be set.
-  # 
+  #
   # If index is given, it specifies the position in the page list that the new
   # page is added.  Otherwise the new page is added to the end.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   status = pages.add "Page 1"
@@ -153,7 +153,7 @@ class Sketchup::Pages < Sketchup::Entity
   # model. This is an advanced feature that was added to support internal
   # SketchUp work, so it is unlikely to be useful to you.
   #
-  # @example 
+  # @example
   #   pages = Sketchup.active_model.pages
   #   page = pages.add_matchphoto_page "Test"
   #
@@ -175,7 +175,7 @@ class Sketchup::Pages < Sketchup::Entity
   # The add_observer method is used to add an observer to the Pages object.
   # See the PagesObserver interface for more details.
   #
-  # @example 
+  # @example
   #   pages = Sketchup.active_model.pages
   #   status = pages.add_observer observer
   #
@@ -189,7 +189,7 @@ class Sketchup::Pages < Sketchup::Entity
   end
 
   #
-  # @example 
+  # @example
   #   pages = Sketchup.active_model.pages
   #   pages.add('Page 1')
   #   pages.add('Page 2')
@@ -209,7 +209,7 @@ class Sketchup::Pages < Sketchup::Entity
 
   # The each method is used to iterate through pages.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   status = pages.add "Page 1"
@@ -226,7 +226,7 @@ class Sketchup::Pages < Sketchup::Entity
 
   # The erase method is used to remove a page from the collection.
   #
-  # @example 
+  # @example
   #   page = Sketchup.active_model.pages.add('Hello World')
   #   Sketchup.active_model.pages.erase(page)
   #
@@ -240,10 +240,10 @@ class Sketchup::Pages < Sketchup::Entity
   end
 
   # The {#size} method is used to retrieve the number of pages.
-  # 
+  #
   # The {#length} method is an alias for {#size}.
   #
-  # @example 
+  # @example
   #   pages = Sketchup.active_model.pages
   #   pages.add('Page 1')
   #   pages.add('Page 2')
@@ -257,7 +257,7 @@ class Sketchup::Pages < Sketchup::Entity
 
   # The parent method is used to determine the model for the Pages collection.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   status = pages.add "Page 1"
@@ -273,7 +273,7 @@ class Sketchup::Pages < Sketchup::Entity
   # The remove_observer method is used to remove an observer from the current
   # object. See the PagesObserver interface for more details.
   #
-  # @example 
+  # @example
   #   pages = Sketchup.active_model.pages
   #   status = pages.remove_observer observer
   #
@@ -288,7 +288,7 @@ class Sketchup::Pages < Sketchup::Entity
 
   # The selected_page method is used to retrieve the currently selected page.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   status = pages.add "Page 1"
@@ -305,7 +305,7 @@ class Sketchup::Pages < Sketchup::Entity
   # you set this, SketchUp will animate to that page as if the user had clicked
   # on its scene tab.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   status = pages.add "Page 1"
@@ -323,7 +323,7 @@ class Sketchup::Pages < Sketchup::Entity
   # The show_frame_at method is used to show a frame in animation (of the slide
   # show) at a given time in seconds.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   status = pages.add "Page 1"
@@ -340,10 +340,10 @@ class Sketchup::Pages < Sketchup::Entity
   end
 
   # The {#size} method is used to retrieve the number of pages.
-  # 
+  #
   # The {#length} method is an alias for {#size}.
   #
-  # @example 
+  # @example
   #   pages = Sketchup.active_model.pages
   #   pages.add('Page 1')
   #   pages.add('Page 2')
@@ -359,7 +359,7 @@ class Sketchup::Pages < Sketchup::Entity
   # of all of the pages will take. This takes into account the transition time
   # for each Page and the amount of time that each Page is displayed.
   #
-  # @example 
+  # @example
   #   pages = Sketchup.active_model.pages
   #   time = pages.slideshow_time
   #

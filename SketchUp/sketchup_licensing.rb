@@ -7,7 +7,7 @@
 # exposed via the SketchUp C API. Extensions that already use native code
 # should prefer using the native API, which should be more secure than their
 # Ruby API counterparts.
-# 
+#
 # See the {Licensing Tutorial}[../tutorial_licensing] for more details.
 #
 # @version SketchUp 2015
@@ -25,7 +25,7 @@ module Sketchup::Licensing
 
   # Acquires a license for a given extension.
   #
-  # @example 
+  # @example
   #   ext_id = "4e215280-dd23-40c4-babb-b8a8dd29d5ee"
   #   ext_lic = Sketchup::Licensing.get_extension_license(ext_id)
   #   if ext_lic.licensed?

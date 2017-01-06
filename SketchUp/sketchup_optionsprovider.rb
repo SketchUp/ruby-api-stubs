@@ -16,7 +16,7 @@ class Sketchup::OptionsProvider
 
   # The [] method is used to get a value by name or index of the key.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   manager = model.options
   #   provider = manager[0]
@@ -24,12 +24,12 @@ class Sketchup::OptionsProvider
   #   option = provider[1]
   #
   # @overload [](index)
-  # 
+  #
   #   @param index         The index for a specific key.
   #   @return              value - the value if successful
   #
   # @overload [](name)
-  # 
+  #
   #   @param name          The name of the specific key.
   #   @return              value - the value if successful
   #
@@ -38,10 +38,10 @@ class Sketchup::OptionsProvider
   end
 
   # The []= method is used to set the value of a specific key.
-  # 
+  #
   # Creates a new attribute for the given key if needed.
   #
-  # @example 
+  # @example
   #   option = provider[1]=10
   #
   # @param key
@@ -59,7 +59,7 @@ class Sketchup::OptionsProvider
 
   # The add_observer method is used to add an observer to the current object.
   #
-  # @example 
+  # @example
   #   status = object.add_observer observer
   #
   # @param observer
@@ -72,7 +72,7 @@ class Sketchup::OptionsProvider
   end
 
   #
-  # @example 
+  # @example
   #   optionsprovider = Sketchup.active_model.options['UnitsOptions']
   #   number = optionsprovider.count
   #
@@ -90,12 +90,12 @@ class Sketchup::OptionsProvider
   end
 
   # The each method is used to iterate through all of the attributes.
-  # 
+  #
   # Throws an exception if there are no keys.
-  # 
+  #
   # The {#each_pair} method is an alias of {#each}.
   #
-  # @example 
+  # @example
   #   # Retrieves each key
   #   provider.each { |key, value| UI.messagebox key }
   #   # Retrieves each corresponding value
@@ -111,10 +111,10 @@ class Sketchup::OptionsProvider
   end
 
   # The each_key method is used to iterate through all of the attribute keys.
-  # 
+  #
   # Throws an exception if there are no keys.
   #
-  # @example 
+  # @example
   #   provider.each_key { |key| UI.messagebox key }
   #
   # @return nil
@@ -126,12 +126,12 @@ class Sketchup::OptionsProvider
   end
 
   # The each method is used to iterate through all of the attributes.
-  # 
+  #
   # Throws an exception if there are no keys.
-  # 
+  #
   # The {#each_pair} method is an alias of {#each}.
   #
-  # @example 
+  # @example
   #   # Retrieves each key
   #   provider.each { |key, value| UI.messagebox key }
   #   # Retrieves each corresponding value
@@ -148,10 +148,10 @@ class Sketchup::OptionsProvider
 
   # The each_value method is used to iterate through all of the attribute
   # values.
-  # 
+  #
   # Throws an exception if there are no keys.
   #
-  # @example 
+  # @example
   #   provider.each_value { |value| UI.messagebox value }
   #
   # @return nil
@@ -165,7 +165,7 @@ class Sketchup::OptionsProvider
   # The key? method is used to determine if the options provider has a specific
   # key. This method is the same as has_key? See also OptionsManager.has_key
   #
-  # @example 
+  # @example
   #   status = provider.key? "name"
   #
   # @param name
@@ -174,7 +174,7 @@ class Sketchup::OptionsProvider
   # @return status - true if the key exists, false if the key does
   #   not exist.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def has_key?(name)
@@ -183,7 +183,7 @@ class Sketchup::OptionsProvider
   # The key? method is used to determine if the options provider has a specific
   # key. This method is the same as has_key? See also OptionsManager.has_key
   #
-  # @example 
+  # @example
   #   status = provider.key? "name"
   #
   # @param name
@@ -192,7 +192,7 @@ class Sketchup::OptionsProvider
   # @return status - true if the key exists, false if the key does
   #   not exist.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def key?(name)
@@ -200,7 +200,7 @@ class Sketchup::OptionsProvider
 
   # The keys method is used to retrieve an array with all of the attribute keys.
   #
-  # @example 
+  # @example
   #   keys = provider.keys
   #   key = keys[0]
   #   if (key)
@@ -218,10 +218,10 @@ class Sketchup::OptionsProvider
 
   # The {#size} method is used to retrieve the size (number of elements) of an
   # options provider.
-  # 
+  #
   # The {#length} method is an alias of {#size}.
   #
-  # @example 
+  # @example
   #   optionsprovider = Sketchup.active_model.options['UnitsOptions']
   #   number = optionsprovider.size
   #
@@ -234,7 +234,7 @@ class Sketchup::OptionsProvider
 
   # The name method is used to retrieve the name of an options provider.
   #
-  # @example 
+  # @example
   #   name = provider.name
   #
   # @return name - the name of the options provider if successful
@@ -246,7 +246,7 @@ class Sketchup::OptionsProvider
   # The remove_observer method is used to remove an observer from the current
   # object.
   #
-  # @example 
+  # @example
   #   status = object.remove_observer observer
   #
   # @param observer
@@ -260,10 +260,10 @@ class Sketchup::OptionsProvider
 
   # The {#size} method is used to retrieve the size (number of elements) of an
   # options provider.
-  # 
+  #
   # The {#length} method is an alias of {#size}.
   #
-  # @example 
+  # @example
   #   optionsprovider = Sketchup.active_model.options['UnitsOptions']
   #   number = optionsprovider.size
   #

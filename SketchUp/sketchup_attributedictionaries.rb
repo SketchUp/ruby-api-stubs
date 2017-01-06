@@ -3,19 +3,19 @@
 
 # The AttributeDictionaries class is a collection of all of the
 # AttributeDictionary objects that are attached to a given Entity object.
-# 
+#
 # The Entity class is a popular parent class in SketchUp, meaning you can
 # attach AttributeDictionaries to almost anything, from geometric items
 # like edges and faces and components to more conceptual things like pages
 # or materials.
-# 
+#
 # You access this class not by performing an AttributeDictionaries.new but
 # by grabbing a handle from an existing entity.
 #
-# @example 
+# @example
 #   # Grab the first entity from the model.
 #   my_layer = Sketchup.active_model.entities[0]
-#   
+#
 #   # Grab a handle to its attribute dictionaries.
 #   attrdicts = my_layer.attribute_dictionaries
 #
@@ -31,7 +31,7 @@ class Sketchup::AttributeDictionaries < Sketchup::Entity
   # Get an AttributeDictionary by name. Returns nil if there is none with the
   # given name.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   attrdicts = model.attribute_dictionaries
   #   # Iterates through all dictionaries and prints to screen.
@@ -53,7 +53,7 @@ class Sketchup::AttributeDictionaries < Sketchup::Entity
 
   # The count method is inherited from the Enumerable mix-in module.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   model.set_attribute('Example', 'Hello', 'World')
   #   dictionaries = model.attribute_dictionaries
@@ -72,7 +72,7 @@ class Sketchup::AttributeDictionaries < Sketchup::Entity
   # AttributeDictionary can be passed directly or identified by its
   # string name.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   attrdicts = model.attribute_dictionaries
   #   # Deletes a dictionary called 'my_dictionary'
@@ -90,10 +90,10 @@ class Sketchup::AttributeDictionaries < Sketchup::Entity
 
   # The each method is used to iterate through all of the attributes
   # dictionaries.
-  # 
+  #
   # Throws an exception if there are no keys.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   attrdicts = model.attribute_dictionaries
   #   # Iterates through all dictionaries and prints to screen.
@@ -109,10 +109,10 @@ class Sketchup::AttributeDictionaries < Sketchup::Entity
 
   # The {#length} method returns the number of attribute dictionary objects in
   # the collection.
-  # 
+  #
   # The {#size} method is an alias for {#length}.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   model.set_attribute('Example', 'Hello', 'World')
   #   dictionaries = model.attribute_dictionaries
@@ -127,10 +127,10 @@ class Sketchup::AttributeDictionaries < Sketchup::Entity
 
   # The {#length} method returns the number of attribute dictionary objects in
   # the collection.
-  # 
+  #
   # The {#size} method is an alias for {#length}.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   model.set_attribute('Example', 'Hello', 'World')
   #   dictionaries = model.attribute_dictionaries

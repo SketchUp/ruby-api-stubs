@@ -15,7 +15,7 @@ class Sketchup::SectionPlane < Sketchup::Drawingelement
   # The activate method is used to make the section plane the active one of its
   # parent component/group.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   sp = entities.add_section_plane([50, 50, 0], [1.0, 1.0, 0])
   #   sp.activate
@@ -28,7 +28,7 @@ class Sketchup::SectionPlane < Sketchup::Drawingelement
 
   # The active? method indicates whether the section plane is active or not.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   sp = entities.add_section_plane([50, 50, 0], [1.0, 1.0, 0])
   #   sp.activate
@@ -38,7 +38,7 @@ class Sketchup::SectionPlane < Sketchup::Drawingelement
   #
   # @return boolean - true if active
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 2014
   def active?
@@ -47,7 +47,7 @@ class Sketchup::SectionPlane < Sketchup::Drawingelement
   # The get_plane method is used to retrieve the plane that the section plane is
   # on.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   # Grab the first section plane from the model.
@@ -69,7 +69,7 @@ class Sketchup::SectionPlane < Sketchup::Drawingelement
   # The set_plane method is used to set the plane that the section plane is
   # on.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   # Grab the first section plane from the model.

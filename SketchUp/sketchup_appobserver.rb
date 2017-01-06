@@ -5,29 +5,29 @@
 # This interface is often used to attach other observers to models as they
 # are opened or started.
 # This ensures that your observers are watching all open models.
-# 
+#
 # For example, when one attaches a {Sketchup::SelectionObserver}, it is only
 # attached to the {Sketchup::Selection} collection of a given model. If a 2nd
 # model is opened, the new model's selection changes will not fire selection
 # callbacks unless you've attached a {Sketchup::SelectionObserver} to the new
 # model as well. By watching for {#onNewModel}, you can be sure to do so.
-# 
+#
 # To implement this observer, create a Ruby class of this type, override the
 # desired methods, and add an instance of the observer to the
 # application class.
 #
-# @example 
+# @example
 #   # This is an example of an observer that watches the application for
 #   # new models and shows a messagebox.
 #   class MyAppObserver < Sketchup::AppObserver
 #     def onNewModel(model)
 #       puts "onNewModel: #{model}"
-#   
+#
 #       # Here is where one might attach other observers to the new model.
 #       model.selection.add_observer(MySelectionObserver.new)
 #     end
 #   end
-#   
+#
 #   # Attach the observer
 #   Sketchup.add_observer(MyAppObserver.new)
 #
@@ -42,7 +42,7 @@ class Sketchup::AppObserver
   # empty initial model, a model opened via command line arguments, or
   # auto-restored models on Mac OS X.
   #
-  # @example 
+  # @example
   #   def expectsStartupModelNotifications
   #     return true
   #   end
@@ -67,7 +67,7 @@ class Sketchup::AppObserver
   # is relevant on Mac only which supports multiple documents to be opened
   # simultaneously.
   #
-  # @example 
+  # @example
   #   def onActivateModel(model)
   #     puts "onActivateModel: #{model}"
   #   end
@@ -75,7 +75,7 @@ class Sketchup::AppObserver
   # @param [Sketchup::Model] model
   #   The newly-activated model object.
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 2015
   def onActivateModel(model)
@@ -84,7 +84,7 @@ class Sketchup::AppObserver
   # The {#onNewModel} method is called when the application creates a new, empty
   # model.
   #
-  # @example 
+  # @example
   #   def onNewModel(model)
   #     puts "onNewModel: #{model}"
   #   end
@@ -92,7 +92,7 @@ class Sketchup::AppObserver
   # @param [Sketchup::Model] model
   #   The active model object.
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onNewModel(model)
@@ -101,7 +101,7 @@ class Sketchup::AppObserver
   # The {#onOpenModel} method is called when the application opens an existing
   # model.
   #
-  # @example 
+  # @example
   #   def onOpenModel(model)
   #     puts "onOpenModel: #{model}"
   #   end
@@ -115,7 +115,7 @@ class Sketchup::AppObserver
   # @param [Sketchup::Model] model
   #   The active model object.
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onOpenModel(model)
@@ -124,12 +124,12 @@ class Sketchup::AppObserver
   # The {#onQuit} method is called when SketchUp closes. This is useful if you
   # need to clean up anything or store your application state upon close.
   #
-  # @example 
+  # @example
   #   def onQuit()
   #     puts "onQuit"
   #   end
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onQuit
@@ -140,7 +140,7 @@ class Sketchup::AppObserver
   # some critical set of observers, for example, so you can warn them
   # or cache your extension state.
   #
-  # @example 
+  # @example
   #   def onUnloadExtension(extension_name)
   #     puts "onUnloadExtension: #{extension_name}"
   #   end
@@ -148,7 +148,7 @@ class Sketchup::AppObserver
   # @param [String] extension_name
   #   The name of the extension just unloaded.
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 7.0
   def onUnloadExtension(extension_name)

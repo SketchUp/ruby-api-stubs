@@ -14,14 +14,14 @@ class Sketchup::OptionsManager
   # Instance Methods
 
   # The [] method is used to get an option provider by name or index.
-  # 
+  #
   # For example, to get the UnitsOptions on the Model, you could use the
   # command:
   #
-  # @example 
+  # @example
   #   Sketchup.active_model.options["UnitsOptions"]
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   manager = model.options
   #   provider = manager[0]
@@ -32,13 +32,13 @@ class Sketchup::OptionsManager
   #   end
   #
   # @overload [](index)
-  # 
+  #
   #   @param index         The index of the OptionsProvider object.
   #   @return              optionprovider - an OptionsProvider object if
   #                        successful, otherwise nil.
   #
   # @overload [](name)
-  # 
+  #
   #   @param name          The name of the OptionsProvider object.
   #   @return              optionprovider - an OptionsProvider object if
   #                        successful, otherwise nil.
@@ -48,7 +48,7 @@ class Sketchup::OptionsManager
   end
 
   #
-  # @example 
+  # @example
   #   optionsmanager = Sketchup.active_model.options
   #   number = manager.count
   #
@@ -67,7 +67,7 @@ class Sketchup::OptionsManager
 
   # The each method is used to iterate through options providers.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   manager = model.options
   #   # Retrieves each provider
@@ -84,7 +84,7 @@ class Sketchup::OptionsManager
 
   # The keys method is used to get a list of keys in the OptionsManager.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   manager = model.options
   #   optionproviderarray = manager.keys
@@ -102,10 +102,10 @@ class Sketchup::OptionsManager
 
   # The {#size} method returns the number of OptionsProvider objects inside this
   # OptionsManager.
-  # 
+  #
   # The {#length} method is an alias for {#size} added in SketchUp 2014.
   #
-  # @example 
+  # @example
   #   optionsmanager = Sketchup.active_model.options
   #   number = manager.size
   #
@@ -118,10 +118,10 @@ class Sketchup::OptionsManager
 
   # The {#size} method returns the number of OptionsProvider objects inside this
   # OptionsManager.
-  # 
+  #
   # The {#length} method is an alias for {#size} added in SketchUp 2014.
   #
-  # @example 
+  # @example
   #   optionsmanager = Sketchup.active_model.options
   #   number = manager.size
   #

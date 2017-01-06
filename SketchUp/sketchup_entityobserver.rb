@@ -6,13 +6,13 @@
 # desired methods, and add an instance of the observer to the entity of
 # interests.
 #
-# @example 
+# @example
 #   class MyEntityObserver < Sketchup::EntityObserver
 #     def onEraseEntity(entity)
 #       puts "onEraseEntity: #{entity}"
 #     end
 #   end
-#   
+#
 #   # Attach the observer. (Assumes there is an entity in the model.)
 #   Sketchup.active_model.entities[0].add_observer(MyEntityObserver.new)
 #
@@ -28,14 +28,14 @@ class Sketchup::EntityObserver
 
   # The {#onChangeEntity} method is invoked when your entity is modified.
   #
-  # @example 
+  # @example
   #   def onChangeEntity(entity)
   #     puts "onChangeEntity: #{entity}"
   #   end
   #
   # @param [Sketchup::Entity] entity
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onChangeEntity(entity)
@@ -43,14 +43,14 @@ class Sketchup::EntityObserver
 
   # The {#onEraseEntity} method is invoked when your entity is erased.
   #
-  # @example 
+  # @example
   #   def onEraseEntity(entity)
   #     puts "onEraseEntity: #{entity}"
   #   end
   #
   # @param [Sketchup::Entity] entity
   #
-  # @return [nil] 
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onEraseEntity(entity)

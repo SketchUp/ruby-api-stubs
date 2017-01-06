@@ -5,11 +5,11 @@
 # roughly correlates to the series of options that you see in the
 # Components dialog under the "edit" tab, such as whether it casts shadows,
 # glues to walls, etc.
-# 
+#
 # A Behavior object is accessed from a ComponentDefinition object, not created
 # with a Behavior.new call.
 #
-# @example 
+# @example
 #   # Grab the Behavior object from the first component definition.
 #   model = Sketchup.active_model
 #   definition = model.definitions[0]
@@ -22,11 +22,11 @@ class Sketchup::Behavior < Sketchup::Entity
 
   # The always_face_camera= method is used to set the always_face_camera
   # behavior for a component.
-  # 
+  #
   # If the always_face_camera behavior is true, a component will always try to
   # orient itself so that the Y axis of the component is facing the camera.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   behavior = model.definitions[0].behavior
   #   status = behavior.always_face_camera = false
@@ -42,23 +42,23 @@ class Sketchup::Behavior < Sketchup::Entity
 
   # The always_face_camera? method is used to retrieve the  always_face_camera
   # behavior for a component.
-  # 
+  #
   # If the always_face_camera behavior is true, then a component will always try
   # to orient itself so that the -Y axis of the component is facing the camera.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   # Returns a DefinitionList
   #   definitions = model.definitions
   #   path = Sketchup.find_support_file "Bed.skp",
   #     "Components/Components Sampler/"
-  #   
+  #
   #   begin
   #     definition = definitions.load path
   #   rescue
   #     UI.messagebox $!.message
   #   end
-  #   
+  #
   #   behavior = definition.behavior
   #   b = behavior.always_face_camera?
   #   if (b)
@@ -78,7 +78,7 @@ class Sketchup::Behavior < Sketchup::Entity
   #   the camera, false if the component is not set to always
   #   face camera.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def always_face_camera?
@@ -87,7 +87,7 @@ class Sketchup::Behavior < Sketchup::Entity
   # The cuts_opening= method is used to set the cut opening behavior for a
   # component.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   behavior = model.definitions[0].behavior
   #   status = behavior.cuts_opening = false
@@ -111,7 +111,7 @@ class Sketchup::Behavior < Sketchup::Entity
   # The cuts_opening? method is used to get the status of a component's cut
   # opening behavior.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   behavior = model.definitions[0].behavior
   #   status = behavior.cuts_opening?
@@ -124,7 +124,7 @@ class Sketchup::Behavior < Sketchup::Entity
   # @return status - the status of the cuts_opening behavior
   #   (either true or false)
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def cuts_opening?
@@ -133,7 +133,7 @@ class Sketchup::Behavior < Sketchup::Entity
   # The is2d= method is used to set the 2D behavior for a component: whether it
   # can be glued or aligned to a face.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   behavior = model.definitions[0].behavior
   #   status = behavior.is2d = false
@@ -156,7 +156,7 @@ class Sketchup::Behavior < Sketchup::Entity
   # The is2d? method is used to get the 2D behavior for a component: whether it
   # can be glued or aligned to a face.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   behavior = model.definitions[0].behavior
   #   status = behavior.is2d?
@@ -169,7 +169,7 @@ class Sketchup::Behavior < Sketchup::Entity
   # @return status - the status of the 2D behavior (either true or
   #   false)
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def is2d?
@@ -181,7 +181,7 @@ class Sketchup::Behavior < Sketchup::Entity
   # a 1, then a certain handle set will be hidden when the user selects the
   # component and activates the Scale tool. Here is the map of which bits
   # control which handles.
-  # 
+  #
   # - Bit0: disable scale along red (X),
   # - Bit1: disable scale along green (Y),
   # - Bit2: disable scale along blue (Z),
@@ -189,14 +189,14 @@ class Sketchup::Behavior < Sketchup::Entity
   # - Bit4: disable scale in green/blue plane (Y+Z),
   # - Bit5: disable scale in red/green plane (X+Y),
   # - Bit6: disable scale uniform (from corners) (XYZ).
-  # 
+  #
   # Note that for 2-dimensional components (such as face-me components), not all
   # of the handles in the list above are even used. Also, if the component you
   # are modifying is already selected with the scale tool, then you or your user
   # must deactivate and reactivate the scale tool for your new behavior to take
   # effect.
   #
-  # @example 
+  # @example
   #   # Disable the green and red-axes handles by setting bits 1 and 2 to 1.
   #   definition = Sketchup.active_model.definitions[0]
   #   behavior = definition.behavior
@@ -217,7 +217,7 @@ class Sketchup::Behavior < Sketchup::Entity
   # this single component with the scale tool. See the no_scale_mask=
   # method for details on the bit encodings used.
   #
-  # @example 
+  # @example
   #   definition = Sketchup.active_model.definitions[0]
   #   behavior = definition.behavior
   #   no_scale_mask = behavior.no_scale_mask?
@@ -225,7 +225,7 @@ class Sketchup::Behavior < Sketchup::Entity
   # @return scale_mask - an integer describing which scale tool
   #   handles are hidden.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 7.0
   def no_scale_mask?
@@ -236,7 +236,7 @@ class Sketchup::Behavior < Sketchup::Entity
   # component were facing the sun. See the Component entity within the SketchUp
   # User's guide for more information on this feature.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   behavior = model.definitions[0].behavior
   #   behavior = behavior.shadows_face_sun = true
@@ -258,7 +258,7 @@ class Sketchup::Behavior < Sketchup::Entity
   # component were facing the sun). See the Component entity within the SketchUp
   # User's guide for more information on this feature.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   # Returns a DefinitionList
   #   definitions = model.definitions
@@ -275,7 +275,7 @@ class Sketchup::Behavior < Sketchup::Entity
   #   were facing the sun. False to cause the shadow to be
   #   cast from the component's current position.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def shadows_face_sun?
@@ -283,17 +283,17 @@ class Sketchup::Behavior < Sketchup::Entity
 
   # The snapto method is used to verify the status of a component's "snap to"
   # behavior.
-  # 
+  #
   # Returns a constant indicating the snapping behavior of the component
   # described by behavior. Snapping behavior is how the x-y plane of a component
   # instance will be snapped against a face. Possible values are:
-  # 
+  #
   # - +SnapTo_Arbitrary+ => Snap to any aribrary face,
   # - +SnapTo_Horizontal+ => Snap to horizontal face like floors,
   # - +SnapTo_Vertical+ => Snap to vertical face like walls,
   # - +SnapTo_Sloped+ => Snap to sloped face like sloping roofs.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   behavior = model.definitions[0].behavior
   #   status = behavior.snapto
@@ -311,16 +311,16 @@ class Sketchup::Behavior < Sketchup::Entity
   end
 
   # The snapto= method sets a component's "snap to" behavior.
-  # 
+  #
   # Snapping behavior is how the x-y plane of a component instance will be
   # snapped against a face. Possible constant values are:
-  # 
+  #
   # - +SnapTo_Arbitrary+ => Snap to any aribrary face,
   # - +SnapTo_Horizontal+ => Snap to horizontal face like floors,
   # - +SnapTo_Vertical+ => Snap to vertical face like walls,
   # - +SnapTo_Sloped+ => Snap to sloped face like sloping roofs.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   behavior = model.definitions[0].behavior
   #   behavior.snapto = SnapTo_Horizontal

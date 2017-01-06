@@ -5,7 +5,7 @@
 # The camera in SketchUp is the "point of view" from which you look at the
 # model.
 #
-# @example 
+# @example
 #   # Create a camera from scratch with an "eye" position in
 #   # x, y, z coordinates, a "target" position that
 #   # defines what to look at, and an "up" vector.
@@ -13,7 +13,7 @@
 #   target = [0,0,0]
 #   up = [0,0,1]
 #   my_camera = Sketchup::Camera.new eye, target, up
-#   
+#
 #   # Get a handle to the current view and change its camera.
 #   view = Sketchup.active_model.active_view
 #   view.camera = my_camera
@@ -25,7 +25,7 @@ class Sketchup::Camera
 
   # The aspect_ratio method is used to retrieve the aspect ratio of the Camera.
   #
-  # @example 
+  # @example
   #   camera = Sketchup::Camera.new
   #   ar = camera.aspect_ratio
   #   if (ar)
@@ -44,11 +44,11 @@ class Sketchup::Camera
   # The aspect_ratio= method is used to set the aspect ratio for a Camera.
   # Changing this value will cause SketchUp to show gray bars over the screen
   # to show the resulting view.
-  # 
+  #
   # If you set the value to 0.0, then the aspect ratio of the Camera will match
   # the aspect ratio of its View.
   #
-  # @example 
+  # @example
   #   camera = Sketchup::Camera.new
   #   ar = camera.aspect_ratio = 1.85
   #   if (ar)
@@ -71,10 +71,10 @@ class Sketchup::Camera
   # user pans around, the x and y values will change. These values are in
   # normalized device coordinates, so for instance, the range [-1.0, 1.0] spans
   # the full width or height of the screen.
-  # 
+  #
   # The z value is unused and it is always zero.
   #
-  # @example 
+  # @example
   #   Sketchup.active_model.active_view.camera.center_2d
   #
   # @return Point3d
@@ -86,7 +86,7 @@ class Sketchup::Camera
   # The description method is used to retrieve the description for a Camera
   # object.
   #
-  # @example 
+  # @example
   #   camera = Sketchup::Camera.new
   #   description = camera.description
   #   if (description)
@@ -104,7 +104,7 @@ class Sketchup::Camera
 
   # The description= method is used to set the description for the Camera.
   #
-  # @example 
+  # @example
   #   camera = Sketchup::Camera.new
   #   description = camera.description = "35 mm Camera"
   #
@@ -120,7 +120,7 @@ class Sketchup::Camera
   # The direction method is used to retrieve a Vector3d object in the direction
   # that the Camera is pointing.
   #
-  # @example 
+  # @example
   #   camera = Sketchup::Camera.new
   #   # Returns 0,0,-1 which indicates it is pointed down the Z axis
   #   direction = camera.direction
@@ -139,7 +139,7 @@ class Sketchup::Camera
 
   # The eye method is used to retrieve the eye Point3d object for the Camera.
   #
-  # @example 
+  # @example
   #   camera = Sketchup::Camera.new
   #   # Returns 0,0,1 which indicates it is right in line with the Z axis.
   #   eye = camera.eye
@@ -157,11 +157,11 @@ class Sketchup::Camera
 
   # The focal_length method is used to get the focal length in millimeters of
   # perspective Camera.
-  # 
+  #
   # This value is computed based on the field of view (see the fov method) and
   # the image width (see image_width).
   #
-  # @example 
+  # @example
   #   camera = Sketchup::Camera.new
   #   l = camera.focal_length
   #   if (l)
@@ -183,7 +183,7 @@ class Sketchup::Camera
   # millimeters) of a perspective camera. It must be between 1 and 3000,
   # inclusive. This is an alternate way of setting the field of view.
   #
-  # @example 
+  # @example
   #   camera = Sketchup::Camera.new
   #   l = camera.focal_length=120
   #   if (l)
@@ -202,10 +202,10 @@ class Sketchup::Camera
   end
 
   # The fov method retrieves the field of view of the camera (in degrees).
-  # 
+  #
   # This is only applicable to perspective cameras.
   #
-  # @example 
+  # @example
   #   camera = Sketchup::Camera.new
   #   fov = camera.fov
   #   if (fov)
@@ -222,10 +222,10 @@ class Sketchup::Camera
 
   # The fov= method sets the field of view, in millimeters, for a Camera. It
   # must be between 1 and 120, inclusive.
-  # 
+  #
   # This is only valid on a perspective camera.
   #
-  # @example 
+  # @example
   #   camera = Sketchup::Camera.new
   #   fov = camera.fov = 56.78
   #   if (fov)
@@ -246,7 +246,7 @@ class Sketchup::Camera
   # The fov_is_height? method indicates whether the field of view is horizontal
   # or vertical.
   #
-  # @example 
+  # @example
   #   camera = Sketchup.active_model.active_view.camera
   #   if camera.fov_is_height?
   #     fov_vertical = camera.fov
@@ -258,17 +258,17 @@ class Sketchup::Camera
   #
   # @return bool - true if vertical, false otherwise
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 2015
   def fov_is_height?
   end
 
   # The height method retrieves the height of a Camera in inches.
-  # 
+  #
   # This is only valid if it is not a perspective camera.
   #
-  # @example 
+  # @example
   #   camera = Sketchup::Camera.new
   #   camera.perspective = false
   #   h = camera.height
@@ -285,10 +285,10 @@ class Sketchup::Camera
   end
 
   # The height= method is used to set the height for the Camera in inches.
-  # 
+  #
   # This is only valid if it is not a perspective camera.
   #
-  # @example 
+  # @example
   #   camera = Sketchup::Camera.new
   #   camera.perspective = false
   #   h = camera.height = 20
@@ -308,13 +308,13 @@ class Sketchup::Camera
 
   # The image_width method retrieves the size of the image on the image plane of
   # the Camera.
-  # 
+  #
   # By default, this value is not set. If it is set, it is used in the
   # calculation of the focal length from the field of view. Unlike most length
   # values in SketchUp, the image_width and focal_length values are specified in
   # millimeters rather than in inches.
   #
-  # @example 
+  # @example
   #   camera = Sketchup::Camera.new
   #   w = camera.image_width
   #   if (w)
@@ -331,11 +331,11 @@ class Sketchup::Camera
 
   # The image_width= method is used to set the size of the image on the "film"
   # for a perspective camera.
-  # 
+  #
   # The value is given in millimeters. It is used in the conversions between
   # field of view and focal length.
   #
-  # @example 
+  # @example
   #   camera = Sketchup::Camera.new
   #   w = camera.image_width=1.0
   #   if (w)
@@ -357,7 +357,7 @@ class Sketchup::Camera
   # perspective flag of value true or false, and optional field-of-view value in
   # degrees of type Float.
   #
-  # @example 
+  # @example
   #   camera = Sketchup::Camera.new
   #   if (camera)
   #     UI.messagebox camera
@@ -389,12 +389,12 @@ class Sketchup::Camera
   # The is_2d? method indicates if the camera is in 2d mode. 2 point
   # perspective mode and PhotoMatch mode are 2d cameras.
   #
-  # @example 
+  # @example
   #   Sketchup.active_model.active_view.camera.is_2d?
   #
   # @return Boolean - true if camera is in 2d mode, false otherwise
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 2015
   def is_2d?
@@ -403,7 +403,7 @@ class Sketchup::Camera
   # The perspective= method is used to set whether or not this is a perspective
   # camera or an orthographic camera.
   #
-  # @example 
+  # @example
   #   camera = Sketchup::Camera.new
   #   status = camera.perspective = false
   #   if (status)
@@ -424,7 +424,7 @@ class Sketchup::Camera
   # The perspective? method is used to determine whether a camera is a
   # perspective or orthographic camera.
   #
-  # @example 
+  # @example
   #   camera = Sketchup::Camera.new
   #   status = camera.perspective?
   #   if (status)
@@ -435,7 +435,7 @@ class Sketchup::Camera
   #
   # @return status - true if perspective, false if orthographic
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def perspective?
@@ -443,11 +443,11 @@ class Sketchup::Camera
 
   # The scale_2d method returns a float indicating the scaling factor of 2d
   # cameras.
-  # 
+  #
   # When the camera is in two-point perspective and the user uses the zoom tools,
   # this value will change. Zooming out will produce a value greater than 1.0.
   #
-  # @example 
+  # @example
   #   Sketchup.active_model.active_view.camera.scale_2d
   #
   # @return float
@@ -460,7 +460,7 @@ class Sketchup::Camera
   # target and up parameters at the same time to make sure that you have a valid
   # camera definition.
   #
-  # @example 
+  # @example
   #   camera = Sketchup::Camera.new
   #   eye = camera.eye
   #   target = camera.target
@@ -490,7 +490,7 @@ class Sketchup::Camera
 
   # The target method retrieves Point3d that the camera is pointing at.
   #
-  # @example 
+  # @example
   #   camera = Sketchup::Camera.new
   #   # Target point is 0,0,0
   #   t = camera.target
@@ -509,7 +509,7 @@ class Sketchup::Camera
   # The up method is used to retrieve the up vector for the camera. This is the
   # direction that the top of the camera is facing.
   #
-  # @example 
+  # @example
   #   camera = Sketchup::Camera.new
   #   # 0.0, 1.0, 0.0
   #   up = camera.up
@@ -527,11 +527,11 @@ class Sketchup::Camera
 
   # The xaxis method is used to retrieve the x axis of the camera coordinate
   # system defined by the camera's direction and up vector.
-  # 
+  #
   # This value is computed from the cross product between the camera direction
   # and the up vector.
   #
-  # @example 
+  # @example
   #   camera = Sketchup::Camera.new
   #   # 1.0, 0.0, 0.0
   #   v = camera.xaxis
@@ -549,12 +549,12 @@ class Sketchup::Camera
 
   # The yaxis method retrieves the y axis of the camera coordinate system
   # defined by the camera's direction and up vector.
-  # 
+  #
   # This value is computed to be perpendicular the camera x and z axes. It is
   # equivalent to the up direction, but is computed to make sure that it is
   # perpendicular to the direction.
   #
-  # @example 
+  # @example
   #   camera = Sketchup::Camera.new
   #   # 0.0, 1.0, 0.0
   #   v = camera.yaxis
@@ -572,10 +572,10 @@ class Sketchup::Camera
 
   # The zaxis method retrieves the z axis of the camera coordinate system
   # defined by the camera's direction and up vector.
-  # 
+  #
   # This value is computed. It is the same as Camera.direction
   #
-  # @example 
+  # @example
   #   camera = Sketchup::Camera.new
   #   # 0.0, 1.0, 0.0
   #   v = camera.zaxis

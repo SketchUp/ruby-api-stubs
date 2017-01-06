@@ -3,14 +3,14 @@
 
 # The Material class represents a texture or color that can be applied to
 # Drawingelements. It is most often applied to Faces.
-# 
+#
 # You can pass any object that can be used as a material to a method that
 # requires a material. Objects include actual materials, color, and classes
 # that can be converted to a color.
-# 
+#
 # The following are valid (assuming the existence of a Material mat1.)
 #
-# @example 
+# @example
 #   face.material = mat1
 #   face.material = "red"
 #   face.material = 0xff0000
@@ -36,7 +36,7 @@ class Sketchup::Material < Sketchup::Entity
   # The <=> method is used to compare two materials based on name. The number
   # returned relates to the "string distance" between the names.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   materials = model.materials
   #   m1 = materials.add('Joe')
@@ -55,7 +55,7 @@ class Sketchup::Material < Sketchup::Entity
 
   # The == method is used to test if two materials are the same.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   materials = model.materials
   #   m1 = materials.add('Joe')
@@ -77,12 +77,12 @@ class Sketchup::Material < Sketchup::Entity
   end
 
   # The alpha method is used to get the opacity of the material.
-  # 
+  #
   # The value will be between 0.0 and 1.0. A value of 0.0 means that the material is
   # completely transparent. A value of 1.0 means that the Material is completely
   # opaque.
   #
-  # @example 
+  # @example
   #   alpha_value = Sketchup.active_model.materials[0].alpha
   #
   # @return alpha - a number between 0 and 1
@@ -92,12 +92,12 @@ class Sketchup::Material < Sketchup::Entity
   end
 
   # The alpha= method is used to set the opacity of the material.
-  # 
+  #
   # The value must be between 0.0 and 1.0. A value of 0.0 means that the material is
   # completely transparent. A value of 1.0 means that the Material is completely
   # opaque.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   materials = model.materials
   #   material = materials.add('Joe')
@@ -113,10 +113,10 @@ class Sketchup::Material < Sketchup::Entity
   end
 
   # The color method is used to retrieve the color of the material.
-  # 
+  #
   # If it uses a Texture, this will return the average color.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   materials = model.materials
   #   material = materials.add('Joe')
@@ -130,14 +130,14 @@ class Sketchup::Material < Sketchup::Entity
   end
 
   # The color= method is used to set the color of the material.
-  # 
+  #
   # If the Material has a texture, then this turns it into a colorized
   # texture.
-  # 
+  #
   # To reset the color of a Material with a texture, set the color
   # to nil.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   materials = model.materials
   #   material = materials.add('Joe')
@@ -154,7 +154,7 @@ class Sketchup::Material < Sketchup::Entity
 
   # The colorize_deltas method retrieves the HLS delta for colorized materials.
   #
-  # @example 
+  # @example
   #   material = Sketchup.active_model.materials[0]
   #   h, l, s = material.colorize_deltas
   #
@@ -168,11 +168,11 @@ class Sketchup::Material < Sketchup::Entity
   # This value is only relevant when the materialType is set to 2
   # (colorized textured).
   # Types include:
-  # 
+  #
   #   - 0 = shift (Sketchup::Material::COLORIZE_SHIFT),
   #   - 1 = tint (Sketchup::Material::COLORIZE_TINT),
   #
-  # @example 
+  # @example
   #   material = Sketchup.active_model.materials[0]
   #   type = material.colorize_type
   #
@@ -186,11 +186,11 @@ class Sketchup::Material < Sketchup::Entity
   # This value is only relevant when the materialType is set to 2
   # (colorized textured).
   # Types include:
-  # 
+  #
   #   - 0 = shift (Sketchup::Material::COLORIZE_SHIFT),
   #   - 1 = tint (Sketchup::Material::COLORIZE_TINT),
   #
-  # @example 
+  # @example
   #   material = Sketchup.active_model.materials[0]
   #   material.colorize_type = Sketchup::Material::COLORIZE_TINT
   #
@@ -205,11 +205,11 @@ class Sketchup::Material < Sketchup::Entity
 
   # The display_name method retrieves the name that is displayed within SketchUp
   # for the material.
-  # 
+  #
   # This should be used when presenting the name in the UI, but the returned name
   # cannot be used as a key in model.materials.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   materials = model.materials
   #   material = materials.add('[Joe]')
@@ -226,14 +226,14 @@ class Sketchup::Material < Sketchup::Entity
   end
 
   # The materialType method retrieves the type of the material. Types include:
-  # 
+  #
   #   - 0 = solid (Sketchup::Material::MATERIAL_SOLID),
   #   - 1 = textured (Sketchup::Material::MATERIAL_TEXTURED),
   #   - 2 = colorized textured (Sketchup::Material::MATERIAL_COLORIZED_TEXTURED).
-  # 
+  #
   # The constants where added in SketchUp 2015.
   #
-  # @example 
+  # @example
   #   material = Sketchup.active_model.materials[0]
   #   type = material.materialType
   #
@@ -247,10 +247,10 @@ class Sketchup::Material < Sketchup::Entity
   # The name method retrieves the name of the material. This is the
   # internal name of the object which should be used for retrieving
   # the material from the model's material list.
-  # 
+  #
   # Use .display_name to display the name in the UI.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   materials = model.materials
   #   material = materials.add('[Joe]')
@@ -268,7 +268,7 @@ class Sketchup::Material < Sketchup::Entity
 
   # Sets the name of the material.
   #
-  # @example 
+  # @example
   #   materials = Sketchup.active_model.materials
   #   material = materials.add("Joe")
   #   material.name = 'Jeff'
@@ -280,11 +280,11 @@ class Sketchup::Material < Sketchup::Entity
   end
 
   # The {#save_as} method is used to write a material to a SKM file.
-  # 
+  #
   # You must remember to append ".skm" to the filename as this will not be done
   # automatically.
   #
-  # @example 
+  # @example
   #   filename = File.join(ENV['HOME'], 'Desktop', 'su_test.skm')
   #   materials = Sketchup.active_model.materials
   #   material = materials.add("Hello World")
@@ -302,7 +302,7 @@ class Sketchup::Material < Sketchup::Entity
 
   # The texture method retrieves the texture of the material.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   materials = model.materials
   #   material = materials.add('Joe')
@@ -317,22 +317,22 @@ class Sketchup::Material < Sketchup::Entity
   end
 
   # The texture= method sets the texture for the material.
-  # 
+  #
   # Setting the texture to +nil+ will turn it into a solid color
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   materials = model.materials
   #   material = materials.add('Joe')
   #   material.texture = "C:/Materials/Carpet.jpg"
   #
   # @overload texture=(filename)
-  # 
+  #
   #   @param [String] filename The file path to the texture the material should
   #     use.
   #
   # @overload texture=(properties)
-  # 
+  #
   #   @param [Array<String, Integer, Integer>] properties An array with the
   #     texture filename and optionally the width and height in model units.
   #
@@ -343,18 +343,18 @@ class Sketchup::Material < Sketchup::Entity
   end
 
   # The use_alpha? method tells if the material uses transparency.
-  # 
+  #
   # Note that this is not affected by the alpha value of the color object. Only
   # the .alpha value and transparent texture will make this method return true.
   #
-  # @example 
+  # @example
   #   material = Sketchup.active_model.materials[0]
   #   is_alpha = material.use_alpha?
   #
   # @return type - the material type for the Material object. See
   #   summary for details.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def use_alpha?
@@ -362,7 +362,7 @@ class Sketchup::Material < Sketchup::Entity
 
   # The write_thumbnail method writes a bitmap thumbnail to the given file name.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   model.materials.each { |material|
   #     thumbnail_file = "C:/tmp/materials/#{material.display_name}.png"

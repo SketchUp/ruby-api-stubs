@@ -10,7 +10,7 @@ class Sketchup::EdgeUse < Sketchup::Entity
 
   # The edge method is used to retrieve the edge for the edge use.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.active_entities
   #   points = []
   #   points << Geom::Point3d.new(0, 0, 0)
@@ -32,7 +32,7 @@ class Sketchup::EdgeUse < Sketchup::Entity
   # The end_vertex_normal method is used to retrieve the vertex normal for the
   # end point of this edgeuse.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.active_entities
   #   points = []
   #   points << Geom::Point3d.new(0, 0, 0)
@@ -53,7 +53,7 @@ class Sketchup::EdgeUse < Sketchup::Entity
 
   # The face method is used to retrieve the face used by this edge use.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.active_entities
   #   points = []
   #   points << Geom::Point3d.new(0, 0, 0)
@@ -74,7 +74,7 @@ class Sketchup::EdgeUse < Sketchup::Entity
 
   # The loop method is used to retrieve the loop for this edge use.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.active_entities
   #   points = []
   #   points << Geom::Point3d.new(0, 0, 0)
@@ -95,7 +95,7 @@ class Sketchup::EdgeUse < Sketchup::Entity
 
   # The next method is used to retrieve the next edge use in a loop.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.active_entities
   #   points = []
   #   points << Geom::Point3d.new(0, 0, 0)
@@ -117,7 +117,7 @@ class Sketchup::EdgeUse < Sketchup::Entity
   # The partners method is used to retrieve all of the partner edge uses that
   # uses the same edge.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.active_entities
   #   points1 = []
   #   points1 << Geom::Point3d.new(0, 0, 0)
@@ -144,7 +144,7 @@ class Sketchup::EdgeUse < Sketchup::Entity
 
   # The previous method is used to retrieve the previous edge use in a loop.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.active_entities
   #   points = []
   #   points << Geom::Point3d.new(0, 0, 0)
@@ -167,7 +167,7 @@ class Sketchup::EdgeUse < Sketchup::Entity
   # of the edge use direction. The edge use direction is the same as the loop
   # it belongs to.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.active_entities
   #   points = []
   #   points << Geom::Point3d.new(0, 0, 0)
@@ -182,7 +182,7 @@ class Sketchup::EdgeUse < Sketchup::Entity
   #
   # @return boolean - true if reversed, false if not reversed.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def reversed?
@@ -191,7 +191,7 @@ class Sketchup::EdgeUse < Sketchup::Entity
   # The start_vertex_normal method is used to retrieve the vertex normal for
   # the start point of this edgeuse.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.active_entities
   #   points = []
   #   points << Geom::Point3d.new(0, 0, 0)

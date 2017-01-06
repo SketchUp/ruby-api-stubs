@@ -3,7 +3,7 @@
 
 # The Page class contains methods to extract information and modify the
 # properties of an individual page.
-# 
+#
 # Note that inside the SketchUp user interface pages are called "Scenes".
 #
 # @version SketchUp 6.0
@@ -13,7 +13,7 @@ class Sketchup::Page < Sketchup::Entity
 
   # The axes method returns the drawing axes for the page.
   #
-  # @example 
+  # @example
   #   page = Sketchup.active_model.pages.add("Example Page")
   #   xaxis = Geom::Vector3d.new(3, 5, 0)
   #   yaxis = xaxis * Z_AXIS
@@ -27,7 +27,7 @@ class Sketchup::Page < Sketchup::Entity
 
   # The camera method retrieves the camera for a particular page.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -42,12 +42,12 @@ class Sketchup::Page < Sketchup::Entity
 
   # The delay_time method retrieves the amount of time, in seconds, that a page
   # will be displayed before transition to another page during a tour.
-  # 
+  #
   # The default delay time can be modified in the Model Info > Animation panel
   # of the SketchUp User Interface. If this method returns -1, the default
   # delay time is used.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -62,11 +62,11 @@ class Sketchup::Page < Sketchup::Entity
   # The delay_time= method sets the amount of time, in seconds, that a page will
   # be displayed before transitioning to another page during a tour. If you set
   # the delay for a page to be -1, the default delay time will be used.
-  # 
+  #
   # The default delay time can be modified in the Model Info > Animation panel
   # of the SketchUp User Interface.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -84,7 +84,7 @@ class Sketchup::Page < Sketchup::Entity
   # The description method retrieves the description for a page as found in the
   # Scenes manager dialog.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -99,7 +99,7 @@ class Sketchup::Page < Sketchup::Entity
   # The description method sets the description for a page as found in the
   # Scenes manager dialog.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -116,7 +116,7 @@ class Sketchup::Page < Sketchup::Entity
 
   # The hidden_entities method retrieves all hidden entities within a page.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -131,7 +131,7 @@ class Sketchup::Page < Sketchup::Entity
 
   # The label method retrieves the label for a page from the page tab.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -145,7 +145,7 @@ class Sketchup::Page < Sketchup::Entity
 
   # The layers method retrieves the non-visible layers associated with a page.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -161,7 +161,7 @@ class Sketchup::Page < Sketchup::Entity
 
   # The name method retrieves the name for a page from the page tab.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -175,7 +175,7 @@ class Sketchup::Page < Sketchup::Entity
 
   # The name= method sets the name for a page's tab.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -193,7 +193,7 @@ class Sketchup::Page < Sketchup::Entity
   # The rendering_options method retrieves a RenderingOptions object for the
   # page.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -207,7 +207,7 @@ class Sketchup::Page < Sketchup::Entity
 
   # The set_visibility method sets the visibility for a layer on a page.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -229,7 +229,7 @@ class Sketchup::Page < Sketchup::Entity
 
   # The shadow_info method retrieves the ShadowInfo object for the page.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -244,7 +244,7 @@ class Sketchup::Page < Sketchup::Entity
 
   # The style method retrieves the style associated with the page.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -260,7 +260,7 @@ class Sketchup::Page < Sketchup::Entity
   # slideshow or animation export.  If this value is -1, it means to use the
   # default transition time.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -276,7 +276,7 @@ class Sketchup::Page < Sketchup::Entity
 
   # The transition_time= method is used to set the transition time.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -295,7 +295,7 @@ class Sketchup::Page < Sketchup::Entity
   # current view that the user has. Which parts of the Page get updated are
   # controlled via an integer whose bits represent which parts to update. You
   # can determine the integer you need to pass by adding these numbers together:
-  # 
+  #
   #   - 1 - Camera Location,
   #   - 2 - Drawing Style,
   #   - 4 - Shadow Settings,
@@ -303,17 +303,17 @@ class Sketchup::Page < Sketchup::Entity
   #   - 16 - Hidden Geometry,
   #   - 32 - Visible Layers,
   #   - 64 - Active Section Planes.
-  # 
+  #
   # The bit code values are added together to provide the flags value.  For
   # example, to update the Camera Location, Axes Location, and Active Section
   # Planes properties, the flag would be 73 (1 + 8 + 64).
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
   #   status = page.update
-  #   
+  #
   #   # Updates Camera Location (+1), Shadow Settings(+4),
   #   # and Visible Layers (+32).
   #   status = page.update(37)
@@ -329,7 +329,7 @@ class Sketchup::Page < Sketchup::Entity
 
   # The use_axes= method sets the page's axes property.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -350,7 +350,7 @@ class Sketchup::Page < Sketchup::Entity
   # The use_axes? method determines whether you are storing the axes property
   # with the page.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -360,7 +360,7 @@ class Sketchup::Page < Sketchup::Entity
   #   the page, false if you are not storing this property
   #   with the page.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def use_axes?
@@ -368,7 +368,7 @@ class Sketchup::Page < Sketchup::Entity
 
   # The use_camera= method sets the page's camera property.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -388,7 +388,7 @@ class Sketchup::Page < Sketchup::Entity
   # The use_camera? method determines whether you are storing the camera
   # property with the page.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -398,7 +398,7 @@ class Sketchup::Page < Sketchup::Entity
   #   the page, false if you are not storing this property
   #   with the page.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def use_camera?
@@ -406,7 +406,7 @@ class Sketchup::Page < Sketchup::Entity
 
   # The use_hidden= method sets the page's hidden property.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -426,7 +426,7 @@ class Sketchup::Page < Sketchup::Entity
   # The use_hidden? method determines whether you are storing the hidden
   # property with the page.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -436,7 +436,7 @@ class Sketchup::Page < Sketchup::Entity
   #   the page, false if you are not storing this property
   #   with the page.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def use_hidden?
@@ -445,7 +445,7 @@ class Sketchup::Page < Sketchup::Entity
   # The use_hidden_layers= method sets the page's hidden layers
   # property.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -465,7 +465,7 @@ class Sketchup::Page < Sketchup::Entity
   # The use_hidden_layers? method determines whether you are storing the hidden
   # layers property with the page.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -475,7 +475,7 @@ class Sketchup::Page < Sketchup::Entity
   #   the page, false if you are not storing this property
   #   with the page.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def use_hidden_layers?
@@ -484,7 +484,7 @@ class Sketchup::Page < Sketchup::Entity
   # The use_rendering_optoins= method sets the page's display
   # settings property.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -504,7 +504,7 @@ class Sketchup::Page < Sketchup::Entity
   # The use_rendering_options? method determines whether you are storing the
   # rendering options property with the page.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -514,7 +514,7 @@ class Sketchup::Page < Sketchup::Entity
   #   the page, false if you are not storing this property
   #   with the page.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def use_rendering_options?
@@ -523,7 +523,7 @@ class Sketchup::Page < Sketchup::Entity
   # The use_section_planes= method sets the page's section planes
   # property.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -543,7 +543,7 @@ class Sketchup::Page < Sketchup::Entity
   # The use_section_planes? method determines whether you are storing the
   # section planes property with the page.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -553,7 +553,7 @@ class Sketchup::Page < Sketchup::Entity
   #   the page, false if you are not storing this property
   #   with the page.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def use_section_planes?
@@ -561,7 +561,7 @@ class Sketchup::Page < Sketchup::Entity
 
   # The use_shadow_info= method sets the page's shadow info property.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -581,7 +581,7 @@ class Sketchup::Page < Sketchup::Entity
   # The use_shadow_info? method determines whether you are storing the shadow
   # info property with the page.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -591,7 +591,7 @@ class Sketchup::Page < Sketchup::Entity
   #   the page, false if you are not storing this property
   #   with the page.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def use_shadow_info?
@@ -599,7 +599,7 @@ class Sketchup::Page < Sketchup::Entity
 
   # The use_style= method sets the style to be used by the page.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -617,7 +617,7 @@ class Sketchup::Page < Sketchup::Entity
 
   # The use_style? method determines whether storing a style with the page.
   #
-  # @example 
+  # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
@@ -627,7 +627,7 @@ class Sketchup::Page < Sketchup::Entity
   #   the page, false if you are not storing this property
   #   with the page.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def use_style?

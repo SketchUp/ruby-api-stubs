@@ -15,7 +15,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
 
   # The add_observer method is used to add an observer to the current object.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   definition = Sketchup.active_model.definitions[0]
   #   transformation = Geom::Transformation.new([0,0,0])
@@ -34,13 +34,13 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   # The definition method is used to retrieve the component definition for this
   # component instance.
   #
-  # @example 
+  # @example
   #   # First create an instance for us to look at.
   #   entities = Sketchup.active_model.entities
   #   definition = Sketchup.active_model.definitions[0]
   #   transformation = Geom::Transformation.new([0,0,0])
   #   componentinstance = entities.add_instance(definition, transformation)
-  #   
+  #
   #   # You can get an instance's definition with this method.
   #   definition = componentinstance.definition
   #
@@ -53,19 +53,19 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
 
   # The definition= method is used to set the component definition for this
   # component.
-  # 
+  #
   # This method causes the instance to use a different definition, but it will
   # use the same transformation to position it in the Model.
   #
-  # @example 
+  # @example
   #   # Assumes that the active model contains two different components.
   #   instance1 = Sketchup.active_model.entities[0]
   #   instance2 = Sketchup.active_model.entities[1]
-  #   
+  #
   #   # Grab handles to our two definitions.
   #   definition1 = instance1.definition
   #   definition2 = instance2.definition
-  #   
+  #
   #   # Replace 2nd instance with the 1st definition.
   #   instance2.definition = definition1
   #
@@ -82,7 +82,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   # The equals? method is used to determine if a component instance is
   # geometrically equivalent to another instance.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   instance1 = entities[0]
   #   instance2 = entities[1]
@@ -95,7 +95,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   equivalent.
   #   Otherwise false.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 8.0
   def equals?(instance)
@@ -104,7 +104,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   # The explode method is used to explode the component instance into separate
   # entities.
   #
-  # @example 
+  # @example
   #   # Assuming 'instance' is a ComponentInstance object
   #   array = instance.explode
   #   if array
@@ -122,10 +122,10 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
 
   # The glued_to method is used to retrieve the entity that this instance is
   # glued to.
-  # 
+  #
   # Returns nil if it is not glued to anything.
   #
-  # @example 
+  # @example
   #   point = Geom::Point3d.new 10,20,30
   #   transform = Geom::Transformation.new point
   #   model = Sketchup.active_model
@@ -145,12 +145,12 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   end
 
   # The glued_to= method glues this instance to a face.
-  # 
+  #
   # This method will raise an exception if the instance cannot be glued to the
   # given face. Instances cannot be glued if the definition of the instance
   # doesn't support gluing or if the alignment is wrong.
   #
-  # @example 
+  # @example
   #   depth = 100
   #   width = 100
   #   path=Sketchup.find_support_file "Bed.skp",
@@ -192,7 +192,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   # The guid method is used to get the base 64 encoded unique id
   # for this SketchUp object.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   definition = Sketchup.active_model.definitions[0]
   #   transformation = Geom::Transformation.new([0,0,0])
@@ -209,7 +209,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   # instances representing manifold solid volumes (this - arg).  If the specified
   # objects (this and arg) do not represent manifold volumes, this method fails.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   instance1 = entities[0]
   #   instance2 = entities[1]
@@ -228,7 +228,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
 
   # The locked= method is used to lock a component instance.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   definition = Sketchup.active_model.definitions[0]
   #   transformation = Geom::Transformation.new([0,0,0])
@@ -246,7 +246,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
 
   # The locked? method is used to determine if a component instance is locked.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   definition = Sketchup.active_model.definitions[0]
   #   transformation = Geom::Transformation.new([0,0,0])
@@ -256,7 +256,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   # @return status - true if the component instance is locked.
   #   False if the instance is not locked.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def locked?
@@ -265,12 +265,12 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   # The make_unique method is used to create a component definition for this
   # instance that is not used by any other instances.
   #
-  # @example 
+  # @example
   #   point = Geom::Point3d.new 10,20,30
   #   transform = Geom::Transformation.new point
   #   model = Sketchup.active_model
   #   entities = model.active_entities
-  #   
+  #
   #   path = Sketchup.find_support_file "Bed.skp",
   #     "Components/Components Sampler/"
   #   definitions = model.definitions
@@ -287,7 +287,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
 
   # The manifold? method is used to determine if an instance is manifold.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   definition = Sketchup.active_model.definitions[0]
   #   transformation = Geom::Transformation.new([0,0,0])
@@ -297,7 +297,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   # @return status - true if the instance is manifold.
   #   false if the instance is not manifold.
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   #
   # @version SketchUp 8.0
   def manifold?
@@ -305,11 +305,11 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
 
   # The move! method is the same as the transform! method, except that it does
   # not record the move as an undo operation.
-  # 
+  #
   # This method is useful for moving entities inside of an animation or page
   # transition.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   definition = Sketchup.active_model.definitions[0]
   #   transformation = Geom::Transformation.new([0,0,0])
@@ -328,7 +328,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
 
   # The name method is used to get the name of this instance.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   definition = Sketchup.active_model.definitions[0]
   #   transformation = Geom::Transformation.new([0,0,0])
@@ -343,7 +343,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
 
   # The name method is used to set the name of this instance.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   definition = Sketchup.active_model.definitions[0]
   #   transformation = Geom::Transformation.new([0,0,0])
@@ -363,7 +363,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   # instances representing manifold solid volumes (this || arg). If the specified
   # objects (this and arg) do not represent manifold volumes, this method fails.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   instance1 = entities[0]
   #   instance2 = entities[1]
@@ -383,7 +383,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   # The remove_observer method is used to remove an observer from the current
   # object.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   definition = Sketchup.active_model.definitions[0]
   #   transformation = Geom::Transformation.new([0,0,0])
@@ -402,16 +402,16 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   # The show_differences method is used to determine if a component instance is
   # geometrically equivalent to another instance and in addition move the non-
   # matching and matching geometry to new layers.
-  # 
+  #
   # This method will move both instances to Layer0.  Geometry that is the same
   # in both components will be moved to a new layer named def_name + "_same".
   # Geometry that is not the same will be moved to a layer named def_name +
   # "_diff".
-  # 
+  #
   # If verbose is true, a list of all the geometry that is different
   # from one component to the other is displayed texturally in the Ruby Console.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   instance1 = entities[0]
   #   instance2 = entities[1]
@@ -435,7 +435,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   # instances representing manifold solid volumes (this - arg).  If the specified
   # objects (this and arg) do not represent manifold volumes, this method fails.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   instance1 = entities[0]
   #   instance2 = entities[1]
@@ -460,7 +460,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   # instances representing manifold solid volumes (this - arg).  If the specified
   # objects (this and arg) do not represent manifold volumes, this method fails.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   instance1 = entities[0]
   #   instance2 = entities[1]
@@ -480,7 +480,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   # The transform! method is used to apply a transformation to a component
   # instance.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   definition = Sketchup.active_model.definitions[0]
   #   transformation = Geom::Transformation.new([0,0,0])
@@ -500,7 +500,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   # The transformation method is used to retrieve the transformation of this
   # instance.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   definition = Sketchup.active_model.definitions[0]
   #   transformation = Geom::Transformation.new([0,0,0])
@@ -517,7 +517,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   # The transformation= method is used to set the transformation on this
   # instance.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   definition = Sketchup.active_model.definitions[0]
   #   transformation = Geom::Transformation.new([0,0,0])
@@ -539,7 +539,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   # the specified objects (this and arg) do not represent manifold volumes, this
   # method fails.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   instance1 = entities[0]
   #   instance2 = entities[1]
@@ -560,7 +560,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   # representing manifold solid volumes (this | arg).  If the specified
   # objects (this and arg) do not represent manifold volumes, this method fails.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   instance1 = entities[0]
   #   instance2 = entities[1]
@@ -580,7 +580,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   # The volume method is used to compute the volume of this instance if and only
   # if this instance is manifold.
   #
-  # @example 
+  # @example
   #   entities = Sketchup.active_model.entities
   #   definition = Sketchup.active_model.definitions[0]
   #   transformation = Geom::Transformation.new([0,0,0])

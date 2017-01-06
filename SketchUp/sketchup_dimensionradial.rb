@@ -12,7 +12,7 @@ class Sketchup::DimensionRadial < Sketchup::Dimension
   # The arc_curve method returns the ArcCurve object to which this dimension is
   # attached.
   #
-  # @example 
+  # @example
   #   arc = dim.arc_curve
   #
   # @return The ArcCurve object to which the dimension is attached.
@@ -24,7 +24,7 @@ class Sketchup::DimensionRadial < Sketchup::Dimension
   # The arc_curve= method is used to set the ArcCurve object to which this
   # dimension is attached.
   #
-  # @example 
+  # @example
   #   dim.arc_curve = arc
   #
   # @param arc_curve
@@ -40,7 +40,7 @@ class Sketchup::DimensionRadial < Sketchup::Dimension
   # The leader_break_point method returns the break point on the leader where the
   # dimension text is attached.
   #
-  # @example 
+  # @example
   #   pt = dim.leader_break_point
   #   puts "Break point is #{pt}"
   #
@@ -53,7 +53,7 @@ class Sketchup::DimensionRadial < Sketchup::Dimension
   # The leader_break_point= method is used to set the break point on the leader
   # where the dimension text is attached.
   #
-  # @example 
+  # @example
   #   dim.leader_break_point = [10, 0, 0]
   #
   # @param point
@@ -68,7 +68,7 @@ class Sketchup::DimensionRadial < Sketchup::Dimension
   # The leader_points method returns the 3 significant points along the dimension
   # line in world coordinates.
   #
-  # @example 
+  # @example
   #   pts = dim.leader_points
   #   puts "Break point is #{pts[0]}"
   #   puts "Attach point is #{pts[1]}"
