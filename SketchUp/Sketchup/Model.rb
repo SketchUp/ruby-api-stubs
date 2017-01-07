@@ -83,7 +83,7 @@ class Sketchup::Model
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #
-  # @return [Sketchup::Entities] entities - an entities object
+  # @return [Sketchup::Entities] entities - the {Sketchup::Entities} of the current editing context, or Model{Model#entities} if none.
   #
   # @version SketchUp 6.0
   def active_entities
