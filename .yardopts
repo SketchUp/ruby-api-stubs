@@ -1,0 +1,8 @@
+--title "SketchUp Ruby API Documentation"
+--no-api
+--no-private
+-e su-api_plugin.rb
+-p su-template
+SketchUp/**/*.rb
+-
+pages/*.md
