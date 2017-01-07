@@ -83,7 +83,7 @@ class Sketchup::Model
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #
-  # @return entities - an entities object
+  # @return [Sketchup::Entities] entities - an entities object
   #
   # @version SketchUp 6.0
   def active_entities
