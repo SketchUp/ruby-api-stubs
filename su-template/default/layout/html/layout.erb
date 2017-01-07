@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= erb(:headers) %>
+  <link rel="shortcut icon" type="image/vnd.microsoft.icon"
+    href="https://help.sketchup.com/sites/all/themes/sketch_help/favicon.ico">
+  <link rel='stylesheet' type='text/css'
+    href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic'>
+  
+  <script>
+    // Every time this page is loaded, it sends this action to SketchUp, telling
+    // SketchUp that a new page has loaded that has example snippets that should
+    // be replaced with code editors. Nothing happens if the page is loaded in a
+    // regular browser outside of the SketchUp client.
+    $( document ).ready(function() {
+      if (typeof sketchup == 'object') { 
+         sketchup.page_loaded();
+      }
+    });
+  </script>
+  
+</head>
+<body>
+
+  <%= erb(:navbar) %>
+
+  <div id="su-content">
+
+    <div class="nav_wrap">
+      <iframe id="nav" src="<%= @nav_url %>"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <%= erb(:breadcrumb) %>
+        <%= erb(:search) %>
+        <div class="clear"></div>
+      </div>
+
+      <iframe id="search_frame" src="<%= @nav_url %>"></iframe>
+
+      <div id="content"><%= yieldall %></div>
+
+      <%= erb(:footer) %>
+    </div>
+
+  </div>
+
+</body>
+</html>
