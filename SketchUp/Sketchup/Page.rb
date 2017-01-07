@@ -336,7 +336,7 @@ class Sketchup::Page < Sketchup::Entity
   #   # Set use_axes to false
   #   status = page.use_axes=false
   #
-  # @param pagesetting
+  # @param pagesettings
   #   true if you want your page to save this property, false
   #   if you do not want your page to save this property.
   #

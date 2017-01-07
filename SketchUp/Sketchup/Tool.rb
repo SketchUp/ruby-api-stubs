@@ -430,22 +430,18 @@ class Sketchup::Tool
   #     puts "              view = #{view}"
   #   end
   #
-  # @param x
-  #   The X coordinate on the screen where the event occurred.
-  #
   # @param flags
   #   A bit mask that tells the state of the modifier keys and
   #   other mouse buttons at the time.
   #
-  # @param y
-  #   The Y coordinate on the screen where the event occurred.
-  #
-  # @param Undefined.
+  # @param x
+  #   The X coordinate on the screen where the event occurred.
   #
   # @param view
   #   A View object where the method was invoked.
   #
-  # @param Undefined.
+  # @param y
+  #   The Y coordinate on the screen where the event occurred.
   #
   # @return nil
   #

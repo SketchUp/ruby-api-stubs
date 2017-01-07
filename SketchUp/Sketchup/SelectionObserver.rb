@@ -34,7 +34,7 @@ class Sketchup::SelectionObserver
   #
   # @param [Sketchup::Selection] selection
   #
-  # @param [Sketchup::Entity] element
+  # @param [Sketchup::Entity] entity
   #
   # @return [nil]
   #
@@ -102,7 +102,7 @@ class Sketchup::SelectionObserver
   # @note Due to a bug in SketchUp this event doesn't trigger. Instead
   #   +onSelectedRemoved+ is called.
   #
-  # @param [Sketchup::Entity] element
+  # @param [Sketchup::Entity] entity
   #
   # @param [Sketchup::Selection] selection
   #

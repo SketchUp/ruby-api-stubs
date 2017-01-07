@@ -1085,16 +1085,19 @@ module Sketchup
   #     #code to do something if set_status_text is successful
   #   end
   #
-  # @param status
-  #   text   the status text that will appear.
+  # @overload set_status_text
   #
-  # @param position
-  #   the position where the text will appear.
+  #   Clears all status panes.
+  #   @return [nil]
   #
-  # @return [nil]
+  # @overload set_status_text(status_text = '', position = SB_PROMPT)
+  #
+  #   @param status text   the status text that will appear.
+  #   @param position      the position where the text will appear.
+  #   @return [nil]
   #
   # @version SketchUp 6.0
-  def self.set_status_text(status_text = '', position = SB_PROMPT)
+  def self.set_status_text(*args)
   end
 
   # The status_text= method is used to set the text appearing on the status

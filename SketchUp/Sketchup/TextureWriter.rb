@@ -76,7 +76,7 @@ class Sketchup::TextureWriter
   # @example
   #   load_front_face = true
   #   tw.load(faces[0], load_front_face)
-  #   handle = tw.handle(faces[0],load_front_face)
+  #   handle = tw.handle(faces[0], load_front_face)
   #
   # @example
   #   tw.load(texturable_entities[0])
@@ -84,19 +84,19 @@ class Sketchup::TextureWriter
   #
   # @overload handle(entity)
   #
-  #   @param [Sketchup::Entity] entity A image, component instance, group, or
-  #                                    layer.
-  #   @return [Integer] handle - the index for the entity in the texture writer.
+  #   @param [Sketchup::Entity] entity  A image, component instance, group, or
+  #                                     layer.
+  #   @return [Integer] the index for the entity in the texture writer.
   #
   # @overload handle(face, side)
   #
-  #   @param [Sketchup::Face] face A face.
-  #   @param [Boolean] side        Specifies one of the sides of the face
-  #                                (true if front, false if back.)
-  #   @return [Integer] handle - the index for the entity in the texture writer.
+  #   @param [Sketchup::Face] face
+  #   @param [Boolean] side  Specifies one of the sides of the face
+  #                          (true if front, false if back.)
+  #   @return [Integer] the index for the entity in the texture writer.
   #
   # @version SketchUp 6.0
-  def handle(*argv, self)
+  def handle(*args)
   end
 
   # The {#length} method is used to determine the number of textures loaded into
@@ -149,7 +149,7 @@ class Sketchup::TextureWriter
   #                     loaded
   #
   # @version SketchUp 6.0
-  def load(*argv, self)
+  def load(*args)
   end
 
   # The write method is used to write an individual textures, within the texture
@@ -205,7 +205,7 @@ class Sketchup::TextureWriter
   #   @return [Integer] status - one of three status messages (see comments.)
   #
   # @version SketchUp 6.0
-  def write(*argv, self)
+  def write(*args)
   end
 
   # The write_all method is used to write all of the textures within the texture

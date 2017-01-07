@@ -81,7 +81,7 @@ class Geom::Vector3d
   #   vector2 = Geom::Vector3d.new(0,1,0)
   #   vector3 = vector.cross(vector2)
   #
-  # @param vector2
+  # @param vector
   #   A Vector3d object.
   #
   # @return vector - the cross of vector1 and vector2
@@ -190,15 +190,18 @@ class Geom::Vector3d
   # Array. The value of i must be 0, 1 or 2.
   #
   # @example
-  #   value = vector[i] = coordinate
+  #   vector[i] = coordinate
   #
-  # @param coordinate
+  # @param index
+  #   The index for the x, y, or z coordinate.
+  #
+  # @param value
   #   The value for the x, y, or z coordinate.
   #
-  # @return value - the newly set coordinate value
+  # @return the newly set coordinate value
   #
   # @version SketchUp 6.0
-  def []=(arguments)
+  def []=(index, value)
   end
 
   # The angle_between method is used to compute the angle (in radians) between
@@ -264,7 +267,7 @@ class Geom::Vector3d
   #   vector2 = Geom::Vector3d.new(0,1,0)
   #   vector3 = vector.cross(vector2)
   #
-  # @param vector2
+  # @param vector
   #   A Vector3d object.
   #
   # @return vector - the cross of vector1 and vector2

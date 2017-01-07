@@ -90,17 +90,20 @@ class Sketchup::View
   #   view = model.active_view
   #   status = view.camera=camera2
   #
-  # @param camera
-  #   The new Camera object.
+  # @overload camera=(camera)
   #
-  # @param transition_time
-  #   The transition time from the existing camera to the
-  #   new camera.
+  #   @param [Sketchup::Camera] camera  The new Camera object.
+  #   @return nil
   #
-  # @return nil
+  # @overload camera=(camera_and_transition)
+  #
+  #   @param [Array(Sketchup::Camera, Float)] camera_and_transition
+  #       The second item in the array represent the transition time from the
+  #       existing camera to the
+  #   @return nil
   #
   # @version SketchUp 6.0
-  def camera=(camera)
+  def camera=(arg)
   end
 
   # The center method is used to retrieve the coordinates of the center of the

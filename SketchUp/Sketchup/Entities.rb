@@ -134,31 +134,29 @@ class Sketchup::Entities
   #   edges = entities.add_arc centerpoint, vector2, vector3, 10, 15.degrees, 135.degrees
   #   arccurve = edges.first.curve
   #
-  # @param normal
-  #   A Vector3d object representing normal for the arc.
+  # @overload add_arc(center, xaxis, normal, radius, start_angle, end_angle)
   #
-  # @param center
-  #   A Point3d object representing the center .
+  #   @param center        A Point3d object representing the center .
+  #   @param xaxis         A Vector3d object representing xaxis for the arc.
+  #   @param normal        A Vector3d object representing normal for the arc.
+  #   @param radius        The radius of the arc.
+  #   @param start_angle   Start angle for the arc, in radians.
+  #   @param end_angle     End angle for the arc, in radians.
+  #   @return              edges - an array of Edge objects that define the arc.
   #
-  # @param xaxis
-  #   A Vector3d object representing xaxis for the arc.
+  # @overload add_arc(center, xaxis, normal, radius, start_angle, end_angle, num_segments)
   #
-  # @param radius
-  #   The radius of the arc.
-  #
-  # @param [optional] num_segments
-  #   How many segments to draw.
-  #
-  # @param start_angle
-  #   Start angle for the arc, in radians.
-  #
-  # @param end_angle
-  #   End angle for the arc, in radians.
-  #
-  # @return edges - an array of Edge objects that define the arc.
+  #   @param center        A Point3d object representing the center .
+  #   @param xaxis         A Vector3d object representing xaxis for the arc.
+  #   @param normal        A Vector3d object representing normal for the arc.
+  #   @param radius        The radius of the arc.
+  #   @param start_angle   Start angle for the arc, in radians.
+  #   @param end_angle     End angle for the arc, in radians.
+  #   @param num_segments  How many segments to draw.
+  #   @return              edges - an array of Edge objects that define the arc.
   #
   # @version SketchUp 6.0
-  def add_arc(center, xaxis, center, normal, radius, start_angle, end_angle, num_segments)
+  def add_arc(*args)
   end
 
   # The add_circle method is used to create a circle.
@@ -195,19 +193,14 @@ class Sketchup::Entities
   # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
-  #   point1 = Geom::Point3d.new(0,0,0)
-  #   point2 = Geom::Point3d.new(20,20,20)
-  #   constline = entities.add_cline point1,point2
-  #   if (constline)
-  #     UI.messagebox constline
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   point1 = Geom::Point3d.new(0, 0, 0)
+  #   point2 = Geom::Point3d.new(20, 20, 20)
+  #   cline = entities.add_cline(point1, point2)
   #
   # @param start_point
   #   A Point3d object where the line will start.
   #
-  # @param end
+  # @param end_point
   #   If a Vector3d, then an infinite line passing through
   #   the start_point will be created in that direction. If a
   #   Point3d, then a finite line will be created between the
@@ -221,7 +214,7 @@ class Sketchup::Entities
   #   successful
   #
   # @version SketchUp 6.0
-  def add_cline(start_point, end)
+  def add_cline(start_point, end_point, stipple)
   end
 
   # The add_cpoint method is used to create a construction point.
@@ -430,7 +423,7 @@ class Sketchup::Entities
   #   smooth_flags = Geom::PolygonMesh::NO_SMOOTH_OR_HIDE
   #   group.entities.add_faces_from_mesh(pm, smooth_flags, material)
   #
-  # @param [Geom::PolygonMesh] polygonmesh
+  # @param [Geom::PolygonMesh] polygon_mesh
   #
   # @param [Integer] smooth_flags
   #   flags for softening and smoothing of edges.
@@ -444,7 +437,7 @@ class Sketchup::Entities
   # @return [Integer] Number of faces created
   #
   # @version SketchUp 6.0
-  def add_faces_from_mesh(polymesh, smooth_flags = Geom::PolygonMesh::AUTO_SOFTEN|Geom::PolygonMesh::SMOOTH_SOFT_EDGES, f_material = nil, b_material = nil)
+  def add_faces_from_mesh(polygon_mesh, smooth_flags = Geom::PolygonMesh::AUTO_SOFTEN|Geom::PolygonMesh::SMOOTH_SOFT_EDGES, f_material = nil, b_material = nil)
   end
 
   # The add_group method is used to create an empty group or a group with
@@ -821,7 +814,7 @@ class Sketchup::Entities
   #   compatibility reasons. Points are always
   #   merged.
   #
-  # @param [Geom::PolygonMesh] polygonmesh
+  # @param [Geom::PolygonMesh] polygon_mesh
   #
   # @param [Integer] smooth_flags
   #   flags for softening and smoothing of edges.
@@ -835,7 +828,7 @@ class Sketchup::Entities
   # @return [Boolean]
   #
   # @version SketchUp 6.0
-  def fill_from_mesh(polymesh, weld_vertices = true, smooth_flags = Geom::PolygonMesh::AUTO_SOFTEN|Geom::PolygonMesh::SMOOTH_SOFT_EDGES, f_material = nil, b_material = nil)
+  def fill_from_mesh(polygon_mesh, weld_vertices = true, smooth_flags = Geom::PolygonMesh::AUTO_SOFTEN|Geom::PolygonMesh::SMOOTH_SOFT_EDGES, f_material = nil, b_material = nil)
   end
 
   # The intersect_with method is used to intersect an entities, component

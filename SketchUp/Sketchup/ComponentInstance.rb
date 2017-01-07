@@ -525,13 +525,13 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   new_transformation = Geom::Transformation.new([100,0,0])
   #   componentinstance.transformation = new_transformation
   #
-  # @param tranform
+  # @param transformation
   #   A Transformation object to apply.
   #
   # @return instance - the transformed ComponentInstance
   #
   # @version SketchUp 6.0
-  def transformation=(transform)
+  def transformation=(transformation)
   end
 
   # The trim method is used to compute the (non-destructive) boolean difference

@@ -220,7 +220,7 @@ module UI
   # @return [Integer] A number corresponding to what the user selected.
   #
   # @version SketchUp 6.0
-  def self.messagebox(string, type = MB_OK)
+  def self.messagebox(message, type = MB_OK)
   end
 
   # The model_info_pages method is used to returns the names of all the

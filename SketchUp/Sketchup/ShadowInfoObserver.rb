@@ -51,7 +51,7 @@ class Sketchup::ShadowInfoObserver
   # @return [nil]
   #
   # @version SketchUp 6.0
-  def onShadowInfoChanged(type)
+  def onShadowInfoChanged(shadow_info, type)
   end
 
 end

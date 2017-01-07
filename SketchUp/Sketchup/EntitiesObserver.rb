@@ -104,7 +104,7 @@ class Sketchup::EntitiesObserver
   # @return [nil]
   #
   # @version SketchUp 6.0
-  def onElementRemoved(entities, entity)
+  def onElementRemoved(entities, entity_id)
   end
 
   # The {#onEraseEntities} method is invoked when one or more entities are erased.

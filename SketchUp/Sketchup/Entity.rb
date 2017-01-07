@@ -146,16 +146,19 @@ class Sketchup::Entity
   #   status = entity1.set_attribute "testdictionary", "test", 115
   #   status = entity1.delete_attribute "testdictionary"
   #
-  # @param dictionary_name
-  #   The name of an attribute dictionary.
+  # @overload delete_attribute(dictionary_name)
   #
-  # @param key
-  #   An attribute key.
+  #   @param dictionary_name The name of an attribute dictionary.
+  #   @return              nil
   #
-  # @return nil
+  # @overload delete_attribute(dictionary_name, key)
+  #
+  #   @param dictionary_name The name of an attribute dictionary.
+  #   @param key           An attribute key.
+  #   @return              nil
   #
   # @version SketchUp 6.0
-  def delete_attribute(dictionary_name)
+  def delete_attribute(*args)
   end
 
   # The deleted? method is used to determine if your entity is still valid (not

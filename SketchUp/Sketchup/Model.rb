@@ -593,9 +593,9 @@ class Sketchup::Model
   #   entities = model.find_entity_by_persistent_id(id1, id2, id3)
   #   entities = model.find_entity_by_persistent_id([id1, id2, id3])
   #
-  # @param [Integer] Array
-  #   ids_or_array Pass either a series of ids or a single
-  #   array containing persistent ids.
+  # @param [Array<Integer>] ids_or_array
+  #   Pass either a series of ids or a
+  #   single array containing persistent ids.
   #
   # @return [Array<Sketchup::Entity, nil>] Returns an array with
   #   {Sketchup::Entity} objects for each id found and nil otherwise.

@@ -363,7 +363,7 @@ class Geom::PolygonMesh
   # @return [Geom::PolygonMesh]
   #
   # @version SketchUp 6.0
-  def transform!(transform)
+  def transform!(transformation)
   end
 
   # The {#uv_at} method is used to access a uv (texture coordinates) at a
