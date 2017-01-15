@@ -477,8 +477,8 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   def subtract(instance)
   end
 
-  # The transform! method is used to apply a transformation to a component
-  # instance.
+  # The +transform!+ method is used to apply a {Geom::Transformation} to a
+  #   component instance.
   #
   # @example
   #   entities = Sketchup.active_model.entities
@@ -488,10 +488,10 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   new_transformation = Geom::Transformation.new([100,0,0])
   #   componentinstance.transform! new_transformation
   #
-  # @param transform
-  #   The transform object to apply to the component instance.
+  # @param transform [Geom::Transformation]
+  #   The transformation object to apply to the component instance.
   #
-  # @return status - true if successful, false if unsuccessful
+  # @return [Boolean] +true+ if successful, +false+ if unsuccessful
   #
   # @version SketchUp 6.0
   def transform!(transform)
