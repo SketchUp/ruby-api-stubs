@@ -75,16 +75,16 @@ class Sketchup::Model
   def abort_operation
   end
 
-  # The active_entities method is used to retrieve an {Entities} object containing
+  # Returns an {Sketchup::Entities} object which contains
   # all of the entities in the active model, component, or group (if you are
   # within a group or component edit session.)
   #
   # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
+  #   entities.each { |entity| puts "#{entity} (#{entity.class})" }
   #
-  # @return [Entities] The {Entities} of the current editing context,
-  #   or Model#entities if none.
+  # @return [Sketchup::Entities]
   #
   # @version SketchUp 6.0
   def active_entities
