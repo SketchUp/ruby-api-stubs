@@ -19,67 +19,44 @@ class Sketchup::Pages < Sketchup::Entity
 
   # Class Methods
 
-  # The add_frame_change_observer method is used to add a new frame change
+  # The {.add_frame_change_observer} method is used to add a new frame change
   # observer that is called with each frame of an animation, meaning the
   # end user has clicked on a Scene tab (aka Page) inside SketchUp and
   # the camera is animating to that scene.
   #
-  # The argument is an object that implements a method frameChange with the
-  # following form:
-  # This method is called during a slide show or creation of an animation after
-  # the camera has been set up, but before the frame is displayed. It give you a
-  # chance to perform your own actions during the animation. The arguments for
-  # frameChange method are the Page that you transition from (fromPage), the Page
-  # that you transition to (toPage), and a percent_done between 0.0 and 1.0 that
-  # tell you the percentage of the way between the two pages.
-  #
-  # By watching the percent_done for 1.0, you can activate Ruby code that
-  # executes as soon as the user's camera has finished animating.
-  #
   # The method returns an integer id that can be stored and later used to remove
-  # the observer with the Pages.remove_frame_change_observer method.
-  #
-  # Note: In SketchUp 6 and 7, the fromPage argument into the callback does not
-  # appear to be populated on the PC. You can store a variable that keeps track
-  # of the toPage and then use that on a subsequent Scene selection to determine
-  # the last Page that the user was on.
+  # the observer with the {Sketchup::Pages.remove_frame_change_observer} method.
   #
   # @example
-  #   # Define the event hangler object.
-  #   class FrameChangeObserver
-  #     def frameChange(fromPage, toPage, percent_done)
-  #       # Actual code here.
+  #   class MyFrameChangeObserver
+  #     def frameChange(from_page, to_page, percent_done)
+  #       puts "From page #{from_page.name} to #{to_page.name} (#{percent_done * 100}%)"
   #     end
   #   end
+  #   id = Sketchup::Pages.add_frame_change_observer(MyFrameChangeObserver.new)
   #
-  #   # Then attach it to the global Pages object.
-  #   id = Sketchup::Pages.add_frame_change_observer(FrameChangeObserver.new)
+  # @param [#frameChange] object
+  #   An object that implements the
+  #   {Sketchup::FrameChangeObserver#frameChange} method.
   #
-  # @example
-  #   id = Sketchup::Pages.add_frame_change_observer(FrameChangeObserver.new)
+  # @return [Integer] A unique id of the observer
   #
-  # @param object
-  #   An object that implements the frameChange method.
-  #
-  # @return id - A unique id of the observer
+  # @see Sketchup::FrameChangeObserver#frameChange
   #
   # @version SketchUp 6.0
   def self.add_frame_change_observer(object)
   end
 
-  # The remove_frame_change_observer method is used to remove a frame change
+  # The #{remove_frame_change_observer} method is used to remove a frame change
   # observer
   #
-  # The argument is the number returned from the call to
-  # add_frame_change_observer.
-  #
   # @example
-  #   Sketchup::Pages.remove_frame_change_observer id
+  #   Sketchup::Pages.remove_frame_change_observer(id)
   #
-  # @param observer_id
-  #   The unique id returned by add_frame_change_observer
+  # @param [Integer] observer_id
+  #   The unique id returned by {.add_frame_change_observer}
   #
-  # @return success - true if successful
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def self.remove_frame_change_observer(observer_id)
