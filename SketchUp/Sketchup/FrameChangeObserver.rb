@@ -8,7 +8,7 @@
 #
 # This abstract observer is any object that implements a callback method
 # +frameChange+ with 3 arguments: +from_scene+ (the scene that you
-# transition from), +to_scene+ (the scene that you transition toward)
+# transition from) +to_scene+ (the scene that you transition toward)
 # and a +percent_done+ between +0.0+ and +1.0+ (that indicates the percentage
 # of transition between the two scenes.)
 #
@@ -36,23 +36,13 @@
 #   change observer. You can not sub-class this class because it is not
 #   defined by the API.
 #
-# @example Draws a progress bar on the status line.
+# @example
 #   class MyFrameChangeObserver
-#     def frameChange(from_scene, to_scene, percent_done)
-#       if percent_done == 0.0
-#         Sketchup.status_text= "% done:"
-#         if from_scene.nil? # PC bug!
-#           puts "Animating to page: '#{to_scene.name}'"
-#         else
-#           puts "From page '#{from_scene.name}' to '#{to_scene.name}'"
-#         end
-#       else
-#         Sketchup.status_text= "% done: #{'|'*(percent_done*100).to_i}"
-#         UI.messagebox("All Done!") if percent_done >= 1.0
-#       end
+#     def frameChange(from_page, to_page, percent_done)
+#       puts "From page #{from_page.name} to #{to_page.name} (#{percent_done * 100}%)"
 #     end
 #   end
-#   @id = Sketchup::Pages.add_frame_change_observer(MyFrameChangeObserver.new)
+#   id = Sketchup::Pages.add_frame_change_observer(MyFrameChangeObserver.new)
 class Sketchup::FrameChangeObserver
 
   # Instance Methods
@@ -62,7 +52,7 @@ class Sketchup::FrameChangeObserver
   # displayed. It gives you a chance to perform your own actions during
   # the animation. The arguments for +frameChange+ method are the scene
   # page that you transition from (+from_scene+), the scene page that you
-  # transition to (+to_scene+), and a +percent_done+ between +0.0+ and +1.0+
+  # transition to (to_scene), and a +percent_done+ between +0.0+ and +1.0+
   # that tell you the percentage of the transition between the two scene
   # pages.
   #
@@ -71,37 +61,33 @@ class Sketchup::FrameChangeObserver
   #
   # @example
   #   class MyFrameChangeObserver
-  #     def frameChange(from_scene, to_scene, percent_done)
-  #       if percent_done == 0.0
-  #         puts "Animating to scene '#{to_scene.name}':"
-  #       else
-  #         puts format("% 7.2f %",percent_done*100)
-  #       end
+  #     def frameChange(from_page, to_page, percent_done)
+  #       puts "From page #{from_page.name} to #{to_page.name} (#{percent_done * 100}%)"
   #     end
   #   end
-  #   @id = Sketchup::Pages.add_frame_change_observer(MyFrameChangeObserver.new)
+  #   id = Sketchup::Pages.add_frame_change_observer(MyFrameChangeObserver.new)
   #
   # @note The +from_scene+ argument into this callback does not appear to
   #   be populated on the PC. You can store a variable that keeps track of
   #   the +to_scene+ and then use that on a subsequent Scene selection to
   #   determine the last Page that the user was on.
   #
-  # @param [Sketchup::Page, nil] from_scene
-  #   The previous scene page the
-  #   view is transitioning from.
+  # @param [Float] percent_done
+  #   The percentage of transition between
+  #   the two scene pages.
   #
   # @param [Sketchup::Page] to_scene
   #   The selected scene page the view
   #   is transitioning towards.
   #
-  # @param [Float] percent_done
-  #   The percentage of transition between
-  #   the two scene pages.
+  # @param [Sketchup::Page, nil] from_scene
+  #   The previous scene page the
+  #   view is transitioning from.
   #
   # @return [void] Value can be anything, but is ignored by SketchUp.
   #
   # @version SketchUp 6.0
-  def frameChange(from_scene, to_scene, percent_done)
+  def frameChange(from_page, to_page, percent_done)
   end
 
 end
