@@ -1,15 +1,14 @@
 # Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
-# The +Sketchup::Licensing+ module contains methods for
-# extensions purchased from Extension Warehouse to check their licensing status.
+# The Sketchup::Licensing module contains methods for extensions purchased
+# from Extension Warehouse to check their licensing status. It is advised
+# to place these calls inside encrypted Ruby (.rbe) files. This API is also
+# exposed via the SketchUp C API. Extensions that already use native code
+# should prefer using the native API, which should be more secure than their
+# Ruby API counterparts.
 #
-# It is advised to place these calls inside encrypted Ruby (.rbe) files. This
-# API is also exposed via the SketchUp C API. Extensions that already use
-# native code should prefer using the native API, which should be more secure
-# than their Ruby API counterparts.
-#
-# For more details, see: {Developer Center Licensing Tutorial}[https://extensions.sketchup.com/en/developer_center/tutorial_licensing]
+# See the {Licensing Tutorial}[../tutorial_licensing] for more details.
 #
 # @version SketchUp 2015
 module Sketchup::Licensing
@@ -33,12 +32,13 @@ module Sketchup::Licensing
   #      puts "Extension is licensed."
   #   end
   #
-  # @param extension_id [String] 
-  #   The Extension Warehouse UUID for the extension.
+  # @param extension_id
+  #   String - The Extension Warehouse UUID for the extension.
   #
-  # @return [ExtensionLicense] An object representing
-  #   licensing state for the extension. Do not store this object, retrieve
-  #   it again when needed since licensing state may have changed.
+  # @return ExtensionLicense - an object representing licensing
+  #   state for the extension. Do not store this object,
+  #   retrieve it again when needed since licensing state may
+  #   have changed.
   #
   # @version SketchUp 2015
   def self.get_extension_license(extension_id)
