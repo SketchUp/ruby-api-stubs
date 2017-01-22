@@ -51,7 +51,9 @@ class Geom::PolygonMesh
   def add_point(point)
   end
 
-  # The {#add_polygon} method is used for adding a polygon to a polygon mesh.
+  # The {#add_polygon} method is used for adding a {#polygons polygon} to a
+  # {PolygonMesh}. All variations of this method require at least 3 elements
+  # to define a polygon, although more may be given.
   #
   # @example
   #   mesh = Geom::PolygonMesh.new
@@ -60,11 +62,34 @@ class Geom::PolygonMesh
   #   point3 = Geom::Point3d.new(2, 0, 1)
   #   index = mesh.add_polygon(point1, point2, point3)
   #
-  # @param [Array<Integer>] points
-  #   A list of points that represent the
-  #   polygon's vertices.
+  # @overload add_polygon(index, index, index, ...)
+  #   @param index [Integer]
+  #     An index of a vertex in the mesh. Remember, mesh indices start at 1.
+  #   @param ... [Integer]
+  #     More indices.
   #
-  # @return [Integer] the index of the polygon in the mesh
+  # @overload add_polygon(index_array)
+  #   @param index_array [Array<Integer>]
+  #     An {Array} of point indices.
+  #
+  # @overload add_polygon(point3d, point3d, point3d, ...)
+  #   @param point3d [Geom::Point3d] 
+  #     Note when passing a flat list of Point3ds, arrays can not be
+  #     substituted and will generate an error:
+  #     +#<ArgumentError: point index 0 out of range>+.
+  #   @param ... [Geom::Point3d]
+  #     More points.
+  #
+  # @overload add_polygon(point3d_array)
+  #   @param point3d_array [Array<Geom::Point3d>]
+  #
+  # @overload add_polygon(array)
+  #   @param array [Array<Array(3)>]
+  #     An array of arrays of length 3, where the inner arrays are used as if
+  #     they were Point3d objects. 
+  #
+  # @return [Integer] The index of the polygon in the mesh.
+  # @return [0] Invalid index.
   #
   # @version SketchUp 6.0
   def add_polygon(points)
