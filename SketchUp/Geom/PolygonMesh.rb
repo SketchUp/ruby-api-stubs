@@ -55,35 +55,60 @@ class Geom::PolygonMesh
   # {PolygonMesh}. All variations of this method require at least 3 elements
   # to define a polygon, although more may be given.
   #
-  # @example
-  #   mesh = Geom::PolygonMesh.new
-  #   point1 = Geom::Point3d.new(0, 1, 2)
-  #   point2 = Geom::Point3d.new(1, 0, 2)
-  #   point3 = Geom::Point3d.new(2, 0, 1)
-  #   index = mesh.add_polygon(point1, point2, point3)
   #
   # @overload add_polygon(index, index, index, ...)
+  #   @example
+  #     mesh = Geom::PolygonMesh.new
+  #     # add points to mesh...
+  #     mesh.add_point(Geom::Point3d.new(0, 0, 0))
+  #     mesh.add_point(Geom::Point3d.new(1, 0, 0))
+  #     mesh.add_point(Geom::Point3d.new(1, 1, 0))
+  #     polygon_index = mesh.add_polygon(1, 2, 3)
   #   @param index [Integer]
   #     An index of a vertex in the mesh. Remember, mesh indices start at 1.
   #   @param ... [Integer]
-  #     More indices.
+  #     More (optional) indices.
   #
   # @overload add_polygon(index_array)
+  #   @example
+  #     mesh = Geom::PolygonMesh.new
+  #     # add points to mesh...
+  #     mesh.add_point(Geom::Point3d.new(0, 0, 0))
+  #     mesh.add_point(Geom::Point3d.new(1, 0, 0))
+  #     mesh.add_point(Geom::Point3d.new(1, 1, 0))
+  #     polygon_index = mesh.add_polygon([1, 2, 3])
   #   @param index_array [Array<Integer>]
   #     An {Array} of point indices.
   #
   # @overload add_polygon(point3d, point3d, point3d, ...)
+  #   @example
+  #     mesh = Geom::PolygonMesh.new
+  #     point1 = Geom::Point3d.new(0, 1, 2)
+  #     point2 = Geom::Point3d.new(1, 0, 2)
+  #     point3 = Geom::Point3d.new(2, 0, 1)
+  #     polygon_index = mesh.add_polygon(point1, point2, point3)
   #   @param point3d [Geom::Point3d] 
   #     Note when passing a flat list of Point3ds, arrays can not be
   #     substituted and will generate an error:
   #     +#<ArgumentError: point index 0 out of range>+.
   #   @param ... [Geom::Point3d]
-  #     More points.
+  #     More (optional) points.
   #
   # @overload add_polygon(point3d_array)
+  #   @example
+  #     mesh = Geom::PolygonMesh.new
+  #     point1 = Geom::Point3d.new(0, 1, 2)
+  #     point2 = Geom::Point3d.new(1, 0, 2)
+  #     point3 = Geom::Point3d.new(2, 0, 1)
+  #     polygon_index = mesh.add_polygon([point1, point2, point3])
   #   @param point3d_array [Array<Geom::Point3d>]
   #
   # @overload add_polygon(array)
+  #   @example
+  #     pts = [[0, 0, 0], [1, 0, 0], [1, 1, 0], [0.5, 2, 0], [0, 1, 0]]
+  #     mesh = Geom::PolygonMesh.new
+  #     polygon_index = mesh.add_polygon(pts)
+  #     Sketchup.active.model.entities.add_faces_from_mesh(mesh)
   #   @param array [Array<Array(3)>]
   #     An array of arrays of length 3, where the inner arrays are used as if
   #     they were Point3d objects. 
