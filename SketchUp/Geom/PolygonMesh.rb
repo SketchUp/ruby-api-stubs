@@ -114,7 +114,8 @@ class Geom::PolygonMesh
   #     they were Point3d objects. 
   #
   # @return [Integer] The index of the polygon in the mesh.
-  # @return [0] Invalid index.
+  # @return [0] Invalid index. Returned if the method failed to create a
+  #   polygon.
   #
   # @version SketchUp 6.0
   def add_polygon(points)
