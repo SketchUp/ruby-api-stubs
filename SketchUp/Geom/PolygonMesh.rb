@@ -64,9 +64,9 @@ class Geom::PolygonMesh
   #     mesh.add_point(Geom::Point3d.new(1, 0, 0))
   #     mesh.add_point(Geom::Point3d.new(1, 1, 0))
   #     polygon_index = mesh.add_polygon(1, 2, 3)
-  #   @param index [Integer]
+  #   @param [Integer] index 
   #     An index of a vertex in the mesh. Remember, mesh indices start at 1.
-  #   @param ... [Integer]
+  #   @param [Integer] ... 
   #     More (optional) indices.
   #
   # @overload add_polygon(index_array)
@@ -77,7 +77,7 @@ class Geom::PolygonMesh
   #     mesh.add_point(Geom::Point3d.new(1, 0, 0))
   #     mesh.add_point(Geom::Point3d.new(1, 1, 0))
   #     polygon_index = mesh.add_polygon([1, 2, 3])
-  #   @param index_array [Array<Integer>]
+  #   @param [Array<Integer>] index_array 
   #     An {Array} of point indices.
   #
   # @overload add_polygon(point3d, point3d, point3d, ...)
@@ -87,11 +87,11 @@ class Geom::PolygonMesh
   #     point2 = Geom::Point3d.new(1, 0, 2)
   #     point3 = Geom::Point3d.new(2, 0, 1)
   #     polygon_index = mesh.add_polygon(point1, point2, point3)
-  #   @param point3d [Geom::Point3d] 
+  #   @param [Geom::Point3d] point3d 
   #     Note when passing a flat list of Point3ds, arrays can not be
   #     substituted and will generate an error:
   #     +#<ArgumentError: point index 0 out of range>+.
-  #   @param ... [Geom::Point3d]
+  #   @param [Geom::Point3d] ... 
   #     More (optional) points.
   #
   # @overload add_polygon(point3d_array)
@@ -101,7 +101,7 @@ class Geom::PolygonMesh
   #     point2 = Geom::Point3d.new(1, 0, 2)
   #     point3 = Geom::Point3d.new(2, 0, 1)
   #     polygon_index = mesh.add_polygon([point1, point2, point3])
-  #   @param point3d_array [Array<Geom::Point3d>]
+  #   @param [Array<Geom::Point3d>] point3d_array 
   #
   # @overload add_polygon(array)
   #   @example
@@ -109,7 +109,7 @@ class Geom::PolygonMesh
   #     mesh = Geom::PolygonMesh.new
   #     polygon_index = mesh.add_polygon(pts)
   #     Sketchup.active_model.entities.add_faces_from_mesh(mesh)
-  #   @param array [Array<Array(3)>]
+  #   @param [Array<Array(3)>] array 
   #     An array of arrays of length 3, where the inner arrays are used as if
   #     they were Point3d objects. 
   #
