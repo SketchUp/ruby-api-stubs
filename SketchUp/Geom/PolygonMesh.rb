@@ -108,7 +108,7 @@ class Geom::PolygonMesh
   #     pts = [[0, 0, 0], [1, 0, 0], [1, 1, 0], [0.5, 2, 0], [0, 1, 0]]
   #     mesh = Geom::PolygonMesh.new
   #     polygon_index = mesh.add_polygon(pts)
-  #     Sketchup.active.model.entities.add_faces_from_mesh(mesh)
+  #     Sketchup.active_model.entities.add_faces_from_mesh(mesh)
   #   @param array [Array<Array(3)>]
   #     An array of arrays of length 3, where the inner arrays are used as if
   #     they were Point3d objects. 
