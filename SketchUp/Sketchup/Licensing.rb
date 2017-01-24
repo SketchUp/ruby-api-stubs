@@ -34,7 +34,7 @@ module Sketchup::Licensing
   #      puts "Extension is licensed."
   #   end
   #
-  # @param extension_id [String]
+  # @param [String] extension_id
   #   The Extension Warehouse UUID for the desired extension.
   #
   # @return [ExtensionLicense] An object representing
