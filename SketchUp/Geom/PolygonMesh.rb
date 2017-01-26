@@ -51,8 +51,8 @@ class Geom::PolygonMesh
   def add_point(point)
   end
 
-  # The {#add_polygon} method is used for adding a {#polygons polygon} to a
-  # {PolygonMesh}. All variations of this method require at least 3 elements
+  # The +add_polygon+ method is used for adding a polygon to a
+  # PolygonMesh. All variations of this method require at least 3 elements
   # to define a polygon, although more may be given.
   #
   #
@@ -88,9 +88,9 @@ class Geom::PolygonMesh
   #     point3 = Geom::Point3d.new(2, 0, 1)
   #     polygon_index = mesh.add_polygon(point1, point2, point3)
   #   @param [Geom::Point3d] point3d 
-  #     Note when passing a flat list of Point3ds, arrays can not be
-  #     substituted and will generate an error:
-  #     +#<ArgumentError: point index 0 out of range>+.
+  #   @raise [ArgumentError] When using Arrays in place of Point3d objects.
+  #     Normally Arrays may be used in place of Point3d objects in most
+  #     SketchUp methods. This method is an exception to that rule.
   #   @param [Geom::Point3d] ... 
   #     More (optional) points.
   #
