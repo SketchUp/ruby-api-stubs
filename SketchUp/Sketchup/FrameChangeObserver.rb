@@ -86,17 +86,14 @@ class Sketchup::FrameChangeObserver
   #   the +to_scene+ and then use that on a subsequent Scene selection to
   #   determine the last Page that the user was on.
   #
-  # @param from_scene [Sketchup::Page, nil]
-  #   The previous scene page the
-  #   view is transitioning from.
+  # @param [Sketchup::Page, nil] from_scene
+  #   The previous scene page the view is transitioning from.
   #
-  # @param to_scene [Sketchup::Page]
-  #   The selected scene page the view
-  #   is transitioning towards.
+  # @param [Sketchup::Page] to_scene
+  #   The selected scene page the view is transitioning towards.
   #
-  # @param percent_done [Float]
-  #   The percentage of transition between
-  #   the two scene pages.
+  # @param [Float] percent_done
+  #   The percentage (0.0..1.0) of transition between the two scene pages.
   #
   # @return [void] Value can be anything, but is ignored by SketchUp.
   #
