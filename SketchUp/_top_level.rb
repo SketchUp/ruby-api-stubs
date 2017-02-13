@@ -12,6 +12,9 @@
   ALT_MODIFIER_KEY = nil # Stub value.
   ALT_MODIFIER_MASK = nil # Stub value.
 
+  CONSTRAIN_MODIFIER_KEY = nil # Stub value.
+  CONSTRAIN_MODIFIER_MASK = nil # Stub value.
+
   CMD_ARC = nil # Stub value.
   CMD_CAMERA_UNDO = nil # Stub value.
   CMD_CIRCLE = nil # Stub value.
@@ -83,9 +86,6 @@
   COPY_MODIFIER_KEY = nil # Stub value.
   COPY_MODIFIER_MASK = nil # Stub value.
 
-  CONSTRAIN_MODIFIER_KEY = nil # Stub value.
-  CONSTRAIN_MODIFIER_MASK = nil # Stub value.
-
   DimensionArrowClosed = nil # Stub value.
   DimensionArrowDot = nil # Stub value.
   DimensionArrowNone = nil # Stub value.
@@ -107,8 +107,6 @@
   GL_TRIANGLE_FAN = nil # Stub value.
   GL_TRIANGLE_STRIP = nil # Stub value.
 
-  IDENTITY = nil # Stub value.
-
   IDABORT = nil # Stub value.
   IDCANCEL = nil # Stub value.
   IDIGNORE = nil # Stub value.
@@ -117,17 +115,13 @@
   IDRETRY = nil # Stub value.
   IDYES = nil # Stub value.
 
+  IDENTITY = nil # Stub value.
+
   LAYER_HIDDEN_BY_DEFAULT = nil # Stub value.
   LAYER_IS_HIDDEN_ON_NEW_PAGES = nil # Stub value.
   LAYER_IS_VISIBLE_ON_NEW_PAGES = nil # Stub value.
   LAYER_USES_DEFAULT_VISIBILITY_ON_NEW_PAGES = nil # Stub value.
   LAYER_VISIBLE_BY_DEFAULT = nil # Stub value.
-
-  MF_CHECKED = nil # Stub value.
-  MF_DISABLED = nil # Stub value.
-  MF_ENABLED = nil # Stub value.
-  MF_GRAYED = nil # Stub value.
-  MF_UNCHECKED = nil # Stub value.
 
   MB_ABORTRETRYIGNORE = nil # Stub value.
   MB_MULTILINE = nil # Stub value.
@@ -136,6 +130,12 @@
   MB_RETRYCANCEL = nil # Stub value.
   MB_YESNO = nil # Stub value.
   MB_YESNOCANCEL = nil # Stub value.
+
+  MF_CHECKED = nil # Stub value.
+  MF_DISABLED = nil # Stub value.
+  MF_ENABLED = nil # Stub value.
+  MF_GRAYED = nil # Stub value.
+  MF_UNCHECKED = nil # Stub value.
 
   ORIGIN = nil # Stub value.
 
