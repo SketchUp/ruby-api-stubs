@@ -329,8 +329,8 @@ class Geom::Point3d
   #
   # @example
   #   point1 = Geom::Point3d.new(10,10,10)
-  #   vector = Geom::Vector3d.new(0,0,1)
-  #   point2 = point1.offset! vector
+  #   vector = Geom::Vector3d.new(0, 0, 1)
+  #   point2 = point1.offset(vector)
   #
   # @param vector
   #   A Vector3d object to offset the point by.
