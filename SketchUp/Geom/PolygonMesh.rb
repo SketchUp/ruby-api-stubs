@@ -55,7 +55,6 @@ class Geom::PolygonMesh
   # PolygonMesh. All variations of this method require at least 3 elements
   # to define a polygon, although more may be given.
   #
-  #
   # @overload add_polygon(index, index, index, ...)
   #   Adds a polygon from a list of the mesh's vertex indices.
   #   @example
@@ -65,9 +64,9 @@ class Geom::PolygonMesh
   #     mesh.add_point(Geom::Point3d.new(1, 0, 0))
   #     mesh.add_point(Geom::Point3d.new(1, 1, 0))
   #     polygon_index = mesh.add_polygon(1, 2, 3)
-  #   @param [Integer] index 
+  #   @param [Integer] index
   #     An index of a vertex in the mesh. Remember that mesh indices start at 1.
-  #   @param [Integer] ... 
+  #   @param [Integer] ...
   #     Additional indices (optional)
   #
   # @overload add_polygon(index_array)
@@ -123,7 +122,7 @@ class Geom::PolygonMesh
   #   polygon.
   #
   # @version SketchUp 6.0
-  def add_polygon(points)
+  def add_polygon(*args)
   end
 
   # The {#count_points} method is used to count the number of points in a mesh.
