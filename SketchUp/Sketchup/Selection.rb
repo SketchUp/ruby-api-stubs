@@ -21,39 +21,26 @@ class Sketchup::Selection
 
   # Instance Methods
 
-  # The [] method is used to retrieve an Entity object from the selection by
-  # index. Index 0 is the first entity in the selection.
+  # The {#[]} method is used to retrieve an {Sketchup::Entity} from the selection
+  # by index. Index 0 is the first entity in the selection.
   #
   # This method is not very efficient. If you need to look at every entity in
-  # the selection, consider using Selection.each instead of using this method
+  # the selection, consider using {#each} instead of using this method
   # to manually grab each one.
   #
   # @example
-  #   depth = 100
-  #   width = 100
   #   model = Sketchup.active_model
   #   entities = model.active_entities
-  #   pts = []
-  #   pts[0] = [0, 0, 0]
-  #   pts[1] = [width, 0, 0]
-  #   pts[2] = [width, depth, 0]
-  #   pts[3] = [0, depth, 0]
-  #   # Add the face to the entities in the model
-  #   face = entities.add_face pts
   #   selection = model.selection
-  #   entity = entities[0]
-  #   status = selection.add entity
-  #   entity = selection[0]
-  #   if (entity)
-  #     UI.messagebox entity
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   selection.add(entities.to_a)
+  #   p selection[0]
   #
-  # @param index
+  # @param [Integer] index
   #   The index of the Entity object to retrieve.
   #
-  # @return entity - an Entity object if successful
+  # @return [Sketchup::Entitiy, nil]
+  #
+  # @see #at
   #
   # @version SketchUp 6.0
   def [](index)
@@ -104,39 +91,21 @@ class Sketchup::Selection
   def add_observer(observer)
   end
 
-  # The [] method is used to retrieve an Entity object from the selection by
-  # index. Index 0 is the first entity in the selection.
-  #
-  # This method is not very efficient. If you need to look at every entity in
-  # the selection, consider using Selection.each instead of using this method
-  # to manually grab each one.
+  # The {#at} method is an alias for {#[]}.
   #
   # @example
-  #   depth = 100
-  #   width = 100
   #   model = Sketchup.active_model
   #   entities = model.active_entities
-  #   pts = []
-  #   pts[0] = [0, 0, 0]
-  #   pts[1] = [width, 0, 0]
-  #   pts[2] = [width, depth, 0]
-  #   pts[3] = [0, depth, 0]
-  #   # Add the face to the entities in the model
-  #   face = entities.add_face pts
   #   selection = model.selection
-  #   entity = entities[0]
-  #   status = selection.add entity
-  #   entity = selection[0]
-  #   if (entity)
-  #     UI.messagebox entity
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   selection.add(entities.to_a)
+  #   p selection.at(0)
   #
-  # @param index
+  # @param [Integer] index
   #   The index of the Entity object to retrieve.
   #
-  # @return entity - an Entity object if successful
+  # @return [Sketchup::Entitiy, nil]
+  #
+  # @see #[]
   #
   # @version SketchUp 6.0
   def at(index)
@@ -156,19 +125,22 @@ class Sketchup::Selection
   def clear
   end
 
-  # The include? method is an alias for contains
+  # The {contains?} method is and alias of {#include?}.
   #
   # @example
-  #   selection.add entity
-  #   status = selection.include? entity
+  #   model = Sketchup.active_model
+  #   entity = model.active_entities.first
+  #   selection = model.selection
+  #   selection.add(entity)
+  #   p selection.contains?(entity)
   #
-  # @param entity
-  #   An Entity object.
-  #
-  # @return status - true if the Entity object is in the selection.
-  #   False if the Entity object is not in the selection.
+  # @param [Sketchup::Entity] entity
   #
   # @return [Boolean]
+  #
+  # @return [Boolean]
+  #
+  # @see #include?
   #
   # @version SketchUp 6.0
   def contains?(entity)
@@ -183,8 +155,7 @@ class Sketchup::Selection
   #   +Enumable+ mix-in module. Prior to that the {#count} method is an alias
   #   for {#length}.
   #
-  # @return integer - the number of Entities in the selection if
-  #   successful
+  # @return [Integer]
   #
   # @see #length
   #
@@ -241,19 +212,23 @@ class Sketchup::Selection
   def first
   end
 
-  # The include? method is an alias for contains
+  # The {include?} method is used to determine if a given {Sketchup::Entity} is
+  # in the selection.
   #
   # @example
-  #   selection.add entity
-  #   status = selection.include? entity
+  #   model = Sketchup.active_model
+  #   entity = model.active_entities.first
+  #   selection = model.selection
+  #   selection.add(entity)
+  #   p selection.include?(entity)
   #
-  # @param entity
-  #   An Entity object.
-  #
-  # @return status - true if the Entity object is in the selection.
-  #   False if the Entity object is not in the selection.
+  # @param [Sketchup::Entity] entity
   #
   # @return [Boolean]
+  #
+  # @return [Boolean]
+  #
+  # @see #contains?
   #
   # @version SketchUp 6.0
   def include?(entity)
@@ -294,18 +269,17 @@ class Sketchup::Selection
   def is_surface?
   end
 
-  # The {#length} method is used to retrieve the number of selected Entities.
-  #
-  # The {#nitems} methods is an alias of {#length}.
-  #
-  # The {#size} methods is an alias of {#length} added in SketchUp 2014.
+  # The {#length} method is used to retrieve the number of selected entities.
   #
   # @example
   #   selection = Sketchup.active_model.selection
   #   number = selection.length
   #
-  # @return integer - the number of entities in the selection if
-  #   successful
+  # @return [Integer]
+  #
+  # @see #nitems
+  #
+  # @see #size
   #
   # @version SketchUp 6.0
   def length
@@ -323,18 +297,15 @@ class Sketchup::Selection
   def model
   end
 
-  # The {#length} method is used to retrieve the number of selected Entities.
-  #
-  # The {#nitems} methods is an alias of {#length}.
-  #
-  # The {#size} methods is an alias of {#length} added in SketchUp 2014.
+  # The {#nitems} method is an alias for {#length}.
   #
   # @example
   #   selection = Sketchup.active_model.selection
-  #   number = selection.length
+  #   number = selection.nitems
   #
-  # @return integer - the number of entities in the selection if
-  #   successful
+  # @return [Integer]
+  #
+  # @see #length
   #
   # @version SketchUp 6.0
   def nitems
@@ -419,20 +390,17 @@ class Sketchup::Selection
   def single_object?
   end
 
-  # The {#length} method is used to retrieve the number of selected Entities.
-  #
-  # The {#nitems} methods is an alias of {#length}.
-  #
-  # The {#size} methods is an alias of {#length} added in SketchUp 2014.
+  # The {#size} method is an alias for {#length}.
   #
   # @example
   #   selection = Sketchup.active_model.selection
-  #   number = selection.length
+  #   number = selection.size
   #
-  # @return integer - the number of entities in the selection if
-  #   successful
+  # @return [Integer]
   #
-  # @version SketchUp 6.0
+  # @see #length
+  #
+  # @version SketchUp 2014
   def size
   end
 

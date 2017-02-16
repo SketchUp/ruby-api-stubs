@@ -66,37 +66,25 @@ class Geom::LatLong
   def longitude
   end
 
-  # The to_a method converts a LatLong object to an array of two values.
+  # The {#to_a} method converts a LatLong object to an array of two values.
   #
   # @example
-  #   ll = [40.01700, 105.28300]
-  #   latlong = Geom::LatLong.new(ll)
-  #   a = latlong.to_a
-  #   if (a)
-  #     UI.messagebox a
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   latlong = Geom::LatLong.new([40.01700, 105.28300])
+  #   array = latlong.to_a
   #
-  # @return array - an array of two values: latitude and longitude
+  # @return [Array(Float, Float)] an array of latitude and longitude
   #
   # @version SketchUp 6.0
   def to_a
   end
 
-  # The to_a method converts a LatLong object to a string.
+  # The {#to_s} method converts a LatLong object to a {String}.
   #
   # @example
-  #   ll = [40.01700, 105.28300]
-  #   latlong = Geom::LatLong.new(ll)
-  #   s = latlong.to_s
-  #   if (s)
-  #     UI.messagebox s
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   latlong = Geom::LatLong.new([40.01700, 105.28300])
+  #   string = latlong.to_s
   #
-  # @return string - a string representation of a LatLong object
+  # @return [String]
   #
   # @version SketchUp 6.0
   def to_s

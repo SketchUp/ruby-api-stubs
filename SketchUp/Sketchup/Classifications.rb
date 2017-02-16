@@ -60,12 +60,14 @@ class Sketchup::Classifications
   def keys
   end
 
-  # The length method returns the number of loaded classification schemas.
+  # The {#length} method returns the number of loaded classification schemas.
   #
   # @example
-  #   Sketchup.active_model.classifications.size
+  #   Sketchup.active_model.classifications.length
   #
-  # @return integer - number of ClassificationSchema object
+  # @return [Integer]
+  #
+  # @see #size
   #
   # @version SketchUp 2015
   def length
@@ -88,12 +90,14 @@ class Sketchup::Classifications
   def load_schema(file)
   end
 
-  # The length method returns the number of loaded classification schemas.
+  # The {#size} method returns the number of loaded classification schemas.
   #
   # @example
   #   Sketchup.active_model.classifications.size
   #
-  # @return integer - number of ClassificationSchema object
+  # @return [Integer]
+  #
+  # @see #length
   #
   # @version SketchUp 2015
   def size

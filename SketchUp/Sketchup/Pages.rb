@@ -176,7 +176,7 @@ class Sketchup::Pages < Sketchup::Entity
   #   +Enumable+ mix-in module. Prior to that the {#count} method is an alias
   #   for {#length}.
   #
-  # @return integer - the number of pages if successful
+  # @return [Integer]
   #
   # @see #length
   #
@@ -216,19 +216,19 @@ class Sketchup::Pages < Sketchup::Entity
   def erase(page)
   end
 
-  # The {#size} method is used to retrieve the number of pages.
-  #
   # The {#length} method is an alias for {#size}.
   #
   # @example
   #   pages = Sketchup.active_model.pages
   #   pages.add('Page 1')
   #   pages.add('Page 2')
-  #   number = pages.size
+  #   number = pages.length
   #
-  # @return integer - the number of pages if successful
+  # @return [Integer]
   #
-  # @version SketchUp 6.0
+  # @see #size
+  #
+  # @version SketchUp 2014
   def length
   end
 
@@ -318,15 +318,15 @@ class Sketchup::Pages < Sketchup::Entity
 
   # The {#size} method is used to retrieve the number of pages.
   #
-  # The {#length} method is an alias for {#size}.
-  #
   # @example
   #   pages = Sketchup.active_model.pages
   #   pages.add('Page 1')
   #   pages.add('Page 2')
   #   number = pages.size
   #
-  # @return integer - the number of pages if successful
+  # @return [Integer]
+  #
+  # @see #length
   #
   # @version SketchUp 6.0
   def size

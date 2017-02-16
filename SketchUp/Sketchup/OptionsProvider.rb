@@ -80,8 +80,7 @@ class Sketchup::OptionsProvider
   #   +Enumable+ mix-in module. Prior to that the {#count} method is an alias
   #   for {#length}.
   #
-  # @return integer - the size of the options provider if
-  #   successful
+  # @return [Integer]
   #
   # @see #length
   #
@@ -89,60 +88,60 @@ class Sketchup::OptionsProvider
   def count
   end
 
-  # The each method is used to iterate through all of the attributes.
-  #
-  # Throws an exception if there are no keys.
-  #
-  # The {#each_pair} method is an alias of {#each}.
+  # The {#each} method is used to iterate through all of the options.
   #
   # @example
-  #   # Retrieves each key
-  #   provider.each { |key, value| UI.messagebox key }
-  #   # Retrieves each corresponding value
-  #   provider.each { |key, value| UI.messagebox value }
+  #   model = Sketchup.active_model.options
+  #   provider = model.options['UnitsOptions']
+  #   provider.each { |key, value| puts "#{key} = #{value}" }
   #
-  # @return nil
+  # @return [nil]
+  #
+  # @see #each_key
   #
   # @version SketchUp 6.0
   #
-  # @yield [key, value] Variables that will hold each key and value as they are
-  #   found.
+  # @yield [key, value]
+  #
+  # @yieldparam [Object] value
+  #
+  # @yieldparam [String] key
   def each
   end
 
-  # The each_key method is used to iterate through all of the attribute keys.
-  #
-  # Throws an exception if there are no keys.
+  # The {#each_key} method is used to iterate through all of the attribute keys.
   #
   # @example
   #   provider.each_key { |key| UI.messagebox key }
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   #
-  # @yield [key] A variable that will hold each key as they are found.
+  # @yield [key]
+  #
+  # @yieldparam [String] key
   def each_key
   end
 
-  # The each method is used to iterate through all of the attributes.
-  #
-  # Throws an exception if there are no keys.
-  #
-  # The {#each_pair} method is an alias of {#each}.
+  # The {#each} method is used to iterate through all of the options.
   #
   # @example
-  #   # Retrieves each key
-  #   provider.each { |key, value| UI.messagebox key }
-  #   # Retrieves each corresponding value
-  #   provider.each { |key, value| UI.messagebox value }
+  #   model = Sketchup.active_model.options
+  #   provider = model.options['UnitsOptions']
+  #   provider.each { |key, value| puts "#{key} = #{value}" }
   #
-  # @return nil
+  # @return [nil]
+  #
+  # @see #each_key
   #
   # @version SketchUp 6.0
   #
-  # @yield [key, value] Variables that will hold each key and value as they are
-  #   found.
+  # @yield [key, value]
+  #
+  # @yieldparam [Object] value
+  #
+  # @yieldparam [String] key
   def each_pair
   end
 
@@ -162,37 +161,42 @@ class Sketchup::OptionsProvider
   def each_value
   end
 
-  # The key? method is used to determine if the options provider has a specific
-  # key. This method is the same as has_key? See also OptionsManager.has_key
+  # The {#has_key?} method is an alias for {#key?}.
   #
   # @example
-  #   status = provider.key? "name"
+  #   model = Sketchup.active_model.options
+  #   provider = model.options['UnitsOptions']
+  #   p provider.has_key?("LengthFormat")
   #
-  # @param name
+  # @param [String] name
   #   The name of the key you are looking for.
   #
-  # @return status - true if the key exists, false if the key does
-  #   not exist.
+  # @return [Boolean]
   #
   # @return [Boolean]
+  #
+  # @see #key?
   #
   # @version SketchUp 6.0
   def has_key?(name)
   end
 
-  # The key? method is used to determine if the options provider has a specific
-  # key. This method is the same as has_key? See also OptionsManager.has_key
+  # The {#key?} method is used to determine if the options provider has a
+  # specific key.
   #
   # @example
-  #   status = provider.key? "name"
+  #   model = Sketchup.active_model.options
+  #   provider = model.options['UnitsOptions']
+  #   p provider.key?("LengthFormat")
   #
-  # @param name
+  # @param [String] name
   #   The name of the key you are looking for.
   #
-  # @return status - true if the key exists, false if the key does
-  #   not exist.
+  # @return [Boolean]
   #
   # @return [Boolean]
+  #
+  # @see #has_key?
   #
   # @version SketchUp 6.0
   def key?(name)
@@ -216,19 +220,17 @@ class Sketchup::OptionsProvider
   def keys
   end
 
-  # The {#size} method is used to retrieve the size (number of elements) of an
-  # options provider.
-  #
   # The {#length} method is an alias of {#size}.
   #
   # @example
   #   optionsprovider = Sketchup.active_model.options['UnitsOptions']
-  #   number = optionsprovider.size
+  #   number = optionsprovider.length
   #
-  # @return integer - the size of the options provider if
-  #   successful
+  # @return [Integer]
   #
-  # @version SketchUp 6.0
+  # @see #size
+  #
+  # @version SketchUp 2014
   def length
   end
 
@@ -261,14 +263,13 @@ class Sketchup::OptionsProvider
   # The {#size} method is used to retrieve the size (number of elements) of an
   # options provider.
   #
-  # The {#length} method is an alias of {#size}.
-  #
   # @example
   #   optionsprovider = Sketchup.active_model.options['UnitsOptions']
   #   number = optionsprovider.size
   #
-  # @return integer - the size of the options provider if
-  #   successful
+  # @return [Integer]
+  #
+  # @see #length
   #
   # @version SketchUp 6.0
   def size

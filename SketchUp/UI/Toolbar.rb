@@ -79,7 +79,7 @@ class UI::Toolbar
   # @example
   #   number = toolbar.count
   #
-  # @return integer
+  # @return [Integer]
   #
   # @version SketchUp 2014
   def count
@@ -151,12 +151,12 @@ class UI::Toolbar
 
   # The {#length} method returns the number of items in the toolbar.
   #
-  # The {#size} method is an alias of {#length}.
-  #
   # @example
   #   number = toolbar.length
   #
-  # @return integer
+  # @return [Integer]
+  #
+  # @see #size
   #
   # @version SketchUp 2014
   def length
@@ -214,14 +214,14 @@ class UI::Toolbar
   def show
   end
 
-  # The {#length} method returns the number of items in the toolbar.
-  #
   # The {#size} method is an alias of {#length}.
   #
   # @example
-  #   number = toolbar.length
+  #   number = toolbar.size
   #
-  # @return integer
+  # @return [Integer]
+  #
+  # @see #length
   #
   # @version SketchUp 2014
   def size

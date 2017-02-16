@@ -8,7 +8,7 @@ class Sketchup::Menu
 
   # Instance Methods
 
-  # The add_item menu item is used to add a menu item to the specified menu.
+  # The {#add_item} method is used to add a menu item to the specified menu.
   #
   # This method takes a block that defines the action to perform when the menu
   # item is selected.
@@ -17,24 +17,22 @@ class Sketchup::Menu
   # validation procedure for the menu item.
   #
   # @example
-  #   plugins_menu = UI.menu("Plugins")
-  #   item = plugins_menu.add_item("Test") { test }
-  #   if (item)
-  #     UI.messagebox item
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   menu = UI.menu('Plugins')
+  #   menu.add_item("Test") { puts 'Hello World' }
   #
-  # @param menu
-  #   A string name of the menu to add.
+  # @overload add_item(menu, &block)
   #
-  # @return item_id - a unique integer id for the added menu item.
+  #   @param [String] menu  The name of the menu to add.
+  #   @yield  A block that will be invoked when the menu item is selected.
+  #   @return [Integer] A unique integer id for the added menu item.
+  #
+  # @overload add_item(command)
+  #
+  #   @param [UI::Command] command
+  #   @return [Integer] A unique integer id for the added menu item.
   #
   # @version SketchUp 6.0
-  #
-  # @yield A method that will be invoked when the menu item is
-  #   selected.
-  def add_item(menu, &block)
+  def add_item(*args)
   end
 
   # The add_separator method is used to add a menu separator to a menu.

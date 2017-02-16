@@ -155,20 +155,22 @@ class Sketchup::InstancePath
   def leaf
   end
 
-  # {#length} is and alias of {#size}.
+  # {#length} is an alias of {#size}.
   #
   # @example
   #   model = Sketchup.active_model
   #   group = model.entities.add_group
   #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
   #   path = Sketchup::InstancePath.new(group, edge])
-  #   if path.size > 1
+  #   if path.length > 1
   #     # do something
   #   end
   #
   # @raise [TypeError] if the instance path refer to deleted entities.
   #
   # @return [Integer]
+  #
+  # @see #size
   #
   # @version SketchUp 2017
   def length
@@ -213,7 +215,6 @@ class Sketchup::InstancePath
   def root
   end
 
-  # {#length} is and alias of {#size}.
   #
   # @example
   #   model = Sketchup.active_model
@@ -227,6 +228,8 @@ class Sketchup::InstancePath
   # @raise [TypeError] if the instance path refer to deleted entities.
   #
   # @return [Integer]
+  #
+  # @see #length
   #
   # @version SketchUp 2017
   def size

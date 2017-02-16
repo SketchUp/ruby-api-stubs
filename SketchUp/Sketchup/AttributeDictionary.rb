@@ -77,7 +77,7 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
   #   dictionary = model.attribute_dictionary('Example')
   #   number = dictionary.count
   #
-  # @return [Integer] the size of the attribute dictionary.
+  # @return [Integer]
   #
   # @version SketchUp 2014
   def count
@@ -105,79 +105,83 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
   def delete_key(key)
   end
 
-  # An alias for each. See AttributeDictionary.each.
-  #
-  # Throws an exception if there are no keys.
+  # The {#each} method iterate through all of the attributes.
   #
   # @example
   #   create_if_nil = true
   #   model = Sketchup.active_model
-  #   attrdict = model.attribute_dictionary "test_dict", create_if_nil
+  #   attrdict = model.attribute_dictionary("test_dict", create_if_nil)
   #   attrdict["attr_one"] = "one"
   #   attrdict["attr_two"] = "two"
   #
-  #   # iterates through all attributes and prints the key to the screen
+  #   # Iterates through all attributes and prints the key to the screen.
   #   attrdict = model.attribute_dictionaries['test_dict']
-  #   attrdict.each_pair { | key, value |
-  #     UI.messagebox key.to_s + '=' + value.to_s
+  #   attrdict.each { | key, value |
+  #     puts "#{key} = #{value}"
   #   }
   #
-  # @return nil
+  # @see #each_pair
   #
   # @version SketchUp 6.0
   #
-  # @yield [key, value] @yieldparam key           The key of each attribute as it is found.
-  #   @yieldparam value         The value of each attribute as it is found.
+  # @yield [key, value]
+  #
+  # @yieldparam [Object] value
+  #   The value of each attribute as it is found.
+  #
+  # @yieldparam [String] key
+  #   The key of each attribute as it is found.
   def each
   end
 
-  # The each_key method is used to iterate through all of the attribute keys.
-  # This is the same method as AttributeDictionary.each.
-  #
-  # Throws an exception if there are no keys.
+  # The {#each_key} method is used to iterate through all of the attribute keys.
   #
   # @example
   #   create_if_nil = true
   #   model = Sketchup.active_model
-  #   attrdict = model.attribute_dictionary "test_dict", create_if_nil
+  #   attrdict = model.attribute_dictionary("test_dict", create_if_nil)
   #   attrdict["attr_one"] = "one"
   #   attrdict["attr_two"] = "two"
   #
   #   # iterates through all attributes and prints the key to the screen
   #   attrdict = model.attribute_dictionaries['test_dict']
-  #   attrdict.each_key { | key | UI.messagebox key }
+  #   attrdict.each_key { |key| puts key }
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   #
-  # @yield [key] A variable that will hold each key as they are found.
+  # @yieldparam [String] key
+  #   The key of each attribute as it is found.
   def each_key
   end
 
-  # An alias for each. See AttributeDictionary.each.
-  #
-  # Throws an exception if there are no keys.
+  # The {#each_pair} method is an alias for {#each}.
   #
   # @example
   #   create_if_nil = true
   #   model = Sketchup.active_model
-  #   attrdict = model.attribute_dictionary "test_dict", create_if_nil
+  #   attrdict = model.attribute_dictionary("test_dict", create_if_nil)
   #   attrdict["attr_one"] = "one"
   #   attrdict["attr_two"] = "two"
   #
   #   # iterates through all attributes and prints the key to the screen
   #   attrdict = model.attribute_dictionaries['test_dict']
   #   attrdict.each_pair { | key, value |
-  #     UI.messagebox key.to_s + '=' + value.to_s
+  #     puts "#{key} = #{value}"
   #   }
   #
-  # @return nil
+  # @see #each
   #
   # @version SketchUp 6.0
   #
-  # @yield [key, value] @yieldparam key           The key of each attribute as it is found.
-  #   @yieldparam value         The value of each attribute as it is found.
+  # @yield [key, value]
+  #
+  # @yieldparam [Object] value
+  #   The value of each attribute as it is found.
+  #
+  # @yieldparam [String] key
+  #   The key of each attribute as it is found.
   def each_pair
   end
 
@@ -204,16 +208,15 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
   # The {#length} method is used to retrieve the size (number of elements) of an
   # attribute dictionary.
   #
-  # The {#size} method is an alias for {#length}.
-  #
   # @example
   #   model = Sketchup.active_model
   #   model.set_attribute('Example', 'Hello', 'World')
   #   dictionary = model.attribute_dictionary('Example')
   #   number = dictionary.length
   #
-  # @return [Integer] the size of the attribute dictionary if
-  #   successful
+  # @return [Integer]
+  #
+  # @see #size
   #
   # @version SketchUp 6.0
   def length
@@ -238,19 +241,17 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
   def name
   end
 
-  # The {#length} method is used to retrieve the size (number of elements) of an
-  # attribute dictionary.
-  #
-  # The {#size} method is an alias for {#length}.
+  # The {#size} method is an alias of {#length}.
   #
   # @example
   #   model = Sketchup.active_model
   #   model.set_attribute('Example', 'Hello', 'World')
   #   dictionary = model.attribute_dictionary('Example')
-  #   number = dictionary.length
+  #   number = dictionary.size
   #
-  # @return [Integer] the size of the attribute dictionary if
-  #   successful
+  # @return [Integer]
+  #
+  # @see #length
   #
   # @version SketchUp 6.0
   def size

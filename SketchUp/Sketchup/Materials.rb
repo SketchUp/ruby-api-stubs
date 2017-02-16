@@ -111,7 +111,7 @@ class Sketchup::Materials < Sketchup::Entity
   #   +Enumable+ mix-in module. Prior to that the {#count} method is an alias
   #   for {#length}.
   #
-  # @return integer - number of materials in the collection.
+  # @return [Integer]
   #
   # @see #length
   #
@@ -166,13 +166,13 @@ class Sketchup::Materials < Sketchup::Entity
 
   # The number of materials in the collection.
   #
-  # The {#size} method is an alias for {#length} added in SketchUp 2014.
-  #
   # @example
   #   materials = Sketchup.active_model.materials
   #   number = materials.length
   #
-  # @return integer - number of materials in the collection.
+  # @return [Integer]
+  #
+  # @see #size
   #
   # @version SketchUp 6.0
   def length
@@ -268,15 +268,17 @@ class Sketchup::Materials < Sketchup::Entity
 
   # The number of materials in the collection.
   #
-  # The {#size} method is an alias for {#length} added in SketchUp 2014.
+  # The {#size} method is an alias for {#length}.
   #
   # @example
   #   materials = Sketchup.active_model.materials
-  #   number = materials.length
+  #   number = materials.size
   #
-  # @return integer - number of materials in the collection.
+  # @return [Integer]
   #
-  # @version SketchUp 6.0
+  # @see #length
+  #
+  # @version SketchUp 2014
   def size
   end
 

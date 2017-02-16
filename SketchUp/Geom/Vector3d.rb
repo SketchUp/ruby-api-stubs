@@ -49,42 +49,44 @@ class Geom::Vector3d
 
   # Instance Methods
 
-  # The dot method is used to compute the dot product between two vectors.
+  # The {#%} method is used to compute the dot product between two vectors.
+  #
+  # This is an alias of the {#dot} method.
   #
   # @example
-  #   vector = Geom::Vector3d.new 0,0,1
-  #   vector2 = Geom::Vector3d.new 0,1,0
-  #   d = vector.dot vector2
+  #   vector1 = Geom::Vector3d.new(0, 0, 1)
+  #   vector2 = Geom::Vector3d.new(0, 1, 0)
+  #   dot = vector1 % vector2
   #
-  # @param vector2
-  #   A Vector3d object.
+  # @param [Geom::Vector] vector
   #
-  # @return d - the dot product of vector1 and vector2
+  # @return [Float]
+  #
+  # @see #dot
   #
   # @version SketchUp 6.0
-  def %(vector2)
+  def %(vector)
   end
 
-  # The cross method is used to compute the cross product between two vectors.
+  # The {#*} method is used to compute the cross product between two vectors.
   #
   # The cross product, also called the vector product, is an operation on two
   # vectors. The cross product of two vectors produces a third vector which is
   # perpendicular to the plane in which the first two lie.
   #
-  # @example
-  #   vector1 = Geom::Vector3d.new(1,0,0)
-  #   vector2 = Geom::Vector3d.new(0,1,0)
-  #   vector3 = vector1 * vector2
+  # This is an alias of the {#cross} method.
   #
   # @example
-  #   vector = Geom::Vector3d.new(1,0,0)
-  #   vector2 = Geom::Vector3d.new(0,1,0)
-  #   vector3 = vector.cross(vector2)
+  #   vector1 = Geom::Vector3d.new 1,0,0
+  #   vector2 = Geom::Vector3d.new 0,1,0
+  #   vector3 = vector1 * vector2
   #
   # @param vector
   #   A Vector3d object.
   #
-  # @return vector - the cross of vector1 and vector2
+  # @return vector - a Vector3d object if successful
+  #
+  # @see #cross
   #
   # @version SketchUp 6.0
   def *(vector)
@@ -251,7 +253,7 @@ class Geom::Vector3d
   def clone
   end
 
-  # The cross method is used to compute the cross product between two vectors.
+  # The {#cross} method is used to compute the cross product between two vectors.
   #
   # The cross product, also called the vector product, is an operation on two
   # vectors. The cross product of two vectors produces a third vector which is
@@ -272,24 +274,27 @@ class Geom::Vector3d
   #
   # @return vector - the cross of vector1 and vector2
   #
+  # @see #*
+  #
   # @version SketchUp 6.0
   def cross(vector)
   end
 
-  # The dot method is used to compute the dot product between two vectors.
+  # The {#dot} method is used to compute the dot product between two vectors.
   #
   # @example
-  #   vector = Geom::Vector3d.new 0,0,1
-  #   vector2 = Geom::Vector3d.new 0,1,0
-  #   d = vector.dot vector2
+  #   vector1 = Geom::Vector3d.new(0, 0, 1)
+  #   vector2 = Geom::Vector3d.new(0, 1, 0)
+  #   dot = vector1.dot(vector2)
   #
-  # @param vector2
-  #   A Vector3d object.
+  # @param [Geom::Vector] vector
   #
-  # @return d - the dot product of vector1 and vector2
+  # @return [Float]
+  #
+  # @see #%
   #
   # @version SketchUp 6.0
-  def dot(vector2)
+  def dot(vector)
   end
 
   # The new method is used to create a new vector.
