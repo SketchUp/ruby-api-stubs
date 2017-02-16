@@ -237,18 +237,17 @@ module UI
   def self.model_info_pages
   end
 
-  # The openURL method is used to open the default Web browser to a URL.
+  # The {#openURL} method is used to open the default Web browser to a URL.
   #
   # @example
   #   status = UI.openURL("http://www.sketchup.com")
   #
-  # @param URL
-  #   A string URL.
+  # @param [String] url
   #
-  # @return status - true if successful
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
-  def self.openURL(URL)
+  def self.openURL(url)
   end
 
   # The openpanel method is used to display the Open dialog box. The path that

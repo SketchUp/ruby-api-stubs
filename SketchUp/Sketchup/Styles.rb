@@ -112,18 +112,17 @@ class Sketchup::Styles < Sketchup::Entity
   def each
   end
 
-  # The {#size} method is used to retrieve the number of styles in the
-  # collection.
-  #
   # The {#length} method is an alias of {#size}.
   #
   # @example
   #   styles = Sketchup.active_model.styles
-  #   number = styles.size
+  #   number = styles.length
   #
-  # @return integer - the number of styles found.
+  # @return [Integer]
   #
-  # @version SketchUp 6.0
+  # @see #size
+  #
+  # @version SketchUp 2014
   def length
   end
 
@@ -175,13 +174,13 @@ class Sketchup::Styles < Sketchup::Entity
   # The {#size} method is used to retrieve the number of styles in the
   # collection.
   #
-  # The {#length} method is an alias of {#size}.
-  #
   # @example
   #   styles = Sketchup.active_model.styles
   #   number = styles.size
   #
-  # @return integer - the number of styles found.
+  # @return [Integer]
+  #
+  # @see #length
   #
   # @version SketchUp 6.0
   def size

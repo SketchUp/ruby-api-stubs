@@ -53,8 +53,7 @@ class Sketchup::ExtensionsManager
   #   +Enumable+ mix-in module. Prior to that the {#count} method is an alias
   #   for {#length}.
   #
-  # @return integer - number of SketchupExtension objects if
-  #   successful
+  # @return [Integer]
   #
   # @see #length
   #
@@ -94,33 +93,30 @@ class Sketchup::ExtensionsManager
   def keys
   end
 
-  # The length method returns the number of SketchupExtension objects inside
+  # The {#length} method returns the number of {SketchupExtension} objects inside
   # this ExtensionsManager.
-  #
-  # The {#size} method is an alias for {#length}.
   #
   # @example
   #   manager = Sketchup.extensions
   #   number = manager.length
   #
-  # @return integer - number of SketchupExtension objects if
-  #   successful
+  # @return [Integer]
+  #
+  # @see #size
   #
   # @version SketchUp 8.0 M2
   def length
   end
 
-  # The length method returns the number of SketchupExtension objects inside
-  # this ExtensionsManager.
-  #
-  # The {#size} method is an alias for {#length}.
+  # The {#size} method is an alias of {#length}.
   #
   # @example
   #   manager = Sketchup.extensions
-  #   number = manager.length
+  #   number = manager.size
   #
-  # @return integer - number of SketchupExtension objects if
-  #   successful
+  # @return [Integer]
+  #
+  # @see #length
   #
   # @version SketchUp 8.0 M2
   def size

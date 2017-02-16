@@ -228,22 +228,33 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   #   options = Sketchup.active_model.rendering_options
   #   number = options.count
   #
-  # @return integer
+  # @return [Integer]
   #
   # @version SketchUp 2014
   def count
   end
 
-  # An alias for each. See RenderingOptions.each.
+  # The {#each} method iterates through all of the rendering options key/value
+  # pairs.
   #
   # @example
-  #   Sketchup.active_model.rendering_options.each_pair { |key, value|
+  #   Sketchup.active_model.rendering_options.each { |key, value|
   #     puts "#{key} : #{value}"
   #   }
   #
-  # @return nil
+  # @return [nil]
+  #
+  # @see #each_pair
   #
   # @version SketchUp 6.0
+  #
+  # @yield [key, value]
+  #
+  # @yieldparam [Object] value
+  #   The value of each pair found.
+  #
+  # @yieldparam [String] key
+  #   The key of each pair found.
   def each
   end
 
@@ -262,14 +273,16 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   def each_key
   end
 
-  # An alias for each. See RenderingOptions.each.
+  # The {#each_pair} method is an alias for {#each}.
   #
   # @example
   #   Sketchup.active_model.rendering_options.each_pair { |key, value|
   #     puts "#{key} : #{value}"
   #   }
   #
-  # @return nil
+  # @return [nil]
+  #
+  # @see #each
   #
   # @version SketchUp 6.0
   def each_pair
@@ -287,15 +300,15 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   end
 
   # The {#length} method returns the number of options in the rendering options
-  # collection
-  #
-  # The {#size} method is an alias for {#length}.
+  # collection.
   #
   # @example
   #   options = Sketchup.active_model.rendering_options
   #   number = options.length
   #
-  # @return integer
+  # @return [Integer]
+  #
+  # @see #size
   #
   # @version SketchUp 2014
   def length
@@ -319,16 +332,15 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   def remove_observer(observer)
   end
 
-  # The {#length} method returns the number of options in the rendering options
-  # collection
-  #
   # The {#size} method is an alias for {#length}.
   #
   # @example
   #   options = Sketchup.active_model.rendering_options
-  #   number = options.length
+  #   number = options.size
   #
-  # @return integer
+  # @return [Integer]
+  #
+  # @see #length
   #
   # @version SketchUp 2014
   def size

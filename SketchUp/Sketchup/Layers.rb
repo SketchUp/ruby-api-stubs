@@ -17,9 +17,7 @@ class Sketchup::Layers < Sketchup::Entity
 
   # Instance Methods
 
-  # The [] method is used to retrieve a layer by index or name.
-  #
-  # The {#at} method is an alias for {#[]}.
+  # The {#[]} method is used to retrieve a layer by index or name.
   #
   # @example
   #   model = Sketchup.active_model
@@ -28,11 +26,13 @@ class Sketchup::Layers < Sketchup::Entity
   #   layer_by_number = layers[1]
   #   layer_by_name = layers["test layer"]
   #
-  # @param index_or_name
-  #   A number representing the layer's index in an array of
-  #   Layer objects, or the name of the layer.
+  # @param [Integer, String] index_or_name
+  #   A number representing the layer's
+  #   index in an array of Layer objects, or the name of the layer.
   #
-  # @return layer - a Layer object
+  # @return [Sketchup::Layer, nil]
+  #
+  # @see #at
   #
   # @version SketchUp 6.0
   def [](index_or_name)
@@ -71,22 +71,18 @@ class Sketchup::Layers < Sketchup::Entity
   def add_observer(observer)
   end
 
-  # The [] method is used to retrieve a layer by index or name.
-  #
   # The {#at} method is an alias for {#[]}.
   #
   # @example
   #   model = Sketchup.active_model
   #   layers = model.layers
   #   new_layer = layers.add "test layer"
-  #   layer_by_number = layers[1]
-  #   layer_by_name = layers["test layer"]
+  #   layer_by_number = layers.at(1)
+  #   layer_by_name = layers.at("test layer")
   #
-  # @param index_or_name
-  #   A number representing the layer's index in an array of
-  #   Layer objects, or the name of the layer.
+  # @return [Sketchup::Layer, nil]
   #
-  # @return layer - a Layer object
+  # @see #[]
   #
   # @version SketchUp 6.0
   def at(index_or_name)
@@ -125,13 +121,13 @@ class Sketchup::Layers < Sketchup::Entity
 
   # The {#length} method retrieves the number of layers.
   #
-  # The {#size} method is an alias for {#length} added in SketchUp 2014.
-  #
   # @example
   #   layers = Sketchup.active_model.layers
   #   number = layers.length
   #
-  # @return integer - the number of layers in the collection
+  # @return [Integer]
+  #
+  # @see #size
   #
   # @version SketchUp 6.0
   def length
@@ -198,17 +194,17 @@ class Sketchup::Layers < Sketchup::Entity
   def remove_observer(observer)
   end
 
-  # The {#length} method retrieves the number of layers.
-  #
-  # The {#size} method is an alias for {#length} added in SketchUp 2014.
+  # The {#size} method is an alias of {#length}.
   #
   # @example
   #   layers = Sketchup.active_model.layers
-  #   number = layers.length
+  #   number = layers.size
   #
-  # @return integer - the number of layers in the collection
+  # @return [Integer]
   #
-  # @version SketchUp 6.0
+  # @see #length
+  #
+  # @version SketchUp 2014
   def size
   end
 

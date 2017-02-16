@@ -138,26 +138,27 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   def count
   end
 
-  # An alias for each. See ShadowInfo.each.
+  # The {#each} method iterates through all of the shadow information key/value
+  # pairs.
   #
   # @example
   #   model = Sketchup.active_model
-  #   shadowinfo = model.shadow_info
-  #   shadowinfo.each_pair { |key, value|
-  #     UI.messagebox(key.to_s + '=' + value.to_s)
+  #   shadow_info = model.shadow_info
+  #   shadow_info.each { |key, value|
+  #     puts "#{key} : #{value}"
   #   }
   #
-  # @return nil
+  # @return [nil]
+  #
+  # @see #each_pair
   #
   # @version SketchUp 6.0
   #
   # @yield [key, value]
   #
-  # @yieldparam key
-  #   A variables that will hold each key as it is found.
+  # @yieldparam [Object] value
   #
-  # @yieldparam value
-  #   A variables that will hold each value as it is found.
+  # @yieldparam [String] key
   def each
   end
 
@@ -174,26 +175,26 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   def each_key
   end
 
-  # An alias for each. See ShadowInfo.each.
+  # The #{each_pair} method is an alias for {#each}.
   #
   # @example
   #   model = Sketchup.active_model
-  #   shadowinfo = model.shadow_info
-  #   shadowinfo.each_pair { |key, value|
-  #     UI.messagebox(key.to_s + '=' + value.to_s)
+  #   shadow_info = model.shadow_info
+  #   shadow_info.each_pair { |key, value|
+  #     puts "#{key} : #{value}"
   #   }
   #
-  # @return nil
+  # @return [nil]
+  #
+  # @see #each
   #
   # @version SketchUp 6.0
   #
   # @yield [key, value]
   #
-  # @yieldparam key
-  #   A variables that will hold each key as it is found.
+  # @yieldparam [String] key
   #
-  # @yieldparam value
-  #   A variables that will hold each value as it is found.
+  # @yieldparam [Object] value
   def each_pair
   end
 
@@ -212,13 +213,13 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   # The {#length} method returns the number of options in the shadow options
   # collection
   #
-  # The {#size} method is an alias for {#length}.
-  #
   # @example
   #   shadow_info = Sketchup.active_model.shadow_info
   #   number = shadow_info.length
   #
-  # @return integer
+  # @return [Integer]
+  #
+  # @see #size
   #
   # @version SketchUp 2014
   def length
@@ -239,16 +240,15 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   def remove_observer(observer)
   end
 
-  # The {#length} method returns the number of options in the shadow options
-  # collection
-  #
   # The {#size} method is an alias for {#length}.
   #
   # @example
   #   shadow_info = Sketchup.active_model.shadow_info
-  #   number = shadow_info.length
+  #   number = shadow_info.size
   #
-  # @return integer
+  # @return [Integer]
+  #
+  # @see #length
   #
   # @version SketchUp 2014
   def size

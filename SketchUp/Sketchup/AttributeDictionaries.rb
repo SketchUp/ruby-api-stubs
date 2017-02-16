@@ -59,8 +59,7 @@ class Sketchup::AttributeDictionaries < Sketchup::Entity
   #   dictionaries = model.attribute_dictionaries
   #   number = dictionaries.count
   #
-  # @return [Integer] the number of attribute dictionary objects
-  #   in the collection.
+  # @return [Integer]
   #
   # @see #length
   #
@@ -110,8 +109,6 @@ class Sketchup::AttributeDictionaries < Sketchup::Entity
   # The {#length} method returns the number of attribute dictionary objects in
   # the collection.
   #
-  # The {#size} method is an alias for {#length}.
-  #
   # @example
   #   model = Sketchup.active_model
   #   model.set_attribute('Example', 'Hello', 'World')
@@ -120,24 +117,24 @@ class Sketchup::AttributeDictionaries < Sketchup::Entity
   #
   # @return [Integer] the number of attribute dictionary objects in the
   #   collection.
+  #
+  # @see #size
   #
   # @version SketchUp 2014
   def length
   end
 
-  # The {#length} method returns the number of attribute dictionary objects in
-  # the collection.
-  #
-  # The {#size} method is an alias for {#length}.
+  # The {#size} method is an alias of {#length}.
   #
   # @example
   #   model = Sketchup.active_model
   #   model.set_attribute('Example', 'Hello', 'World')
   #   dictionaries = model.attribute_dictionaries
-  #   number = dictionaries.length
+  #   number = dictionaries.size
   #
-  # @return [Integer] the number of attribute dictionary objects in the
-  #   collection.
+  # @return [Integer]
+  #
+  # @see #length
   #
   # @version SketchUp 2014
   def size

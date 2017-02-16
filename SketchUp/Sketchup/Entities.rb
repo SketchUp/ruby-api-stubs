@@ -18,22 +18,17 @@ class Sketchup::Entities
   # general, it is preferable to use the {#each} method to iterate though all
   # of the entities in the collection as it will be much more efficient.
   #
-  # The {#at} method is an alias of {#[]}
-  #
   # @example
   #   entities = Sketchup.active_model.entities
-  #   entity0 = entities[0]
-  #   if (entity0)
-  #     UI.messagebox entity0
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   entity = entities[0]
   #
   # @param [Integer] entity_index
   #   The index for a specific entity.
   #
   # @return [Sketchup::Entity, nil] an {Sketchup::Entity} object if successful,
   #   +nil+ if not found
+  #
+  # @see #at
   #
   # @version SketchUp 6.0
   def [](entity_index)
@@ -658,27 +653,15 @@ class Sketchup::Entities
   def add_text(text, point, vector)
   end
 
-  # The {#[]} method is used to retrieve an entity by its index in an array of
-  # entities. The index is a number between +0+ and entities.length - 1. In
-  # general, it is preferable to use the {#each} method to iterate though all
-  # of the entities in the collection as it will be much more efficient.
-  #
-  # The {#at} method is an alias of {#[]}
+  # The {#at} method is an alias for {#[]}.
   #
   # @example
   #   entities = Sketchup.active_model.entities
-  #   entity0 = entities[0]
-  #   if (entity0)
-  #     UI.messagebox entity0
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   entity = entities.at(0)
   #
-  # @param [Integer] entity_index
-  #   The index for a specific entity.
+  # @return [Sketchup::Entity, nil]
   #
-  # @return [Sketchup::Entity, nil] an {Sketchup::Entity} object if successful,
-  #   +nil+ if not found
+  # @see #[]
   #
   # @version SketchUp 6.0
   def at(entity_index)
@@ -869,16 +852,15 @@ class Sketchup::Entities
   # The {#length} method is used to retrieve the number of entities in the
   # collection of entities.
   #
-  # The {#size} method is an alias for {#length} added in SketchUp 2014.
-  #
   # @example
   #   model = Sketchup.active_model
   #   entities = model.entities
   #   entities.add_cpoint([10, 10, 10])
   #   number = entities.length
   #
-  # @return [Integer] the number of entities in the collection of
-  #   entities if successful
+  # @return [Integer]
+  #
+  # @see #size
   #
   # @version SketchUp 6.0
   def length
@@ -937,21 +919,19 @@ class Sketchup::Entities
   def remove_observer(observer)
   end
 
-  # The {#length} method is used to retrieve the number of entities in the
-  # collection of entities.
-  #
-  # The {#size} method is an alias for {#length} added in SketchUp 2014.
+  # The {#size} method is an alias for the {#length} method.
   #
   # @example
   #   model = Sketchup.active_model
   #   entities = model.entities
   #   entities.add_cpoint([10, 10, 10])
-  #   number = entities.length
+  #   number = entities.size
   #
-  # @return [Integer] the number of entities in the collection of
-  #   entities if successful
+  # @return [Integer]
   #
-  # @version SketchUp 6.0
+  # @see #length
+  #
+  # @version SketchUp 2014
   def size
   end
 

@@ -154,15 +154,14 @@ class Sketchup::DefinitionList < Sketchup::Entity
   # The {#length} method is used to retrieve number of component definitions in
   # the list.
   #
-  # The {#size} method is an alias for {#length} added in SketchUp 2014.
-  #
   # @example
   #   model = Sketchup.active_model
   #   definitions = model.definitions
   #   number = definitions.length
   #
-  # @return [Integer] the number of component definitions in the
-  #   definition list if successful
+  # @return [Integer]
+  #
+  # @see #size
   #
   # @version SketchUp 6.0
   def length
@@ -276,20 +275,18 @@ class Sketchup::DefinitionList < Sketchup::Entity
   def remove_observer(observer)
   end
 
-  # The {#length} method is used to retrieve number of component definitions in
-  # the list.
-  #
-  # The {#size} method is an alias for {#length} added in SketchUp 2014.
+  # The {#size} method is an alias for {#length}.
   #
   # @example
   #   model = Sketchup.active_model
   #   definitions = model.definitions
-  #   number = definitions.length
+  #   number = definitions.size
   #
-  # @return [Integer] the number of component definitions in the
-  #   definition list if successful
+  # @return [Integer]
   #
-  # @version SketchUp 6.0
+  # @see #length
+  #
+  # @version SketchUp 2014
   def size
   end
 
