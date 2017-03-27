@@ -1,0 +1,78 @@
+<%  su_site_name = h options.title
+    case object
+    when String
+      if object == "_index.html" || object == "index.html"
+        su_page_url = "http://ruby.sketchup.com/index.html"
+        su_page_title = "Alphabetic Index"
+        su_page_desc  = "Alphabetic Index of Files and API Namespaces. This is the main landing page for the SketchUp Ruby API Documentation."
+      else
+        su_page_url = "http://ruby.sketchup.com/"+(object =~ /(.html)\z/ ? object : "#{File.basename(object,'.*')}.html" )
+        su_page_title = (@page_title && !@page_title.empty?) ? (h @page_title) : object.split('.')[0]
+        su_page_desc  = "The #{su_page_title} page."
+      end
+    when YARD::CodeObjects::Base # or subclass
+      if object.root? 
+        if @file # Generating a YARD::CodeObjects::ExtraFileObject
+          su_page_url   = "http://ruby.sketchup.com/file.#{File.basename(@file.filename,'.*')}.html"
+          su_page_title = h @page_title
+          su_page_desc  = @file.title
+        elsif h @page_title == "Top Level Namespace"
+          su_page_url   = "http://ruby.sketchup.com/top-level-namespace.html"
+          su_page_title = h @page_title
+          su_page_desc  = "The Top Level Namespace for Ruby and the SketchUp API, listing global constants, and a summary of toplevel modules and classes."
+        else %>
+      <!-- <%= "YARD Error - (embed_meta.erb) Unknown root object - using site name." %>--><%
+          su_page_title = su_site_name
+          su_page_url   = "http://ruby.sketchup.com/"
+          su_page_desc  = "#{su_site_name}."
+        end
+      else # Generating a Class or Module page:
+        su_page_url   = "http://ruby.sketchup.com/#{@path.gsub('::','/')}.html"
+        su_page_title = h @page_title
+        if object.docstring.blank?
+          if object.is_a?(YARD::CodeObjects::ClassObject)
+            su_page_desc = "The #{@path} class."
+          elsif object.is_a?(YARD::CodeObjects::ModuleObject)
+            su_page_desc = "The #{@path} module."
+          else
+            su_page_desc = "The #{su_page_title} page."
+          end %>
+      <!-- <%= "YARD Warning - Blank docstring, object is: #{object.class.name}" %>--><%
+        else
+          su_page_desc = object.docstring.summary.gsub(/[{}+]/,'')
+        end
+      end # if root object
+    else # object is unexpected type %>
+      <!-- <%= "YARD Error - (embed_meta.erb) Unexpected type: #{object.class.name}" %>--><%
+      su_page_title = su_site_name
+      su_page_url   = "http://ruby.sketchup.com/"
+      if object.respond_to?(:docstring)
+        su_page_desc = object.docstring.summary.gsub(/[{}+]/,'')
+      else
+        su_page_desc  = "#{su_site_name}."
+      end
+    end
+    su_page_img = "http://developer.sketchup.com/sites/developers.sketchup.com/files/Ruby.svg"
+%>
+  <!-- GENERIC META PROPERTIES -->
+    <meta name="url"   content="<%= su_page_url %>" />
+    <meta name="image" content="<%= su_page_img %>?s=60" />
+    <meta name="title" content="<%= su_page_title %>" />
+    <meta name="name"  content="<%= su_site_name %>" />
+    <meta name="description" content="<%= su_page_desc %>" />
+  <!-- OPEN GRAPH META PROPERTIES -->
+    <meta property="og:site_name" content="<%= su_site_name %>" />
+    <meta property="og:type"      content="website" />
+    <meta property="og:image"     content="<%= su_page_img %>" />
+    <meta property="og:image:width"  content="60" />
+    <meta property="og:image:height" content="60" />
+    <meta property="og:title"     content="<%= su_page_title %>" />
+    <meta property="og:url"       content="<%= su_page_url %>" />
+    <meta property="og:description" content="<%= su_page_desc %>" />
+  <!-- TWITTER CARD META PROPERTIES -->
+    <meta name="twitter:card"  content="summary"   />
+    <meta name="twitter:site"  content="@sketchup" />
+    <meta name="twitter:title" content="<%= su_page_title %>" />
+    <meta name="twitter:description" content="<%= su_page_desc %>" />
+    <meta name="twitter:image:src"   content="<%= su_page_img %>?s=120" />
+    <meta name="twitter:url"   content="<%= su_page_url %>" />
