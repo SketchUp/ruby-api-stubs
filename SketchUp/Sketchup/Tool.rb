@@ -27,9 +27,9 @@
 #
 # - +CONSTRAIN_MODIFIER_KEY+ = Shift Key
 # - +CONSTRAIN_MODIFIER_MASK+ = Shift Key
-# - +COPY_MODIFIER_KEY+ = Menu on Mac, Ctrl on PC
-# - +COPY_MODIFIER_MASK+ = Alt on Mac, Ctrl on PC
-# - +ALT_MODIFIER_KEY+ = Command on Mac, Menu on PC
+# - +COPY_MODIFIER_KEY+ = Alt/Option on Mac, Ctrl on PC
+# - +COPY_MODIFIER_MASK+ = Alt/Option on Mac, Ctrl on PC
+# - +ALT_MODIFIER_KEY+ = Command on Mac, Alt on PC
 # - +ALT_MODIFIER_MASK+ = Command on Mac, Alt on PC
 #
 # @version SketchUp 6.0
