@@ -6,69 +6,61 @@
 # draw the model.
 #
 # @example
-#   # Get a handle to the styles collection.
 #   styles = Sketchup.active_model.styles
-#
-#   # Display the name of the first style.
-#   first_style = styles[0]
-#   UI.messagebox("Your first style is named " + first_style.name.to_s)
+#   puts "Your first style is named #{styles.first.name}"
 #
 # @version SketchUp 6.0
 class Sketchup::Style < Sketchup::Entity
 
   # Instance Methods
 
-  # The description method is used to retrieve the description for a style.
+  # The {#description} method gets the description for a {Sketchup::Style}.
   #
   # @example
-  #   style = Sketchup.active_model.styles[0]
-  #   UI.messagebox("Your first style description is: " +
-  #                 style.description.to_s)
+  #   styles = Sketchup.active_model.styles
+  #   style = styles.first
+  #   puts "Your first style description is: #{style.description}"
   #
-  # @return description - the description for the style.
+  # @return [String] description
   #
   # @version SketchUp 6.0
   def description
   end
 
-  # The description= method is used to set a description for a style.
+  # The {#description=} method sets the description for a {Sketchup::Style}.
   #
   # @example
-  #   style = Sketchup.active_model.styles[0]
+  #   styles = Sketchup.active_model.styles
+  #   style = styles.first
   #   style.description = "My new style description."
-  #   UI.messagebox('My new style description is: ' + style.description)
   #
-  # @param description
-  #   A textual description of the style.
-  #
-  # @return status - true if successful, false if unsuccessful.
+  # @param [String] description
   #
   # @version SketchUp 6.0
   def description=(description)
   end
 
-  # The name method is used to retrieve the name for a style.
+  # The {#name} method gets the name for a {Sketchup::Style}.
   #
   # @example
+  #   styles = Sketchup.active_model.styles
+  #   style = styles.first
   #   name = style.name
   #
-  # @return name - the name for the style.
+  # @return [String]
   #
   # @version SketchUp 6.0
   def name
   end
 
-  # The name= method is used to set the name for a style.
+  # The {#name=} method sets the name for a {Sketchup::Style}.
   #
   # @example
-  #   style = Sketchup.active_model.styles[0]
+  #   styles = Sketchup.active_model.styles
+  #   style = styles.first
   #   style.name = 'My Very Own Style'
-  #   UI.messagebox('My new style name is: ' + style.name)
   #
-  # @param name
-  #   - the new name for the style.
-  #
-  # @return name - the name that was set.
+  # @param [String] name
   #
   # @version SketchUp 6.0
   def name=(name)
