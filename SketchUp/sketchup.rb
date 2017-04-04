@@ -48,7 +48,7 @@ module Sketchup
   #     # code acting on the model
   #   end
   #
-  # @return model - active model object if successful, false if
+  # @return [Sketchup::Model] model - active model object if successful, false if
   #   unsuccessful
   #
   # @version SketchUp 6.0
