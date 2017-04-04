@@ -6,7 +6,7 @@
 #
 # @example
 #   styles = Sketchup.active_model.styles
-#   UI.messagebox "There are " + styles.count.to_s + " styles in your model."
+#   puts "There are #{styles.size} styles in your model."
 #
 # @version SketchUp 6.0
 class Sketchup::Styles < Sketchup::Entity
@@ -17,65 +17,67 @@ class Sketchup::Styles < Sketchup::Entity
 
   # Instance Methods
 
-  # The [] method is used to retrieves a style by either name or index.
+  # The {#[]} method is used to retrieves a style by either name or index.
   #
   # @example
   #   styles = Sketchup.active_model.styles
   #   style1 = styles[0]
-  #   style2 = styles["name"]
+  #   style2 = styles["MyStyle"]
   #
-  # @param name_or_index
-  #   The string name or index for a specific style.
+  # @overload [](name)
   #
-  # @return style - a Style object if successful
+  #   @param [String] name  The name of the style to retrieve.
+  #   @return [Sketchup::Style, nil]
+  #
+  # @overload [](index)
+  #
+  #   @param [Integer] index  The index of the style to retrieve.
+  #   @return [Sketchup::Style, nil]
   #
   # @version SketchUp 6.0
-  def [](name_or_index)
+  def [](arg)
   end
 
-  # The active_style method is used to retrieve the active style.
+  # The #{active_style} method is used to retrieve the active style.
   #
   # @example
   #   styles = Sketchup.active_model.styles
   #   style = styles.active_style
-  #   UI.messagebox('The active style is: ' + active_style.name)
   #
-  # @return style - the active Style object.
+  # @return [Sketchup::Style]
   #
   # @version SketchUp 6.0
   def active_style
   end
 
-  # The active_style_changed method tells you if the active style has been
+  # The {#active_style_changed} method tells you if the active style has been
   # edited by the user since it was last saved.
   #
   # @example
   #   styles = Sketchup.active_model.styles
-  #   user_made_change = styles.active_style_changed
-  #   UI.messagebox ('The active style was edited: ' + user_made_change.to_s)
+  #   style_changed = styles.active_style_changed
   #
-  # @return changed - true if the active style has been changed
-  #   from when it was last saved.
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def active_style_changed
   end
 
-  # The add_style method is used to create and load a style from the given file.
+  # The {#add_style} method is used to create and load a style from the given
+  # file.
   #
   # @example
+  #   filename = File.expand_path('./MyStyle.style')
   #   styles = Sketchup.active_model.styles
-  #   status = styles.add_style "c:\\MyStyle.style", true
-  #   UI.messagebox ('A style was added: ' + status.to_s)
+  #   status = styles.add_style(filename, true)
   #
-  # @param filename
-  #   The filename for the style.
+  # @param [String] filename
   #
-  # @param select
-  #   true if you want to set the style to be the active
-  #   style, false if not.
+  # @param [Boolean] select
+  #   +true+ if you want to set the style to be the
+  #   active style.
   #
-  # @return status - true if successful, false if unsuccessful.
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def add_style(filename, select)
@@ -90,25 +92,25 @@ class Sketchup::Styles < Sketchup::Entity
   #   +Enumable+ mix-in module. Prior to that the {#count} method is an alias
   #   for {#length}.
   #
-  # @return integer - the number of styles found.
+  # @return [Integer]
   #
   # @version SketchUp 6.0
   def count
   end
 
-  # The each method is used to iterate through styles.
+  # The {#each} method is used to iterate through styles.
   #
   # @example
   #   styles = Sketchup.active_model.styles
-  #   styles.each {| style |
-  #     UI.messagebox('style: ' + style.name)
+  #   styles.each { |style|
+  #     puts style.name
   #   }
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   #
-  # @yield [style] Variable that will hold each style as it is found.
+  # @yieldparam [Sketchup::Style] style
   def each
   end
 
@@ -126,46 +128,51 @@ class Sketchup::Styles < Sketchup::Entity
   def length
   end
 
-  # parent pointer, so we can't use the normal "parent" method from Entity
-  def parent
-  end
-
-  # The purge_unused method is used to remove unused styles from the model.
+  # The {#parent} method is used to return the model for the styles.
   #
   # @example
   #   styles = Sketchup.active_model.styles
-  #   status = styles.purge_unused
-  #   UI.messagebox ('Purging Unused styles status: ' + status.to_s)
+  #   model = styles.parent
   #
-  # @return status - true if successful, false if unsuccessful.
+  # @return [Sketchup::Model]
+  #
+  # @version SketchUp 6.0
+  def parent
+  end
+
+  # The {#purge_unused} method is used to remove unused styles from the model.
+  #
+  # @example
+  #   styles = Sketchup.active_model.styles
+  #   styles.purge_unused
+  #
+  # @return [true]
   #
   # @version SketchUp 6.0
   def purge_unused
   end
 
-  # The selected_style method is used to retrieve the currently selected style.
+  # The {#selected_style} method is used to retrieve the currently selected style.
   #
   # @example
   #   styles = Sketchup.active_model.styles
   #   style = styles.selected_style
-  #   UI.messagebox ('The selected style is: ' + style.name)
   #
-  # @return style - the selected Style object.
+  # @return [Sketchup::Style] style
   #
   # @version SketchUp 6.0
   def selected_style
   end
 
-  # The selected_style= method is used to set the currently selected style.
+  # The {#selected_style=} method is used to set the currently selected style.
   #
   # @example
   #   styles = Sketchup.active_model.styles
-  #   styles.selected_style = styles[styles.count -1]
+  #   styles.selected_style = styles.last
   #
-  # @param style
-  #   The style object to select.
+  # @param [Sketchup::Style] style
   #
-  # @return false
+  # @return [false]
   #
   # @version SketchUp 6.0
   def selected_style=(style)
@@ -186,15 +193,16 @@ class Sketchup::Styles < Sketchup::Entity
   def size
   end
 
-  # The update_selected_style method returns true if the selected style
-  # was changed (e.g. the user selected a different style).
+  # The {#update_selected_style} method commits the current style settings to the
+  # style selected in the Style Browser.
   #
   # @example
   #   styles = Sketchup.active_model.styles
-  #   success = styles.update_selected_style
-  #   UI.messagebox ('The selected style was switched: ' + success.to_s)
+  #   styles.update_selected_style
   #
-  # @return status - true if the style was switched
+  # @return [true]
+  #
+  # @see #selected_style
   #
   # @version SketchUp 6.0
   def update_selected_style
