@@ -1,3 +1,5 @@
+# @title Documentation Guide
+
 # Documentation Guide
 
 The Ruby API docs was originally generated using a custom proprietary tool which loosely used RDoc syntax.
