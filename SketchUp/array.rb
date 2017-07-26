@@ -511,10 +511,10 @@ class Array
   #   # This will initialize the x value as a Fixnum
   #   array.x = 5
   #
-  # @param x
+  # @param x [Object]
   #   The new x position.
   #
-  # @return The new x coordinate if successful
+  # @return [Object] The new x coordinate if successful
   #
   # @version SketchUp 6.0
   def x=(x)
@@ -546,10 +546,10 @@ class Array
   #   # This will initialize the y value as a Fixnum
   #   array.y = 5
   #
-  # @param y
+  # @param y [Object]
   #   The new y position.
   #
-  # @return The new y coordinate if successful
+  # @return [Object] The new y coordinate if successful
   #
   # @version SketchUp 6.0
   def y=(y)
@@ -581,10 +581,10 @@ class Array
   #   # This will initialize the z value as a Fixnum
   #   array.z = 5
   #
-  # @param z
+  # @param z [Object]
   #   The new z position.
   #
-  # @return The new z coordinate if successful
+  # @return [Object] The new z coordinate if successful
   #
   # @version SketchUp 6.0
   def z=(z)
