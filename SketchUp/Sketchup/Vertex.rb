@@ -24,10 +24,10 @@ class Sketchup::Vertex < Sketchup::Entity
   #     UI.messagebox "Failure"
   #   end
   #
-  # @param vertex2
+  # @param vertex2 [Sketchup::Vertex]
   #   A Vertex object.
   #
-  # @return edge - an Edge object common to both vertices if
+  # @return [Sketchup::Edge, nil] an Edge object common to both vertices if
   #   successful. Returns nil if there is no edge between the
   #   two vertices.
   #
@@ -51,10 +51,8 @@ class Sketchup::Vertex < Sketchup::Entity
   #     UI.messagebox "Failure"
   #   end
   #
-  # @return status - true if it is used by exactly two edges which
+  # @return [Boolean] true if it is used by exactly two edges which
   #   are both part of the same curve.
-  #
-  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def curve_interior?
@@ -69,7 +67,7 @@ class Sketchup::Vertex < Sketchup::Entity
   #   vertex1 = verticies[0]
   #   edges = vertex1.edges
   #
-  # @return edges - an Array of edge objects if successful
+  # @return [Array<Sketchup::Edge>] an Array of edge objects if successful
   #
   # @version SketchUp 6.0
   def edges
@@ -84,7 +82,7 @@ class Sketchup::Vertex < Sketchup::Entity
   #   vertex1 = verticies[0]
   #   faces = vertex1.faces
   #
-  # @return faces - an Array of faces that use the vertex if
+  # @return [Array<Sketchup::Face>] an Array of faces that use the vertex if
   #   successful
   #
   # @version SketchUp 6.0
@@ -100,7 +98,7 @@ class Sketchup::Vertex < Sketchup::Entity
   #   vertex1 = verticies[0]
   #   loops = vertex1.loops
   #
-  # @return loops - an Array of loops that use the vertex if
+  # @return [Array<Sketchup::Loop>] an Array of loops that use the vertex if
   #   successful
   #
   # @version SketchUp 6.0
@@ -116,7 +114,7 @@ class Sketchup::Vertex < Sketchup::Entity
   #   vertex1 = verticies[0]
   #   position = vertex1.position
   #
-  # @return point - a Point3d object representing the position of
+  # @return [Geom::Point3d] a Point3d object representing the position of
   #   the vertex if successful
   #
   # @version SketchUp 6.0
@@ -129,12 +127,10 @@ class Sketchup::Vertex < Sketchup::Entity
   # @example
   #   used = vertex1.used_by? my_face
   #
-  # @param face_or_edge
+  # @param face_or_edge [Sketchup::Edge, Sketchup::Face]
   #   A Face or Edge ot test against.
   #
-  # @return used - true if the Vertex is used in the given entity.
-  #
-  # @return [Boolean]
+  # @return [Boolean] true if the Vertex is used in the given entity.
   #
   # @version SketchUp 6.0
   def used_by?(face_or_edge)
