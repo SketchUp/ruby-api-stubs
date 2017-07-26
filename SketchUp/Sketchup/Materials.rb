@@ -29,14 +29,14 @@ class Sketchup::Materials < Sketchup::Entity
   #
   # @overload [](index)
   #
-  #   @param index         A number representing the material's index in an array
-  #                        of Material objects.
-  #   @return              material - a Material object on success, Nil on failure
+  #   @param index [Integer] A number representing the material's index in an array
+  #                          of Material objects.
+  #   @return [Sketchup::Material, nil] a Material object on success, Nil on failure
   #
   # @overload [](name)
   #
-  #   @param name          The name of the material.
-  #   @return              material - a Material object on success, Nil on failure
+  #   @param name [String] The name of the material.
+  #   @return [Sketchup::Material, nil] a Material object on success, Nil on failure
   #
   # @version SketchUp 6.0
   def [](arg)
@@ -53,10 +53,10 @@ class Sketchup::Materials < Sketchup::Entity
   #   materials = model.materials
   #   material = materials.add('Joe')
   #
-  # @param name
+  # @param name [String]
   #   The name of the new material.
   #
-  # @return material - a Material object
+  # @return [Sketchup::Material] a Material object
   #
   # @version SketchUp 6.0
   def add(name)
@@ -69,10 +69,10 @@ class Sketchup::Materials < Sketchup::Entity
   #   materials = Sketchup.active_model.materials
   #   status = materials.add_observer(observer)
   #
-  # @param observer
+  # @param observer [Object]
   #   An observer.
   #
-  # @return success - true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def add_observer(observer)
@@ -89,14 +89,14 @@ class Sketchup::Materials < Sketchup::Entity
   #
   # @overload [](index)
   #
-  #   @param index         A number representing the material's index in an array
-  #                        of Material objects.
-  #   @return              material - a Material object on success, Nil on failure
+  #   @param index [Integer] A number representing the material's index in an array
+  #                          of Material objects.
+  #   @return [Sketchup::Material, nil] a Material object on success, Nil on failure
   #
   # @overload [](name)
   #
-  #   @param name          The name of the material.
-  #   @return              material - a Material object on success, Nil on failure
+  #   @param name [String] The name of the material.
+  #   @return [Sketchup::Material, nil] a Material object on success, Nil on failure
   #
   # @version SketchUp 6.0
   def at(arg)
@@ -125,7 +125,7 @@ class Sketchup::Materials < Sketchup::Entity
   # @example
   #   current = Sketchup.active_model.materials.current
   #
-  # @return material - a Material object.
+  # @return [Sketchup::Material] a Material object.
   #
   # @version SketchUp 6.0
   def current
@@ -138,10 +138,10 @@ class Sketchup::Materials < Sketchup::Entity
   #   materials = Sketchup.active_model.materials
   #   materials.current = materials[0]
   #
-  # @param material
+  # @param material [Sketchup::Material]
   #   A Material object.
   #
-  # @return true if successful, false if unsuccessful.
+  # @return [Sketchup::Material]
   #
   # @version SketchUp 6.0
   def current=(material)
@@ -155,11 +155,11 @@ class Sketchup::Materials < Sketchup::Entity
   #     puts material.display_name
   #   }
   #
-  # @return material - a Material object
+  # @return [nil]
   #
   # @version SketchUp 6.0
   #
-  # @yield [material] A variable that will hold each Material object as they
+  # @yield [Sketchup::Material] A variable that will hold each Material object as they
   #   are found.
   def each
   end
@@ -189,7 +189,7 @@ class Sketchup::Materials < Sketchup::Entity
   #   materials = Sketchup.active_model.materials
   #   material = materials.load(path)
   #
-  # @param [String] filename
+  # @param filename [String]
   #   the path to the SKM file to load.
   #
   # @raise [RuntimeError] if the material failed to load.
@@ -206,7 +206,7 @@ class Sketchup::Materials < Sketchup::Entity
   #   materials = Sketchup.active_model.materials
   #   materials.purge_unused
   #
-  # @return materials - The Materials object.
+  # @return [Sketchup::Materials] The Materials object.
   #
   # @version SketchUp 6.0
   def purge_unused
@@ -241,10 +241,10 @@ class Sketchup::Materials < Sketchup::Entity
   #   material = materials.add('Joe')
   #   materials.remove(material)
   #
-  # @param material
+  # @param material [Sketchup::Material]
   #   The material to remove.
   #
-  # @return status - true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 8.0 M1
   def remove(material)
@@ -257,10 +257,10 @@ class Sketchup::Materials < Sketchup::Entity
   #   materials = Sketchup.active_model.materials
   #   status = materials.remove_observer(observer)
   #
-  # @param observer
+  # @param observer [Object]
   #   An observer.
   #
-  # @return success - true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def remove_observer(observer)
