@@ -35,7 +35,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   face = entities.add_face(pts)
   #   connected = face.all_connected
   #
-  # @return entities - the entities connected to the face
+  # @return [Array<Sketchup::Edge, Sketchup::Face>] the entities connected to the face
   #
   # @version SketchUp 6.0
   def all_connected
@@ -66,15 +66,13 @@ class Sketchup::Face < Sketchup::Drawingelement
   #
   # @overload area
   #
-  #   @return              area - the area of the face in current units (if
-  #                        successful)
+  #   @return [Float] the area of the face in current units (if successful)
   #
   # @overload area(transform)
   #
-  #   @param transform     A Transformation object or array that can
-  #                        be interpreted as a Transformation object.
-  #   @return              area - the area of the face in current units (if
-  #                        successful)
+  #   @param transform [Geom::Transformation] A Transformation object or array 
+  #                        that can be interpreted as a Transformation object.
+  #   @return [Float] the area of the face in current units (if successful)
   #
   # @version SketchUp 6.0
   def area(*args)
@@ -101,7 +99,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   face.back_material = "red"
   #   material = face.back_material
   #
-  # @return material - a Material object representing the material
+  # @return [Sketchup::Material, nil] a Material object representing the material
   #   on the back of the face (if successful)
   #
   # @version SketchUp 6.0
@@ -125,10 +123,10 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   face = entities.add_face(pts)
   #   status = face.back_material = "red"
   #
-  # @param material
+  # @param material [Sketchup::Material]
   #   A Material object or the name of a valid material.
   #
-  # @return material - the name of the valid material or the new
+  # @return [Sketchup::Material] the name of the valid material or the new
   #   Material object (if successful)
   #
   # @version SketchUp 6.0
@@ -191,10 +189,10 @@ class Sketchup::Face < Sketchup::Drawingelement
   #     puts "#{pt.to_s} is not on the same plane as the face"
   #   end
   #
-  # @param point
+  # @param point [Geom::Point3d]
   #   A Point3d.
   #
-  # @return result - an integer describing where a Point3d is in
+  # @return [Integer] an integer describing where a Point3d is in
   #   relation to the referenced Face.
   #
   # @version SketchUp 6.0
@@ -217,7 +215,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   face = entities.add_face(pts)
   #   edges = face.edges
   #
-  # @return edges - an array of Edge objects (if successful)
+  # @return [Array<Sketchup::Edge>] an array of Edge objects (if successful)
   #
   # @version SketchUp 6.0
   def edges
@@ -279,18 +277,18 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   tw = Sketchup.create_texture_writer
   #   uvHelp = face.get_UVHelper(true, true, tw)
   #
-  # @param front
+  # @param front [Boolean]
   #   True if you want the texture coordinates for the front
   #   face, false if not. Defaults to true.
   #
-  # @param back
+  # @param back [Boolean]
   #   True if you want the texture coordinates for the back
   #   face, false if not. Defaults to true.
   #
-  # @param texturewriter
-  #   A TextureWriter object.
+  # @param texturewriter [Sketchup::TextureWriter]
+  #   An optional TextureWriter object.
   #
-  # @return uvhelper - a UVHelper object
+  # @return [Sketchup::UVHelper] a UVHelper object
   #
   # @version SketchUp 6.0
   def get_UVHelper(front, back, texturewriter)
@@ -313,7 +311,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   face = entities.add_face(pts)
   #   glued_array = face.get_glued_instances
   #
-  # @return instances - An array of ComponentInstance objects that
+  # @return [Array<Sketchup::ComponentInstance, Sketchup::Group>] An array of ComponentInstance objects that
   #   are currently glued to the face.
   #
   # @version SketchUp 7.0 M1
@@ -353,10 +351,10 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   # Get the projection of the applied material
   #   vector = face.get_texture_projection(true)
   #
-  # @param frontside
+  # @param frontside [Boolean]
   #   true for front side, false for back side.
   #
-  # @return vector - a vector on success, nil on failure.
+  # @return [Geom::Vector3d] a vector on success, nil on failure.
   #
   # @version SketchUp 2014
   def get_texture_projection(frontside)
@@ -380,7 +378,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   face = entities.add_face(pts)
   #   loops = face.loops
   #
-  # @return loops - an array of Loop objects if successful
+  # @return [Array<Sketchup::Loop>] an array of Loop objects if successful
   #
   # @version SketchUp 6.0
   def loops
@@ -408,7 +406,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   face.material = "red"
   #   material = face.material
   #
-  # @return material - a Material object representing the material
+  # @return [Sketchup::Material, nil] a Material object representing the material
   #   on the front of the face (if successful)
   #
   # @version SketchUp 6.0
@@ -433,10 +431,10 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   face = entities.add_face(pts)
   #   status = face.material = "red"
   #
-  # @param material
+  # @param material [Sketchup::Material]
   #   A Material object or the name of a valid material.
   #
-  # @return material - the name of the valid material or the new
+  # @return [Sketchup::Material] the name of the valid material or the new
   #   Material object (if successful)
   #
   # @version SketchUp 6.0
@@ -477,7 +475,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   flags = kPoints | kUVQFront | kUVQBack | kNormals # equals to 7
   #   mesh = face.mesh(flags)
   #
-  # @param [Integer] flags
+  # @param flags [Integer]
   #   One or more flags used to generate a mesh.
   #
   # @return [Geom::PolygonMesh]
@@ -504,7 +502,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   face = entities.add_face(pts)
   #   normal = face.normal
   #
-  # @return vector - a Vector3d object if successful
+  # @return [Geom::Vector3d] a Vector3d object if successful
   #
   # @version SketchUp 6.0
   def normal
@@ -526,7 +524,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   face = entities.add_face(pts)
   #   loop = face.outer_loop
   #
-  # @return loop - a Loop object representing the outer loop (if
+  # @return [Sketchup::Loop] a Loop object representing the outer loop (if
   #   successful)
   #
   # @version SketchUp 6.0
@@ -551,7 +549,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   face = entities.add_face(pts)
   #   plane = face.plane
   #
-  # @return plane - a plane that contains the face (if successful)
+  # @return [Array(Float, Float, Float, Float)] a plane that contains the face (if successful)
   #
   # @version SketchUp 6.0
   def plane
@@ -595,17 +593,17 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   on_front = true
   #   face.position_material(material, pt_array, on_front)
   #
-  # @param material
+  # @param material [Sketchup::Material]
   #   a Material object.
   #
-  # @param pt_array
+  # @param pt_array [Array<Geom::Point3d>]
   #   An array of Point3d objects used to position the material.
   #
-  # @param o_front
+  # @param o_front [Boolean]
   #   true to position the texture on the front of the Face or
   #   false to position it on the back of the Face.
   #
-  # @return the face upon success, false upon failure.
+  # @return [Sketchup::Face, FalseClass] the face upon success, false upon failure.
   #
   # @version SketchUp 6.0
   def position_material(material, pt_array, o_front)
@@ -629,15 +627,15 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   face = entities.add_face(pts)
   #   status = face.pushpull(100, true)
   #
-  # @param distance
+  # @param distance [Numeric]
   #   The distance, in current units, to push/pull the face.
   #
-  # @param copy
+  # @param copy [Boolean]
   #   Create a new push/pull starting face if true (equivalent
   #   of pressing CTRL while in SketchUp), do not create a
   #   push/pull starting face if false.
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def pushpull(distance, copy)
@@ -660,7 +658,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   face = entities.add_face(pts)
   #   status = face.reverse!
   #
-  # @return face - the reversed Face object if successful, false if
+  # @return [Sketchup::Face, FalseClass] the reversed Face object if successful, false if
   #   unsuccessful
   #
   # @version SketchUp 6.0
@@ -697,14 +695,14 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   # Returns nil if not successful, path if successful
   #   result = face.set_texture_projection(face.normal, true)
   #
-  # @param vector
+  # @param vector [Geom::Vector3d]
   #   representing the direction of the projection. Use nil
   #   to remove the projection.
   #
-  # @param frontside
+  # @param frontside [Boolean]
   #   true for front side, false for back side.
   #
-  # @return boolean - true on success
+  # @return [Boolean] true on success
   #
   # @version SketchUp 2014
   def set_texture_projection(vector, frontside)
@@ -728,7 +726,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   face = entities.add_face(pts)
   #   vertices = face.vertices
   #
-  # @return vertices - an array of Vertex objects if successful
+  # @return [Array<Sketchup::Vertex>] an array of Vertex objects if successful
   #
   # @version SketchUp 6.0
   def vertices
