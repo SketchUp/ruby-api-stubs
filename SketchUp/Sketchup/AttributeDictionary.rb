@@ -31,10 +31,10 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
   #   # value will contain 115
   #   value = attrdict["test"]
   #
-  # @param key
+  # @param key [String]
   #   The name of the attribute.
   #
-  # @return attribute - the attribute stored under your key, or
+  # @return [Object, nil] the attribute stored under your key, or
   #   nil if not found
   #
   # @version SketchUp 6.0
@@ -56,13 +56,13 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
   #     UI.messagebox value
   #   end
   #
-  # @param key
+  # @param key [String]
   #   The valid key.
   #
-  # @param value
+  # @param value [Boolean, Fixnum, Float, Length, NilClass, String, Time, Array, Geom::Point3d, Geom::Vector3d]
   #   The value to be set.
   #
-  # @return value - the value that was set if successful, or false
+  # @return [Object, nil] the value that was set if successful, or false
   #   if unsuccessful.
   #
   # @version SketchUp 6.0
@@ -96,10 +96,10 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
   #   attrdict = model.attribute_dictionaries['test_dict']
   #   value = attrdict.delete_key("attr_one")
   #
-  # @param key
+  # @param key [String]
   #   The key to be deleted.
   #
-  # @return value - the value of the key
+  # @return [Object, nil] the value of the key
   #
   # @version SketchUp 6.0
   def delete_key(key)
@@ -198,7 +198,7 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
   #   attrdict = model.attribute_dictionaries['test_dict']
   #   keys = attrdict.keys
   #
-  # @return keys - an array of keys within the attribute dictionary
+  # @return [Array<String>] an array of keys within the attribute dictionary
   #   if successful
   #
   # @version SketchUp 6.0
@@ -234,7 +234,7 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
   #   # Show the name.
   #   UI.messagebox attrdict.name
   #
-  # @return name - the name of the attribute dictionary if
+  # @return [String] the name of the attribute dictionary if
   #   successful
   #
   # @version SketchUp 6.0
@@ -271,7 +271,7 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
   #   attrdict = model.attribute_dictionaries['test_dict']
   #   values = attrdict.values
   #
-  # @return keys - an array of keys within the attribute dictionary
+  # @return [Array<Object, nil>] an array of values within the attribute dictionary
   #   if successful
   #
   # @version SketchUp 6.0
