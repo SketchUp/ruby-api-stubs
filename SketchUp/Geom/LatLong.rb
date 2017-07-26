@@ -20,10 +20,25 @@ class Geom::LatLong
   #     UI.messagebox "Failure"
   #   end
   #
-  # @param latlong
-  #   A latitude and longitude coordinate set as an Array.
+  # @overload initialize
   #
-  # @return latlong - a LatLong object
+  #   @return [Geom::LatLong]
+  #
+  # @overload initialize(latlong)
+  #
+  #   @param latlong [Geom::LatLong]
+  #   @return [Geom::LatLong]
+  #
+  # @overload initialize(lat, lon)
+  #
+  #   @param lat [Numeric]
+  #   @param lon [Numeric]
+  #   @return [Geom::LatLong]
+  #
+  # @overload initialize(latlon_array)
+  #
+  #   @param latlon_array [Array(Numeric, Numeric)]
+  #   @return [Geom::LatLong]
   #
   # @version SketchUp 6.0
   def initialize(latlong)
@@ -41,7 +56,7 @@ class Geom::LatLong
   #     UI.messagebox "Failure"
   #   end
   #
-  # @return latitude - a latitude coordinate value
+  # @return [Float] a latitude coordinate value
   #
   # @version SketchUp 6.0
   def latitude
@@ -60,7 +75,7 @@ class Geom::LatLong
   #     UI.messagebox "Failure"
   #   end
   #
-  # @return longitude - a latitude coordinate value
+  # @return [Float] a latitude coordinate value
   #
   # @version SketchUp 6.0
   def longitude
@@ -90,7 +105,7 @@ class Geom::LatLong
   def to_s
   end
 
-  # The to_utm method converts a LatLong object to an array of two values.
+  # The to_utm method converts a LatLong object to a UTM object.
   #
   # @example
   #   ll = [40.01700, 105.28300]
@@ -102,7 +117,7 @@ class Geom::LatLong
   #     UI.messagebox "Failure"
   #   end
   #
-  # @return array - an array of two values: latitude and longitude
+  # @return [Geom::UTM]
   #
   # @version SketchUp 6.0
   def to_utm
