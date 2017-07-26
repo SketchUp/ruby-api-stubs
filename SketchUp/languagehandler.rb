@@ -40,10 +40,10 @@ class LanguageHandler
   #   swiveldriver_langHandler = LanguageHandler.new('swiveldriver.strings')
   #   localized_string = swiveldriver_langHandler['String 1']
   #
-  # @param key
+  # @param key [String]
   #   The key for the string to be retrieved.
   #
-  # @return the localized string.
+  # @return [String] the localized string.
   #
   # @version SketchUp 2014
   def [](key)
@@ -54,11 +54,11 @@ class LanguageHandler
   # @example
   #   swiveldriver_langHandler = LanguageHandler.new('swiveldriver.strings')
   #
-  # @param filename
+  # @param filename [String]
   #   The name of the file that contains the localized strings
   #   with their keys in UTF-8 encoding.
   #
-  # @return the new LanguageHandler object
+  # @return [LanguageHandler] the new LanguageHandler object
   #
   # @version SketchUp 2014
   def initialize(filename)
@@ -71,7 +71,7 @@ class LanguageHandler
   #   swiveldriver_langHandler = LanguageHandler.new('swiveldriver.strings')
   #   image = swiveldriver_langHandler.resource_path('fancy_image.png')
   #
-  # @return path - the location of the file in the Resources folder.
+  # @return [String] the location of the file in the Resources folder.
   #
   # @version SketchUp 2014
   def resource_path
@@ -83,7 +83,7 @@ class LanguageHandler
   #   swiveldriver_langHandler = LanguageHandler.new('swiveldriver.strings')
   #   hash = swiveldriver_langHandler.strings
   #
-  # @return hash - the localization dictionary.
+  # @return [Hash] the localization dictionary.
   #
   # @version SketchUp 2014
   def strings
