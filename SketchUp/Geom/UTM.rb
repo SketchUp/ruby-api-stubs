@@ -19,20 +19,20 @@ class Geom::UTM
   #   # Create a new UTM object from scratch.
   #   utm = Geom::UTM.new 13, "T", 475849.37521, 4429682.73749
   #
-  # @param zone_number
+  # @param zone_number [Integer]
   #   A zone number or a UTM object. If this first parameter
   #   is a UTM object, then the other parameters are ignored.
   #
-  # @param zone_letter
+  # @param zone_letter [String]
   #   A zone letter.
   #
-  # @param y
+  # @param y [Numeric]
   #   The y position.
   #
-  # @param x
+  # @param x [Numeric]
   #   The x position.
   #
-  # @return utm - a utm coordinate if successful
+  # @return [Geom::UTM] a utm coordinate if successful
   #
   # @version SketchUp 6.0
   def initialize(zone_number, zone_letter, x, y)
@@ -47,7 +47,7 @@ class Geom::UTM
   #   utm = Geom::UTM.new 13, "T", 475849.37521, 4429682.73749
   #   a = utm.to_a
   #
-  # @return utm_as_array - a utm array if successful
+  # @return [Array(Fixnum, String, Float, Float)] a utm array if successful
   #
   # @version SketchUp 6.0
   def to_a
@@ -61,7 +61,7 @@ class Geom::UTM
   #   utm = Geom::UTM.new 13, "T", 475849.37521, 4429682.73749
   #   ll = utm.to_latlong
   #
-  # @return utm_as_latlong - a LatLong object if successful
+  # @return [Geom::LatLong] a LatLong object if successful
   #
   # @version SketchUp 6.0
   def to_latlong
@@ -74,7 +74,7 @@ class Geom::UTM
   #   utm = Geom::UTM.new 13, "T", 475849.37521, 4429682.73749
   #   string = utm.to_s
   #
-  # @return utm_as_string - a utm string if successful
+  # @return [String] a utm string if successful
   #
   # @version SketchUp 6.0
   def to_s
@@ -87,7 +87,7 @@ class Geom::UTM
   #   utm = Geom::UTM.new 13, "T", 475849.37521, 4429682.73749
   #   x = utm.x
   #
-  # @return x - the UTM x coordinate
+  # @return [Float] the UTM x coordinate
   #
   # @version SketchUp 6.0
   def x
@@ -100,7 +100,7 @@ class Geom::UTM
   #   utm = Geom::UTM.new 13, "T", 475849.37521, 4429682.73749
   #   y = utm.y
   #
-  # @return y - the UTM y coordinate
+  # @return [Float] the UTM y coordinate
   #
   # @version SketchUp 6.0
   def y
@@ -113,7 +113,7 @@ class Geom::UTM
   #   utm = Geom::UTM.new 13, "T", 475849.37521, 4429682.73749
   #   zl = utm.zone_letter
   #
-  # @return zone_letter - the UTM zone letter
+  # @return [String] the UTM zone letter
   #
   # @version SketchUp 6.0
   def zone_letter
@@ -126,7 +126,7 @@ class Geom::UTM
   #   utm = Geom::UTM.new 13, "T", 475849.37521, 4429682.73749
   #   zn = utm.zone_number
   #
-  # @return zone_number - the UTM zone number
+  # @return [Fixnum] the UTM zone number
   #
   # @version SketchUp 6.0
   def zone_number
