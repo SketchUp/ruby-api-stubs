@@ -20,7 +20,7 @@ class Geom::Vector3d
   #
   # In addition to the 4-argument form detailed here, you may also call this
   # method with 6 parameters in the form of:
-  #   - vec = Geom::Vector3d.linear_combination(x, xaxis, y, yaxis, z, zaxis)
+  #   vec = Geom::Vector3d.linear_combination(x, xaxis, y, yaxis, z, zaxis)
   #
   # @example
   #   # Create a vector that is a 50%/50% linear combination of two others.
@@ -41,7 +41,7 @@ class Geom::Vector3d
   # @param weight2
   #   A weight or percentage.
   #
-  # @return vector - a Vector3d object
+  # @return [Geom::Vector3d] a Vector3d object
   #
   # @version SketchUp 6.0
   def self.linear_combination(weight1, vector1, weight2, vector2)
@@ -84,7 +84,7 @@ class Geom::Vector3d
   # @param vector
   #   A Vector3d object.
   #
-  # @return vector - a Vector3d object if successful
+  # @return [Geom::Vector3d] a Vector3d object if successful
   #
   # @see #cross
   #
@@ -102,7 +102,7 @@ class Geom::Vector3d
   # @param vector2
   #   A Vector3d object.
   #
-  # @return vector - the new vector.
+  # @return [Geom::Vector3d] the new vector.
   #
   # @version SketchUp 6.0
   def +(vector2)
@@ -118,7 +118,7 @@ class Geom::Vector3d
   # @param vector2
   #   A Vector3d object.
   #
-  # @return vector - the new vector.
+  # @return [Geom::Vector3d] the new vector.
   #
   # @version SketchUp 6.0
   def -(vector2)
@@ -135,7 +135,7 @@ class Geom::Vector3d
   # @param vector2
   #   A Vector3d object.
   #
-  # @return true if the vector's x, y or z component is less
+  # @return [Boolean] true if the vector's x, y or z component is less
   #
   # @version SketchUp 6.0
   def <(vector2)
@@ -154,7 +154,7 @@ class Geom::Vector3d
   # @param vector2
   #   A Vector3d object.
   #
-  # @return status - true if vector1 is equal to vector 2. False if
+  # @return [Boolean] true if vector1 is equal to vector 2. False if
   #   they are not equal.
   #
   # @version SketchUp 6.0
@@ -179,10 +179,10 @@ class Geom::Vector3d
   #     UI.messagebox "Failure"
   #   end
   #
-  # @param i
+  # @param i [Integer]
   #   An index into an array of three coordinates.
   #
-  # @return coordinate - the value for the x, y, or z coordinate.
+  # @return [Length] the value for the x, y, or z coordinate.
   #
   # @version SketchUp 6.0
   def [](i)
@@ -194,13 +194,13 @@ class Geom::Vector3d
   # @example
   #   vector[i] = coordinate
   #
-  # @param index
+  # @param index [Integer]
   #   The index for the x, y, or z coordinate.
   #
-  # @param value
+  # @param value [Numeric]
   #   The value for the x, y, or z coordinate.
   #
-  # @return the newly set coordinate value
+  # @return [Numeric] the newly set coordinate value
   #
   # @version SketchUp 6.0
   def []=(index, value)
@@ -214,10 +214,10 @@ class Geom::Vector3d
   #   vector2 = Geom::Vector3d.new 0,1,0
   #   angle = vector1.angle_between vector2
   #
-  # @param vector2
+  # @param vector2 [Geom::Vector3d]
   #   A Vector3d object.
   #
-  # @return angle - an angle (in radians)
+  # @return [Float] an angle (in radians)
   #
   # @version SketchUp 6.0
   def angle_between(vector2)
@@ -232,7 +232,7 @@ class Geom::Vector3d
   #   vector = Geom::Vector3d.new 1,0,0
   #   a = vector.axes
   #
-  # @return a - an Array object containing three Vector3d objects
+  # @return [Array(Geom::Vector3d, Geom::Vector3d, Geom::Vector3d)] an Array object containing three Vector3d objects
   #
   # @version SketchUp 6.0
   def axes
@@ -246,7 +246,7 @@ class Geom::Vector3d
   #   vector = Geom::Vector3d.new 1,0,0
   #   vector2 = vector.clone
   #
-  # @return vector2 - a Vector3d object which is the clone of
+  # @return [Geom::Vector3d] a Vector3d object which is the clone of
   #   vector
   #
   # @version SketchUp 6.0
@@ -269,10 +269,10 @@ class Geom::Vector3d
   #   vector2 = Geom::Vector3d.new(0,1,0)
   #   vector3 = vector.cross(vector2)
   #
-  # @param vector
+  # @param vector [Geom::Vector3d]
   #   A Vector3d object.
   #
-  # @return vector - the cross of vector1 and vector2
+  # @return [Geom::Vector3d] the cross of vector1 and vector2
   #
   # @see #*
   #
@@ -287,7 +287,7 @@ class Geom::Vector3d
   #   vector2 = Geom::Vector3d.new(0, 1, 0)
   #   dot = vector1.dot(vector2)
   #
-  # @param [Geom::Vector] vector
+  # @param vector [Geom::Vector]
   #
   # @return [Float]
   #
@@ -312,16 +312,26 @@ class Geom::Vector3d
   #
   #   @return [Geom::Vector3d]
   #
-  # @overload initialize(vector2)
-  #
-  #   @param vector2       A Vector3d object.
-  #   @return [Geom::Vector3d]
-  #
   # @overload initialize(x, y, z)
   #
-  #   @param x             A X value.
-  #   @param y             A Y value.
-  #   @param z             A Z value.
+  #   @param x [Numeric] A X value.
+  #   @param y [Numeric] A Y value.
+  #   @param z [Numeric] A Z value.
+  #   @return [Geom::Vector3d]
+  #
+  # @overload initialize(vector)
+  #
+  #   @param vector [Geom::Vector3d] A Vector3d object.
+  #   @return [Geom::Vector3d]
+  #
+  # @overload initialize(array2d)
+  #
+  #   @param [Array(Numeric, Numeric)] array2d
+  #   @return [Geom::Vector3d]
+  #
+  # @overload initialize(array3d)
+  #
+  #   @param [Array(Numeric, Numeric, Numeric)] array3d
   #   @return [Geom::Vector3d]
   #
   # @version SketchUp 6.0
@@ -336,7 +346,7 @@ class Geom::Vector3d
   #   out_string = vector.inspect
   #   puts out_string
   #
-  # @return vector - the Vector3d object
+  # @return [Geom::Vector3d] the Vector3d object
   #
   # @version SketchUp 6.0
   def inspect
@@ -348,7 +358,7 @@ class Geom::Vector3d
   #   vector = Geom::Vector3d.new 0,0,1
   #   l = vector.length
   #
-  # @return length - the length of the vector
+  # @return [Length] the length of the vector
   #
   # @version SketchUp 6.0
   def length
@@ -363,10 +373,10 @@ class Geom::Vector3d
   #   UI.messagebox l
   #   newl = vector.length = 2
   #
-  # @param length
+  # @param length [Numeric]
   #   A length for the vector.
   #
-  # @return length - a newly set length
+  # @return [Numeric] a newly set length
   #
   # @version SketchUp 6.0
   def length=(length)
@@ -379,7 +389,7 @@ class Geom::Vector3d
   #   vector = Geom::Vector3d.new 0,0,2
   #   vector2 = vector.normalize
   #
-  # @return vector2 - a normalized Vector3d object
+  # @return [Geom::Vector3d] a new normalized Vector3d object
   #
   # @version SketchUp 6.0
   def normalize
@@ -394,7 +404,7 @@ class Geom::Vector3d
   #   vector = Geom::Vector3d.new 0,0,2
   #   vector.normalize!
   #
-  # @return vector2 - a normalized Vector3d object
+  # @return [Geom::Vector3d] a normalized Vector3d object
   #
   # @version SketchUp 6.0
   def normalize!
@@ -406,13 +416,11 @@ class Geom::Vector3d
   # @example
   #   status = vector.parallel? vector2
   #
-  # @param vector2
+  # @param vector2 [Geom::Vector3d]
   #   A Vector3d object.
   #
-  # @return status - true if vector and vector2 are parallel. False
+  # @return [Boolean] true if vector and vector2 are parallel. False
   #   if they are not parallel.
-  #
-  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def parallel?(vector2)
@@ -426,13 +434,11 @@ class Geom::Vector3d
   #   vector2 = Geom::Vector3d.new 0,1,0
   #   status = vector.perpendicular? vector2
   #
-  # @param vector2
+  # @param vector2 [Geom::Vector3d]
   #   A Vector3d object.
   #
-  # @return status - true if vector and vector2 are parallel. False
+  # @return [Boolean] true if vector and vector2 are parallel. False
   #   if they are not parallel.
-  #
-  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def perpendicular?(vector2)
@@ -444,7 +450,7 @@ class Geom::Vector3d
   # @example
   #   vector2 = vector.reverse
   #
-  # @return vector2 - a Vector3d object that is the reverse of
+  # @return [Geom::Vector3d] a Vector3d object that is the reverse of
   #   vector
   #
   # @version SketchUp 6.0
@@ -456,7 +462,7 @@ class Geom::Vector3d
   # @example
   #   vector.reverse!
   #
-  # @return vector2 - a Vector3d object that is the reverse of
+  # @return [Geom::Vector3d] a Vector3d object that is the reverse of
   #   vector
   #
   # @version SketchUp 6.0
@@ -471,13 +477,11 @@ class Geom::Vector3d
   #   vector2 = Geom::Vector3d.new 0,1,0
   #   status = vector.samedirection? vector2
   #
-  # @param vector2
+  # @param vector2 [Geom::Vector3d]
   #   A Vector3d object.
   #
-  # @return status - true if vector and vector2 are in the same
+  # @return [Boolean] true if vector and vector2 are in the same
   #   direction. False if they are not in the same direction.
-  #
-  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def samedirection?(vector2)
@@ -501,15 +505,20 @@ class Geom::Vector3d
   #
   # @overload set!(x, y, z)
   #
-  #   @param x             The x value for the vector.
-  #   @param y             The y value for the vector.
-  #   @param z             The z value for the vector.
-  #   @return              vector - The newly set Vector3d object
+  #   @param x [Numeric] The x value for the vector.
+  #   @param y [Numeric] The y value for the vector.
+  #   @param z [Numeric] The z value for the vector.
+  #   @return [Geom::Vector3d] The newly set Vector3d object
   #
-  # @overload set!(vector2)
+  # @overload set!(vector)
   #
-  #   @param vector2       A Vector3d object.
-  #   @return              vector - The newly set Vector3d object
+  #   @param vector [Geom::Vector3d] A Vector3d object.
+  #   @return [Geom::Vector3d] The newly set Vector3d object
+  #
+  # @overload set!(array3d)
+  #
+  #   @param array3d [Array(Numeric, Numeric, Numeric)]
+  #   @return [Geom::Vector3d]
   #
   # @version SketchUp 6.0
   def set!(*args)
@@ -521,7 +530,7 @@ class Geom::Vector3d
   # @example
   #   a = vector.to_a
   #
-  # @return a - the coordinates of the vector in an array
+  # @return [Array(Length, Length, Length)] the coordinates of the vector in an array
   #
   # @version SketchUp 6.0
   def to_a
@@ -534,7 +543,7 @@ class Geom::Vector3d
   #   out_string = vector.to_s
   #   puts out_string
   #
-  # @return s - a string representation of vector
+  # @return [String] a string representation of vector
   #
   # @version SketchUp 6.0
   def to_s
@@ -545,28 +554,28 @@ class Geom::Vector3d
   # @example
   #   vector.transform! transformation
   #
-  # @param transform
+  # @param transform [Geom::Transformation]
   #   A Transformation object to apply to the vector.
   #
-  # @return vector - the vector
+  # @return [Geom::Vector3d] the transformed vector
   #
   # @version SketchUp 6.0
-  def transform(transform)
+  def transform!(transform)
   end
 
   # Apply a Transformation to a vector, returning a new vector. The original
   # vector is unchanged by this method.
   #
   # @example
-  #   vector2 = vector.transform! transformation
+  #   vector2 = vector.transform transformation
   #
-  # @param transform
+  # @param transform [Geom::Transformation]
   #   A Transformation object to apply to the vector.
   #
-  # @return vector2 - the newly transformed vector
+  # @return [Geom::Vector3d] the newly transformed vector
   #
   # @version SketchUp 6.0
-  def transform!(transform)
+  def transform(transform)
   end
 
   # The unitvector? method is used to see if the vector is a unit vector.
@@ -577,10 +586,8 @@ class Geom::Vector3d
   #   vector = Geom::Vector3d.new 0,0,1
   #   status = vector.unitvector?
   #
-  # @return status - true if the vector is a unit vector. False if
+  # @return [Boolean] true if the vector is a unit vector. False if
   #   the vector is not a unit vector.
-  #
-  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def unitvector?
@@ -597,10 +604,8 @@ class Geom::Vector3d
   #   vector = Geom::Vector3d.new 0,0,1
   #   status = vector.valid?
   #
-  # @return status - true if the vector is valid. false if the
+  # @return [Boolean] true if the vector is valid. false if the
   #   vector is not valid.
-  #
-  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def valid?
@@ -611,7 +616,7 @@ class Geom::Vector3d
   # @example
   #   x = vector.x
   #
-  # @return x - the x coordinate of the vector
+  # @return [Length] the x coordinate of the vector
   #
   # @version SketchUp 6.0
   def x
@@ -623,10 +628,10 @@ class Geom::Vector3d
   #   vector = Geom::Vector3d.new 1,2,3
   #   x = vector.x = 10
   #
-  # @param x
+  # @param x [Numeric]
   #   The x coordinate for the vector.
   #
-  # @return x - the newly set x coordinate for the vector
+  # @return [Numeric] the newly set x coordinate for the vector
   #
   # @version SketchUp 6.0
   def x=(x)
@@ -638,7 +643,7 @@ class Geom::Vector3d
   #   vector = Geom::Vector3d.new 1,2,3
   #   y = vector.y
   #
-  # @return y - the y coordinate of the vector
+  # @return [Length] the y coordinate of the vector
   #
   # @version SketchUp 6.0
   def y
@@ -650,10 +655,10 @@ class Geom::Vector3d
   #   vector = Geom::Vector3d.new 1,2,3
   #   y = vector.y = 10
   #
-  # @param y
+  # @param y [Numeric]
   #   The y coordinate for the vector.
   #
-  # @return y - the newly set y coordinate for the vector
+  # @return [Numeric] the newly set y coordinate for the vector
   #
   # @version SketchUp 6.0
   def y=(y)
@@ -665,7 +670,7 @@ class Geom::Vector3d
   #   vector = Geom::Vector3d.new 1,2,3
   #   z = vector.z
   #
-  # @return z - the z coordinate of the vector
+  # @return [Length] the z coordinate of the vector
   #
   # @version SketchUp 6.0
   def z
@@ -677,10 +682,10 @@ class Geom::Vector3d
   #   vector = Geom::Vector3d.new 1,2,3
   #   z = vector.z = 10
   #
-  # @param z
+  # @param z [Numeric]
   #   The z coordinate for the vector.
   #
-  # @return z - the newly set z coordinate for the vector
+  # @return [Numeric] the newly set z coordinate for the vector
   #
   # @version SketchUp 6.0
   def z=(z)
