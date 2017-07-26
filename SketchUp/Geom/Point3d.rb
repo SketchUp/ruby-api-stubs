@@ -50,19 +50,19 @@ class Geom::Point3d
   #     UI.messagebox "Failure"
   #   end
   #
-  # @param weight1
+  # @param weight1 [Float]
   #   A weight or percentage.
   #
-  # @param point1
+  # @param point1 [Float]
   #   The start point on the line.
   #
-  # @param point2
+  # @param point2 [Float]
   #   The end point of the line.
   #
-  # @param weight2
+  # @param weight2 [Float]
   #   A weight or percentage.
   #
-  # @return point - a Point3d object
+  # @return [Geom::Point3d]
   #
   # @version SketchUp 6.0
   def self.linear_combination(weight1, point1, weight2, point2)
@@ -77,10 +77,10 @@ class Geom::Point3d
   #   pt2 = pt + vec
   #   pt = pt + [10,10,10]
   #
-  # @param point2
+  # @param point2 [Geom::Point3d]
   #   A Point3d object.
   #
-  # @return point - a Point3d object
+  # @return [Geom::Point3d]
   #
   # @version SketchUp 6.0
   def +(point2)
@@ -93,10 +93,10 @@ class Geom::Point3d
   #   pt2 = pt - vec
   #   pt = pt - [10,10,10]
   #
-  # @param point2
+  # @param point2 [Geom::Point3d]
   #   A Point3d object.
   #
-  # @return vector - a Vector object
+  # @return [Geom::Vector3d]
   #
   # @version SketchUp 6.0
   def -(point2)
@@ -110,10 +110,10 @@ class Geom::Point3d
   #   pt2 = Geom::Point3d.new(20,20,20)
   #   result = pt1 < pt2
   #
-  # @param point2
+  # @param point2 [Geom::Point3d]
   #   A Point3d object.
   #
-  # @return true if the point2 is closer to the origin.
+  # @return [Boolean] true if the point2 is closer to the origin.
   #
   # @version SketchUp 6.0
   def <(point2)
@@ -142,10 +142,10 @@ class Geom::Point3d
   #   point2 = Geom::Point3d.new 10,10,10
   #   status = point1 == point2
   #
-  # @param point2
+  # @param point2 [Geom::Point3d]
   #   A Point3d object.
   #
-  # @return status - true if both points are equal; false if points are not
+  # @return [Boolean] true if both points are equal; false if points are not
   #   equal
   #
   # @version SketchUp 6.0
@@ -161,11 +161,11 @@ class Geom::Point3d
   #   # retrieves the y value of 2
   #   yvalue = point[1]
   #
-  # @param index
+  # @param index [Integer]
   #   The index for a specific x, y, or z value within the
   #   Point3d.
   #
-  # @return value - an x, y, or z value if successful
+  # @return [Length] an x, y, or z value if successful
   #
   # @version SketchUp 6.0
   def [](index)
@@ -178,13 +178,17 @@ class Geom::Point3d
   #   point = Geom::Point3d.new 1,2,3
   #   yvalue = point[1] = 4
   #
-  # @param new_value
+  # @param index [Integer]
+  #   The index for a specific x, y, or z value within the
+  #   Point3d.
+  #
+  # @param new_value [Numeric]
   #   New x, y, or z value.
   #
-  # @return status - the newly set x, y, or z value if successful
+  # @return [Numeric] the newly set x, y, or z value if successful
   #
   # @version SketchUp 6.0
-  def []=(new_value)
+  def []=(index, new_value)
   end
 
   # The clone method is used to create another point identical to the point
@@ -194,7 +198,7 @@ class Geom::Point3d
   #   point = Geom::Point3d.new 1,2,3
   #   newpoint = point.clone
   #
-  # @return point2 - the cloned Point3d object
+  # @return [Geom::Point3d] the cloned Point3d object
   #
   # @version SketchUp 6.0
   def clone
@@ -208,10 +212,10 @@ class Geom::Point3d
   #   point2 = Geom::Point3d.new 10,10,10
   #   distance = point1.distance point2
   #
-  # @param point2
+  # @param point2 [Geom::Point3d]
   #   The Point3d object to compute the distance to.
   #
-  # @return distance - the distance in current units
+  # @return [Length] the distance in current units
   #
   # @version SketchUp 6.0
   def distance(point2)
@@ -230,8 +234,10 @@ class Geom::Point3d
   # @param line
   #   A line (see Geom for information on creating lines).
   #
-  # @return distance - the distance between a point and line in
-  #   current units if successful
+  # @return [Float] the distance between a point and line in
+  #   internal units if successful
+  #
+  # @note Take care that this method does not return a Length as expected.
   #
   # @version SketchUp 6.0
   def distance_to_line(line)
@@ -248,8 +254,10 @@ class Geom::Point3d
   # @param plane
   #   A plane (see Geom for how to create a plane).
   #
-  # @return distance - a distance between a point and a plane in
-  #   current units if successful
+  # @return [Float] a distance between a point and a plane in
+  #   internal units if successful
+  #
+  # @note Take care that this method does not return a Length as expected.
   #
   # @version SketchUp 6.0
   def distance_to_plane(plane)
@@ -318,7 +326,7 @@ class Geom::Point3d
   #   point = Geom::Point3d.new 10,10,10
   #   string = point.inspect
   #
-  # @return point - a string point representation
+  # @return [String] a string point representation
   #
   # @version SketchUp 6.0
   def inspect
@@ -332,14 +340,14 @@ class Geom::Point3d
   #   vector = Geom::Vector3d.new(0, 0, 1)
   #   point2 = point1.offset(vector)
   #
-  # @param vector
+  # @param vector [Geom::Vector3d]
   #   A Vector3d object to offset the point by.
   #
-  # @param length
+  # @param length [Numeric]
   #   the distance to offset. If not provided, the
   #   offset is my a distance equal to the vector length.
   #
-  # @return point2 - a new Point3d object
+  # @return [Geom::Point3d] - a new Point3d object
   #
   # @version SketchUp 6.0
   def offset(vector, length = vector.length)
@@ -355,14 +363,14 @@ class Geom::Point3d
   #   vector = Geom::Vector3d.new(0,0,1)
   #   point2 = point1.offset! vector
   #
-  # @param vector
+  # @param vector [Geom::Vector3d]
   #   A Vector3d object to offset the point by.
   #
-  # @param length
+  # @param length [Numeric]
   #   the distance to offset. If not provided, the
   #   offset is my a distance equal to the vector length.
   #
-  # @return point2 - a new Point3d object
+  # @return [Geom::Point3d] a new Point3d object
   #
   # @version SketchUp 6.0
   def offset!(vector, length = vector.length)
@@ -380,10 +388,8 @@ class Geom::Point3d
   # @param line
   #   A line (see Geom for how to create a line).
   #
-  # @return status - true if the point is on the line; false if the
+  # @return [Boolean] true if the point is on the line; false if the
   #   point is not on the line
-  #
-  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def on_line?(line)
@@ -400,10 +406,8 @@ class Geom::Point3d
   #
   # @param plane
   #
-  # @return status - true if the point is on the plane; false if
+  # @return [Boolean] true if the point is on the plane; false if
   #   the point is not on the plane
-  #
-  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def on_plane?(plane)
@@ -422,7 +426,7 @@ class Geom::Point3d
   # @param line
   #   - see Geom for how to specify a line
   #
-  # @return point - the Point3d that is on a line closest to the
+  # @return [Geom::Point3d] the Point3d that is on a line closest to the
   #   point
   #
   # @version SketchUp 6.0
@@ -444,7 +448,7 @@ class Geom::Point3d
   # @param plane
   #   A plane (see Geom for how to create a plane).
   #
-  # @return point - the Point3d that is on a plane closest to the
+  # @return [Geom::Point3d] the Point3d that is on a plane closest to the
   #   point
   #
   # @version SketchUp 6.0
@@ -457,14 +461,21 @@ class Geom::Point3d
   #   point = Geom::Point3d.new 10,10,10
   #   point = point.set! 100,200,300
   #
+  # @overload set!(x, y, z)
+  #
+  #   @param x [Numeric] The x value for the point.
+  #   @param y [Numeric] The y value for the point.
+  #   @param z [Numeric] The z value for the point.
+  #   @return [Geom::Point3d] The newly set Point3d object
+  #
   # @overload set!(point3d)
   #
-  #   @param [Geom::Point3d] point3d
+  #   @param point3d [Geom::Point3d]
   #   @return [Geom::Point3d]
   #
   # @overload set!(array3d)
   #
-  #   @param [Array(Numeric, Numeric, Numeric)] array3d
+  #   @param array3d [Array(Numeric, Numeric, Numeric)]
   #   @return [Geom::Point3d]
   #
   # @version SketchUp 6.0
@@ -481,7 +492,7 @@ class Geom::Point3d
   #   # outputs [100.0,200.0,300.0]
   #   UI.messagebox(pt.to_a)
   #
-  # @return array - an array of three numbers representing x,y,z of
+  # @return [Array(Length, Length, Length)] an array of three numbers representing x,y,z of
   #   the Point3d
   #
   # @version SketchUp 6.0
@@ -494,15 +505,13 @@ class Geom::Point3d
   #   point = Geom::Point3d.new 10,10,10
   #   str = point.to_s
   #
-  # @return string - the string representation of the Point3d
+  # @return [String] the string representation of the Point3d
   #
   # @version SketchUp 6.0
   def to_s
   end
 
-  # The transform! method is used to apply a Transformation to a point.
-  #
-  # Unlike the transform method, the point itself is modified.
+  # Apply a Transformation to a point. The point itself is modified.
   #
   # @example
   #   transform = Geom::Transformation.new(point2)
@@ -510,17 +519,17 @@ class Geom::Point3d
   #   point1 = Geom::Point3d.new 10,10,10
   #   point1.transform! transform
   #
-  # @param transform
+  # @param transform [Geom::Transformation]
   #   A Transformation object.
   #
-  # @return nil
+  # @return [Geom::Point3d] the transformed point
   #
   # @version SketchUp 6.0
-  def transform(transform)
+  def transform!(transform)
   end
 
-  # The transform! method is used to apply a Transformation to a point to create
-  # a new point.
+  # Apply a Transformation to a point, returning a new point. The original
+  # vector is unchanged by this method.
   #
   # @example
   #   transform = Geom::Transformation.new(point2)
@@ -528,13 +537,13 @@ class Geom::Point3d
   #   point1 = Geom::Point3d.new 10,10,10
   #   point3 = point1.transform transform
   #
-  # @param transform
+  # @param transform [Geom::Transformation]
   #   A Transformation object.
   #
-  # @return transformed_point - the new point
+  # @return [Geom::Point3d] the newly transformed point
   #
   # @version SketchUp 6.0
-  def transform!(transform)
+  def transform(transform)
   end
 
   # The vector_to team method retrieves the vector between points.
@@ -550,10 +559,10 @@ class Geom::Point3d
   #   pt1.vector_to( pt2 ) # returns the vector (2,0,0)
   #   pt1.vector_to(pt2) # is equivalent to (pt2 - pt1)
   #
-  # @param point2
+  # @param point2 [Geom::Point3d]
   #   A Point3d object.
   #
-  # @return vector - a Vector object
+  # @return [Geom::Vector3d] a Vector object
   #
   # @version SketchUp 6.0
   def vector_to(point2)
@@ -565,7 +574,7 @@ class Geom::Point3d
   #   point = Geom::Point3d.new 1,2,3
   #   x = point.x
   #
-  # @return x - the new x value
+  # @return [Length] the x value
   #
   # @version SketchUp 6.0
   def x
@@ -577,10 +586,10 @@ class Geom::Point3d
   #   point = Geom::Point3d.new 1,2,3
   #   x = point.x = 2
   #
-  # @param value
+  # @param value [Numeric]
   #   The new x value.
   #
-  # @return x - the newly set x value
+  # @return [Numeric] the newly set x value
   #
   # @version SketchUp 6.0
   def x=(value)
@@ -592,7 +601,7 @@ class Geom::Point3d
   #   point = Geom::Point3d.new 1,2,3
   #   y = point.y
   #
-  # @return y - the new y value
+  # @return [Length] the y value
   #
   # @version SketchUp 6.0
   def y
@@ -604,10 +613,10 @@ class Geom::Point3d
   #   point = Geom::Point3d.new 1,2,3
   #   y = point.y = 2
   #
-  # @param value
+  # @param value [Numeric]
   #   The new y value.
   #
-  # @return y - the newly set y value
+  # @return [Numeric] the newly set y value
   #
   # @version SketchUp 6.0
   def y=(value)
@@ -619,7 +628,7 @@ class Geom::Point3d
   #   point = Geom::Point3d.new 1,2,3
   #   z = point.x
   #
-  # @return z - the z value
+  # @return [Length] the z value
   #
   # @version SketchUp 6.0
   def z
@@ -631,10 +640,10 @@ class Geom::Point3d
   #   point = Geom::Point3d.new 1,2,3
   #   z = point.z = 2
   #
-  # @param value
+  # @param value [Numeric]
   #   The new z value.
   #
-  # @return z - the newly set z value
+  # @return [Numeric] the newly set z value
   #
   # @version SketchUp 6.0
   def z=(value)
