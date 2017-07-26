@@ -237,7 +237,7 @@ module UI
   def self.model_info_pages
   end
 
-  # The {#openURL} method is used to open the default Web browser to a URL.
+  # The {.openURL} method is used to open the default Web browser to a URL.
   #
   # @example
   #   status = UI.openURL("http://www.sketchup.com")
