@@ -15,9 +15,9 @@ class Geom::LatLong
   #   ll = [40.01700, 105.28300]
   #   latlong = Geom::LatLong.new(ll)
   #   if (latlong)
-  #     UI.messagebox latlong
+  #     UI.messagebox(latlong)
   #   else
-  #     UI.messagebox "Failure"
+  #     UI.messagebox("Failure")
   #   end
   #
   # @overload initialize
@@ -51,9 +51,9 @@ class Geom::LatLong
   #   latlong = Geom::LatLong.new(ll)
   #   latitude = latlong.latitude
   #   if (latitude)
-  #     UI.messagebox latitude
+  #     UI.messagebox(latitude)
   #   else
-  #     UI.messagebox "Failure"
+  #     UI.messagebox("Failure")
   #   end
   #
   # @return [Float] a latitude coordinate value
@@ -70,9 +70,9 @@ class Geom::LatLong
   #   latlong = Geom::LatLong.new(ll)
   #   longitude = latlong.longitude
   #   if (longitude)
-  #     UI.messagebox longitude
+  #     UI.messagebox(longitude)
   #   else
-  #     UI.messagebox "Failure"
+  #     UI.messagebox("Failure")
   #   end
   #
   # @return [Float] a latitude coordinate value
@@ -112,9 +112,9 @@ class Geom::LatLong
   #   latlong = Geom::LatLong.new(ll)
   #   utm = latlong.to_utm
   #   if (utm)
-  #     UI.messagebox utm
+  #     UI.messagebox(utm)
   #   else
-  #     UI.messagebox "Failure"
+  #     UI.messagebox("Failure")
   #   end
   #
   # @return [Geom::UTM]
