@@ -14,10 +14,10 @@ class Geom::UTM
   #
   # @example
   #   # Create a copy of an existing UTM object.
-  #   utm = Geom::UTM.new utm2
+  #   utm = Geom::UTM.new(utm2)
   #
   #   # Create a new UTM object from scratch.
-  #   utm = Geom::UTM.new 13, "T", 475849.37521, 4429682.73749
+  #   utm = Geom::UTM.new(13, "T", 475849.37521, 4429682.73749)
   #
   # @param zone_number [Integer]
   #   A zone number or a UTM object. If this first parameter
@@ -44,7 +44,7 @@ class Geom::UTM
   #
   # @example
   #   # Create a new UTM object from scratch.
-  #   utm = Geom::UTM.new 13, "T", 475849.37521, 4429682.73749
+  #   utm = Geom::UTM.new(13, "T", 475849.37521, 4429682.73749)
   #   a = utm.to_a
   #
   # @return [Array(Fixnum, String, Float, Float)] a utm array if successful
@@ -58,7 +58,7 @@ class Geom::UTM
   #
   # @example
   #   # Create a new UTM object from scratch.
-  #   utm = Geom::UTM.new 13, "T", 475849.37521, 4429682.73749
+  #   utm = Geom::UTM.new(13, "T", 475849.37521, 4429682.73749)
   #   ll = utm.to_latlong
   #
   # @return [Geom::LatLong] a LatLong object if successful
@@ -71,7 +71,7 @@ class Geom::UTM
   #
   # @example
   #   # Create a new UTM object from scratch.
-  #   utm = Geom::UTM.new 13, "T", 475849.37521, 4429682.73749
+  #   utm = Geom::UTM.new(13, "T", 475849.37521, 4429682.73749)
   #   string = utm.to_s
   #
   # @return [String] a utm string if successful
@@ -84,7 +84,7 @@ class Geom::UTM
   #
   # @example
   #   # Create a new UTM object from scratch.
-  #   utm = Geom::UTM.new 13, "T", 475849.37521, 4429682.73749
+  #   utm = Geom::UTM.new(13, "T", 475849.37521, 4429682.73749)
   #   x = utm.x
   #
   # @return [Float] the UTM x coordinate
@@ -97,7 +97,7 @@ class Geom::UTM
   #
   # @example
   #   # Create a new UTM object from scratch.
-  #   utm = Geom::UTM.new 13, "T", 475849.37521, 4429682.73749
+  #   utm = Geom::UTM.new(13, "T", 475849.37521, 4429682.73749)
   #   y = utm.y
   #
   # @return [Float] the UTM y coordinate
@@ -110,7 +110,7 @@ class Geom::UTM
   #
   # @example
   #   # Create a new UTM object from scratch.
-  #   utm = Geom::UTM.new 13, "T", 475849.37521, 4429682.73749
+  #   utm = Geom::UTM.new(13, "T", 475849.37521, 4429682.73749)
   #   zl = utm.zone_letter
   #
   # @return [String] the UTM zone letter
@@ -123,7 +123,7 @@ class Geom::UTM
   #
   # @example
   #   # Create a new UTM object from scratch.
-  #   utm = Geom::UTM.new 13, "T", 475849.37521, 4429682.73749
+  #   utm = Geom::UTM.new(13, "T", 475849.37521, 4429682.73749)
   #   zn = utm.zone_number
   #
   # @return [Fixnum] the UTM zone number
