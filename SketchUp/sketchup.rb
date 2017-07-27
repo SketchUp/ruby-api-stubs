@@ -42,8 +42,8 @@ module Sketchup
   #
   # @example
   #   model = Sketchup.active_model
-  #   if (! model)
-  #     UI.messagebox "Failure"
+  #   if !model
+  #     UI.messagebox("Failure")
   #   else
   #     # code acting on the model
   #   end
@@ -58,7 +58,7 @@ module Sketchup
   # The add_observer method is used to add an observer to the current object.
   #
   # @example
-  #   status = Sketchup.add_observer observer
+  #   status = Sketchup.add_observer(observer)
   #
   # @param observer [Object]
   #   An observer.
@@ -95,7 +95,7 @@ module Sketchup
   # reactivated.
   #
   # @example
-  #   is_on = Sketchup.break_edges?
+  #   Sketchup.break_edges = false
   #
   # @param enabled [Boolean]
   #   If true, break edges will be turned on. If false, it
@@ -184,10 +184,10 @@ module Sketchup
   #
   # @example
   #   extensions = Sketchup.extensions
-  #   for extension in extensions
+  #   extensions.each{ |extension|
   #     UI.messagebox('The next extension is named: ' + extension.name +
   #         ' and its loaded? state is: ' + extension.loaded?)
-  #   end
+  #   }
   #
   # @return [Sketchup::ExtensionsManager] an ExtensionsManager object.
   #
@@ -212,15 +212,15 @@ module Sketchup
   # Forward slashes must be used to delimit between directory names.
   #
   # @example
-  #   help_file = Sketchup.find_support_file "help.html", "Plugins/"
-  #   if (help_file)
+  #   help_file = Sketchup.find_support_file("help.html", "Plugins/")
+  #   if help_file
   #     # Print out the help_file full path
-  #     UI.messagebox help_file
+  #     UI.messagebox(help_file)
   #
   #     # Open the help_file in a web browser
-  #     UI.openURL "file://" + help_file
+  #     UI.openURL("file://" + help_file)
   #   else
-  #     UI.messagebox "Failure"
+  #     UI.messagebox("Failure")
   #   end
   #
   # @param filename [String]
@@ -266,7 +266,7 @@ module Sketchup
   # method can be used to control it.
   #
   # @example
-  #   Sketchup.fix_shadow_strings=true
+  #   Sketchup.fix_shadow_strings = true
   #
   # @param enabled [Boolean]
   #   If true, shadow strings fix will be turned on. If
@@ -296,7 +296,7 @@ module Sketchup
   # into degrees. For example, format_angle(Math::PI) will return 180.0.
   #
   # @example
-  #   degrees = Sketchup.format_angle Math::PI
+  #   degrees = Sketchup.format_angle(Math::PI)
   #
   # @param number [Numeri]
   #   A number to be formatted.
@@ -314,7 +314,7 @@ module Sketchup
   # squared.
   #
   # @example
-  #   area = Sketchup.format_area number
+  #   area = Sketchup.format_area(number)
   #
   # @param number [Numeric]
   #   A number to be formatted.
@@ -329,7 +329,7 @@ module Sketchup
   # example, 10 becomes 10.0. This is the equivalent to a to_f call.
   #
   # @example
-  #   degrees = Sketchup.format_degrees number
+  #   degrees = Sketchup.format_degrees(number)
   #
   # @param number [Numeric]
   #   A number to be formatted.
@@ -346,9 +346,9 @@ module Sketchup
   # The default unit setting is inches. For example, 10 becomes 10".
   #
   # @example
-  #   length = Sketchup.format_length 10
-  #   if (length)
-  #     UI.messagebox length
+  #   length = Sketchup.format_length(10)
+  #   if length
+  #     UI.messagebox(length)
   #   end
   #
   # @param number [Numeric]
@@ -425,7 +425,7 @@ module Sketchup
   # localization files.
   #
   # @example
-  #   directory = Sketchup.get_resource_path "Styles.strings"
+  #   directory = Sketchup.get_resource_path("Styles.strings")
   #
   # @param filename [String]
   #   The filename of a resource file in the resource directory hierarchy.
@@ -475,9 +475,9 @@ module Sketchup
   #   begin
   #     Sketchup.install_from_archive(path)
   #   rescue Interrupt => error
-  #     UI.messagebox "User said 'no': " + error
+  #     UI.messagebox("User said 'no': " + error)
   #   rescue Exception => error
-  #     UI.messagebox "Error during unzip: " + error
+  #     UI.messagebox("Error during unzip: " + error)
   #   end
   #
   # @param filename [String]
@@ -534,8 +534,8 @@ module Sketchup
   # the product.
   #
   # @example
-  #   if (Sketchup.is_pro?)
-  #     UI.messagebox "You are running SU Pro."
+  #   if Sketchup.is_pro?
+  #     UI.messagebox("You are running SU Pro.")
   #   end
   #
   # @return [Boolean] true if the user is using SketchUp Pro
@@ -548,7 +548,7 @@ module Sketchup
   # contains illegal characters.
   #
   # @example
-  #   status = Sketchup.is_valid_filename? filename
+  #   status = Sketchup.is_valid_filename?(filename)
   #
   # @param filename [String]
   #   A filename string.
@@ -585,7 +585,7 @@ module Sketchup
   # The open_file method is used to open a file.
   #
   # @example
-  #   result = Sketchup.open_file "C:\\model.skp"
+  #   result = Sketchup.open_file("C:\\model.skp")
   #
   # @param filename [String]
   #   The path and filename to open.
@@ -667,10 +667,10 @@ module Sketchup
   #
   # @example
   #   # Type this in the Ruby console then restart SketchUp.
-  #   Sketchup.plugins_disabled=true
+  #   Sketchup.plugins_disabled = true
   #
   #   # To reactivate plugins, type this into the Ruby console and restart.
-  #   Sketchup.plugins_disabled=false
+  #   Sketchup.plugins_disabled = false
   #
   # @param enabled [Boolean]
   #   If true, the plugins directory will not load.
@@ -712,8 +712,7 @@ module Sketchup
   # (within the Software > SketchUp > SketchUp [Version] section).
   #
   # @example
-  #   result = Sketchup.read_default "section",
-  #   "variable", "default"
+  #   result = Sketchup.read_default("section", "variable", "default")
   #
   # @param section [String]
   #   A section in an .INI or registry.
@@ -735,14 +734,14 @@ module Sketchup
   # SketchUp's extension manager (in SketchUp preferences).
   #
   # @example
-  #   utilitiesExtension = SketchupExtension.new "Utilities Tools",
-  #     "Utilities/utilitiesTools.rb"
+  #   utilities_extension = SketchupExtension.new("Utilities Tools",
+  #     "Utilities/utilitiesTools.rb")
   #
-  #   utilitiesExtension.description = "Adds Tools->Utilities to the " +
+  #   utilities_extension.description = "Adds Tools->Utilities to the " +
   #     "SketchUp inteface. The Utilities submenu contains two tools: " +
   #     "Create Face and Query Tool."
   #
-  #   Sketchup.register_extension utilitiesExtension, false
+  #   Sketchup.register_extension(utilities_extension, false)
   #
   # @note It is recommended to set +load_on_start+ to true unless you have a very
   #   good reason not to.
@@ -765,7 +764,7 @@ module Sketchup
   # The register_importer method is used to register an importer with SketchUp.
   #
   # @example
-  #   status = Sketchup.register_importer importer
+  #   status = Sketchup.register_importer(importer)
   #
   # @param importer [Sketchup::Importer]
   #   An Importer object representing the importer.
@@ -780,7 +779,7 @@ module Sketchup
   # object.
   #
   # @example
-  #   status = Sketchup.remove_observer observer
+  #   status = Sketchup.remove_observer(observer)
   #
   # @param observer [Sketchup::AppObserver]
   #   An observer.
@@ -819,7 +818,7 @@ module Sketchup
   # not necessarily the loaded model.
   #
   # @example
-  #   status = Sketchup.save_thumbnail "skp_filename", "image_filename"
+  #   status = Sketchup.save_thumbnail("skp_filename", "image_filename")
   #
   # @param skp_filename [String]
   #   The name of the SketchUp file whose model you want
@@ -1041,7 +1040,7 @@ module Sketchup
   # - 21560 and up: causes a runtime Error
   #
   # @example
-  #   result = Sketchup.send_action "selectArcTool:"
+  #   result = Sketchup.send_action("selectArcTool:")
   #
   # @param action [String, Integer]
   #   The action to be performed.
@@ -1063,8 +1062,8 @@ module Sketchup
   # - +SB_VCB_VALUE+ - the text will appear in the VCB
   #
   # @example
-  #   result = Sketchup.set_status_text "This is a Test", SB_VCB_VALUE
-  #   if (result)
+  #   result = Sketchup.set_status_text("This is a Test", SB_VCB_VALUE)
+  #   if result
   #     #code to do something if set_status_text is successful
   #   end
   #
@@ -1130,7 +1129,7 @@ module Sketchup
   # Templates are the .skp files that are loaded when the user select File > New.
   #
   # @example
-  #   status = Sketchup.template= "filename"
+  #   status = Sketchup.template = "filename"
   #
   # @param filename [String]
   #   The name of the template to set.
