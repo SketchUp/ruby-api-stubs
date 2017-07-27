@@ -10,10 +10,10 @@
 #
 # @example Example code that uses LanguageHandler:
 #   # Create a global language handler object
-#   swiveldriver_langHandler = LanguageHandler.new('swiveldriver.strings')
+#   swiveldriver_lang_handler = LanguageHandler.new('swiveldriver.strings')
 #
 #   # Get localized string
-#   localizedStr = swiveldriver_langHandler.GetString('String 1')
+#   localizedStr = swiveldriver_lang_handler.GetString('String 1')
 #
 # @example
 #   "String 1"="Localized String 1";
@@ -37,8 +37,8 @@ class LanguageHandler
   # in the Resources folder.
   #
   # @example
-  #   swiveldriver_langHandler = LanguageHandler.new('swiveldriver.strings')
-  #   localized_string = swiveldriver_langHandler['String 1']
+  #   swiveldriver_lang_handler = LanguageHandler.new('swiveldriver.strings')
+  #   localized_string = swiveldriver_lang_handler['String 1']
   #
   # @param key [String]
   #   The key for the string to be retrieved.
@@ -52,7 +52,7 @@ class LanguageHandler
   # The new method is used to create a new LanguageHandler object.
   #
   # @example
-  #   swiveldriver_langHandler = LanguageHandler.new('swiveldriver.strings')
+  #   swiveldriver_lang_handler = LanguageHandler.new('swiveldriver.strings')
   #
   # @param filename [String]
   #   The name of the file that contains the localized strings
@@ -68,8 +68,8 @@ class LanguageHandler
   # in the Resources folder.
   #
   # @example
-  #   swiveldriver_langHandler = LanguageHandler.new('swiveldriver.strings')
-  #   image = swiveldriver_langHandler.resource_path('fancy_image.png')
+  #   swiveldriver_lang_handler = LanguageHandler.new('swiveldriver.strings')
+  #   image = swiveldriver_lang_handler.resource_path('fancy_image.png')
   #
   # @return [String] the location of the file in the Resources folder.
   #
@@ -80,8 +80,8 @@ class LanguageHandler
   # Returns a Hash object containing the localization dictionary.
   #
   # @example
-  #   swiveldriver_langHandler = LanguageHandler.new('swiveldriver.strings')
-  #   hash = swiveldriver_langHandler.strings
+  #   swiveldriver_lang_handler = LanguageHandler.new('swiveldriver.strings')
+  #   hash = swiveldriver_lang_handler.strings
   #
   # @return [Hash] the localization dictionary.
   #
