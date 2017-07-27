@@ -497,7 +497,7 @@ module UI
   # name. You can get the list of valid inspectors with UI.inspector_names.
   #
   # @example
-  #   status = UI.show_inspector "Components"
+  #   status = UI.show_inspector("Components")
   #
   # @param name [String]
   #   The name of inspector that you want to display.
