@@ -48,7 +48,7 @@ module Sketchup
   #     # code acting on the model
   #   end
   #
-  # @return [Sketchup::Model] model - active model object if successful, false if
+  # @return [Sketchup::Model] active model object if successful, false if
   #   unsuccessful
   #
   # @version SketchUp 6.0
@@ -444,7 +444,7 @@ module Sketchup
   # @example
   #   shortcuts = Sketchup.get_shortcuts
   #
-  # @return shortcuts - an array of shortcut strings.
+  # @return [Array<String>] an array of shortcut strings.
   #
   # @version SketchUp 6.0
   def self.get_shortcuts
