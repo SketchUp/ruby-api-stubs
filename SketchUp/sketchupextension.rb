@@ -226,7 +226,7 @@ class SketchupExtension
   # @example
   #   ext = SketchupExtension.new('Stair Tools', 'StairTools/core.rb')
   #   UI.messagebox("loaded? is false: #{ext.loaded?.to_s}")
-  #   Sketchup.register_extension ext, true
+  #   Sketchup.register_extension(ext, true)
   #   UI.messagebox("loaded? is now true: #{ext.loaded?.to_s}")
   #
   # @return [Boolean] true if the extension has been loaded
