@@ -77,8 +77,8 @@ class Geom::Vector3d
   # This is an alias of the {#cross} method.
   #
   # @example
-  #   vector1 = Geom::Vector3d.new 1,0,0
-  #   vector2 = Geom::Vector3d.new 0,1,0
+  #   vector1 = Geom::Vector3d.new(1,0,0)
+  #   vector2 = Geom::Vector3d.new(0,1,0)
   #   vector3 = vector1 * vector2
   #
   # @param vector
@@ -95,8 +95,8 @@ class Geom::Vector3d
   # The - method is used to add a vector to this one.
   #
   # @example
-  #   vector = Geom::Vector3d.new 0,0,2
-  #   vector2 = Geom::Vector3d.new 0,1,0
+  #   vector = Geom::Vector3d.new(0,0,2)
+  #   vector2 = Geom::Vector3d.new(0,1,0)
   #   new_vector = vector + vector2
   #
   # @param vector2
@@ -111,8 +111,8 @@ class Geom::Vector3d
   # The - method is used to subtract a vector from this one.
   #
   # @example
-  #   vector = Geom::Vector3d.new 0,0,2
-  #   vector2 = Geom::Vector3d.new 0,1,0
+  #   vector = Geom::Vector3d.new(0,0,2)
+  #   vector2 = Geom::Vector3d.new(0,1,0)
   #   new_vector = vector - vector2
   #
   # @param vector2
@@ -128,8 +128,8 @@ class Geom::Vector3d
   # than another vector's x, y or z value.
   #
   # @example
-  #   vector = Geom::Vector3d.new 0,0,2
-  #   vector2 = Geom::Vector3d.new 0,1,0
+  #   vector = Geom::Vector3d.new(0,0,2)
+  #   vector2 = Geom::Vector3d.new(0,1,0)
   #   lt = vector < vector2
   #
   # @param vector2
@@ -145,8 +145,8 @@ class Geom::Vector3d
   # tolerance.
   #
   # @example
-  #   vector = Geom::Vector3d.new 1,0,0
-  #   vector2 = Geom::Vector3d.new 0,1,0
+  #   vector = Geom::Vector3d.new(1,0,0)
+  #   vector2 = Geom::Vector3d.new(0,1,0)
   #   status = vector == vector2
   #   # Returns false
   #   UI.messagebox status
@@ -171,7 +171,7 @@ class Geom::Vector3d
   #   x = vector[0]
   #
   # @example
-  #   vector = Geom::Vector3d.new 1,0,0
+  #   vector = Geom::Vector3d.new(1,0,0)
   #   value = vector[0]
   #   if (value)
   #     UI.messagebox value
@@ -210,8 +210,8 @@ class Geom::Vector3d
   # this vector and another vector.
   #
   # @example
-  #   vector1 = Geom::Vector3d.new 1,0,0
-  #   vector2 = Geom::Vector3d.new 0,1,0
+  #   vector1 = Geom::Vector3d.new(1,0,0)
+  #   vector2 = Geom::Vector3d.new(0,1,0)
   #   angle = vector1.angle_between vector2
   #
   # @param vector2 [Geom::Vector3d]
@@ -229,7 +229,7 @@ class Geom::Vector3d
   # Returns an Array of three vectors [xaxis, yaxis, zaxis]
   #
   # @example
-  #   vector = Geom::Vector3d.new 1,0,0
+  #   vector = Geom::Vector3d.new(1,0,0)
   #   a = vector.axes
   #
   # @return [Array(Geom::Vector3d, Geom::Vector3d, Geom::Vector3d)] an Array object containing three Vector3d objects
@@ -243,7 +243,7 @@ class Geom::Vector3d
   # This method is equivalent to vec2 = Geom::Vector3d.new(vec)
   #
   # @example
-  #   vector = Geom::Vector3d.new 1,0,0
+  #   vector = Geom::Vector3d.new(1,0,0)
   #   vector2 = vector.clone
   #
   # @return [Geom::Vector3d] a Vector3d object which is the clone of
@@ -301,7 +301,7 @@ class Geom::Vector3d
   #
   # @example
   #   # A vector that runs up the Z axis.
-  #   vector = Geom::Vector3d.new 0,0,1
+  #   vector = Geom::Vector3d.new(0,0,1)
   #   if (vector)
   #     UI.messagebox vector
   #   else
@@ -342,9 +342,9 @@ class Geom::Vector3d
   # friendly string.
   #
   # @example
-  #   vector = Geom::Vector3d.new 0,0,1
+  #   vector = Geom::Vector3d.new(0,0,1)
   #   out_string = vector.inspect
-  #   puts out_string
+  #   puts(out_string)
   #
   # @return [Geom::Vector3d] the Vector3d object
   #
@@ -355,7 +355,7 @@ class Geom::Vector3d
   # The length method is used to retrieve the length of the vector.
   #
   # @example
-  #   vector = Geom::Vector3d.new 0,0,1
+  #   vector = Geom::Vector3d.new(0,0,1)
   #   l = vector.length
   #
   # @return [Length] the length of the vector
@@ -368,9 +368,9 @@ class Geom::Vector3d
   # be greater than 0.
   #
   # @example
-  #   vector = Geom::Vector3d.new 0,0,1
+  #   vector = Geom::Vector3d.new(0,0,1)
   #   l = vector.length
-  #   UI.messagebox l
+  #   UI.messagebox(l)
   #   newl = vector.length = 2
   #
   # @param length [Numeric]
@@ -386,7 +386,7 @@ class Geom::Vector3d
   # of another.
   #
   # @example
-  #   vector = Geom::Vector3d.new 0,0,2
+  #   vector = Geom::Vector3d.new(0,0,2)
   #   vector2 = vector.normalize
   #
   # @return [Geom::Vector3d] a new normalized Vector3d object
@@ -401,7 +401,7 @@ class Geom::Vector3d
   # Another way to do this is vec.length = 1
   #
   # @example
-  #   vector = Geom::Vector3d.new 0,0,2
+  #   vector = Geom::Vector3d.new(0,0,2)
   #   vector.normalize!
   #
   # @return [Geom::Vector3d] a normalized Vector3d object
@@ -414,7 +414,7 @@ class Geom::Vector3d
   # another vector to within tolerance.
   #
   # @example
-  #   status = vector.parallel? vector2
+  #   status = vector.parallel?(vector2)
   #
   # @param vector2 [Geom::Vector3d]
   #   A Vector3d object.
@@ -430,9 +430,9 @@ class Geom::Vector3d
   # perpendicular to another vector to within tolerance.
   #
   # @example
-  #   vector = Geom::Vector3d.new 0,0,1
-  #   vector2 = Geom::Vector3d.new 0,1,0
-  #   status = vector.perpendicular? vector2
+  #   vector = Geom::Vector3d.new(0,0,1)
+  #   vector2 = Geom::Vector3d.new(0,1,0)
+  #   status = vector.perpendicular?(vector2)
   #
   # @param vector2 [Geom::Vector3d]
   #   A Vector3d object.
@@ -473,9 +473,9 @@ class Geom::Vector3d
   # and in the same direction as another vector to within tolerance.
   #
   # @example
-  #   vector = Geom::Vector3d.new 0,0,1
-  #   vector2 = Geom::Vector3d.new 0,1,0
-  #   status = vector.samedirection? vector2
+  #   vector = Geom::Vector3d.new(0,0,1)
+  #   vector2 = Geom::Vector3d.new(0,1,0)
+  #   status = vector.samedirection?(vector2)
   #
   # @param vector2 [Geom::Vector3d]
   #   A Vector3d object.
@@ -500,7 +500,7 @@ class Geom::Vector3d
   #   vec.set!(vec2)
   #
   # @example
-  #   vector = Geom::Vector3d.new 0,0,1
+  #   vector = Geom::Vector3d.new(0,0,1)
   #   vector.set! 1,0,0
   #
   # @overload set!(x, y, z)
@@ -539,9 +539,9 @@ class Geom::Vector3d
   # The to_s method is used to format the vector as a String.
   #
   # @example
-  #   vector = Geom::Vector3d.new 0,0,1
+  #   vector = Geom::Vector3d.new(0,0,1)
   #   out_string = vector.to_s
-  #   puts out_string
+  #   puts(out_string)
   #
   # @return [String] a string representation of vector
   #
@@ -552,7 +552,7 @@ class Geom::Vector3d
   # Apply a Transformation to a vector. The vector itself is modified.
   #
   # @example
-  #   vector.transform! transformation
+  #   vector.transform!(transformation)
   #
   # @param transform [Geom::Transformation]
   #   A Transformation object to apply to the vector.
@@ -567,7 +567,7 @@ class Geom::Vector3d
   # vector is unchanged by this method.
   #
   # @example
-  #   vector2 = vector.transform transformation
+  #   vector2 = vector.transform(transformation)
   #
   # @param transform [Geom::Transformation]
   #   A Transformation object to apply to the vector.
@@ -583,7 +583,7 @@ class Geom::Vector3d
   # This is equivalent to vec.length == 1.0
   #
   # @example
-  #   vector = Geom::Vector3d.new 0,0,1
+  #   vector = Geom::Vector3d.new(0,0,1)
   #   status = vector.unitvector?
   #
   # @return [Boolean] true if the vector is a unit vector. False if
@@ -598,10 +598,10 @@ class Geom::Vector3d
   #
   # @example
   #   # A zero length vector will be invalid
-  #   vector = Geom::Vector3d.new 0,0,0
+  #   vector = Geom::Vector3d.new(0,0,0)
   #   status = vector.valid?
   #   # A non-zero length vector is valid
-  #   vector = Geom::Vector3d.new 0,0,1
+  #   vector = Geom::Vector3d.new(0,0,1)
   #   status = vector.valid?
   #
   # @return [Boolean] true if the vector is valid. false if the
@@ -640,7 +640,7 @@ class Geom::Vector3d
   # The y method is used to retrieve the y coordinate of the vector.
   #
   # @example
-  #   vector = Geom::Vector3d.new 1,2,3
+  #   vector = Geom::Vector3d.new(1,2,3)
   #   y = vector.y
   #
   # @return [Length] the y coordinate of the vector
@@ -652,7 +652,7 @@ class Geom::Vector3d
   # Set the y coordinate of the vector.
   #
   # @example
-  #   vector = Geom::Vector3d.new 1,2,3
+  #   vector = Geom::Vector3d.new(1,2,3)
   #   y = vector.y = 10
   #
   # @param y [Numeric]
@@ -667,7 +667,7 @@ class Geom::Vector3d
   # Get the z coordinate of the vector.
   #
   # @example
-  #   vector = Geom::Vector3d.new 1,2,3
+  #   vector = Geom::Vector3d.new(1,2,3)
   #   z = vector.z
   #
   # @return [Length] the z coordinate of the vector
@@ -679,7 +679,7 @@ class Geom::Vector3d
   # Set the z coordinate of the vector.
   #
   # @example
-  #   vector = Geom::Vector3d.new 1,2,3
+  #   vector = Geom::Vector3d.new(1,2,3)
   #   z = vector.z = 10
   #
   # @param z [Numeric]
