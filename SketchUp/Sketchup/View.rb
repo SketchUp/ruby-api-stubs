@@ -63,7 +63,7 @@ class Sketchup::View
   #   view = model.active_view
   #   time = view.average_refresh_time
   #
-  # @return [Float] the time in milliseconds
+  # @return [Float] the time in seconds
   #
   # @version SketchUp 6.0
   def average_refresh_time
