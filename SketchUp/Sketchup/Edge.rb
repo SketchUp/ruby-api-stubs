@@ -203,7 +203,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #     UI.messagebox "Failure"
   #   end
   #
-  # @return [Fixnum] the number of faces found
+  # @return [Integer] the number of faces found
   #
   # @version SketchUp 6.0
   def find_faces

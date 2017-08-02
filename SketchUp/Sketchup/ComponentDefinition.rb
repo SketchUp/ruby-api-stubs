@@ -130,7 +130,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   definition = definitions.load(path)
   #   number = definition.count_instances
   #
-  # @return [Fixnum] the number of component instances of this
+  # @return [Integer] the number of component instances of this
   #   component definition (if successful)
   #
   # @version SketchUp 6.0
@@ -148,7 +148,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   definition = definitions.load(path)
   #   number = definition.count_used_instances
   #
-  # @return [Fixnum] the number of component instances of this
+  # @return [Integer] the number of component instances of this
   #   component definition (if successful)
   #
   # @version SketchUp 2016
