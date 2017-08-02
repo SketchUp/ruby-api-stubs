@@ -21,22 +21,18 @@ class Geom::LatLong
   #   end
   #
   # @overload initialize
-  #
   #   @return [Geom::LatLong]
   #
   # @overload initialize(latlong)
-  #
   #   @param latlong [Geom::LatLong]
   #   @return [Geom::LatLong]
   #
   # @overload initialize(lat, lon)
-  #
   #   @param lat [Numeric]
   #   @param lon [Numeric]
   #   @return [Geom::LatLong]
   #
   # @overload initialize(latlon_array)
-  #
   #   @param latlon_array [Array(Numeric, Numeric)]
   #   @return [Geom::LatLong]
   #
