@@ -39,8 +39,8 @@ class Geom::Point3d
   # point = weight1 * point1 + weight2 * point2.
   #
   # @example
-  #   point1 = Geom::Vector3d.new(1,1,1)
-  #   point2 = Geom::Vector3d.new(10,10,10)
+  #   point1 = Geom::Point3d.new(1,1,1)
+  #   point2 = Geom::Point3d.new(10,10,10)
   #   # Gets the point on the line segment connecting point1 and point2 that is
   #   # 3/4 the way from point1 to point2.
   #   point = Geom::Point3d.linear_combination(0.25, point1, 0.75, point2)
@@ -138,8 +138,8 @@ class Geom::Point3d
   #   end
   #
   # @example
-  #   point1 = Geom::Vector3d.new(1,1,1)
-  #   point2 = Geom::Vector3d.new(10,10,10)
+  #   point1 = Geom::Point3d.new(1,1,1)
+  #   point2 = Geom::Point3d.new(10,10,10)
   #   status = point1 == point2
   #
   # @param point2 [Geom::Point3d]
@@ -175,7 +175,7 @@ class Geom::Point3d
   # specific index of the value.
   #
   # @example
-  #   point = Geom::Vector3d.new(1,2,3)
+  #   point = Geom::Point3d.new(1,2,3)
   #   yvalue = point[1] = 4
   #
   # @param index [Integer]
@@ -195,7 +195,7 @@ class Geom::Point3d
   # being cloned.
   #
   # @example
-  #   point = Geom::Vector3d.new(1,2,3)
+  #   point = Geom::Point3d.new(1,2,3)
   #   newpoint = point.clone
   #
   # @return [Geom::Point3d] the cloned Point3d object
@@ -208,8 +208,8 @@ class Geom::Point3d
   # point.
   #
   # @example
-  #   point1 = Geom::Vector3d.new(1,1,1)
-  #   point2 = Geom::Vector3d.new(10,10,10)
+  #   point1 = Geom::Point3d.new(1,1,1)
+  #   point2 = Geom::Point3d.new(10,10,10)
   #   distance = point1.distance(point2)
   #
   # @param point2 [Geom::Point3d]
@@ -227,7 +227,7 @@ class Geom::Point3d
   # See Geom module for how to specify a line.
   #
   # @example
-  #   point1 = Geom::Vector3d.new(1,1,1)
+  #   point1 = Geom::Point3d.new(1,1,1)
   #   line = [Geom::Point3d.new(0,0,0), Geom::Vector3d.new(0,0,1)]
   #   distance = point1.distance_to_line(line)
   #
@@ -323,7 +323,7 @@ class Geom::Point3d
   # which writes to the Ruby console.
   #
   # @example
-  #   point = Geom::Vector3d.new(10,10,10)
+  #   point = Geom::Point3d.new(10,10,10)
   #   string = point.inspect
   #
   # @return [String] a string point representation
@@ -382,7 +382,7 @@ class Geom::Point3d
   #
   # @example
   #   line = [Geom::Point3d.new(0,0,0), Geom::Vector3d.new(0,0,1)]
-  #   point = Geom::Vector3d.new(10,10,10)
+  #   point = Geom::Point3d.new(10,10,10)
   #   status = point.on_line?(line)
   #
   # @param line
@@ -401,7 +401,7 @@ class Geom::Point3d
   #
   # @example
   #   plane = [Geom::Point3d.new(0,0,0), Geom::Vector3d.new(0,0,1)]
-  #   point = Geom::Vector3d.new(10,10,10)
+  #   point = Geom::Point3d.new(10,10,10)
   #   status = point.on_plane?(plane)
   #
   # @param plane
@@ -420,7 +420,7 @@ class Geom::Point3d
   #
   # @example
   #   line = [Geom::Point3d.new(0,0,0), Geom::Vector3d.new(0,0,1)]
-  #   point = Geom::Vector3d.new(10,10,10)
+  #   point = Geom::Point3d.new(10,10,10)
   #   projected_point = point.project_to_line(line)
   #
   # @param line
@@ -442,7 +442,7 @@ class Geom::Point3d
   #
   # @example
   #   plane = [Geom::Point3d.new(0,0,0), Geom::Vector3d.new(0,0,1)]
-  #   point = Geom::Vector3d.new(10,10,10)
+  #   point = Geom::Point3d.new(10,10,10)
   #   projected_point = point.project_to_plane(plane)
   #
   # @param plane
@@ -458,7 +458,7 @@ class Geom::Point3d
   # The {#set!} method is used to set the values of the Point3d.
   #
   # @example
-  #   point = Geom::Vector3d.new(10,10,10)
+  #   point = Geom::Point3d.new(10,10,10)
   #   point = point.set!(100,200,300)
   #
   # @overload set!(x, y, z)
@@ -485,7 +485,7 @@ class Geom::Point3d
   # The to_a method is used to convert the point to an array of 3 numbers
   #
   # @example
-  #   point = Geom::Vector3d.new(10,20,30)
+  #   point = Geom::Point3d.new(10,20,30)
   #   array = point.to_a
   #
   #   pt = [100,200,300]
@@ -502,7 +502,7 @@ class Geom::Point3d
   # The to_s method is used to retrieve a string representation of a point.
   #
   # @example
-  #   point = Geom::Vector3d.new(10,10,10)
+  #   point = Geom::Point3d.new(10,10,10)
   #   str = point.to_s
   #
   # @return [String] the string representation of the Point3d
@@ -515,8 +515,8 @@ class Geom::Point3d
   #
   # @example
   #   transform = Geom::Transformation.new(point2)
-  #   point2 = Geom::Vector3d.new(100,200,300)
-  #   point1 = Geom::Vector3d.new(10,10,10)
+  #   point2 = Geom::Point3d.new(100,200,300)
+  #   point1 = Geom::Point3d.new(10,10,10)
   #   point1.transform!(transform)
   #
   # @param transform [Geom::Transformation]
@@ -533,8 +533,8 @@ class Geom::Point3d
   #
   # @example
   #   transform = Geom::Transformation.new(point2)
-  #   point2 = Geom::Vector3d.new(100,200,300)
-  #   point1 = Geom::Vector3d.new(10,10,10)
+  #   point2 = Geom::Point3d.new(100,200,300)
+  #   point1 = Geom::Point3d.new(10,10,10)
   #   point3 = point1.transform(transform)
   #
   # @param transform [Geom::Transformation]
@@ -549,8 +549,8 @@ class Geom::Point3d
   # The vector_to team method retrieves the vector between points.
   #
   # @example
-  #   point2 = Geom::Vector3d.new(100,200,300)
-  #   point1 = Geom::Vector3d.new(10,10,10)
+  #   point2 = Geom::Point3d.new(100,200,300)
+  #   point1 = Geom::Point3d.new(10,10,10)
   #   vector = point1.vector_to(point2)
   #
   #   # Another example...
@@ -571,7 +571,7 @@ class Geom::Point3d
   # The x method retrieves the x value of the 3D point.
   #
   # @example
-  #   point = Geom::Vector3d.new(1,2,3)
+  #   point = Geom::Point3d.new(1,2,3)
   #   x = point.x
   #
   # @return [Length] the x value
@@ -583,7 +583,7 @@ class Geom::Point3d
   # The x= method is used to set the x value of a 3D point.
   #
   # @example
-  #   point = Geom::Vector3d.new(1,2,3)
+  #   point = Geom::Point3d.new(1,2,3)
   #   x = point.x = 2
   #
   # @param value [Numeric]
@@ -598,7 +598,7 @@ class Geom::Point3d
   # The y method retrieves the y value of the 3D point.
   #
   # @example
-  #   point = Geom::Vector3d.new(1,2,3)
+  #   point = Geom::Point3d.new(1,2,3)
   #   y = point.y
   #
   # @return [Length] the y value
@@ -610,7 +610,7 @@ class Geom::Point3d
   # The y= method is used to set the y value of a 3D point.
   #
   # @example
-  #   point = Geom::Vector3d.new(1,2,3)
+  #   point = Geom::Point3d.new(1,2,3)
   #   y = point.y = 2
   #
   # @param value [Numeric]
@@ -625,7 +625,7 @@ class Geom::Point3d
   # The z method retrieves the z value of the 3D point.
   #
   # @example
-  #   point = Geom::Vector3d.new(1,2,3)
+  #   point = Geom::Point3d.new(1,2,3)
   #   z = point.x
   #
   # @return [Length] the z value
@@ -637,7 +637,7 @@ class Geom::Point3d
   # The z= method is used to set the z value of a 3D point.
   #
   # @example
-  #   point = Geom::Vector3d.new(1,2,3)
+  #   point = Geom::Point3d.new(1,2,3)
   #   z = point.z = 2
   #
   # @param value [Numeric]
