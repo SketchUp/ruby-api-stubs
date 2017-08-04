@@ -271,7 +271,7 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
   #   attrdict = model.attribute_dictionaries['test_dict']
   #   values = attrdict.values
   #
-  # @return [Array<Object, nil>] an array of values within the attribute dictionary
+  # @return [Array<Object>] an array of values within the attribute dictionary
   #   if successful
   #
   # @version SketchUp 6.0
