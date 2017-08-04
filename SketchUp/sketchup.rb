@@ -297,7 +297,7 @@ module Sketchup
   # @example
   #   degrees = Sketchup.format_angle(Math::PI)
   #
-  # @param number [Numeri]
+  # @param number [Numeric]
   #   A number to be formatted.
   #
   # @return [String] an angle in degrees if successful, false if unsuccessful
