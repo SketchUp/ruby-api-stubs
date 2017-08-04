@@ -129,7 +129,7 @@ module UI
   #   a total of 4 params are passed, then this is an array
   #   containing pipe-separated strings of options.
   #
-  # @return [Array<String>, FalseClass] An array of returned values if the user did
+  # @return [Array<String>, false] An array of returned values if the user did
   #   not cancel the dialog.  If the user canceled the
   #   dialog, false is returned.  The returned values in the
   #   array will be in the same order as the input fields.

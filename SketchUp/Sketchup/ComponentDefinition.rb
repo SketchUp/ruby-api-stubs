@@ -427,7 +427,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   componentdefinition = definitions.load path
   #   path = componentdefinition.path
   #
-  # @return [String, FalseClass] a valid path if successful, false if
+  # @return [String, false] a valid path if successful, false if
   #   unsuccessful
   #
   # @version SketchUp 6.0

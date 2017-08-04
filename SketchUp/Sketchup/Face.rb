@@ -603,7 +603,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   true to position the texture on the front of the Face or
   #   false to position it on the back of the Face.
   #
-  # @return [Sketchup::Face, FalseClass] the face upon success, false upon failure.
+  # @return [Sketchup::Face, false] the face upon success, false upon failure.
   #
   # @version SketchUp 6.0
   def position_material(material, pt_array, o_front)
@@ -658,7 +658,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   face = entities.add_face(pts)
   #   status = face.reverse!
   #
-  # @return [Sketchup::Face, FalseClass] the reversed Face object if successful, false if
+  # @return [Sketchup::Face, false] the reversed Face object if successful, false if
   #   unsuccessful
   #
   # @version SketchUp 6.0
