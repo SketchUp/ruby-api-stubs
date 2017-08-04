@@ -92,7 +92,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #     UI.messagebox "Failure: Not a Curve"
   #   end
   #
-  # @return [Sketchup::ArcCurve, nil] returns a Curve or ArcCurve object if it is a
+  # @return [Sketchup::Curve, nil] returns a Curve object if it is a
   #   curve, nil if it is not a curve
   #
   # @version SketchUp 6.0
