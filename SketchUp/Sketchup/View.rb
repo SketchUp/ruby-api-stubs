@@ -897,27 +897,27 @@ class Sketchup::View
   #   view = model.active_view
   #   view.write_image keys
   #
-  # @param width [Integer] (optional)
-  #   Width in pixels.
-  #
   # @param filename_or_hash [String, Hash]
   #   The filename for the saved image or a hash
   #   containing a set of keys.
   #
-  # @param height [Integer] (optional)
-  #   Height in pixels.
+  # @param width [Integer]
+  #   Width in pixels, defaults to the current viewport width {#vpwidth}.
   #
-  # @param compression [Float] (optional)
+  # @param height [Integer]
+  #   Height in pixels, defaults to the current viewport height {#vpheight}.
+  #
+  # @param compression [Float]
   #   Float compression factor for JPEG images,
   #   between 0.0 and 1.0
   #
-  # @param antialias [Boolean] (optional)
+  # @param antialias [Boolean]
   #   true or false
   #
   # @return [Boolean]
   #
   # @version SketchUp 6.0
-  def write_image(filename_or_hash, width, height, antialias, compression)
+  def write_image(filename_or_hash, width = nil, height = nil, antialias = false, compression = nil)
   end
 
   # The zoom method is used to zoom in or out by some zoom factor.
