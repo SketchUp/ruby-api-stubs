@@ -88,11 +88,11 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
   # @example
   #   create_if_nil = true
   #   model = Sketchup.active_model
-  #   attrdict = model.attribute_dictionary "test_dict", create_if_nil
+  #   attrdict = model.attribute_dictionary("test_dict", create_if_nil)
   #   attrdict["attr_one"] = "one"
   #   attrdict["attr_two"] = "two"
   #
-  #   # Gets an array of values
+  #   # Delete a key/value pair and get the deleted value.
   #   attrdict = model.attribute_dictionaries['test_dict']
   #   value = attrdict.delete_key("attr_one")
   #
