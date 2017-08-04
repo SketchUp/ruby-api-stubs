@@ -35,7 +35,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #     UI.messagebox "Failure"
   #   end
   #
-  # @return [Array<Sketchup::Edge, Sketchup::Face>] the edge and entities connected to that edge
+  # @return [Array<Sketchup::Entity>] the edge and entities connected to that edge
   #
   # @version SketchUp 6.0
   def all_connected
