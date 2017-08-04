@@ -35,7 +35,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   face = entities.add_face(pts)
   #   connected = face.all_connected
   #
-  # @return [Array<Sketchup::Edge, Sketchup::Face>] the entities connected to the face
+  # @return [Array<Sketchup::Entity>] the entities connected to the face
   #
   # @version SketchUp 6.0
   def all_connected
