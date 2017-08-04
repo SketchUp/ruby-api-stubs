@@ -311,7 +311,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   face = entities.add_face(pts)
   #   glued_array = face.get_glued_instances
   #
-  # @return [Array<Sketchup::ComponentInstance, Sketchup::Group>] An array of ComponentInstance objects that
+  # @return [Array<Sketchup::ComponentInstance, Sketchup::Group, Sketchup::Image>] An array of ComponentInstance objects that
   #   are currently glued to the face.
   #
   # @version SketchUp 7.0 M1
