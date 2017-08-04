@@ -185,8 +185,7 @@ module Sketchup
   # @example
   #   extensions = Sketchup.extensions
   #   extensions.each{ |extension|
-  #     UI.messagebox('The next extension is named: ' + extension.name +
-  #         ' and its loaded? state is: ' + extension.loaded?)
+  #     puts "The next extension is named: #{extension.name} and its loaded? state is: #{extension.loaded?}"
   #   }
   #
   # @return [Sketchup::ExtensionsManager] an ExtensionsManager object.
