@@ -167,7 +167,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #     UI.messagebox "Failure: No Faces Found"
   #   end
   #
-  # @return [Array<Sketchup::Faces>] an array of Face objects if successful, false
+  # @return [Array<Sketchup::Face>] an array of Face objects if successful, false
   #   if unsuccessful
   #
   # @version SketchUp 6.0
