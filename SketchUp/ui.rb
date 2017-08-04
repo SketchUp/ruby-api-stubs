@@ -551,7 +551,7 @@ module UI
   #   # Beep once after 10 seconds.
   #   id = UI.start_timer(10, false) { UI.beep }
   #
-  # @param repeat [Boolean] (optional)
+  # @param repeat [Boolean]
   #   true if you want the timer to repeat, false
   #   (or omit) if you do not want it to repeat.
   #

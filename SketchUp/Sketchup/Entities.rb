@@ -86,24 +86,24 @@ class Sketchup::Entities
   #
   # @param font [String] font name.
   #
-  # @param is_bold [Boolean] (optional) true for bold.
+  # @param is_bold [Boolean] true for bold.
   #
-  # @param is_italic [Boolean] (optional) true for italic.
+  # @param is_italic [Boolean] true for italic.
   #
-  # @param letter_height [Numeric] (optional)
+  # @param letter_height [Numeric]
   #   Height of the text in inches.
   #
-  # @param tolerance [Numeric] (optional)
+  # @param tolerance [Numeric]
   #   Tolerance of the curve creation. Defaults to
   #   0.0, which creates the highest possible curve quality.
   #
-  # @param z [Numeric] (optional)
+  # @param z [Numeric]
   #   z position in inches.
   #
-  # @param is_filled [Boolean] (optional)
+  # @param is_filled [Boolean]
   #   true for filled, which will put a face between the edges of the letters.
   #
-  # @param extrusion [Numeric] (optional)
+  # @param extrusion [Numeric]
   #   Extrusion depth in inches. Defaults to 0.0.
   #
   # @return [Boolean] true if successful
@@ -481,7 +481,7 @@ class Sketchup::Entities
   #   A Point3d object representing the insertion point of
   #   the image.
   #
-  # @param height [Numeric] (optional)
+  # @param height [Numeric]
   #   height for the image if you want to control
   #   width and height independently.
   #
@@ -639,7 +639,7 @@ class Sketchup::Entities
   # @param point [Geom::Point3d]
   #   A Point3d object representing the insertion point.
   #
-  # @param vector [Geom::Vector3d] (optional)
+  # @param vector [Geom::Vector3d]
   #   vector representing an arrow leader.
   #
   # @return [Sketchup::Text] a Text object if successful
