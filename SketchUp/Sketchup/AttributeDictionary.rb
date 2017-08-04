@@ -59,7 +59,7 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
   # @param key [String]
   #   The valid key.
   #
-  # @param value [Boolean, Fixnum, Float, Length, NilClass, String, Time, Array, Geom::Point3d, Geom::Vector3d]
+  # @param value [Boolean, Fixnum, Float, Length, nil, String, Time, Array, Geom::Point3d, Geom::Vector3d]
   #   The value to be set.
   #
   # @return [Object, nil] the value that was set if successful, or false
