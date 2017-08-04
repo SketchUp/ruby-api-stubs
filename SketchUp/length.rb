@@ -42,9 +42,9 @@ class Length < Float
   #   length1 = 12.to_l
   #   length2 = 11.to_l
   #   if length1 < length2
-  #     puts("length1 is less than length2")
+  #     puts "length1 is less than length2"
   #   else
-  #     puts("length1 is not less than length2")
+  #     puts "length1 is not less than length2"
   #   end
   #
   # @param length2 [Length]
@@ -64,9 +64,9 @@ class Length < Float
   #   length1 = 11.to_l
   #   length2 = 12.to_l
   #   if length1 <= length2
-  #     puts("length1 is less than or equal length2")
+  #     puts "length1 is less than or equal length2"
   #   else
-  #     puts("length1 is greater than length2")
+  #     puts "length1 is greater than length2"
   #   end
   #
   # @param length2 [Length]
@@ -126,9 +126,9 @@ class Length < Float
   #   length1 = 11.to_l
   #   length2 = 12.to_l
   #   if length1 > length2
-  #     puts("length1 is greater than length2")
+  #     puts "length1 is greater than length2"
   #   else
-  #     puts("length1 is not greater than length2")
+  #     puts "length1 is not greater than length2"
   #   end
   #
   # @param length2 [Length]
@@ -151,9 +151,9 @@ class Length < Float
   #   length1 = 11.to_l
   #   length2 = 12.to_l
   #   if length1 >= length2
-  #     puts("length1 is greater than or equal length2")
+  #     puts "length1 is greater than or equal length2"
   #   else
-  #     puts("length1 is less than length2")
+  #     puts "length1 is less than length2"
   #   end
   #
   # @param length2 [Length]

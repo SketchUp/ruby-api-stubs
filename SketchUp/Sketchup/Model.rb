@@ -682,7 +682,7 @@ class Sketchup::Model
   #   model = Sketchup.active_model
   #   product_family = model.get_product_family
   #   if product_family == Sketchup::Model::ProLicensed then
-  #     puts("You are running licensed SketchUp Pro!")
+  #     puts "You are running licensed SketchUp Pro!"
   #   end
   #
   # @return [Integer] the product family number.

@@ -37,7 +37,7 @@ class Sketchup::TextureWriter
   #   length = tw.length
   #   tw.load(texturable_entities[0])
   #   if length < tw.length
-  #     puts("A new entity was successfully loaded into the writer.")
+  #     puts "A new entity was successfully loaded into the writer."
   #   end
   #
   # @return [Integer] length - the number of textures loaded in the texture
@@ -53,7 +53,7 @@ class Sketchup::TextureWriter
   # @example
   #   index = tw.load(texturable_entities[0])
   #   filename = tw.filename(index)
-  #   puts("filename = #{filename}")
+  #   puts "filename = #{filename}"
   #
   # @param [Integer] handle
   #   The index or handle of the texture in the texture
@@ -108,7 +108,7 @@ class Sketchup::TextureWriter
   #   length = tw.length
   #   tw.load(texturable_entities[0])
   #   if length < tw.length
-  #     puts("A new entity was successfully loaded into the writer.")
+  #     puts "A new entity was successfully loaded into the writer."
   #   end
   #
   # @return [Integer] length - the number of textures loaded in the texture
@@ -166,19 +166,19 @@ class Sketchup::TextureWriter
   # @example
   #   tw.load(faces[0], true)
   #   if tw.write(faces[0], true, "C:\\textures\\Face.png") == FILE_WRITE_OK
-  #     puts("PNG file successfully written.")
+  #     puts "PNG file successfully written."
   #   end
   #   if tw.write(faces[0], true, "C:\\textures\\Face.bmp") == FILE_WRITE_OK
-  #     puts("BMP file successfully written.")
+  #     puts "BMP file successfully written."
   #   end
   #   if tw.write(faces[0], true, "C:\\textures\\Face.tif") == FILE_WRITE_OK
-  #     puts("TIFF file successfully written.")
+  #     puts "TIFF file successfully written."
   #   end
   #
   # @example
   #   tw.load(texturable_entities[0])
   #   if tw.write(texturable_entities[0], "C:\\textures\\A.jpg") == FILE_WRITE_OK
-  #     puts("JPEG file successfully written.")
+  #     puts "JPEG file successfully written."
   #   end
   #
   # @note If you are passing a face in as the entity argument when writing a
@@ -219,7 +219,7 @@ class Sketchup::TextureWriter
   #   tw.load(texturable_entities[0]
   #   tw.load(faces[0], false)
   #   if tw.write_all("C:\\textures\\", true) == FILE_WRITE_OK
-  #     puts("Texture files were successfully written.")
+  #     puts "Texture files were successfully written."
   #   end
   #
   # @param [String] dirname
