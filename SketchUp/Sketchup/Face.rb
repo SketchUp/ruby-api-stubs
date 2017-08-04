@@ -291,7 +291,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   # @return [Sketchup::UVHelper] a UVHelper object
   #
   # @version SketchUp 6.0
-  def get_UVHelper(front, back, texturewriter)
+  def get_UVHelper(front, back, texturewriter = nil)
   end
 
   # The get_glued_instances method returns an Array any ComponentInstances
