@@ -116,14 +116,14 @@ module UI
   #   An array of prompt names appearing in the input box
   #   adjacent to input fields.
   #
-  # @param defaults [Array<String>] (optional)
+  # @param defaults [Array<String>]
   #   An array of default values for the input
   #   fields.
   #
-  # @param title [String] (optional)
+  # @param title [String]
   #   The title for the input box.
   #
-  # @param title_or_list [String, Array<String>] (optional)
+  # @param title_or_list [String, Array<String>]
   #   If 3 params are passed, then this value is
   #   a string containing the title of the input box. If
   #   a total of 4 params are passed, then this is an array
@@ -135,7 +135,7 @@ module UI
   #   array will be in the same order as the input fields.
   #
   # @version SketchUp 6.0
-  def self.inputbox(prompts, defaults, title_or_list, title)
+  def self.inputbox(prompts, defaults = nil, title_or_list = nil, title = nil)
   end
 
   # The inspector_names method is used to returns the names of all the
@@ -424,10 +424,7 @@ module UI
   #     directory: "C:/images"
   #   )
   #
-  # @param options [Hash]
-  #   hash (optional)   The dialog can be customized by
-  #   providing a hash or named arguments of
-  #   options.
+  # @param options [Hash] The dialog can be customized by providing a hash or named arguments of options.
   #
   # @return [String, Array<String>] A string with the full path of the
   #   directory selected when
@@ -436,7 +433,7 @@ module UI
   #   or nil if the user cancelled.
   #
   # @version SketchUp 2015
-  def self.select_directory(options)
+  def self.select_directory(options = {})
   end
 
   # The set_cursor method is used to change the cursor to a new cursor with a
