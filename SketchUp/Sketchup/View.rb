@@ -640,7 +640,7 @@ class Sketchup::View
   # @return [Sketchup::View] a View object
   #
   # @version SketchUp 6.0
-  def lock_inference(inputpoint, inputpoint2)
+  def lock_inference(inputpoint = nil, inputpoint2 = nil)
   end
 
   # The model method is used to retrieve the model for the current view.
