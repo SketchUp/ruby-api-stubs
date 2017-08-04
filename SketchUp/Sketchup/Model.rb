@@ -1044,7 +1044,7 @@ class Sketchup::Model
   # @param ray [Array(Geom::Point3d, Geom::Vector3d)]
   #   A two element array containing a point and a vector.
   #
-  # @return [Array(Geom::Point3d, Sketchup::Drawingelement), nil] an array of two values. The first value is a
+  # @return [Array(Geom::Point3d, Array<Sketchup::Drawingelement>), nil] an array of two values. The first value is a
   #   Point3d where the item that the ray passed through
   #   exists. The second element is the instance path array
   #   of the entity that the ray hit. For example, if the ray
