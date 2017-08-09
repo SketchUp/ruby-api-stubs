@@ -58,7 +58,7 @@ Example (imagine a search or find method):
 
 **Better**
 
-`# @param entities [Sketchup::Entities] The entities context in which to search. Defaults to the current model's entities.`
+`@param entities [Sketchup::Entities] The entities context in which to search. Defaults to the current model's entities.`
 - The param name is immediately following the @param tag (just as a method name immediately follows the `def` keyword in a method definition.) Ie, it is the form we are used to using when we code in Ruby (or most other modern programming languages.)
 - No dash need even be considered as the Typelist separates the parameter name from the description.
 - The descriptions are proper grammatical sentences, that can be more easily translated using online translators.

@@ -48,7 +48,7 @@ class UI::HtmlDialog
   # @example JavaScript
   #   sketchup.say('Hello World', 42);
   #
-  # @param [String] callback_name
+  # @param callback_name [String]
   #   The name of the callback method to be
   #   invoked from the html dialog.
   #
@@ -110,7 +110,7 @@ class UI::HtmlDialog
   #   js_command = "document.getElementById('id').innerHTML = '<b>Hi!</b>'"
   #   dialog.execute_script(js_command)
   #
-  # @param [String] script
+  # @param script [String]
   #   The JavaScript script to execute on the HtmlDialog.
   #
   # @return [nil]
@@ -179,11 +179,11 @@ class UI::HtmlDialog
   #
   # @option properties [Integer] :style (UI::HtmlDialog::STYLE_DIALOG)
   #
-  # @param [Hash] properties
+  # @param properties [Hash]
   #   A hash containing the initial properties of
   #   the newly created dialog.
   #
-  # @return [HtmlDialog]
+  # @return [UI::HtmlDialog]
   #
   # @version SketchUp 2017
   def initialize(properties)
@@ -211,7 +211,7 @@ class UI::HtmlDialog
   # @example
   #   dialog.set_file("c:/mypage.html")
   #
-  # @param [String] filename
+  # @param filename [String]
   #   The filename for the HtmlDialog file (HTML file)
   #
   # @return [nil]
@@ -227,7 +227,7 @@ class UI::HtmlDialog
   #   html = '<b>Hello world!</b>'
   #   dialog.set_html(html)
   #
-  # @param [String] html_string
+  # @param html_string [String]
   #   A string of valid html to display in your
   #   HtmlDialog.
   #
@@ -256,10 +256,10 @@ class UI::HtmlDialog
   # @example
   #   dialog.set_position(100, 50)
   #
-  # @param [Integer] left
+  # @param left [Integer]
   #   The number of pixels from the left.
   #
-  # @param [Integer] top
+  # @param top [Integer]
   #   The number of pixels from the top of the screen.
   #
   # @return [true]
@@ -273,10 +273,10 @@ class UI::HtmlDialog
   # @example
   #   dialog.set_size(320, 240)
   #
-  # @param [Integer] width
+  # @param width [Integer]
   #   Width of the HtmlDialog.
   #
-  # @param [Integer] height
+  # @param height [Integer]
   #   Height of the HtmlDialog.
   #
   # @return [true]
@@ -336,8 +336,6 @@ class UI::HtmlDialog
   #   end
   #
   # @return [Boolean] Returns true if the dialog is open.
-  #
-  # @return [Boolean]
   #
   # @version SketchUp 2017
   def visible?

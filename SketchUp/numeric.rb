@@ -15,7 +15,7 @@ class Numeric
   #   cm = 10
   #   inches = cm.cm
   #
-  # @return inches - a value in inches if successful
+  # @return [Length] a value in inches if successful
   #
   # @version SketchUp 6.0
   def cm
@@ -29,7 +29,7 @@ class Numeric
   #   degrees = 90
   #   radians = degrees.degrees
   #
-  # @return radians - a value in radians if successful
+  # @return [Float] a value in radians if successful
   #
   # @version SketchUp 6.0
   def degrees
@@ -41,7 +41,7 @@ class Numeric
   #   feet = 1
   #   inches = feet.feet
   #
-  # @return inches - a value in inches if successful
+  # @return [Length] a value in inches if successful
   #
   # @version SketchUp 6.0
   def feet
@@ -53,7 +53,7 @@ class Numeric
   #   number = 12
   #   length = number.to_l
   #
-  # @return length - a Length object if successful
+  # @return [Length] a Length object if successful
   #
   # @version SketchUp 6.0
   def inch
@@ -65,7 +65,7 @@ class Numeric
   #   value = 1
   #   inches = value.km
   #
-  # @return inches - a value in inches if successful
+  # @return [Length] a value in inches if successful
   #
   # @version SketchUp 6.0
   def km
@@ -77,7 +77,7 @@ class Numeric
   #   meters = 1
   #   inches = meters.m
   #
-  # @return inches - a value in inches if successful
+  # @return [Length] a value in inches if successful
   #
   # @version SketchUp 6.0
   def m
@@ -89,7 +89,7 @@ class Numeric
   #   miles = 1
   #   inches = miles.mile
   #
-  # @return inches - a value in inches if successful
+  # @return [Length] a value in inches if successful
   #
   # @version SketchUp 6.0
   def mile
@@ -104,7 +104,7 @@ class Numeric
   #   value = 10
   #   mm = value.mm
   #
-  # @return mm - a value in millimeters if successful
+  # @return [Length] a value in millimeters if successful
   #
   # @version SketchUp 6.0
   def mm
@@ -118,7 +118,7 @@ class Numeric
   #   radians = 1.5707963267949
   #   degrees = radians.radians
   #
-  # @return degrees - a value in degrees if successful
+  # @return [Float] a value in degrees if successful
   #
   # @version SketchUp 6.0
   def radians
@@ -130,7 +130,7 @@ class Numeric
   #   inches = 1
   #   cm = inches.to_cm
   #
-  # @return cm - a value in centimeters if successful
+  # @return [Float] a value in centimeters if successful
   #
   # @version SketchUp 6.0
   def to_cm
@@ -142,7 +142,7 @@ class Numeric
   #   inches = 12
   #   feet = inches.to_feet
   #
-  # @return feet - a value in feet if successful
+  # @return [Float] a value in feet if successful
   #
   # @version SketchUp 6.0
   def to_feet
@@ -156,7 +156,7 @@ class Numeric
   #   inches = 12
   #   inches = inches.to_inch
   #
-  # @return inches - a value in inches if successful
+  # @return [Float] a value in inches if successful
   #
   # @version SketchUp 6.0
   def to_inch
@@ -168,7 +168,7 @@ class Numeric
   #   inches = 1
   #   km = inches.to_km
   #
-  # @return kilometers - a value in kilometers if successful
+  # @return [Float] a value in kilometers if successful
   #
   # @version SketchUp 6.0
   def to_km
@@ -180,7 +180,7 @@ class Numeric
   #   number = 12
   #   length = number.to_l
   #
-  # @return length - a Length object if successful
+  # @return [Length] a Length object if successful
   #
   # @version SketchUp 6.0
   def to_l
@@ -192,7 +192,7 @@ class Numeric
   #   inches = 12
   #   meters = inches.to_m
   #
-  # @return meters - a value in meters if successful
+  # @return [Float] a value in meters if successful
   #
   # @version SketchUp 6.0
   def to_m
@@ -204,7 +204,7 @@ class Numeric
   #   inches = 10000
   #   miles = inches.to_mile
   #
-  # @return miles - a value in miles if successful
+  # @return [Float] a value in miles if successful
   #
   # @version SketchUp 6.0
   def to_mile
@@ -216,7 +216,7 @@ class Numeric
   #   inches = 1
   #   mm = inches.to_mm
   #
-  # @return millimeters - a value in millimeters if successful
+  # @return [Float] a value in millimeters if successful
   #
   # @version SketchUp 6.0
   def to_mm
@@ -228,7 +228,7 @@ class Numeric
   #   inches = 10000
   #   yards = inches.to_yard
   #
-  # @return yards - a value in yards if successful
+  # @return [Float] a value in yards if successful
   #
   # @version SketchUp 6.0
   def to_yard
@@ -240,7 +240,7 @@ class Numeric
   #   yards = 1.to_l
   #   inches = yards.yard
   #
-  # @return inches - a value in inches if successful
+  # @return [Length] a value in inches if successful
   #
   # @version SketchUp 6.0
   def yard

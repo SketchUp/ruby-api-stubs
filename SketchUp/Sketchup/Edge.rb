@@ -35,7 +35,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #     UI.messagebox "Failure"
   #   end
   #
-  # @return entities - the edge and entities connected to that edge
+  # @return [Array<Sketchup::Entity>] the edge and entities connected to that edge
   #
   # @version SketchUp 6.0
   def all_connected
@@ -68,10 +68,10 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #     UI.messagebox "Failure: No Common Face"
   #   end
   #
-  # @param edge2
+  # @param edge2 [Sketchup::Edge]
   #   The face whose edge you are checking for commonality.
   #
-  # @return face - the Face object that is common to the two edges
+  # @return [Sketchup::Face, nil] the Face object that is common to the two edges
   #   if successful
   #
   # @version SketchUp 6.0
@@ -92,7 +92,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #     UI.messagebox "Failure: Not a Curve"
   #   end
   #
-  # @return curve - returns a Curve or ArcCurve object if it is a
+  # @return [Sketchup::Curve, nil] returns a Curve object if it is a
   #   curve, nil if it is not a curve
   #
   # @version SketchUp 6.0
@@ -118,7 +118,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #     UI.messagebox "Failure"
   #   end
   #
-  # @return vertex - a Vertex object if successful
+  # @return [Sketchup::Vertex] a Vertex object if successful
   #
   # @version SketchUp 6.0
   def end
@@ -149,7 +149,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #     UI.messagebox "Failure"
   #   end
   #
-  # @return edge - an exploded edge object if successful
+  # @return [Sketchup::Edge] an exploded edge object if successful
   #
   # @version SketchUp 6.0
   def explode_curve
@@ -167,7 +167,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #     UI.messagebox "Failure: No Faces Found"
   #   end
   #
-  # @return faces - an array of Face objects if successful, false
+  # @return [Array<Sketchup::Face>] an array of Face objects if successful, false
   #   if unsuccessful
   #
   # @version SketchUp 6.0
@@ -203,7 +203,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #     UI.messagebox "Failure"
   #   end
   #
-  # @return number - the number of faces found
+  # @return [Integer] the number of faces found
   #
   # @version SketchUp 6.0
   def find_faces
@@ -228,13 +228,13 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #
   # @overload length
   #
-  #   @return              length - the length of the edge in current units
+  #   @return [Length] the length of the edge in current units
   #
   # @overload length(transform)
   #
-  #   @param transform     A Transformation object or array that can
-  #                        be interpreted as a Transformation object.
-  #   @return              length - the length of the edge in current units
+  #   @param transform [Geom::Transformation] A Transformation object or array 
+  #                        that can be interpreted as a Transformation object.
+  #   @return [Length] the length of the edge in current units
   #
   # @version SketchUp 6.0
   def length(*args)
@@ -255,8 +255,8 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #     UI.messagebox "Failure"
   #   end
   #
-  # @return line - an array with a Point3d object and a Vector3d
-  #   object.
+  # @return [Array(Geom::Point3d, Geom::Vector3d)] an array with a Point3d object
+  #   and a Vector3d object.
   #
   # @version SketchUp 6.0
   def line
@@ -284,11 +284,10 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #     UI.messagebox "Failure"
   #   end
   #
-  # @param vertex1
+  # @param vertex1 [Sketchup::Vertex]
   #   One of the Vertex objects associated with the edge.
   #
-  # @return vertex2 - the other Vertex object associated with the
-  #   edge
+  # @return [Sketchup::Vertex] the other Vertex object associated with the edge
   #
   # @version SketchUp 6.0
   def other_vertex(vertex1)
@@ -314,8 +313,6 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #
   # @param [Sketchup::Face] face
   #   The face that is bounded by the edge.
-  #
-  # @return [Boolean]
   #
   # @return [Boolean] +true+ if the edge is reversed, +false+ if it is not
   #   reversed. +nil+ if the edge and face is not connected.
@@ -437,12 +434,12 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #   edge = Sketchup.active_model.entities.add_line([0,0,0],[100,100,0])
   #   new_edge = edge.split 0.5
   #
-  # @param position
+  # @param position [Geom::Point3d]
   #   A Point3d object whose location is along the edge, or
   #   a Float between 0.0 and 1.0 defining how far along the
   #   edge to split.
   #
-  # @return edge - the new Edge object that was split off
+  # @return [Sketchup::Edge] the new Edge object that was split off
   #   the old one if successful
   #
   # @version SketchUp 6.0
@@ -469,7 +466,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #     UI.messagebox "Failure"
   #   end
   #
-  # @return vertex - a Vertex object if successful
+  # @return [Sketchup::Vertex] a Vertex object if successful
   #
   # @version SketchUp 6.0
   def start
@@ -490,13 +487,11 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #     UI.messagebox "Failure"
   #   end
   #
-  # @param element
+  # @param element [Sketchup::Vertex, Sketchup::Face]
   #   A Vertex or Face object.
   #
-  # @return status - true if the face belongs to the element,
+  # @return [Boolean] true if the face belongs to the element,
   #   false if not.
-  #
-  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def used_by?(element)
@@ -508,7 +503,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #   edge = Sketchup.active_model.entities.add_line([0,0,0],[100,100,0])
   #   vertices = edge.vertices
   #
-  # @return vertices - an array of Vertex objects
+  # @return [Array<Sketchup::Vertex>] an array of Vertex objects
   #
   # @version SketchUp 6.0
   def vertices

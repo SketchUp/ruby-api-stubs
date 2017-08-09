@@ -42,10 +42,10 @@ class Sketchup::AttributeDictionaries < Sketchup::Entity
   #     UI.messagebox("No dictionary found.")
   #   end
   #
-  # @param key
+  # @param key [String]
   #   The name of the attribute dictionary.
   #
-  # @return dictionary - the dictionary
+  # @return [Sketchup::AttributeDictionary] the dictionary
   #
   # @version SketchUp 6.0
   def [](key)
@@ -77,11 +77,11 @@ class Sketchup::AttributeDictionaries < Sketchup::Entity
   #   # Deletes a dictionary called 'my_dictionary'
   #   attrdicts.delete 'my_dictionary'
   #
-  # @param key_or_dict
+  # @param key_or_dict [String, Sketchup::AttributeDictionary]
   #   The name of the attribute dictionary to delete, or
   #   the dictionary object itself.
   #
-  # @return dictionaries - the modified AttributeDictionaries object
+  # @return [Sketchup::AttributeDictionaries] the modified AttributeDictionaries object
   #
   # @version SketchUp 6.0
   def delete(key_or_dict)

@@ -41,10 +41,10 @@ class Sketchup::Entity
   #     status = entity.add_observer observer
   #   end
   #
-  # @param observer
+  # @param observer [Object]
   #   An observer.
   #
-  # @return true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def add_observer(observer)
@@ -73,7 +73,7 @@ class Sketchup::Entity
   #   status = entity1.set_attribute "testdictionary", "test", 115
   #   attrdicts = entity1.attribute_dictionaries
   #
-  # @return attributedictionaries - the AttributeDictionaries
+  # @return [Sketchup::AttributeDictionaries, nil] the AttributeDictionaries
   #   object associated with the entity, or nil if there are
   #   no attribute_dictionary objects associated with the
   #   model. Care must be taken if nil is returned, for
@@ -107,18 +107,18 @@ class Sketchup::Entity
   #   status = entity1.set_attribute "testdictionary", "test", 115
   #   attrdict = entity1.attribute_dictionary "testdictionary"
   #
-  # @param name
+  # @param name [String]
   #   The name of the attribute dictionary.
   #
-  # @param [optional] create
+  # @param create [Boolean]
   #   boolean, if set to true then the attribute
   #   dictionary will be created if it does not exist.
   #
-  # @return attributedictionary - an AttributeDictionary object if
-  #   successful, or nil if there is no attribute dictionary
+  # @return [Sketchup::AttributeDictionary, nil] - an AttributeDictionary object
+  #   if successful, or nil if there is no attribute dictionary
   #
   # @version SketchUp 6.0
-  def attribute_dictionary(name, create)
+  def attribute_dictionary(name, create = false)
   end
 
   # The delete_attribute method is used to delete an attribute from an entity.
@@ -148,14 +148,14 @@ class Sketchup::Entity
   #
   # @overload delete_attribute(dictionary_name)
   #
-  #   @param dictionary_name The name of an attribute dictionary.
-  #   @return              nil
+  #   @param dictionary_name [String] The name of an attribute dictionary.
+  #   @return                [nil]
   #
   # @overload delete_attribute(dictionary_name, key)
   #
-  #   @param dictionary_name The name of an attribute dictionary.
-  #   @param key           An attribute key.
-  #   @return              nil
+  #   @param dictionary_name [String] The name of an attribute dictionary.
+  #   @param key             [String] An attribute key.
+  #   @return                [nil]
   #
   # @version SketchUp 6.0
   def delete_attribute(*args)
@@ -180,9 +180,7 @@ class Sketchup::Entity
   #   entity1 = entities[1]
   #   status = entity1.deleted?
   #
-  # @return status - true if deleted, false if not deleted
-  #
-  # @return [Boolean]
+  # @return [Boolean] true if deleted, false if not deleted
   #
   # @version SketchUp 6.0
   def deleted?
@@ -208,7 +206,7 @@ class Sketchup::Entity
   #   entity1 = entities[1]
   #   id = entity1.entityID
   #
-  # @return id - the id for the Entity object
+  # @return [Integer] the id for the Entity object
   #
   # @version SketchUp 6.0
   def entityID
@@ -243,17 +241,17 @@ class Sketchup::Entity
   #   status = entity1.set_attribute "testdictionary", "test", 115
   #   value = entity1.get_attribute "testdictoinary", "test"
   #
-  # @param dict_name
+  # @param dict_name [String]
   #   The name of an attribute dictionary.
   #
-  # @param key
+  # @param key [String]
   #   An attribute key.
   #
-  # @param [optional] default_value
+  # @param default_value [Object]
   #   A default value to return if no attribute
   #   is found.
   #
-  # @return value - the retrieved value
+  # @return [Object] the retrieved value
   #
   # @version SketchUp 6.0
   def get_attribute(dict_name, key, default_value = nil)
@@ -280,7 +278,7 @@ class Sketchup::Entity
   #   entity1 = entities[1]
   #   st = entity1.to_s
   #
-  # @return string - the string representation of the entity if
+  # @return [String] the string representation of the entity if
   #   successful
   #
   # @version SketchUp 6.0
@@ -308,7 +306,7 @@ class Sketchup::Entity
   #   entity1 = entities[1]
   #   m = entity1.model
   #
-  # @return model - the model that contains the Entity object
+  # @return [Sketchup::Model] the model that contains the Entity object
   #
   # @version SketchUp 6.0
   def model
@@ -338,8 +336,8 @@ class Sketchup::Entity
   #   entity1 = entities[1]
   #   parent = entity1.parent
   #
-  # @return entity - a Entity object representing the parent of
-  #   this entity
+  # @return [Sketchup::ComponentDefinition, Sketchup::Model] a Entity object 
+  #   representing the parent of this entity
   #
   # @version SketchUp 6.0
   def parent
@@ -382,10 +380,10 @@ class Sketchup::Entity
   #     status = entity.remove_observer observer
   #   end
   #
-  # @param observer
+  # @param observer [Object]
   #   An observer.
   #
-  # @return true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def remove_observer(observer)
@@ -419,16 +417,16 @@ class Sketchup::Entity
   #   entity1 = entities[1]
   #   status = entity1.set_attribute "testdictionary", "test", 115
   #
-  # @param dict_name
+  # @param dict_name [String]
   #   The name of an attribute dictionary.
   #
-  # @param key
+  # @param key [String]
   #   An attribute key.
   #
-  # @param value
+  # @param value [Object]
   #   The value for the attribute.
   #
-  # @return value - the newly set value if successful
+  # @return [Object] the newly set value if successful
   #
   # @version SketchUp 6.0
   def set_attribute(dict_name, key, value)
@@ -455,7 +453,7 @@ class Sketchup::Entity
   #   entity1 = entities[1]
   #   st = entity1.to_s
   #
-  # @return string - the string representation of the entity if
+  # @return [String] the string representation of the entity if
   #   successful
   #
   # @version SketchUp 6.0
@@ -484,7 +482,7 @@ class Sketchup::Entity
   #   entity1 = entities[1]
   #   type = entity1.typename
   #
-  # @return type - the type of the entity
+  # @return [String] the type of the entity
   #
   # @version SketchUp 6.0
   def typename
@@ -511,9 +509,7 @@ class Sketchup::Entity
   #   entity1 = entities[1]
   #   status = entity1.valid?
   #
-  # @return status - true if deleted, false if not deleted
-  #
-  # @return [Boolean]
+  # @return [Boolean] true if deleted, false if not deleted
   #
   # @version SketchUp 6.0
   def valid?

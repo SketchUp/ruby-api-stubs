@@ -1,7 +1,7 @@
 # coding: utf-8
 Gem::Specification.new do |spec|
   spec.name          = 'sketchup-api-stubs'
-  spec.version       = '0.1.1'
+  spec.version       = '0.1.2'
   spec.authors       = ['Trimble Inc, SketchUp Team']
 
   spec.summary       = %q{SketchUp Ruby API stubs.}

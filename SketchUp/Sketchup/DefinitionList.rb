@@ -55,11 +55,11 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #   componentdefinition = definitions.add "BedTraditional"
   #   component = definitions[0]
   #
-  # @param def_name
+  # @param def_name [String]
   #   The new component definition to add to the definition
   #   list.
   #
-  # @return componentdefinition - the ComponentDefinition object
+  # @return [Sketchup::ComponentDefinition] the ComponentDefinition object
   #   that was added (if successful)
   #
   # @version SketchUp 6.0
@@ -72,10 +72,10 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #   definitions = Sketchup.active_model.definitions
   #   status = definitions.add_observer observer
   #
-  # @param observer
+  # @param observer [Object]
   #   An observer.
   #
-  # @return true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def add_observer(observer)
@@ -142,7 +142,7 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #   definitions.add("BedTraditional")
   #   number = definitions.each { |definition| puts definition.name }
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   #
@@ -176,10 +176,10 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #   definitions = model.definitions
   #   componentdefinition = definitions.load path
   #
-  # @param path
+  # @param path [String]
   #   The path where the component definition file is located.
   #
-  # @return componentdefinition - the loaded ComponentDefinition
+  # @return [Sketchup::ComponentDefinition] the loaded ComponentDefinition
   #   object if successful
   #
   # @version SketchUp 6.0
@@ -233,18 +233,18 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #     puts "Error: #{load_handler.error}"
   #   end
   #
-  # @param url
+  # @param url [String]
   #   URL to load a .skp file from.
   #
-  # @param [optional] load_handler
+  # @param load_handler [Object]
   #   Ruby object that has methods defined
   #   as described in the load_from_url details.
   #
-  # @return componentdefinition - the loaded ComponentDefinition
+  # @return [Sketchup::ComponentDefinition] the loaded ComponentDefinition
   #   object if successful
   #
   # @version SketchUp 7.0
-  def load_from_url(url, load_handler)
+  def load_from_url(url, load_handler = nil)
   end
 
   # The purge_unused method is used to remove the unused component definitions.
@@ -253,7 +253,7 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #   definitions = Sketchup.active_model.definitions
   #   definitions.purge_unused
   #
-  # @return Sketchup::DefinitionList object
+  # @return [Sketchup::DefinitionList]
   #
   # @version SketchUp 6.0
   def purge_unused
@@ -266,10 +266,10 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #   definitions = Sketchup.active_model.definitions
   #   status = definitions.remove_observer observer
   #
-  # @param observer
+  # @param observer [Object]
   #   An observer.
   #
-  # @return true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def remove_observer(observer)
@@ -298,9 +298,9 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #   definitions = model.definitions
   #   new_name = definitions.unique_name "My Base Name"
   #
-  # @param base_name
+  # @param base_name [String]
   #
-  # @return new_name - the unique name.
+  # @return [String] the unique name.
   #
   # @version SketchUp 6.0
   def unique_name(base_name)

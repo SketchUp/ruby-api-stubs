@@ -65,11 +65,11 @@ class UI::WebDialog
   #   # JavaScript inside the page loaded into the WebDialog:
   #   # window.location = 'skp:ruby_messagebox@Hello World';
   #
-  # @param callback_name
+  # @param callback_name [String]
   #   The name of the callback method to be invoked from the
   #   webdialog.
   #
-  # @return nil
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   #
@@ -93,11 +93,11 @@ class UI::WebDialog
   # @example
   #   dialog.allow_actions_from_host("sketchup.com")
   #
-  # @param hostname
+  # @param hostname [String]
   #   The name (domain) of the host that your webdialog can
   #   access safely.
   #
-  # @return nil
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def allow_actions_from_host(hostname)
@@ -110,7 +110,7 @@ class UI::WebDialog
   # @example
   #   dialog.bring_to_front
   #
-  # @return nil
+  # @return [UI::WebDialog]
   #
   # @version SketchUp 6.0
   def bring_to_front
@@ -121,7 +121,7 @@ class UI::WebDialog
   # @example
   #   dialog.close
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def close
@@ -134,10 +134,10 @@ class UI::WebDialog
   #   js_command = "document.getElementById('id').innerHTML = '<b>Hi!</b>'"
   #   dialog.execute_script(js_command)
   #
-  # @param script
+  # @param script [String]
   #   The JavaScript script to execute on the webdialog.
   #
-  # @return nil
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def execute_script(script)
@@ -150,8 +150,7 @@ class UI::WebDialog
   #   dialog.get_default_dialog_color
   #   #ece9d8
   #
-  # @return color - a six digit hexidecimal number representing the
-  #   color
+  # @return [String] a six digit hexidecimal number representing the color
   #
   # @version SketchUp 6.0
   def get_default_dialog_color
@@ -167,10 +166,10 @@ class UI::WebDialog
   #   # In webdialog's HTML:
   #   <input type="text" id="myTextInput" value="hello">
   #
-  # @param element_id
+  # @param element_id [String]
   #   The name of the element in your HTML code.
   #
-  # @return String containing the retrieved value.
+  # @return [String] a string containing the retrieved value.
   #
   # @version SketchUp 6.0
   def get_element_value(element_id)
@@ -240,7 +239,7 @@ class UI::WebDialog
   # @example
   #   max = dialog.max_height
   #
-  # @return height - the maximum height in pixels
+  # @return [Integer] the maximum height in pixels
   #
   # @version SketchUp 7.0
   def max_height
@@ -252,10 +251,10 @@ class UI::WebDialog
   # @example
   #   dialog.max_height = 400
   #
-  # @param height
+  # @param height [Integer]
   #   The maximum height in pixels
   #
-  # @return nil
+  # @return [Integer]
   #
   # @version SketchUp 7.0
   def max_height=(height)
@@ -267,7 +266,7 @@ class UI::WebDialog
   # @example
   #   max = dialog.max_width
   #
-  # @return width - the maximum width in pixels
+  # @return [Integer] the maximum width in pixels
   #
   # @version SketchUp 7.0
   def max_width
@@ -279,10 +278,10 @@ class UI::WebDialog
   # @example
   #   dialog.max_width = 500
   #
-  # @param width
+  # @param width [Integer]
   #   The maximum width in pixels
   #
-  # @return nil
+  # @return [Integer]
   #
   # @version SketchUp 7.0
   def max_width=(width)
@@ -294,7 +293,7 @@ class UI::WebDialog
   # @example
   #   min = dialog.min_height
   #
-  # @return height - the minimum height in pixels
+  # @return [Integer] the minimum height in pixels
   #
   # @version SketchUp 7.0
   def min_height
@@ -306,10 +305,10 @@ class UI::WebDialog
   # @example
   #   dialog.min_height = 100
   #
-  # @param height
+  # @param height [Integer]
   #   The minimum height in pixels
   #
-  # @return nil
+  # @return [Integer]
   #
   # @version SketchUp 7.0
   def min_height=(height)
@@ -321,7 +320,7 @@ class UI::WebDialog
   # @example
   #   min = dialog.min_width
   #
-  # @return width - the minimum width in pixels
+  # @return [Integer] the minimum width in pixels
   #
   # @version SketchUp 7.0
   def min_width
@@ -333,10 +332,10 @@ class UI::WebDialog
   # @example
   #   dialog.min_width = 200
   #
-  # @param width
+  # @param width [Integer]
   #   The minimum width in pixels
   #
-  # @return nil
+  # @return [Integer]
   #
   # @version SketchUp 7.0
   def min_width=(width)
@@ -349,10 +348,10 @@ class UI::WebDialog
   # @example
   #   dialog.navigation_buttons_enabled = false
   #
-  # @param nav_buttons
+  # @param nav_buttons [Boolean]
   #   true to hide the buttons, false to show them
   #
-  # @return dialog - the updated WebDialog
+  # @return [Boolean]
   #
   # @version SketchUp 7.0
   def navigation_buttons_enabled=(nav_buttons)
@@ -367,9 +366,7 @@ class UI::WebDialog
   # @example
   #   nav_buttons = dialog.navigation_buttons_enabled?
   #
-  # @return nav_buttons - true if the buttons are visible.
-  #
-  # @return [Boolean]
+  # @return [Boolean] true if the buttons are visible.
   #
   # @version SketchUp 7.0
   def navigation_buttons_enabled?
@@ -381,13 +378,13 @@ class UI::WebDialog
   # @example
   #   data = dialog.post_url("http://www.mydomain.com/formchecker.cgi",data)
   #
-  # @param url
+  # @param url [String]
   #   The url to send the data.
   #
-  # @param data
+  # @param data [String]
   #   The data to be sent.
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def post_url(url, data)
@@ -401,7 +398,7 @@ class UI::WebDialog
   # @example
   #   factor = dialog.screen_scale_factor
   #
-  # @return screen scale factor
+  # @return [Float] screen scale factor
   #
   # @version SketchUp 2014
   def screen_scale_factor
@@ -413,10 +410,10 @@ class UI::WebDialog
   # @example
   #   dlg.set_background_color("f3f0f0")
   #
-  # @param color
+  # @param color [String]
   #   A six digit hexidecimal color.
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def set_background_color(color)
@@ -448,7 +445,7 @@ class UI::WebDialog
   # @example
   #   dialog.set_full_security
   #
-  # @return dialog - the updated WebDialog
+  # @return [UI::WebDialog] the updated WebDialog
   #
   # @version SketchUp 7.0
   def set_full_security
@@ -461,10 +458,10 @@ class UI::WebDialog
   #   html= '<b>Hello world!</b>'
   #   dialog.set_html(html)
   #
-  # @param html_string
+  # @param html_string [String]
   #   A string of valid html to display in your webdialog.
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def set_html(html_string)
@@ -476,7 +473,7 @@ class UI::WebDialog
   # @example
   #   dialog.set_on_close{ UI.messagebox("Closing the webDialog") }
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   #
@@ -490,13 +487,13 @@ class UI::WebDialog
   # @example
   #   dialog.set_position(100,50)
   #
-  # @param left
+  # @param left [Integer]
   #   The number of pixels from the left.
   #
-  # @param top
+  # @param top [Integer]
   #   The number of pixels from the top of the screen.
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def set_position(left, top)
@@ -507,13 +504,13 @@ class UI::WebDialog
   # @example
   #   dialog.set_size(320,240)
   #
-  # @param w
+  # @param w [Integer]
   #   Width of the webdialog.
   #
-  # @param h
+  # @param h [Integer]
   #   Height of the webdialog.
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def set_size(w, h)
@@ -525,10 +522,10 @@ class UI::WebDialog
   # @example
   #   dialog.set_url "http://www.sketchup.com"
   #
-  # @param url
+  # @param url [String]
   #   The URL for a specific web site.
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def set_url(url)
@@ -541,7 +538,7 @@ class UI::WebDialog
   #     dialog.execute_script("alert(10)");
   #   }
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   #
@@ -561,7 +558,7 @@ class UI::WebDialog
   #     dialog.execute_script("alert(10)");
   #   }
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   #
@@ -575,9 +572,7 @@ class UI::WebDialog
   # @example
   #   vis = dialog.visible?
   #
-  # @return visibility - true if visible.
-  #
-  # @return [Boolean]
+  # @return [Boolean] true if visible.
   #
   # @version SketchUp 6.0
   def visible?
@@ -590,29 +585,29 @@ class UI::WebDialog
   #   dialog.write_image('c:/grab.jpg', 70, 0, 0, 100, 100)
   #   dialog.write_image('c:/grab.png', 4, 0, 0, 100, 100)
   #
-  # @param option
+  # @param option [Integer]
   #   Specifies what method to use when saving the image. For
   #   JPG/JPEG images, this specifies the image quality and
   #   can range from 1 to 100. For PNG images this specifies
   #   the compression algorithm: <4 (best speed), 4-8
   #   (default), or >=9 (best compression).
   #
-  # @param image_path
+  # @param image_path [String]
   #   The destination path of the saved image.
   #
-  # @param bottom_right_y
+  # @param bottom_right_y [Integer]
   #   The x coordinate of the lower right corner of the
   #   region to grab.
   #
-  # @param bottom_right_x
+  # @param bottom_right_x [Integer]
   #   The x coordinate of the lower right corner of the
   #   region to grab.
   #
-  # @param top_left_y
+  # @param top_left_y [Integer]
   #   The x coordinate of the upper left corner of the
   #   region to grab.
   #
-  # @param top_left_x
+  # @param top_left_x [Integer]
   #   The x coordinate of the upper left corner of the
   #   region to grab.
   #
