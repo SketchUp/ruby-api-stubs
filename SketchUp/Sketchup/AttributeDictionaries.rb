@@ -42,10 +42,10 @@ class Sketchup::AttributeDictionaries < Sketchup::Entity
   #     UI.messagebox("No dictionary found.")
   #   end
   #
-  # @param key
+  # @param [String] key
   #   The name of the attribute dictionary.
   #
-  # @return dictionary - the dictionary
+  # @return [Sketchup::AttributeDictionary] the dictionary
   #
   # @version SketchUp 6.0
   def [](key)
@@ -71,17 +71,26 @@ class Sketchup::AttributeDictionaries < Sketchup::Entity
   # AttributeDictionary can be passed directly or identified by its
   # string name.
   #
+  # In SketchUp 2018, special attribute dictionaries have been added. The name of
+  # these dictionaries are "SU_InstanceSet" and "SU_DefinitionSet". The
+  # dictionaries cannot be deleted via ruby and an ArgumentError will be raised.
+  # The key/value pairs in the dictionary can be deleted safely.
+  #
+  # object
+  #
   # @example
   #   model = Sketchup.active_model
   #   attrdicts = model.attribute_dictionaries
   #   # Deletes a dictionary called 'my_dictionary'
   #   attrdicts.delete 'my_dictionary'
   #
-  # @param key_or_dict
+  # @param [String, Sketchup::AttributeDictionary] key_or_dict
   #   The name of the attribute dictionary to delete, or
   #   the dictionary object itself.
   #
-  # @return dictionaries - the modified AttributeDictionaries object
+  # @raise ArgumentError if an advanced attribute dictionary is being deleted.
+  #
+  # @return [Sketchup::AttributeDictionaries] the modified AttributeDictionaries
   #
   # @version SketchUp 6.0
   def delete(key_or_dict)

@@ -81,6 +81,22 @@ class Sketchup::Image < Sketchup::Drawingelement
   def height=(height)
   end
 
+  # The {#image_rep} method returns a copy of a {Sketchup::ImageRep} object
+  # representing the pixel data.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   path = "Plugins/su_dynamiccomponents/images"
+  #   image_file = Sketchup.find_support_file("report_tool.png", path)
+  #   image = model.active_entities.add_image(image_file, ORIGIN, 300)
+  #   image_rep = image.image_rep
+  #
+  # @return [Sketchup::ImageRep]
+  #
+  # @version SketchUp 2018
+  def image_rep
+  end
+
   # The normal method is used to retrieve the 3D Vector that is perpendicular to
   # the plane of the image.
   #

@@ -1,16 +1,23 @@
 # Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
-# The ComponentDefinition class is used to define the contents for a SketchUp
-# component. Components are a collection of entities that can be instanced
-# and reused multiple times throughout a model. For example, you could
-# draw a chair once, turn it into a component, and then use 6 instances of
-# it to surround a table. Edits to the original "definition" will then
+# The {Sketchup::ComponentDefinition} class is used to define the contents for
+# a SketchUp component. Components are a collection of entities that can be
+# instanced and reused multiple times throughout a model. For example, you
+# could draw a chair once, turn it into a component, and then use 6 instances
+# of it to surround a table. Edits to the original "definition" will then
 # propagate across all of its instances.
 #
-# The ComponentDefinition class contains the global entities and settings
-# for each definition. See the ComponentInstance class for how each copy
-# is defined.
+# The ComponentDefinition class contains the global entities and settings for
+# each definition. See the {Sketchup::ComponentInstance} class for how each
+# copy is defined.
+#
+# Starting from SketchUp 2018+, the {Sketchup::ComponentDefinition} class
+# contains a new default attribute dictionary named "SU_DefinitionSet" with
+# default keys named named "Price", "Size", "Url". See the
+# {https://help.sketchup.com/en/article/3000124 Help article} for more
+# information. The dictionary cannot be deleted via ruby and an ArgumentError
+# will be raised. The key/value pairs in the dictionary can be deleted safely.
 #
 # @version SketchUp 6.0
 class Sketchup::ComponentDefinition < Sketchup::Drawingelement
@@ -33,10 +40,10 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #     UI.messagebox("c1 sorts before c2")
   #   end
   #
-  # @param compdef2
+  # @param [Sketchup::ComponentDefinition] compdef2
   #   The second component definition in the comparison.
   #
-  # @return status - a -1 if component1 is less then component2. A 1
+  # @return [Integer] a -1 if component1 is less then component2. A 1
   #   if component1 greater than component2
   #
   # @version SketchUp 6.0
@@ -55,10 +62,10 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #     UI.messagebox("These definitions are the same.")
   #   end
   #
-  # @param compdef2
+  # @param [Sketchup::ComponentDefinition] compdef2
   #   The second component definition in the comparison.
   #
-  # @return status - true if the ComponentDefinition objects are
+  # @return [Boolean] true if the ComponentDefinition objects are
   #   the same object. False if the objects are not the same.
   #
   # @version SketchUp 6.0
@@ -74,13 +81,13 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   definition = Sketchup.active_model.definitions.first
   #   success = definition.add_classification("IFC 2x3", "IfcDoor")
   #
-  # @param schema_name
+  # @param [String] schema_name
   #   a String - Schema name to add
   #
-  # @param schema_type
+  # @param [String] schema_type
   #   a String - Schema type to add
   #
-  # @return true if the classification succeeds. Otherwise false.
+  # @return [Boolean] true if the classification succeeds. Otherwise false.
   #
   # @version SketchUp 2015
   def add_classification(schema_name, schema_type)
@@ -92,10 +99,10 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   componentdefinition = Sketchup.active_model.definitions[0]
   #   status = componentdefinition.add_observer observer
   #
-  # @param observer
+  # @param [Object] observer
   #   An observer.
   #
-  # @return true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def add_observer(observer)
@@ -112,7 +119,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   componentdefinition = definitions.load path
   #   behavior = componentdefinition.behavior
   #
-  # @return behavior - a Behavior object if successful
+  # @return [Sketchup::Behavior] a Behavior object if successful
   #
   # @version SketchUp 6.0
   def behavior
@@ -130,7 +137,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   definition = definitions.load(path)
   #   number = definition.count_instances
   #
-  # @return count - the number of component instances of this
+  # @return [Integer] the number of component instances of this
   #   component definition (if successful)
   #
   # @version SketchUp 6.0
@@ -148,7 +155,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   definition = definitions.load(path)
   #   number = definition.count_used_instances
   #
-  # @return count - the number of component instances of this
+  # @return [Integer] the number of component instances of this
   #   component definition (if successful)
   #
   # @version SketchUp 2016
@@ -165,8 +172,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   componentdefinition = Sketchup.active_model.definitions[0]
   #   description = componentdefinition.description
   #
-  # @return description - the description of the component
-  #   definition if successful
+  # @return [String] the description of the component definition if successful
   #
   # @version SketchUp 6.0
   def description
@@ -182,7 +188,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #
   # @param [String] description
   #
-  # @return status - the description if successful, false if
+  # @return [String] the description if successful, false if
   #   unsuccessful
   #
   # @version SketchUp 6.0
@@ -196,7 +202,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   componentdefinition = Sketchup.active_model.definitions[0]
   #   entities = componentdefinition.entities
   #
-  # @return entities - an Entities object if successful
+  # @return [Sketchup::Entities] an Entities object if successful
   #
   # @version SketchUp 6.0
   def entities
@@ -212,10 +218,10 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   path = ["IFC 2x3", "IfcDoor", "ObjectType", "IfcLabel"]
   #   value = definition.get_classification_value(path)
   #
-  # @param path
+  # @param [Array<String>] path
   #   An array composed of the key path to the value.
   #
-  # @return mixed - a Ruby object if successful, nil otherwise.
+  # @return [Object, nil] a Ruby object if successful, nil otherwise.
   #
   # @version SketchUp 2015
   def get_classification_value(path)
@@ -232,8 +238,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   componentdefinition = definitions.load path
   #   status = componentdefinition.group?
   #
-  # @return status - true if the definition is used to hold a
-  #   group, false if the definition does not hold a group.
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -249,7 +254,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   componentdefinition = Sketchup.active_model.definitions[0]
   #   guid = componentdefinition.guid
   #
-  # @return guid - a string guid if successful
+  # @return [String] a string guid if successful
   #
   # @version SketchUp 6.0
   def guid
@@ -262,8 +267,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   componentdefinition = Sketchup.active_model.definitions[0]
   #   status = componentdefinition.hidden?
   #
-  # @return status - true if the definition should be hidden, false
-  #   if the definition should not be hidden
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -284,9 +288,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #     UI.messagebox "Component definition does not define an image"
   #   end
   #
-  # @return status - true if the component definition defines an
-  #   image, false if the component definition does not
-  #   define an image.
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -309,7 +311,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   instance = entities.add_instance componentdefinition, transform
   #   point = componentdefinition.insertion_point
   #
-  # @return point - the Point3d where the component was inserted if
+  # @return [Geom::Point3d] the Point3d where the component was inserted if
   #   successful. False if unsuccessful.
   #
   # @version SketchUp 6.0
@@ -340,8 +342,8 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   componentdefinition = Sketchup.active_model.definitions[0]
   #   instances = componentdefinition.instances
   #
-  # @return instances - an array of ComponentInstances (if
-  #   successful)
+  # @return [Array<Sketchup::ComponentInstance>] an array of ComponentInstances
+  #   (if successful)
   #
   # @version SketchUp 6.0
   def instances
@@ -361,9 +363,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   componentdefinition = definitions.load path
   #   status = componentdefinition.internal?
   #
-  # @return status - true if the component definition is internal
-  #   to SketchUp's Component Browser.  False if the
-  #   component definition is not internal to SketchUp.
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -383,7 +383,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   componentdefinition = Sketchup.active_model.definitions[0]
   #   componentdefinition.invalidate_bounds
   #
-  # @return true if successful
+  # @return [Boolean] true if successful
   #
   # @version SketchUp 6.0
   def invalidate_bounds
@@ -399,7 +399,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   componentdefinition = definitions.load path
   #   name = componentdefinition.name
   #
-  # @return name - the component definition's name if successful
+  # @return [String] the component definition's name if successful
   #
   # @version SketchUp 6.0
   def name
@@ -417,7 +417,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #
   # @param [String] name
   #
-  # @return name - the name assigned to the component definition if
+  # @return [String] the name assigned to the component definition if
   #   successful
   #
   # @version SketchUp 6.0
@@ -436,7 +436,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   componentdefinition = definitions.load path
   #   path = componentdefinition.path
   #
-  # @return path - a valid path if successful, false if
+  # @return [String, false] a valid path if successful, false if
   #   unsuccessful
   #
   # @version SketchUp 6.0
@@ -452,7 +452,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   componentdefinition = Sketchup.active_model.definitions[0]
   #   componentdefinition.refresh_thumbnail
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 7.0
   def refresh_thumbnail
@@ -467,15 +467,15 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   definition = Sketchup.active_model.definitions.first
   #   success = definition.remove_classification("IFC 2x3", "IfcDoor")
   #
-  # @param schema_name
-  #   a String - Schema name to remove
+  # @param [String] schema_name
+  #   Schema name to remove
   #
-  # @param schema_type
-  #   a String - Schema type to remove. If not provided or an
+  # @param [String] schema_type
+  #   Schema type to remove. If not provided or an
   #   empty string, the currently applied schema type for the
   #   given schema name will be removed.
   #
-  # @return true if the removal succeeds. Otherwise false.
+  # @return [Boolean] true if the removal succeeds. Otherwise false.
   #
   # @version SketchUp 2015
   def remove_classification(schema_name, schema_type)
@@ -488,10 +488,10 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   componentdefinition = Sketchup.active_model.definitions[0]
   #   status = componentdefinition.remove_observer observer
   #
-  # @param observer
+  # @param [Object] observer
   #   An observer.
   #
-  # @return true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def remove_observer(observer)
@@ -504,10 +504,10 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   my_definition = Sketchup.active_model.definitions[0]
   #   success = my_definition.save_as "c:\\myComponent.skp"
   #
-  # @param file_path
+  # @param [String] file_path
   #   Local file path to save the .skp file to.
   #
-  # @return true if successful
+  # @return [Boolean] true if successful
   #
   # @version SketchUp 7.0
   def save_as(file_path)
@@ -523,7 +523,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #
   # @param [String] filename
   #
-  # @return true if successful, false otherwise.
+  # @return [Boolean] true if successful, false otherwise.
   #
   # @version SketchUp 7.0
   def save_thumbnail(filename)
@@ -539,11 +539,11 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   path = ["IFC 2x3", "IfcDoor", "ObjectType", "IfcLabel"]
   #   success = definition.set_classification_value(path, "Room 101")
   #
-  # @param value
-  #   A value valid for that specific attribute.
-  #
-  # @param path
+  # @param [Array<String>] path
   #   An array composed of the key path to the value.
+  #
+  # @param [Object] value
+  #   A value valid for that specific attribute.
   #
   # @raise [NotImplementedError] when trying to set the value of "choice"
   #   attributes.
@@ -553,7 +553,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #
   # @raise [RuntimeError] if the attributes being set are corrupt.
   #
-  # @return boolean - true if the path was valid, false otherwise.
+  # @return [Boolean] true if the path was valid, false otherwise.
   #
   # @version SketchUp 2015
   def set_classification_value(path, value)

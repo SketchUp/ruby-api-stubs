@@ -57,7 +57,7 @@ class Geom::BoundingBox
   #   @param [Array<Geom::Point3d, Geom::BoundingBox, Sketchup::Vertex>]
   #     points_or_bb
   #
-  # @return boundingbox - the new, resized, BoundingBox object if successful
+  # @return [Geom::BoundingBox]
   #
   # @version SketchUp 6.0
   def add(*args)
@@ -72,7 +72,7 @@ class Geom::BoundingBox
   #   # This will return a point Point3d(150, 300, -150).
   #   point = boundingbox.center
   #
-  # @return point - the Point3d at the center of the bounding box
+  # @return [Geom::Point3d] the Point3d at the center of the bounding box
   #   if successful
   #
   # @version SketchUp 6.0
@@ -95,7 +95,7 @@ class Geom::BoundingBox
   #   # This will return true.
   #   boundingbox.empty?
   #
-  # @return boundingbox - the BoundingBox object which was cleared
+  # @return [Geom::BoundingBox] the BoundingBox object which was cleared
   #
   # @version SketchUp 6.0
   def clear
@@ -114,8 +114,7 @@ class Geom::BoundingBox
   #
   # @param [Geom::Point3d, Geom::BoundingBox] point_or_bb
   #
-  # @return status - true if successful (bounding box contains a
-  #   Point3d or BoundingBox object), or false if unsuccessful.
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -147,11 +146,11 @@ class Geom::BoundingBox
   #   # This will return Point3d(100, 200, -400).
   #   boundingbox.corner(6)
   #
-  # @param corner_index
+  # @param [Integer] corner_index
   #   A number (from 0 to 7) representing point at the
   #   corner you want to retrieve.
   #
-  # @return point - a Point3d object if successful
+  # @return [Geom::Point3d] a Point3d object if successful
   #
   # @version SketchUp 6.0
   def corner(corner_index)
@@ -167,7 +166,7 @@ class Geom::BoundingBox
   #   # This will return a Length of 500.0.
   #   length = boundingbox.depth
   #
-  # @return depth - the depth of the bounding box if successful
+  # @return [Length] the depth of the bounding box if successful
   #
   # @version SketchUp 6.0
   def depth
@@ -184,7 +183,7 @@ class Geom::BoundingBox
   #   # This will return a point a Length of ~547.72.
   #   length = boundingbox.diagonal
   #
-  # @return diagonal - the size of the diagonal for the bounding
+  # @return [Length] the size of the diagonal for the bounding
   #   box if successful
   #
   # @version SketchUp 6.0
@@ -201,8 +200,7 @@ class Geom::BoundingBox
   #   # This will return false.
   #   boundingbox.empty?
   #
-  # @return status - true if the bounding box is empty, false if it
-  #   is not empty
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -220,7 +218,7 @@ class Geom::BoundingBox
   #   # This will return a Length of 200.0.
   #   length = boundingbox.height
   #
-  # @return height - the height of the bounding box
+  # @return [Length] the height of the bounding box
   #
   # @version SketchUp 6.0
   def height
@@ -231,7 +229,7 @@ class Geom::BoundingBox
   # @example
   #   boundingbox = Geom::BoundingBox.new
   #
-  # @return boundingbox - a BoundingBox object if successful
+  # @return [Geom::BoundingBox] a BoundingBox object if successful
   #
   # @version SketchUp 6.0
   def initialize
@@ -253,10 +251,10 @@ class Geom::BoundingBox
   #   boundingboxes actually overlap - then call this to get the resulting
   #   boundingbox.
   #
-  # @param boundingbox
+  # @param [Geom::BoundingBox] boundingbox
   #   A second boundbox which might intersect boundingbox1.
   #
-  # @return boundingbox - the resulting BoundingBox object if
+  # @return [Geom::BoundingBox] the resulting BoundingBox object if
   #   successful, an empty BoundingBox object if unsuccessful.
   #
   # @version SketchUp 6.0
@@ -275,7 +273,7 @@ class Geom::BoundingBox
   #   # This will return a point Point3d(700, 900, 800).
   #   point = boundingbox.max
   #
-  # @return point - a Point3d object representing the point where
+  # @return [Geom::Point3d] a Point3d object representing the point where
   #   x, y, and z are the maximum in the bounding box.
   #
   # @version SketchUp 6.0
@@ -291,7 +289,7 @@ class Geom::BoundingBox
   #   # This will return a point Point3d(100, 200, -400).
   #   point = boundingbox.min
   #
-  # @return point - a Point3d object representing the point where
+  # @return [Geom::Point3d] a Point3d object representing the point where
   #   x, y, and z are the maximum in the bounding box.
   #
   # @version SketchUp 6.0
@@ -307,8 +305,7 @@ class Geom::BoundingBox
   #   # This will return true.
   #   boundingbox.valid?
   #
-  # @return status - true if the bounding box is valid (not empty),
-  #   false if it is not valid (empty)
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -326,7 +323,7 @@ class Geom::BoundingBox
   #   # This will return a Length of 100.0.
   #   length = boundingbox.width
   #
-  # @return width - the width of the bounding box
+  # @return [Length] the width of the bounding box
   #
   # @version SketchUp 6.0
   def width

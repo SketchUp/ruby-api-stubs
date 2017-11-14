@@ -52,7 +52,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   # @example
   #   shadowinfo.each_key { |key| UI.messagebox(key) }
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   #
@@ -66,7 +66,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   # @example
   #   keys = Sketchup::ShadowInfo.keys
   #
-  # @return keys - an array of keys
+  # @return [Array<String>] an array of keys
   #
   # @version SketchUp 6.0
   def self.keys
@@ -79,10 +79,10 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   # @example
   #   value = shadowinfo["key"]
   #
-  # @param key
+  # @param [String] key
   #   The key of the shadowinfo value to retrieve.
   #
-  # @return value - the value that is retrieved.
+  # @return [Object, nil] the value that is retrieved.
   #
   # @version SketchUp 6.0
   def [](key)
@@ -99,13 +99,13 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   #   value = shadowinfo["City"]="Denver, CO"
   #   UI.messagebox value
   #
-  # @param key
+  # @param [String] key
   #   The key of the shadowinfo value to set.
   #
-  # @param value
+  # @param [Object] value
   #   The value to be set.
   #
-  # @return value - the value that was set if successful, or false
+  # @return [Object] the value that was set if successful, or false
   #   if unsuccessful.
   #
   # @version SketchUp 6.0
@@ -117,10 +117,10 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   # @example
   #   status = object.add_observer observer
   #
-  # @param observer
+  # @param [Object] observer
   #   An observer.
   #
-  # @return true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def add_observer(observer)
@@ -132,7 +132,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   #   shadow_info = Sketchup.active_model.shadow_info
   #   number = shadow_info.count
   #
-  # @return integer
+  # @return [Integer]
   #
   # @version SketchUp 2014
   def count
@@ -167,7 +167,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   # @example
   #   shadowinfo.each_key { |key| UI.messagebox(key) }
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   #
@@ -204,7 +204,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   # @example
   #   keys = Sketchup::ShadowInfo.keys
   #
-  # @return keys - an array of keys
+  # @return [Array<String>] an array of keys
   #
   # @version SketchUp 6.0
   def keys
@@ -231,10 +231,10 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   # @example
   #   status = object.remove_observer observer
   #
-  # @param observer
+  # @param [Object] observer
   #   An observer.
   #
-  # @return true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def remove_observer(observer)

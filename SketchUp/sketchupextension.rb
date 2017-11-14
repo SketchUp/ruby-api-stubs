@@ -51,7 +51,7 @@ class SketchupExtension
   #   # And this will load the extension.
   #   ext_c.check
   #
-  # @return boolean - whether the load succeeded
+  # @return [Boolean] whether the load succeeded
   #
   # @version SketchUp 8.0 M2
   def check
@@ -67,7 +67,7 @@ class SketchupExtension
   #   extension.copyright = '2008'
   #   copyright = extension.copyright
   #
-  # @return copyright - the Extension copyright
+  # @return [String] the Extension copyright
   #
   # @version SketchUp 6.0
   def copyright
@@ -83,10 +83,10 @@ class SketchupExtension
   #   extension.copyright = '2008'
   #   copyright = extension.copyright
   #
-  # @param copyright
+  # @param [String] copyright
   #   The copyright to set
   #
-  # @return copyright - the new copyright
+  # @return [String] the new copyright
   #
   # @version SketchUp 6.0
   def copyright=(copyright)
@@ -102,7 +102,7 @@ class SketchupExtension
   #   extension.creator = 'Trimble Navigation, Inc.'
   #   creator = extension.creator
   #
-  # @return creator - the Extension creator
+  # @return [String] the Extension creator
   #
   # @version SketchUp 6.0
   def creator
@@ -118,10 +118,10 @@ class SketchupExtension
   #   extension.creator = 'Trimble Navigation, Inc.'
   #   creator = extension.creator
   #
-  # @param creator
+  # @param [String] creator
   #   The creator to set
   #
-  # @return creator - the new creator
+  # @return [String] the new creator
   #
   # @version SketchUp 6.0
   def creator=(creator)
@@ -137,7 +137,7 @@ class SketchupExtension
   #   extension.description = 'My description.'
   #   description = extension.description
   #
-  # @return description - the Extension description
+  # @return [String] the Extension description
   #
   # @version SketchUp 6.0
   def description
@@ -153,10 +153,10 @@ class SketchupExtension
   #   extension.description = 'My description.'
   #   description = extension.description
   #
-  # @param description
+  # @param [String] description
   #   The description string to set.
   #
-  # @return description - the Extension description
+  # @return [String] the Extension description
   #
   # @version SketchUp 6.0
   def description=(description)
@@ -165,7 +165,7 @@ class SketchupExtension
   # The extension_path method returns the file system path to the extension's
   # outer rb file.
   #
-  # @return extension_path - the file system path to the extension
+  # @return [String] the file system path to the extension
   #
   # @version SketchUp 2013
   def extension_path
@@ -173,7 +173,7 @@ class SketchupExtension
 
   # The id method returns the Extension Warehouse ID string.
   #
-  # @return id - the Extension Warehouse ID
+  # @return [String] the Extension Warehouse ID
   #
   # @version SketchUp 2013
   def id
@@ -193,14 +193,14 @@ class SketchupExtension
   #   # telling SketchUp to load the extension by default.
   #   Sketchup.register_extension(extension, true)
   #
-  # @param title
+  # @param [String] title
   #   The name of the extension
   #
-  # @param path
+  # @param [String] path
   #   The relative path to the script that loads your
   #   plugin.
   #
-  # @return extension - the new Extension object
+  # @return [Sketchup::Extension] the new Extension object
   #
   # @version SketchUp 6.0
   def initialize(title, path)
@@ -214,7 +214,7 @@ class SketchupExtension
   #   Sketchup.register_extension(ext, true)
   #   UI.messagebox("load_on_start? is now true: #{ext.load_on_start?.to_s}")
   #
-  # @return boolean - true if the extension loads on startup.
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -228,10 +228,10 @@ class SketchupExtension
   # @example
   #   ext = SketchupExtension.new('Stair Tools', 'StairTools/core.rb')
   #   UI.messagebox("loaded? is false: #{ext.loaded?.to_s}")
-  #   Sketchup.register_extension ext, true
+  #   Sketchup.register_extension(ext, true)
   #   UI.messagebox("loaded? is now true: #{ext.loaded?.to_s}")
   #
-  # @return boolean - true if the extension has been loaded
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -248,7 +248,7 @@ class SketchupExtension
   #   extension = SketchupExtension.new('Stair Tools', 'StairTools/core.rb')
   #   name = extension.name
   #
-  # @return name - the Extension name
+  # @return [String] the Extension name
   #
   # @version SketchUp 6.0
   def name
@@ -263,10 +263,10 @@ class SketchupExtension
   #   extension = SketchupExtension.new('Stair Tools', 'StairTools/core.rb')
   #   extension.name = 'Renamed Stair Tools'
   #
-  # @param name
+  # @param [String] name
   #   The new name
   #
-  # @return name - the Extension name
+  # @return [String] the Extension name
   #
   # @version SketchUp 6.0
   def name=(name)
@@ -281,7 +281,7 @@ class SketchupExtension
   #   Sketchup.register_extension(ext, true)
   #   UI.messagebox("Now registered? is now true: #{ext.registered?.to_s}")
   #
-  # @return boolean - true if the extension has been registered.
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -303,7 +303,7 @@ class SketchupExtension
   #     extension.uncheck
   #   }
   #
-  # @return boolean - whether the unload succeeded
+  # @return [Boolean] whether the unload succeeded
   #
   # @version SketchUp 8.0 M2
   def uncheck
@@ -319,7 +319,7 @@ class SketchupExtension
   #   extension.version = '5.0'
   #   version = extension.version
   #
-  # @return version - the Extension version
+  # @return [String] the Extension version
   #
   # @version SketchUp 6.0
   def version
@@ -335,10 +335,10 @@ class SketchupExtension
   #   extension.version = '5.0'
   #   version = extension.version
   #
-  # @param version
+  # @param [String] version
   #   The version string to set.
   #
-  # @return version - the Extension version
+  # @return [String] the Extension version
   #
   # @version SketchUp 6.0
   def version=(version)
@@ -346,7 +346,7 @@ class SketchupExtension
 
   # The version_id method returns the Extension Warehouse Version ID string.
   #
-  # @return version_id - the Extension Warehouse Version ID string
+  # @return [String] the Extension Warehouse Version ID string
   #
   # @version SketchUp 2013
   def version_id

@@ -35,15 +35,32 @@ class Array
 
   # The {#cross} method is used to compute the cross product between two vectors.
   #
-  # @example
+  # @example With 2d array
+  #   vector1 = Geom::Vector2d.new(0, 1)
+  #   array = [1, 0]
+  #   vector2 = array.cross(vector1)
+  #
+  #   vector1 = Geom::Vector3d.new(0, 1, 0)
+  #   array = [1, 0]
+  #   vector2 = array.cross(vector1) # This will force array to be [1, 0, 0]
+  #
+  # @example With 3d array
   #   vector1 = Geom::Vector3d.new(0, 1, 0)
   #   array = [1, 0, 0]
   #   # This will return a new Vector3d
   #   vector2 = array.cross(vector1)
   #
-  # @param [Geom::Vector3d] vector
+  # @overload cross(vector)
   #
-  # @return [Geom::Vector3d]
+  #   @param [Geom::Vector3d] vector
+  #   @return [Geom::Vector3d]
+  #
+  # @overload cross(vector)
+  #
+  #   @param [Geom::Vector2d] vector
+  #   @return [Geom::Vector2d]
+  #
+  # @raise ArgumentError if the argument is the wrong vector type
   #
   # @version SketchUp 6.0
   def cross(vector)
@@ -51,15 +68,31 @@ class Array
 
   # The {#distance} method is used to compute the distance between two points.
   #
-  # @example
+  # @example With 2d array
+  #   point = Geom::Point2d.new(10, 10)
+  #   array = [1, 2]
+  #   distance = array.distance(point)
+  #
+  #   point = Geom::Point3d.new(10, 10, 10)
+  #   distance = array.distance(point)
+  #
+  # @example With 3d array
   #   point = Geom::Point3d.new(10, 10, 10)
   #   array = [1, 1, 1]
   #   # This will return a Length
   #   distance = array.distance(point)
   #
-  # @param [Geom::Point3d] point
+  # @overload distance(point)
   #
-  # @return [Length]
+  #   @param [Geom::Point3d] point
+  #   @return [Length]
+  #
+  # @overload distance(point)
+  #
+  #   @param [Geom::Point2d] point
+  #   @return [Length]
+  #
+  # @raise ArgumentError if the argument is the wrong point type
   #
   # @version SketchUp 6.0
   def distance(point)
@@ -155,15 +188,29 @@ class Array
 
   # The {#dot} method is used to compute the dot product between two vectors.
   #
-  # @example
+  # @example With 2d array
+  #   vector = Geom::Vector2d.new(12, 12)
+  #   array = [12, 0]
+  #   # This will return a float
+  #   dot_product = array.dot(vector)
+  #
+  # @example With 3d array
   #   vector = Geom::Vector3d.new(12, 12, 0)
   #   array = [12, 0, 0]
   #   # This will return a Float, in this case 144.0
   #   dot_product = array.dot(vector)
   #
-  # @param [Geom::Vector3d] vector
+  # @overload dot(vector)
   #
-  # @return [Float]
+  #   @param [Geom::Vector3d] vector
+  #   @return [Float]
+  #
+  # @overload dot(vector)
+  #
+  #   @param [Geom::Vector2d] vector
+  #   @return [Float]
+  #
+  # @raise ArgumentError if the argument is the wrong vector type
   #
   # @version SketchUp 6.0
   def dot(vector)
@@ -173,7 +220,11 @@ class Array
   # length to 1). It returns a new array rather than changing the original in
   # place.
   #
-  # @example
+  # @example With 2d array
+  #   array = [1, 2]
+  #   normal_vector = array.normalize
+  #
+  # @example With 3d array
   #   array = [1, 2, 3]
   #   # This will return a new Vector3d
   #   normal_vector = array.normalize
@@ -181,7 +232,13 @@ class Array
   # @note The arguments and return value will be converted to a floating point
   #   value. (Unlike in the {Geom::Vector3d#normalize!} method.)
   #
-  # @return [Array(Float, Float, Float)] An array object representing a vector
+  # @overload normalize
+  #
+  #   @return [Array(Float, Float, Float)] an array object representing a vector
+  #
+  # @overload normalize
+  #
+  #   @return [Array(Float, Float)] an array object representing a vector
   #
   # @version SketchUp 6.0
   def normalize
@@ -190,12 +247,22 @@ class Array
   # The {#normalize!} method is used to normalize a vector in place (setting its
   # length to 1).
   #
-  # @example
+  # @example With 2d array
+  #   array = [1, 2]
+  #   array.normalize!
+  #
+  # @example With 3d array
   #   array = [1, 2, 3]
   #   # This will modify 'array' in place
   #   array.normalize!
   #
-  # @return [Array]
+  # @overload normalize!
+  #
+  #   @return [Array(Float, Float, Float)] an array object representing a vector
+  #
+  # @overload normalize!
+  #
+  #   @return [Array(Float, Float)] an array object representing a vector
   #
   # @version SketchUp 6.0
   def normalize!
@@ -204,22 +271,49 @@ class Array
   # The {#offset} method is used to offset a point by a vector. it returns a new
   # array rather than modifying the original in place.
   #
-  # @example
+  # @example With 3d array
   #   array = [10, 10, 10]
   #   vector = Geom::Vector3d.new(0, 0, 1)
-  #   # This will return a new Array
-  #   point = array.offset(vector)
+  #   # This will modify 'array' in place
+  #   length_array = array.offset(vector)
   #
-  # @overload offset!(vector)
+  # @example With 2d array
+  #   array = [10, 10]
+  #   vector = Geom::Vector2d.new(0, 1)
+  #   length_array = array.offset(vector)
   #
-  #   @param [Geom::Vector3d] vector A Vector3d object used to offset the point.
-  #   @return [Array(Length, Length, Length)] The newly offset point or vector.
+  #   # Using Vector3d with a 2d array
+  #   array = [10, 10]
+  #   vector = Geom::Vector3d.new(0, 0, 1)
+  #   length_array = array.offset(vector)
   #
-  # @overload offset!(vector, length)
+  # @overload offset(vector, length)
   #
   #   @param [Geom::Vector3d] vector A Vector3d object used to offset the point.
   #   @param [Length] length An overriding distance for how far to offset.
-  #   @return [Array(Length, Length, Length)] The newly offset point or vector.
+  #   @return [Array(Length, Length, Length)] The newly offset array representing
+  #     a point or vector.
+  #
+  # @overload offset(vector)
+  #
+  #   @param [Geom::Vector2d] vector A Vector2d object used to offset the point.
+  #   @return [Array(Length, Length)] The newly offset array representing a point
+  #     or vector.
+  #
+  # @overload offset(vector)
+  #
+  #   @param [Geom::Vector3d] vector A Vector3d object used to offset the point.
+  #   @return [Array(Length, Length, Length)] The newly offset array representing
+  #     a point or vector.
+  #
+  # @overload offset(vector, length)
+  #
+  #   @param [Geom::Vector2d] vector A Vector2d object used to offset the point.
+  #   @param [Length] length An overriding distance for how far to offset.
+  #   @return [Array(Length, Length)] The newly offset array representing a point
+  #     or vector.
+  #
+  # @raise ArgumentError if the argument is the wrong vector type
   #
   # @version SketchUp 6.0
   def offset(*args)
@@ -228,7 +322,17 @@ class Array
   # The {#offset!} method is used to offset a point by a vector. The array is
   # modified in place.
   #
-  # @example
+  # @example With 2d array
+  #   array = [10, 10]
+  #   vector = Geom::Vector2d.new(0, 1)
+  #   array.offset!(vector)
+  #
+  #   # Using Vector3d with a 2d array
+  #   array = [10, 10]
+  #   vector = Geom::Vector3d.new(0, 0, 1)
+  #   array.offset!(vector)
+  #
+  # @example With 3d array
   #   array = [10, 10, 10]
   #   vector = Geom::Vector3d.new(0, 0, 1)
   #   # This will modify 'array' in place
@@ -246,6 +350,21 @@ class Array
   #   @param [Length] length An overriding distance for how far to offset.
   #   @return [Array(Length, Length, Length)] The newly offset array representing
   #     a point or vector.
+  #
+  # @overload offset!(vector)
+  #
+  #   @param [Geom::Vector2d] vector A Vector2d object used to offset the point.
+  #   @return [Array(Length, Length)] The newly offset array representing a point
+  #     or vector.
+  #
+  # @overload offset!(vector, length)
+  #
+  #   @param [Geom::Vector2d] vector A Vector2d object used to offset the point.
+  #   @param [Length] length An overriding distance for how far to offset.
+  #   @return [Array(Length, Length)] The newly offset array representing a point
+  #     or vector.
+  #
+  # @raise ArgumentError if the argument is the wrong vector type
   #
   # @version SketchUp 6.0
   def offset!(*args)
@@ -471,15 +590,33 @@ class Array
   # The {#vector_to} method is used to create an array as a vector from one point
   # to a second point.
   #
-  # @example
+  # @example With 2d array
+  #   point = Geom::Point2d.new(10, 20)
+  #   array = [1, 2]
+  #   # This will return a new Vector2d
+  #   vector = array.vector_to(point)
+  #
+  #   point = Geom::Point3d.new(10, 20)
+  #   # This will return a new Vector3d
+  #   vector = array.vector_to(point)
+  #
+  # @example With 3d array
   #   point = Geom::Point3d.new(10, 20, 30)
   #   array = [1, 2, 3]
   #   # This will return a new Vector3d
   #   vector = array.vector_to(point)
   #
-  # @param [Geom::Point3d] point
+  # @overload vector_to(point)
   #
-  # @return [Geom::Vector3d]
+  #   @param [Geom::Point3d] point
+  #   @return [Geom::Vector3d]
+  #
+  # @overload vector_to(point)
+  #
+  #   @param [Geom::Point2d] point
+  #   @return [Geom::Vector2d]
+  #
+  # @raise ArgumentError if the argument is the wrong point type
   #
   # @version SketchUp 6.0
   def vector_to(point)
@@ -511,10 +648,10 @@ class Array
   #   # This will initialize the x value as a Fixnum
   #   array.x = 5
   #
-  # @param x
+  # @param [Object] x
   #   The new x position.
   #
-  # @return The new x coordinate if successful
+  # @return [Object] The new x coordinate if successful
   #
   # @version SketchUp 6.0
   def x=(x)
@@ -546,10 +683,10 @@ class Array
   #   # This will initialize the y value as a Fixnum
   #   array.y = 5
   #
-  # @param y
+  # @param [Object] y
   #   The new y position.
   #
-  # @return The new y coordinate if successful
+  # @return [Object] The new y coordinate if successful
   #
   # @version SketchUp 6.0
   def y=(y)
@@ -581,10 +718,10 @@ class Array
   #   # This will initialize the z value as a Fixnum
   #   array.z = 5
   #
-  # @param z
+  # @param [Object] z
   #   The new z position.
   #
-  # @return The new z coordinate if successful
+  # @return [Object] The new z coordinate if successful
   #
   # @version SketchUp 6.0
   def z=(z)

@@ -25,6 +25,8 @@ Here are the build numbers for recent SketchUp releases. Note that build numbers
 in languages besides English are larger for each release, so it is best to check
 for builds that are greater than or equal to the numbers here.
 
+- **SU2018 M0** = 18.0.16975 on Windows 64-bit, 18.0.16976 on Mac 64-bit.
+
 - **SU2017 M0** = 17.0.18899 on Windows 64-bit, 17.0.18898 on Mac 64-bit.
 
 - **SU2016 M0** = 16.0.19912 on Windows 64-bit, 16.0.19911 on Windows 32-bit, 16.0.19913 on Mac 64-bit.
@@ -49,6 +51,91 @@ for builds that are greater than or equal to the numbers here.
 - **SU7.0 M0** = 7.0.8657 on Windows, 7.0.8656 on Mac.
 
 - **SU6 M6** = 6.4.265 on Windows, 6.4.263 on Mac.
+
+# What's new in SketchUp 2018 M0
+
+## LayOut Ruby API for SketchUp
+
+This is a new Ruby based API for SketchUp that allows developers to read and write LayOut files using the regular SketchUp Ruby API. We’ve taken the existing LayOut C API and wrapped it with a Ruby layer and then included that inside SketchUp. This is proving to be a great working model for how to expose API functionality to our base C API and then expose that exact functionality to a ruby layer without duplicating code.
+
+## {Sketchup.send_to_layout}
+
+Along with the LayOut Ruby API for SketchUp we added the ability to open LayOut files with the LayOut application. This gives developers the ability to write a SketchUp extension purely in ruby that parses the SketchUp model, writes a LayOut file and opens the LayOut file in LayOut in one smooth motion. This helps create a stronger connection between SketchUp and LayOut and can improve user workflows through the use of developer created extensions.
+
+## ImageRep
+
+Hello Ruby API developers, meet {Sketchup::ImageRep}. This new class exposes a data structure internal to SketchUp called an ImageRep. ImageRep is an in-memory representation of an image (as opposed to a reference to an image inside the SketchUp model). This class exposes a number of image reading and manipulation tools to the Ruby API. Now you can get the color of a pixel at a specified uv coordinate from an ImageRep, get an array of all pixel data from an ImageRep, set pixel data in an ImageRep, save an ImageRep out to disk, and more. Of course we’ve also included utilities to convert an in-model texture to an ImageRep, and assign an ImageRep object directly to a material as the material’s texture. This new class opens up a lot of opportunities to read and manipulate images in the model. Check out the ImageRep class in Ruby API docs for more information.
+
+## Exposed Importer/Exporter Options to Ruby API
+
+We have exposed all the options for our native importers and exporters to Ruby. See the Ruby API documentation on {Sketchup::Model#import} and {Sketchup::Model#export}.
+
+## New SketchUp Features in the API
+
+A big round of applause for the SketchUp Core team for the improvements they have added to the SketchUp application. Well, we also wanted to make sure that these new features were accessible to our developer community. We have introduced new API features for Named Section Planes and Filled Section Cuts. Awesome!
+
+## Ruby Handling of Advanced Attributes
+
+SketchUp core added a feature called Advanced Attributes. This adds some new attribute dictionaries and attributes to Component Instances and Definitions by default on every model. It should be noted that we have blocked the ability to delete the dictionaries via ruby. This should not be possible, please let us know if you find a scenario where you are able to do so. You can however delete the key/value pairs. The UI will recreate those key value pairs if they do not exist.
+
+## Ruby Improvements and Fixes
+
+* Added method: {UI.refresh_toolbars}
+* Added constants to {Geom::PolygonMesh}:
+    * {Geom::PolygonMesh::MESH_NORMALS}
+    * {Geom::PolygonMesh::MESH_POINTS}
+    * {Geom::PolygonMesh::MESH_UVQ_BACK}
+    * {Geom::PolygonMesh::MESH_UVQ_FRONT}
+* Added method: {Sketchup::DefinitionList#remove}
+* Added {Sketchup::Page} methods:
+    * {Sketchup::Page#include_in_animation?}
+    * `include_in_animation=`
+* Added {Sketchup::SectionPlane} methods:
+    * `name`
+    * `name=`
+    * `symbol`
+    * `symbol=`
+* Added {Sketchup::ImageRep} class:
+    * `load_file`
+    * `save_file`
+    * `initialize`
+    * `bits_per_pixel`
+    * `size`
+    * `data`
+    * `width`
+    * `height`
+    * `row_padding`
+    * `colors`
+    * `color_at_uv`
+    * `set_data`
+* Added {Sketchup::Materials#unique_name}
+* Added {Sketchup::Texture#image_rep}
+* Added {Sketchup::Image#image_rep}
+* Added {Sketchup::Material#texture=} to accept {Sketchup::ImageRep} object as one of the data types it uses.
+* Added rendering options support for filled section cuts:
+    * {Sketchup::RenderingOptions} keys added:
+        * `"SectionCutFilled"`
+        * `"SectionDefaultFillColor"`
+    * {Sketchup::RenderingOptionsObserver} constants:
+        * `ROPSetSectionCutFilled`
+        * `ROPSetSectionDefaultFillColor`
+* Added {Sketchup.send_to_layout}
+* Added options for all 3D exporters and imports
+
+### Bug Fixes
+
+* **Breaking Change** - Fixed a bug in {Sketchup::Material.name=} which allowed the API to create materials with duplicate names. Now it will raise `ArgumentError` if it's not unique to the model.
+* **Breaking Change** - Changed {Sketchup::Color class to be common between LayOut and SketchUp. The potentially breaking change is that {Sketchup::Color} changed to now compare RGBA values instead of the ruby objects.
+* **Breaking Change** - Changed {Geom::Transformation#identity?} So that it now properly returns true in all cases where the transformation matrix match the values for the identity transformation.
+* Fixed {Geom::Transformation.scaling}`(float)` and {Geom::Transformation#initialize}`(float)` to not set the 15th component of the matrix, but instead adjust the other fields.
+* Fixed a crash when trying to call {Sketchup::View#animation=} from {Sketchup::Animation#stop}
+* Fixed a crash when calling {UI.menu} with empty string.
+* {Sketchup::Pages#erase} will now correctly delete the Scene tab, like the UI does.
+* Fixed a bug in {Sketchup::ArcCurve#end_angle} where it sometimes added 360 degrees to the returned value.
+* Fixed an issue where a Ruby Importer could cause the Import file dialog to render the drop-down items incorrectly under Windows due to pipe characters in the description.
+* Fixed a crash when using `-RubyStartup` command line argument with a file that raises errors while loading.
+* Fixed a crash in {UI.create_cursor} that would happen if the length was less than 4 characters.
+* Fixed a rare crash in {Sketchup::MaterialsObserver}.
 
 # What's new in SketchUp 2017 M0
 
@@ -292,13 +379,15 @@ Visual Studio 2015 SP1 (targeting Windows 7). On MacOs we are using XCode 7.2.1
 
 ### Ruby API
 
-* Fixed Entities.transform_by_vectors so that it performs a bounds check on the
-  second array. An ArgumentError is raised if the second array has less items
-  than the first.
-* Added ability to UI::HtmlDialogs to receive JavaScript arrays and objects
+* Fixed {Sketchup::Entities.transform_by_vectors} so that it performs a bounds
+  check on the second array. An `ArgumentError` is raised if the second array
+  has less items than the first.
+* Added ability to {UI::HtmlDialog}s to receive JavaScript arrays and objects
   using callbacks.
-* Removed a limitation with UI::HtmlDialog where callbacks were required to have
-  at least one argument.  Now no arguments are required.
+* Removed a limitation with {UI::HtmlDialog} where callbacks were required to
+  have at least one argument. Now no arguments are required.
+* {UI.show_model_info} no longer opens a Model Info page for `"Extensions"` as
+  that page is now replaced by the Extension Manager dialog.
 
 ### LayOut C API
 
@@ -672,6 +761,7 @@ Below is an outline of new API functionality. Please see the new API docs for ho
 * Added persistent IDs for groups and component which can be accessed via Ruby.
 * Ruby UI.openpanel/savepanel filters now use a more complex filetype filter to allow for multiple multi-file type filters.
 * Added Sketchup.platform that returns either :platform_win or :platform_osx. Developers are encouraged to use this over RUBY_PLATFORM whenever possible.
+* New page `"Classifications"` for {UI.show_model_info}.
 
 ### Ruby Console Upgrades
 

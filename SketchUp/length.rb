@@ -47,10 +47,10 @@ class Length < Float
   #     puts "length1 is not less than length2"
   #   end
   #
-  # @param length2
+  # @param [Length] length2
   #   A length value.
   #
-  # @return status - true if length1 is < length2; false if
+  # @return [Boolean] true if length1 is < length2; false if
   #   length1 is not < length2
   #
   # @version SketchUp 6.0
@@ -69,10 +69,10 @@ class Length < Float
   #     puts "length1 is greater than length2"
   #   end
   #
-  # @param length2
+  # @param [Length] length2
   #   A length value.
   #
-  # @return status - true if length1 is <= length2; false if
+  # @return [Boolean] true if length1 is <= length2; false if
   #   length1 is not <= length2
   #
   # @version SketchUp 6.0
@@ -88,10 +88,10 @@ class Length < Float
   #   length2 = 30.to_l
   #   result = length1 <=> length2
   #
-  # @param length2
+  # @param [Length] length2
   #   A length value.
   #
-  # @return result - the result of the comparison
+  # @return [Integer] the result of the comparison
   #
   # @version SketchUp 6.0
   def <=>(length2)
@@ -107,10 +107,10 @@ class Length < Float
   #   length2 = 30.to_l
   #   is_equal = length1 == length2
   #
-  # @param length2
+  # @param [Length] length2
   #   A length value.
   #
-  # @return status - true if length1 is == length2; false if
+  # @return [Boolean] true if length1 is == length2; false if
   #   length1 is not == length2
   #
   # @version SketchUp 6.0
@@ -131,10 +131,10 @@ class Length < Float
   #     puts "length1 is not greater than length2"
   #   end
   #
-  # @param length2
+  # @param [Length] length2
   #   A length value.
   #
-  # @return status - true if length1 is > length2; false if length1
+  # @return [Boolean] true if length1 is > length2; false if length1
   #   is not > length2
   #
   # @version SketchUp 6.0
@@ -156,10 +156,10 @@ class Length < Float
   #     puts "length1 is less than length2"
   #   end
   #
-  # @param length2
+  # @param [Length] length2
   #   A length value.
   #
-  # @return status - true if length1 is >= length2; false if
+  # @return [Boolean] true if length1 is >= length2; false if
   #   length1 is not >= length2
   #
   # @version SketchUp 6.0
@@ -175,7 +175,7 @@ class Length < Float
   #   length = 55.to_l
   #   str = length.inspect
   #
-  # @return length - an unformatted length string
+  # @return [String] an unformatted length string
   #
   # @version SketchUp 6.0
   def inspect
@@ -187,7 +187,7 @@ class Length < Float
   #   length = 45.to_l
   #   f = length.to_f
   #
-  # @return value - the float length value
+  # @return [Float] the float length value
   #
   # @version SketchUp 6.0
   def to_f
@@ -201,7 +201,7 @@ class Length < Float
   #   length = 55.to_l
   #   str = length.to_s
   #
-  # @return value - the float length value
+  # @return [String] the float length value
   #
   # @version SketchUp 6.0
   def to_s

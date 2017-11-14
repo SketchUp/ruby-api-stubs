@@ -1,17 +1,17 @@
 # Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
-# The PolygonMesh class contains methods to create polygon mesh structures.
-# This is useful if you need to write a custom importer/exporter in Ruby that
-# works at the level of triangulated polygons. For example, you can determine
-# the triangles that make up a 15-sided SketchUp face by using this class, or
-# write a SketchupImporter that reads a data file, creates a mesh from it,
-# and draws faces based on the mesh.
+# The {#Geom::PolygonMesh} class contains methods to create polygon mesh
+# structures. This is useful if you need to write a custom importer/exporter in
+# Ruby that works at the level of triangulated polygons. For example, you can
+# determine the triangles that make up a 15-sided {#Sketchup::Face} by using
+# this class, or write a {#Sketchup::Importer} that reads a data file, creates
+# a mesh from it, and draws faces based on the mesh.
 #
 # You can construct a mesh manually using the methods of this class, or you
 # can get a mesh from a face by calling the Face.mesh method. See
-# Entities.add_faces_from_mesh for an easy way to convert a mesh back into
-# faces.
+# {Sketchup::Entities#add_faces_from_mesh} for an easy way to convert a mesh
+# back into faces.
 #
 # @example
 #   # Grab a mesh from a given face.
@@ -19,7 +19,7 @@
 #
 #   # Create a new group that we will populate with the mesh.
 #   group = Sketchup.active_model.entities.add_group
-#   group.add_faces_from_mesh(my_mesh)
+#   group.entities.add_faces_from_mesh(my_mesh)
 #
 # @version SketchUp 6.0
 class Geom::PolygonMesh
@@ -31,6 +31,11 @@ class Geom::PolygonMesh
   NO_SMOOTH_OR_HIDE = nil # Stub value.
   SMOOTH_SOFT_EDGES = nil # Stub value.
   SOFTEN_BASED_ON_INDEX = nil # Stub value.
+
+  MESH_NORMALS = nil # Stub value.
+  MESH_POINTS = nil # Stub value.
+  MESH_UVQ_BACK = nil # Stub value.
+  MESH_UVQ_FRONT = nil # Stub value.
 
   # Instance Methods
 
@@ -272,12 +277,11 @@ class Geom::PolygonMesh
   # The {#polygon_at} method is used to retrieve an array of vertex index values
   # for a polygon at a specific index.
   #
-  # Index is 1 based (starts at 1).  The returned array can contain negative
-  # values with the sign indicating a hidden edge. For example, a return value
-  # of +[-1, 2, 3]+ indicates that the edge from +1+ to +2+ is hidden.
-  # The negative values should not be used as an index for point_at, take the
-  # positive value of the index value in the polygon array.  So if you
-  # get +[-1, 2,3]+ use +1+ as the argument to {#point_at}.
+  # values with the sign indicating a hidden edge. For example, a return value of
+  # +[-1, 2, 3]+ indicates that the edge from +1+ to +2+ is hidden. The negative
+  # values should not be used as an index for point_at, take the positive value
+  # of the index value in the polygon array.  So if you get +[-1, 2,3]+ use +1+
+  # as the argument to {#point_at}.
   #
   # @example
   #   mesh = Geom::PolygonMesh.new
@@ -286,6 +290,8 @@ class Geom::PolygonMesh
   #   point3 = Geom::Point3d.new(2, 0, 1)
   #   index = mesh.add_polygon(point1, point2, point3)
   #   polygon = mesh.polygon_at(index)
+  #
+  # @note Index is 1 based (starts at 1).The returned array can contain negative
   #
   # @param [Integer] index
   #   The index of the desired polygon.
@@ -319,14 +325,14 @@ class Geom::PolygonMesh
   # The {#polygons} method is used to retrieve an array of all polygons in the
   # mesh.
   #
-  # The returned array can contain negative values with the sign indicating a
-  # hidden edge. For example, a return value of +[-1, 2, 3]+ indicates that the
-  # edge from +1+ to +2+ is hidden.
+  # The returned array contains an array that can have a negative value with the
+  # sign indicating a hidden edge. For example, a return value of +[-1, 2, 3]+
+  # indicates that the edge from +1+ to +2+ is hidden.
   #
   # @example
   #   polygons = polygonmesh.polygons
   #
-  # @return [Array<Integer>]
+  # @return [Array<Array<Integer>>, Array<nil>]
   #
   # @version SketchUp 6.0
   def polygons
@@ -397,6 +403,9 @@ class Geom::PolygonMesh
   # @note If you don't specify how many points you will be adding to the mesh
   #   when you initiate it you may risk the UV data becoming out of sync.
   #
+  # @param [Boolean] front
+  #   A boolean representing the front or back.
+  #
   # @param [Geom::Point3d] point
   #   A Point3d object representing UV coordinates.
   #
@@ -406,7 +415,7 @@ class Geom::PolygonMesh
   # @return [nil]
   #
   # @version SketchUp 2014
-  def set_uv(index, point)
+  def set_uv(index, point, front)
   end
 
   # The {#transform!} method is used to apply a transformation to a mesh.
@@ -465,7 +474,7 @@ class Geom::PolygonMesh
   # @example
   #   # Get a mesh with front and back UVs.
   #   mesh = face.mesh(1 | 2)
-  #   uvs = mesh.uvs
+  #   uvs = mesh.uvs(true)
   #
   # @param [Boolean] front
   #

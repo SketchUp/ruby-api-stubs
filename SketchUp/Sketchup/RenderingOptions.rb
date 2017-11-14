@@ -75,6 +75,10 @@
 # - +DrawBackEdges+
 # - +SectionCutDrawEdges+
 #
+# Added in SketchUp 2018:
+# - +SectionCutFilled+
+# - +SectionDefaultFillColor+
+#
 # @version SketchUp 6.0
 class Sketchup::RenderingOptions < Sketchup::Entity
 
@@ -134,8 +138,10 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   ROPSetProfilesOnlyEdges = nil # Stub value.
   ROPSetRenderMode = nil # Stub value.
   ROPSetSectionActiveColor = nil # Stub value.
+  ROPSetSectionCutFilled = nil # Stub value.
   ROPSetSectionCutWidth = nil # Stub value.
   ROPSetSectionDefaultCutColor = nil # Stub value.
+  ROPSetSectionDefaultFillColor = nil # Stub value.
   ROPSetSectionDisplayMode = nil # Stub value.
   ROPSetSectionInactiveColor = nil # Stub value.
   ROPSetSkyColor = nil # Stub value.
@@ -153,7 +159,7 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   #     puts key
   #   }
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   #
@@ -166,7 +172,7 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   # @example
   #   keys = Sketchup.active_model.rendering_options.keys
   #
-  # @return keys - an array of keys
+  # @return [Array<String>] an array of keys
   #
   # @version SketchUp 6.0
   def self.keys
@@ -174,16 +180,15 @@ class Sketchup::RenderingOptions < Sketchup::Entity
 
   # Instance Methods
 
-  # The set value [] method is used to get the value in the array of
-  # rendering options.
+  # The {#[]} method is used to get the value of a rendering option.
   #
   # @example
   #   result = Sketchup.active_model.rendering_options["DisplayInstanceAxes"]
   #
-  # @param key
-  #   The key of the rendering option value to set.
+  # @param [String] key
+  #   The key of the rendering option value to get.
   #
-  # @return value - the value that was found.
+  # @return [Object, nil]
   #
   # @version SketchUp 6.0
   def [](key)
@@ -195,13 +200,13 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   # @example
   #   Sketchup.active_model.rendering_options["DisplayInstanceAxes"] = false
   #
-  # @param key
+  # @param [String] key
   #   The key of the rendering option value to set.
   #
-  # @param value
+  # @param [Object] value
   #   The value to be set.
   #
-  # @return value - the value that was set
+  # @return [Object] the value that was set
   #
   # @version SketchUp 6.0
   def []=(key, value)
@@ -213,10 +218,10 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   #   observer = Sketchup::RenderingOptionsObserver.new # Dummy observer.
   #   result = Sketchup.active_model.rendering_options.add_observer(observer)
   #
-  # @param observer
+  # @param [Object] observer
   #   An observer.
   #
-  # @return true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def add_observer(observer)
@@ -265,7 +270,7 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   #     puts key
   #   }
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   #
@@ -293,7 +298,7 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   # @example
   #   keys = Sketchup.active_model.rendering_options.keys
   #
-  # @return keys - an array of keys
+  # @return [Array<String>] an array of keys
   #
   # @version SketchUp 6.0
   def keys
@@ -323,10 +328,10 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   #   options.add_observer(observer)
   #   result = options.remove_observer(observer)
   #
-  # @param observer
+  # @param [Object] observer
   #   An observer.
   #
-  # @return true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def remove_observer(observer)

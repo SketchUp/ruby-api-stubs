@@ -43,10 +43,10 @@ class Sketchup::Material < Sketchup::Entity
   #   m2 = materials.add('Fred')
   #   p m1 <=> m2
   #
-  # @param material2
+  # @param [Sketchup::Material] material2
   #   A Material object.
   #
-  # @return status - 0 if they are equal, positive number if
+  # @return [Integer] 0 if they are equal, positive number if
   #   material1 > material2, negative if material1 < material2
   #
   # @version SketchUp 6.0
@@ -66,10 +66,10 @@ class Sketchup::Material < Sketchup::Entity
   #     UI.messagebox('The Materials are not equal.')
   #   end
   #
-  # @param material2
+  # @param [Sketchup::Material] material2
   #   A Material object.
   #
-  # @return status - true if the materials are the same, false if
+  # @return [Boolean] true if the materials are the same, false if
   #   they are different
   #
   # @version SketchUp 6.0
@@ -85,7 +85,7 @@ class Sketchup::Material < Sketchup::Entity
   # @example
   #   alpha_value = Sketchup.active_model.materials[0].alpha
   #
-  # @return alpha - a number between 0 and 1
+  # @return [Float] a number between 0 and 1
   #
   # @version SketchUp 6.0
   def alpha
@@ -103,10 +103,10 @@ class Sketchup::Material < Sketchup::Entity
   #   material = materials.add('Joe')
   #   material.alpha = 0.5
   #
-  # @param alpha
+  # @param [Float] alpha
   #   An opacity value.
   #
-  # @return status - the newly set opacity value
+  # @return [Float] the newly set opacity value
   #
   # @version SketchUp 6.0
   def alpha=(alpha)
@@ -123,7 +123,7 @@ class Sketchup::Material < Sketchup::Entity
   #   material.color = 'red'
   #   color = material.color
   #
-  # @return color - a Color object
+  # @return [Sketchup::Color] a Color object
   #
   # @version SketchUp 6.0
   def color
@@ -143,10 +143,10 @@ class Sketchup::Material < Sketchup::Entity
   #   material = materials.add('Joe')
   #   material.color = 'red'
   #
-  # @param color
+  # @param [Sketchup::Color, String, nil] color
   #   A Color object.
   #
-  # @return color - the newly set Color object's name
+  # @return [Sketchup::Color, String, nil] the newly set Color object
   #
   # @version SketchUp 6.0
   def color=(color)
@@ -158,7 +158,7 @@ class Sketchup::Material < Sketchup::Entity
   #   material = Sketchup.active_model.materials[0]
   #   h, l, s = material.colorize_deltas
   #
-  # @return Array - An array of floats representing the HLS delta.
+  # @return [Array(Float, Float, Float)] An array of floats representing the HLS delta.
   #
   # @version SketchUp 2015
   def colorize_deltas
@@ -176,7 +176,7 @@ class Sketchup::Material < Sketchup::Entity
   #   material = Sketchup.active_model.materials[0]
   #   type = material.colorize_type
   #
-  # @return type - the colorize type for the Material object.
+  # @return [Integer] the colorize type for the Material object.
   #
   # @version SketchUp 2015
   def colorize_type
@@ -194,10 +194,10 @@ class Sketchup::Material < Sketchup::Entity
   #   material = Sketchup.active_model.materials[0]
   #   material.colorize_type = Sketchup::Material::COLORIZE_TINT
   #
-  # @param type
-  #   - the new colorize type for the Material object.
+  # @param [Integer] type
+  #   the new colorize type for the Material object.
   #
-  # @return type - the colorize type for the Material object.
+  # @return [Integer] the colorize type for the Material object.
   #
   # @version SketchUp 2015
   def colorize_type=(type)
@@ -219,7 +219,7 @@ class Sketchup::Material < Sketchup::Entity
   #   # to the UI like SketchUp does.
   #   puts material.display_name # Outputs "Joe"
   #
-  # @return name - the display name for the material
+  # @return [String] the display name for the material
   #
   # @version SketchUp 6.0
   def display_name
@@ -237,7 +237,7 @@ class Sketchup::Material < Sketchup::Entity
   #   material = Sketchup.active_model.materials[0]
   #   type = material.materialType
   #
-  # @return type - the material type for the Material object. See
+  # @return [Integer] the material type for the Material object. See
   #   summary for details.
   #
   # @version SketchUp 6.0
@@ -260,7 +260,7 @@ class Sketchup::Material < Sketchup::Entity
   #   # to the UI like SketchUp does.
   #   puts material.display_name # Outputs "Joe"
   #
-  # @return name - the name of the Material object
+  # @return [String] the name of the Material object
   #
   # @version SketchUp 6.0
   def name
@@ -273,7 +273,13 @@ class Sketchup::Material < Sketchup::Entity
   #   material = materials.add("Joe")
   #   material.name = 'Jeff'
   #
-  # @return name - the newly set material name.
+  # @param [String] str
+  #   the new material name
+  #
+  # @raise [ArgumentError] if the name is not unique to the model.
+  #   (Added in SU2018)
+  #
+  # @return [String] the newly set material name.
   #
   # @version SketchUp 8.0 M1
   def name=(str)
@@ -309,7 +315,7 @@ class Sketchup::Material < Sketchup::Entity
   #   material.texture = "C:/Materials/Carpet.jpg"
   #   texture = material.texture
   #
-  # @return texture - the Texture object within the Material.
+  # @return [Sketchup::Texture, nil] the Texture object within the Material.
   #   Returns nil if the Material does not have a texture.
   #
   # @version SketchUp 6.0
@@ -328,15 +334,20 @@ class Sketchup::Material < Sketchup::Entity
   #
   # @overload texture=(filename)
   #
-  #   @param [String] filename The file path to the texture the material should
-  #     use.
+  #   @param filename [String] The file path to the texture the material should use.
+  #   @return [String]
+  #
+  # @overload texture=(image_rep)
+  #
+  #   @param [Sketchup::ImageRep] image_rep The pixel data representing the
+  #     texture. (Added in SketchUp 2018)
+  #   @return [Sketchup::ImageRep]
   #
   # @overload texture=(properties)
   #
-  #   @param [Array<String, Integer, Integer>] properties An array with the
+  #   @param properties [Array(String, Integer, Integer)] An array with the
   #     texture filename and optionally the width and height in model units.
-  #
-  # @return [Sketchup::Texture] the newly set Texture object
+  #   @return [Array(String, Integer, Integer)]
   #
   # @version SketchUp 6.0
   def texture=(arg)
@@ -351,8 +362,7 @@ class Sketchup::Material < Sketchup::Entity
   #   material = Sketchup.active_model.materials[0]
   #   is_alpha = material.use_alpha?
   #
-  # @return type - the material type for the Material object. See
-  #   summary for details.
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -369,13 +379,13 @@ class Sketchup::Material < Sketchup::Entity
   #     material.write_thumbnail(thumbnail_file, 128)
   #   }
   #
-  # @param filename
+  # @param [String] filename
   #   The file name for the thumbnail.
   #
-  # @param resolution
+  # @param [Integer] resolution
   #   The resolution of the thumbnail.
   #
-  # @return status - true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 8.0 M1
   def write_thumbnail(filename, resolution)

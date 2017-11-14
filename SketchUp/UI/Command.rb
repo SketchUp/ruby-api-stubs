@@ -49,11 +49,11 @@ class UI::Command
   #   cmd = UI::Command.new("Tester") { UI.messagebox("Hello World") }
   #   testmenu.add_item cmd
   #
-  # @param menutext
+  # @param [String] menutext
   #   The text that will appear for this command's menu item
   #   if it appears on a menu.
   #
-  # @return command - the new Command object
+  # @return [UI::Command] the new Command object
   #
   # @version SketchUp 6.0
   #
@@ -77,7 +77,7 @@ class UI::Command
   #   toolbar.show
   #   puts cmd.large_icon
   #
-  # @return string - the path to the large icon.
+  # @return [String] the path to the large icon.
   #
   # @version SketchUp 8.0 M1
   def large_icon
@@ -101,10 +101,10 @@ class UI::Command
   #   toolbar = toolbar.add_item cmd
   #   toolbar.show
   #
-  # @param path
+  # @param [String] path
   #   The path to the large icon.
   #
-  # @return command - the Command object
+  # @return [String]
   #
   # @version SketchUp 6.0
   def large_icon=(path)
@@ -121,7 +121,7 @@ class UI::Command
   #   testmenu.add_item cmd
   #   puts cmd.menu_text
   #
-  # @return command - a Command object
+  # @return [String]
   #
   # @version SketchUp 8.0 M1
   def menu_text
@@ -137,10 +137,10 @@ class UI::Command
   #   cmd.menu_text = "New String"
   #   testmenu.add_item cmd
   #
-  # @param menuitem
+  # @param [String] menuitem
   #   A string representing the menu item for the command.
   #
-  # @return command - a Command object
+  # @return [String]
   #
   # @version SketchUp 6.0
   def menu_text=(menuitem)
@@ -189,7 +189,7 @@ class UI::Command
   #   toolbar.show
   #   puts cmd.small_icon
   #
-  # @return string - the path to the small_icon
+  # @return [String] the path to the small_icon
   #
   # @version SketchUp 8.0 M1
   def small_icon
@@ -213,10 +213,10 @@ class UI::Command
   #   toolbar = toolbar.add_item cmd
   #   toolbar.show
   #
-  # @param path
+  # @param [String] path
   #   A path to the small icon.
   #
-  # @return command - the Command object
+  # @return [String]
   #
   # @version SketchUp 6.0
   def small_icon=(path)
@@ -237,7 +237,7 @@ class UI::Command
   #   toolbar.show
   #   puts cmd.status_bar_text
   #
-  # @return string - the status bar text.
+  # @return [String] the status bar text.
   #
   # @version SketchUp 8.0 M1
   def status_bar_text
@@ -256,11 +256,11 @@ class UI::Command
   #   toolbar = toolbar.add_item cmd
   #   toolbar.show
   #
-  # @param text
+  # @param [String] text
   #   The text that will appear on the status bar when the
   #   cursor is over the command's menu item.
   #
-  # @return command - the Command object
+  # @return [String]
   #
   # @version SketchUp 6.0
   def status_bar_text=(text)
@@ -277,7 +277,7 @@ class UI::Command
   #   toolbar.show
   #   puts cmd.tooltip
   #
-  # @return string - the tooltip text
+  # @return [String] the tooltip text
   #
   # @version SketchUp 8.0 M1
   def tooltip
@@ -295,10 +295,10 @@ class UI::Command
   #   toolbar = toolbar.add_item cmd
   #   toolbar.show
   #
-  # @param text
+  # @param [String] text
   #   The text of the tooltip.
   #
-  # @return command - the Command object
+  # @return [String]
   #
   # @version SketchUp 6.0
   def tooltip=(text)

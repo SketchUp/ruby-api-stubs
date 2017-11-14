@@ -22,7 +22,7 @@ class Sketchup::Menu
   #
   # @overload add_item(menu, &block)
   #
-  #   @param [String] menu  The name of the menu to add.
+  #   @param [String] menu The name of the menu to add.
   #   @yield  A block that will be invoked when the menu item is selected.
   #   @return [Integer] A unique integer id for the added menu item.
   #
@@ -41,7 +41,7 @@ class Sketchup::Menu
   #   plugins_menu = UI.menu("Plugins")
   #   plugins_menu.add_separator
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def add_separator
@@ -59,7 +59,7 @@ class Sketchup::Menu
   # @param [String] title
   #   The title of the sub menu.
   #
-  # @return submenu - a Menu object
+  # @return [Sketchup::Menu] a Menu object
   #
   # @version SketchUp 6.0
   def add_submenu(title)
@@ -80,10 +80,10 @@ class Sketchup::Menu
   #     end
   #   }
   #
-  # @param menu
+  # @param [String] menu
   #   A string name of the menu to add.
   #
-  # @return item_id - a unique numerical item id for the menu
+  # @return [Integer] a unique numerical item id for the menu
   #
   # @version SketchUp 6.0
   #

@@ -34,7 +34,7 @@ class Sketchup::Texture < Sketchup::Entity
   #     UI.messagebox "Failure: No average color"
   #   end
   #
-  # @return color - a color object (if successful), nil if
+  # @return [Sketchup::Color, nil] a color object (if successful), nil if
   #   unsuccessful.
   #
   # @version SketchUp 6.0
@@ -63,7 +63,7 @@ class Sketchup::Texture < Sketchup::Entity
   #     UI.messagebox "Failure"
   #   end
   #
-  # @return filename - a string representation of the path and
+  # @return [String] a string representation of the path and
   #   filename used for the texture.
   #
   # @version SketchUp 6.0
@@ -76,7 +76,7 @@ class Sketchup::Texture < Sketchup::Entity
   # @example
   #   height = texture.height
   #
-  # @return height - the height, in inches, of the texture pattern
+  # @return [Integer] the height, in inches, of the texture pattern
   #
   # @version SketchUp 6.0
   def height
@@ -93,11 +93,27 @@ class Sketchup::Texture < Sketchup::Entity
   #     UI.messagebox "Failure"
   #   end
   #
-  # @return imageheight - the height, in pixels, of the texture
+  # @return [Integer] the height, in pixels, of the texture
   #   pattern
   #
   # @version SketchUp 6.0
   def image_height
+  end
+
+  # The {#image_rep} method returns a copy of a {Sketchup::ImageRep} object
+  # representing the texture pixel data.
+  #
+  # @example
+  #   texture = Sketchup.active_model.materials[0].texture
+  #   image_rep = texture.image_rep
+  #
+  # @param [Boolean] colorized
+  #   Set to +true+ to obtain the colorized version.
+  #
+  # @return [Sketchup::ImageRep]
+  #
+  # @version SketchUp 2018
+  def image_rep(colorized = false)
   end
 
   # The image_width method retrieves the width of the repeatable texture image,
@@ -111,7 +127,7 @@ class Sketchup::Texture < Sketchup::Entity
   #     UI.messagebox "Failure"
   #   end
   #
-  # @return imagewidth - the width, in pixels, of the texture
+  # @return [Integer] the width, in pixels, of the texture
   #   pattern
   #
   # @version SketchUp 6.0
@@ -139,14 +155,14 @@ class Sketchup::Texture < Sketchup::Entity
   #     UI.messagebox "Failure"
   #   end
   #
-  # @param size
+  # @param [Integer, Array(Integer, Integer)] size
   #   The size, in inches, of the texture. This number will
   #   apply to height and width to keep aspect ratio.
   #   You can also pass as a parameter an array of two
   #   numeric values which will set width and height
   #   regardless of maintaining the height/width ratio.
   #
-  # @return size - the size, in inches, of the texture. This number
+  # @return [Integer, Array(Integer, Integer)] the size, in inches, of the texture. This number
   #   will apply to height and width to keep aspect ratio.
   #   If you have passed in an array of two numbers for width
   #   and height, the same array will be returned if
@@ -166,7 +182,7 @@ class Sketchup::Texture < Sketchup::Entity
   #     UI.messagebox status
   #   end
   #
-  # @return status - true if valid, false if invalid.
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -180,7 +196,7 @@ class Sketchup::Texture < Sketchup::Entity
   # @example
   #   width = texture.width
   #
-  # @return width - the width, in inches, of the texture pattern
+  # @return [Integer] the width, in inches, of the texture pattern
   #
   # @version SketchUp 6.0
   def width
@@ -195,14 +211,14 @@ class Sketchup::Texture < Sketchup::Entity
   #   filename = File.join(Sketchup.temp_dir, basename)
   #   material.texture.write(filename)
   #
-  # @param filename
+  # @param [String] filename
   #   String - The filename to write the texture to.
   #
-  # @param colorize
+  # @param [Boolean] colorize
   #   Boolean - Allows for the texture to
   #   be exported with the color adjustments.
   #
-  # @return Boolean - true if the method succeeded
+  # @return [Boolean] true if the method succeeded
   #
   # @version SketchUp 2016
   def write(filename, colorize = false)

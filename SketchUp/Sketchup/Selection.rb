@@ -67,10 +67,10 @@ class Sketchup::Selection
   #   entity = entities[0]
   #   status = selection.add entity
   #
-  # @param ents_or_array
+  # @param [Array<Sketchup::Entity>] ents_or_array
   #   List or Array of Entity objects.
   #
-  # @return status - the number of Entity objects added
+  # @return [Integer] the number of Entity objects added
   #
   # @version SketchUp 6.0
   def add(ents_or_array)
@@ -82,10 +82,10 @@ class Sketchup::Selection
   #   selection = Sketchup.active_model.selection
   #   status = selection.add_observer observer
   #
-  # @param observer
+  # @param [Object] observer
   #   An observer.
   #
-  # @return true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def add_observer(observer)
@@ -119,7 +119,7 @@ class Sketchup::Selection
   #   UI.messagebox "Ready to Clear"
   #   selection.clear
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def clear
@@ -171,11 +171,11 @@ class Sketchup::Selection
   # @example
   #   selection.each { |entity| UI.messagebox(entity) }
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   #
-  # @yield [entity] A variable that will hold each Entity object as they
+  # @yield [Sketchup::Entity] A variable that will hold each Entity object as they
   #   are found.
   def each
   end
@@ -187,8 +187,7 @@ class Sketchup::Selection
   #   status = selection.add entity
   #   status = selection.empty
   #
-  # @return status - true if the selection is empty. False if the
-  #   selection is not empty.
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -206,7 +205,7 @@ class Sketchup::Selection
   #   status = selection.add entity
   #   entity = selection.first
   #
-  # @return entity - the first selected Entity object if successful
+  # @return [Sketchup::Entity] the first selected Entity object if successful
   #
   # @version SketchUp 6.0
   def first
@@ -241,9 +240,7 @@ class Sketchup::Selection
   #   selection.add entity
   #   status = selection.is_curve?
   #
-  # @return status - true if the selection contains all edges that
-  #   belong to a single curve. False if the selection does
-  #   not contain all edges that belong to a single curve.
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -258,10 +255,7 @@ class Sketchup::Selection
   #   selection.add entity
   #   status = selection.is_surface
   #
-  # @return status - true if the selection contains all faces that
-  #   belong to a single curved surface. False if the
-  #   selection does not contain all faces that belong to a
-  #   single curved surface.
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -290,7 +284,7 @@ class Sketchup::Selection
   # @example
   #   model = selection.model
   #
-  # @return model - the model that includes the selection if
+  # @return [Sketchup::Model] the model that includes the selection if
   #   successful
   #
   # @version SketchUp 6.0
@@ -331,10 +325,10 @@ class Sketchup::Selection
   #   entity = entities[0]
   #   status = selection.add entity
   #
-  # @param ents_or_array
+  # @param [Array<Sketchup::Entity>] ents_or_array
   #   List or Array of Entity objects.
   #
-  # @return status - the number of Entity objects removed
+  # @return [Integer] the number of Entity objects removed
   #
   # @version SketchUp 6.0
   def remove(ents_or_array)
@@ -347,10 +341,10 @@ class Sketchup::Selection
   #   selection = Sketchup.active_model.selection
   #   status = object.remove_observer observer
   #
-  # @param observer
+  # @param [Object] observer
   #   An observer.
   #
-  # @return true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def remove_observer(observer)
@@ -364,7 +358,7 @@ class Sketchup::Selection
   #   UI.messagebox "Ready to remove item from selection set"
   #   entity = selection.shift
   #
-  # @return entity - the first Entity object in the selection set
+  # @return [Sketchup::Entity] the first Entity object in the selection set
   #   if successful
   #
   # @version SketchUp 6.0
@@ -380,9 +374,7 @@ class Sketchup::Selection
   # @example
   #   status = selection.single_object
   #
-  # @return status - true if the selection contains a single
-  #   object. False if the selection does not contain a
-  #   single object.
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -426,10 +418,10 @@ class Sketchup::Selection
   #   entity = entities[0]
   #   status = selection.add entity
   #
-  # @param ents_or_array
+  # @param [Array<Sketchup::Entity>] ents_or_array
   #   List or Array of Entity objects.
   #
-  # @return status - the number of Entity objects changed
+  # @return [Integer] the number of Entity objects changed
   #
   # @version SketchUp 6.0
   def toggle(ents_or_array)

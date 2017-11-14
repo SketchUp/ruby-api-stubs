@@ -51,6 +51,7 @@ class Sketchup::Model
   VERSION_2015 = nil # Stub value.
   VERSION_2016 = nil # Stub value.
   VERSION_2017 = nil # Stub value.
+  VERSION_2018 = nil # Stub value.
   VERSION_3 = nil # Stub value.
   VERSION_4 = nil # Stub value.
   VERSION_5 = nil # Stub value.
@@ -69,15 +70,19 @@ class Sketchup::Model
   # @example
   #   status = model.abort_operation
   #
-  # @return status - true if successful, false if unsuccessful
+  # @return [Boolean] true if successful, false if unsuccessful
   #
   # @version SketchUp 6.0
   def abort_operation
   end
 
   # Returns an {Sketchup::Entities} object which contains
-  # all of the entities in the active model, component, or group (if you are
-  # within a group or component edit session.)
+  # the entities in the open group or component instance. If no group or
+  # component is open for editing then this will be the same as {#entities}.
+  #
+  # To perform actions upon the current set of entities the user is working with
+  # then this is the method to use. Entities selected by the user will be a
+  # subset of the active entities.
   #
   # @example
   #   model = Sketchup.active_model
@@ -86,11 +91,13 @@ class Sketchup::Model
   #
   # @return [Sketchup::Entities]
   #
+  # @see #edit_transform
+  #
   # @version SketchUp 6.0
   def active_entities
   end
 
-  # The active_layer method retrieves the active Layer.
+  # The {#active_layer} method retrieves the active Layer.
   #
   # The default layer in SketchUp is layer 0.
   #
@@ -98,8 +105,7 @@ class Sketchup::Model
   #   model = Sketchup.active_model
   #   layer = model.active_layer
   #
-  # @return layer - a layer object containing the currently active
-  #   layer
+  # @return [Sketchup::Layer]
   #
   # @version SketchUp 6.0
   def active_layer
@@ -135,20 +141,20 @@ class Sketchup::Model
   # @example
   #   active_path = Sketchup.active_model.active_path
   #
-  # @return path - array of entities showing where the user is
+  # @return [Array<Sketchup::Drawingelement>, nil] array of entities showing where the user is
   #   currently editing.
   #
   # @version SketchUp 7.0
   def active_path
   end
 
-  # The active_view method returns the active View object for this model.
+  # The {#active_view} method returns the active View object for this model.
   #
   # @example
   #   model = Sketchup.active_model
   #   view = model.active_view
   #
-  # @return view - a view object
+  # @return [Sketchup::View]
   #
   # @version SketchUp 6.0
   def active_view
@@ -165,16 +171,16 @@ class Sketchup::Model
   #   # upper left corner of model window.
   #   note = Sketchup.active_model.add_note('Hello World', 0.1, 0.1)
   #
-  # @param note
+  # @param [String] note
   #   A string note.
   #
-  # @param x
-  #   A distance along the x axis between 0 and 1.
-  #
-  # @param y
+  # @param [Numeric] y
   #   A distance along the y axis between 0 and 1.
   #
-  # @return note - a note object or an exception if it is
+  # @param [Numeric] x
+  #   A distance along the x axis between 0 and 1.
+  #
+  # @return [Sketchup::Text] a note object or an exception if it is
   #   unsuccessful.
   #
   # @version SketchUp 6.0
@@ -188,17 +194,17 @@ class Sketchup::Model
   #   observer = Sketchup::ModelObserver.new
   #   status = model.add_observer(observer)
   #
-  # @param observer
+  # @param [Object] observer
   #   An observer.
   #
-  # @return true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def add_observer(observer)
   end
 
-  # The attribute_dictionaries method retrieves the AttributeDictionaries object
-  # that is associated with the Model.
+  # The {#attribute_dictionaries} method retrieves the AttributeDictionaries
+  # object that is associated with the Model.
   #
   # @example
   #   model = Sketchup.active_model
@@ -210,7 +216,7 @@ class Sketchup::Model
   #     # Code to do something if attribute dictionaries do not exist.
   #   end
   #
-  # @return attributedictionaries - the AttributeDictionaries
+  # @return [Sketchup::AttributeDictionaries] the AttributeDictionaries
   #   object associated with the entity, or nil if there are
   #   no attribute_dictionary objects associated with the
   #   model. Care must be taken if nil is returned, for
@@ -233,22 +239,22 @@ class Sketchup::Model
   #   create_if_empty = true
   #   dictionary = model.attribute_dictionary('name', create_if_empty)
   #
-  # @param name
+  # @param [String] name
   #   The name of the dictionary you are attempting to
   #   retrieve.
   #
-  # @param [optional] create
+  # @param [Boolean] create
   #   if set to true an attribute dictionary of the
   #   given "name" will be created if not found.
   #
-  # @return attributedictionary - an attribute dictionary object if
+  # @return [Sketchup::AttributeDictionary] an attribute dictionary object if
   #   successful, nil if unsuccessful
   #
   # @version SketchUp 6.0
   def attribute_dictionary(name, create = false)
   end
 
-  # The axes method returns the drawing axes for the model.
+  # The {#axes} method returns the drawing axes for the model.
   #
   # @example
   #   # Point for a rectangle.
@@ -264,7 +270,7 @@ class Sketchup::Model
   #   points.each { |point| point.transform!(tr) }
   #   Sketchup.active_model.active_entities.add_face(points)
   #
-  # @return Axes - the axes for the model.
+  # @return [Sketchup::Axes] the axes for the model.
   #
   # @version SketchUp 2016
   def axes
@@ -276,32 +282,32 @@ class Sketchup::Model
   #   model = Sketchup.active_model
   #   behavior = model.behavior
   #
-  # @return behavior = behavior object for the model if successful
+  # @return [Sketchup::Behavior] behavior object for the model if successful
   #
   # @version SketchUp 6.0
   def behavior
   end
 
-  # The bounds method retrieves the bounding box of the model.
+  # The {#bounds} method retrieves the bounding box of the model.
   #
   # @example
   #   model = Sketchup.active_model
   #   bounds = model.bounds
   #
-  # @return boundingbox = bounding box for the model if successful
+  # @return [Geom::BoundingBox] bounding box for the model if successful
   #
   # @version SketchUp 6.0
   def bounds
   end
 
-  # The classifications method is used to retrieve the Classifications object
+  # The {#classifications} method is used to retrieve the Classifications object
   # for this model.
   #
   # @example
   #   model = Sketchup.active_model
   #   c = model.classifications
   #
-  # @return a Classifications object.
+  # @return [Sketchup::Classifications] a Classifications object.
   #
   # @version SketchUp 2015
   def classifications
@@ -316,13 +322,13 @@ class Sketchup::Model
   #   model = Sketchup.active_model
   #   model.close
   #
-  # @param ignore_changes
-  #   boolean - if true, model changes will be
+  # @param [Boolean] ignore_changes
+  #   If true, model changes will be
   #   ignored and save prompts will be suppressed.
   #   If false, changes will not be ignored and save
   #   prompts will be displayed normally.
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 2015
   def close(ignore_changes = false)
@@ -339,7 +345,7 @@ class Sketchup::Model
   #   model = Sketchup.active_model
   #   status = model.close_active
   #
-  # @return status - true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def close_active
@@ -353,22 +359,20 @@ class Sketchup::Model
   # @example
   #   status = model.commit_operation
   #
-  # @return status - true if successful, false if unsuccessful
+  # @return [Boolean] true if successful, false if unsuccessful
   #
   # @version SketchUp 6.0
   def commit_operation
   end
 
-  # The definitions method retrieves a definition list containing all of the
+  # The {#definitions} method retrieves a definition list containing all of the
   # component definitions in the model.
-  #
-  # The returned definitions can be empty.
   #
   # @example
   #   model = Sketchup.active_model
   #   definitions = model.definitions
   #
-  # @return definitions - a definitions list if successful.
+  # @return [Sketchup::DefinitionList]
   #
   # @version SketchUp 6.0
   def definitions
@@ -384,7 +388,7 @@ class Sketchup::Model
   #   model = Sketchup.active_model
   #   description = model.description
   #
-  # @return description - a description if successful.
+  # @return [String] a description if successful.
   #
   # @version SketchUp 6.0
   def description
@@ -415,23 +419,24 @@ class Sketchup::Model
   # @example
   #   Sketchup.active_model.edit_transform
   #
-  # @return transform - the current edit Transformation
+  # @return [Geom::Transformation] the current edit Transformation
   #
   # @version SketchUp 7.0
   def edit_transform
   end
 
-  # The entities method returns an Entities object containing an array of
-  # entities in the model.
-  #
-  # If no entities are in your model, this method returns an empty Entities
-  # object (an empty array)
+  # The {#entities} method returns an {Sketchup::Entities} object containing the
+  # entities in the root of model.
   #
   # @example
   #   model = Sketchup.active_model
   #   entities = model.entities
   #
-  # @return entities - an Entities object if successful
+  # @note This does not return a collection of all the entities in the model,
+  #   only the top level node of the model hierarchy. To get to all entities in
+  #   a model you must recursivly traverse the model.
+  #
+  # @return [Sketchup::Entities] an Entities object if successful
   #
   # @version SketchUp 6.0
   def entities
@@ -447,74 +452,31 @@ class Sketchup::Model
   #
   # Format Support Changes:
   # * SketchUp 7.1 added COLLADA (.dae) export capability.
-  # * SketchUp Pro 2016+ includes PDF export capability.
+  # * SketchUp Pro 2015+ added IFC export capability.
+  # * SketchUp Pro 2016+ added PDF export capability.
+  # * SketchUp Pro 2018+ added options for all 3D exporters.
   #
-  # The optional second parameter can be either:
-  # - a boolean flag, which instructs the exporter to display a summary dialog after export
-  # - a hash of options specific to the given exporter, which may include a summary dialog flag.
-  #
-  # The following describes the options that can be defined in the hash for the
-  # various exporters.
-  #
-  # All exporters
-  # - show_summary (default = false)
-  #
-  # DAE (COLLADA)
-  # - triangulated_faces (default = true)
-  # - doublesided_faces (default = true)
-  # - edges (default = false)
-  # - author_attribution (default = false)
-  # - texture_maps (default = true)
-  # - selectionset_only (default = false)
-  # - preserve_instancing (default = true)
-  #
-  # PDF
-  # WINDOWS OPTIONS
-  # - output_profile_lines (default = true)
-  # - output_section_lines (default = true)
-  # - edge_extensions (default = true)
-  # - match_screen_profiles (default = true)
-  # - match_screen_section (default = true)
-  # - match_screen_extensions (default = true)
-  # - full_scale (default = true)
-  # - map_fonts (default = true)
-  # - drawing_units (default = Length::Inches)
-  # - extension_units (default = Length::Feet)
-  # - height_units (default = Length::Feet)
-  # - model_units (default = Length::Feet)
-  # - width_units (default = Length::Feet)
-  # - extension_length (default = 0.0)
-  # - line_width (default = 0.0)
-  # - line_width_section (default = 0.0)
-  # - length_in_drawing (default = 1.0)
-  # - length_in_model (default = 1.0)
-  # - window_height (default = 1.0)
-  #
-  # MAC OPTIONS
-  # - line_weight (default = 0.5)
-  # - imageWidth (default = 50)
-  # - imageHeight (default = 50)
-  #
-  # Returns true or false indicating success or failure.
+  # See the {file:pages/exporter_options.md Exporter Options} file for information
+  # on creating a valid hash for the various exporters.
   #
   # @example
   #   model = Sketchup.active_model
   #   show_summary = true
   #
   #   # Export dwg file on a PC, showing a summary when complete.
-  #   status = model.export 'c:\my_export.dwg', show_summary
+  #   status = model.export('c:\my_export.dwg', show_summary)
   #
   #   # Export kmz file on Mac (note the absolute file path), without summary.
-  #   status = model.export '/Library/my_export.kmz'
+  #   status = model.export('/Library/my_export.kmz')
   #
   #   # Export pdf file on a PC, showing a summary when complete.
   #   options_hash = { :show_summary => true,
   #                    :output_profile_lines => false,
   #                    :map_fonts => false,
   #                    :model_units => Length::Meter }
-  #   status = model.export 'c:/my_export.pdf', show_summary
+  #   status = model.export('c:/my_export.pdf', options_hash)
   #
-  #   # Or for a COLLADA (.dae) file, using the default options
+  #   # Or for a COLLADA (.dae) file.
   #   options_hash = { :triangulated_faces => true,
   #                    :doublesided_faces => true,
   #                    :edges => false,
@@ -522,19 +484,24 @@ class Sketchup::Model
   #                    :texture_maps => true,
   #                    :selectionset_only => false,
   #                    :preserve_instancing => true }
-  #   status = model.export 'c:/my_export.dae', options_hash
+  #   status = model.export('c:/my_export.dae', options_hash)
   #
-  # @param filename
-  #   The name of the file to export.
+  # @overload export(filename, show_summary = false)
   #
-  # @param options
-  #   Either a true/false value or a hash table. See above
-  #   for details.
+  #   @param [String] filename The name of the file to export.
+  #   @param [Boolean] show_summary Boolean to show summary dialog.
+  #   @return [Boolean]
   #
-  # @return status - true if successful, false if unsuccessful
+  # @overload export(filename, options)
+  #
+  #   @param [String] filename The name of the file to export.
+  #   @param [Hash] options
+  #   @return [Boolean]
+  #
+  # @raise [ArgumentError] If the file extension is unsupported.
   #
   # @version SketchUp 6.0
-  def export(filename, options)
+  def export(*args)
   end
 
   # Finds and returns entities by their entityID or GUID.
@@ -564,12 +531,12 @@ class Sketchup::Model
   #   entities = model.find_entity_by_id(guid1, guid2, guid3)
   #   entities = model.find_entity_by_id([guid1, guid2, guid3])
   #
-  # @param ids_or_array
+  # @param [Array<Integer, String>] ids_or_array
   #   Pass either a series of ids or a single array containing
   #   ids. Ids must either be entityID Integers or GUID
   #   Strings.
   #
-  # @return entities_or_array  Returns an array with Entity  objects for each id
+  # @return [Array<Sketchup::Entity, nil>] Returns an array with Entity  objects for each id
   #   found and nil otherwise. Single Entity or nil when
   #   called with a single id.
   #
@@ -630,17 +597,17 @@ class Sketchup::Model
   #   model.set_attribute('testdictionary', 'test', 115)
   #   value = model.get_attribute('testdictionary', 'test', 42)
   #
-  # @param dictname
+  # @param [String] dictname
   #   The name of the dictionary containing the value.
   #
-  # @param key
-  #   The key containing the value.
-  #
-  # @param [optional] defaultvalue
+  # @param [Object] defaultvalue
   #   default value that will be returned if a
   #   value does not exist.
   #
-  # @return value - the value for a given key in the given
+  # @param [String] key
+  #   The key containing the value.
+  #
+  # @return [Object, nil] the value for a given key in the given
   #   dictionary if a value exists; the default value if a
   #   defaultvalue is provided and the value does not exist;
   #   nil if the value does not exist and no defaultvalue is
@@ -657,7 +624,7 @@ class Sketchup::Model
   #   model = Sketchup.active_model
   #   datum = model.get_datum
   #
-  # @return datum - a datum represented as a string if successful.
+  # @return [String] a datum represented as a string if successful.
   #
   # @version SketchUp 6.0
   def get_datum
@@ -682,10 +649,10 @@ class Sketchup::Model
   #   model = Sketchup.active_model
   #   product_family = model.get_product_family
   #   if product_family == Sketchup::Model::ProLicensed then
-  #     puts("You are running licensed SketchUp Pro!")
+  #     puts "You are running licensed SketchUp Pro!"
   #   end
   #
-  # @return number - the product family number.
+  # @return [Integer] the product family number.
   #
   # @version SketchUp 6.0
   def get_product_family
@@ -700,7 +667,7 @@ class Sketchup::Model
   #   model = Sketchup.active_model
   #   guid = model.guid
   #
-  # @return guid - a globally unique identifier, in the form of a
+  # @return [String] a globally unique identifier, in the form of a
   #   string, for the model
   #
   # @version SketchUp 6.0
@@ -710,22 +677,36 @@ class Sketchup::Model
   # The import method is used to load a file by recognizing the file extension
   # and calling appropriate importer.
   #
-  # @example
+  # See the {file:pages/importer_options.md Importer Options} file for information
+  # on creating a valid hash for the various importers.
+  #
+  # @example Import for SketchUp 2017 and older
   #   model = Sketchup.active_model
   #   show_summary = true
-  #   status = model.import "filename", show_summary
+  #   status = model.import("filename", show_summary)
   #
-  # @param filename
-  #   The name of the file to import.
+  # @example Import for SketchUp 2018+ and newer
+  #   model = Sketchup.active_model
+  #   options = { :units => "model",
+  #               :merge_coplaner_faces => true,
+  #               :show_summary => true }
+  #   status = model.import("filename", options)
   #
-  # @param show_summary
-  #   true if you want to show a summary window, false if you
-  #   do not want to show a summary window.
+  # @overload import(filename, options)
   #
-  # @return status - true if successful, false if unsuccessful
+  #   @param [String] filename The input filename.
+  #   @param [Hash] options The options.
+  #   @return [Boolean]
+  #
+  # @overload import(filename, show_summary = false)
+  #
+  #   @note This variant is for SketchUp 2017 and earlier.
+  #   @param [String] filename The input filename.
+  #   @param [Boolean] show_summary Show the summary dialog.
+  #   @return [Boolean]
   #
   # @version SketchUp 6.0
-  def import(filename, show_summary)
+  def import(*args)
   end
 
   # The {#instance_path_from_pid_path} method returns a instance path given a
@@ -772,24 +753,24 @@ class Sketchup::Model
   #   local_point = model.latlong_to_point(lnglat_array)
   #   model.entities.add_cpoint(local_point)
   #
-  # @param lnglat_array
+  # @param [Array(Numeric, Numeric)] lnglat_array
   #   A 2-element array containing first the longitude then
   #   the latitude.
   #
-  # @return point - a point3d object if successful, false if
+  # @return [Geom::Point3d] a point3d object if successful, false if
   #   unsuccessful.
   #
   # @version SketchUp 6.0
   def latlong_to_point(lnglat_array)
   end
 
-  # The layers method retrieves a collection of all Layers objects in the model.
+  # The {#layers method retrieves a collection of all Layers objects in the model.
   #
   # @example
   #   model = Sketchup.active_model
   #   layers = model.layers
   #
-  # @return layers - a Layers object containing a collection of
+  # @return [Sketchup::Layers] a Layers object containing a collection of
   #   layers in the model
   #
   # @version SketchUp 6.0
@@ -802,21 +783,21 @@ class Sketchup::Model
   #   model = Sketchup.active_model
   #   datums = model.list_datums
   #
-  # @return datums - An Array object containing the datums
+  # @return [Array<String>] An Array object containing the datums
   #   supported by SketchUp
   #
   # @version SketchUp 6.0
   def list_datums
   end
 
-  # The materials method returns a collection of all of the materials in the
+  # The {#materials} method returns a collection of all of the materials in the
   # model.
   #
   # @example
   #   model = Sketchup.active_model
   #   materials = model.materials
   #
-  # @return materials - materials collection.
+  # @return [Sketchup::Materials]
   #
   # @version SketchUp 6.0
   def materials
@@ -827,10 +808,10 @@ class Sketchup::Model
   # @example
   #   Sketchup.active_model.mipmapping = false
   #
-  # @param mipmap
-  #   boolean - whether mipmapping is turned on or off.
+  # @param [Boolean] mipmap
+  #   whether mipmapping is turned on or off.
   #
-  # @return boolean - the new mipmapping setting
+  # @return [Boolean] the new mipmapping setting
   #
   # @version SketchUp 7.0
   def mipmapping=(mipmap)
@@ -841,7 +822,7 @@ class Sketchup::Model
   # @example
   #   mipmapping = Sketchup.active_model.mipmapping?
   #
-  # @return boolean - the current mipmapping setting
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -859,9 +840,7 @@ class Sketchup::Model
   #   entities.add_group
   #   status = model.modified?
   #
-  # @return status = true if the model has been modified since last
-  #   save (and requires a save), false if the model has not
-  #   been modified.
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -875,7 +854,7 @@ class Sketchup::Model
   #   model = Sketchup.active_model
   #   name = model.name
   #
-  # @return name - string name of the model
+  # @return [String] string name of the model
   #
   # @version SketchUp 6.0
   def name
@@ -886,10 +865,10 @@ class Sketchup::Model
   # @example
   #   Sketchup.active_model.name = "My New Model Name"
   #
-  # @param name
-  #   - new name of the model
+  # @param [String] name
+  #   new name of the model
   #
-  # @return string - the new name
+  # @return [String] the new name
   #
   # @version SketchUp 6.0
   def name=(name)
@@ -902,11 +881,13 @@ class Sketchup::Model
   #   number_of_faces = model.number_faces
   #   puts "There are #{number_of_faces} faces in the model."
   #
+  # @return [Integer]
+  #
   # @version SketchUp 7.1
   def number_faces
   end
 
-  # The options method retrieves the options manager that defines the options
+  # The {#options} method retrieves the options manager that defines the options
   # settings for the model.
   #
   # Use the string keys instead of numerical indicies when accessing the options
@@ -922,21 +903,20 @@ class Sketchup::Model
   #     }
   #   }
   #
-  # @return optionsmanager - an OptionsManager object containing
-  #   one or more options providers if successful.
+  # @return [Sketchup::OptionsManager]
   #
   # @version SketchUp 6.0
   def options
   end
 
-  # The pages method retrieves a Pages object containing all of the pages in the
-  # Model.
+  # The {#pages} method retrieves a {Sketchup::Pages} object containing all of
+  # the pages in the model.
   #
   # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #
-  # @return pages - returns a Pages object with 0 or more pages.
+  # @return [Sketchup::Pages]
   #
   # @version SketchUp 6.0
   def pages
@@ -952,7 +932,7 @@ class Sketchup::Model
   #   model = Sketchup.active_model
   #   path = model.path
   #
-  # @return path - an string containing the path for the currently
+  # @return [String] an string containing the path for the currently
   #   opened model.
   #
   # @version SketchUp 6.0
@@ -965,15 +945,15 @@ class Sketchup::Model
   # @example
   #   model.place_component componentdefinition, repeat
   #
-  # @param componentdef
+  # @param [Sketchup::ComponentDefinition] componentdef
   #   A component definition object containing the
   #   definition (blueprint) for the component.
   #
-  # @param repeat
+  # @param [Boolean] repeat
   #   If set to true, stay in the component
   #   placement tool and place multiple components.
   #
-  # @return model - The model object on success or Nil
+  # @return [Sketchup::Model, nil] The model object on success or Nil
   #
   # @version SketchUp 6.0
   def place_component(componentdef, repeat = false)
@@ -993,10 +973,10 @@ class Sketchup::Model
   #   local_point = Geom::Point3d.new(10, 10, 10)
   #   world_point = model.point_to_latlong(local_point)
   #
-  # @param point
+  # @param [Geom::Point3d] point
   #   A Point3d object.
   #
-  # @return latlong_or_point - a LatLong or Point3d object. See
+  # @return [Geom::Point3d, Geom::LatLong] a LatLong or Point3d object. See
   #   details for information.
   #
   # @version SketchUp 6.0
@@ -1012,10 +992,10 @@ class Sketchup::Model
   #   point = Geom::Point3d.new(10, 10, 10)
   #   utm = model.point_to_utm(point)
   #
-  # @param point
+  # @param [Geom::Point3d] point
   #   A Point3d object.
   #
-  # @return utm - a UTM object
+  # @return [Geom::UTM] a UTM object
   #
   # @version SketchUp 6.0
   def point_to_utm(point)
@@ -1038,21 +1018,21 @@ class Sketchup::Model
   #
   # @note The parameter wysiwyg_flag was added in SU8 M1.
   #
-  # @param wysiwyg_flag
+  # @param [Array(Geom::Point3d, Geom::Vector3d)] ray
+  #   A two element array containing a point and a vector.
+  #
+  # @param [Boolean] wysiwyg_flag
   #   An optional boolean, added in SU8 M1, indicating
   #   whether or not to consider hidden geometry in intersect
   #   computations.  If this flag is not specified, it
   #   defaults to true (WYSIWYG) - i.e. hidden geometry is
   #   not intersected against.
   #
-  # @param ray
-  #   A two element array containing a point and a vector.
-  #
-  # @return item - an array of two values. The first value is a
+  # @return [Array(Geom::Point3d, Array<Sketchup::Drawingelement>), nil] an array of two values. The first value is a
   #   Point3d where the item that the ray passed through
   #   exists. The second element is the instance path array
   #   of the entity that the ray hit. For example, if the ray
-  #   hits a face that contained by a component instance the
+  #   hits a face that is contained by a component instance the
   #   instance path would be [Component1]. If the ray hit a
   #   face that is contained by a component instance, which
   #   is contained by another component instance and so on,
@@ -1060,7 +1040,7 @@ class Sketchup::Model
   #   Component3...].
   #
   # @version SketchUp 6.0
-  def raytest(ray, wysiwyg_flag)
+  def raytest(ray, wysiwyg_flag = true)
   end
 
   # The remove_observer method is used to remove an observer from the current
@@ -1072,23 +1052,23 @@ class Sketchup::Model
   #   model.add_observer(observer)
   #   status = model.remove_observer(observer)
   #
-  # @param observer
+  # @param [Object] observer
   #   An observer.
   #
-  # @return true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def remove_observer(observer)
   end
 
-  # The rendering_options method retrieves the RenderingOptions object for this
-  # Model.
+  # The {#rendering_options} method retrieves the RenderingOptions object for
+  # this model.
   #
   # @example
   #   model = Sketchup.active_model
   #   renderingoptions = model.rendering_options
   #
-  # @return renderingoptions - a RenderingOptions object
+  # @return [Sketchup::RenderingOptions]
   #
   # @version SketchUp 6.0
   def rendering_options
@@ -1109,30 +1089,50 @@ class Sketchup::Model
   #   filename = File.join(ENV['Home'], 'Desktop', 'mysketchup_v8.skp')
   #   status = model.save("filename", Sketchup::Model::VERSION_8)
   #
-  # @param filename
-  #   The name of the file to save.
+  # @overload save
+  #
   #   Starting with SketchUp 2014, this parameter is optional.
-  #   If not provided or an empty string, model will be saved
-  #   to the file to which it is associated. It must have
+  #   If no arguments are provided or the filename is an empty string, model
+  #   will be saved to the file to which it is associated. It must have
   #   already been saved to a file.
   #
-  # @param [SketchUp 2014+] version
-  #   Optional SketchUp file format to save.
-  #   If not provided, latest file format will be used.
-  #   Possible values are:
-  #   Sketchup::Model::VERSION_3, Sketchup::Model::VERSION_4,
-  #   Sketchup::Model::VERSION_5, Sketchup::Model::VERSION_6,
-  #   Sketchup::Model::VERSION_7, Sketchup::Model::VERSION_8,
-  #   Sketchup::Model::VERSION_2013,
-  #   Sketchup::Model::VERSION_2014,
-  #   Sketchup::Model::VERSION_2015,
-  #   Sketchup::Model::VERSION_2016,
-  #   Sketchup::Model::VERSION_2017
+  # @overload save(filename)
   #
-  # @return status - true if successful, false if unsuccessful
+  #   @param [String] filename
+  #     The name of the file to save.
+  #     Starting with SketchUp 2014, this parameter is optional.
+  #     If not provided or an empty string, model will be saved
+  #     to the file to which it is associated. It must have
+  #     already been saved to a file.
+  #
+  # @overload save(filename, version)
+  #
+  #   @param [String] filename
+  #     The name of the file to save.
+  #     Starting with SketchUp 2014, this parameter is optional.
+  #     If not provided or an empty string, model will be saved
+  #     to the file to which it is associated. It must have
+  #     already been saved to a file.
+  #
+  #   @param [Integer] version
+  #     (SketchUp 2014+)
+  #     Optional SketchUp file format to save.
+  #     If not provided, latest file format will be used.
+  #     Possible values are:
+  #     Sketchup::Model::VERSION_3, Sketchup::Model::VERSION_4,
+  #     Sketchup::Model::VERSION_5, Sketchup::Model::VERSION_6,
+  #     Sketchup::Model::VERSION_7, Sketchup::Model::VERSION_8,
+  #     Sketchup::Model::VERSION_2013,
+  #     Sketchup::Model::VERSION_2014,
+  #     Sketchup::Model::VERSION_2015,
+  #     Sketchup::Model::VERSION_2016,
+  #     Sketchup::Model::VERSION_2017,
+  #     Sketchup::Model::VERSION_2018
+  #
+  # @return [Boolean] true if successful, false if unsuccessful
   #
   # @version SketchUp 6.0
-  def save(filename, version)
+  def save(*args)
   end
 
   # This method is used to save the copy of the current model to a file.
@@ -1146,10 +1146,11 @@ class Sketchup::Model
   #   filename = File.join(ENV['Home'], 'Desktop', 'mysketchupcopy_v8.skp')
   #   status = model.save_copy(filename, Sketchup::Model::VERSION_8)
   #
-  # @param filename
+  # @param [String] filename
   #   The name of the file to save the model copy.
   #
-  # @param version
+  # @param [Integer] version
+  #   (SketchUp 2014+)
   #   Optional SketchUp file format to save.
   #   If not provided, latest file format will be used.
   #   Possible values are:
@@ -1160,9 +1161,10 @@ class Sketchup::Model
   #   Sketchup::Model::VERSION_2014,
   #   Sketchup::Model::VERSION_2015,
   #   Sketchup::Model::VERSION_2016,
-  #   Sketchup::Model::VERSION_2017
+  #   Sketchup::Model::VERSION_2017,
+  #   Sketchup::Model::VERSION_2018
   #
-  # @return status - true if successful, false if unsuccessful
+  # @return [Boolean] true if successful, false if unsuccessful
   #
   # @version SketchUp 2014
   def save_copy(filename, version)
@@ -1176,11 +1178,11 @@ class Sketchup::Model
   #   model = Sketchup.active_model
   #   status = model.save_thumbnail('testthumbnail2.jpg')
   #
-  # @param filename
+  # @param [String] filename
   #   The name of the file, with extension, to save the
   #   thumbnail as.
   #
-  # @return status - true if successful, false if unsuccessful
+  # @return [Boolean] true if successful, false if unsuccessful
   #
   # @version SketchUp 6.0
   def save_thumbnail(filename)
@@ -1200,10 +1202,10 @@ class Sketchup::Model
   #   model = Sketchup.active_model
   #   tool = model.select_tool(nil)
   #
-  # @param tool
+  # @param [Object] tool
   #   The Tool object you want to select.
   #
-  # @return model - The Model object.
+  # @return [Sketchup::Model] The Model object.
   #
   # @version SketchUp 6.0
   def select_tool(tool)
@@ -1217,7 +1219,7 @@ class Sketchup::Model
   #   model = Sketchup.active_model
   #   selection = model.selection
   #
-  # @return selection - A Selection object with 0 or more entities
+  # @return [Sketchup::Selection] A Selection object with 0 or more entities
   #   that are currently selected.
   #
   # @version SketchUp 6.0
@@ -1233,17 +1235,17 @@ class Sketchup::Model
   #   model = Sketchup.active_model
   #   value = model.set_attribute('attributedictionaryname', 'key', 'value')
   #
-  # @param attrdictname
+  # @param [String] attrdictname
   #   The name of the attribute dictionary whose attribute
   #   you wish to set.
   #
-  # @param key
-  #   The attribute name.
-  #
-  # @param value
+  # @param [Object] value
   #   The value to set.
   #
-  # @return value - the value that was set
+  # @param [String] key
+  #   The attribute name.
+  #
+  # @return [Object] the value that was set
   #
   # @version SketchUp 6.0
   def set_attribute(attrdictname, key, value)
@@ -1260,9 +1262,9 @@ class Sketchup::Model
   #   model = Sketchup.active_model
   #   value = model.set_datum('Adindan')
   #
-  # @param datum
+  # @param [String] datum
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def set_datum(datum)
@@ -1274,7 +1276,7 @@ class Sketchup::Model
   #   model = Sketchup.active_model
   #   shadowinfo = model.shadow_info
   #
-  # @return shadowinfo - a ShadowInfo object.
+  # @return [Sketchup::ShadowInfo]
   #
   # @version SketchUp 6.0
   def shadow_info
@@ -1319,12 +1321,6 @@ class Sketchup::Model
   #   new Ruby operation while another is still open, you will implicitly close
   #   the first one.
   #
-  # @param [Boolean] transparent
-  #   if set to true, then this operation will
-  #   append to the previous operation. This is particularly useful for
-  #   creating observers that react to user actions without littering the
-  #   undo stack with extra steps that Ruby is performing.
-  #
   # @param [Boolean] next_transparent
   #   <b>Deprecated!</b> if set to true, then
   #   whatever operation comes after this one will be appended into one
@@ -1343,19 +1339,25 @@ class Sketchup::Model
   # @param [String] op_name
   #   name of the operation visible in the UI
   #
+  # @param [Boolean] transparent
+  #   if set to true, then this operation will
+  #   append to the previous operation. This is particularly useful for
+  #   creating observers that react to user actions without littering the
+  #   undo stack with extra steps that Ruby is performing.
+  #
   # @return [Boolean] +true+ if successful, +false+ if unsuccessful
   #
   # @version SketchUp 6.0
   def start_operation(op_name, disable_ui = false, next_transparent = false, transparent = false)
   end
 
-  # The styles method retrieves the styles associated with the model.
+  # The {#styles} method retrieves the styles associated with the model.
   #
   # @example
   #   model = Sketchup.active_model
   #   styles = model.styles
   #
-  # @return styles - the Styles object if successful
+  # @return [Sketchup::Styles]
   #
   # @version SketchUp 6.0
   def styles
@@ -1367,7 +1369,7 @@ class Sketchup::Model
   #   model = Sketchup.active_model
   #   tags = model.tags
   #
-  # @return tags - string tags of the model
+  # @return [String] string tags of the model
   #
   # @version SketchUp 6.0
   def tags
@@ -1378,10 +1380,10 @@ class Sketchup::Model
   # @example
   #   Sketchup.active_model.tags = "Building, House, Brick"
   #
-  # @param tags
-  #   - new tags of the model
+  # @param [String] tags
+  #   new tags of the model
   #
-  # @return string - the new tags
+  # @return [String] the new tags
   #
   # @version SketchUp 6.0
   def tags=(tags)
@@ -1395,20 +1397,20 @@ class Sketchup::Model
   #   model = Sketchup.active_model
   #   title = model.title
   #
-  # @return title - the title of the model or an empty string (if
+  # @return [String] the title of the model or an empty string (if
   #   the title is not set)
   #
   # @version SketchUp 6.0
   def title
   end
 
-  # The tools method is used to retrieve the current Tools object.
+  # The {#tools} method is used to retrieve the current {Sketchup::Tools} object.
   #
   # @example
   #   model = Sketchup.active_model
   #   tools = model.tools
   #
-  # @return tools - a Tools object.
+  # @return [Sketchup::Tools] a Tools object.
   #
   # @version SketchUp 6.0
   def tools
@@ -1422,10 +1424,10 @@ class Sketchup::Model
   #   utm = Geom::UTM.new([+1, "A", 0.12333333, 0.12321321])
   #   point = model.utm_to_point(utm)
   #
-  # @param utm
+  # @param [Geom::UTM] utm
   #   A UTM object.
   #
-  # @return point - A Point3d object.
+  # @return [Geom::Point3d] A Point3d object.
   #
   # @version SketchUp 6.0
   def utm_to_point(utm)
@@ -1448,7 +1450,7 @@ class Sketchup::Model
   #     UI.messagebox('This model is NOT valid.')
   #   end
   #
-  # @return valid - true or false depending on model validity
+  # @return [Boolean]
   #
   # @return [Boolean]
   #

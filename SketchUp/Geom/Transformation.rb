@@ -112,7 +112,8 @@ class Geom::Transformation
   #
   # @overload scaling(scale)
   #
-  #   @note This might yield an unexpected transformation. It sets the 16th value
+  #   @note This has been fixed in SketchUp 2018 but in previous versions it
+  #     might yield an unexpected transformation. It sets the 16th value
   #     to the scaling factor. Something not all extensions reading the
   #     transformation expects. Consider using +scaling(xscale, yscale, zscale)+
   #     instead.
@@ -250,9 +251,10 @@ class Geom::Transformation
   #   # Returns false.
   #   status = tr.identity?
   #
-  # @note This only looks at the flag to see if the transform has not been
-  #   modified. If the transform has been changed, this will return false even if
-  #   it is really the identity.
+  # @note As of SketchUp 2018, this now looks at the data to determine if the
+  #   transformation is identity. Prior to SU2018, this only looks at the flag to
+  #   see if the transform has not been modified. If the transform has been
+  #   changed, this will return false even if it is really the identity.
   #
   # @return [Boolean] +true+ if the transformation is the identity
   #
@@ -334,6 +336,8 @@ class Geom::Transformation
   # @overload initialize(scale)
   #
   #   Creates a transformation that does uniform scaling.
+  #   @note Versions prior to SU2018 would produce transformations which
+  #     didn't always work right in SketchUp. See {.scaling} for more info.
   #   @param [Float] scale
   #   @return [Geom::Transformation]
   #

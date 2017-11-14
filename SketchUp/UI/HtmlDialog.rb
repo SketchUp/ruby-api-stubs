@@ -33,6 +33,9 @@ class UI::HtmlDialog
   # Basic types such as booleans, numbers, strings, arrays and hashes are
   # automatically converted between Ruby and JavaScript.
   #
+  # @example JavaScript
+  #   sketchup.say('Hello World', 42);
+  #
   # @example JavaScript with callback
   #   sketchup.say('Hello World', 42, {
   #     onCompleted: function() {
@@ -45,8 +48,8 @@ class UI::HtmlDialog
   #     puts "JavaScript said #{param1} and #{param2}"
   #   }
   #
-  # @example JavaScript
-  #   sketchup.say('Hello World', 42);
+  # @note When an HtmlDialog is closed, all callbacks to that instance are
+  #   cleared. Re-attach them if you need to open the dialog again.
   #
   # @param [String] callback_name
   #   The name of the callback method to be
@@ -59,11 +62,11 @@ class UI::HtmlDialog
   #
   # @yield [action_context, ...]
   #
-  # @yieldparam [Object] action_context
-  #   action_context  Currently unused.
-  #
   # @yieldparam [Object] ...
   #   The parameters sent from JavaScript.
+  #
+  # @yieldparam [Object] action_context
+  #   action_context  Currently unused.
   def add_action_callback(callback_name)
   end
 

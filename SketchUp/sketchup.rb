@@ -42,13 +42,13 @@ module Sketchup
   #
   # @example
   #   model = Sketchup.active_model
-  #   if (! model)
-  #     UI.messagebox "Failure"
+  #   if !model
+  #     UI.messagebox("Failure")
   #   else
   #     # code acting on the model
   #   end
   #
-  # @return [Sketchup::Model] model - active model object if successful, false if
+  # @return [Sketchup::Model] active model object if successful, false if
   #   unsuccessful
   #
   # @version SketchUp 6.0
@@ -58,12 +58,12 @@ module Sketchup
   # The add_observer method is used to add an observer to the current object.
   #
   # @example
-  #   status = Sketchup.add_observer observer
+  #   status = Sketchup.add_observer(observer)
   #
-  # @param observer
+  # @param [Object] observer
   #   An observer.
   #
-  # @return status - true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def self.add_observer(observer)
@@ -74,7 +74,7 @@ module Sketchup
   # @example
   #   name = Sketchup.app_name
   #
-  # @return name - the name of the application, either
+  # @return [String] the name of the application, either
   #   "SketchUp Pro" or "SketchUp".
   #   Note: For versions earlier than SketchUp8 M4
   #   (Mac 8.0.15157 and Windows 8.0.15158) this function will
@@ -95,13 +95,13 @@ module Sketchup
   # reactivated.
   #
   # @example
-  #   is_on = Sketchup.break_edges?
+  #   Sketchup.break_edges = false
   #
-  # @param enabled
+  # @param [Boolean] enabled
   #   If true, break edges will be turned on. If false, it
   #   will be deactivated.
   #
-  # @return setting - true if break edges was turned on.
+  # @return [Boolean] true if break edges was turned on.
   #
   # @version SketchUp 7.0
   def self.break_edges=(enabled)
@@ -116,7 +116,7 @@ module Sketchup
   # @example
   #   is_on = Sketchup.break_edges?
   #
-  # @return break_edges - true if the feature is on.
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -129,7 +129,7 @@ module Sketchup
   # @example
   #   texturewriter = Sketchup.create_texture_writer
   #
-  # @return texturewriter - a texturewriter object if successful.
+  # @return [Sketchup::TextureWriter] a texturewriter object if successful.
   #
   # @version SketchUp 6.0
   def self.create_texture_writer
@@ -142,10 +142,10 @@ module Sketchup
   # @example
   #   Sketchup.debug_mode = true
   #
-  # @param enabled
+  # @param [Boolean] enabled
   #   If true, SketchUp will produce debug warnings.
   #
-  # @return setting - true if debug mode is enabled.
+  # @return [Boolean]
   #
   # @version SketchUp 2016
   def self.debug_mode=(enabled)
@@ -157,7 +157,7 @@ module Sketchup
   # @example
   #   debug_mode = Sketchup.debug_mode?
   #
-  # @return debug_mode - true if debug mode is enabled
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -174,10 +174,10 @@ module Sketchup
   #
   # @note This method has been non-functional on Mac since SketchUp 8.
   #
-  # @param action_name
+  # @param [String] action_name
   #   An action string.
   #
-  # @return friendly_name = a friendly name.
+  # @return [String] a friendly name.
   #
   # @version SketchUp 6.0
   def self.display_name_from_action(action_name)
@@ -188,12 +188,11 @@ module Sketchup
   #
   # @example
   #   extensions = Sketchup.extensions
-  #   for extension in extensions
-  #     UI.messagebox('The next extension is named: ' + extension.name +
-  #         ' and its loaded? state is: ' + extension.loaded?)
-  #   end
+  #   extensions.each{ |extension|
+  #     puts "The next extension is named: #{extension.name} and its loaded? state is: #{extension.loaded?}"
+  #   }
   #
-  # @return extensionsmanager - an ExtensionsManager object.
+  # @return [Sketchup::ExtensionsManager] an ExtensionsManager object.
   #
   # @version SketchUp 8.0 M2
   def self.extensions
@@ -204,7 +203,7 @@ module Sketchup
   # @example
   #   new_sketchup = Sketchup.file_new
   #
-  # @return Sketchup - a Sketchup object if successful.
+  # @return [Module] The Sketchup module.
   #
   # @version SketchUp 6.0
   def self.file_new
@@ -216,29 +215,29 @@ module Sketchup
   # Forward slashes must be used to delimit between directory names.
   #
   # @example
-  #   help_file = Sketchup.find_support_file "help.html", "Plugins/"
-  #   if (help_file)
+  #   help_file = Sketchup.find_support_file("help.html", "Plugins/")
+  #   if help_file
   #     # Print out the help_file full path
-  #     UI.messagebox help_file
+  #     UI.messagebox(help_file)
   #
   #     # Open the help_file in a web browser
-  #     UI.openURL "file://" + help_file
+  #     UI.openURL("file://" + help_file)
   #   else
-  #     UI.messagebox "Failure"
+  #     UI.messagebox("Failure")
   #   end
   #
-  # @param filename
+  # @param [String] filename
   #   Name of the filename you want to find.
   #
-  # @param directory
+  # @param [String] directory
   #   directory relative to the SketchUp
   #   installation directory.
   #
-  # @return path - the entire path if successful. If unsuccessful,
+  # @return [String] the entire path if successful. If unsuccessful,
   #   the method returns false.
   #
   # @version SketchUp 6.0
-  def self.find_support_file(filename, directory = '')
+  def self.find_support_file(filename, directory)
   end
 
   # The find_support_files method is used to retrieve the path and name of all
@@ -249,15 +248,15 @@ module Sketchup
   # @example
   #   files = Sketchup.find_support_files('rb', 'Plugins')
   #
-  # @param filename
+  # @param [String] filename
   #   Extension of the files to be found.
   #
-  # @param directory
+  # @param [String] directory
   #   directory relative to the SketchUp installation
   #   directory. Without this the result will
   #   be empty.
   #
-  # @return array - an array of files. If unsuccessful, the method
+  # @return [Array<String>] an array of files. If unsuccessful, the method
   #   returns false.
   #
   # @version SketchUp 6.0
@@ -270,13 +269,13 @@ module Sketchup
   # method can be used to control it.
   #
   # @example
-  #   Sketchup.fix_shadow_strings=true
+  #   Sketchup.fix_shadow_strings = true
   #
-  # @param enabled
+  # @param [Boolean] enabled
   #   If true, shadow strings fix will be turned on. If
   #   false, it will be deactivated.
   #
-  # @return setting - true if shadow strings fix was turned on.
+  # @return [Boolean] true if shadow strings fix was turned on.
   #
   # @version SketchUp 8.0 M1
   def self.fix_shadow_strings=(enabled)
@@ -290,7 +289,7 @@ module Sketchup
   # @example
   #   is_on = Sketchup.fix_shadow_strings?
   #
-  # @return fix_shadow_strings - true if the feature is on.
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -302,13 +301,12 @@ module Sketchup
   # into degrees. For example, format_angle(Math::PI) will return 180.0.
   #
   # @example
-  #   degrees = Sketchup.format_angle Math::PI
+  #   degrees = Sketchup.format_angle(Math::PI)
   #
-  # @param number
+  # @param [Numeric] number
   #   A number to be formatted.
   #
-  # @return degrees - an angle in degrees if successful, false if
-  #   unsuccessful
+  # @return [String] an angle in degrees if successful, false if unsuccessful
   #
   # @version SketchUp 6.0
   def self.format_angle(number)
@@ -321,12 +319,12 @@ module Sketchup
   # squared.
   #
   # @example
-  #   area = Sketchup.format_area number
+  #   area = Sketchup.format_area(number)
   #
-  # @param number
+  # @param [Numeric] number
   #   A number to be formatted.
   #
-  # @return area - an area if successful, false if unsuccessful.
+  # @return [String] an area if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def self.format_area(number)
@@ -336,12 +334,12 @@ module Sketchup
   # example, 10 becomes 10.0. This is the equivalent to a to_f call.
   #
   # @example
-  #   degrees = Sketchup.format_degrees number
+  #   degrees = Sketchup.format_degrees(number)
   #
-  # @param number
+  # @param [Numeric] number
   #   A number to be formatted.
   #
-  # @return degrees - degrees if successful, false if unsuccessful.
+  # @return [String] degrees if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def self.format_degrees(number)
@@ -353,15 +351,15 @@ module Sketchup
   # The default unit setting is inches. For example, 10 becomes 10".
   #
   # @example
-  #   length = Sketchup.format_length 10
-  #   if (length)
-  #     UI.messagebox length
+  #   length = Sketchup.format_length(10)
+  #   if length
+  #     UI.messagebox(length)
   #   end
   #
-  # @param number
+  # @param [Numeric] number
   #   A number to be formatted.
   #
-  # @return length - length if successful, false if unsuccessful
+  # @return [String] length if successful, false if unsuccessful
   #
   # @version SketchUp 6.0
   def self.format_length(number)
@@ -375,14 +373,14 @@ module Sketchup
   # @example
   #   value = Sketchup.get_datfile_info(key, default_value)
   #
-  # @param key
+  # @param [String] key
   #   The key whose value you want to retrieve.
   #
-  # @param default_value
+  # @param [String] default_value
   #   The default value you want returned if key is not
   #   available.
   #
-  # @return value - a string value if successful.
+  # @return [String] a string value if successful.
   #
   # @version SketchUp 6.0
   def self.get_datfile_info(key, default_value)
@@ -397,14 +395,14 @@ module Sketchup
   # @example
   #   value = Sketchup.get_i18ndatfile_info(key, default_value)
   #
-  # @param key
+  # @param [String] key
   #   The key whose value you want to retrieve.
   #
-  # @param default_value
+  # @param [String] default_value
   #   The default value you want returned if key is not
   #   available.
   #
-  # @return value - a string value if successful.
+  # @return [String] a string value if successful.
   #
   # @version SketchUp 6.0
   def self.get_i18n_datfile_info(key, default_value)
@@ -421,7 +419,7 @@ module Sketchup
   # @example
   #   language = Sketchup.os_language
   #
-  # @return language - a code representing the language SketchUp
+  # @return [String] a code representing the language SketchUp
   #   is displaying.
   #
   # @version SketchUp 6.0
@@ -433,13 +431,12 @@ module Sketchup
   # localization files.
   #
   # @example
-  #   directory = Sketchup.get_resource_path "Styles.strings"
+  #   directory = Sketchup.get_resource_path("Styles.strings")
   #
-  # @param filename
-  #   The filename of a resource file in the resource
-  #   directory hierarchy.
+  # @param [String] filename
+  #   The filename of a resource file in the resource directory hierarchy.
   #
-  # @return path - the directory path to the resources folder.
+  # @return [String] the directory path to the resources folder.
   #
   # @version SketchUp 6.0
   def self.get_resource_path(filename)
@@ -453,7 +450,7 @@ module Sketchup
   # @example
   #   shortcuts = Sketchup.get_shortcuts
   #
-  # @return shortcuts - an array of shortcut strings.
+  # @return [Array<String>] an array of shortcut strings.
   #
   # @version SketchUp 6.0
   def self.get_shortcuts
@@ -484,21 +481,21 @@ module Sketchup
   #   begin
   #     Sketchup.install_from_archive(path)
   #   rescue Interrupt => error
-  #     UI.messagebox "User said 'no': " + error
+  #     UI.messagebox("User said 'no': " + error)
   #   rescue Exception => error
-  #     UI.messagebox "Error during unzip: " + error
+  #     UI.messagebox("Error during unzip: " + error)
   #   end
   #
   # @param [String] filename
   #   The path to the RBZ or ZIP file to install.
   #
-  # @raise [Exception] If the archive cannot be found.
+  # @raise [Exception] If the archive cannot be installed.
   #
   # @raise [Interrupt] If the user cancel the installation.
   #
-  # @raise [Exception] If the archive cannot be installed.
+  # @raise [Exception] If the archive cannot be found.
   #
-  # @return [Boolean] .
+  # @return [Boolean]
   #
   # @version SketchUp 8.0 M2
   def self.install_from_archive(filename)
@@ -518,7 +515,7 @@ module Sketchup
   #     # Load 32bit binaries.
   #   end
   #
-  # @return Boolean - True if SketchUp is 64bit.
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -533,7 +530,7 @@ module Sketchup
   # @example
   #   status = Sketchup.is_online
   #
-  # @return status - true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def self.is_online
@@ -545,11 +542,11 @@ module Sketchup
   # the product.
   #
   # @example
-  #   if (Sketchup.is_pro?)
-  #     UI.messagebox "You are running SU Pro."
+  #   if Sketchup.is_pro?
+  #     UI.messagebox("You are running SU Pro.")
   #   end
   #
-  # @return is_pro - true if the user is using SketchUp Pro
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -561,13 +558,12 @@ module Sketchup
   # contains illegal characters.
   #
   # @example
-  #   status = Sketchup.is_valid_filename? filename
+  #   status = Sketchup.is_valid_filename?(filename)
   #
-  # @param filename
+  # @param [String] filename
   #   A filename string.
   #
-  # @return status - true if filename is valid, false if filename
-  #   is invalid (contains illegal characters).
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -586,11 +582,11 @@ module Sketchup
   #   sfile = "application_loader" # file extension not required
   #   status = Sketchup.load(sfile)
   #
-  # @param path
+  # @param [String] path
   #   The path, including the filename, to the file you want
   #   to require.
   #
-  # @return status - True if the file is included. False if the
+  # @return [Boolean] True if the file is included. False if the
   #   file is not included.
   #
   # @version SketchUp 6.0
@@ -600,12 +596,12 @@ module Sketchup
   # The open_file method is used to open a file.
   #
   # @example
-  #   result = Sketchup.open_file "C:\\model.skp"
+  #   result = Sketchup.open_file("C:\\model.skp")
   #
-  # @param filename
+  # @param [String] filename
   #   The path and filename to open.
   #
-  # @return result - true if opening the file succeeded,
+  # @return [Boolean] true if opening the file succeeded,
   #   false otherwise.
   #
   # @version SketchUp 6.0
@@ -623,7 +619,7 @@ module Sketchup
   # @example
   #   language = Sketchup.os_language
   #
-  # @return language - a code representing the language SketchUp
+  # @return [String] a code representing the language SketchUp
   #   is displaying.
   #
   # @version SketchUp 6.0
@@ -638,10 +634,10 @@ module Sketchup
   #   float = Sketchup.parse_length("2'") # Returns 24 (representing inches)
   #   length = float.to_l # Convert to a Length type if needed.
   #
-  # @param string
+  # @param [String] string
   #   The string to be parsed as a number.
   #
-  # @return float - the numerical representation of the string if
+  # @return [Float] the numerical representation of the string if
   #   successful, or nil if unsuccessful.
   #
   # @version SketchUp 6.0
@@ -667,7 +663,7 @@ module Sketchup
   #     IS_OSX = Sketchup.platform == :platform_osx
   #   end
   #
-  # @return symbol - Current OS platform.
+  # @return [Symbol] Current OS platform.
   #
   # @version SketchUp 2014
   def self.platform
@@ -682,15 +678,15 @@ module Sketchup
   #
   # @example
   #   # Type this in the Ruby console then restart SketchUp.
-  #   Sketchup.plugins_disabled=true
+  #   Sketchup.plugins_disabled = true
   #
   #   # To reactivate plugins, type this into the Ruby console and restart.
-  #   Sketchup.plugins_disabled=false
+  #   Sketchup.plugins_disabled = false
   #
-  # @param enabled
+  # @param [Boolean] enabled
   #   If true, the plugins directory will not load.
   #
-  # @return setting - true if plugins were disabled.
+  # @return [Boolean] true if plugins were disabled.
   #
   # @version SketchUp 8.0 M2
   def self.plugins_disabled=(enabled)
@@ -702,7 +698,7 @@ module Sketchup
   # @example
   #   is_disabled = Sketchup.plugins_disabled?
   #
-  # @return plugins_disabled - true if the plugins are disabled.
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -729,19 +725,18 @@ module Sketchup
   # (within the Software > SketchUp > SketchUp [Version] section).
   #
   # @example
-  #   result = Sketchup.read_default "section",
-  #   "variable", "default"
+  #   result = Sketchup.read_default("section", "variable", "default")
   #
-  # @param section
+  # @param [String] section
   #   A section in an .INI or registry.
   #
-  # @param variable
-  #   A variable within the section.
-  #
-  # @param default
+  # @param [Object] default
   #   A default value if the value is not found.
   #
-  # @return result - nil if unsuccessful, the value of the default
+  # @param [String] variable
+  #   A variable within the section.
+  #
+  # @return [Object, nil] if unsuccessful, the value of the default
   #   if successful.
   #
   # @version SketchUp 6.0
@@ -752,26 +747,26 @@ module Sketchup
   # SketchUp's extension manager (in SketchUp preferences).
   #
   # @example
-  #   utilitiesExtension = SketchupExtension.new "Utilities Tools",
-  #     "Utilities/utilitiesTools.rb"
+  #   utilities_extension = SketchupExtension.new("Utilities Tools",
+  #     "Utilities/utilitiesTools.rb")
   #
-  #   utilitiesExtension.description = "Adds Tools->Utilities to the " +
+  #   utilities_extension.description = "Adds Tools->Utilities to the " +
   #     "SketchUp inteface. The Utilities submenu contains two tools: " +
   #     "Create Face and Query Tool."
   #
-  #   Sketchup.register_extension utilitiesExtension, false
+  #   Sketchup.register_extension(utilities_extension, false)
   #
   # @note It is recommended to set +load_on_start+ to true unless you have a very
   #   good reason not to.
+  #
+  # @param [SketchupExtension] extension
+  #   A SketchupExtension object.
   #
   # @param [Boolean] load_on_start
   #   Passing true into this will load the
   #   extension immediately and set it so
   #   that it will load automatically
   #   whenever SketchUp restarts.
-  #
-  # @param [SketchupExtension] extension
-  #   A SketchupExtension object.
   #
   # @return [Boolean] +true+ if extension registered properly
   #
@@ -782,12 +777,12 @@ module Sketchup
   # The register_importer method is used to register an importer with SketchUp.
   #
   # @example
-  #   status = Sketchup.register_importer importer
+  #   status = Sketchup.register_importer(importer)
   #
-  # @param importer
+  # @param [Sketchup::Importer] importer
   #   An Importer object representing the importer.
   #
-  # @return status - true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def self.register_importer(importer)
@@ -797,12 +792,12 @@ module Sketchup
   # object.
   #
   # @example
-  #   status = Sketchup.remove_observer observer
+  #   status = Sketchup.remove_observer(observer)
   #
-  # @param observer
+  # @param [Sketchup::AppObserver] observer
   #   An observer.
   #
-  # @return true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def self.remove_observer(observer)
@@ -821,11 +816,11 @@ module Sketchup
   #   sfile = "application_loader" # file extension not required
   #   status = Sketchup::require(sfile)
   #
-  # @param path
+  # @param [String] path
   #   The path, including the filename, to the file you want
   #   to require.
   #
-  # @return status - True if the file is included. False if the
+  # @return [Boolean] True if the file is included. False if the
   #   file is not included.
   #
   # @version SketchUp 6.0
@@ -836,16 +831,16 @@ module Sketchup
   # not necessarily the loaded model.
   #
   # @example
-  #   status = Sketchup.save_thumbnail "skp_filename", "image_filename"
+  #   status = Sketchup.save_thumbnail("skp_filename", "image_filename")
   #
-  # @param skp_filename
+  # @param [String] skp_filename
   #   The name of the SketchUp file whose model you want
   #   represented in the thumbnail.
   #
-  # @param img_filename
+  # @param [String] img_filename
   #   The name of the file where the thumbnail will be saved.
   #
-  # @return status - true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def self.save_thumbnail(skp_filename, img_filename)
@@ -1058,15 +1053,31 @@ module Sketchup
   # - 21560 and up: causes a runtime Error
   #
   # @example
-  #   result = Sketchup.send_action "selectArcTool:"
+  #   result = Sketchup.send_action("selectArcTool:")
   #
   # @param [String, Integer] action
   #   The action to be performed.
   #
-  # @return [boolean] +true+ if successful, +false+ if unsuccessful
+  # @return [Boolean] +true+ if successful, +false+ if unsuccessful
   #
   # @version SketchUp 6.0
   def self.send_action(action)
+  end
+
+  # The {#send_to_layout} method is used to open a file in LayOut.
+  #
+  # @example
+  #   result = Sketchup.send_to_layout("C:/models/hexaflexagon.layout")
+  #
+  # @param [String] file
+  #   The path and filename to open, either .skp or .layout.
+  #
+  # @return [Boolean] true if opening the file succeeded,
+  #   false otherwise.  If LayOut is not installed or the file is not present
+  #   this function will return false.
+  #
+  # @version SketchUp 2018
+  def self.send_to_layout(file)
   end
 
   # The set_status_text method is used to
@@ -1080,8 +1091,8 @@ module Sketchup
   # - +SB_VCB_VALUE+ - the text will appear in the VCB
   #
   # @example
-  #   result = Sketchup.set_status_text "This is a Test", SB_VCB_VALUE
-  #   if (result)
+  #   result = Sketchup.set_status_text("This is a Test", SB_VCB_VALUE)
+  #   if result
   #     #code to do something if set_status_text is successful
   #   end
   #
@@ -1092,8 +1103,8 @@ module Sketchup
   #
   # @overload set_status_text(status_text = '', position = SB_PROMPT)
   #
-  #   @param status text   the status text that will appear.
-  #   @param position      the position where the text will appear.
+  #   @param [String]  status text the status text that will appear.
+  #   @param [Integer] position    the position where the text will appear.
   #   @return [nil]
   #
   # @version SketchUp 6.0
@@ -1109,10 +1120,10 @@ module Sketchup
   # @example
   #   result = Sketchup.status_text = "This is a Test"
   #
-  # @param status_text
+  # @param [String] status_text
   #   The status text that will appear.
   #
-  # @return result - true if successful, false if unsuccessful.
+  # @return [String]
   #
   # @version SketchUp 6.0
   def self.status_text=(status_text)
@@ -1125,7 +1136,7 @@ module Sketchup
   # @example
   #   temp_dir = Sketchup.temp_dir
   #
-  # @return String containing the full temporary directory path
+  # @return [String] a string containing the full temporary directory path
   #
   # @version SketchUp 2014
   def self.temp_dir
@@ -1137,7 +1148,7 @@ module Sketchup
   # @example
   #   name = Sketchup.template
   #
-  # @return name - the current template
+  # @return [String] the current template
   #
   # @version SketchUp 6.0
   def self.template
@@ -1147,12 +1158,12 @@ module Sketchup
   # Templates are the .skp files that are loaded when the user select File > New.
   #
   # @example
-  #   status = Sketchup.template= "filename"
+  #   status = Sketchup.template = "filename"
   #
-  # @param filename
+  # @param [String] filename
   #   The name of the template to set.
   #
-  # @return status - true if successful, false if unsuccessful.
+  # @return [String] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def self.template=(filename)
@@ -1165,7 +1176,7 @@ module Sketchup
   # @example
   #   directory = Sketchup.template_dir
   #
-  # @return String containing the full template directory path
+  # @return [String] containing the full template directory path
   #
   # @version SketchUp 6.0
   def self.template_dir
@@ -1176,7 +1187,7 @@ module Sketchup
   # @example
   #   Sketchup.undo
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def self.undo
@@ -1192,10 +1203,10 @@ module Sketchup
   # @example
   #   result = Sketchup.vcb_label = "This is a Test"
   #
-  # @param label_text
+  # @param [String] label_text
   #   The label text that will appear.
   #
-  # @return result - true if successful, false if unsuccessful.
+  # @return [String]
   #
   # @version SketchUp 6.0
   def self.vcb_label=(label_text)
@@ -1211,10 +1222,10 @@ module Sketchup
   # @example
   #   result = Sketchup.vcb_value = "This is a Test"
   #
-  # @param value
+  # @param [String] value
   #   The text that will appear as the vcb's value.
   #
-  # @return result - true if successful, false if unsuccessful.
+  # @return [String]
   #
   # @version SketchUp 6.0
   def self.vcb_value=(value)
@@ -1230,7 +1241,7 @@ module Sketchup
   #     return
   #   end
   #
-  # @return version - the decimal form of the version
+  # @return [String] the decimal form of the version
   #
   # @version SketchUp 6.0
   def self.version
@@ -1257,10 +1268,10 @@ module Sketchup
   #     puts "New format"
   #   end
   #
-  # @return version - the whole number form of the version
+  # @return [Integer] the whole number form of the version
   #
   # @version SketchUp 6.0
-  def self.version_number
+  def self.version_number(*args)
   end
 
   # The write_default method is used to set the string associated with a
@@ -1275,13 +1286,13 @@ module Sketchup
   #   A section in a .plist file (Mac) or the registry
   #   (Windows).
   #
-  # @param [String] key
-  #   A key within the section.
-  #
   # @param [Object] value
   #   The value to store.
   #
-  # @return [Boolean] result - True if successful, false if unsuccessful.
+  # @param [String] key
+  #   A key within the section.
+  #
+  # @return [Boolean] True if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def self.write_default(section, key, value)

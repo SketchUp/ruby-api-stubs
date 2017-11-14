@@ -32,6 +32,8 @@ module Geom
   # The {.closest_points} method is used to compute the closest points on two
   # lines.
   #
+  # line.
+  #
   # @example
   #   line1 = [Geom::Point3d.new(0, 2, 0), Geom::Vector3d.new(1, 0, 0)]
   #   line2 = [Geom::Point3d.new(3, 0, 0), Geom::Vector3d.new(0, 1, 0)]
@@ -47,7 +49,7 @@ module Geom
   #   intersect
   #
   # @return [Array(Geom::Point3d, Geom::Point3d)] An array of two points. The
-  #   first point is on the first line and the second point is on the second line.
+  #   first point is on the first line and the second point is on the second
   #
   # @version SketchUp 6.0
   def self.closest_points(line1, line2)
@@ -136,8 +138,8 @@ module Geom
   def self.intersect_line_plane(line, plane)
   end
 
-  # The {.intersect_plane_plane} method is used to compute the intersection of two
-  # planes.
+  # The {.intersect_plane_plane} method is used to compute the intersection of
+  # two planes.
   #
   # @example
   #   # Defines a plane with it's normal parallel to the x axis.
@@ -174,17 +176,17 @@ module Geom
   #
   # @overload linear_combination(weight1, point1, weight2, point2)
   #
-  #   @param [Float] weight1 A weight or percentage.
+  #   @param [Float] weight1
   #   @param [Geom::Point3d] point1
-  #   @param [Float] weight2 A weight or percentage.
+  #   @param [Float] weight2
   #   @param [Geom::Point3d] point2
   #   @return [Geom::Point3d]
   #
   # @overload linear_combination(weight1, vector1, weight2, vector2)
   #
-  #   @param [Float] weight1 A weight or percentage.
+  #   @param [Float] weight1
   #   @param [Geom::Vector3d] vector1
-  #   @param [Float] weight2 A weight or percentage.
+  #   @param [Float] weight2
   #   @param [Geom::Vector3d] vector2
   #   @return [Geom::Vector3d]
   #

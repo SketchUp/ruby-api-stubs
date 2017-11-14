@@ -36,10 +36,10 @@ class UI::Toolbar
   # @example
   #   toolbar = UI::Toolbar.new "Test"
   #
-  # @param toolbarname
+  # @param [String] toolbarname
   #   The name for the new toolbar.
   #
-  # @return toolbar - the newly created toolbar object
+  # @return [UI::Toolbar] the newly created toolbar object
   #
   # @version SketchUp 6.0
   def self.new(toolbarname)
@@ -52,11 +52,11 @@ class UI::Toolbar
   # @example
   #   toolbar = toolbar.add_item command
   #
-  # @param command
+  # @param [UI::Command] command
   #   A Command object representing the command to add to the
   #   toolbar.
   #
-  # @return toolbar - the toolbar where the command was just added
+  # @return [UI::Toolbar] the toolbar where the command was just added
   #
   # @version SketchUp 6.0
   def add_item(command)
@@ -67,11 +67,10 @@ class UI::Toolbar
   # @example
   #   toolbar = toolbar.add_separator
   #
-  # @return toolbar - the toolbar where the line separator was just
-  #   added
+  # @return [UI::Toolbar] the toolbar where the line separator was just added
   #
   # @version SketchUp 6.0
-  def add_separator
+  def add_separator(arg)
   end
 
   # The {#count} method is inherited from the +Enumerable+ mix-in module.
@@ -101,7 +100,7 @@ class UI::Toolbar
   #     puts item
   #   }
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 8.0 M1
   #
@@ -118,7 +117,7 @@ class UI::Toolbar
   # @example
   #   state = toolbar.get_last_state
   #
-  # @return state - the last state of the toolbar (see comments)
+  # @return [Boolean] the last state of the toolbar (see comments)
   #
   # @version SketchUp 6.0
   def get_last_state
@@ -143,7 +142,7 @@ class UI::Toolbar
   #   toolbar.hide
   #   UI.messagebox "Toolbar Hidden"
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def hide
@@ -174,7 +173,7 @@ class UI::Toolbar
   #   puts toolbar.name
   #   toolbar.show
   #
-  # @return string - the name of the toolbar.
+  # @return [String] the name of the toolbar.
   #
   # @version SketchUp 8.0 M1
   def name
@@ -186,7 +185,7 @@ class UI::Toolbar
   # @example
   #   toolbar.restore
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def restore
@@ -208,7 +207,7 @@ class UI::Toolbar
   #   toolbar = toolbar.add_item cmd
   #   toolbar.show
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def show
@@ -232,7 +231,7 @@ class UI::Toolbar
   # @example
   #   visible = toolbar.visible?
   #
-  # @return true if visible
+  # @return [Boolean]
   #
   # @return [Boolean]
   #

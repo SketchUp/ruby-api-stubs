@@ -22,10 +22,10 @@ class Sketchup::View
   #   view = Sketchup.active_model.active_view
   #   status = view.add_observer observer
   #
-  # @param observer
+  # @param [Object] observer
   #   An observer.
   #
-  # @return true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def add_observer(observer)
@@ -45,10 +45,10 @@ class Sketchup::View
   #     UI.messagebox "Failure"
   #   end
   #
-  # @param animation
+  # @param [#nextFrame] animation
   #   An Animation object.
   #
-  # @return animation - the newly set Animation object
+  # @return [#nextFrame] the newly set Animation object
   #
   # @version SketchUp 6.0
   def animation=(animation)
@@ -63,7 +63,7 @@ class Sketchup::View
   #   view = model.active_view
   #   time = view.average_refresh_time
   #
-  # @return time - the time in milliseconds
+  # @return [Float] the time in seconds
   #
   # @version SketchUp 6.0
   def average_refresh_time
@@ -74,7 +74,7 @@ class Sketchup::View
   # @example
   #   camera = view.camera
   #
-  # @return camera - a Camera object
+  # @return [Sketchup::Camera] a Camera object
   #
   # @version SketchUp 6.0
   def camera
@@ -92,15 +92,15 @@ class Sketchup::View
   #
   # @overload camera=(camera)
   #
-  #   @param [Sketchup::Camera] camera  The new Camera object.
-  #   @return nil
+  #   @param camera [Sketchup::Camera] The new Camera object.
+  #   @return [Sketchup::Camera]
   #
   # @overload camera=(camera_and_transition)
   #
-  #   @param [Array(Sketchup::Camera, Float)] camera_and_transition
-  #       The second item in the array represent the transition time from the
-  #       existing camera to the
-  #   @return nil
+  #   @param camera_and_transition [Array(Sketchup::Camera, Float)]
+  #     The second item in the array represents the transition time from the
+  #     existing camera to the new one
+  #   @return [Array(Sketchup::Camera, Float)]
   #
   # @version SketchUp 6.0
   def camera=(arg)
@@ -114,7 +114,7 @@ class Sketchup::View
   #   view = model.active_view
   #   c = view.center
   #
-  # @return center - the center of the view
+  # @return [Geom::Point3d] the center of the view
   #
   # @version SketchUp 6.0
   def center
@@ -137,11 +137,11 @@ class Sketchup::View
   # @example
   #   point = view.corner index
   #
-  # @param index
+  # @param [Integer] index
   #   A value between (or including) 0 and 3 identifying the
   #   corner whose coordinate you want to retrieve.
   #
-  # @return point - a 2d array [w,h] representing the screen point
+  # @return [Array(Integer, Integer)] a 2d array [w,h] representing the screen point
   #
   # @version SketchUp 6.0
   def corner(index)
@@ -217,10 +217,10 @@ class Sketchup::View
   #   view.draw(GL_LINE_LOOP, points)
   #
   # @note If you draw outside the model bounds you need to implement
-  #   {Tool#getExtents} which return a bounding box large enough to include the
+  #   {Tool#getExtents} which returns a bounding box large enough to include the
   #   points you draw. Otherwise your drawing will be clipped.
   #
-  # @param [Integer] mode
+  # @param [Integer] openglenum
   #   The item you are going to draw, one of the constants
   #   from the comments, such as +GL_LINES+.
   #
@@ -231,7 +231,7 @@ class Sketchup::View
   # @see Tool#getExtents
   #
   # @version SketchUp 6.0
-  def draw(mode, points)
+  def draw(openglenum, points)
   end
 
   # The {#draw2d} method is used to draw in screen space (using 2D screen
@@ -253,11 +253,11 @@ class Sketchup::View
   #   ]
   #   view.draw2d(GL_LINE_STRIP, points)
   #
-  # @param [Array<Geom::Point3d>] points
-  #
   # @param [Integer] openglenum
   #   An OpenGL enumerator (unsigned integer). See
   #   comments in the {#draw} method for a list of constants.
+  #
+  # @param [Array<Geom::Point3d>] points
   #
   # @return [Sketchup::View] returns the View object.
   #
@@ -283,13 +283,13 @@ class Sketchup::View
   #
   # @overload draw_lines(point_list, ...)
   #
-  #   @param point_list    An even number of Point3d objects.
-  #   @return              view - a View object
+  #   @param point_list [Array<Geom::Point3d>] An even number of Point3d objects.
+  #   @return [Sketchup::View] returns the View object
   #
   # @overload draw_lines(pts)
   #
-  #   @param pts           An array of Point3d objects.
-  #   @return              view - a View object
+  #   @param pts [Array<Geom::Point3d>] An array of Point3d objects.
+  #   @return [Sketchup::View] returns the View object
   #
   # @version SketchUp 6.0
   def draw_line(*args)
@@ -309,13 +309,13 @@ class Sketchup::View
   #
   # @overload draw_lines(point_list, ...)
   #
-  #   @param point_list    An even number of Point3d objects.
-  #   @return              view - a View object
+  #   @param point_list [Array<Geom::Point3d>] An even number of Point3d objects.
+  #   @return [Sketchup::View] returns the View object
   #
   # @overload draw_lines(pts)
   #
-  #   @param pts           An array of Point3d objects.
-  #   @return              view - a View object
+  #   @param pts [Array<Geom::Point3d>] An array of Point3d objects.
+  #   @return [Sketchup::View] returns the View object
   #
   # @version SketchUp 6.0
   def draw_lines(*args)
@@ -330,24 +330,24 @@ class Sketchup::View
   #   # returns a view
   #   status = view.draw_points point3, 10, 1, "red"
   #
-  # @param pts
+  # @param [Array<Geom::Point3d>] pts
   #   An array of Point3d objects.
   #
-  # @param [optional] pointsize
-  #   Size of the point in pixels.
-  #
-  # @param [optional] pointcolor
-  #   Color of the point.
-  #
-  # @param [optional] pointstyle
+  # @param [Integer] pointstyle
   #   Style of the point. 1 = open square,
   #   2 = filled square, 3 = "+", 4 = "X", 5 = "*",
   #   6 = open triangle, 7 = filled triangle.
   #
-  # @return view - a View object
+  # @param [Sketchup::Color] pointcolor
+  #   Color of the point.
+  #
+  # @param [Integer] pointsize
+  #   Size of the point in pixels.
+  #
+  # @return [Sketchup::View] a View object
   #
   # @version SketchUp 6.0
-  def draw_points(pts, pointsize, pointstyle, pointcolor)
+  def draw_points(pts, pointsize = 6, pointstyle = 3, pointcolor = 'black')
   end
 
   # The draw_polyline method is used to draw a series of connected line segments
@@ -364,13 +364,13 @@ class Sketchup::View
   #
   # @overload draw_polyline(point_list, ...)
   #
-  #   @param point_list    An even number of Point3d objects.
-  #   @return              view - a View object
+  #   @param point_list [Array<Geom::Point3d>] An even number of Point3d objects.
+  #   @return [Sketchup::View] a View object
   #
   # @overload draw_polyline(pts)
   #
-  #   @param pts           An array of Point3d objects.
-  #   @return              view - a View object
+  #   @param pts [Array<Geom::Point3d>] An array of Point3d objects.
+  #   @return [Sketchup::View] a View object
   #
   # @version SketchUp 6.0
   def draw_polyline(*args)
@@ -443,10 +443,10 @@ class Sketchup::View
   # @example
   #   view = view.drawing_color = color
   #
-  # @param color
+  # @param [Sketchup::Color, String] color
   #   A Color object.
   #
-  # @return view - a View object
+  # @return [Sketchup::View]
   #
   # @version SketchUp 6.0
   def drawing_color=(color)
@@ -463,10 +463,10 @@ class Sketchup::View
   # @example
   #   view.dynamic = true
   #
-  # @param value
+  # @param [Boolean] value
   #   true or false
   #
-  # @return nil
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def dynamic=(value)
@@ -478,7 +478,7 @@ class Sketchup::View
   # @example
   #   fov = Sketchup.active_model.active_view.field_of_view
   #
-  # @return fov - the field of view
+  # @return [Float] the field of view
   #
   # @version SketchUp 6.0
   def field_of_view
@@ -492,10 +492,10 @@ class Sketchup::View
   #   my_view.field_of_view = 45
   #   my_view.invalidate
   #
-  # @param fov
-  #   - the field of view
+  # @param [Numeric] fov
+  #   the field of view
   #
-  # @return status - true if successful
+  # @return [Numeric]
   #
   # @version SketchUp 6.0
   def field_of_view=(fov)
@@ -510,11 +510,11 @@ class Sketchup::View
   # @example
   #   target = view.guess_target
   #
-  # @return target - a Point3d object representing the point in the
+  # @return [Geom::Point3d] a Point3d object representing the point in the
   #   model that the user is likely interested in.
   #
   # @version SketchUp 6.0
-  def guess_target
+  def guess_target(*args)
   end
 
   # The inference_locked? method is used to determine if inference locking is on
@@ -525,7 +525,7 @@ class Sketchup::View
   #   view = model.active_view
   #   status = view.inference_locked
   #
-  # @return status - true if locked, false if unlocked
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -542,16 +542,16 @@ class Sketchup::View
   # @example
   #   inputpoint = view.inputpoint x, y, inputpoint1
   #
-  # @param x
+  # @param [Numeric] x
   #   A x value.
   #
-  # @param y
-  #   A y value.
-  #
-  # @param inputpoint1
+  # @param [Sketchup::InputPoint] inputpoint1
   #   An InputPoint object.
   #
-  # @return nil
+  # @param [Numeric] y
+  #   A y value.
+  #
+  # @return [Sketchup::InputPoint]
   #
   # @version SketchUp 6.0
   def inputpoint(x, y, inputpoint1)
@@ -567,7 +567,7 @@ class Sketchup::View
   # @note This is the preferred method to update the viewport. Use this before
   #   trying to use {#refresh}.
   #
-  # @return invalidated_view - the invalidated View object
+  # @return [Sketchup::View] the invalidated View object
   #
   # @version SketchUp 6.0
   def invalidate
@@ -579,10 +579,10 @@ class Sketchup::View
   # @example
   #   time = view.last_refresh_time
   #
-  # @return time - time in milliseconds
+  # @return [Float] time in milliseconds
   #
   # @version SketchUp 6.0
-  def last_refresh_time
+  def last_refresh_time(*args)
   end
 
   # The line_stipple= method is used to set the line pattern to use for drawing.
@@ -602,10 +602,10 @@ class Sketchup::View
   #   view.line_stipple = "-.-"
   #   view = view.draw_lines point8, point9
   #
-  # @param pattern
+  # @param [String] pattern
   #   A string stipple pattern, such as "-.-"
   #
-  # @return view - the View object
+  # @return [Sketchup::View] the View object
   #
   # @version SketchUp 6.0
   def line_stipple=(pattern)
@@ -619,10 +619,10 @@ class Sketchup::View
   # @example
   #   view.line_width = width
   #
-  # @param width
+  # @param [Integer] width
   #   The width in pixels.
   #
-  # @return view - a View object
+  # @return [Integer]
   #
   # @version SketchUp 6.0
   def line_width=(width)
@@ -638,19 +638,28 @@ class Sketchup::View
   #
   # @example
   #   view = view.lock_inference
-  #   view = view.lock_inference inputpoint
-  #   view = view.lock_inference inputpoint1, inputpoint2
+  #   view = view.lock_inference(inputpoint)
+  #   view = view.lock_inference(inputpoint1, inputpoint2)
   #
-  # @param [optional] inputpoint
-  #   1st InputPoint to inference to.
+  # @overload lock_inference
   #
-  # @param [optional] inputpoint2
-  #   2nd InputPoint to inference to.
   #
-  # @return view - a View object
+  # @overload lock_inference(inputpoint)
+  #
+  #   @param [Sketchup::InputPoint] inputpoint
+  #     1st InputPoint to inference to.
+  #
+  # @overload lock_inference(inputpoint, inputpoint2)
+  #
+  #   @param [Sketchup::InputPoint] inputpoint
+  #     1st InputPoint to inference to.
+  #   @param [Sketchup::InputPoint] inputpoint2
+  #     2nd InputPoint to inference to.
+  #
+  # @return [Sketchup::View] a View object
   #
   # @version SketchUp 6.0
-  def lock_inference(inputpoint, inputpoint2)
+  def lock_inference(*args)
   end
 
   # The model method is used to retrieve the model for the current view.
@@ -658,7 +667,7 @@ class Sketchup::View
   # @example
   #   model = view.model
   #
-  # @return model - the model for this view
+  # @return [Sketchup::Model] the model for this view
   #
   # @version SketchUp 6.0
   def model
@@ -676,14 +685,14 @@ class Sketchup::View
   #
   # @overload pick_helper
   #
-  #   @return              pickhelper - a PickHelper object
+  #   @return [Sketchup::PickHelper] a PickHelper object
   #
   # @overload pick_helper(x, y, aperture = 0)
   #
   #   @param [Integer] x
   #   @param [Integer] y
   #   @param [Integer] aperture
-  #   @return              pickhelper - a PickHelper object
+  #   @return [Sketchup::PickHelper] a PickHelper object
   #
   # @version SketchUp 6.0
   def pick_helper(*args)
@@ -698,13 +707,13 @@ class Sketchup::View
   # @overload pickray(screen_point)
   #
   #   @param [Array(Integer, Integer)] screen_point
-  #   @return              ray - a ray
+  #   @return [Array(Geom::Point3d, Geom::Vector3d)] a ray
   #
   # @overload pickray(x, y)
   #
   #   @param [Integer] x
   #   @param [Integer] y
-  #   @return              ray - a ray
+  #   @return [Array(Geom::Point3d, Geom::Vector3d)] a ray
   #
   # @version SketchUp 6.0
   def pickray(*args)
@@ -719,13 +728,13 @@ class Sketchup::View
   # @example
   #   size = view.pixels_to_model pixels, point
   #
-  # @param pixels
+  # @param [Numeric] pixels
   #   The pixel size.
   #
-  # @param point
+  # @param [Geom::Point3d] point
   #   A Point3d object where the size will be calculated from.
   #
-  # @return size - the model size
+  # @return [Float] the model size
   #
   # @version SketchUp 6.0
   def pixels_to_model(pixels, point)
@@ -742,7 +751,7 @@ class Sketchup::View
   #   instability or crashes. Don't use this unless you have verified that
   #   you cannot use {#invalidate} instead.
   #
-  # @return refreshed_view - the refreshed View object
+  # @return [Sketchup::View] the refreshed View object
   #
   # @version SketchUp 7.1
   def refresh
@@ -755,10 +764,10 @@ class Sketchup::View
   #   view = Sketchup.active_model.active_view
   #   status = view.remove_observer observer
   #
-  # @param observer
+  # @param [Object] observer
   #   An observer.
   #
-  # @return true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def remove_observer(observer)
@@ -774,10 +783,10 @@ class Sketchup::View
   # @example
   #   point = view.screen_coords(ORIGIN)
   #
-  # @param point3d
+  # @param [Geom::Point3d] point3d
   #   A Point3d object.
   #
-  # @return x, y - A Point3d containing the screen position
+  # @return [Geom::Point3d] A Point3d containing the screen position
   #
   # @version SketchUp 6.0
   def screen_coords(point3d)
@@ -792,13 +801,13 @@ class Sketchup::View
   # @example
   #   view = view.set_color_from_line point1, point2
   #
-  # @param point1
+  # @param [Geom::Point3d] point1
   #   Point3d object representing first point in the line.
   #
-  # @param point2
-  #   Point3d object representing second point in the line.
+  # @param [Geom::Point3d] point2
+  #   Point3d object representing the second point in the line.
   #
-  # @return view - a View object
+  # @return [Sketchup::View] a View object
   #
   # @version SketchUp 6.0
   def set_color_from_line(point1, point2)
@@ -811,12 +820,12 @@ class Sketchup::View
   # frame. This can be useful to control the speed at which the animation runs.
   #
   # @example
-  #   status = view.show_frame &lt;delay
+  #   status = view.show_frame delay
   #
-  # @param delay
+  # @param [Numeric] delay
   #   An optional delay in seconds.
   #
-  # @return nil
+  # @return [Sketchup::View]
   #
   # @version SketchUp 6.0
   def show_frame(delay)
@@ -828,10 +837,10 @@ class Sketchup::View
   # @example
   #   tooltip = view.tooltip = string
   #
-  # @param string
+  # @param [String] string
   #   The string tooltip.
   #
-  # @return tooltip - the new tooltip string
+  # @return [String] the new tooltip string
   #
   # @version SketchUp 6.0
   def tooltip=(string)
@@ -845,7 +854,7 @@ class Sketchup::View
   #   view = model.active_view
   #   height = view.vpheight
   #
-  # @return height - the height of the viewport in pixels.
+  # @return [Integer] the height of the viewport in pixels.
   #
   # @version SketchUp 6.0
   def vpheight
@@ -857,7 +866,7 @@ class Sketchup::View
   # @example
   #   width = view.vpwidth
   #
-  # @return width - the width of the viewport in pixels.
+  # @return [Integer] the width of the viewport in pixels.
   #
   # @version SketchUp 6.0
   def vpwidth
@@ -908,27 +917,28 @@ class Sketchup::View
   #   view = model.active_view
   #   view.write_image keys
   #
-  # @param [optional] width
-  #   Width in pixels.
+  # @overload write_image(filename, width = view.vpwidth, height = view.vpheight, antialias = false, compression = 1.0)
   #
-  # @param filename_or_hash
-  #   The filename for the saved image or a hash
-  #   containing a set of keys.
+  #   @param [String] filename
+  #     The filename for the saved image
+  #   @param [Integer] width
+  #     Width in pixels, defaults to the current viewport width {#vpwidth}.
+  #   @param [Integer] height
+  #     Height in pixels, defaults to the current viewport height {#vpheight}.
+  #   @param [Boolean] antialias
+  #     true or false
+  #   @param [Float] compression
+  #     Float compression factor for JPEG images,
+  #     between 0.0 and 1.0
   #
-  # @param [optional] height
-  #   Height in pixels.
+  # @overload write_image(options)
   #
-  # @param [optional] compression
-  #   Float compression factor for JPEG images,
-  #   between 0.0 and 1.0
+  #   @param [Hash] options
   #
-  # @param [optional] antialias
-  #   true or false
-  #
-  # @return nil
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
-  def write_image(filename_or_hash, width, height, antialias, compression)
+  def write_image(*args)
   end
 
   # The zoom method is used to zoom in or out by some zoom factor.
@@ -939,11 +949,11 @@ class Sketchup::View
   #   view = view.zoom entity
   #   view = view.zoom array_of_entities
   #
-  # @param zoom_or_ents
+  # @param [Numeric, Sketchup::Selection, Sketchup::Entity, Array<Sketchup::Entity>] zoom_or_ents
   #   A Float zoom factor from 1.0 or larger or an Array or
   #   collection of entities to "zoom extents" around.
   #
-  # @return view - the zoomed View object
+  # @return [Sketchup::View] the zoomed View object
   #
   # @version SketchUp 6.0
   def zoom(zoom_or_ents)
@@ -956,7 +966,7 @@ class Sketchup::View
   #   view = Sketchup.active_model.active_view
   #   new_view = view.zoom_extents
   #
-  # @return new_view - the zoomed View object
+  # @return [Sketchup::View] the zoomed View object
   #
   # @version SketchUp 6.0
   def zoom_extents

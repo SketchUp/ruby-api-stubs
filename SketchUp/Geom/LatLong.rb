@@ -15,18 +15,33 @@ class Geom::LatLong
   #   ll = [40.01700, 105.28300]
   #   latlong = Geom::LatLong.new(ll)
   #   if (latlong)
-  #     UI.messagebox latlong
+  #     UI.messagebox(latlong)
   #   else
-  #     UI.messagebox "Failure"
+  #     UI.messagebox("Failure")
   #   end
   #
-  # @param latlong
-  #   A latitude and longitude coordinate set as an Array.
+  # @overload initialize
   #
-  # @return latlong - a LatLong object
+  #   @return [Geom::LatLong]
+  #
+  # @overload initialize(latlong)
+  #
+  #   @param latlong [Geom::LatLong]
+  #   @return [Geom::LatLong]
+  #
+  # @overload initialize(lat, long)
+  #
+  #   @param lat  [Numeric]
+  #   @param long [Numeric]
+  #   @return [Geom::LatLong]
+  #
+  # @overload initialize(latlong_array)
+  #
+  #   @param latlong_array [Array(Numeric, Numeric)]
+  #   @return [Geom::LatLong]
   #
   # @version SketchUp 6.0
-  def initialize(latlong)
+  def initialize(*args)
   end
 
   # The Latitude method retrieves the latitude coordinate from a LatLong object.
@@ -36,12 +51,12 @@ class Geom::LatLong
   #   latlong = Geom::LatLong.new(ll)
   #   latitude = latlong.latitude
   #   if (latitude)
-  #     UI.messagebox latitude
+  #     UI.messagebox(latitude)
   #   else
-  #     UI.messagebox "Failure"
+  #     UI.messagebox("Failure")
   #   end
   #
-  # @return latitude - a latitude coordinate value
+  # @return [Float] a latitude coordinate value
   #
   # @version SketchUp 6.0
   def latitude
@@ -55,12 +70,12 @@ class Geom::LatLong
   #   latlong = Geom::LatLong.new(ll)
   #   longitude = latlong.longitude
   #   if (longitude)
-  #     UI.messagebox longitude
+  #     UI.messagebox(longitude)
   #   else
-  #     UI.messagebox "Failure"
+  #     UI.messagebox("Failure")
   #   end
   #
-  # @return longitude - a latitude coordinate value
+  # @return [Float] a latitude coordinate value
   #
   # @version SketchUp 6.0
   def longitude
@@ -90,19 +105,19 @@ class Geom::LatLong
   def to_s
   end
 
-  # The to_utm method converts a LatLong object to an array of two values.
+  # The to_utm method converts a LatLong object to a UTM object.
   #
   # @example
   #   ll = [40.01700, 105.28300]
   #   latlong = Geom::LatLong.new(ll)
   #   utm = latlong.to_utm
   #   if (utm)
-  #     UI.messagebox utm
+  #     UI.messagebox(utm)
   #   else
-  #     UI.messagebox "Failure"
+  #     UI.messagebox("Failure")
   #   end
   #
-  # @return array - an array of two values: latitude and longitude
+  # @return [Geom::UTM]
   #
   # @version SketchUp 6.0
   def to_utm

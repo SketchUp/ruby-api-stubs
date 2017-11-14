@@ -15,7 +15,7 @@ class String
   # @example
   #   length = "5'".to_l
   #
-  # @return length - the length value
+  # @return [Length] the length value
   #
   # @version SketchUp 6.0
   def to_l

@@ -104,7 +104,7 @@ class UI::Notification
   #
   # @example
   #   notification = UI::Notification.new(sketchup_extension)
-  #   puts "This is the current message: ${notification.message}"
+  #   puts "This is the current message: #{notification.message}"
   #   notification.show
   #
   # @return [String]

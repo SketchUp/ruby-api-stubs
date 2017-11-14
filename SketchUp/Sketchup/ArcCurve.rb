@@ -53,24 +53,24 @@ class Sketchup::ArcCurve < Sketchup::Curve
   def center
   end
 
-  # The end_angle method is used to retrieve the angle of the end of the arc
+  # The {#end_angle} method is used to retrieve the angle of the end of the arc
   # measured from the X axis in radians.
   #
   # @example
   #   # Create a 1/2 circle, normal to the Z axis
-  #   center = Geom::Point3d.new
-  #   normal = Geom::Vector3d.new 0,0,1
-  #   xaxis = Geom::Vector3d.new 1,0,0
   #   start_a = 0.0
-  #   end_a = Math::PI
+  #   end_a = 180.degrees
   #   model = Sketchup.active_model
   #   entities = model.entities
-  #   edgearray = entities.add_arc center, xaxis, normal, 5, start_a, end_a
-  #   edge = edgearray[0]
-  #   arccurve = edge.curve
-  #   end_angle = arccurve.end_angle
+  #   edges = entities.add_arc(ORIGIN, X_AXIS, Z_AXIS, 5, start_a, end_a)
+  #   arc_curve = edges.first.curve
+  #   end_angle = arc_curve.end_angle
   #
-  # @return angle - the angle of the end of the arc if successful
+  # @note A bug in SketchUp 2017 and older will report the end-angle for some
+  #   circles as more than 360 degrees. In such case, subtract +2 * PI+ from
+  #   the end angle value.
+  #
+  # @return [Float]
   #
   # @version SketchUp 6.0
   def end_angle

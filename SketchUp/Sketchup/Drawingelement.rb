@@ -31,7 +31,7 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #   # is a sub-class of Drawingelement.
   #   boundingbox = face.bounds
   #
-  # @return boundingbox - A BoundingBox object if successful
+  # @return [Geom::BoundingBox] A BoundingBox object if successful
   #
   # @version SketchUp 6.0
   def bounds
@@ -56,12 +56,12 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #   status = face.casts_shadows = false
   #   UI.messagebox status.to_s
   #
-  # @param casts
+  # @param [Boolean] casts
   #   true if you want the Drawingelement object to cast
   #   shadows, false if you do not want the Drawingelement
   #   object to cast shadows.
   #
-  # @return status - true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def casts_shadows=(casts)
@@ -85,8 +85,7 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #   status = face.casts_shadows?
   #   UI.messagebox status.to_s
   #
-  # @return status - true if the Drawingelement is casting shadows,
-  #   false if unsuccessful.
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -112,7 +111,7 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #   face = entities.add_face pts
   #   status = face.erase!
   #
-  # @return status - true if successful, false if unsuccessful
+  # @return [Boolean] true if successful, false if unsuccessful
   #
   # @version SketchUp 6.0
   def erase!
@@ -135,11 +134,11 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #   UI.messagebox "Click OK to Hide the Box"
   #   status = face.hidden = true
   #
-  # @param hidden
+  # @param [Boolean] hidden
   #   true if you want to hide the element, false if you do
   #   not want to hide the element.
   #
-  # @return status - true if the element has been hidden, false if
+  # @return [Boolean] true if the element has been hidden, false if
   #   the element has not been hidden.
   #
   # @version SketchUp 6.0
@@ -165,7 +164,7 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #   status = face.hidden?
   #   UI.messagebox "hidden? " + status.to_s
   #
-  # @return status -true if hidden, false if not hidden
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -190,7 +189,7 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #   face = entities.add_face pts
   #   layer = face.layer
   #
-  # @return layer - a layer object if successful
+  # @return [Sketchup::Layer] a layer object if successful
   #
   # @version SketchUp 6.0
   def layer
@@ -221,7 +220,7 @@ class Sketchup::Drawingelement < Sketchup::Entity
   # @param [Sketchup::Layer, String] layer
   #   A layer or layer name.
   #
-  # @return layer - the new Layer object if successful
+  # @return [Sketchup::Layer, String] the new Layer object if successful
   #
   # @version SketchUp 6.0
   def layer=(layer)
@@ -244,7 +243,7 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #   face = entities.add_face pts
   #   material = face.material
   #
-  # @return material - the Material object if successful
+  # @return [Sketchup::Material] the Material object if successful
   #
   # @version SketchUp 6.0
   def material
@@ -276,11 +275,11 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #   # You will see the material applied when you reverse the box's faces
   #   material = face.material = m
   #
-  # @param material
+  # @param [Sketchup::Material, String, Sketchup::Color] material
   #   A Material, name of a material, Color, or name of a
   #   color.
   #
-  # @return material - the new Material object if successful
+  # @return [Sketchup::Material, String, Sketchup::Color] the new Material object if successful
   #
   # @version SketchUp 6.0
   def material=(material)
@@ -306,11 +305,11 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #   status = face.receives_shadows = false
   #   UI.messagebox status.to_s
   #
-  # @param receive
+  # @param [Boolean] receive
   #   true if you want the Drawingelement object to
   #   receive shadows, false if not.
   #
-  # @return status - true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def receives_shadows=(receive)
@@ -334,8 +333,7 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #   status = face.receives_shadows?
   #   UI.messagebox status.to_s
   #
-  # @return status - true if the Drawingelement is receiving
-  #   shadows, false if unsuccessful.
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -361,10 +359,10 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #   UI.messagebox "Click OK to Hide the Box"
   #   status = face.visible = false
   #
-  # @param visibility
+  # @param [Boolean] visibility
   #   true if you want to hide the element, false if not
   #
-  # @return status - true if the element has been hidden, false if
+  # @return [Boolean] true if the element has been hidden, false if
   #   the element has not been hidden.
   #
   # @version SketchUp 6.0
@@ -389,7 +387,7 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #   face.visible = false
   #   UI.messagebox "Is the face visible? " + face.visible?.to_s
   #
-  # @return visibility - true if visible, false if not
+  # @return [Boolean]
   #
   # @return [Boolean]
   #

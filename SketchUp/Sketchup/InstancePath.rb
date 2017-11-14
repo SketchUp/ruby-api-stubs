@@ -18,7 +18,7 @@ class Sketchup::InstancePath
   #   model = Sketchup.active_model
   #   group = model.entities.add_group
   #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
-  #   path = Sketchup::InstancePath.new(group, edge])
+  #   path = Sketchup::InstancePath.new([group, edge])
   #   if path.size > 1
   #     # do something
   #   end
@@ -36,7 +36,7 @@ class Sketchup::InstancePath
   #   model = Sketchup.active_model
   #   group = model.entities.add_group
   #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
-  #   path = Sketchup::InstancePath.new(group, edge])
+  #   path = Sketchup::InstancePath.new([group, edge])
   #   path[0] == group # returns true
   #   path[1] == edge # returns true
   #
@@ -60,7 +60,7 @@ class Sketchup::InstancePath
   #   model = Sketchup.active_model
   #   group = model.entities.add_group
   #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
-  #   path = Sketchup::InstancePath.new(group, edge])
+  #   path = Sketchup::InstancePath.new([group, edge])
   #   path.each { |entity|
   #     # do something
   #   }
@@ -80,7 +80,7 @@ class Sketchup::InstancePath
   #   model = Sketchup.active_model
   #   group = model.entities.add_group
   #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
-  #   path = Sketchup::InstancePath.new(group, edge])
+  #   path = Sketchup::InstancePath.new([group, edge])
   #   if path.empty?
   #     # do something...
   #   end
@@ -99,7 +99,7 @@ class Sketchup::InstancePath
   #   model = Sketchup.active_model
   #   group = model.entities.add_group
   #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
-  #   path = Sketchup::InstancePath.new(group, edge])
+  #   path = Sketchup::InstancePath.new([group, edge])
   #   if path.include?(edge)
   #     # do something...
   #   end
@@ -144,7 +144,7 @@ class Sketchup::InstancePath
   #   model = Sketchup.active_model
   #   group = model.entities.add_group
   #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
-  #   path = Sketchup::InstancePath.new(group, edge])
+  #   path = Sketchup::InstancePath.new([group, edge])
   #   path.leaf == edge # returns true
   #
   # @raise [TypeError] if the instance path refer to deleted entities.
@@ -161,7 +161,7 @@ class Sketchup::InstancePath
   #   model = Sketchup.active_model
   #   group = model.entities.add_group
   #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
-  #   path = Sketchup::InstancePath.new(group, edge])
+  #   path = Sketchup::InstancePath.new([group, edge])
   #   if path.length > 1
   #     # do something
   #   end
@@ -183,7 +183,7 @@ class Sketchup::InstancePath
   #   model = Sketchup.active_model
   #   group = model.entities.add_group
   #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
-  #   path = Sketchup::InstancePath.new(group, edge])
+  #   path = Sketchup::InstancePath.new([group, edge])
   #   pid_path = path.persistent_id_path # something like "342.345"
   #
   # @raise [TypeError] if the instance path refer to deleted entities.
@@ -204,7 +204,7 @@ class Sketchup::InstancePath
   #   model = Sketchup.active_model
   #   group = model.entities.add_group
   #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
-  #   path = Sketchup::InstancePath.new(group, edge])
+  #   path = Sketchup::InstancePath.new([group, edge])
   #   path.root == group # returns true
   #
   # @raise [TypeError] if the instance path refer to deleted entities.
@@ -220,7 +220,7 @@ class Sketchup::InstancePath
   #   model = Sketchup.active_model
   #   group = model.entities.add_group
   #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
-  #   path = Sketchup::InstancePath.new(group, edge])
+  #   path = Sketchup::InstancePath.new([group, edge])
   #   if path.size > 1
   #     # do something
   #   end
@@ -240,7 +240,7 @@ class Sketchup::InstancePath
   #   model = Sketchup.active_model
   #   group = model.entities.add_group
   #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
-  #   path = Sketchup::InstancePath.new(group, edge])
+  #   path = Sketchup::InstancePath.new([group, edge])
   #   pid_string = path.to_a.join('.')
   #
   # @raise [TypeError] if the instance path refer to deleted entities.
@@ -259,7 +259,7 @@ class Sketchup::InstancePath
   #   model = Sketchup.active_model
   #   group = model.entities.add_group
   #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
-  #   path = Sketchup::InstancePath.new(group, edge])
+  #   path = Sketchup::InstancePath.new([group, edge])
   #   tr = path.transformation
   #
   # @param [Integer] index
@@ -286,7 +286,7 @@ class Sketchup::InstancePath
   #   model = Sketchup.active_model
   #   group = model.entities.add_group
   #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
-  #   path = Sketchup::InstancePath.new(group, edge])
+  #   path = Sketchup::InstancePath.new([group, edge])
   #   if path.valid?
   #     # do something...
   #   end

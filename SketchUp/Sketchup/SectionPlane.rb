@@ -66,6 +66,37 @@ class Sketchup::SectionPlane < Sketchup::Drawingelement
   def get_plane
   end
 
+  # The {#name} method is used to retrieve the name of the section plane.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   entities = model.active_entities
+  #   # Grab the first section plane from the model.
+  #   section_plane = entities.grep(Sketchup::SectionPlane).first
+  #   name = section_plane.name
+  #
+  # @return [String]
+  #
+  # @version SketchUp 2018
+  def name
+  end
+
+  # The {#name=} method is used to set the name of a section plane.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   entities = Sketchup.active_model.entities
+  #   # Grab the first section plane from the model.
+  #   section_plane = entities.grep(Sketchup::SectionPlane).first
+  #   section_plane.name = "my section plane"
+  #
+  # @param [String] name
+  #   The new name for the section plane object.
+  #
+  # @version SketchUp 2018
+  def name=(name)
+  end
+
   # The set_plane method is used to set the plane that the section plane is
   # on.
   #
@@ -83,6 +114,39 @@ class Sketchup::SectionPlane < Sketchup::Drawingelement
   #
   # @version SketchUp 6.0
   def set_plane(plane)
+  end
+
+  # The {#symbol} method is used to retrieve the symbol of the section plane.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   entities = model.active_entities
+  #   # Grab the first section plane from the model.
+  #   section_plane = entities.grep(Sketchup::SectionPlane).first
+  #   symbol = section_plane.symbol
+  #
+  # @return [String]
+  #
+  # @version SketchUp 2018
+  def symbol
+  end
+
+  # The {#symbol=} method is used to set the symbol of a section plane.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   entities = Sketchup.active_model.entities
+  #   # Grab the first section plane from the model.
+  #   section_plane = entities.grep(Sketchup::SectionPlane).first
+  #   section_plane.symbol = "AB1"
+  #
+  # @note The symbol must be three characters or less.
+  #
+  # @param [String] symbol
+  #   The new symbol for the section plane object.
+  #
+  # @version SketchUp 2018
+  def symbol=(symbol)
   end
 
 end

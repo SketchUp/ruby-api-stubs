@@ -201,16 +201,15 @@ class Sketchup::Pages < Sketchup::Entity
   def each
   end
 
-  # The erase method is used to remove a page from the collection.
+  # The {#erase} method is used to remove a page from the collection.
   #
   # @example
   #   page = Sketchup.active_model.pages.add('Hello World')
   #   Sketchup.active_model.pages.erase(page)
   #
-  # @param page
-  #   The page you wish to delete.
+  # @param [Sketchup::Page] page
   #
-  # @return true if successful, false if unsuccessful.
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def erase(page)
