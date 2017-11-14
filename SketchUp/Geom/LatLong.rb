@@ -21,23 +21,27 @@ class Geom::LatLong
   #   end
   #
   # @overload initialize
+  #
   #   @return [Geom::LatLong]
   #
   # @overload initialize(latlong)
+  #
   #   @param latlong [Geom::LatLong]
   #   @return [Geom::LatLong]
   #
   # @overload initialize(lat, long)
+  #
   #   @param lat  [Numeric]
   #   @param long [Numeric]
   #   @return [Geom::LatLong]
   #
   # @overload initialize(latlong_array)
+  #
   #   @param latlong_array [Array(Numeric, Numeric)]
   #   @return [Geom::LatLong]
   #
   # @version SketchUp 6.0
-  def initialize(latlong)
+  def initialize(*args)
   end
 
   # The Latitude method retrieves the latitude coordinate from a LatLong object.

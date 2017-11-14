@@ -121,12 +121,15 @@ class Sketchup::Animation
   # an example of this.
   #
   # @example
-  #   def stop
-  #     # Insert your handler code for cleaning up after your animation.
+  #   class MyAnimation
+  #     def stop
+  #       # Insert your handler code for cleaning up after your animation.
+  #     end
   #   end
   #
-  # @note Do not call +view.animation = nil+ within this method! This will cause
-  #   a recursive loop and crash SketchUp.
+  # @note Do not call {#Sketchup::View#animation=} from this method. This will
+  #   cause a recursive loop and crash SketchUp 2017 and earlier versions.
+  #   As of SketchUp 2018 this will raise a +RunTimeError+.
   #
   # @return [nil]
   #

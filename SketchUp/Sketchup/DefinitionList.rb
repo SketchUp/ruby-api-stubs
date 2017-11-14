@@ -55,7 +55,7 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #   componentdefinition = definitions.add "BedTraditional"
   #   component = definitions[0]
   #
-  # @param def_name [String]
+  # @param [String] def_name
   #   The new component definition to add to the definition
   #   list.
   #
@@ -72,7 +72,7 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #   definitions = Sketchup.active_model.definitions
   #   status = definitions.add_observer observer
   #
-  # @param observer [Object]
+  # @param [Object] observer
   #   An observer.
   #
   # @return [Boolean] true if successful, false if unsuccessful.
@@ -146,8 +146,7 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #
   # @version SketchUp 6.0
   #
-  # @yield [definition] A variable that will hold each ComponentDefinition
-  #   object as they are found.
+  # @yield [Sketchup::ComponentDefinition] definition
   def each
   end
 
@@ -176,7 +175,7 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #   definitions = model.definitions
   #   componentdefinition = definitions.load path
   #
-  # @param path [String]
+  # @param [String] path
   #   The path where the component definition file is located.
   #
   # @return [Sketchup::ComponentDefinition] the loaded ComponentDefinition
@@ -233,10 +232,10 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #     puts "Error: #{load_handler.error}"
   #   end
   #
-  # @param url [String]
+  # @param [String] url
   #   URL to load a .skp file from.
   #
-  # @param load_handler [Object]
+  # @param [Object] load_handler
   #   Ruby object that has methods defined
   #   as described in the load_from_url details.
   #
@@ -259,6 +258,24 @@ class Sketchup::DefinitionList < Sketchup::Entity
   def purge_unused
   end
 
+  # The {#remove} method is used to remove a component definition from the
+  # definition list with the given component definition. This will remove all
+  # instances of the definition.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   definitions = model.definitions
+  #   definition = definitions[0]
+  #   definitions.remove(definition)
+  #
+  # @param [Sketchup::ComponentDefinition] definition
+  #
+  # @return [Boolean]
+  #
+  # @version SketchUp 2018
+  def remove(definition)
+  end
+
   # The remove_observer method is used to remove an observer from the current
   # object.
   #
@@ -266,7 +283,7 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #   definitions = Sketchup.active_model.definitions
   #   status = definitions.remove_observer observer
   #
-  # @param observer [Object]
+  # @param [Object] observer
   #   An observer.
   #
   # @return [Boolean] true if successful, false if unsuccessful.
@@ -298,7 +315,7 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #   definitions = model.definitions
   #   new_name = definitions.unique_name "My Base Name"
   #
-  # @param base_name [String]
+  # @param [String] base_name
   #
   # @return [String] the unique name.
   #

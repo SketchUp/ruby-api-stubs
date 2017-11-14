@@ -70,20 +70,20 @@ module UI
   #     UI.set_cursor(cursor_id)
   #   end
   #
-  # @param filename [String]
+  # @param [String] filename
   #   Filename for an image.
   #
-  # @param hot_x [Integer]
-  #   An x coordinate that is the "hotpoint" for the cursor
-  #   computed from the left edge of your cursor image.
-  #
-  # @param hot_y [Integer]
+  # @param [Integer] hot_y
   #   A y coordinate that is the "hotpoint" for the cursor
   #   computed from the top edge of the of your cursor image.
   #   For example, a value of (hot_x, hot_y) = (5,10) would
   #   identify the hotpoint of the cursor at 5 pixels from
   #   the left edge of your cursor image and 10 pixels from
   #   the top edge of your cursor image.
+  #
+  # @param [Integer] hot_x
+  #   An x coordinate that is the "hotpoint" for the cursor
+  #   computed from the left edge of your cursor image.
   #
   # @return [Integer] ID associated with the cursor
   #
@@ -112,22 +112,29 @@ module UI
   #   list = ["", "", "Male|Female"]
   #   input = UI.inputbox(prompts, defaults, list, "Tell me about yourself.")
   #
-  # @param prompts [Array<String>]
-  #   An array of prompt names appearing in the input box
-  #   adjacent to input fields.
+  # @overload inputbox(prompts, defaults, title)
   #
-  # @param defaults [Array<String>]
-  #   An array of default values for the input
-  #   fields.
+  #   @param [Array<String>] prompts
+  #     An array of prompt names appearing in the input box
+  #     adjacent to input fields.
+  #   @param [Array<String>] defaults
+  #     An array of default values for the input
+  #     fields.
+  #   @param [String] title
+  #     The title for the input box.
   #
-  # @param title [String]
-  #   The title for the input box.
+  # @overload inputbox(prompts, defaults, list, title)
   #
-  # @param title_or_list [String, Array<String>]
-  #   If 3 params are passed, then this value is
-  #   a string containing the title of the input box. If
-  #   a total of 4 params are passed, then this is an array
-  #   containing pipe-separated strings of options.
+  #   @param [Array<String>] prompts
+  #     An array of prompt names appearing in the input box
+  #     adjacent to input fields.
+  #   @param [Array<String>] defaults
+  #     An array of default values for the input
+  #     fields.
+  #   @param [String, Array<String>] list
+  #     An array containing pipe-separated strings of options.
+  #   @param [String] title
+  #     The title for the input box.
   #
   # @return [Array<String>, false] An array of returned values if the user did
   #   not cancel the dialog.  If the user canceled the
@@ -135,7 +142,7 @@ module UI
   #   array will be in the same order as the input fields.
   #
   # @version SketchUp 6.0
-  def self.inputbox(prompts, defaults = nil, title_or_list = nil, title = nil)
+  def self.inputbox(*args)
   end
 
   # The inspector_names method is used to returns the names of all the
@@ -153,15 +160,12 @@ module UI
   def self.inspector_names
   end
 
-  # The menu method retrieves a SketchUp's menu object with a given name. This
+  # The {#menu} method retrieves a SketchUp's menu object with a given name. This
   # is the first step toward adding your own custom items to the bottom
   # of SketchUp's menus.
   #
   # Valid menu names are: "File", "Edit", "View", "Camera", "Draw", "Tools",
   # "Window", "Extensions" and "Help".
-  #
-  # Note that the "Extensions" menu was named "Plugins" prior to SketchUp 2015.
-  # For backward compatibility "Plugins" still works.
   #
   # @example
   #   tool_menu = UI.menu("Tools")
@@ -169,14 +173,19 @@ module UI
   #     UI.messagebox("Cheese activated.")
   #   }
   #
-  # @param menuname [String]
-  #   Optional. The name of an existing menu. Default menu
-  #   is "Extensions"
+  # @note The "Extensions" menu was named "Plugins" prior to SketchUp 2015.
+  #   For backward compatibility "Plugins" still works.
   #
-  # @return [Sketchup::Menu] a menu object.
+  # @note In versions prior to SketchUp 2018 this would crash if you passed an
+  #   empty string.
+  #
+  # @param menu_name
+  #   The name of an existing top level menu.
+  #
+  # @return [Sketchup::Menu]
   #
   # @version SketchUp 6.0
-  def self.menu(menuname = "Extensions")
+  def self.menu(menu_name = "Plugins")
   end
 
   # Creates a dialog box containing static text with a series of buttons for
@@ -266,13 +275,10 @@ module UI
   #   chosen_image = UI.openpanel("Open Image File", "c:/", "Image Files|*.jpg;*.png;||")
   #   chosen_image = UI.openpanel("Open CAD File", "c:/", "DXF|*.dxf|DWG|*.dwg||")
   #
-  # @param title [String]
+  # @param [String] title
   #   The title to apply to the open dialog box.
   #
-  # @param directory [String]
-  #   The default directory for the open panel.
-  #
-  # @param filename [String]
+  # @param [String] filename
   #   The default filename for the open panel. On Windows, you
   #   can alternatively pass a wildcard filter using this
   #   format: UIname|wildcard||. Additional filter dropdown
@@ -282,6 +288,9 @@ module UI
   #   Also multiple wildcard filters can be combined into a
   #   single line using a semicolon-separated list in the
   #   filter field: ui_name|wildcard1;wildcard2||.
+  #
+  # @param [String] directory
+  #   The default directory for the open panel.
   #
   # @return [String] the full path and name of the file selected, or
   #   nil if the dialog was canceled.
@@ -296,7 +305,7 @@ module UI
   # @example
   #   UI.play_sound "Plugins/mediadiscussion.wav"
   #
-  # @param filename [String]
+  # @param [String] filename
   #   the relative path to the filename from the SketchUp
   #   install directory, or an absolute path to the file. (See
   #   Sketchup.find_support_file for a way to search for a
@@ -315,7 +324,7 @@ module UI
   #   prefs = UI.preferences_pages
   #
   # @return [Array<String>] an array of strings containing the names
-  #   of prefspages.
+  #   of preference pages.
   #
   # @version SketchUp 6.0
   def self.preferences_pages
@@ -336,6 +345,22 @@ module UI
   def self.refresh_inspectors
   end
 
+  # Tells SketchUp to refresh all floating toolbars. This is useful when you need
+  # to manually force a refresh after you've made a change to the document via
+  # Ruby. Generally, SketchUp will keep these in sync for you, but occasionally
+  # it does not, such as when {Sketchup::Model#start_operation} has disabled UI
+  # updates.
+  # This only affects macOS, on Windows the toolbars are always refreshing.
+  #
+  # @example
+  #   UI.refresh_toolbars
+  #
+  # @return [nil]
+  #
+  # @version SketchUp 2018
+  def self.refresh_toolbars
+  end
+
   # The savepanel method is used to display the Save dialog box. The path that
   # is returned can then be used inside code to save out a text or image file.
   # See the standard Ruby class File for examples of reading and writing from
@@ -349,19 +374,19 @@ module UI
   # @example
   #   path_to_save_to = UI.savepanel("Save Image File", "c:\\", "Shapes.jpg")
   #
-  # @param title [String]
+  # @param [String] title
   #   The title to apply to the save dialog box.
   #
-  # @param directory [String]
-  #   The default directory for the save panel.
-  #
-  # @param filename [String]
+  # @param [String] filename
   #   The default filename for the save panel. On Windows, you
   #   can alternatively pass a mask, like "*.txt", to have all
   #   the .txt files display. If you want multiple file types
   #   to display, you can supply multiple masks for the
   #   filename and separate them with a semicolon, like this:
   #   "*.txt;*.doc".
+  #
+  # @param [String] directory
+  #   The default directory for the save panel.
   #
   # @return [String] the full path and name of the file
   #   selected or nil if the dialog was canceled.
@@ -424,7 +449,8 @@ module UI
   #     directory: "C:/images"
   #   )
   #
-  # @param options [Hash] The dialog can be customized by providing a hash or named arguments of options.
+  # @param [Hash] options
+  #   The dialog can be customized by providing a hash or named arguments of options.
   #
   # @return [String, Array<String>] A string with the full path of the
   #   directory selected when
@@ -449,7 +475,7 @@ module UI
   #     UI.set_cursor(cursor_id)
   #   end
   #
-  # @param cursor_id [Integer]
+  # @param [Integer] cursor_id
   #   The id of the cursor you want to display.
   #
   # @return [nil]
@@ -466,10 +492,10 @@ module UI
   # @example
   #   status = UI.set_toolbar_visible("Camera", true)
   #
-  # @param name [String]
+  # @param [String] name
   #   The name of a Ruby toolbar.
   #
-  # @param visible [Boolean]
+  # @param [Boolean] visible
   #   True to make the toolbar visible, false to hide it.
   #
   # @return [Boolean] true if successful, false if not.
@@ -496,7 +522,7 @@ module UI
   # @example
   #   status = UI.show_inspector("Components")
   #
-  # @param name [String]
+  # @param [String] name
   #   The name of inspector that you want to display.
   #
   # @return [Boolean] true if successful, false if unsuccessful
@@ -505,17 +531,20 @@ module UI
   def self.show_inspector(name)
   end
 
-  # The show_model_info method is used to display the model info dialog for a
+  # The {.show_model_info} method is used to display the model info dialog for a
   # specific page. You can get the list of valid dialogs with
-  # UI.model_info_pages.
+  # {UI.model_info_pages}.
+  #
+  # [SketchUp 2014] <code>"Classifications"</code> page was added.
+  # [SketchUp 2017] <code>"Extensions"</code> page was removed.
   #
   # @example
-  #   status = UI.show_model_info('Credits')
+  #   UI.show_model_info('Credits')
   #
-  # @param page_name [String]
+  # @param [String] page_name
   #   The name of the model info dialog you want to display.
   #
-  # @return [Boolean] true
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def self.show_model_info(page_name)
@@ -529,7 +558,7 @@ module UI
   # @example
   #   status = UI.show_preferences('GraphicsCard')
   #
-  # @param page_name [String]
+  # @param [String] page_name
   #   The name of the preferences dialog you want to display.
   #
   # @return [Boolean] true
@@ -551,11 +580,11 @@ module UI
   #   # Beep once after 10 seconds.
   #   id = UI.start_timer(10, false) { UI.beep }
   #
-  # @param repeat [Boolean]
+  # @param [Boolean] repeat
   #   true if you want the timer to repeat, false
   #   (or omit) if you do not want it to repeat.
   #
-  # @param seconds [Numeric]
+  # @param [Numeric] seconds
   #   The time in seconds before your code should be called.
   #
   # @return [Integer] a timer ID
@@ -574,7 +603,7 @@ module UI
   #   id = UI.start_timer(10) { UI.beep }
   #   UI.stop_timer(id)
   #
-  # @param id [Integer]
+  # @param [Integer] id
   #   The timer id for the timer that you want to stop.
   #
   # @return [nil]
@@ -589,7 +618,7 @@ module UI
   # @example
   #   toolbar = UI.toolbar('Test')
   #
-  # @param name [String]
+  # @param [String] name
   #   The name of the Ruby toolbar.
   #
   # @return [UI::Toolbar] a Toolbar object
@@ -619,10 +648,10 @@ module UI
   # @example
   #   status = UI.toolbar_visible?("Camera")
   #
-  # @param name [String]
+  # @param [String] name
   #   The name of a native toolbar.
   #
-  # @return [Boolean] true if successful, false if unsuccessful
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def self.toolbar_visible?(name)

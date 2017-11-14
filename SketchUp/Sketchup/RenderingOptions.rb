@@ -75,6 +75,10 @@
 # - +DrawBackEdges+
 # - +SectionCutDrawEdges+
 #
+# Added in SketchUp 2018:
+# - +SectionCutFilled+
+# - +SectionDefaultFillColor+
+#
 # @version SketchUp 6.0
 class Sketchup::RenderingOptions < Sketchup::Entity
 
@@ -134,8 +138,10 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   ROPSetProfilesOnlyEdges = nil # Stub value.
   ROPSetRenderMode = nil # Stub value.
   ROPSetSectionActiveColor = nil # Stub value.
+  ROPSetSectionCutFilled = nil # Stub value.
   ROPSetSectionCutWidth = nil # Stub value.
   ROPSetSectionDefaultCutColor = nil # Stub value.
+  ROPSetSectionDefaultFillColor = nil # Stub value.
   ROPSetSectionDisplayMode = nil # Stub value.
   ROPSetSectionInactiveColor = nil # Stub value.
   ROPSetSkyColor = nil # Stub value.
@@ -174,16 +180,15 @@ class Sketchup::RenderingOptions < Sketchup::Entity
 
   # Instance Methods
 
-  # The set value [] method is used to get the value in the array of
-  # rendering options.
+  # The {#[]} method is used to get the value of a rendering option.
   #
   # @example
   #   result = Sketchup.active_model.rendering_options["DisplayInstanceAxes"]
   #
-  # @param key [String]
-  #   The key of the rendering option value to set.
+  # @param [String] key
+  #   The key of the rendering option value to get.
   #
-  # @return [Object, nil] the value that was found.
+  # @return [Object, nil]
   #
   # @version SketchUp 6.0
   def [](key)
@@ -195,10 +200,10 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   # @example
   #   Sketchup.active_model.rendering_options["DisplayInstanceAxes"] = false
   #
-  # @param key [String]
+  # @param [String] key
   #   The key of the rendering option value to set.
   #
-  # @param value [Object]
+  # @param [Object] value
   #   The value to be set.
   #
   # @return [Object] the value that was set
@@ -213,7 +218,7 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   #   observer = Sketchup::RenderingOptionsObserver.new # Dummy observer.
   #   result = Sketchup.active_model.rendering_options.add_observer(observer)
   #
-  # @param observer [Object]
+  # @param [Object] observer
   #   An observer.
   #
   # @return [Boolean] true if successful, false if unsuccessful.
@@ -323,7 +328,7 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   #   options.add_observer(observer)
   #   result = options.remove_observer(observer)
   #
-  # @param observer [Object]
+  # @param [Object] observer
   #   An observer.
   #
   # @return [Boolean] true if successful, false if unsuccessful.

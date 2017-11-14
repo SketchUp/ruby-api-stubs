@@ -36,7 +36,7 @@ class UI::Toolbar
   # @example
   #   toolbar = UI::Toolbar.new "Test"
   #
-  # @param toolbarname [String]
+  # @param [String] toolbarname
   #   The name for the new toolbar.
   #
   # @return [UI::Toolbar] the newly created toolbar object
@@ -52,7 +52,7 @@ class UI::Toolbar
   # @example
   #   toolbar = toolbar.add_item command
   #
-  # @param command [UI::Command]
+  # @param [UI::Command] command
   #   A Command object representing the command to add to the
   #   toolbar.
   #
@@ -70,7 +70,7 @@ class UI::Toolbar
   # @return [UI::Toolbar] the toolbar where the line separator was just added
   #
   # @version SketchUp 6.0
-  def add_separator
+  def add_separator(arg)
   end
 
   # The {#count} method is inherited from the +Enumerable+ mix-in module.
@@ -231,7 +231,7 @@ class UI::Toolbar
   # @example
   #   visible = toolbar.visible?
   #
-  # @return [Boolean] true if visible
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def visible?

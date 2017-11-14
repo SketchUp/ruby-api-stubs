@@ -24,7 +24,7 @@ class Sketchup::Vertex < Sketchup::Entity
   #     UI.messagebox "Failure"
   #   end
   #
-  # @param vertex2 [Sketchup::Vertex]
+  # @param [Sketchup::Vertex] vertex2
   #   A Vertex object.
   #
   # @return [Sketchup::Edge, nil] an Edge object common to both vertices if
@@ -35,7 +35,7 @@ class Sketchup::Vertex < Sketchup::Entity
   def common_edge(vertex2)
   end
 
-  # The curve_interior? method is used to determine if this vertex is on the
+  # The {#curve_interior?} method is used to determine if this vertex is on the
   # interior of a Curve.
   #
   # @example
@@ -51,8 +51,13 @@ class Sketchup::Vertex < Sketchup::Entity
   #     UI.messagebox "Failure"
   #   end
   #
-  # @return [Boolean] true if it is used by exactly two edges which
-  #   are both part of the same curve.
+  # @note This method doesn't actually return a boolean as the question mark
+  #   post-fix would normally indicate. But the result still evaluates to
+  #   truthy or falsy.
+  #
+  # @return [Boolean]
+  #
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def curve_interior?
@@ -127,10 +132,10 @@ class Sketchup::Vertex < Sketchup::Entity
   # @example
   #   used = vertex1.used_by? my_face
   #
-  # @param face_or_edge [Sketchup::Edge, Sketchup::Face]
+  # @param [Sketchup::Edge, Sketchup::Face] face_or_edge
   #   A Face or Edge ot test against.
   #
-  # @return [Boolean] true if the Vertex is used in the given entity.
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def used_by?(face_or_edge)

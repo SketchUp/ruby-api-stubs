@@ -93,7 +93,7 @@ class UI::WebDialog
   # @example
   #   dialog.allow_actions_from_host("sketchup.com")
   #
-  # @param hostname [String]
+  # @param [String] hostname
   #   The name (domain) of the host that your webdialog can
   #   access safely.
   #
@@ -134,7 +134,7 @@ class UI::WebDialog
   #   js_command = "document.getElementById('id').innerHTML = '<b>Hi!</b>'"
   #   dialog.execute_script(js_command)
   #
-  # @param script [String]
+  # @param [String] script
   #   The JavaScript script to execute on the webdialog.
   #
   # @return [Boolean]
@@ -166,7 +166,7 @@ class UI::WebDialog
   #   # In webdialog's HTML:
   #   <input type="text" id="myTextInput" value="hello">
   #
-  # @param element_id [String]
+  # @param [String] element_id
   #   The name of the element in your HTML code.
   #
   # @return [String] a string containing the retrieved value.
@@ -251,7 +251,7 @@ class UI::WebDialog
   # @example
   #   dialog.max_height = 400
   #
-  # @param height [Integer]
+  # @param [Integer] height
   #   The maximum height in pixels
   #
   # @return [Integer]
@@ -278,7 +278,7 @@ class UI::WebDialog
   # @example
   #   dialog.max_width = 500
   #
-  # @param width [Integer]
+  # @param [Integer] width
   #   The maximum width in pixels
   #
   # @return [Integer]
@@ -305,7 +305,7 @@ class UI::WebDialog
   # @example
   #   dialog.min_height = 100
   #
-  # @param height [Integer]
+  # @param [Integer] height
   #   The minimum height in pixels
   #
   # @return [Integer]
@@ -332,7 +332,7 @@ class UI::WebDialog
   # @example
   #   dialog.min_width = 200
   #
-  # @param width [Integer]
+  # @param [Integer] width
   #   The minimum width in pixels
   #
   # @return [Integer]
@@ -347,9 +347,6 @@ class UI::WebDialog
   #
   # @example
   #   dialog.navigation_buttons_enabled = false
-  #
-  # @param nav_buttons [Boolean]
-  #   true to hide the buttons, false to show them
   #
   # @return [Boolean]
   #
@@ -366,7 +363,7 @@ class UI::WebDialog
   # @example
   #   nav_buttons = dialog.navigation_buttons_enabled?
   #
-  # @return [Boolean] true if the buttons are visible.
+  # @return [Boolean]
   #
   # @version SketchUp 7.0
   def navigation_buttons_enabled?
@@ -378,10 +375,10 @@ class UI::WebDialog
   # @example
   #   data = dialog.post_url("http://www.mydomain.com/formchecker.cgi",data)
   #
-  # @param url [String]
+  # @param [String] url
   #   The url to send the data.
   #
-  # @param data [String]
+  # @param [String] data
   #   The data to be sent.
   #
   # @return [nil]
@@ -410,7 +407,7 @@ class UI::WebDialog
   # @example
   #   dlg.set_background_color("f3f0f0")
   #
-  # @param color [String]
+  # @param [String] color
   #   A six digit hexidecimal color.
   #
   # @return [nil]
@@ -458,7 +455,7 @@ class UI::WebDialog
   #   html= '<b>Hello world!</b>'
   #   dialog.set_html(html)
   #
-  # @param html_string [String]
+  # @param [String] html_string
   #   A string of valid html to display in your webdialog.
   #
   # @return [nil]
@@ -487,10 +484,10 @@ class UI::WebDialog
   # @example
   #   dialog.set_position(100,50)
   #
-  # @param left [Integer]
+  # @param [Integer] left
   #   The number of pixels from the left.
   #
-  # @param top [Integer]
+  # @param [Integer] top
   #   The number of pixels from the top of the screen.
   #
   # @return [nil]
@@ -504,10 +501,10 @@ class UI::WebDialog
   # @example
   #   dialog.set_size(320,240)
   #
-  # @param w [Integer]
+  # @param [Integer] w
   #   Width of the webdialog.
   #
-  # @param h [Integer]
+  # @param [Integer] h
   #   Height of the webdialog.
   #
   # @return [nil]
@@ -522,7 +519,7 @@ class UI::WebDialog
   # @example
   #   dialog.set_url "http://www.sketchup.com"
   #
-  # @param url [String]
+  # @param [String] url
   #   The URL for a specific web site.
   #
   # @return [nil]
@@ -572,7 +569,7 @@ class UI::WebDialog
   # @example
   #   vis = dialog.visible?
   #
-  # @return [Boolean] true if visible.
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def visible?
@@ -585,29 +582,29 @@ class UI::WebDialog
   #   dialog.write_image('c:/grab.jpg', 70, 0, 0, 100, 100)
   #   dialog.write_image('c:/grab.png', 4, 0, 0, 100, 100)
   #
-  # @param option [Integer]
+  # @param [Integer] top_left_x
+  #   The x coordinate of the upper left corner of the
+  #   region to grab.
+  #
+  # @param [String] image_path
+  #   The destination path of the saved image.
+  #
+  # @param [Integer] option
   #   Specifies what method to use when saving the image. For
   #   JPG/JPEG images, this specifies the image quality and
   #   can range from 1 to 100. For PNG images this specifies
   #   the compression algorithm: <4 (best speed), 4-8
   #   (default), or >=9 (best compression).
   #
-  # @param image_path [String]
-  #   The destination path of the saved image.
-  #
-  # @param bottom_right_y [Integer]
+  # @param [Integer] bottom_right_y
   #   The x coordinate of the lower right corner of the
   #   region to grab.
   #
-  # @param bottom_right_x [Integer]
+  # @param [Integer] bottom_right_x
   #   The x coordinate of the lower right corner of the
   #   region to grab.
   #
-  # @param top_left_y [Integer]
-  #   The x coordinate of the upper left corner of the
-  #   region to grab.
-  #
-  # @param top_left_x [Integer]
+  # @param [Integer] top_left_y
   #   The x coordinate of the upper left corner of the
   #   region to grab.
   #

@@ -50,17 +50,17 @@ class Geom::Point3d
   #     UI.messagebox("Failure")
   #   end
   #
-  # @param weight1 [Float]
+  # @param [Float] weight1
   #   A weight or percentage.
   #
-  # @param point1 [Float]
-  #   The start point on the line.
-  #
-  # @param point2 [Float]
+  # @param [Float] point2
   #   The end point of the line.
   #
-  # @param weight2 [Float]
+  # @param [Float] weight2
   #   A weight or percentage.
+  #
+  # @param [Float] point1
+  #   The start point on the line.
   #
   # @return [Geom::Point3d]
   #
@@ -77,7 +77,7 @@ class Geom::Point3d
   #   pt2 = pt + vec
   #   pt = pt + [10,10,10]
   #
-  # @param point2 [Geom::Point3d]
+  # @param [Geom::Point3d] point2
   #   A Point3d object.
   #
   # @return [Geom::Point3d]
@@ -93,7 +93,7 @@ class Geom::Point3d
   #   pt2 = pt - vec
   #   pt = pt - [10,10,10]
   #
-  # @param point2 [Geom::Point3d]
+  # @param [Geom::Point3d] point2
   #   A Point3d object.
   #
   # @return [Geom::Vector3d]
@@ -110,7 +110,7 @@ class Geom::Point3d
   #   pt2 = Geom::Point3d.new(20,20,20)
   #   result = pt1 < pt2
   #
-  # @param point2 [Geom::Point3d]
+  # @param [Geom::Point3d] point2
   #   A Point3d object.
   #
   # @return [Boolean] true if the point2 is closer to the origin.
@@ -142,7 +142,7 @@ class Geom::Point3d
   #   point2 = Geom::Point3d.new(10,10,10)
   #   status = point1 == point2
   #
-  # @param point2 [Geom::Point3d]
+  # @param [Geom::Point3d] point2
   #   A Point3d object.
   #
   # @return [Boolean] true if both points are equal; false if points are not
@@ -161,7 +161,7 @@ class Geom::Point3d
   #   # retrieves the y value of 2
   #   yvalue = point[1]
   #
-  # @param index [Integer]
+  # @param [Integer] index
   #   The index for a specific x, y, or z value within the
   #   Point3d.
   #
@@ -178,11 +178,11 @@ class Geom::Point3d
   #   point = Geom::Point3d.new(1,2,3)
   #   yvalue = point[1] = 4
   #
-  # @param index [Integer]
+  # @param [Integer] index
   #   The index for a specific x, y, or z value within the
   #   Point3d.
   #
-  # @param new_value [Numeric]
+  # @param [Numeric] new_value
   #   New x, y, or z value.
   #
   # @return [Numeric] the newly set x, y, or z value if successful
@@ -212,7 +212,7 @@ class Geom::Point3d
   #   point2 = Geom::Point3d.new(10,10,10)
   #   distance = point1.distance(point2)
   #
-  # @param point2 [Geom::Point3d]
+  # @param [Geom::Point3d] point2
   #   The Point3d object to compute the distance to.
   #
   # @return [Length] the distance in current units
@@ -230,6 +230,8 @@ class Geom::Point3d
   #   point1 = Geom::Point3d.new(1,1,1)
   #   line = [Geom::Point3d.new(0,0,0), Geom::Vector3d.new(0,0,1)]
   #   distance = point1.distance_to_line(line)
+  #
+  # @note This function returns a `Float` value, not a `Length`.
   #
   # @param line
   #   A line (see Geom for information on creating lines).
@@ -250,6 +252,8 @@ class Geom::Point3d
   #
   # @example
   #   distance = point.distance_to_plane(plane)
+  #
+  # @note This function returns a `Float` value, not a `Length`.
   #
   # @param plane
   #   A plane (see Geom for how to create a plane).
@@ -340,10 +344,10 @@ class Geom::Point3d
   #   vector = Geom::Vector3d.new(0, 0, 1)
   #   point2 = point1.offset(vector)
   #
-  # @param vector [Geom::Vector3d]
+  # @param [Geom::Vector3d] vector
   #   A Vector3d object to offset the point by.
   #
-  # @param length [Numeric]
+  # @param [Numeric] length
   #   the distance to offset. If not provided, the
   #   offset is my a distance equal to the vector length.
   #
@@ -363,10 +367,10 @@ class Geom::Point3d
   #   vector = Geom::Vector3d.new(0,0,1)
   #   point2 = point1.offset!(vector)
   #
-  # @param vector [Geom::Vector3d]
+  # @param [Geom::Vector3d] vector
   #   A Vector3d object to offset the point by.
   #
-  # @param length [Numeric]
+  # @param [Numeric] length
   #   the distance to offset. If not provided, the
   #   offset is my a distance equal to the vector length.
   #
@@ -388,8 +392,7 @@ class Geom::Point3d
   # @param line
   #   A line (see Geom for how to create a line).
   #
-  # @return [Boolean] true if the point is on the line; false if the
-  #   point is not on the line
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def on_line?(line)
@@ -406,8 +409,7 @@ class Geom::Point3d
   #
   # @param plane
   #
-  # @return [Boolean] true if the point is on the plane; false if
-  #   the point is not on the plane
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def on_plane?(plane)
@@ -424,7 +426,7 @@ class Geom::Point3d
   #   projected_point = point.project_to_line(line)
   #
   # @param line
-  #   - see Geom for how to specify a line
+  #   see Geom for how to specify a line
   #
   # @return [Geom::Point3d] the Point3d that is on a line closest to the
   #   point
@@ -463,9 +465,9 @@ class Geom::Point3d
   #
   # @overload set!(x, y, z)
   #
-  #   @param x [Numeric] The x value for the point.
-  #   @param y [Numeric] The y value for the point.
-  #   @param z [Numeric] The z value for the point.
+  #   @param [Numeric] x The x value for the point.
+  #   @param [Numeric] y The y value for the point.
+  #   @param [Numeric] z The z value for the point.
   #   @return [Geom::Point3d] The newly set Point3d object
   #
   # @overload set!(point3d)
@@ -511,23 +513,6 @@ class Geom::Point3d
   def to_s
   end
 
-  # Apply a Transformation to a point. The point itself is modified.
-  #
-  # @example
-  #   transform = Geom::Transformation.new(point2)
-  #   point2 = Geom::Point3d.new(100,200,300)
-  #   point1 = Geom::Point3d.new(10,10,10)
-  #   point1.transform!(transform)
-  #
-  # @param transform [Geom::Transformation]
-  #   A Transformation object.
-  #
-  # @return [Geom::Point3d] the transformed point
-  #
-  # @version SketchUp 6.0
-  def transform!(transform)
-  end
-
   # Apply a Transformation to a point, returning a new point. The original
   # vector is unchanged by this method.
   #
@@ -537,10 +522,27 @@ class Geom::Point3d
   #   point1 = Geom::Point3d.new(10,10,10)
   #   point3 = point1.transform(transform)
   #
-  # @param transform [Geom::Transformation]
+  # @param [Geom::Transformation] transform
   #   A Transformation object.
   #
   # @return [Geom::Point3d] the newly transformed point
+  #
+  # @version SketchUp 6.0
+  def transform!(transform)
+  end
+
+  # Apply a Transformation to a point. The point itself is modified.
+  #
+  # @example
+  #   transform = Geom::Transformation.new(point2)
+  #   point2 = Geom::Point3d.new(100,200,300)
+  #   point1 = Geom::Point3d.new(10,10,10)
+  #   point1.transform!(transform)
+  #
+  # @param [Geom::Transformation] transform
+  #   A Transformation object.
+  #
+  # @return [Geom::Point3d] the transformed point
   #
   # @version SketchUp 6.0
   def transform(transform)
@@ -556,10 +558,10 @@ class Geom::Point3d
   #   # Another example...
   #   pt1 = [1,1,0]
   #   pt2 = [3,1,0]
-  #   pt1.vector_to( pt2 ) # returns the vector (2,0,0)
+  #   pt1.vector_to(pt2) # returns the vector (2,0,0)
   #   pt1.vector_to(pt2) # is equivalent to (pt2 - pt1)
   #
-  # @param point2 [Geom::Point3d]
+  # @param [Geom::Point3d] point2
   #   A Point3d object.
   #
   # @return [Geom::Vector3d] a Vector object
@@ -586,7 +588,7 @@ class Geom::Point3d
   #   point = Geom::Point3d.new(1,2,3)
   #   x = point.x = 2
   #
-  # @param value [Numeric]
+  # @param [Numeric] value
   #   The new x value.
   #
   # @return [Numeric] the newly set x value
@@ -613,7 +615,7 @@ class Geom::Point3d
   #   point = Geom::Point3d.new(1,2,3)
   #   y = point.y = 2
   #
-  # @param value [Numeric]
+  # @param [Numeric] value
   #   The new y value.
   #
   # @return [Numeric] the newly set y value
@@ -640,7 +642,7 @@ class Geom::Point3d
   #   point = Geom::Point3d.new(1,2,3)
   #   z = point.z = 2
   #
-  # @param value [Numeric]
+  # @param [Numeric] value
   #   The new z value.
   #
   # @return [Numeric] the newly set z value

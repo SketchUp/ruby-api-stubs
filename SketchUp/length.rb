@@ -47,7 +47,7 @@ class Length < Float
   #     puts "length1 is not less than length2"
   #   end
   #
-  # @param length2 [Length]
+  # @param [Length] length2
   #   A length value.
   #
   # @return [Boolean] true if length1 is < length2; false if
@@ -69,7 +69,7 @@ class Length < Float
   #     puts "length1 is greater than length2"
   #   end
   #
-  # @param length2 [Length]
+  # @param [Length] length2
   #   A length value.
   #
   # @return [Boolean] true if length1 is <= length2; false if
@@ -88,7 +88,7 @@ class Length < Float
   #   length2 = 30.to_l
   #   result = length1 <=> length2
   #
-  # @param length2 [Length]
+  # @param [Length] length2
   #   A length value.
   #
   # @return [Integer] the result of the comparison
@@ -107,7 +107,7 @@ class Length < Float
   #   length2 = 30.to_l
   #   is_equal = length1 == length2
   #
-  # @param length2 [Length]
+  # @param [Length] length2
   #   A length value.
   #
   # @return [Boolean] true if length1 is == length2; false if
@@ -131,7 +131,7 @@ class Length < Float
   #     puts "length1 is not greater than length2"
   #   end
   #
-  # @param length2 [Length]
+  # @param [Length] length2
   #   A length value.
   #
   # @return [Boolean] true if length1 is > length2; false if length1
@@ -156,7 +156,7 @@ class Length < Float
   #     puts "length1 is less than length2"
   #   end
   #
-  # @param length2 [Length]
+  # @param [Length] length2
   #   A length value.
   #
   # @return [Boolean] true if length1 is >= length2; false if

@@ -31,7 +31,7 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
   #   # value will contain 115
   #   value = attrdict["test"]
   #
-  # @param key [String]
+  # @param [String] key
   #   The name of the attribute.
   #
   # @return [Object, nil] the attribute stored under your key, or
@@ -56,10 +56,10 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
   #     UI.messagebox value
   #   end
   #
-  # @param key [String]
+  # @param [String] key
   #   The valid key.
   #
-  # @param value [Boolean, Fixnum, Float, Length, nil, String, Time, Array, Geom::Point3d, Geom::Vector3d]
+  # @param [Boolean, Fixnum, Float, Length, nil, String, Time, Array, Geom::Point3d, Geom::Vector3d] value
   #   The value to be set.
   #
   # @return [Object, nil] the value that was set if successful, or false
@@ -96,7 +96,7 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
   #   attrdict = model.attribute_dictionaries['test_dict']
   #   value = attrdict.delete_key("attr_one")
   #
-  # @param key [String]
+  # @param [String] key
   #   The key to be deleted.
   #
   # @return [Object, nil] the value of the key

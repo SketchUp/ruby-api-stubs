@@ -41,7 +41,7 @@ class Sketchup::Entity
   #     status = entity.add_observer observer
   #   end
   #
-  # @param observer [Object]
+  # @param [Object] observer
   #   An observer.
   #
   # @return [Boolean] true if successful, false if unsuccessful.
@@ -107,10 +107,10 @@ class Sketchup::Entity
   #   status = entity1.set_attribute "testdictionary", "test", 115
   #   attrdict = entity1.attribute_dictionary "testdictionary"
   #
-  # @param name [String]
+  # @param [String] name
   #   The name of the attribute dictionary.
   #
-  # @param create [Boolean]
+  # @param [Boolean] create
   #   boolean, if set to true then the attribute
   #   dictionary will be created if it does not exist.
   #
@@ -126,6 +126,11 @@ class Sketchup::Entity
   # If only the dictionary_name is given, then it deletes the entire
   # AttributeDictionary. Otherwise, delete_attribute deletes the attribute with
   # the given key from the given dictionary.
+  #
+  # In SketchUp 2018, special attribute dictionaries have been added. The name
+  # of these dictionaries are "SU_InstanceSet" and "SU_DefinitionSet". The
+  # dictionaries cannot be deleted via ruby and an ArgumentError will be raised.
+  # The key/value pairs in the dictionary can be deleted safely.
   #
   # @example
   #   depth = 100
@@ -180,7 +185,7 @@ class Sketchup::Entity
   #   entity1 = entities[1]
   #   status = entity1.deleted?
   #
-  # @return [Boolean] true if deleted, false if not deleted
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def deleted?
@@ -212,44 +217,33 @@ class Sketchup::Entity
   def entityID
   end
 
-  # The get_attribute method is used to retrieve the value of an attribute in
+  # The {#get_attribute} method is used to retrieve the value of an attribute in
   # the entity's attribute dictionary.
   #
-  # If the third parameter, default_value, is not passed and there is no
-  # attribute that matches the given name, it returns nil.
+  # If the third parameter, +default_value+, is not passed and there is no
+  # attribute that matches the given name, it returns +nil+.
   #
-  # If default_value is provided and there is no matching attribute it returns
+  # If +default_value+ is provided and there is no matching attribute it returns
   # the given value. It does not create an attribute with that name though.
   #
   # @example
-  #   depth = 100
-  #   width = 100
+  #   # Add an entity to the model:
   #   model = Sketchup.active_model
   #   entities = model.active_entities
-  #   pts = []
-  #   pts[0] = [0, 0, 0]
-  #   pts[1] = [width, 0, 0]
-  #   pts[2] = [width, depth, 0]
-  #   pts[3] = [0, depth, 0]
+  #   edge = entities.add_line([0, 0, 0], [9, 9, 9])
   #
-  #   # Add the face to the entities in the model
-  #   face = entities.add_face pts
+  #   # Read an attribute value from the edge. In this case this will return the
+  #   # default value provided; 42.
+  #   value = edge.get_attribute("MyExtension", "MyProperty", 42)
   #
-  #   # I just happen to know that the second and third entities in the
-  #   # entities objects are edges.
-  #   entity1 = entities[1]
-  #   status = entity1.set_attribute "testdictionary", "test", 115
-  #   value = entity1.get_attribute "testdictoinary", "test"
-  #
-  # @param dict_name [String]
+  # @param [String] dict_name
   #   The name of an attribute dictionary.
   #
-  # @param key [String]
-  #   An attribute key.
+  # @param [Object] default_value
+  #   A default value to return if no attribute is found.
   #
-  # @param default_value [Object]
-  #   A default value to return if no attribute
-  #   is found.
+  # @param [String] key
+  #   An attribute key.
   #
   # @return [Object] the retrieved value
   #
@@ -336,7 +330,7 @@ class Sketchup::Entity
   #   entity1 = entities[1]
   #   parent = entity1.parent
   #
-  # @return [Sketchup::ComponentDefinition, Sketchup::Model] a Entity object 
+  # @return [Sketchup::ComponentDefinition, Sketchup::Model] a Entity object
   #   representing the parent of this entity
   #
   # @version SketchUp 6.0
@@ -347,6 +341,28 @@ class Sketchup::Entity
   # assigned to an entity.
   #
   # The persistent id persistent between sessions.
+  #
+  # Note that only a subset of entity types support PIDs. Refer to the table
+  # below for which and when support was added.
+  #
+  # [SketchUp 2018]
+  #   - {Sketchup::Page}
+  # [SketchUp 2017]
+  #   - {Sketchup::Axes}
+  #   - {Sketchup::ComponentDefinition}
+  #   - {Sketchup::ComponentInstance}
+  #   - {Sketchup::ConstructionLine}
+  #   - {Sketchup::ConstructionPoint}
+  #   - {Sketchup::Curve}
+  #   - {Sketchup::Dimension}
+  #   - {Sketchup::Edge}
+  #   - {Sketchup::Face}
+  #   - {Sketchup::SectionPlane}
+  #   - {Sketchup::Text}
+  #   - {Sketchup::Vertex}
+  #   - Polyline3d entities exposed only as {Sketchup::Drawingelement} Use
+  #     {#typename} to determine if a {Sketchup::Drawingelement} is
+  #     a <tt>"Polyline3d"</tt>.
   #
   # @example
   #   model = Sketchup.active_model
@@ -380,7 +396,7 @@ class Sketchup::Entity
   #     status = entity.remove_observer observer
   #   end
   #
-  # @param observer [Object]
+  # @param [Object] observer
   #   An observer.
   #
   # @return [Boolean] true if successful, false if unsuccessful.
@@ -417,14 +433,14 @@ class Sketchup::Entity
   #   entity1 = entities[1]
   #   status = entity1.set_attribute "testdictionary", "test", 115
   #
-  # @param dict_name [String]
+  # @param [String] dict_name
   #   The name of an attribute dictionary.
   #
-  # @param key [String]
-  #   An attribute key.
-  #
-  # @param value [Object]
+  # @param [Object] value
   #   The value for the attribute.
+  #
+  # @param [String] key
+  #   An attribute key.
   #
   # @return [Object] the newly set value if successful
   #
@@ -509,7 +525,7 @@ class Sketchup::Entity
   #   entity1 = entities[1]
   #   status = entity1.valid?
   #
-  # @return [Boolean] true if deleted, false if not deleted
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def valid?

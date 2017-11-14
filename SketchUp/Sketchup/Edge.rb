@@ -68,7 +68,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #     UI.messagebox "Failure: No Common Face"
   #   end
   #
-  # @param edge2 [Sketchup::Edge]
+  # @param [Sketchup::Edge] edge2
   #   The face whose edge you are checking for commonality.
   #
   # @return [Sketchup::Face, nil] the Face object that is common to the two edges
@@ -232,8 +232,8 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #
   # @overload length(transform)
   #
-  #   @param transform [Geom::Transformation] A Transformation object or array 
-  #                        that can be interpreted as a Transformation object.
+  #   @param transform [Geom::Transformation] A Transformation object or array
+  #                      that can be interpreted as a Transformation object.
   #   @return [Length] the length of the edge in current units
   #
   # @version SketchUp 6.0
@@ -284,7 +284,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #     UI.messagebox "Failure"
   #   end
   #
-  # @param vertex1 [Sketchup::Vertex]
+  # @param [Sketchup::Vertex] vertex1
   #   One of the Vertex objects associated with the edge.
   #
   # @return [Sketchup::Vertex] the other Vertex object associated with the edge
@@ -434,7 +434,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #   edge = Sketchup.active_model.entities.add_line([0,0,0],[100,100,0])
   #   new_edge = edge.split 0.5
   #
-  # @param position [Geom::Point3d]
+  # @param [Geom::Point3d] position
   #   A Point3d object whose location is along the edge, or
   #   a Float between 0.0 and 1.0 defining how far along the
   #   edge to split.
@@ -487,11 +487,10 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #     UI.messagebox "Failure"
   #   end
   #
-  # @param element [Sketchup::Vertex, Sketchup::Face]
+  # @param [Sketchup::Vertex, Sketchup::Face] element
   #   A Vertex or Face object.
   #
-  # @return [Boolean] true if the face belongs to the element,
-  #   false if not.
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def used_by?(element)

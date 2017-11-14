@@ -100,6 +100,22 @@ class Sketchup::Texture < Sketchup::Entity
   def image_height
   end
 
+  # The {#image_rep} method returns a copy of a {Sketchup::ImageRep} object
+  # representing the texture pixel data.
+  #
+  # @example
+  #   texture = Sketchup.active_model.materials[0].texture
+  #   image_rep = texture.image_rep
+  #
+  # @param [Boolean] colorized
+  #   Set to +true+ to obtain the colorized version.
+  #
+  # @return [Sketchup::ImageRep]
+  #
+  # @version SketchUp 2018
+  def image_rep(colorized = false)
+  end
+
   # The image_width method retrieves the width of the repeatable texture image,
   # in pixels.
   #
@@ -139,7 +155,7 @@ class Sketchup::Texture < Sketchup::Entity
   #     UI.messagebox "Failure"
   #   end
   #
-  # @param size [Integer, Array(Integer, Integer)]
+  # @param [Integer, Array(Integer, Integer)] size
   #   The size, in inches, of the texture. This number will
   #   apply to height and width to keep aspect ratio.
   #   You can also pass as a parameter an array of two
@@ -166,7 +182,7 @@ class Sketchup::Texture < Sketchup::Entity
   #     UI.messagebox status
   #   end
   #
-  # @return [Boolean] true if valid, false if invalid.
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def valid?
@@ -193,10 +209,10 @@ class Sketchup::Texture < Sketchup::Entity
   #   filename = File.join(Sketchup.temp_dir, basename)
   #   material.texture.write(filename)
   #
-  # @param filename [String]
+  # @param [String] filename
   #   String - The filename to write the texture to.
   #
-  # @param colorize [Boolean]
+  # @param [Boolean] colorize
   #   Boolean - Allows for the texture to
   #   be exported with the color adjustments.
   #

@@ -129,6 +129,38 @@ class Sketchup::Page < Sketchup::Entity
   def hidden_entities
   end
 
+  # The {#include_in_animation=} method controls whether the page should be
+  # included when exporting an animation from the model.
+  #
+  # @example Turn off animation for all pages.
+  #   model = Sketchup.active_model
+  #   model.pages.each { |page|
+  #     page.include_in_animation = false
+  #   }
+  #
+  # @param [Boolean] include
+  #
+  # @return [Sketchup::Page]
+  #
+  # @version SketchUp 2018
+  def include_in_animation=(include)
+  end
+
+  # The {#include_in_animation?} method determines whether the page should be
+  # included when exporting an animation from the model.
+  #
+  # @example Toggle inclusion in animation for all pages.
+  #   model = Sketchup.active_model
+  #   in_animation = model.pages.select { |page| page.include_in_animation? }
+  #
+  # @return [Boolean]
+  #
+  # @return [Boolean]
+  #
+  # @version SketchUp 2018
+  def include_in_animation?
+  end
+
   # The label method retrieves the label for a page from the page tab.
   #
   # @example

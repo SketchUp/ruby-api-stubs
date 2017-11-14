@@ -40,7 +40,7 @@ class LanguageHandler
   #   swiveldriver_lang_handler = LanguageHandler.new('swiveldriver.strings')
   #   localized_string = swiveldriver_lang_handler['String 1']
   #
-  # @param key [String]
+  # @param [String] key
   #   The key for the string to be retrieved.
   #
   # @return [String] the localized string.
@@ -54,7 +54,7 @@ class LanguageHandler
   # @example
   #   swiveldriver_lang_handler = LanguageHandler.new('swiveldriver.strings')
   #
-  # @param filename [String]
+  # @param [String] filename
   #   The name of the file that contains the localized strings
   #   with their keys in UTF-8 encoding.
   #

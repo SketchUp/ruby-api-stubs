@@ -83,7 +83,7 @@ class SketchupExtension
   #   extension.copyright = '2008'
   #   copyright = extension.copyright
   #
-  # @param copyright [String]
+  # @param [String] copyright
   #   The copyright to set
   #
   # @return [String] the new copyright
@@ -118,7 +118,7 @@ class SketchupExtension
   #   extension.creator = 'Trimble Navigation, Inc.'
   #   creator = extension.creator
   #
-  # @param creator [String]
+  # @param [String] creator
   #   The creator to set
   #
   # @return [String] the new creator
@@ -153,7 +153,7 @@ class SketchupExtension
   #   extension.description = 'My description.'
   #   description = extension.description
   #
-  # @param description [String]
+  # @param [String] description
   #   The description string to set.
   #
   # @return [String] the Extension description
@@ -193,10 +193,10 @@ class SketchupExtension
   #   # telling SketchUp to load the extension by default.
   #   Sketchup.register_extension(extension, true)
   #
-  # @param title [String]
+  # @param [String] title
   #   The name of the extension
   #
-  # @param path [String]
+  # @param [String] path
   #   The relative path to the script that loads your
   #   plugin.
   #
@@ -214,7 +214,7 @@ class SketchupExtension
   #   Sketchup.register_extension(ext, true)
   #   UI.messagebox("load_on_start? is now true: #{ext.load_on_start?.to_s}")
   #
-  # @return [Boolean] true if the extension loads on startup.
+  # @return [Boolean]
   #
   # @version SketchUp 8.0 M2
   def load_on_start?
@@ -229,7 +229,7 @@ class SketchupExtension
   #   Sketchup.register_extension(ext, true)
   #   UI.messagebox("loaded? is now true: #{ext.loaded?.to_s}")
   #
-  # @return [Boolean] true if the extension has been loaded
+  # @return [Boolean]
   #
   # @version SketchUp 8.0 M2
   def loaded?
@@ -259,7 +259,7 @@ class SketchupExtension
   #   extension = SketchupExtension.new('Stair Tools', 'StairTools/core.rb')
   #   extension.name = 'Renamed Stair Tools'
   #
-  # @param name [String]
+  # @param [String] name
   #   The new name
   #
   # @return [String] the Extension name
@@ -277,7 +277,7 @@ class SketchupExtension
   #   Sketchup.register_extension(ext, true)
   #   UI.messagebox("Now registered? is now true: #{ext.registered?.to_s}")
   #
-  # @return [Boolean] true if the extension has been registered.
+  # @return [Boolean]
   #
   # @version SketchUp 8.0 M2
   def registered?
@@ -329,7 +329,7 @@ class SketchupExtension
   #   extension.version = '5.0'
   #   version = extension.version
   #
-  # @param version [String]
+  # @param [String] version
   #   The version string to set.
   #
   # @return [String] the Extension version

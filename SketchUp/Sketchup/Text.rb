@@ -32,7 +32,7 @@ class Sketchup::Text < Sketchup::Drawingelement
   # @example
   #   arrow = text.arrow_type=type
   #
-  # @param type [Integer]
+  # @param [Integer] type
   #   A numerical representation of the type of arrow to be
   #   set.
   #
@@ -51,7 +51,7 @@ class Sketchup::Text < Sketchup::Drawingelement
   # @example
   #   leader = text.display_leader=true
   #
-  # @param status [Boolean]
+  # @param [Boolean] status
   #   true if you want to display the leader text, false if
   #   you do not want to display the leader text.
   #
@@ -66,8 +66,7 @@ class Sketchup::Text < Sketchup::Drawingelement
   # @example
   #   status = text.display_leader
   #
-  # @return [Boolean] true if the leader is being displayed, false
-  #   if it is not displayed.
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def display_leader?
@@ -78,8 +77,7 @@ class Sketchup::Text < Sketchup::Drawingelement
   # @example
   #   status = text.has_leader
   #
-  # @return [Boolean] true if the Text object has a leader. False if
-  #   the Text object does not have a leader.
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def has_leader?
@@ -104,7 +102,7 @@ class Sketchup::Text < Sketchup::Drawingelement
   # @example
   #   leader = text.leader_type=1
   #
-  # @param type [Integer]
+  # @param [Integer] type
   #   A numerical value representing the leader type to be
   #   set.
   #
@@ -135,7 +133,7 @@ class Sketchup::Text < Sketchup::Drawingelement
   # @example
   #   newweight = text.line_weight = 4
   #
-  # @param weight [Integer]
+  # @param [Integer] weight
   #   The line weight to be set (in pixels).
   #
   # @return [Integer] The line weight that has been set.
@@ -160,7 +158,7 @@ class Sketchup::Text < Sketchup::Drawingelement
   # @example
   #   status = text.point = point3d
   #
-  # @param point3d [Geom::Point3d]
+  # @param [Geom::Point3d] point3d
   #   A Point3d object.
   #
   # @return [Geom::Point3d] true if successful, false if unsuccessful.
@@ -175,7 +173,7 @@ class Sketchup::Text < Sketchup::Drawingelement
   # @example
   #   text = text.set_text "This is another text"
   #
-  # @param textstring [String]
+  # @param [String] textstring
   #   The string to be set within the Text object.
   #
   # @return [Sketchup::Text] the Text object
@@ -201,7 +199,7 @@ class Sketchup::Text < Sketchup::Drawingelement
   # @example
   #   textstring = text.text= "text"
   #
-  # @param textstring [String]
+  # @param [String] textstring
   #
   # @return [String] the newly set text
   #
@@ -225,7 +223,7 @@ class Sketchup::Text < Sketchup::Drawingelement
   # @example
   #   vector = text.vector
   #
-  # @param vector [Geom::Vector3d]
+  # @param [Geom::Vector3d] vector
   #   A Vector3d object.
   #
   # @return [Geom::Vector3d]

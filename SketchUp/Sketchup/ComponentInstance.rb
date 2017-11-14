@@ -1,12 +1,19 @@
 # Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
-# The ComponentInstance class is used to represent component instances of a
-# component definition or components that have been dragged from the Component
-# Browser and placed (thus, instanced) within the Model. Therefore, the
-# ComponentInstance class contains a reference to a corresponding
-# ComponentDefinition object and a Transformation object (which contains the
-# location of the component in the Drawing Window).
+# The {Sketchup::ComponentInstance} class is used to represent component
+# instances of a component definition or components that have been dragged from
+# the Component Browser and placed (thus, instanced) within the Model.
+# Therefore, the ComponentInstance class contains a reference to a
+# corresponding ComponentDefinition object and a Transformation object (which
+# contains the location of the component in the Drawing Window).
+#
+# Starting from SketchUp 2018+, the {Sketchup::ComponentInstance} class
+# contains default attributes when created or imported. The attributes
+# are: "Owner", "Status". See the
+# {https://help.sketchup.com/en/article/3000124 Help article} for more
+# information. The dictionary cannot be deleted via ruby and an @raise ArgumentError
+# will be raised. The key/value pairs in the dictionary can be deleted safely.
 #
 # @version SketchUp 6.0
 class Sketchup::ComponentInstance < Sketchup::Drawingelement
@@ -22,7 +29,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   componentinstance = entities.add_instance(definition, transformation)
   #   status = componentinstance.add_observer observer
   #
-  # @param observer [Object]
+  # @param [Object] observer
   #   An observer.
   #
   # @return [Boolean] true if successful, false if unsuccessful.
@@ -69,7 +76,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   # Replace 2nd instance with the 1st definition.
   #   instance2.definition = definition1
   #
-  # @param definition [Sketchup::ComponentDefinition]
+  # @param [Sketchup::ComponentDefinition] definition
   #   A ComponentDefinition object to set.
   #
   # @return [Sketchup::ComponentDefinition] the ComponentDefinition object
@@ -88,12 +95,10 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   instance2 = entities[1]
   #   status = instance1.equals?(instance2)
   #
-  # @param instance [Sketchup::ComponentInstance]
+  # @param [Sketchup::ComponentInstance] instance
   #   The instance to compare this instance with.
   #
-  # @return [Boolean] true if the instances are geometrically
-  #   equivalent.
-  #   Otherwise false.
+  # @return [Boolean]
   #
   # @version SketchUp 8.0
   def equals?(instance)
@@ -213,7 +218,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   instance2 = entities[1]
   #   result = instance1.intersect(instance2)
   #
-  # @param instance [Sketchup::ComponentInstance]
+  # @param [Sketchup::ComponentInstance] instance
   #   The instance to intersect this instance with.
   #
   # @return [Sketchup::Group, nil] The resultant group if the two objects
@@ -251,8 +256,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   componentinstance = entities.add_instance(definition, transformation)
   #   status = componentinstance.locked?
   #
-  # @return [Boolean] true if the component instance is locked.
-  #   False if the instance is not locked.
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def locked?
@@ -290,8 +294,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   componentinstance = entities.add_instance(definition, transformation)
   #   status = componentinstance.manifold?
   #
-  # @return [Boolean] true if the instance is manifold.
-  #   false if the instance is not manifold.
+  # @return [Boolean]
   #
   # @version SketchUp 8.0
   def manifold?
@@ -311,7 +314,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   new_transformation = Geom::Transformation.new([100,0,0])
   #   componentinstance.move! new_transformation
   #
-  # @param transform [Geom::Transformation]
+  # @param [Geom::Transformation] transform
   #   The transform object to apply to the component instance.
   #
   # @return [Boolean] true if successful, false if unsuccessful
@@ -344,7 +347,8 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   componentinstance = entities.add_instance(definition, transformation)
   #   componentinstance.name = "Sang"
   #
-  # @param name [String] the string name to set
+  # @param [String] name
+  #   the string name to set
   #
   # @return [Sketchup::ComponentInstance] the newly named ComponentInstance
   #
@@ -362,7 +366,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   instance2 = entities[1]
   #   result = instance1.outer_shell(instance2)
   #
-  # @param instance [Sketchup::ComponentInstance]
+  # @param [Sketchup::ComponentInstance] instance
   #   The instance to outer shell this instance with.
   #
   # @return [Sketchup::Group, nil] The resultant group if the two objects
@@ -383,7 +387,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   componentinstance = entities.add_instance(definition, transformation)
   #   status = componentinstance.remove_observer observer
   #
-  # @param observer [Object]
+  # @param [Object] observer
   #   An observer.
   #
   # @return [Boolean] true if successful, false if unsuccessful.
@@ -410,10 +414,10 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   instance2 = entities[1]
   #   status = instance1.show_differences(instance2, true)
   #
-  # @param instance [Sketchup::ComponentInstance]
+  # @param [Sketchup::ComponentInstance] instance
   #   The instance to be compared with.
   #
-  # @param verbose [Boolean]
+  # @param [Boolean] verbose
   #   A boolean flag indicating whether to display a textural
   #   report of the found differences to the Ruby console.
   #
@@ -434,11 +438,10 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   instance2 = entities[1]
   #   result = instance1.split(instance2)
   #
-  # @param instance [Sketchup::ComponentInstance, nil]
+  # @param [Sketchup::ComponentInstance, nil] instance
   #   The instance to split this instance with.
   #
-  # @return [Array(Sketchup::Group, Sketchup::Group, Sketchup::Group)] 
-  #   A vector (array) of the three resultant groups
+  # @return [Array(Sketchup::Group, Sketchup::Group, Sketchup::Group)] A vector (array) of the three resultant groups
   #   if the two objects (this and arg) represent manifold
   #   solids and the operation succeeds otherwise nil is
   #   returned. The 3 groups are as follows: The intersection
@@ -460,7 +463,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   instance2 = entities[1]
   #   result = instance1.subtract(instance2)
   #
-  # @param instance [Sketchup::ComponentInstance]
+  # @param [Sketchup::ComponentInstance] instance
   #   The instance to subtract this instance from.
   #
   # @return [Sketchup::Group, nil] The resultant group if the two objects
@@ -517,7 +520,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   new_transformation = Geom::Transformation.new([100,0,0])
   #   componentinstance.transformation = new_transformation
   #
-  # @param transformation [Geom::Transformation]
+  # @param [Geom::Transformation] transformation
   #   A Transformation object to apply.
   #
   # @return [Sketchup::ComponentInstance] the transformed ComponentInstance
@@ -537,7 +540,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   instance2 = entities[1]
   #   result = instance1.trim(instance2)
   #
-  # @param instance [Sketchup::ComponentInstance]
+  # @param [Sketchup::ComponentInstance] instance
   #   The instance to trim this instance against.
   #
   # @return [Sketchup::Group, nil] The resultant group if the two objects
@@ -558,7 +561,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   instance2 = entities[1]
   #   result = instance1.union(instance2)
   #
-  # @param instance [Sketchup::ComponentInstance]
+  # @param [Sketchup::ComponentInstance] instance
   #   The instance to union this instance with.
   #
   # @return [Sketchup::Group, nil] The resultant group if the two objects

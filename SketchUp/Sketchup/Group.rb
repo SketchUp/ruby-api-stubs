@@ -25,7 +25,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   group.entities.add_line([0,0,0],[100,100,100])
   #   status = group.add_observer observer
   #
-  # @param observer [Object]
+  # @param [Object] observer
   #   An observer.
   #
   # @return [Boolean] true if successful, false if unsuccessful.
@@ -121,7 +121,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   #     UI.messagebox "Failure"
   #   end
   #
-  # @param description [String]
+  # @param [String] description
   #   A string description.
   #
   # @return [String] the new description if successful
@@ -173,11 +173,10 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   group2 = entities[1]
   #   status = group1.equals?(group2)
   #
-  # @param group [Sketchup::Group]
+  # @param [Sketchup::Group] group
   #   The group to compare this group with.
   #
-  # @return [Boolean] true if the groups are geometrically
-  #   equivalent. Otherwise false.
+  # @return [Boolean]
   #
   # @version SketchUp 8.0
   def equals?(group)
@@ -229,7 +228,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   group2 = entities[1]
   #   result = group1.intersect(group2)
   #
-  # @param group [Sketchup::Group, Sketchup::ComponentInstance]
+  # @param [Sketchup::Group, Sketchup::ComponentInstance] group
   #   The group to intersect this group with.
   #
   # @return [Sketchup::Group, nil] The resultant group if the two objects
@@ -298,7 +297,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   status = group.locked?
   #   UI.messagebox status
   #
-  # @return [Boolean] true if the group is locked, false if not.
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def locked?
@@ -336,8 +335,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   group = entities.add_instance(definition, transformation)
   #   status = group.manifold?
   #
-  # @return [Boolean] true if the group is manifold.
-  #   false if the group is not manifold.
+  # @return [Boolean]
   #
   # @version SketchUp 8.0
   def manifold?
@@ -379,7 +377,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   #     UI.messagebox "Failure"
   #   end
   #
-  # @param transform [Geom::Transformation]
+  # @param [Geom::Transformation] transform
   #   A Transformation object.
   #
   # @return [Sketchup::Group] the transformed Group object if successful
@@ -412,7 +410,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   group.name = "A Line"
   #   name = group.name
   #
-  # @param name [String]
+  # @param [String] name
   #   A string name.
   #
   # @return [String] a new name if successful
@@ -431,7 +429,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   group2 = entities[1]
   #   result = group1.outer_shell(group2)
   #
-  # @param group [Sketchup::Group, Sketchup::ComponentInstance]
+  # @param [Sketchup::Group, Sketchup::ComponentInstance] group
   #   The group to outer shell this group with.
   #
   # @return [Sketchup::Group, nil] The resultant group if the two objects
@@ -453,7 +451,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   #     end
   #   end
   #
-  # @param observer [Object]
+  # @param [Object] observer
   #   An observer.
   #
   # @return [Boolean] true if successful, false if unsuccessful.
@@ -480,10 +478,10 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   group2 = entities[1]
   #   status = group1.show_differences(group2, true)
   #
-  # @param group [Sketchup::Group, Sketchup::ComponentInstance]
+  # @param [Sketchup::Group, Sketchup::ComponentInstance] group
   #   The group to be compared with.
   #
-  # @param verbose [Boolean]
+  # @param [Boolean] verbose
   #   A boolean flag indicating whether to display a textural
   #   report of the found differences to the Ruby console.
   #
@@ -505,12 +503,11 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   group2 = entities[1]
   #   result = group1.split(group2)
   #
-  # @param group [Sketchup::Group, Sketchup::ComponentInstance]
+  # @param [Sketchup::Group, Sketchup::ComponentInstance] group
   #   The group to split this group with.
   #
-  # @return [Array(Sketchup::Group, Sketchup::Group, Sketchup::Group), nil] 
-  #    A vector (array) of the three resultant groups
-  #   if the two objects (this and arg) represent manifold
+  # @return [Array(Sketchup::Group, Sketchup::Group, Sketchup::Group), nil] A vector (array) of the three resultant groups
+  #   If the two objects (this and arg) represent manifold
   #   solids and the operation succeeds otherwise nil is
   #   returned. The 3 groups are as follows:
   #   The intersection of volume 1 & volume 2,
@@ -531,7 +528,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   group2 = entities[1]
   #   result = group1.subtract(group2)
   #
-  # @param group [Sketchup::Group, Sketchup::ComponentInstance]
+  # @param [Sketchup::Group, Sketchup::ComponentInstance] group
   #   The group to subtract this group from.
   #
   # @return [Sketchup::Group, nil] The resultant group if the two objects
@@ -591,7 +588,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   #     UI.messagebox "Failure"
   #   end
   #
-  # @param transform [Geom::Transformation]
+  # @param [Geom::Transformation] transform
   #   A Transformation object.
   #
   # @return [Sketchup::Group] a transformed group object if successful
@@ -627,7 +624,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   new_transform = Geom::Transformation.new([100,0,0])
   #   group.transformation = new_transform
   #
-  # @param transform [Geom::Transformation]
+  # @param [Geom::Transformation] transform
   #   The Transformation object to apply
   #
   # @return [Geom::Transformation] the applied transformation
@@ -647,7 +644,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   group2 = entities[1]
   #   result = group1.trim(group2)
   #
-  # @param group [Sketchup::Group, Sketchup::ComponentInstance]
+  # @param [Sketchup::Group, Sketchup::ComponentInstance] group
   #   The group to trim this group against.
   #
   # @return [Sketchup::Group, nil] The resultant group if the two objects
@@ -668,7 +665,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   group2 = entities[1]
   #   result = group1.union(group2)
   #
-  # @param group [Sketchup::Group, Sketchup::ComponentInstance]
+  # @param [Sketchup::Group, Sketchup::ComponentInstance] group
   #   The group to union this group with.
   #
   # @return [Sketchup::Group, nil] The resultant group if the two objects

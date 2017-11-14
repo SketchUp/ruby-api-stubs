@@ -1,16 +1,23 @@
 # Copyright:: Copyright 2017 Trimble Inc.
 # License:: The MIT License (MIT)
 
-# The ComponentDefinition class is used to define the contents for a SketchUp
-# component. Components are a collection of entities that can be instanced
-# and reused multiple times throughout a model. For example, you could
-# draw a chair once, turn it into a component, and then use 6 instances of
-# it to surround a table. Edits to the original "definition" will then
+# The {Sketchup::ComponentDefinition} class is used to define the contents for
+# a SketchUp component. Components are a collection of entities that can be
+# instanced and reused multiple times throughout a model. For example, you
+# could draw a chair once, turn it into a component, and then use 6 instances
+# of it to surround a table. Edits to the original "definition" will then
 # propagate across all of its instances.
 #
-# The ComponentDefinition class contains the global entities and settings
-# for each definition. See the ComponentInstance class for how each copy
-# is defined.
+# The ComponentDefinition class contains the global entities and settings for
+# each definition. See the {Sketchup::ComponentInstance} class for how each
+# copy is defined.
+#
+# Starting from SketchUp 2018+, the {Sketchup::ComponentDefinition} class
+# contains a new default attribute dictionary named "SU_DefinitionSet" with
+# default keys named named "Price", "Size", "Url". See the
+# {https://help.sketchup.com/en/article/3000124 Help article} for more
+# information. The dictionary cannot be deleted via ruby and an ArgumentError
+# will be raised. The key/value pairs in the dictionary can be deleted safely.
 #
 # @version SketchUp 6.0
 class Sketchup::ComponentDefinition < Sketchup::Drawingelement
@@ -33,7 +40,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #     UI.messagebox("c1 sorts before c2")
   #   end
   #
-  # @param compdef2 [Sketchup::ComponentDefinition]
+  # @param [Sketchup::ComponentDefinition] compdef2
   #   The second component definition in the comparison.
   #
   # @return [Integer] a -1 if component1 is less then component2. A 1
@@ -55,7 +62,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #     UI.messagebox("These definitions are the same.")
   #   end
   #
-  # @param compdef2 [Sketchup::ComponentDefinition]
+  # @param [Sketchup::ComponentDefinition] compdef2
   #   The second component definition in the comparison.
   #
   # @return [Boolean] true if the ComponentDefinition objects are
@@ -74,10 +81,10 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   definition = Sketchup.active_model.definitions.first
   #   success = definition.add_classification("IFC 2x3", "IfcDoor")
   #
-  # @param schema_name [String]
+  # @param [String] schema_name
   #   a String - Schema name to add
   #
-  # @param schema_type [String]
+  # @param [String] schema_type
   #   a String - Schema type to add
   #
   # @return [Boolean] true if the classification succeeds. Otherwise false.
@@ -92,7 +99,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   componentdefinition = Sketchup.active_model.definitions[0]
   #   status = componentdefinition.add_observer observer
   #
-  # @param observer [Object]
+  # @param [Object] observer
   #   An observer.
   #
   # @return [Boolean] true if successful, false if unsuccessful.
@@ -211,7 +218,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   path = ["IFC 2x3", "IfcDoor", "ObjectType", "IfcLabel"]
   #   value = definition.get_classification_value(path)
   #
-  # @param path [Array<String>]
+  # @param [Array<String>] path
   #   An array composed of the key path to the value.
   #
   # @return [Object, nil] a Ruby object if successful, nil otherwise.
@@ -231,8 +238,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   componentdefinition = definitions.load path
   #   status = componentdefinition.group?
   #
-  # @return [Boolean] true if the definition is used to hold a
-  #   group, false if the definition does not hold a group.
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def group?
@@ -259,8 +265,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   componentdefinition = Sketchup.active_model.definitions[0]
   #   status = componentdefinition.hidden?
   #
-  # @return [Boolean] true if the definition should be hidden, false
-  #   if the definition should not be hidden
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def hidden?
@@ -279,9 +284,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #     UI.messagebox "Component definition does not define an image"
   #   end
   #
-  # @return [Boolean] true if the component definition defines an
-  #   image, false if the component definition does not
-  #   define an image.
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def image?
@@ -333,7 +336,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   componentdefinition = Sketchup.active_model.definitions[0]
   #   instances = componentdefinition.instances
   #
-  # @return [Array<Sketchup::ComponentInstance>] an array of ComponentInstances 
+  # @return [Array<Sketchup::ComponentInstance>] an array of ComponentInstances
   #   (if successful)
   #
   # @version SketchUp 6.0
@@ -354,9 +357,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   componentdefinition = definitions.load path
   #   status = componentdefinition.internal?
   #
-  # @return [Boolean] true if the component definition is internal
-  #   to SketchUp's Component Browser.  False if the
-  #   component definition is not internal to SketchUp.
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def internal?
@@ -458,11 +459,11 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   definition = Sketchup.active_model.definitions.first
   #   success = definition.remove_classification("IFC 2x3", "IfcDoor")
   #
-  # @param schema_name [String]
-  #   a String - Schema name to remove
+  # @param [String] schema_name
+  #   Schema name to remove
   #
-  # @param schema_type [String]
-  #   a String - Schema type to remove. If not provided or an
+  # @param [String] schema_type
+  #   Schema type to remove. If not provided or an
   #   empty string, the currently applied schema type for the
   #   given schema name will be removed.
   #
@@ -479,7 +480,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   componentdefinition = Sketchup.active_model.definitions[0]
   #   status = componentdefinition.remove_observer observer
   #
-  # @param observer [Object]
+  # @param [Object] observer
   #   An observer.
   #
   # @return [Boolean] true if successful, false if unsuccessful.
@@ -495,7 +496,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   my_definition = Sketchup.active_model.definitions[0]
   #   success = my_definition.save_as "c:\\myComponent.skp"
   #
-  # @param file_path [String]
+  # @param [String] file_path
   #   Local file path to save the .skp file to.
   #
   # @return [Boolean] true if successful
@@ -530,11 +531,11 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   path = ["IFC 2x3", "IfcDoor", "ObjectType", "IfcLabel"]
   #   success = definition.set_classification_value(path, "Room 101")
   #
-  # @param value [Object]
-  #   A value valid for that specific attribute.
-  #
-  # @param path [Array<String>]
+  # @param [Array<String>] path
   #   An array composed of the key path to the value.
+  #
+  # @param [Object] value
+  #   A value valid for that specific attribute.
   #
   # @raise [NotImplementedError] when trying to set the value of "choice"
   #   attributes.

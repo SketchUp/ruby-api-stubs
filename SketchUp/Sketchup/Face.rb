@@ -70,8 +70,8 @@ class Sketchup::Face < Sketchup::Drawingelement
   #
   # @overload area(transform)
   #
-  #   @param transform [Geom::Transformation] A Transformation object or array 
-  #                        that can be interpreted as a Transformation object.
+  #   @param transform [Geom::Transformation] A Transformation object or array
+  #                      that can be interpreted as a Transformation object.
   #   @return [Float] the area of the face in current units (if successful)
   #
   # @version SketchUp 6.0
@@ -123,7 +123,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   face = entities.add_face(pts)
   #   status = face.back_material = "red"
   #
-  # @param material [Sketchup::Material]
+  # @param [Sketchup::Material] material
   #   A Material object or the name of a valid material.
   #
   # @return [Sketchup::Material] the name of the valid material or the new
@@ -189,7 +189,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #     puts "#{pt.to_s} is not on the same plane as the face"
   #   end
   #
-  # @param point [Geom::Point3d]
+  # @param [Geom::Point3d] point
   #   A Point3d.
   #
   # @return [Integer] an integer describing where a Point3d is in
@@ -277,16 +277,16 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   tw = Sketchup.create_texture_writer
   #   uvHelp = face.get_UVHelper(true, true, tw)
   #
-  # @param front [Boolean]
+  # @param [Boolean] front
   #   True if you want the texture coordinates for the front
   #   face, false if not. Defaults to true.
   #
-  # @param back [Boolean]
+  # @param [Sketchup::TextureWriter] texturewriter
+  #   An optional TextureWriter object.
+  #
+  # @param [Boolean] back
   #   True if you want the texture coordinates for the back
   #   face, false if not. Defaults to true.
-  #
-  # @param texturewriter [Sketchup::TextureWriter]
-  #   An optional TextureWriter object.
   #
   # @return [Sketchup::UVHelper] a UVHelper object
   #
@@ -351,7 +351,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   # Get the projection of the applied material
   #   vector = face.get_texture_projection(true)
   #
-  # @param frontside [Boolean]
+  # @param [Boolean] frontside
   #   true for front side, false for back side.
   #
   # @return [Geom::Vector3d] a vector on success, nil on failure.
@@ -431,7 +431,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   face = entities.add_face(pts)
   #   status = face.material = "red"
   #
-  # @param material [Sketchup::Material]
+  # @param [Sketchup::Material] material
   #   A Material object or the name of a valid material.
   #
   # @return [Sketchup::Material] the name of the valid material or the new
@@ -593,15 +593,15 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   on_front = true
   #   face.position_material(material, pt_array, on_front)
   #
-  # @param material [Sketchup::Material]
+  # @param [Sketchup::Material] material
   #   a Material object.
   #
-  # @param pt_array [Array<Geom::Point3d>]
-  #   An array of Point3d objects used to position the material.
-  #
-  # @param o_front [Boolean]
+  # @param [Boolean] o_front
   #   true to position the texture on the front of the Face or
   #   false to position it on the back of the Face.
+  #
+  # @param [Array<Geom::Point3d>] pt_array
+  #   An array of Point3d objects used to position the material.
   #
   # @return [Sketchup::Face, false] the face upon success, false upon failure.
   #
@@ -627,10 +627,10 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   face = entities.add_face(pts)
   #   status = face.pushpull(100, true)
   #
-  # @param distance [Numeric]
+  # @param [Numeric] distance
   #   The distance, in current units, to push/pull the face.
   #
-  # @param copy [Boolean]
+  # @param [Boolean] copy
   #   Create a new push/pull starting face if true (equivalent
   #   of pressing CTRL while in SketchUp), do not create a
   #   push/pull starting face if false.
@@ -638,7 +638,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   # @return [nil]
   #
   # @version SketchUp 6.0
-  def pushpull(distance, copy)
+  def pushpull(distance, copy = false)
   end
 
   # The reverse! method is used to reverse the face's orientation, meaning the
@@ -668,6 +668,9 @@ class Sketchup::Face < Sketchup::Drawingelement
   # The set_texture_projection method is used to set the texture projection
   # direction.
   #
+  # @deprecated This function never worked right. It's not possible to control
+  #   the position and orientation of the texture.
+  #
   # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
@@ -695,11 +698,11 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   # Returns nil if not successful, path if successful
   #   result = face.set_texture_projection(face.normal, true)
   #
-  # @param vector [Geom::Vector3d]
+  # @param [Geom::Vector3d] vector
   #   representing the direction of the projection. Use nil
   #   to remove the projection.
   #
-  # @param frontside [Boolean]
+  # @param [Boolean] frontside
   #   true for front side, false for back side.
   #
   # @return [Boolean] true on success

@@ -30,7 +30,7 @@ class Sketchup::Materials < Sketchup::Entity
   # @overload [](index)
   #
   #   @param index [Integer] A number representing the material's index in an array
-  #                          of Material objects.
+  #                        of Material objects.
   #   @return [Sketchup::Material, nil] a Material object on success, Nil on failure
   #
   # @overload [](name)
@@ -53,7 +53,7 @@ class Sketchup::Materials < Sketchup::Entity
   #   materials = model.materials
   #   material = materials.add('Joe')
   #
-  # @param name [String]
+  # @param [String] name
   #   The name of the new material.
   #
   # @return [Sketchup::Material] a Material object
@@ -69,7 +69,7 @@ class Sketchup::Materials < Sketchup::Entity
   #   materials = Sketchup.active_model.materials
   #   status = materials.add_observer(observer)
   #
-  # @param observer [Object]
+  # @param [Object] observer
   #   An observer.
   #
   # @return [Boolean] true if successful, false if unsuccessful.
@@ -90,7 +90,7 @@ class Sketchup::Materials < Sketchup::Entity
   # @overload [](index)
   #
   #   @param index [Integer] A number representing the material's index in an array
-  #                          of Material objects.
+  #                        of Material objects.
   #   @return [Sketchup::Material, nil] a Material object on success, Nil on failure
   #
   # @overload [](name)
@@ -138,7 +138,7 @@ class Sketchup::Materials < Sketchup::Entity
   #   materials = Sketchup.active_model.materials
   #   materials.current = materials[0]
   #
-  # @param material [Sketchup::Material]
+  # @param [Sketchup::Material] material
   #   A Material object.
   #
   # @return [Sketchup::Material]
@@ -241,7 +241,7 @@ class Sketchup::Materials < Sketchup::Entity
   #   material = materials.add('Joe')
   #   materials.remove(material)
   #
-  # @param material [Sketchup::Material]
+  # @param [Sketchup::Material] material
   #   The material to remove.
   #
   # @return [Boolean] true if successful, false if unsuccessful.
@@ -257,7 +257,7 @@ class Sketchup::Materials < Sketchup::Entity
   #   materials = Sketchup.active_model.materials
   #   status = materials.remove_observer(observer)
   #
-  # @param observer [Object]
+  # @param [Object] observer
   #   An observer.
   #
   # @return [Boolean] true if successful, false if unsuccessful.
@@ -280,6 +280,24 @@ class Sketchup::Materials < Sketchup::Entity
   #
   # @version SketchUp 2014
   def size
+  end
+
+  # The {#unique_name} method is used to retrieve a unique name from the
+  # materials collection that is based on the provided one. If provided name is
+  # unique it will be returned, otherwise any trailing indices will be replaced
+  # by a new index.
+  #
+  # @example
+  #   materials = Sketchup.active_model.materials
+  #   unique_name = materials.unique_name("test_name")
+  #
+  # @param [String] name
+  #   the suggested name.
+  #
+  # @return [String] a unique name.
+  #
+  # @version SketchUp 2018
+  def unique_name(name)
   end
 
 end

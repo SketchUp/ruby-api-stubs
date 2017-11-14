@@ -57,7 +57,7 @@ class Geom::BoundingBox
   #   @param [Array<Geom::Point3d, Geom::BoundingBox, Sketchup::Vertex>]
   #     points_or_bb
   #
-  # @return [Geom::BoundingBox] the new, resized, BoundingBox object if successful
+  # @return [Geom::BoundingBox]
   #
   # @version SketchUp 6.0
   def add(*args)
@@ -114,8 +114,7 @@ class Geom::BoundingBox
   #
   # @param [Geom::Point3d, Geom::BoundingBox] point_or_bb
   #
-  # @return [Boolean] true if successful (bounding box contains a
-  #   Point3d or BoundingBox object), or false if unsuccessful.
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def contains?(point_or_bb)
@@ -145,7 +144,7 @@ class Geom::BoundingBox
   #   # This will return Point3d(100, 200, -400).
   #   boundingbox.corner(6)
   #
-  # @param corner_index [Integer]
+  # @param [Integer] corner_index
   #   A number (from 0 to 7) representing point at the
   #   corner you want to retrieve.
   #
@@ -199,8 +198,7 @@ class Geom::BoundingBox
   #   # This will return false.
   #   boundingbox.empty?
   #
-  # @return [Boolean] true if the bounding box is empty, false if it
-  #   is not empty
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def empty?
@@ -249,7 +247,7 @@ class Geom::BoundingBox
   #   boundingboxes actually overlap - then call this to get the resulting
   #   boundingbox.
   #
-  # @param boundingbox [Geom::BoundingBox]
+  # @param [Geom::BoundingBox] boundingbox
   #   A second boundbox which might intersect boundingbox1.
   #
   # @return [Geom::BoundingBox] the resulting BoundingBox object if
@@ -303,8 +301,7 @@ class Geom::BoundingBox
   #   # This will return true.
   #   boundingbox.valid?
   #
-  # @return [Boolean] true if the bounding box is valid (not empty),
-  #   false if it is not valid (empty)
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def valid?

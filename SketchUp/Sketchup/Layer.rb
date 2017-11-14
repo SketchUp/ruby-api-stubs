@@ -171,22 +171,18 @@ class Sketchup::Layer < Sketchup::Entity
   def page_behavior
   end
 
-  # The page_behavior= method is used to control the layer's visibility behavior
-  # on existing and new pages.
-  #
-  # The behavior is composed of a combination of these flags:
-  #   - LAYER_VISIBLE_BY_DEFAULT: 0x0000
-  #   - LAYER_HIDDEN_BY_DEFAULT: 0x0001
-  #   - LAYER_USES_DEFAULT_VISIBILITY_ON_NEW_PAGES: 0x0000
-  #   - LAYER_IS_VISIBLE_ON_NEW_PAGES: 0x0010
-  #   - LAYER_IS_HIDDEN_ON_NEW_PAGES: 0x0020
+  # The {#page_behavior=} method is used to control the layer's visibility
+  # behavior on existing and new pages.
   #
   # When you Update a page (as opposed to creating a new page) the current
   # visibility of the layer is used.
   #
-  # NOTE: Prior to SketchUp 2014 the <code>LAYER_HIDDEN_BY_DEFAULT</code> flag
-  # would trigger the validation check in SketchUp that would reset the
-  # <code>page_behavior</code> of the layer.
+  # The behavior is composed of a combination of these flags:
+  # [+LAYER_VISIBLE_BY_DEFAULT: 0x0000+]
+  # [+LAYER_HIDDEN_BY_DEFAULT: 0x0001+]
+  # [+LAYER_USES_DEFAULT_VISIBILITY_ON_NEW_PAGES: 0x0000+]
+  # [+LAYER_IS_VISIBLE_ON_NEW_PAGES: 0x0010+]
+  # [+LAYER_IS_HIDDEN_ON_NEW_PAGES: 0x0020+]
   #
   # @example
   #   layers = Sketchup.active_model.layers
@@ -194,14 +190,16 @@ class Sketchup::Layer < Sketchup::Entity
   #   behavior = LAYER_HIDDEN_BY_DEFAULT | LAYER_IS_HIDDEN_ON_NEW_PAGES
   #   layer.page_behavior = behavior
   #
-  # @param pagebehavior
-  #   Pagebehavior value.
+  # @note Prior to SketchUp 2014 the +LAYER_HIDDEN_BY_DEFAULT+ flag
+  #   would trigger the validation check in SketchUp that would reset the
+  #   {#page_behavior} of the layer.
   #
-  # @return pagebehavior - an integer representing the default
-  #   visibility of the layer.
+  # @param [Integer] page_behavior
+  #
+  # @return [Integer]
   #
   # @version SketchUp 6.0
-  def page_behavior=(pagebehavior)
+  def page_behavior=(page_behavior)
   end
 
   # The visible= method is used to set if the layer is visible.

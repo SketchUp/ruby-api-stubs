@@ -49,7 +49,7 @@ class UI::Command
   #   cmd = UI::Command.new("Tester") { UI.messagebox("Hello World") }
   #   testmenu.add_item cmd
   #
-  # @param menutext [String]
+  # @param [String] menutext
   #   The text that will appear for this command's menu item
   #   if it appears on a menu.
   #
@@ -101,7 +101,7 @@ class UI::Command
   #   toolbar = toolbar.add_item cmd
   #   toolbar.show
   #
-  # @param path [String]
+  # @param [String] path
   #   The path to the large icon.
   #
   # @return [String]
@@ -137,7 +137,7 @@ class UI::Command
   #   cmd.menu_text = "New String"
   #   testmenu.add_item cmd
   #
-  # @param menuitem [String]
+  # @param [String] menuitem
   #   A string representing the menu item for the command.
   #
   # @return [String]
@@ -213,7 +213,7 @@ class UI::Command
   #   toolbar = toolbar.add_item cmd
   #   toolbar.show
   #
-  # @param path [String]
+  # @param [String] path
   #   A path to the small icon.
   #
   # @return [String]
@@ -256,7 +256,7 @@ class UI::Command
   #   toolbar = toolbar.add_item cmd
   #   toolbar.show
   #
-  # @param text [String]
+  # @param [String] text
   #   The text that will appear on the status bar when the
   #   cursor is over the command's menu item.
   #
@@ -295,7 +295,7 @@ class UI::Command
   #   toolbar = toolbar.add_item cmd
   #   toolbar.show
   #
-  # @param text [String]
+  # @param [String] text
   #   The text of the tooltip.
   #
   # @return [String]

@@ -43,7 +43,7 @@ class Sketchup::Material < Sketchup::Entity
   #   m2 = materials.add('Fred')
   #   p m1 <=> m2
   #
-  # @param material2 [Sketchup::Material]
+  # @param [Sketchup::Material] material2
   #   A Material object.
   #
   # @return [Integer] 0 if they are equal, positive number if
@@ -66,7 +66,7 @@ class Sketchup::Material < Sketchup::Entity
   #     UI.messagebox('The Materials are not equal.')
   #   end
   #
-  # @param material2 [Sketchup::Material]
+  # @param [Sketchup::Material] material2
   #   A Material object.
   #
   # @return [Boolean] true if the materials are the same, false if
@@ -103,7 +103,7 @@ class Sketchup::Material < Sketchup::Entity
   #   material = materials.add('Joe')
   #   material.alpha = 0.5
   #
-  # @param alpha [Float]
+  # @param [Float] alpha
   #   An opacity value.
   #
   # @return [Float] the newly set opacity value
@@ -143,7 +143,7 @@ class Sketchup::Material < Sketchup::Entity
   #   material = materials.add('Joe')
   #   material.color = 'red'
   #
-  # @param color [Sketchup::Color, String, nil]
+  # @param [Sketchup::Color, String, nil] color
   #   A Color object.
   #
   # @return [Sketchup::Color, String, nil] the newly set Color object
@@ -194,8 +194,8 @@ class Sketchup::Material < Sketchup::Entity
   #   material = Sketchup.active_model.materials[0]
   #   material.colorize_type = Sketchup::Material::COLORIZE_TINT
   #
-  # @param type [Integer]
-  #   - the new colorize type for the Material object.
+  # @param [Integer] type
+  #   the new colorize type for the Material object.
   #
   # @return [Integer] the colorize type for the Material object.
   #
@@ -273,7 +273,11 @@ class Sketchup::Material < Sketchup::Entity
   #   material = materials.add("Joe")
   #   material.name = 'Jeff'
   #
-  # @param str [String] the new material name
+  # @param [String] str
+  #   the new material name
+  #
+  # @raise [ArgumentError] if the name is not unique to the model.
+  #   (Added in SU2018)
   #
   # @return [String] the newly set material name.
   #
@@ -333,6 +337,12 @@ class Sketchup::Material < Sketchup::Entity
   #   @param filename [String] The file path to the texture the material should use.
   #   @return [String]
   #
+  # @overload texture=(image_rep)
+  #
+  #   @param [Sketchup::ImageRep] image_rep The pixel data representing the
+  #     texture. (Added in SketchUp 2018)
+  #   @return [Sketchup::ImageRep]
+  #
   # @overload texture=(properties)
   #
   #   @param properties [Array(String, Integer, Integer)] An array with the
@@ -352,7 +362,7 @@ class Sketchup::Material < Sketchup::Entity
   #   material = Sketchup.active_model.materials[0]
   #   is_alpha = material.use_alpha?
   #
-  # @return [Boolean] true if the material use alpha transparency, otherwise false.
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def use_alpha?
@@ -367,10 +377,10 @@ class Sketchup::Material < Sketchup::Entity
   #     material.write_thumbnail(thumbnail_file, 128)
   #   }
   #
-  # @param filename [String]
+  # @param [String] filename
   #   The file name for the thumbnail.
   #
-  # @param resolution [Integer]
+  # @param [Integer] resolution
   #   The resolution of the thumbnail.
   #
   # @return [Boolean] true if successful, false if unsuccessful.

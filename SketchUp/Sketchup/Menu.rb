@@ -22,7 +22,7 @@ class Sketchup::Menu
   #
   # @overload add_item(menu, &block)
   #
-  #   @param menu [String] The name of the menu to add.
+  #   @param [String] menu The name of the menu to add.
   #   @yield  A block that will be invoked when the menu item is selected.
   #   @return [Integer] A unique integer id for the added menu item.
   #
@@ -80,7 +80,7 @@ class Sketchup::Menu
   #     end
   #   }
   #
-  # @param menu [String]
+  # @param [String] menu
   #   A string name of the menu to add.
   #
   # @return [Integer] a unique numerical item id for the menu

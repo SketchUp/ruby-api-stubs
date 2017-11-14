@@ -79,7 +79,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   # @example
   #   value = shadowinfo["key"]
   #
-  # @param key [String]
+  # @param [String] key
   #   The key of the shadowinfo value to retrieve.
   #
   # @return [Object, nil] the value that is retrieved.
@@ -99,10 +99,10 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   #   value = shadowinfo["City"]="Denver, CO"
   #   UI.messagebox value
   #
-  # @param key [String]
+  # @param [String] key
   #   The key of the shadowinfo value to set.
   #
-  # @param value [Object]
+  # @param [Object] value
   #   The value to be set.
   #
   # @return [Object] the value that was set if successful, or false
@@ -117,7 +117,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   # @example
   #   status = object.add_observer observer
   #
-  # @param observer [Object]
+  # @param [Object] observer
   #   An observer.
   #
   # @return [Boolean] true if successful, false if unsuccessful.
@@ -231,7 +231,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   # @example
   #   status = object.remove_observer observer
   #
-  # @param observer [Object]
+  # @param [Object] observer
   #   An observer.
   #
   # @return [Boolean] true if successful, false if unsuccessful.
