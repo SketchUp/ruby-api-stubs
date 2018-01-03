@@ -6,6 +6,6 @@
 # shared attribute of a locked {Layout::Layer}.
 #
 # @version LayOut 2018
-class Layout::LockedLayerError < ArgError
+class Layout::LockedLayerError < ArgumentError
 
 end

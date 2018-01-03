@@ -356,7 +356,7 @@ class Sketchup::Entities
   # @return [Array<Sketchup::Edge>]
   #
   # @version SketchUp 6.0
-  def add_edges(point1, point2, ...)
+  def add_edges(*points)
   end
 
   # The add_face method is used to create a face. You can call this method a

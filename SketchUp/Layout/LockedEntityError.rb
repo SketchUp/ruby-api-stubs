@@ -5,6 +5,6 @@
 # that is individually locked.
 #
 # @version LayOut 2018
-class Layout::LockedEntityError < ArgError
+class Layout::LockedEntityError < ArgumentError
 
 end
