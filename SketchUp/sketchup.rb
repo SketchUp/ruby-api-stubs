@@ -1064,7 +1064,7 @@ module Sketchup
   def self.send_action(action)
   end
 
-  # The {#send_to_layout} method is used to open a file in LayOut.
+  # The {.send_to_layout} method is used to open a file in LayOut.
   #
   # @example
   #   result = Sketchup.send_to_layout("C:/models/hexaflexagon.layout")

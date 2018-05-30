@@ -334,7 +334,7 @@ class Sketchup::Entities
   # The {#add_edges} method is used to add a set of connected edges to the
   # {Sketchup::Entities} collection.
   #
-  # * @overload add_edges(points)
+  # @overload add_edges(points)
   #   @param [Array<Geom::Point3d>] points
   #   @return [Array<Sketchup::Edge>]
   #
@@ -349,14 +349,8 @@ class Sketchup::Entities
   #   merge. If you intend to create a face from the edges, use {#add_face}
   #   directly.
   #
-  # @param [Array<Geom::Point3d>] points
-  #
-  # @return [Array<Sketchup::Edge>] an array of Edge objects if successful
-  #
-  # @return [Array<Sketchup::Edge>]
-  #
   # @version SketchUp 6.0
-  def add_edges(point1, point2, ...)
+  def add_edges(point1, point2, *points)
   end
 
   # The add_face method is used to create a face. You can call this method a

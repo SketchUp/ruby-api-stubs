@@ -160,7 +160,7 @@ module UI
   def self.inspector_names
   end
 
-  # The {#menu} method retrieves a SketchUp's menu object with a given name. This
+  # The {.menu} method retrieves a SketchUp's menu object with a given name. This
   # is the first step toward adding your own custom items to the bottom
   # of SketchUp's menus.
   #

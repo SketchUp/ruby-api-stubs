@@ -379,7 +379,7 @@ Visual Studio 2015 SP1 (targeting Windows 7). On MacOs we are using XCode 7.2.1
 
 ### Ruby API
 
-* Fixed {Sketchup::Entities.transform_by_vectors} so that it performs a bounds
+* Fixed {Sketchup::Entities#transform_by_vectors} so that it performs a bounds
   check on the second array. An `ArgumentError` is raised if the second array
   has less items than the first.
 * Added ability to {UI::HtmlDialog}s to receive JavaScript arrays and objects

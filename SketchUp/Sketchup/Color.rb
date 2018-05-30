@@ -26,7 +26,7 @@ class Sketchup::Color
 
   # Class Methods
 
-  # The {#names} method is used to retrieve an array of all color names
+  # The {.names} method is used to retrieve an array of all color names
   # recognized by SketchUp.
   #
   # In general, whenever a method wants a color, you can pass in a String with
