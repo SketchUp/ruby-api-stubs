@@ -1,5 +1,6 @@
-/.yardoc/
-/doc/
+.yardoc/
+doc/
+debug/
 
 pkg/
 
