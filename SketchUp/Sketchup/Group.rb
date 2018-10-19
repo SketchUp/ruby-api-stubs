@@ -525,8 +525,10 @@ class Sketchup::Group < Sketchup::Drawingelement
   end
 
   # The subtract method is used to compute the boolean difference of the two
-  # groups representing manifold solid volumes (this - arg).  If the specified
-  # objects (this and arg) do not represent manifold volumes, this method fails.
+  # groups representing manifold solid volumes (arg - this).  Both groups are
+  # deleted and replaced by the result of subtracting the first from the second
+  # group.  If the specified objects (this and arg) do not represent manifold
+  # volumes, this method fails.
   #
   # @example
   #   entities = Sketchup.active_model.entities
@@ -640,9 +642,10 @@ class Sketchup::Group < Sketchup::Drawingelement
   end
 
   # The trim method is used to compute the (non-destructive) boolean difference
-  # of the two groups representing manifold solid volumes (this - arg).  If
-  # the specified objects (this and arg) do not represent manifold volumes, this
-  # method fails.
+  # of the two groups representing manifold solid volumes (arg - this).  The
+  # argument is deleted and replaced by the result of subtracting the first from
+  # the second group.  If the specified objects (this and arg) do not represent
+  # manifold volumes, this method fails.
   #
   # @example
   #   entities = Sketchup.active_model.entities
