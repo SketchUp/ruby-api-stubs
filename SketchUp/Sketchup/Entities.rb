@@ -823,6 +823,7 @@ class Sketchup::Entities
   # The resulting intersection lines can be drawn into the same entities object if you want to split entities or into a specified target entities collection if you want to leave the original entities unmodified.
   #
   # @example
+  #   model = Sketchup.active_model
   #   group = model.entities.add_group
   #   group.entities.add_face(ORIGIN, ORIGIN+X_AXIS, ORIGIN+X_AXIS+Y_AXIS, ORIGIN+Y_AXIS).pushpull(-1)
   #   context = [model.entities.add_face([-2, 1, 0], [1, -2, 0], [2, 2, 2])]
