@@ -251,27 +251,28 @@ class Sketchup::InstancePath
   def to_a
   end
 
-  # overload transformation
+  # @overload transformation
   #   @return [Sketchup::Transformation] the combined transformation up to the
   #     the leaf entity.
   #
-  # @example
-  #   model = Sketchup.active_model
-  #   group = model.entities.add_group
-  #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
-  #   path = Sketchup::InstancePath.new([group, edge])
-  #   tr = path.transformation
+  #   @example
+  #     model = Sketchup.active_model
+  #     group = model.entities.add_group
+  #     edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
+  #     path = Sketchup::InstancePath.new(group, edge])
+  #     tr = path.transformation
   #
-  # @param [Integer] index
+  # @overload transformation(index)
+  #   @param [Integer] index
   #
-  # @raise [TypeError] if the index is not of integer type
+  #   @raise [TypeError] if the index is not of integer type
   #
-  # @raise [IndexError] if the given index is out of bounds
+  #   @raise [IndexError] if the given index is out of bounds
   #
-  # @raise [TypeError] if the instance path refer to deleted entities.
+  #   @raise [TypeError] if the instance path refers to deleted entities.
   #
-  # @return [Sketchup::Transformation] the combined transformation up to the
-  #   the given index.
+  #   @return [Sketchup::Transformation] the combined transformation up to the
+  #     the given index.
   #
   # @version SketchUp 2017
   def transformation(index)
