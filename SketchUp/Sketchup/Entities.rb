@@ -819,39 +819,43 @@ class Sketchup::Entities
   def fill_from_mesh(polygon_mesh, weld_vertices = true, smooth_flags = Geom::PolygonMesh::AUTO_SOFTEN|Geom::PolygonMesh::SMOOTH_SOFT_EDGES, f_material = nil, b_material = nil)
   end
 
-  # The intersect_with method is used to intersect an entities, component
-  # instance, or group object with a entities object.
+  # The intersect_with method is used to intersect an entities object with a component instance, group or one or more entities.
+  # The resulting intersection lines can be drawn into the same entities object if you want to split entities or into a specified target entities collection if you want to leave the original entities unmodified.
   #
   # @example
-  #   entities.intersect_with recurse, transformation1, entities1,
-  #     transformation2, hidden, entities2
-  #
-  # @param [Geom::Transformation] transform1
-  #   The transformation for this entities object.
-  #
-  # @param [Sketchup::Entity, Array<Sketchup::Entity>] entities2
-  #   A single entity, or an array of entities.
+  #   model = Sketchup.active_model
+  #   group = model.entities.add_group
+  #   group.entities.add_face(ORIGIN, ORIGIN+X_AXIS, ORIGIN+X_AXIS+Y_AXIS, ORIGIN+Y_AXIS).pushpull(-1)
+  #   context = [model.entities.add_face([-2, 1, 0], [1, -2, 0], [2, 2, 2])]
+  #   target = model.entities.add_group
+  #   group.entities.intersect_with(false, group.transformation, target.entities, target.transformation, true, context)
   #
   # @param [Boolean] recurse
   #   true if you want this entities object to be recursed
   #   (intersection lines will be put inside of groups and
   #   components within this entities object).
   #
-  # @param [Boolean] hidden
-  #   true if you want hidden geometry in this entities
-  #   object to be used in the intersection.
-  #
-  # @param [Geom::Transformation] transform2
-  #   The transformation for entities1.
+  # @param [Geom::Transformation] transform
+  #   The transformation for this entities object.
   #
   # @param [Sketchup::Entities] entities1
   #   The entities object where you want the intersection
   #   lines to appear.
   #
+  # @param [Geom::Transformation] transform1
+  #   The transformation for entities1.
+  #
+  # @param [Boolean] hidden
+  #   true if you want hidden geometry in this entities
+  #   object to be used in the intersection.
+  #
+  # @param [Sketchup::Entity, Array<Sketchup::Entity>] entities2
+  #   A single entity, or an array of entities.
+  #
   # @return [nil]
   #
   # @version SketchUp 6.0
-  def intersect_with(recurse, transform1, entities1, transform2, hidden, entities2)
+  def intersect_with(recurse, transform, entities1, transform1, hidden, entities2)
   end
 
   # The {#length} method is used to retrieve the number of entities in the
