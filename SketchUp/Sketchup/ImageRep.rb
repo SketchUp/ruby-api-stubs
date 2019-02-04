@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # References an image representation object.
@@ -30,6 +30,9 @@ class Sketchup::ImageRep
   #   image_rep.load_file("/path/to/image.jpg")
   #   color = image_rep.color_at_uv(0.7, 0.5, false)
   #
+  # @param [Float] u
+  #   The U texture coordinate.
+  #
   # @param [Float] v
   #   The V texture coordinate.
   #
@@ -37,9 +40,6 @@ class Sketchup::ImageRep
   #   Use bilinear texture filtering. This
   #   interpolates the colors instead of picking
   #   the nearest neighbor.
-  #
-  # @param [Float] u
-  #   The U texture coordinate.
   #
   # @return [Sketchup::Color, nil]
   #
@@ -97,12 +97,12 @@ class Sketchup::ImageRep
   # @example Construct from file
   #   image_rep = Sketchup::ImageRep.new("/path/to/image.jpg")
   #
+  # @overload initialize
+  #
+  #
   # @overload initialize(filepath)
   #
   #   @param [String] filepath
-  #
-  # @overload initialize
-  #
   #
   # @raise [ArgumentError] if the file path or image is invalid.
   #
@@ -165,31 +165,31 @@ class Sketchup::ImageRep
   # @note The encoding of the pixel_data {String} parameter should be ASCII-8BIT.
   #   Any other encoding could corrupt the binary data.
   #
+  # @param [Integer] width
+  #   The width of the pixel data. Must be greater than 0.
+  #
   # @param [Integer] height
   #   The height of the pixel data.
   #   Must be greater than 0.
   #
-  # @param [Integer] width
-  #   The width of the pixel data. Must be greater than 0.
+  # @param [Integer] bits_per_pixel
+  #   The bits per pixel for the pixel data.
+  #   Must be either 8/24/32.
   #
   # @param [Integer] row_padding
   #   The row padding for the pixel data which is
   #   sized in bytes. Row padding is used to pad each row with zeros so that each
   #   scanline on the pixel data will end on the data-type boundry.
   #
-  # @param [Integer] bits_per_pixel
-  #   The bits per pixel for the pixel data.
-  #   Must be either 8/24/32.
-  #
   # @param [String] pixel_data
   #   The binary string containing the pixel data
   #   representing the new image.
   #
-  # @raise [TypeError] If width, height, bits_per_pixel or pixel_data are wrong
-  #   data types.
-  #
   # @raise [ArgumentError] If width, height, bits_per_pixel or pixel_data are
   #   invalid.
+  #
+  # @raise [TypeError] If width, height, bits_per_pixel or pixel_data are wrong
+  #   data types.
   #
   # @return [Sketchup::ImageRep]
   #

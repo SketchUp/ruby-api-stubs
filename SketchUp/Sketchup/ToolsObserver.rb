@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This observer interface is implemented to react to tool events. To implement
@@ -96,16 +96,16 @@ class Sketchup::ToolsObserver
   #   do this shown below. (This example is not a comprehensive list of the tool
   #   names.)
   #
-  # @param [Integer] tool_id
-  #   The ID of the tool. This is a predefined number
-  #   unique to a given tool. For example, the Materials Browser is tool_id
-  #   21074.
+  # @param [Sketchup::Tools] tools
+  #   A Tools object.
   #
   # @param [String] tool_name
   #   The name of the tool.
   #
-  # @param [Sketchup::Tools] tools
-  #   A Tools object.
+  # @param [Integer] tool_id
+  #   The ID of the tool. This is a predefined number
+  #   unique to a given tool. For example, the Materials Browser is tool_id
+  #   21074.
   #
   # @return [nil]
   #
@@ -130,20 +130,20 @@ class Sketchup::ToolsObserver
   #   use the tool_id to keep track of which tool you need to watch for, or use
   #   logic that corrects for the error. This bug was fixed in SketchUp 8.0.
   #
-  # @param [Integer] tool_state
-  #   A number identifying the state the tool just
-  #   entered.
-  #
   # @param [Sketchup::Tools] tools
   #   A Tools object.
+  #
+  # @param [String] tool_name
+  #   The name of the tool.
   #
   # @param [Integer] tool_id
   #   The ID of the tool. This is a predefined number
   #   unique to a given tool. For example, the Materials Browser is tool_id
   #   21074.
   #
-  # @param [String] tool_name
-  #   The name of the tool.
+  # @param [Integer] tool_state
+  #   A number identifying the state the tool just
+  #   entered.
   #
   # @return [nil]
   #

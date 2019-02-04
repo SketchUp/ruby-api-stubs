@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {#Geom::PolygonMesh} class contains methods to create polygon mesh
@@ -177,16 +177,18 @@ class Geom::PolygonMesh
   #
   #   @return [Geom::PolygonMesh]
   #
+  # @overload initialize(numpts)
+  #
+  #   @param [Integer] numpts    How many points will be in the mesh.
+  #   @return [Geom::PolygonMesh]
+  #
   # @overload initialize(numpts, numpolys)
   #
   #   @param [Integer] numpts    How many points will be in the mesh.
   #   @param [Integer] numpolys  How many polygons will be in the mesh.
   #   @return [Geom::PolygonMesh]
   #
-  # @overload initialize(numpts)
-  #
-  #   @param [Integer] numpts    How many points will be in the mesh.
-  #   @return [Geom::PolygonMesh]
+  # @raise [RangeError] If number of points or polygons are negative numbers.
   #
   # @version SketchUp 6.0
   def initialize(*args)
@@ -201,7 +203,7 @@ class Geom::PolygonMesh
   #   mesh = face.mesh(flags)
   #   normal = mesh.normal_at(1)
   #
-  # @note Index is 1 based (starts at 1).
+  # @note Index starts at 1.
   #
   # @param [Integer] index
   #   The index in the mesh for the vertex normal to be
@@ -224,7 +226,7 @@ class Geom::PolygonMesh
   #   mesh.add_point(point2)
   #   point_from_index = mesh.point_at(1)
   #
-  # @note Index is 1 based (starts at 1).
+  # @note Index starts at 1.
   #
   # @param [Integer] index
   #   The index in the mesh for the point to be retrieved
@@ -277,12 +279,6 @@ class Geom::PolygonMesh
   # The {#polygon_at} method is used to retrieve an array of vertex index values
   # for a polygon at a specific index.
   #
-  # values with the sign indicating a hidden edge. For example, a return value of
-  # +[-1, 2, 3]+ indicates that the edge from +1+ to +2+ is hidden. The negative
-  # values should not be used as an index for point_at, take the positive value
-  # of the index value in the polygon array.  So if you get +[-1, 2,3]+ use +1+
-  # as the argument to {#point_at}.
-  #
   # @example
   #   mesh = Geom::PolygonMesh.new
   #   point1 = Geom::Point3d.new(0, 1, 2)
@@ -291,7 +287,14 @@ class Geom::PolygonMesh
   #   index = mesh.add_polygon(point1, point2, point3)
   #   polygon = mesh.polygon_at(index)
   #
-  # @note Index is 1 based (starts at 1).The returned array can contain negative
+  # @note Index starts at 1.
+  #
+  # @note The returned array can contain negative
+  #   values with the sign indicating a hidden edge. For example, a return value
+  #   of +[-1, 2, 3]+ indicates that the edge from +1+ to +2+ is hidden. The
+  #   negative values should not be used as an index for {#point_at}, take the
+  #   absolute value of the index value in the polygon array.  So if you
+  #   get +[-1, 2,3]+ use +1+ as the argument to {#point_at}.
   #
   # @param [Integer] index
   #   The index of the desired polygon.
@@ -312,6 +315,8 @@ class Geom::PolygonMesh
   #   point3 = Geom::Point3d.new(2, 0, 1)
   #   index = mesh.add_polygon(point1, point2, point3)
   #   points = mesh.polygon_points_at(index)
+  #
+  # @note Index starts at 1.
   #
   # @param [Integer] index
   #   An index for a polygon in the mesh.
@@ -403,14 +408,14 @@ class Geom::PolygonMesh
   # @note If you don't specify how many points you will be adding to the mesh
   #   when you initiate it you may risk the UV data becoming out of sync.
   #
-  # @param [Boolean] front
-  #   A boolean representing the front or back.
+  # @param [Integer] index
+  #   An Integer representing the UV index.
   #
   # @param [Geom::Point3d] point
   #   A Point3d object representing UV coordinates.
   #
-  # @param [Integer] index
-  #   An Integer representing the UV index.
+  # @param [Boolean] front
+  #   A boolean representing the front or back.
   #
   # @return [nil]
   #

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # References a collection of style attributes that determine the visual
@@ -15,15 +15,7 @@ class Layout::Style
 
   # Constants
 
-  ALIGN_CENTER = nil # Stub value.
-  ALIGN_LEFT = nil # Stub value.
-  ALIGN_RIGHT = nil # Stub value.
-
   ARCHITECTURAL_INCHES = nil # Stub value.
-
-  ANCHOR_BOTTOM = nil # Stub value.
-  ANCHOR_CENTER = nil # Stub value.
-  ANCHOR_TOP = nil # Stub value.
 
   ARROW_FILLED_CIRCLE = nil # Stub value.
   ARROW_FILLED_DIAMOND = nil # Stub value.
@@ -45,9 +37,23 @@ class Layout::Style
   ARROW_T = nil # Stub value.
   ARROW_UNDERRUN = nil # Stub value.
 
+  ALIGN_CENTER = nil # Stub value.
+  ALIGN_LEFT = nil # Stub value.
+  ALIGN_RIGHT = nil # Stub value.
+
+  ANCHOR_BOTTOM = nil # Stub value.
+  ANCHOR_CENTER = nil # Stub value.
+  ANCHOR_TOP = nil # Stub value.
+
   CAP_STYLE_FLAT = nil # Stub value.
   CAP_STYLE_ROUND = nil # Stub value.
   CAP_STYLE_SQUARE = nil # Stub value.
+
+  DIMENSION_END_EXTENSION_LINE = nil # Stub value.
+  DIMENSION_LEADER_LINE = nil # Stub value.
+  DIMENSION_LINE = nil # Stub value.
+  DIMENSION_START_EXTENSION_LINE = nil # Stub value.
+  DIMENSION_TEXT = nil # Stub value.
 
   DECIMAL_CENTIMETERS = nil # Stub value.
   DECIMAL_FEET = nil # Stub value.
@@ -57,12 +63,6 @@ class Layout::Style
   DECIMAL_POINTS = nil # Stub value.
 
   DEGREES = nil # Stub value.
-
-  DIMENSION_END_EXTENSION_LINE = nil # Stub value.
-  DIMENSION_LEADER_LINE = nil # Stub value.
-  DIMENSION_LINE = nil # Stub value.
-  DIMENSION_START_EXTENSION_LINE = nil # Stub value.
-  DIMENSION_TEXT = nil # Stub value.
 
   DIMENSION_TEXT_ABOVE = nil # Stub value.
   DIMENSION_TEXT_BELOW = nil # Stub value.
@@ -88,8 +88,6 @@ class Layout::Style
 
   RADIANS = nil # Stub value.
 
-  SUPER_SCRIPT = nil # Stub value.
-
   STROKE_PATTERN_CENTER = nil # Stub value.
   STROKE_PATTERN_DASH = nil # Stub value.
   STROKE_PATTERN_DASH_DASH_DOT = nil # Stub value.
@@ -101,9 +99,12 @@ class Layout::Style
   STROKE_PATTERN_DASH_SPACE = nil # Stub value.
   STROKE_PATTERN_DOT = nil # Stub value.
   STROKE_PATTERN_PHANTOM = nil # Stub value.
+  STROKE_PATTERN_SHORT_DASH = nil # Stub value.
   STROKE_PATTERN_SOLID = nil # Stub value.
 
   SUB_SCRIPT = nil # Stub value.
+
+  SUPER_SCRIPT = nil # Stub value.
 
   UNDERLINE_DOUBLE = nil # Stub value.
   UNDERLINE_NONE = nil # Stub value.

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This observer interface is implemented to react to rendering options events.
@@ -30,12 +30,12 @@ class Sketchup::RenderingOptionsObserver
   #     puts "onRenderingOptionsChanged(#{rendering_options}, #{type})"
   #   end
   #
+  # @param [Sketchup::RenderingOptions] rendering_options
+  #
   # @param [Integer] type
   #   A number indicating which option was changed
   #   represented by one of the constants defined in
   #   {Sketchup::RenderingOptions}.
-  #
-  # @param [Sketchup::RenderingOptions] rendering_options
   #
   # @version SketchUp 6.0
   def onRenderingOptionsChanged(rendering_options, type)

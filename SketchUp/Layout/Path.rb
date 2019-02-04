@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A path entity represents a continuous, multi-segment polyline or bezier
@@ -8,6 +8,10 @@
 class Layout::Path < Layout::Entity
 
   # Constants
+
+  PATH_WINDING_CLOCKWISE = nil # Stub value.
+  PATH_WINDING_COUNTER_CLOCKWISE = nil # Stub value.
+  PATH_WINDING_NONE = nil # Stub value.
 
   POINT_TYPE_ARC_CENTER = nil # Stub value.
   POINT_TYPE_BEZIER_CONTROL = nil # Stub value.
@@ -35,9 +39,9 @@ class Layout::Path < Layout::Entity
   #
   # @param [Float] end_angle
   #
-  # @raise [ArgumentError] if start angle is equal to end angle
-  #
   # @raise [ArgumentError] if radius is less than or equal to zero
+  #
+  # @raise [ArgumentError] if start angle is equal to end angle
   #
   # @return [Layout::Path] an arc path
   #
@@ -56,19 +60,19 @@ class Layout::Path < Layout::Entity
   #
   # @overload append_point(point)
   #
-  #   @param  [Geom::Point2d] append_point
+  #   @param  [Geom::Point2d] point
   #   @return [Layout::Path]
   #
-  # @overload append_point(point, control_point1, control_point2)
+  # @overload append_point(control_point1, control_point2, point)
   #
-  #   @param  [Geom::Point2d] point The point to append
   #   @param  [Geom::Point2d] control_point1 The first bezier control point
   #   @param  [Geom::Point2d] control_point2 The second bezier control point
+  #   @param  [Geom::Point2d] point The point to append
   #   @return [Layout::Path]
   #
-  # @raise [LockedEntityError] if the {Layout::Path} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::Path} is on a locked {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::Path} is locked
   #
   # @version LayOut 2018
   def append_point(*args)
@@ -107,10 +111,10 @@ class Layout::Path < Layout::Entity
   # @raise [LockedLayerError] if the {Layout::Path} is on a locked
   #   {Layout::Layer}
   #
-  # @raise [LockedEntityError] if the {Layout::Path} is locked
-  #
   # @raise [ArgumentError] if the {Layout::Path} can not be closed becauase it
   #   contains less than three points.
+  #
+  # @raise [LockedEntityError] if the {Layout::Path} is locked
   #
   # @version LayOut 2018
   def close
@@ -161,15 +165,24 @@ class Layout::Path < Layout::Entity
   #
   # @example
   #   start = Geom::Point2d.new(1, 1)
+  #   end = Geom::Point2d.new(2, 2)
+  #   new_path = Layout::Path.new(start, end)
+  #
+  # @example
+  #   start = Geom::Point2d.new(1, 1)
   #   control_1 = Geom::Point2d.new(1.5, 1)
   #   control_2 = Geom::Point2d.new(1, 1.5)
   #   end = Geom::Point2d.new(2, 2)
   #   new_path = Layout::Path.new(start, control_1, control_2, end)
   #
-  # @example
-  #   start = Geom::Point2d.new(1, 1)
-  #   end = Geom::Point2d.new(2, 2)
-  #   new_path = Layout::Path.new(start, end)
+  # @overload initialize(start_point, end_point)
+  #
+  #   @param [Geom::Point2D] start_point
+  #   @param [Geom::Point2D] end_point
+  #   @return [Layout::Path] a straight path
+  #
+  #   @raise [ArgumentError] if the length between start point and end point is
+  #     zero
   #
   # @overload initialize(start_point, control_point_1, control_point_2, end_point)
   #
@@ -182,14 +195,12 @@ class Layout::Path < Layout::Entity
   #   @raise [ArgumentError] if the length between start point and end point is
   #     zero
   #
-  # @overload initialize(start_point, end_point)
+  # @overload initialize(rectangle)
   #
-  #   @param [Geom::Point2D] start_point
-  #   @param [Geom::Point2D] end_point
-  #   @return [Layout::Path] a straight path
+  #   @param [Layout::Rectangle] rectangle
+  #   @return [Layout::Path] a path created from the {Layout::Rectangle}
   #
-  #   @raise [ArgumentError] if the length between start point and end point is
-  #     zero
+  #   @raise [TypeError] if rectangle is not a {Layout::Rectangle}
   #
   # @overload initialize(ellipse)
   #
@@ -197,13 +208,6 @@ class Layout::Path < Layout::Entity
   #   @return [Layout::Path] a path created from the {Layout::Ellipse}
   #
   #   @raise [TypeError] if ellipse is not an {Layout::Ellipse}
-  #
-  # @overload initialize(rectangle)
-  #
-  #   @param [Layout::Rectangle] rectangle
-  #   @return [Layout::Path] a path created from the {Layout::Rectangle}
-  #
-  #   @raise [TypeError] if rectangle is not a {Layout::Rectangle}
   #
   # @version LayOut 2018
   def initialize(*args)
@@ -321,6 +325,22 @@ class Layout::Path < Layout::Entity
   #
   # @version LayOut 2018
   def tangent_at(parametric_value)
+  end
+
+  # The {#winding} method returns the winding type of the {Layout::Path}.
+  #
+  # A point type can be one of the following values:
+  # [+PATH_WINDING_NONE+]
+  # [+PATH_WINDING_CLOCKWISE+]
+  # [+PATH_WINDING_COUNTER_CLOCKWISE+]
+  #
+  # @example
+  #   winding = path.winding
+  #
+  # @return [Integer]
+  #
+  # @version LayOut 2019
+  def winding
   end
 
 end

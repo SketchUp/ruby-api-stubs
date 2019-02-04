@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Pages class contains methods for manipulating a collection of Pages
@@ -296,20 +296,25 @@ class Sketchup::Pages < Sketchup::Entity
   def selected_page=(page)
   end
 
-  # The show_frame_at method is used to show a frame in animation (of the slide
-  # show) at a given time in seconds.
+  # The {#show_frame_at} method is used to show a frame in animation (of the
+  # slide show) at a given time in seconds.
   #
   # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
-  #   status = pages.add "Page 1"
-  #   status = pages.add "Page 2"
-  #   status = pages.show_frame_at 10
+  #   pages.add("Page 1")
+  #   pages.add("Page 2")
+  #   page, ratio = pages.show_frame_at(1.8)
   #
-  # @param seconds
+  # @note In versions prior to SketchUp 2019 this method will crash if called
+  #   when there are no pages in the model.
+  #
+  # @param [Float] seconds
   #   The time in seconds.
   #
-  # @return nil
+  # @return [Array(Sketchup::Page, Float), nil] Upon success it returns the
+  #   page that is displayed and a parameter between +0.0+ and +1.0+ that is
+  #   tells how far along the transition to next page you are at.
   #
   # @version SketchUp 6.0
   def show_frame_at(seconds)

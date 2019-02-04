@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The SketchUp Array class adds additional methods to the standard Ruby Array
@@ -35,6 +35,12 @@ class Array
 
   # The {#cross} method is used to compute the cross product between two vectors.
   #
+  # @example With 3d array
+  #   vector1 = Geom::Vector3d.new(0, 1, 0)
+  #   array = [1, 0, 0]
+  #   # This will return a new Vector3d
+  #   vector2 = array.cross(vector1)
+  #
   # @example With 2d array
   #   vector1 = Geom::Vector2d.new(0, 1)
   #   array = [1, 0]
@@ -43,12 +49,6 @@ class Array
   #   vector1 = Geom::Vector3d.new(0, 1, 0)
   #   array = [1, 0]
   #   vector2 = array.cross(vector1) # This will force array to be [1, 0, 0]
-  #
-  # @example With 3d array
-  #   vector1 = Geom::Vector3d.new(0, 1, 0)
-  #   array = [1, 0, 0]
-  #   # This will return a new Vector3d
-  #   vector2 = array.cross(vector1)
   #
   # @overload cross(vector)
   #
@@ -68,18 +68,18 @@ class Array
 
   # The {#distance} method is used to compute the distance between two points.
   #
+  # @example With 3d array
+  #   point = Geom::Point3d.new(10, 10, 10)
+  #   array = [1, 1, 1]
+  #   # This will return a Length
+  #   distance = array.distance(point)
+  #
   # @example With 2d array
   #   point = Geom::Point2d.new(10, 10)
   #   array = [1, 2]
   #   distance = array.distance(point)
   #
   #   point = Geom::Point3d.new(10, 10, 10)
-  #   distance = array.distance(point)
-  #
-  # @example With 3d array
-  #   point = Geom::Point3d.new(10, 10, 10)
-  #   array = [1, 1, 1]
-  #   # This will return a Length
   #   distance = array.distance(point)
   #
   # @overload distance(point)
@@ -107,16 +107,16 @@ class Array
   #   # This will return a Length
   #   distance = array.distance_to_line(line)
   #
-  # @overload distance_to_line(point1, point2)
-  #
-  #   @param [Geom::Point3d] point1
-  #   @param [Geom::Point3d] point1
-  #   @return [Length]
-  #
   # @overload distance_to_line(point, vector)
   #
   #   @param [Geom::Point3d] point
   #   @param [Geom::Vector3d] vector
+  #   @return [Length]
+  #
+  # @overload distance_to_line(point1, point2)
+  #
+  #   @param [Geom::Point3d] point1
+  #   @param [Geom::Point3d] point1
   #   @return [Length]
   #
   # @see Geom
@@ -135,12 +135,6 @@ class Array
   #   # This will return a Length
   #   distance = array.distance_to_plane(plane)
   #
-  # @overload distance_to_plane(array)
-  #
-  #   Plane defined by its coefficents.
-  #   @param [Array<Float, Float, Float, Float>] point
-  #   @return [Length] The distance between the two points.
-  #
   # @overload distance_to_plane(point, vector)
   #
   #   Plane defined by
@@ -157,10 +151,13 @@ class Array
   #   @param [Geom::Point3d] point3
   #   @return [Length] The distance between the two points.
   #
-  # @overload distance_to_plane(array)
+  # @overload distance_to_plane(float1, float2, float3, float4)
   #
-  #   Plane defined by three points.
-  #   @param [Array<Geom::Point3d, Geom::Point3d, Geom::Point3d>] point
+  #   Plane defined by its coefficents.
+  #   @param [Float] float1
+  #   @param [Float] float2
+  #   @param [Float] float3
+  #   @param [Float] float4
   #   @return [Length] The distance between the two points.
   #
   # @overload distance_to_plane(array)
@@ -170,13 +167,16 @@ class Array
   #   @param [Array<Geom::Point3d, Geom::Vector3d>] point
   #   @return [Length] The distance between the two points.
   #
-  # @overload distance_to_plane(float1, float2, float3, float4)
+  # @overload distance_to_plane(array)
+  #
+  #   Plane defined by three points.
+  #   @param [Array<Geom::Point3d, Geom::Point3d, Geom::Point3d>] point
+  #   @return [Length] The distance between the two points.
+  #
+  # @overload distance_to_plane(array)
   #
   #   Plane defined by its coefficents.
-  #   @param [Float] float1
-  #   @param [Float] float2
-  #   @param [Float] float3
-  #   @param [Float] float4
+  #   @param [Array<Float, Float, Float, Float>] point
   #   @return [Length] The distance between the two points.
   #
   # @see Geom
@@ -188,16 +188,16 @@ class Array
 
   # The {#dot} method is used to compute the dot product between two vectors.
   #
-  # @example With 2d array
-  #   vector = Geom::Vector2d.new(12, 12)
-  #   array = [12, 0]
-  #   # This will return a float
-  #   dot_product = array.dot(vector)
-  #
   # @example With 3d array
   #   vector = Geom::Vector3d.new(12, 12, 0)
   #   array = [12, 0, 0]
   #   # This will return a Float, in this case 144.0
+  #   dot_product = array.dot(vector)
+  #
+  # @example With 2d array
+  #   vector = Geom::Vector2d.new(12, 12)
+  #   array = [12, 0]
+  #   # This will return a float
   #   dot_product = array.dot(vector)
   #
   # @overload dot(vector)
@@ -220,13 +220,13 @@ class Array
   # length to 1). It returns a new array rather than changing the original in
   # place.
   #
-  # @example With 2d array
-  #   array = [1, 2]
-  #   normal_vector = array.normalize
-  #
   # @example With 3d array
   #   array = [1, 2, 3]
   #   # This will return a new Vector3d
+  #   normal_vector = array.normalize
+  #
+  # @example With 2d array
+  #   array = [1, 2]
   #   normal_vector = array.normalize
   #
   # @note The arguments and return value will be converted to a floating point
@@ -247,13 +247,13 @@ class Array
   # The {#normalize!} method is used to normalize a vector in place (setting its
   # length to 1).
   #
-  # @example With 2d array
-  #   array = [1, 2]
-  #   array.normalize!
-  #
   # @example With 3d array
   #   array = [1, 2, 3]
   #   # This will modify 'array' in place
+  #   array.normalize!
+  #
+  # @example With 2d array
+  #   array = [1, 2]
   #   array.normalize!
   #
   # @overload normalize!
@@ -287,10 +287,9 @@ class Array
   #   vector = Geom::Vector3d.new(0, 0, 1)
   #   length_array = array.offset(vector)
   #
-  # @overload offset(vector, length)
+  # @overload offset(vector)
   #
   #   @param [Geom::Vector3d] vector A Vector3d object used to offset the point.
-  #   @param [Length] length An overriding distance for how far to offset.
   #   @return [Array(Length, Length, Length)] The newly offset array representing
   #     a point or vector.
   #
@@ -300,9 +299,10 @@ class Array
   #   @return [Array(Length, Length)] The newly offset array representing a point
   #     or vector.
   #
-  # @overload offset(vector)
+  # @overload offset(vector, length)
   #
   #   @param [Geom::Vector3d] vector A Vector3d object used to offset the point.
+  #   @param [Length] length An overriding distance for how far to offset.
   #   @return [Array(Length, Length, Length)] The newly offset array representing
   #     a point or vector.
   #
@@ -322,6 +322,12 @@ class Array
   # The {#offset!} method is used to offset a point by a vector. The array is
   # modified in place.
   #
+  # @example With 3d array
+  #   array = [10, 10, 10]
+  #   vector = Geom::Vector3d.new(0, 0, 1)
+  #   # This will modify 'array' in place
+  #   array.offset!(vector)
+  #
   # @example With 2d array
   #   array = [10, 10]
   #   vector = Geom::Vector2d.new(0, 1)
@@ -332,22 +338,9 @@ class Array
   #   vector = Geom::Vector3d.new(0, 0, 1)
   #   array.offset!(vector)
   #
-  # @example With 3d array
-  #   array = [10, 10, 10]
-  #   vector = Geom::Vector3d.new(0, 0, 1)
-  #   # This will modify 'array' in place
-  #   array.offset!(vector)
-  #
   # @overload offset!(vector)
   #
   #   @param [Geom::Vector3d] vector A Vector3d object used to offset the point.
-  #   @return [Array(Length, Length, Length)] The newly offset array representing
-  #     a point or vector.
-  #
-  # @overload offset!(vector, length)
-  #
-  #   @param [Geom::Vector3d] vector A Vector3d object used to offset the point.
-  #   @param [Length] length An overriding distance for how far to offset.
   #   @return [Array(Length, Length, Length)] The newly offset array representing
   #     a point or vector.
   #
@@ -356,6 +349,13 @@ class Array
   #   @param [Geom::Vector2d] vector A Vector2d object used to offset the point.
   #   @return [Array(Length, Length)] The newly offset array representing a point
   #     or vector.
+  #
+  # @overload offset!(vector, length)
+  #
+  #   @param [Geom::Vector3d] vector A Vector3d object used to offset the point.
+  #   @param [Length] length An overriding distance for how far to offset.
+  #   @return [Array(Length, Length, Length)] The newly offset array representing
+  #     a point or vector.
   #
   # @overload offset!(vector, length)
   #
@@ -379,17 +379,17 @@ class Array
   #   # This will return a true or false value
   #   on_plane = array.on_line?(line)
   #
-  # @overload on_line?(point1, point2)
-  #
-  #   @param [Geom::Point3d] point1
-  #   @param [Geom::Point3d] point1
-  #   @return [Boolean] +true+ if the point is on the line, +false+ if the
-  #     point is not on the line.
-  #
   # @overload on_line?(point, vector)
   #
   #   @param [Geom::Point3d] point
   #   @param [Geom::Vector3d] vector
+  #   @return [Boolean] +true+ if the point is on the line, +false+ if the
+  #     point is not on the line.
+  #
+  # @overload on_line?(point1, point2)
+  #
+  #   @param [Geom::Point3d] point1
+  #   @param [Geom::Point3d] point1
   #   @return [Boolean] +true+ if the point is on the line, +false+ if the
   #     point is not on the line.
   #
@@ -411,6 +411,12 @@ class Array
   #   # This will return a true or false value
   #   on_plane = array.on_plane?(plane)
   #
+  # @overload on_plane?(point, vector)
+  #
+  #   Plane defined by
+  #   @param [Geom::Point3d] point
+  #   @param [Geom::Vector3d] vector
+  #
   # @overload on_plane?(point1, point2, point3)
   #
   #   Plane defined by three points.
@@ -418,18 +424,6 @@ class Array
   #   @param [Geom::Point3d] point1
   #   @param [Geom::Point3d] point2
   #   @param [Geom::Point3d] point3
-  #
-  # @overload on_plane?(point, vector)
-  #
-  #   Plane defined by
-  #   @param [Geom::Point3d] point
-  #   @param [Geom::Vector3d] vector
-  #
-  # @overload on_plane?(array)
-  #
-  #   Plane defined by three points.
-  #   @note The three points should not be co-linear or duplicate.
-  #   @param [Array<Geom::Point3d, Geom::Vector3d>] point
   #
   # @overload on_plane?(float1, float2, float3, float4)
   #
@@ -441,13 +435,19 @@ class Array
   #
   # @overload on_plane?(array)
   #
-  #   Plane defined by its coefficents.
-  #   @param [Array<Float, Float, Float, Float>] point
+  #   Plane defined by three points.
+  #   @note The three points should not be co-linear or duplicate.
+  #   @param [Array<Geom::Point3d, Geom::Vector3d>] point
   #
   # @overload on_plane?(array)
   #
   #   Plane defined by three points.
   #   @param [Array<Geom::Point3d, Geom::Point3d, Geom::Point3d>] point
+  #
+  # @overload on_plane?(array)
+  #
+  #   Plane defined by its coefficents.
+  #   @param [Array<Float, Float, Float, Float>] point
   #
   # @return [Boolean]
   #
@@ -467,17 +467,17 @@ class Array
   #   # This will return a new Array
   #   point_on_line = array.project_to_line(line)
   #
-  # @overload project_to_line(point1, point2)
-  #
-  #   @param [Geom::Point3d] point1
-  #   @param [Geom::Point3d] point1
-  #   @return [Array(Length, Length, Length)] A new  point on the line that is
-  #     closest to this point
-  #
   # @overload project_to_line(point, vector)
   #
   #   @param [Geom::Point3d] point
   #   @param [Geom::Vector3d] vector
+  #   @return [Array(Length, Length, Length)] A new  point on the line that is
+  #     closest to this point
+  #
+  # @overload project_to_line(point1, point2)
+  #
+  #   @param [Geom::Point3d] point1
+  #   @param [Geom::Point3d] point1
   #   @return [Array(Length, Length, Length)] A new  point on the line that is
   #     closest to this point
   #
@@ -496,12 +496,6 @@ class Array
   #   array = [10, 10, 10]
   #   point_on_plane = array.project_to_plane(plane)
   #
-  # @overload project_to_plane(array)
-  #
-  #   Plane defined by its coefficents.
-  #   @param [Array(Float, Float, Float, Float)] point
-  #   @return [Array(Length, Length, Length)]
-  #
   # @overload project_to_plane(point, vector)
   #
   #   Plane defined by
@@ -518,19 +512,6 @@ class Array
   #   @param [Geom::Point3d] point3
   #   @return [Array(Length, Length, Length)]
   #
-  # @overload project_to_plane(array)
-  #
-  #   Plane defined by three points.
-  #   @param [Array(Geom::Point3d, Geom::Point3d, Geom::Point3d)] point
-  #   @return [Array(Length, Length, Length)]
-  #
-  # @overload project_to_plane(array)
-  #
-  #   Plane defined by three points.
-  #   @note The three points should not be co-linear or duplicate.
-  #   @param [Array(Geom::Point3d, Geom::Vector3d)] point
-  #   @return [Array(Length, Length, Length)]
-  #
   # @overload project_to_plane(float1, float2, float3, float4)
   #
   #   Plane defined by its coefficents.
@@ -540,6 +521,25 @@ class Array
   #   @param [Float] float4
   #   @return [Array(Length, Length, Length)]
   #
+  # @overload project_to_plane(array)
+  #
+  #   Plane defined by three points.
+  #   @note The three points should not be co-linear or duplicate.
+  #   @param [Array(Geom::Point3d, Geom::Vector3d)] point
+  #   @return [Array(Length, Length, Length)]
+  #
+  # @overload project_to_plane(array)
+  #
+  #   Plane defined by three points.
+  #   @param [Array(Geom::Point3d, Geom::Point3d, Geom::Point3d)] point
+  #   @return [Array(Length, Length, Length)]
+  #
+  # @overload project_to_plane(array)
+  #
+  #   Plane defined by its coefficents.
+  #   @param [Array(Float, Float, Float, Float)] point
+  #   @return [Array(Length, Length, Length)]
+  #
   # @see Geom
   #   The Geom module for instructions on how to create a plane.
   #
@@ -547,8 +547,9 @@ class Array
   def project_to_plane(*args)
   end
 
-  # The {#transform} method is used to apply a {Geom::Transformation} object to a
-  # {Geom::Point3d} object defined by an {Array} object.
+  # The {#transform} method is used to apply a {Geom::Transformation} or
+  # {Geom::Transformation2d} object to a {Geom::Point3d} or {Geom::Point2d} object
+  # defined by an {Array} object.
   #
   # This method returns a new {Array} object instead of modifying the original.
   #
@@ -559,9 +560,15 @@ class Array
   #   # This will return a new Array
   #   point2 = array.transform(transform)
   #
-  # @param [Geom::Transformation] transform
+  # @overload transform(transform)
   #
-  # @return [Array(Length, Length, Length)] The newly transformed point.
+  #   @param [Geom::Transformation2d] transform
+  #   @return [Array<Length, Length>] The newly transformed point.
+  #
+  # @overload transform(transform)
+  #
+  #   @param [Geom::Transformation] transform
+  #   @return [Array<Length, Length, Length>] The newly transformed point.
   #
   # @version SketchUp 6.0
   def transform(transform)
@@ -579,9 +586,15 @@ class Array
   #
   # @note This method modifies the original.
   #
-  # @param [Geom::Transformation] transform
+  # @overload transform!(transform)
   #
-  # @return [Array] The newly transformed point.
+  #   @param [Geom::Transformation2d] transform
+  #   @return [Array] The newly transformed point.
+  #
+  # @overload transform!(transform)
+  #
+  #   @param [Geom::Transformation] transform
+  #   @return [Array] The newly transformed point.
   #
   # @version SketchUp 6.0
   def transform!(transform)
@@ -590,6 +603,12 @@ class Array
   # The {#vector_to} method is used to create an array as a vector from one point
   # to a second point.
   #
+  # @example With 3d array
+  #   point = Geom::Point3d.new(10, 20, 30)
+  #   array = [1, 2, 3]
+  #   # This will return a new Vector3d
+  #   vector = array.vector_to(point)
+  #
   # @example With 2d array
   #   point = Geom::Point2d.new(10, 20)
   #   array = [1, 2]
@@ -597,12 +616,6 @@ class Array
   #   vector = array.vector_to(point)
   #
   #   point = Geom::Point3d.new(10, 20)
-  #   # This will return a new Vector3d
-  #   vector = array.vector_to(point)
-  #
-  # @example With 3d array
-  #   point = Geom::Point3d.new(10, 20, 30)
-  #   array = [1, 2, 3]
   #   # This will return a new Vector3d
   #   vector = array.vector_to(point)
   #

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The TextureWriter class is used primarily for writing the textures used in a
@@ -74,13 +74,13 @@ class Sketchup::TextureWriter
   # texture in the texture writer.
   #
   # @example
+  #   tw.load(texturable_entities[0])
+  #   handle = tw.handle(texturable_entities[0])
+  #
+  # @example
   #   load_front_face = true
   #   tw.load(faces[0], load_front_face)
   #   handle = tw.handle(faces[0], load_front_face)
-  #
-  # @example
-  #   tw.load(texturable_entities[0])
-  #   handle = tw.handle(texturable_entities[0])
   #
   # @overload handle(entity)
   #
@@ -122,10 +122,10 @@ class Sketchup::TextureWriter
   # for writing out to a file.
   #
   # @example
-  #   index = tw.load(faces[0], true)
+  #   index = tw.load(texturable_entities[0])
   #
   # @example
-  #   index = tw.load(texturable_entities[0])
+  #   index = tw.load(faces[0], true)
   #
   # @note If you are passing a face in as the entity argument when loading a
   #   texture you will have to specify the second boolean argument, side.
@@ -164,6 +164,12 @@ class Sketchup::TextureWriter
   #   - 2 = FILE_WRITE_FAILED_UNKNOWN
   #
   # @example
+  #   tw.load(texturable_entities[0])
+  #   if tw.write(texturable_entities[0], "C:\\textures\\A.jpg") == FILE_WRITE_OK
+  #     puts("JPEG file successfully written.")
+  #   end
+  #
+  # @example
   #   tw.load(faces[0], true)
   #   if tw.write(faces[0], true, "C:\\textures\\Face.png") == FILE_WRITE_OK
   #     puts("PNG file successfully written.")
@@ -173,12 +179,6 @@ class Sketchup::TextureWriter
   #   end
   #   if tw.write(faces[0], true, "C:\\textures\\Face.tif") == FILE_WRITE_OK
   #     puts("TIFF file successfully written.")
-  #   end
-  #
-  # @example
-  #   tw.load(texturable_entities[0])
-  #   if tw.write(texturable_entities[0], "C:\\textures\\A.jpg") == FILE_WRITE_OK
-  #     puts("JPEG file successfully written.")
   #   end
   #
   # @note If you are passing a face in as the entity argument when writing a

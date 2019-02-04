@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Command class is the preferred class for adding tools to the menus and
@@ -48,6 +48,9 @@ class UI::Command
   #   # This menu item simply displays Hello World on the screen when clicked.
   #   cmd = UI::Command.new("Tester") { UI.messagebox("Hello World") }
   #   testmenu.add_item cmd
+  #
+  # @note Prior to SketchUp 2019 it was not possible to sub-class {UI::Command}
+  #   due to a bug in how SketchUp initialized the class.
   #
   # @param [String] menutext
   #   The text that will appear for this command's menu item

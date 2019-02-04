@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A set of the currently selected entities. Use the Model.selection method
@@ -271,9 +271,9 @@ class Sketchup::Selection
   #
   # @return [Integer]
   #
-  # @see #nitems
-  #
   # @see #size
+  #
+  # @see #nitems
   #
   # @version SketchUp 6.0
   def length

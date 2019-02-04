@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This observer interface is implemented to react to selection events. To
@@ -102,9 +102,9 @@ class Sketchup::SelectionObserver
   # @note Due to a bug in SketchUp this event doesn't trigger. Instead
   #   +onSelectedRemoved+ is called.
   #
-  # @param [Sketchup::Entity] entity
-  #
   # @param [Sketchup::Selection] selection
+  #
+  # @param [Sketchup::Entity] entity
   #
   # @return [nil]
   #

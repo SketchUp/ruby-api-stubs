@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Ruby HtmlDialog class allows you to create and interact with HTML dialog
@@ -8,6 +8,11 @@
 # If your goal is to simple display a website to your users, consider using
 # {UI#openURL}, which will show them a web page in their default browser rather
 # than inside a dialog in SketchUp.
+#
+# The left, top, width, height etc. dimensions of the dialog are in logical
+# units. This means you provide the units as if they where on a monitor with
+# "normal" DPI. The units given will be multiplied by the same factor as
+# returned by {UI.scale_factor}.
 #
 # @version SketchUp 2017
 class UI::HtmlDialog
@@ -33,6 +38,11 @@ class UI::HtmlDialog
   # Basic types such as booleans, numbers, strings, arrays and hashes are
   # automatically converted between Ruby and JavaScript.
   #
+  # @example Ruby Code
+  #   dialog.add_action_callback("say") { |action_context, param1, param2|
+  #     puts "JavaScript said #{param1} and #{param2}"
+  #   }
+  #
   # @example JavaScript
   #   sketchup.say('Hello World', 42);
   #
@@ -42,11 +52,6 @@ class UI::HtmlDialog
   #       console.log('Ruby side done.');
   #     }
   #   });
-  #
-  # @example Ruby Code
-  #   dialog.add_action_callback("say") { |action_context, param1, param2|
-  #     puts "JavaScript said #{param1} and #{param2}"
-  #   }
   #
   # @note When an HtmlDialog is closed, all callbacks to that instance are
   #   cleared. Re-attach them if you need to open the dialog again.
@@ -62,11 +67,11 @@ class UI::HtmlDialog
   #
   # @yield [action_context, ...]
   #
-  # @yieldparam [Object] ...
-  #   The parameters sent from JavaScript.
-  #
   # @yieldparam [Object] action_context
   #   action_context  Currently unused.
+  #
+  # @yieldparam [Object] ...
+  #   The parameters sent from JavaScript.
   def add_action_callback(callback_name)
   end
 
@@ -156,9 +161,9 @@ class UI::HtmlDialog
   #   dialog.set_url("http://www.sketchup.com")
   #   dialog.show
   #
-  # @option properties [Integer] :width (250)
-  #
-  # @option properties [Integer] :max_height (-1)
+  # @note Prior to SketchUp 2019 the +:width+ and +:height+ provided is ignored
+  #   if a +:preference_key+ is also present. To work around this bug on older
+  #   versions use {#set_size} after you initialize the dialog.
   #
   # @option properties [String] :dialog_title
   #
@@ -168,9 +173,9 @@ class UI::HtmlDialog
   #
   # @option properties [Boolean] :resizable (true)
   #
-  # @option properties [Integer] :height (250)
+  # @option properties [Integer] :width (250)
   #
-  # @option properties [Integer] :max_width (-1)
+  # @option properties [Integer] :height (250)
   #
   # @option properties [Integer] :left (0)
   #
@@ -179,6 +184,10 @@ class UI::HtmlDialog
   # @option properties [Integer] :min_width (0)
   #
   # @option properties [Integer] :min_height (0)
+  #
+  # @option properties [Integer] :max_width (-1)
+  #
+  # @option properties [Integer] :max_height (-1)
   #
   # @option properties [Integer] :style (UI::HtmlDialog::STYLE_DIALOG)
   #

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The RenderingOptions class contains method to extract the rendering
@@ -255,11 +255,11 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   #
   # @yield [key, value]
   #
-  # @yieldparam [Object] value
-  #   The value of each pair found.
-  #
   # @yieldparam [String] key
   #   The key of each pair found.
+  #
+  # @yieldparam [Object] value
+  #   The value of each pair found.
   def each
   end
 

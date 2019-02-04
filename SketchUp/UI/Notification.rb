@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # UI::Notification objects allows you to show native notifications in the
@@ -47,7 +47,7 @@ class UI::Notification
   #
   # @example
   #   notification = UI::Notification.new(sketchup_extension, "Hello world", "/path/to/icon", "icon Tooltip")
-  #   puts "Tooltip: " notification.icon_tooltip
+  #   puts "Tooltip: #{notification.icon_tooltip}"
   #   notification.show
   #
   # @return [String]
@@ -81,18 +81,18 @@ class UI::Notification
   #   notification = UI::Notification.new(sketchup_extension, "Hello world", "/path/to/icon", "icon Tooltip")
   #   notification.show
   #
-  # @param [String] icon_tooltip
-  #   Optionally set an image tooltip.
-  #
-  # @param [String] icon_name
-  #   Optionally set a path to an image.
+  # @param [SketchupExtension] sketchup_extension
+  #   Required sketchup_extension
+  #   to identify the sender.
   #
   # @param [String] message
   #   Optionally assign the message.
   #
-  # @param [SketchupExtension] sketchup_extension
-  #   Required sketchup_extension
-  #   to identify the sender.
+  # @param [String] icon_name
+  #   Optionally set a path to an image.
+  #
+  # @param [String] icon_tooltip
+  #   Optionally set an image tooltip.
   #
   # @return [UI::Notification]
   #

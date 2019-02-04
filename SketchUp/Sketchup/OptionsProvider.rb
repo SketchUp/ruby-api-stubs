@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # An OptionsProvider class provides various kinds of options on a Model. You
@@ -103,9 +103,9 @@ class Sketchup::OptionsProvider
   #
   # @yield [key, value]
   #
-  # @yieldparam [Object] value
-  #
   # @yieldparam [String] key
+  #
+  # @yieldparam [Object] value
   def each
   end
 
@@ -139,9 +139,9 @@ class Sketchup::OptionsProvider
   #
   # @yield [key, value]
   #
-  # @yieldparam [Object] value
-  #
   # @yieldparam [String] key
+  #
+  # @yieldparam [Object] value
   def each_pair
   end
 

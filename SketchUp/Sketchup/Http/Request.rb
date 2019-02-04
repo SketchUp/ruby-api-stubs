@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # Http::Request objects allows you to send HTTP request to HTTP servers.
@@ -240,8 +240,8 @@ class Sketchup::Http::Request
   #
   # @yield A block that is invoked when the request has finished.
   #
-  # @yieldparam [FileUploadRequest] request
-  #   The FileUploadRequest object.
+  # @yieldparam [Request] request
+  #   The request object.
   #
   # @yieldparam [Response] response
   #   The response object, use this to read the

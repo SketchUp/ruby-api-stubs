@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A {Layout::TableColumn} is a single row from a table.
@@ -47,10 +47,10 @@ class Layout::TableRow
   #
   # @param [Layout::Style] style
   #
-  # @raise [LockedEntityError] if the {Layout::Table} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::Table} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::Table} is locked
   #
   # @version LayOut 2018
   def bottom_edge_style=(style)
@@ -84,10 +84,10 @@ class Layout::TableRow
   #
   # @raise [ArgumentError] if height is not a valid height
   #
-  # @raise [LockedEntityError] if the {Layout::Table} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::Table} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::Table} is locked
   #
   # @version LayOut 2018
   def height=(height)
@@ -123,10 +123,10 @@ class Layout::TableRow
   #
   # @param [Layout::Style] style
   #
-  # @raise [LockedEntityError] if the {Layout::Table} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::Table} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::Table} is locked
   #
   # @version LayOut 2018
   def top_edge_style=(style)

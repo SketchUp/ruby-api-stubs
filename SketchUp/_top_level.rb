@@ -1,16 +1,19 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 
 
   # Constants
 
-  ALT_MODIFIER_KEY = nil # Stub value.
-  ALT_MODIFIER_MASK = nil # Stub value.
-
   ALeaderModel = nil # Stub value.
   ALeaderNone = nil # Stub value.
   ALeaderView = nil # Stub value.
+
+  ALT_MODIFIER_KEY = nil # Stub value.
+  ALT_MODIFIER_MASK = nil # Stub value.
+
+  COPY_MODIFIER_KEY = nil # Stub value.
+  COPY_MODIFIER_MASK = nil # Stub value.
 
   CMD_ARC = nil # Stub value.
   CMD_CAMERA_UNDO = nil # Stub value.
@@ -80,9 +83,6 @@
   CMD_ZOOM_EXTENTS = nil # Stub value.
   CMD_ZOOM_WINDOW = nil # Stub value.
 
-  COPY_MODIFIER_KEY = nil # Stub value.
-  COPY_MODIFIER_MASK = nil # Stub value.
-
   CONSTRAIN_MODIFIER_KEY = nil # Stub value.
   CONSTRAIN_MODIFIER_MASK = nil # Stub value.
 
@@ -107,10 +107,6 @@
   GL_TRIANGLE_FAN = nil # Stub value.
   GL_TRIANGLE_STRIP = nil # Stub value.
 
-  IDENTITY = nil # Stub value.
-
-  IDENTITY_2D = nil # Stub value.
-
   IDABORT = nil # Stub value.
   IDCANCEL = nil # Stub value.
   IDIGNORE = nil # Stub value.
@@ -119,17 +115,14 @@
   IDRETRY = nil # Stub value.
   IDYES = nil # Stub value.
 
+  IDENTITY = nil # Stub value.
+  IDENTITY_2D = nil # Stub value.
+
   LAYER_HIDDEN_BY_DEFAULT = nil # Stub value.
   LAYER_IS_HIDDEN_ON_NEW_PAGES = nil # Stub value.
   LAYER_IS_VISIBLE_ON_NEW_PAGES = nil # Stub value.
   LAYER_USES_DEFAULT_VISIBILITY_ON_NEW_PAGES = nil # Stub value.
   LAYER_VISIBLE_BY_DEFAULT = nil # Stub value.
-
-  MF_CHECKED = nil # Stub value.
-  MF_DISABLED = nil # Stub value.
-  MF_ENABLED = nil # Stub value.
-  MF_GRAYED = nil # Stub value.
-  MF_UNCHECKED = nil # Stub value.
 
   MB_ABORTRETRYIGNORE = nil # Stub value.
   MB_MULTILINE = nil # Stub value.
@@ -138,6 +131,12 @@
   MB_RETRYCANCEL = nil # Stub value.
   MB_YESNO = nil # Stub value.
   MB_YESNOCANCEL = nil # Stub value.
+
+  MF_CHECKED = nil # Stub value.
+  MF_DISABLED = nil # Stub value.
+  MF_ENABLED = nil # Stub value.
+  MF_GRAYED = nil # Stub value.
+  MF_UNCHECKED = nil # Stub value.
 
   ORIGIN = nil # Stub value.
   ORIGIN_2D = nil # Stub value.
@@ -152,30 +151,24 @@
   PAGE_USE_SHADOWINFO = nil # Stub value.
   PAGE_USE_SKETCHCS = nil # Stub value.
 
-  SnapTo_Arbitrary = nil # Stub value.
-  SnapTo_Horizontal = nil # Stub value.
-  SnapTo_Sloped = nil # Stub value.
-  SnapTo_Vertical = nil # Stub value.
-
   SKETCHUP_CONSOLE = nil # Stub value.
 
   SB_PROMPT = nil # Stub value.
   SB_VCB_LABEL = nil # Stub value.
   SB_VCB_VALUE = nil # Stub value.
 
-  TextAlignCenter = nil # Stub value.
-  TextAlignLeft = nil # Stub value.
-  TextAlignRight = nil # Stub value.
+  SnapTo_Arbitrary = nil # Stub value.
+  SnapTo_Horizontal = nil # Stub value.
+  SnapTo_Sloped = nil # Stub value.
+  SnapTo_Vertical = nil # Stub value.
 
   TB_HIDDEN = nil # Stub value.
   TB_NEVER_SHOWN = nil # Stub value.
   TB_VISIBLE = nil # Stub value.
 
-  VK_ALT = nil # Stub value.
-  VK_COMMAND = nil # Stub value.
-  VK_CONTROL = nil # Stub value.
-  VK_MENU = nil # Stub value.
-  VK_SHIFT = nil # Stub value.
+  TextAlignCenter = nil # Stub value.
+  TextAlignLeft = nil # Stub value.
+  TextAlignRight = nil # Stub value.
 
   VK_DELETE = nil # Stub value.
   VK_DOWN = nil # Stub value.
@@ -189,13 +182,18 @@
   VK_SPACE = nil # Stub value.
   VK_UP = nil # Stub value.
 
+  VK_ALT = nil # Stub value.
+  VK_COMMAND = nil # Stub value.
+  VK_CONTROL = nil # Stub value.
+  VK_MENU = nil # Stub value.
+  VK_SHIFT = nil # Stub value.
+
+  X_AXIS_2D = nil # Stub value.
+  Y_AXIS_2D = nil # Stub value.
+
   X_AXIS = nil # Stub value.
   Y_AXIS = nil # Stub value.
   Z_AXIS = nil # Stub value.
-
-  X_AXIS_2D = nil # Stub value.
-
-  Y_AXIS_2D = nil # Stub value.
 
   # Instance Methods
 

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The SketchupExtension class contains methods allowing you to create and
@@ -187,11 +187,15 @@ class SketchupExtension
   # @example
   #   # Create an entry in the Extension list that loads a script called
   #   # core.rb.
-  #   extension = SketchupExtension.new('Stair Tools', 'StairTools/core.rb')
+  #   extension = SketchupExtension.new('Stair Tools', 'StairTools/core')
   #
   #   # Then be sure to register it. By passing a 2nd param of true, you're
   #   # telling SketchUp to load the extension by default.
   #   Sketchup.register_extension(extension, true)
+  #
+  # @note It is recommended to omit the file extension provided in the +path+
+  #   argument. SketchUp will resolve the file extension to +.rbe+, +.rbs+
+  #   or +.rb+.
   #
   # @param [String] title
   #   The name of the extension

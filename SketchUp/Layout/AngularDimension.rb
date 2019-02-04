@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # References an angular dimension entity. An {Layout::AngularDimension} is
@@ -83,10 +83,10 @@ class Layout::AngularDimension < Layout::Entity
   #
   # @param [Boolean] uses_custom_text
   #
-  # @raise [LockedEntityError] if the {Layout::AngularDimension} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::AngularDimension} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::AngularDimension} is locked
   #
   # @version LayOut 2018
   def custom_text=(uses_custom_text)
@@ -145,10 +145,10 @@ class Layout::AngularDimension < Layout::Entity
   #
   # @param [Geom::Point2d] end_point
   #
-  # @raise [LockedEntityError] if the {Layout::AngularDimension} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::AngularDimension} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::AngularDimension} is locked
   #
   # @version LayOut 2018
   def end_connection_point=(end_point)
@@ -187,10 +187,10 @@ class Layout::AngularDimension < Layout::Entity
   #
   # @param [Geom::Point2d] end_extent
   #
-  # @raise [LockedEntityError] if the {Layout::AngularDimension} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::AngularDimension} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::AngularDimension} is locked
   #
   # @version LayOut 2018
   def end_extent_point=(end_extent)
@@ -212,10 +212,10 @@ class Layout::AngularDimension < Layout::Entity
   #
   # @param [Numeric] offset_length
   #
-  # @raise [LockedEntityError] if the {Layout::AngularDimension} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::AngularDimension} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::AngularDimension} is locked
   #
   # @version LayOut 2018
   def end_offset_length=(offset_length)
@@ -284,13 +284,13 @@ class Layout::AngularDimension < Layout::Entity
   #   The extent point where the
   #   dimension line should start
   #
-  # @param [Boolean] inner_angle
-  #   Whether or not the {Layout::AngularDimension}
-  #   should measure the inner angle. If +false+, it will measure the outer angle.
-  #
   # @param [Geom::Point2d] end_extent_point
   #   The extent point where the dimension
   #   line should end
+  #
+  # @param [Boolean] inner_angle
+  #   Whether or not the {Layout::AngularDimension}
+  #   should measure the inner angle. If +false+, it will measure the outer angle.
   #
   # @return [Layout::AngularDimension]
   #
@@ -345,10 +345,10 @@ class Layout::AngularDimension < Layout::Entity
   #
   # @raise [ArgumentError] if type is not a valid leader line type
   #
-  # @raise [LockedEntityError] if the {Layout::AngularDimension} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::AngularDimension} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::AngularDimension} is locked
   #
   # @version LayOut 2018
   def leader_line_type=(type)
@@ -388,10 +388,10 @@ class Layout::AngularDimension < Layout::Entity
   #
   # @raise [ArgumentError] is radius is negative
   #
-  # @raise [LockedEntityError] if the {Layout::AngularDimension} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::AngularDimension} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::AngularDimension} is locked
   #
   # @version LayOut 2018
   def radius=(radius)
@@ -429,10 +429,10 @@ class Layout::AngularDimension < Layout::Entity
   #
   # @param [Geom::Point2d] start_point
   #
-  # @raise [LockedEntityError] if the {Layout::AngularDimension} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::AngularDimension} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::AngularDimension} is locked
   #
   # @version LayOut 2018
   def start_connection_point=(start_point)
@@ -471,10 +471,10 @@ class Layout::AngularDimension < Layout::Entity
   #
   # @param [Geom::Point2d] start_extent
   #
-  # @raise [LockedEntityError] if the {Layout::AngularDimension} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::AngularDimension} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::AngularDimension} is locked
   #
   # @version LayOut 2018
   def start_extent_point=(start_extent)
@@ -496,10 +496,10 @@ class Layout::AngularDimension < Layout::Entity
   #
   # @param [Numeric] offset_length
   #
-  # @raise [LockedEntityError] if the {Layout::AngularDimension} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::AngularDimension} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::AngularDimension} is locked
   #
   # @version LayOut 2018
   def start_offset_length=(offset_length)
@@ -557,10 +557,10 @@ class Layout::AngularDimension < Layout::Entity
   #
   # @param [Layout::FormattedText] formatted_text
   #
-  # @raise [LockedEntityError] if the {Layout::AngularDimension} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::AngularDimension} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::AngularDimension} is locked
   #
   # @version LayOut 2018
   def text=(formatted_text)

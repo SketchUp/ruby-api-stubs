@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This is the interface to a SketchUp model. The model is the 3D drawing that
@@ -36,6 +36,9 @@
 #
 #   new_edge = entities.add_line([0,0,0], [500,500,0])
 #
+# @note Prior to SketchUp 2019 this class would yield +TypeError+ for all
+#   method calls if +#singleton_class+ was called on the model object.
+#
 # @version SketchUp 6.0
 class Sketchup::Model
 
@@ -52,6 +55,7 @@ class Sketchup::Model
   VERSION_2016 = nil # Stub value.
   VERSION_2017 = nil # Stub value.
   VERSION_2018 = nil # Stub value.
+  VERSION_2019 = nil # Stub value.
   VERSION_3 = nil # Stub value.
   VERSION_4 = nil # Stub value.
   VERSION_5 = nil # Stub value.
@@ -174,11 +178,11 @@ class Sketchup::Model
   # @param [String] note
   #   A string note.
   #
-  # @param [Numeric] y
-  #   A distance along the y axis between 0 and 1.
-  #
   # @param [Numeric] x
   #   A distance along the x axis between 0 and 1.
+  #
+  # @param [Numeric] y
+  #   A distance along the y axis between 0 and 1.
   #
   # @return [Sketchup::Text] a note object or an exception if it is
   #   unsuccessful.
@@ -459,7 +463,7 @@ class Sketchup::Model
   # See the {file:pages/exporter_options.md Exporter Options} file for information
   # on creating a valid hash for the various exporters.
   #
-  # @example
+  # @example General use
   #   model = Sketchup.active_model
   #   show_summary = true
   #
@@ -485,6 +489,14 @@ class Sketchup::Model
   #                    :selectionset_only => false,
   #                    :preserve_instancing => true }
   #   status = model.export('c:/my_export.dae', options_hash)
+  #
+  # @example IFC Example
+  #   model = Sketchup.active_model
+  #   # If no IFC types are passed in, then no geometry will be exported.
+  #   options_hash = { :hidden_geometry => true,
+  #                    :ifc_mapped_items => true,
+  #                    :ifc_types => ['IfcBuilding', 'IfcDoor']}
+  #   status = model.export('c:/my_export.ifc', options_hash)
   #
   # @overload export(filename, show_summary = false)
   #
@@ -600,12 +612,12 @@ class Sketchup::Model
   # @param [String] dictname
   #   The name of the dictionary containing the value.
   #
+  # @param [String] key
+  #   The key containing the value.
+  #
   # @param [Object] defaultvalue
   #   default value that will be returned if a
   #   value does not exist.
-  #
-  # @param [String] key
-  #   The key containing the value.
   #
   # @return [Object, nil] the value for a given key in the given
   #   dictionary if a value exists; the default value if a
@@ -688,7 +700,7 @@ class Sketchup::Model
   # @example Import for SketchUp 2018+ and newer
   #   model = Sketchup.active_model
   #   options = { :units => "model",
-  #               :merge_coplaner_faces => true,
+  #               :merge_coplanar_faces => true,
   #               :show_summary => true }
   #   status = model.import("filename", options)
   #
@@ -775,6 +787,17 @@ class Sketchup::Model
   #
   # @version SketchUp 6.0
   def layers
+  end
+
+  # The {#line_styles} method returns the line styles manager.
+  #
+  # @example
+  #   line_styles = Sketchup.active_model.line_styles
+  #
+  # @return [Sketchup::LineStyles] The line styles manager.
+  #
+  # @version SketchUp 2019
+  def line_styles
   end
 
   # This method retrieves an Array of all of the datums recognized by SketchUp.
@@ -1089,6 +1112,9 @@ class Sketchup::Model
   #   filename = File.join(ENV['Home'], 'Desktop', 'mysketchup_v8.skp')
   #   status = model.save("filename", Sketchup::Model::VERSION_8)
   #
+  # @note A bug in SketchUp 2016 and older caused the +.skb+ backup file
+  #   written during save to be empty. The +.skp+ file was however valid.
+  #
   # @overload save
   #
   #   Starting with SketchUp 2014, this parameter is optional.
@@ -1239,11 +1265,11 @@ class Sketchup::Model
   #   The name of the attribute dictionary whose attribute
   #   you wish to set.
   #
-  # @param [Object] value
-  #   The value to set.
-  #
   # @param [String] key
   #   The attribute name.
+  #
+  # @param [Object] value
+  #   The value to set.
   #
   # @return [Object] the value that was set
   #
@@ -1321,6 +1347,15 @@ class Sketchup::Model
   #   new Ruby operation while another is still open, you will implicitly close
   #   the first one.
   #
+  # @param [String] op_name
+  #   name of the operation visible in the UI
+  #
+  # @param [Boolean] disable_ui
+  #   if set to true, then SketchUp's tendency to
+  #   update the user interface after each geometry change will be
+  #   suppressed. This can result in much faster Ruby code execution if the
+  #   operation involves updating the model in any way.
+  #
   # @param [Boolean] next_transparent
   #   <b>Deprecated!</b> if set to true, then
   #   whatever operation comes after this one will be appended into one
@@ -1329,15 +1364,6 @@ class Sketchup::Model
   #   are so many ways that a SketchUp user can interrupt a given operation
   #   with one of their own. <b>Use extreme caution</b> and test thoroughly
   #   when setting this to true.
-  #
-  # @param [Boolean] disable_ui
-  #   if set to true, then SketchUp's tendency to
-  #   update the user interface after each geometry change will be
-  #   suppressed. This can result in much faster Ruby code execution if the
-  #   operation involves updating the model in any way.
-  #
-  # @param [String] op_name
-  #   name of the operation visible in the UI
   #
   # @param [Boolean] transparent
   #   if set to true, then this operation will

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A {Layout::TableColumn} is a single column from a table.
@@ -49,10 +49,10 @@ class Layout::TableColumn
   #
   # @param [Layout::Style] style
   #
-  # @raise [LockedEntityError] if the {Layout::Table} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::Table} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::Table} is locked
   #
   # @version LayOut 2018
   def left_edge_style=(style)
@@ -90,10 +90,10 @@ class Layout::TableColumn
   #
   # @param [Layout::Style] style
   #
-  # @raise [LockedEntityError] if the {Layout::Table} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::Table} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::Table} is locked
   #
   # @version LayOut 2018
   def right_edge_style=(style)
@@ -127,10 +127,10 @@ class Layout::TableColumn
   #
   # @raise [ArgumentError] if width is not a valid width
   #
-  # @raise [LockedEntityError] if the {Layout::Table} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::Table} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::Table} is locked
   #
   # @version LayOut 2018
   def width=(width)

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Geom::Vector2d} class allows you to work with a point in 2D space.
@@ -169,15 +169,15 @@ class Geom::Point2d
   #
   #   @return [Geom::Point2d]
   #
-  # @overload initialize(point)
-  #
-  #   @param [Geom::Point2d, Array(Numeric, Numeric)] point
-  #   @return [Geom::Point2d]
-  #
   # @overload initialize(x, y)
   #
   #   @param [Numeric] x The location along the x axis
   #   @param [Numeric] y The location along the y axis
+  #   @return [Geom::Point2d]
+  #
+  # @overload initialize(point)
+  #
+  #   @param [Geom::Point2d, Array(Numeric, Numeric)] point
   #   @return [Geom::Point2d]
   #
   # @version LayOut 2018
@@ -289,6 +289,42 @@ class Geom::Point2d
   #
   # @version LayOut 2018
   def to_s
+  end
+
+  # The {#transform} method applies a transformation to a point, returning a new
+  # point. The original point is unchanged by this method.
+  #
+  # @example
+  #   point = Geom::Point2d.new(4, 5)
+  #   transformation = Geom::Transformation2d.new([1, 0, 0, 1, 2, 3])
+  #   # pt will be (6, 8)
+  #   pt = point.transform(transformation)
+  #
+  # @param [Geom::Transformation2d] transform
+  #   A Transformation object to apply to the point.
+  #
+  # @return [Geom::Point2d] the transformed point
+  #
+  # @version LayOut 2019
+  def transform(transform)
+  end
+
+  # The {#transform!} method applies a transformation to a point. The point
+  # itself is modified.
+  #
+  # @example
+  #   point = Geom::Point2d.new(4, 5)
+  #   transformation = Geom::Transformation2d.new([1, 0, 0, 1, 2, 3])
+  #   # point will be (6, 8)
+  #   point.transform!(transformation)
+  #
+  # @param [Geom::Transformation2d] transform
+  #   A Transformation object to apply to the point.
+  #
+  # @return [Geom::Point2d] the transformed point
+  #
+  # @version LayOut 2019
+  def transform!(transform)
   end
 
   # The {#vector_to} method returns the vector between points.

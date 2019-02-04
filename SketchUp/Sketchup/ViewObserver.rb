@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This observer interface is implemented to react to view events. To implement
@@ -26,7 +26,7 @@ class Sketchup::ViewObserver
   #
   # @example
   #   def onViewChanged(view)
-  #     pust "onViewChanged: #{view}"
+  #     puts "onViewChanged: #{view}"
   #   end
   #
   # @param [Sketchup::View] view

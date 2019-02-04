@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A simple rectangular shape entity.
@@ -59,14 +59,14 @@ class Layout::Rectangle < Layout::Entity
   #   @param [Float] radius
   #   @return [Layout::Rectangle]
   #
-  # @raise [ArgumentError] if radius is a negative value
+  # @raise [ArgumentError] if type passed in does not match the number of
+  #   arguments
   #
   # @raise [ArgumentError] if bounds is zero size
   #
   # @raise [ArgumentError] if type is not a valid type
   #
-  # @raise [ArgumentError] if type passed in does not match the number of
-  #   arguments
+  # @raise [ArgumentError] if radius is a negative value
   #
   # @version LayOut 2018
   def initialize(*args)
@@ -107,12 +107,12 @@ class Layout::Rectangle < Layout::Entity
   # @raise [ArgumentError] if the {Layout::Rectangle} is not of type
   #   +Layout::Rectangle::TYPE_BULGED+ or +Layout::Rectangle::TYPE_ROUNDED+
   #
-  # @raise [LockedEntityError] if the {Layout::Rectangle} is locked
+  # @raise [ArgumentError] if radius is negative
   #
   # @raise [LockedLayerError] if the {Layout::Rectangle} is on a locked
   #   {Layout::Layer}
   #
-  # @raise [ArgumentError] if radius is negative
+  # @raise [LockedEntityError] if the {Layout::Rectangle} is locked
   #
   # @version LayOut 2018
   def radius=(radius)
@@ -163,9 +163,9 @@ class Layout::Rectangle < Layout::Entity
   # @raise [LockedLayerError] if the {Layout::Rectangle} is on a locked
   #   {Layout::Layer}
   #
-  # @raise [ArgumentError] if type is not a valid rectangle type
-  #
   # @raise [LockedEntityError] if the {Layout::Rectangle} is locked
+  #
+  # @raise [ArgumentError] if type is not a valid rectangle type
   #
   # @version LayOut 2018
   def type=(type)

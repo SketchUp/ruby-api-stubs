@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # Class for a single page in a LayOut document.
@@ -173,10 +173,10 @@ class Layout::Page
   #
   # @param [Boolean] visible
   #
+  # @raise [ArgumentError] if layer and page are not in the same document
+  #
   # @raise [ArgumentError] if layer could not be hidden because there must be at
   #   least one unlocked, visible layer on each page
-  #
-  # @raise [ArgumentError] if layer and page are not in the same document
   #
   # @return [Boolean]
   #

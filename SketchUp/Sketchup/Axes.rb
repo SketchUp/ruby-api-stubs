@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # SketchUp's drawing axes consist of three colored lines (red, green, blue),
@@ -54,11 +54,11 @@ class Sketchup::Axes < Sketchup::Entity
   # @param xaxis
   #   Vector3d - The x axis to set.
   #
-  # @param zaxis
-  #   Vector3d - The z axis to set.
-  #
   # @param yaxis
   #   Vector3d - The y axis to set.
+  #
+  # @param zaxis
+  #   Vector3d - The z axis to set.
   #
   # @return Axes - the axes object being set.
   #

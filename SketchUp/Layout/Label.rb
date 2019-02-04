@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This is an interface to a label entity. A {Layout::Label} consists of a
@@ -57,14 +57,14 @@ class Layout::Label < Layout::Entity
   # @raise [LockedLayerError] if the {Layout::Label} is on a locked
   #   {Layout::Layer}
   #
-  # @raise [ArgumentError] if both the {Layout::Label} and the
-  #   {Layout::ConnectionPoint} are on non-shared {Layout::Layers}, but are not
-  #   on the same {Layout::Page}.
+  # @raise [LockedEntityError] if the {Layout::Label} is locked
   #
   # @raise [ArgumentError] if the {Layout::Label} is not in the same
   #   {Layout::Document} as the {Layout::ConnectionPoint}
   #
-  # @raise [LockedEntityError] if the {Layout::Label} is locked
+  # @raise [ArgumentError] if both the {Layout::Label} and the
+  #   {Layout::ConnectionPoint} are on non-shared {Layout::Layers}, but are not
+  #   on the same {Layout::Page}.
   #
   # @version LayOut 2018
   def connect(connection_point)
@@ -127,10 +127,10 @@ class Layout::Label < Layout::Entity
   # @raise [LockedLayerError] if the {Layout::Label} is on a locked
   #   {Layout::Layer}
   #
+  # @raise [LockedEntityError] if the {Layout::Label} is locked
+  #
   # @raise [ArgumentError] if the connection_type is not a valid text connection
   #   type
-  #
-  # @raise [LockedEntityError] if the {Layout::Label} is locked
   #
   # @version LayOut 2018
   def connection_type=(connection_type)
@@ -219,11 +219,11 @@ class Layout::Label < Layout::Entity
   #
   # @raise [ArgumentError] if anchor_type is not a valid anchor type
   #
-  # @raise [ArgumentError] if plain_text is an empty string
+  # @raise [ArgumentError] if leader_type is not a valid leader line type
   #
   # @raise [ArgumentError] if bounds is zero size
   #
-  # @raise [ArgumentError] if leader_type is not a valid leader line type
+  # @raise [ArgumentError] if plain_text is an empty string
   #
   # @version LayOut 2018
   def initialize(*args)
@@ -260,10 +260,10 @@ class Layout::Label < Layout::Entity
   #
   # @param [Layout::Path] leader_path
   #
-  # @raise [LockedEntityError] if the {Layout::Label} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::Label} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::Label} is locked
   #
   # @version LayOut 2018
   def leader_line=(leader_path)
@@ -316,10 +316,10 @@ class Layout::Label < Layout::Entity
   # @raise [LockedLayerError] if the {Layout::Label} is on a locked
   #   {Layout::Layer}
   #
+  # @raise [LockedEntityError] if the {Layout::Label} is locked
+  #
   # @raise [ArgumentError] if leader_type is
   #   +Layout::Label::LEADER_LINE_TYPE_UNKNOWN+ or not a valid leader line type
-  #
-  # @raise [LockedEntityError] if the {Layout::Label} is locked
   #
   # @version LayOut 2018
   def leader_line_type=(leader_type)
@@ -359,10 +359,10 @@ class Layout::Label < Layout::Entity
   #
   # @param [Layout::FormattedText] new_text
   #
-  # @raise [LockedEntityError] if the {Layout::Label} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::Label} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::Label} is locked
   #
   # @version LayOut 2018
   def text=(new_text)

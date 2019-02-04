@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A {Layout::Table} is a series of rows and columns that holds data.
@@ -152,11 +152,11 @@ class Layout::Table < Layout::Entity
   #
   # @param [Integer] columns
   #
-  # @raise [ArgumentError] if bounds is zero size
-  #
   # @raise [ArgumentError] if rows is less than 1
   #
   # @raise [ArgumentError] if columns is less than 1
+  #
+  # @raise [ArgumentError] if bounds is zero size
   #
   # @return [Layout::Table]
   #
@@ -177,10 +177,10 @@ class Layout::Table < Layout::Entity
   #
   # @raise [IndexError] if index is not a valid index for the {Layout::Table}
   #
-  # @raise [LockedEntityError] if the {Layout::Table} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::Table} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::Table} is locked
   #
   # @version LayOut 2018
   def insert_column(index)
@@ -199,10 +199,10 @@ class Layout::Table < Layout::Entity
   #
   # @raise [IndexError] if index is not a valid index for the {Layout::Table}
   #
-  # @raise [LockedEntityError] if the {Layout::Table} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::Table} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::Table} is locked
   #
   # @version LayOut 2018
   def insert_row(index)
@@ -226,7 +226,8 @@ class Layout::Table < Layout::Entity
   #
   # @param [Integer] end_column
   #
-  # @raise [ArgumentError] if the specified range of cells contains a merged cell
+  # @raise [IndexError] if the passed in indices are not a valid for the
+  #   {Layout::Table}
   #
   # @raise [LockedLayerError] if the {Layout::Table} is on a locked
   #   {Layout::Layer}
@@ -236,8 +237,7 @@ class Layout::Table < Layout::Entity
   # @raise [ArgumentError] if the specified range of cells only spans a single
   #   cell
   #
-  # @raise [IndexError] if the passed in indices are not a valid for the
-  #   {Layout::Table}
+  # @raise [ArgumentError] if the specified range of cells contains a merged cell
   #
   # @version LayOut 2018
   def merge(start_row, start_column, end_row, end_column)
@@ -256,10 +256,10 @@ class Layout::Table < Layout::Entity
   #
   # @raise [IndexError] if index is not a valid index for the {Layout::Table}
   #
-  # @raise [LockedEntityError] if the {Layout::Table} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::Table} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::Table} is locked
   #
   # @version LayOut 2018
   def remove_column(index)
@@ -278,10 +278,10 @@ class Layout::Table < Layout::Entity
   #
   # @raise [IndexError] if index is not a valid index for the {Layout::Table}
   #
-  # @raise [LockedEntityError] if the {Layout::Table} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::Table} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::Table} is locked
   #
   # @version LayOut 2018
   def remove_row(index)

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # References an instance of a {Layout::Layer}. A {Layout::LayerInstance}
@@ -117,9 +117,9 @@ class Layout::LayerInstance
   # @param [Integer] index
   #   The desired index of the {Layout::Entity}
   #
-  # @raise [IndexError] if index is out of range
-  #
   # @raise [ArgumentError] if entity is not on the {Layout::LayerInstance}
+  #
+  # @raise [IndexError] if index is out of range
   #
   # @version LayOut 2018
   def reorder_entity(entity, index)

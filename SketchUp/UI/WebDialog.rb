@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Ruby WebDialog class allows you to create and interact with DHTML dialog
@@ -75,12 +75,12 @@ class UI::WebDialog
   #
   # @yield [dialog, params]
   #
+  # @yieldparam dialog
+  #   The dialog.
+  #
   # @yieldparam params
   #   Any parameters passed to the dialog from HTML.
   #   This is passed as a single string.
-  #
-  # @yieldparam dialog
-  #   The dialog.
   def add_action_callback(callback_name)
   end
 
@@ -177,19 +177,19 @@ class UI::WebDialog
 
   # The +new+ method is used to create a new webdialog.
   #
-  # Since SU2017 the position and size of the dialog is DPI aware - it will scale
-  # to the DPI of the monitor automatically. Specify units as they would be on a
-  # traditional low-DPI monitor.
-  #
-  # Note that the browser which is embedded inside the dialog depends on the
-  # user's OS. On Mac, Safari is embedded, while on the PC whatever version of
-  # Internet Explorer is installed will be embedded.
-  #
   # @example
   #   dlg = UI::WebDialog.new("Show sketchup.com", true,
   #     "ShowSketchupDotCom", 739, 641, 150, 150, true);
   #   dlg.set_url "http://www.sketchup.com"
   #   dlg.show
+  #
+  # @note Since SU2017 the position and size of the dialog is DPI aware - it will
+  #   scale to the DPI of the monitor automatically. Specify units as they would
+  #   be on a traditional low-DPI monitor.
+  #
+  # @note The browser which is embedded inside the dialog depends on the
+  #   user's OS. On Mac, Safari is embedded, while on the PC whatever version of
+  #   Internet Explorer is installed will be embedded.
   #
   # @overload initialize(dialog_title = "", scrollable = true, pref_key = nil, width = 250, height = 250, left = 0, top = 0, resizable = true)
   #
@@ -251,6 +251,9 @@ class UI::WebDialog
   # @example
   #   dialog.max_height = 400
   #
+  # @note As of SU2017 this will automatically scale the height by the same
+  #   factor as {UI.scale_factor}.
+  #
   # @param [Integer] height
   #   The maximum height in pixels
   #
@@ -277,6 +280,9 @@ class UI::WebDialog
   #
   # @example
   #   dialog.max_width = 500
+  #
+  # @note As of SU2017 this will automatically scale the width by the same factor
+  #   as {UI.scale_factor}.
   #
   # @param [Integer] width
   #   The maximum width in pixels
@@ -305,6 +311,9 @@ class UI::WebDialog
   # @example
   #   dialog.min_height = 100
   #
+  # @note As of SU2017 this will automatically scale the height by the same
+  #   factor as {UI.scale_factor}.
+  #
   # @param [Integer] height
   #   The minimum height in pixels
   #
@@ -331,6 +340,9 @@ class UI::WebDialog
   #
   # @example
   #   dialog.min_width = 200
+  #
+  # @note As of SU2017 this will automatically scale the width by the same factor
+  #   as {UI.scale_factor}.
   #
   # @param [Integer] width
   #   The minimum width in pixels
@@ -486,6 +498,9 @@ class UI::WebDialog
   # @example
   #   dialog.set_position(100,50)
   #
+  # @note As of SU2017 this will automatically scale the x and y by the same
+  #   factor as {UI.scale_factor}.
+  #
   # @param [Integer] left
   #   The number of pixels from the left.
   #
@@ -502,6 +517,9 @@ class UI::WebDialog
   #
   # @example
   #   dialog.set_size(320,240)
+  #
+  # @note As of SU2017 this will automatically scale the width and height by the
+  #   same factor as {UI.scale_factor}.
   #
   # @param [Integer] w
   #   Width of the webdialog.
@@ -586,10 +604,6 @@ class UI::WebDialog
   #   dialog.write_image('c:/grab.jpg', 70, 0, 0, 100, 100)
   #   dialog.write_image('c:/grab.png', 4, 0, 0, 100, 100)
   #
-  # @param [Integer] top_left_x
-  #   The x coordinate of the upper left corner of the
-  #   region to grab.
-  #
   # @param [String] image_path
   #   The destination path of the saved image.
   #
@@ -600,16 +614,20 @@ class UI::WebDialog
   #   the compression algorithm: <4 (best speed), 4-8
   #   (default), or >=9 (best compression).
   #
-  # @param [Integer] bottom_right_y
-  #   The x coordinate of the lower right corner of the
+  # @param [Integer] top_left_x
+  #   The x coordinate of the upper left corner of the
+  #   region to grab.
+  #
+  # @param [Integer] top_left_y
+  #   The x coordinate of the upper left corner of the
   #   region to grab.
   #
   # @param [Integer] bottom_right_x
   #   The x coordinate of the lower right corner of the
   #   region to grab.
   #
-  # @param [Integer] top_left_y
-  #   The x coordinate of the upper left corner of the
+  # @param [Integer] bottom_right_y
+  #   The x coordinate of the lower right corner of the
   #   region to grab.
   #
   # @version SketchUp 7.1

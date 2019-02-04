@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The LatLong class contains various methods for creating and manipulating
@@ -29,15 +29,15 @@ class Geom::LatLong
   #   @param latlong [Geom::LatLong]
   #   @return [Geom::LatLong]
   #
+  # @overload initialize(latlong_array)
+  #
+  #   @param latlong_array [Array(Numeric, Numeric)]
+  #   @return [Geom::LatLong]
+  #
   # @overload initialize(lat, long)
   #
   #   @param lat  [Numeric]
   #   @param long [Numeric]
-  #   @return [Geom::LatLong]
-  #
-  # @overload initialize(latlong_array)
-  #
-  #   @param latlong_array [Array(Numeric, Numeric)]
   #   @return [Geom::LatLong]
   #
   # @version SketchUp 6.0

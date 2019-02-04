@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # Faces in SketchUp are flat, 2-sided polygons with 3 or more sides.
@@ -281,12 +281,12 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   True if you want the texture coordinates for the front
   #   face, false if not. Defaults to true.
   #
-  # @param [Sketchup::TextureWriter] texturewriter
-  #   An optional TextureWriter object.
-  #
   # @param [Boolean] back
   #   True if you want the texture coordinates for the back
   #   face, false if not. Defaults to true.
+  #
+  # @param [Sketchup::TextureWriter] texturewriter
+  #   An optional TextureWriter object.
   #
   # @return [Sketchup::UVHelper] a UVHelper object
   #
@@ -596,12 +596,12 @@ class Sketchup::Face < Sketchup::Drawingelement
   # @param [Sketchup::Material] material
   #   a Material object.
   #
+  # @param [Array<Geom::Point3d>] pt_array
+  #   An array of Point3d objects used to position the material.
+  #
   # @param [Boolean] o_front
   #   true to position the texture on the front of the Face or
   #   false to position it on the back of the Face.
-  #
-  # @param [Array<Geom::Point3d>] pt_array
-  #   An array of Point3d objects used to position the material.
   #
   # @return [Sketchup::Face, false] the face upon success, false upon failure.
   #

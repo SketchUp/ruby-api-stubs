@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Vector2d class represents vectors in a 2 dimensional space.
@@ -98,7 +98,7 @@ class Geom::Vector2d
   #   # retrieves the y value of 2
   #   yvalue = vector[1]
   #
-  # @param [Numeric] index
+  # @param [Integer] index
   #   The index into an array of two coordinates.
   #
   # @return [Numeric] The value for the x or y coordinate.
@@ -199,15 +199,15 @@ class Geom::Vector2d
   #
   #   @return [Geom::Vector2d]
   #
-  # @overload initialize(vector)
-  #
-  #   @param [Geom::Vector2d, Array(Numeric, Numeric)] vector
-  #   @return [Geom::Vector2d]
-  #
   # @overload initialize(x, y)
   #
   #   @param [Numeric] x The length in the x direction
   #   @param [Numeric] y The length in the y direction
+  #   @return [Geom::Vector2d]
+  #
+  # @overload initialize(vector)
+  #
+  #   @param [Geom::Vector2d, Array(Numeric, Numeric)] vector
   #   @return [Geom::Vector2d]
   #
   # @version LayOut 2018
@@ -233,14 +233,14 @@ class Geom::Vector2d
   #   # returns 4
   #   l = vector.length
   #
-  # @return [Numeric] The length of the {Geom::Vector2d}
+  # @return [Length] The length of the {Geom::Vector2d}
   #
   # @version LayOut 2018
   def length
   end
 
   # The {#length=} method sets the length of the {Geom::Vector2d}. The new length
-  # must be greater than 0.
+  # must not be 0.
   #
   # @example
   #   vector = Geom::Vector2d.new(0, 4)
@@ -407,6 +407,42 @@ class Geom::Vector2d
   #
   # @version LayOut 2018
   def to_s
+  end
+
+  # The {#transform} method applies a transformation to a vector, returning a new
+  # vector. The original vector is unchanged by this method.
+  #
+  # @example
+  #   vector = Geom::Vector2d.new(4, 5)
+  #   transformation = Geom::Transformation2d.new([1, 0, 0, 1, 2, 3])
+  #   # vector2 will be (6, 8)
+  #   vector2 = vector.transform(transformation)
+  #
+  # @param [Geom::Transformation2d] transform
+  #   A transformation object to apply to the vector.
+  #
+  # @return [Geom::Vector2d] the newly transformed vector
+  #
+  # @version LayOut 2019
+  def transform(transform)
+  end
+
+  # The {#transform!} method applies a transformation to a vector. The vector
+  # itself is modified.
+  #
+  # @example
+  #   vector = Geom::Vector2d.new(4, 5)
+  #   transformation = Geom::Transformation2d.new([1, 0, 0, 1, 2, 3])
+  #   # vector will be (6, 8)
+  #   vector.transform!(transformation)
+  #
+  # @param [Geom::Transformation2d] transform
+  #   A Transformation object to apply to the vector.
+  #
+  # @return [Geom::Vector2d] the transformed vector
+  #
+  # @version LayOut 2019
+  def transform!(transform)
   end
 
   # The {#unit_vector?} method returns whether the {Geom::Vector2d} is a unit

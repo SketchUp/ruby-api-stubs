@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The bounds2d class represents an axis aligned bounding box represented by
@@ -39,7 +39,7 @@ class Geom::Bounds2d
   # The {#initialize} method creates a new {Geom::Bounds2d}.
   #
   # @example
-  #   bounds = Geom::Bounds2d.new({0.0, 0.0, 1.0, 1.0})
+  #   bounds = Geom::Bounds2d.new(0.0, 0.0, 1.0, 1.0)
   #
   # @overload initialize(other_bounds)
   #
@@ -52,10 +52,12 @@ class Geom::Bounds2d
   #   @param [Geom::Point2d] lower_right
   #   @return [Geom::Bounds2d]
   #
-  # @overload initialize(float_array)
+  # @overload initialize(x, y, width, height)
   #
-  #   @param [Array(Float, Float, Float, Float)] float_array An array of four
-  #     floats (x, y, width, height)
+  #   @param [Float] x
+  #   @param [Float] y
+  #   @param [Float] width
+  #   @param [Float] height
   #   @return [Geom::Bounds2d]
   #
   # @overload initialize(point_array)
@@ -64,12 +66,10 @@ class Geom::Bounds2d
   #     {Geom::Point2d}s
   #   @return [Geom::Bounds2d]
   #
-  # @overload initialize(x, y, width, height)
+  # @overload initialize(float_array)
   #
-  #   @param [Float] x
-  #   @param [Float] y
-  #   @param [Float] width
-  #   @param [Float] height
+  #   @param [Array(Float, Float, Float, Float)] float_array An array of four
+  #     floats (x, y, width, height)
   #   @return [Geom::Bounds2d]
   #
   # @version LayOut 2018
@@ -107,10 +107,12 @@ class Geom::Bounds2d
   #   @param [Geom::Point2d] lower_right
   #   @return [Geom::Bounds2d]
   #
-  # @overload set!(float_array)
+  # @overload set!(x, y, width, height)
   #
-  #   @param [Array(Float, Float, Float, Float)] float_array An array of four
-  #     floats (x, y, width, height)
+  #   @param [Float] x
+  #   @param [Float] y
+  #   @param [Float] width
+  #   @param [Float] height
   #   @return [Geom::Bounds2d]
   #
   # @overload set!(point_array)
@@ -119,12 +121,10 @@ class Geom::Bounds2d
   #     {Geom::Point2d}s
   #   @return [Geom::Bounds2d]
   #
-  # @overload set!(x, y, width, height)
+  # @overload set!(float_array)
   #
-  #   @param [Float] x
-  #   @param [Float] y
-  #   @param [Float] width
-  #   @param [Float] height
+  #   @param [Array(Float, Float, Float, Float)] float_array An array of four
+  #     floats (x, y, width, height)
   #   @return [Geom::Bounds2d]
   #
   # @version LayOut 2018

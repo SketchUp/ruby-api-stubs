@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Edge class contains methods modifying and extracting information for
@@ -209,32 +209,29 @@ class Sketchup::Edge < Sketchup::Drawingelement
   def find_faces
   end
 
-  # The length method is used to retrieve the length of an edge in current
+  # The {#length} method is used to retrieve the length of an edge in current
   # units.
   #
-  # You can pass in an optional Transformation (or an array that can represent a
-  # transformation), to correct for a parent group's transformation. For example,
-  # if an edge is inside of a group that is scaled to 200%, the length method
-  # will return the unscaled length of the edge. So by passing a 200%
-  # transformation object to this method, you can account for that to get the
-  # "visual" length of the edge.
+  # You can pass in an optional {Geom::Transformation} (or an array that can
+  # represent a transformation), to correct for a parent group's transformation.
+  # For example, if an edge is inside of a group that is scaled to 200%, the
+  # length method will return the unscaled length of the edge. So by passing a
+  # 200% transformation object to this method, you can account for that to get
+  # the "visual" length of the edge.
   #
   # @example
-  #   edge = Sketchup.active_model.entities.add_line([0,0,0],[100,100,0])
-  #   length = edge.length
-  #   if (length)
-  #     UI.messagebox length
-  #   end
+  #   edge = Sketchup.active_model.entities.add_line([0, 0, 0], [100, 100, 0])
+  #   puts "#{edge.length} (#{edge.length.inspect})"
   #
   # @overload length
   #
-  #   @return [Length] the length of the edge in current units
+  #   @return [Length] the length of the edge
   #
   # @overload length(transform)
   #
   #   @param transform [Geom::Transformation] A Transformation object or array
-  #                      that can be interpreted as a Transformation object.
-  #   @return [Length] the length of the edge in current units
+  #                       that can be interpreted as a Transformation object.
+  #   @return [Length] the length of the edge
   #
   # @version SketchUp 6.0
   def length(*args)

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Vector3d class is used to represent vectors in a 3 dimensional space.
@@ -321,9 +321,9 @@ class Geom::Vector3d
   #   @param [Numeric] z
   #   @return [Geom::Vector3d]
   #
-  # @overload initialize(vector)
+  # @overload initialize(array3d)
   #
-  #   @param vector [Geom::Vector3d] A Vector3d object.
+  #   @param [Array(Numeric, Numeric, Numeric)] array3d
   #   @return [Geom::Vector3d]
   #
   # @overload initialize(array2d)
@@ -331,9 +331,9 @@ class Geom::Vector3d
   #   @param [Array(Numeric, Numeric)] array2d
   #   @return [Geom::Vector3d]
   #
-  # @overload initialize(array3d)
+  # @overload initialize(vector)
   #
-  #   @param [Array(Numeric, Numeric, Numeric)] array3d
+  #   @param vector [Geom::Vector3d] A Vector3d object.
   #   @return [Geom::Vector3d]
   #
   # @version SketchUp 6.0
@@ -508,11 +508,9 @@ class Geom::Vector3d
   #   vector = Geom::Vector3d.new(0,0,1)
   #   vector.set! 1,0,0
   #
-  # @overload set!(x, y, z)
+  # @overload set!(array3d)
   #
-  #   @param [Numeric] x
-  #   @param [Numeric] y
-  #   @param [Numeric] z
+  #   @param array3d [Array(Numeric, Numeric, Numeric)]
   #   @return [Geom::Vector3d]
   #
   # @overload set!(vector)
@@ -520,9 +518,11 @@ class Geom::Vector3d
   #   @param vector [Geom::Vector3d]
   #   @return [Geom::Vector3d]
   #
-  # @overload set!(array3d)
+  # @overload set!(x, y, z)
   #
-  #   @param array3d [Array(Numeric, Numeric, Numeric)]
+  #   @param [Numeric] x
+  #   @param [Numeric] y
+  #   @param [Numeric] z
   #   @return [Geom::Vector3d]
   #
   # @version SketchUp 6.0

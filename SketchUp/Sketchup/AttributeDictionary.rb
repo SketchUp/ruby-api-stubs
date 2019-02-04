@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The AttributeDictionary class allows you to attach arbitrary collections of
@@ -126,11 +126,11 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
   #
   # @yield [key, value]
   #
-  # @yieldparam [Object] value
-  #   The value of each attribute as it is found.
-  #
   # @yieldparam [String] key
   #   The key of each attribute as it is found.
+  #
+  # @yieldparam [Object] value
+  #   The value of each attribute as it is found.
   def each
   end
 
@@ -177,11 +177,11 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
   #
   # @yield [key, value]
   #
-  # @yieldparam [Object] value
-  #   The value of each attribute as it is found.
-  #
   # @yieldparam [String] key
   #   The key of each attribute as it is found.
+  #
+  # @yieldparam [Object] value
+  #   The value of each attribute as it is found.
   def each_pair
   end
 

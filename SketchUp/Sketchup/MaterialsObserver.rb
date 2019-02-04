@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This observer interface is implemented to react to materials events. To
@@ -128,9 +128,9 @@ class Sketchup::MaterialsObserver
   #   the {Sketchup::ModelObserver#onTransactionStart} to capture all undo
   #   events.
   #
-  # @param [Sketchup::Material] material
-  #
   # @param [Sketchup::Materials] materials
+  #
+  # @param [Sketchup::Material] material
   #
   # @return [nil]
   #

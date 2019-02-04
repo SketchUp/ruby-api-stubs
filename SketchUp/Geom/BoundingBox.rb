@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # Bounding boxes are three-dimensional boxes (eight corners), aligned with the
@@ -156,9 +156,7 @@ class Geom::BoundingBox
   def corner(corner_index)
   end
 
-  # The depth method is used to retrieve the depth of the bounding box.
-  #
-  # The depth is returned in the currently set units (inches, by default).
+  # The {#depth} method is used to retrieve the depth of the bounding box.
   #
   # @example
   #   boundingbox = Geom::BoundingBox.new
@@ -166,16 +164,14 @@ class Geom::BoundingBox
   #   # This will return a Length of 500.0.
   #   length = boundingbox.depth
   #
-  # @return [Length] the depth of the bounding box if successful
+  # @return [Length] the depth of the bounding box
   #
   # @version SketchUp 6.0
   def depth
   end
 
-  # The diagonal method is used to get the length of the diagonal of the
+  # The {#diagonal} method is used to get the length of the diagonal of the
   # bounding box.
-  #
-  # The diagonal is returned in the currently set units (inches, by default).
   #
   # @example
   #   boundingbox = Geom::BoundingBox.new
@@ -184,7 +180,7 @@ class Geom::BoundingBox
   #   length = boundingbox.diagonal
   #
   # @return [Length] the size of the diagonal for the bounding
-  #   box if successful
+  #   box
   #
   # @version SketchUp 6.0
   def diagonal
@@ -208,9 +204,7 @@ class Geom::BoundingBox
   def empty?
   end
 
-  # The height method is used to retrieve the height of the bounding box.
-  #
-  # The height is returned in the currently set units (inches, by default).
+  # The {#height} method is used to retrieve the height of the bounding box.
   #
   # @example
   #   boundingbox = Geom::BoundingBox.new
@@ -313,9 +307,7 @@ class Geom::BoundingBox
   def valid?
   end
 
-  # The width method is used to retrieve the width of the bounding box.
-  #
-  # The width is returned in the currently set units (inches, by default).
+  # The {#width} method is used to retrieve the width of the bounding box.
   #
   # @example
   #   boundingbox = Geom::BoundingBox.new

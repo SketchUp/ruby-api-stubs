@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Tools class contains methods to manipulate a collection of SketchUp
@@ -11,6 +11,18 @@
 class Sketchup::Tools
 
   # Instance Methods
+
+  # The {#active_tool} method is used to obtain the active Ruby tool.
+  #
+  # @example
+  #   tools = Sketchup.active_model.tools
+  #   tool = tools.current
+  #
+  # @return [Object, nil] Returns the active Ruby tool, or `nil` otherwise.
+  #
+  # @version SketchUp 2019
+  def active_tool
+  end
 
   # The active_tool_id method is used to retrieve the active tool's id.
   #
