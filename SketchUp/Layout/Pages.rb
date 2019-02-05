@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Pages class is a container class for all pages in a {Layout::Document}.

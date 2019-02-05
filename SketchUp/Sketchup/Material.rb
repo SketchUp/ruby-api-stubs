@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Material class represents a texture or color that can be applied to
@@ -266,12 +266,18 @@ class Sketchup::Material < Sketchup::Entity
   def name
   end
 
-  # Sets the name of the material.
+  # The {#name=} method sets the name of the material.
   #
-  # @example
+  # @example Safely change name without raising errors
   #   materials = Sketchup.active_model.materials
   #   material = materials.add("Joe")
-  #   material.name = 'Jeff'
+  #   material.name = materials.unique_name('Jeff')
+  #
+  # @note Since SketchUp 2018 this method will raise an `ArgumentError` if the
+  #   name is not unique.
+  #
+  # @note SketchUp 2018 would raise an error if you named material the name it
+  #   already had.
   #
   # @param [String] str
   #   the new material name
@@ -337,17 +343,17 @@ class Sketchup::Material < Sketchup::Entity
   #   @param filename [String] The file path to the texture the material should use.
   #   @return [String]
   #
-  # @overload texture=(image_rep)
-  #
-  #   @param [Sketchup::ImageRep] image_rep The pixel data representing the
-  #     texture. (Added in SketchUp 2018)
-  #   @return [Sketchup::ImageRep]
-  #
   # @overload texture=(properties)
   #
   #   @param properties [Array(String, Integer, Integer)] An array with the
   #     texture filename and optionally the width and height in model units.
   #   @return [Array(String, Integer, Integer)]
+  #
+  # @overload texture=(image_rep)
+  #
+  #   @param [Sketchup::ImageRep] image_rep The pixel data representing the
+  #     texture. (Added in SketchUp 2018)
+  #   @return [Sketchup::ImageRep]
   #
   # @version SketchUp 6.0
   def texture=(arg)

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Geom module defines a number of Module methods that let you perform
@@ -225,7 +225,7 @@ module Geom
   # @return [Boolean] +true+ if the point is inside the polygon.
   #
   # @version SketchUp 6.0
-  def self.point_in_polygon_2D(point, *polygon, check_border)
+  def self.point_in_polygon_2D(point, polygon, check_border)
   end
 
 end

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Point3d class allows you to work with a point in 3D space.
@@ -53,14 +53,14 @@ class Geom::Point3d
   # @param [Float] weight1
   #   A weight or percentage.
   #
-  # @param [Float] point2
-  #   The end point of the line.
+  # @param [Float] point1
+  #   The start point on the line.
   #
   # @param [Float] weight2
   #   A weight or percentage.
   #
-  # @param [Float] point1
-  #   The start point on the line.
+  # @param [Float] point2
+  #   The end point of the line.
   #
   # @return [Geom::Point3d]
   #
@@ -70,20 +70,31 @@ class Geom::Point3d
 
   # Instance Methods
 
-  # The '+' operator is a fast way to add to the current x, y and z values of
-  # a point, or to set the values of a point by adding to other points together.
+  # The {#+} operator is a fast way to add to the current x, y and z values of
+  # a vector.
   #
-  # @example
-  #   pt2 = pt + vec
-  #   pt = pt + [10,10,10]
+  # @example Using vector
+  #   point1 = Geom::Point3d.new(1, 2, 3)
+  #   vector = Geom::Vector3d.new(4, 5, 6)
+  #   point2 = point1 + vector
   #
-  # @param [Geom::Point3d] point2
-  #   A Point3d object.
+  # @example Using array
+  #   point1 = Geom::Point3d.new(1, 2, 3)
+  #   point2 = point1 + [10,10,10]
+  #
+  # @example Using point
+  #   point1 = Geom::Point3d.new(1, 2, 3)
+  #   point2 = Geom::Point3d.new(4, 5, 6)
+  #   # This works because SketchUp treats the array of tripple numerics as
+  #   # a vector in this case.
+  #   point3 = point1 + point2.to_a
+  #
+  # @param [Geom::Vector3d] vector
   #
   # @return [Geom::Point3d]
   #
   # @version SketchUp 6.0
-  def +(point2)
+  def +(vector)
   end
 
   # The '-' operator is a fast way to subtract from the current x, y and z values
@@ -296,9 +307,9 @@ class Geom::Point3d
   #   @param [Geom::Point3d] point3d
   #   @return [Geom::Point3d]
   #
-  # @overload initialize(vertex)
+  # @overload initialize(array3d)
   #
-  #   @param [Sketchup::Vertex] vertex
+  #   @param [Array(Numeric, Numeric, Numeric)] array3d
   #   @return [Geom::Point3d]
   #
   # @overload initialize(array2d)
@@ -311,9 +322,9 @@ class Geom::Point3d
   #   @param [Sketchup::InputPoint] input_point
   #   @return [Geom::Point3d]
   #
-  # @overload initialize(array3d)
+  # @overload initialize(vertex)
   #
-  #   @param [Array(Numeric, Numeric, Numeric)] array3d
+  #   @param [Sketchup::Vertex] vertex
   #   @return [Geom::Point3d]
   #
   # @version SketchUp 6.0
@@ -470,14 +481,14 @@ class Geom::Point3d
   #   @param [Numeric] z The z value for the point.
   #   @return [Geom::Point3d] The newly set Point3d object
   #
+  # @overload set!(array3d)
+  #
+  #   @param [Array(Numeric, Numeric, Numeric)] array3d
+  #   @return [Geom::Point3d]
+  #
   # @overload set!(point3d)
   #
   #   @param point3d [Geom::Point3d]
-  #   @return [Geom::Point3d]
-  #
-  # @overload set!(array3d)
-  #
-  #   @param array3d [Array(Numeric, Numeric, Numeric)]
   #   @return [Geom::Point3d]
   #
   # @version SketchUp 6.0

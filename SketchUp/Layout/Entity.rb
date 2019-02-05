@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # An entity is an object shown on a page of a LayOut document.
@@ -159,17 +159,17 @@ class Layout::Entity
   #
   # @param [Layout::Group] group
   #
-  # @raise [ArgumentError] if entity and group are not in the same
-  #   {Layout::Document}
-  #
   # @raise [LockedLayerError] if the {Layout::Entity} is on a locked
   #   {Layout::Layer}
   #
-  # @raise [LockedEntityError] if the {Layout::Entity} is locked
+  # @raise [ArgumentError] if entity and group are not in the same
+  #   {Layout::Document}
+  #
+  # @raise [ArgumentError] if entity and group are not on the same {Layout::Page}
   #
   # @raise [ArgumentError] if of entity and group one is shared and one is not
   #
-  # @raise [ArgumentError] if entity and group are not on the same {Layout::Page}
+  # @raise [LockedEntityError] if the {Layout::Entity} is locked
   #
   # @version LayOut 2018
   def move_to_group(group)
@@ -201,15 +201,15 @@ class Layout::Entity
   # @raise [ArgumentError] if layer is shared and a valid array of non-duplicate
   #   {Layout::Page}s is not passed in
   #
-  # @raise [LockedEntityError] if the {Layout::Entity} is locked
+  # @raise [ArgumentError] if entity, layer, and pages are not all in the same
+  #   {Layout::Document}
   #
   # @raise [LockedLayerError] if the {Layout::Entity} is on a locked
   #   {Layout::Layer}
   #
   # @raise [LockedLayerError] if layer is locked
   #
-  # @raise [ArgumentError] if entity, layer, and pages are not all in the same
-  #   {Layout::Document}
+  # @raise [LockedEntityError] if the {Layout::Entity} is locked
   #
   # @version LayOut 2018
   def move_to_layer(*args)
@@ -272,10 +272,10 @@ class Layout::Entity
   #
   # @param [Layout::Style] style
   #
-  # @raise [LockedEntityError] if the {Layout::Entity} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::Entity} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::Entity} is locked
   #
   # @version LayOut 2018
   def style=(style)
@@ -292,10 +292,10 @@ class Layout::Entity
   #
   # @param [Geom::Transformation2d] transformation
   #
-  # @raise [LockedEntityError] if the {Layout::Entity} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::Entity} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::Entity} is locked
   #
   # @version LayOut 2018
   def transform!(transformation)
@@ -349,12 +349,12 @@ class Layout::Entity
   # @raise [ArgumentError] if the {Layout::Entity} does not have an explicit
   #   {Geom::Transformation2d}
   #
-  # @raise [ArgumentError] if the bounds are of zero size
+  # @raise [LockedLayerError] if the {Layout::Entity} is on a locked
+  #   {Layout::Layer}
   #
   # @raise [LockedEntityError] if the {Layout::Entity} is locked
   #
-  # @raise [LockedLayerError] if the {Layout::Entity} is on a locked
-  #   {Layout::Layer}
+  # @raise [ArgumentError] if the bounds are of zero size
   #
   # @version LayOut 2018
   def untransformed_bounds=(bounds)

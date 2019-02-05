@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Console class is used by SketchUp to direct $stdout and $stderr to the
@@ -13,16 +13,16 @@
 # not produce any output.
 #
 # @example
-#   t = Thread.new { puts 'This will not be written to the console.' }
-#   t.join
-#
-# @example
 #   # By default $stdout is directed to SKETCHUP_CONSOLE.
 #   p $stdout
 #
 #   # $stdout can however be redirected so the safe way to access the
 #   # SketchUp console is by using the SKETCHUP_CONSOLE constant.
 #   p SKETCHUP_CONSOLE
+#
+# @example
+#   t = Thread.new { puts 'This will not be written to the console.' }
+#   t.join
 #
 # @version SketchUp 2014
 class Sketchup::Console

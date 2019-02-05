@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Sketchup module contains a number of important utility methods for use in
@@ -380,14 +380,14 @@ module Sketchup
   def self.get_datfile_info(key, default_value)
   end
 
-  # The get_i18ndatfile_info method is used to retrieve the value for the
+  # The {.get_i18n_datfile_info} method is used to retrieve the value for the
   # given key from the internationalization file that SketchUp uses to work
   # in multiple languages.
   #
-  # If the key is not found, default_value is returned.
+  # If the +key+ is not found, +default_value+ is returned.
   #
   # @example
-  #   value = Sketchup.get_i18ndatfile_info(key, default_value)
+  #   value = Sketchup.get_i18n_datfile_info(key, default_value)
   #
   # @param [String] key
   #   The key whose value you want to retrieve.
@@ -396,7 +396,7 @@ module Sketchup
   #   The default value you want returned if key is not
   #   available.
   #
-  # @return [String] a string value if successful.
+  # @return [String]
   #
   # @version SketchUp 6.0
   def self.get_i18n_datfile_info(key, default_value)
@@ -716,11 +716,11 @@ module Sketchup
   # @param [String] section
   #   A section in an .INI or registry.
   #
-  # @param [Object] default
-  #   A default value if the value is not found.
-  #
   # @param [String] variable
   #   A variable within the section.
+  #
+  # @param [Object] default
+  #   A default value if the value is not found.
   #
   # @return [Object, nil] if unsuccessful, the value of the default
   #   if successful.
@@ -1050,7 +1050,7 @@ module Sketchup
   def self.send_action(action)
   end
 
-  # The {#send_to_layout} method is used to open a file in LayOut.
+  # The {.send_to_layout} method is used to open a file in LayOut.
   #
   # @example
   #   result = Sketchup.send_to_layout("C:/models/hexaflexagon.layout")
@@ -1272,11 +1272,11 @@ module Sketchup
   #   A section in a .plist file (Mac) or the registry
   #   (Windows).
   #
-  # @param [Object] value
-  #   The value to store.
-  #
   # @param [String] key
   #   A key within the section.
+  #
+  # @param [Object] value
+  #   The value to store.
   #
   # @return [Boolean] True if successful, false if unsuccessful.
   #

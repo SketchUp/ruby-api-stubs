@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The DimensionLinear class represents linear dimensions.
@@ -108,6 +108,46 @@ class Sketchup::DimensionLinear < Sketchup::Dimension
   def end=(pt_or_entity)
   end
 
+  # The {#end_attached_to} method will return the attached end point via an array
+  # containing the {Sketchup::InstancePath} and {Geom::Point3d}.
+  #
+  # @example
+  #   # Assuming you have a valid dimension selected that is attached to a
+  #   # component instance
+  #   dim = Sketchup.active_model.selection[0]
+  #   dim.end_attached_to
+  #
+  # @return [Array(Sketchup::InstancePath, Geom::Point3d), nil]
+  #
+  # @version SketchUp 2019
+  def end_attached_to
+  end
+
+  # The {#end_attached_to=} method will attach the ending point to the
+  # {Sketchup::InstancePath} and {Geom::Point3d}.
+  #
+  # @example
+  #   # Assuming you have a valid dimension selected that is attached to a
+  #   # component instance
+  #   dim = Sketchup.active_model.selection[0]
+  #   # get the path (instance_path, point)
+  #   path = dim.end_attached_to
+  #   instance_path = path[0]
+  #   instance = instance_path.to_a[0]
+  #   point1 = Geom::Point3d.new(0, 0, 0)
+  #   point2 = Geom::Point3d.new(20, 20, 20)
+  #   instance.definition.entities.add_edges(point1, point2)
+  #   edge = instance.definition.entities.grep(Sketchup::Edge).first
+  #   new_instance_path = Sketchup::InstancePath.new([instance, edge])
+  #   point2 = point2.transform(new_instance_path.transformation.inverse)
+  #   dim.end_attached_to = [new_instance_path, point2]
+  #
+  # @param [Array(Sketchup::InstancePath, Geom::Point3d)] path
+  #
+  # @version SketchUp 2019
+  def end_attached_to=(path)
+  end
+
   # The offset_vector method returns the parallel offset vector from the
   # reference line to the dimension line measured from the 'start' reference
   # point.
@@ -187,6 +227,46 @@ class Sketchup::DimensionLinear < Sketchup::Dimension
   #
   # @version SketchUp 2014
   def start=(pt_or_entity)
+  end
+
+  # The {#start_attached_to} method will return the attached start point via an
+  # array containing the {Sketchup::InstancePath} and {Geom::Point3d}.
+  #
+  # @example
+  #   # Assuming you have a valid dimension selected that is attached to a
+  #   # component instance
+  #   dim = Sketchup.active_model.selection[0]
+  #   dim.start_attached_to
+  #
+  # @return [Array(Sketchup::InstancePath, Geom::Point3d), nil]
+  #
+  # @version SketchUp 2019
+  def start_attached_to
+  end
+
+  # The {#start_attached_to=} method will attach the starting point to the
+  # {Sketchup::InstancePath} and {Geom::Point3d}.
+  #
+  # @example
+  #   # Assuming you have a valid dimension selected that is attached to a
+  #   # component instance
+  #   dim = Sketchup.active_model.selection[0]
+  #   # get the path (instance_path, point)
+  #   path = dim.start_attached_to
+  #   instance_path = path[0]
+  #   instance = instance_path.to_a[0]
+  #   point1 = Geom::Point3d.new(0, 0, 0)
+  #   point2 = Geom::Point3d.new(20, 20, 20)
+  #   instance.definition.entities.add_edges(point1, point2)
+  #   edge = instance.definition.entities.grep(Sketchup::Edge).first
+  #   new_instance_path = Sketchup::InstancePath.new([instance, edge])
+  #   point2 = point2.transform(new_instance_path.transformation.inverse)
+  #   dim.start_attached_to = [new_instance_path, point2]
+  #
+  # @param [Array(Sketchup::InstancePath, Geom::Point3d)] path
+  #
+  # @version SketchUp 2019
+  def start_attached_to=(path)
   end
 
   # The text_position method returns the position of the text along the dimension

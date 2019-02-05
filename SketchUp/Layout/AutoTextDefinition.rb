@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # References an auto text definition. Some auto text definitions are mandatory.
@@ -273,10 +273,10 @@ class Layout::AutoTextDefinition
   #
   # @raise [ArgumentError] if the {Layout::AutoTextDefinition} is a mandatory type
   #
-  # @raise [ArgumentError] if name is an empty string
-  #
   # @raise [ArgumentError] if name matches an existing
   #   {Layout::AutoTextDefinition}
+  #
+  # @raise [ArgumentError] if name is an empty string
   #
   # @version LayOut 2018
   def name=(name)
@@ -325,10 +325,10 @@ class Layout::AutoTextDefinition
   #
   # @param [Integer] number_style
   #
-  # @raise [ArgumentError] if number_style is not a valid page numbering style
-  #
   # @raise [ArgumentError] if the {Layout::AutoTextDefinition}'s type is not
   #   +Layout::AutoTextDefinition::TYPE_PAGE_NUMBER+.
+  #
+  # @raise [ArgumentError] if number_style is not a valid page numbering style
   #
   # @version LayOut 2018
   def page_number_style=(number_style)

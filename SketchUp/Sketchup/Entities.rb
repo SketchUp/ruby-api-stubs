@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Entities class is a container class for all entities in a model (it is a
@@ -76,12 +76,6 @@ class Sketchup::Entities
   #   success = entities.add_3d_text('test', TextAlignLeft, "Arial",
   #     true, false, 1.0, 0.0, 0.5, true, 5.0)
   #
-  # @param [Boolean] is_bold
-  #   true for bold.
-  #
-  # @param [Numeric] extrusion
-  #   Extrusion depth in inches.
-  #
   # @param [String] string
   #   The text to create.
   #
@@ -93,11 +87,11 @@ class Sketchup::Entities
   # @param [String] font
   #   font name.
   #
-  # @param [Boolean] is_filled
-  #   true for filled, which will put a face between the edges of the letters.
+  # @param [Boolean] is_bold
+  #   true for bold.
   #
-  # @param [Numeric] z
-  #   z position in inches.
+  # @param [Boolean] is_italic
+  #   true for italic.
   #
   # @param [Numeric] letter_height
   #   Height of the text in inches.
@@ -106,8 +100,14 @@ class Sketchup::Entities
   #   Tolerance of the curve creation. Defaults to
   #   0.0, which creates the highest possible curve quality.
   #
-  # @param [Boolean] is_italic
-  #   true for italic.
+  # @param [Numeric] z
+  #   z position in inches.
+  #
+  # @param [Boolean] is_filled
+  #   true for filled, which will put a face between the edges of the letters.
+  #
+  # @param [Numeric] extrusion
+  #   Extrusion depth in inches.
   #
   # @return [Boolean] true if successful
   #
@@ -167,14 +167,14 @@ class Sketchup::Entities
   # @param [Geom::Point3d] center
   #   A Point3d object representing the center.
   #
-  # @param [Integer] numsegs
-  #   The number of segments.
+  # @param [Geom::Vector3d] normal
+  #   A Vector3d object representing normal for the arc.
   #
   # @param [Numeric] radius
   #   The radius of the arc.
   #
-  # @param [Geom::Vector3d] normal
-  #   A Vector3d object representing normal for the arc.
+  # @param [Integer] numsegs
+  #   The number of segments.
   #
   # @return [Array<Sketchup::Edge>] an Array object containing edges if successful
   #
@@ -182,7 +182,8 @@ class Sketchup::Entities
   def add_circle(center, normal, radius, numsegs = 24)
   end
 
-  # The add_cline method is used to create a construction line.
+  # The {#add_cline} method is used to create a construction line. This can be
+  # finite or infinite.
   #
   # @example
   #   model = Sketchup.active_model
@@ -191,31 +192,23 @@ class Sketchup::Entities
   #   point2 = Geom::Point3d.new(20, 20, 20)
   #   cline = entities.add_cline(point1, point2)
   #
-  # @overload add_cline(start_point, end_point)
+  # @overload add_cline(start_point, end_point, stipple = '-')
   #
+  #   Creates a finite construction line.
   #   @param [Geom::Point3d] start_point
-  #     A Point3d object where the line will start.
   #   @param [Geom::Point3d] end_point
-  #     If a Vector3d, then an infinite line passing through
-  #     the start_point will be created in that direction. If a
-  #     Point3d, then a finite line will be created between the
-  #     two points.
+  #   @param [String] stipple  See {ConstructionLine#stipple=} for acceptable
+  #     patterns.
   #
-  # @overload add_cline(start_point, end_point, stipple)
+  # @overload add_cline(point, vector, stipple = '-')
   #
-  #   @param [Geom::Point3d] start_point
-  #     A Point3d object where the line will start.
-  #   @param [Geom::Point3d] end_point
-  #     If a Vector3d, then an infinite line passing through
-  #     the start_point will be created in that direction. If a
-  #     Point3d, then a finite line will be created between the
-  #     two points.
-  #   @param [String] stipple
-  #     Stipple pattern. See ConstructionLine.stipple
-  #     for acceptable patterns.
+  #   Creates an infinite construction line.
+  #   @param [Geom::Point3d] point
+  #   @param [Geom::Point3d] vector
+  #   @param [String] stipple  See {ConstructionLine#stipple=} for acceptable
+  #     patterns.
   #
-  # @return [Sketchup::ConstructionLine] a ConstructionLine object if
-  #   successful
+  # @return [Sketchup::ConstructionLine]
   #
   # @version SketchUp 6.0
   def add_cline(*args)
@@ -264,7 +257,7 @@ class Sketchup::Entities
   def add_curve(*pts_or_array)
   end
 
-  # The add_dimension_linear method adds a linear dimension to the entities.
+  # The {#add_dimension_linear} method adds a linear dimension to the entities.
   #
   # @example
   #   entities = Sketchup.active_model.entities
@@ -284,25 +277,71 @@ class Sketchup::Entities
   #   # alternatively, the start params could be passed in separately
   #   dim = entities.add_dimension_linear edge, mp, cp, [20, 0, 0]
   #
-  # @param [Geom::Point3d, Sketchup::Entity] start_pt_or_entity
-  #   the reference point and/or entity at the start of
-  #   the dimension. This parameter can take several
-  #   forms:
+  # @example Instance path
+  #   instance = Sketchup.active_model.active_entities.grep(Sketchup::ComponentInstance).first
+  #   edge = instance.definition.entities.grep(Sketchup::Edge).first
+  #   instance_path = Sketchup::InstancePath.new([instance, edge])
+  #   start_point = edge.start.position
+  #   end_point = edge.end.position
+  #   vector = Geom::Vector3d.new(30, 30, 0)
+  #   Sketchup.active_model.entities.add_dimension_linear([instance_path, start_point], [instance_path, end_point], vector)
   #
-  # @param [Geom::Vector3d] offset_vector
-  #   the parallel offset vector from the reference line
-  #   to the dimension line measured from the 'start'
-  #   reference point.
+  # @example Instance path as an array
+  #   instance = Sketchup.active_model.active_entities.grep(Sketchup::ComponentInstance).first
+  #   edge = instance.definition.entities.grep(Sketchup::Edge).first
+  #   path = [instance, edge]
+  #   start_point = edge.start.position
+  #   end_point = edge.end.position
+  #   vector = Geom::Vector3d.new(30, 30, 0)
+  #   Sketchup.active_model.entities.add_dimension_linear([path, start_point], [path, end_point], vector)
   #
-  # @param [Geom::Point3d, Sketchup::Entity] end_pt_or_entity
-  #   the reference point and/or entity at the end
-  #   of the dimension. This parameter takes the exact
-  #   same forms as 'start_pt_or_entity'.
+  # @overload add_dimension_linear(start_pt_or_entity, end_pt_or_entity, offset_vector)
+  #
+  #   @param [Geom::Point3d, Sketchup::Entity] start_pt_or_entity
+  #     the reference point and/or entity at the start of
+  #     the dimension. This parameter can take several
+  #     forms:
+  #   @param [Geom::Point3d, Sketchup::Entity] end_pt_or_entity
+  #     the reference point and/or entity at the end
+  #     of the dimension. This parameter takes the exact
+  #     same forms as 'start_pt_or_entity'.
+  #   @param [Geom::Vector3d] offset_vector
+  #     the parallel offset vector from the reference line
+  #     to the dimension line measured from the 'start'
+  #     reference point.
+  #
+  # @overload add_dimension_linear(start_instance_path, end_instance_path, offset_vector)
+  #
+  #   @note Added in SketchUp 2019.
+  #   @param [Array<Sketchup::InstancePath, Geom::Point3d>] start_instance_path An array
+  #     containing a {Sketchup::InstancePath} and a {Geom::Point3d}.
+  #   @param [Array<Sketchup::InstancePath, Geom::Point3d>] end_instance_path An array
+  #     containing a {Sketchup::InstancePath} and a {Geom::Point3d}.
+  #   @param [Geom::Vector3d] offset_vector The parallel offset vector from the
+  #     reference line to the dimension line measured from the start reference
+  #     point.
+  #
+  # @overload add_dimension_linear(start_array, end_array, offset_vector)
+  #
+  #   @note Added in SketchUp 2019.
+  #   @param [Array(Array<Entity>, Geom::Point3d)] start_array
+  #     The {Array<Entity>} must contain one or more {Sketchup::ComponentInstance}'s
+  #     and a leaf entity. The leaf entity can be a {Sketchup::Vertex},
+  #     {Sketchup::ConstructionPoint}, {Sketchup::ConstructionLine}, or
+  #     {Sketchup::Edge}. The {Geom::Point3d} is the point associated with the leaf entity.
+  #   @param [Array(Array<Entity>, Geom::Point3d)] end_array
+  #     The {Array<Entity>} must contain one or more {Sketchup::ComponentInstance}'s
+  #     and a leaf entity. The leaf entity can be a {Sketchup::Vertex},
+  #     {Sketchup::ConstructionPoint}, {Sketchup::ConstructionLine}, or
+  #     {Sketchup::Edge}. The {Geom::Point3d} is the point associated with the leaf entity.
+  #   @param [Geom::Vector3d] offset_vector The parallel offset vector from the
+  #     reference line to the dimension line measured form the start reference
+  #     point.
   #
   # @return [Sketchup::DimensionLinear] the created dimension
   #
   # @version SketchUp 2014
-  def add_dimension_linear(start_pt_or_entity, end_pt_or_entity, offset_vector)
+  def add_dimension_linear(*args)
   end
 
   # The add_dimension_radial method adds a radial dimension (i.e arc/circle
@@ -334,10 +373,6 @@ class Sketchup::Entities
   # The {#add_edges} method is used to add a set of connected edges to the
   # {Sketchup::Entities} collection.
   #
-  # * @overload add_edges(points)
-  #   @param [Array<Geom::Point3d>] points
-  #   @return [Array<Sketchup::Edge>]
-  #
   # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
@@ -349,14 +384,20 @@ class Sketchup::Entities
   #   merge. If you intend to create a face from the edges, use {#add_face}
   #   directly.
   #
-  # @param [Array<Geom::Point3d>] points
+  # @overload add_edges(points)
+  #
+  #   @param [Array<Geom::Point3d>] points At least two points required.
+  #   @return [Array<Sketchup::Edge>]
+  #
+  # @overload add_edges(*points)
+  #
+  #   @param [Array<Geom::Point3d>] points At least two points required.
+  #   @return [Array<Sketchup::Edge>]
   #
   # @return [Array<Sketchup::Edge>] an array of Edge objects if successful
   #
-  # @return [Array<Sketchup::Edge>]
-  #
   # @version SketchUp 6.0
-  def add_edges(point1, point2, ...)
+  def add_edges(*args)
   end
 
   # The add_face method is used to create a face. You can call this method a
@@ -433,11 +474,11 @@ class Sketchup::Entities
   # @param [Integer] smooth_flags
   #   flags for softening and smoothing of edges.
   #
-  # @param [Sketchup::Material, String] b_material
-  #   material to paint back faces with.
-  #
   # @param [Sketchup::Material, String] f_material
   #   material to paint front faces with.
+  #
+  # @param [Sketchup::Material, String] b_material
+  #   material to paint back faces with.
   #
   # @return [Integer] Number of faces created
   #
@@ -491,16 +532,16 @@ class Sketchup::Entities
   # @param [String] filename
   #   A filename for the image file.
   #
-  # @param [Numeric] height
-  #   height for the image if you want to control
-  #   width and height independently.
+  # @param [Geom::Point3d] point
+  #   A Point3d object representing the insertion point of
+  #   the image.
   #
   # @param [Numeric] width
   #   Width for the image.
   #
-  # @param [Geom::Point3d] point
-  #   A Point3d object representing the insertion point of
-  #   the image.
+  # @param [Numeric] height
+  #   height for the image if you want to control
+  #   width and height independently.
   #
   # @return [Sketchup::Image] an Image object if successful.
   #
@@ -584,14 +625,14 @@ class Sketchup::Entities
   # @param [Geom::Point3d] center
   #   A Point3d object representing the center of the polygon.
   #
-  # @param [Integer] numsides
-  #   The number of sides for the polygon.
+  # @param [Geom::Vector3d] normal
+  #   A Vector3d object.
   #
   # @param [Numeric] radius
   #   A radius.
   #
-  # @param [Geom::Vector3d] normal
-  #   A Vector3d object.
+  # @param [Integer] numsides
+  #   The number of sides for the polygon.
   #
   # @return [Array<Sketchup::Edge>] an array of Edges that make up the polygon if
   #   successful
@@ -638,7 +679,7 @@ class Sketchup::Entities
   def add_section_plane(plane)
   end
 
-  # The add_text method adds a note or label text entity to the entities
+  # The {#add_text} method adds a note or label text entity to the entities
   #
   # @example
   #   coordinates = [10, 10, 10]
@@ -647,19 +688,53 @@ class Sketchup::Entities
   #   point = Geom::Point3d.new coordinates
   #   text = entities.add_text "This is a Test", point
   #
-  # @param [String] text
-  #   The text string to add.
+  # @example Instance path
+  #   instance = Sketchup.active_model.active_entities.grep(Sketchup::ComponentInstance).first
+  #   edge = instance.definition.entities.grep(Sketchup::Edge).first
+  #   instance_path = Sketchup::InstancePath.new([instance, edge])
+  #   point = edge.start.position
+  #   vector = Geom::Vector3d.new(30, 30, 0)
+  #   Sketchup.active_model.entities.add_text("mytext", [instance_path, point], vector)
   #
-  # @param [Geom::Vector3d] vector
-  #   vector representing an arrow leader.
+  # @example Instance path as an array
+  #   instance = Sketchup.active_model.active_entities.grep(Sketchup::ComponentInstance).first
+  #   edge = instance.definition.entities.grep(Sketchup::Edge).first
+  #   path = [instance, edge]
+  #   point = edge.start.position
+  #   vector = Geom::Vector3d.new(30, 30, 0)
+  #   Sketchup.active_model.entities.add_text("mytext", [path, point], vector)
   #
-  # @param [Geom::Point3d] point
-  #   A Point3d object representing the insertion point.
+  # @overload add_text(text, point, vector)
+  #
+  #   @param [String] text The text string to add.
+  #   @param [Geom::Point3d] point A Point3d object representing the insertion
+  #     point.
+  #   @param [Geom::Vector3d] vector The Vector representing an arrow leader.
+  #
+  # @overload add_text(text, instance_path_and_pt, vector)
+  #
+  #   @note Added in SketchUp 2019.
+  #   @param [String] text The text to add.
+  #   @param [Array<Sketchup::InstancePath, Geom::Point3d>] instance_path_and_pt
+  #     The array containing a {Sketchup::InstancePath} and a {Geom::Point3d}.
+  #   @param [Geom::Vector3d] vector The vector representing an arrow leader.
+  #
+  # @overload add_text(text, instance_array_and_pt, vector)
+  #
+  #   @note Added in SketchUp 2019.
+  #   @param [String] text The text to add.
+  #   @param [Array(Array<Sketchup::Entity>, Geom::Point3d)] instance_array_with_pt
+  #     The array containing one or more {Sketchup::ComponentInstance}'s and a
+  #     leaf entity. The leaf entity can be a {Sketchup::Vertex},
+  #     {Sketchup::ConstructionPoint}, {Sketchup::ConstructionLine}, or
+  #     {Sketchup::Edge}. The {Geom::Point3d} is the point associated with the
+  #     leaf entity.
+  #   @param [Geom::Vector3d] vector The vector representing an arrow leader.
   #
   # @return [Sketchup::Text] a Text object if successful
   #
   # @version SketchUp 6.0
-  def add_text(text, point, vector = [0,0,0])
+  def add_text(*args)
   end
 
   # The {#at} method is an alias for {#[]}.
@@ -803,21 +878,21 @@ class Sketchup::Entities
   #   smooth_flags = Geom::PolygonMesh::HIDE_BASED_ON_INDEX
   #   group.entities.fill_from_mesh(pm, true, smooth_flags, material)
   #
-  # @param weld_vertices [Boolean]
+  # @param [Geom::PolygonMesh] polygon_mesh
+  #
+  # @param [Boolean] weld_vertices
   #   This argument has no effect and is kept for
   #   compatibility reasons. Points are always
   #   merged.
   #
-  # @param [Sketchup::Material, String] b_material
-  #   material to paint back faces with.
-  #
-  # @param [Geom::PolygonMesh] polygon_mesh
+  # @param [Integer] smooth_flags
+  #   flags for softening and smoothing of edges.
   #
   # @param [Sketchup::Material, String] f_material
   #   material to paint front faces with.
   #
-  # @param [Integer] smooth_flags
-  #   flags for softening and smoothing of edges.
+  # @param [Sketchup::Material, String] b_material
+  #   material to paint back faces with.
   #
   # @return [Boolean]
   #
@@ -832,27 +907,27 @@ class Sketchup::Entities
   #   entities.intersect_with recurse, transformation1, entities1,
   #     transformation2, hidden, entities2
   #
-  # @param [Geom::Transformation] transform1
-  #   The transformation for this entities object.
-  #
-  # @param [Sketchup::Entity, Array<Sketchup::Entity>] entities2
-  #   A single entity, or an array of entities.
-  #
   # @param [Boolean] recurse
   #   true if you want this entities object to be recursed
   #   (intersection lines will be put inside of groups and
   #   components within this entities object).
   #
-  # @param [Boolean] hidden
-  #   true if you want hidden geometry in this entities
-  #   object to be used in the intersection.
-  #
-  # @param [Geom::Transformation] transform2
-  #   The transformation for entities1.
+  # @param [Geom::Transformation] transform1
+  #   The transformation for this entities object.
   #
   # @param [Sketchup::Entities] entities1
   #   The entities object where you want the intersection
   #   lines to appear.
+  #
+  # @param [Geom::Transformation] transform2
+  #   The transformation for entities1.
+  #
+  # @param [Boolean] hidden
+  #   true if you want hidden geometry in this entities
+  #   object to be used in the intersection.
+  #
+  # @param [Sketchup::Entity, Array<Sketchup::Entity>] entities2
+  #   A single entity, or an array of entities.
   #
   # @return [nil]
   #

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Sketchup::ComponentDefinition} class is used to define the contents for
@@ -540,10 +540,10 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   # @raise [NotImplementedError] when trying to set the value of "choice"
   #   attributes.
   #
+  # @raise [RuntimeError] if the attributes being set are corrupt.
+  #
   # @raise [TypeError] when trying to set a value that is not valid for the
   #   attribute.
-  #
-  # @raise [RuntimeError] if the attributes being set are corrupt.
   #
   # @return [Boolean] true if the path was valid, false otherwise.
   #

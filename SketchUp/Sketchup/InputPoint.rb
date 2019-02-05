@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The InputPoint used to pick entities that reside under the current cursor
@@ -218,6 +218,10 @@ class Sketchup::InputPoint
   #   starting_point = Geom::Point3d.new(100, 200, 300)
   #   ip2 = Sketchup::InputPoint.new(starting_point)
   #
+  # @note Prior to SketchUp 2019 it was not possible to
+  #   sub-class {Sketchup::InputPoint} due to a bug in how SketchUp initialized
+  #   the class.
+  #
   # @param pt_or_vertex
   #   An optional Point3d or Vertex where the new InputPoint
   #   should be created.
@@ -276,12 +280,12 @@ class Sketchup::InputPoint
   # @param x
   #   A x value.
   #
+  # @param y
+  #   A y value.
+  #
   # @param [optional] inputpoint
   #   A second input point used as a reference
   #   for the pick.
-  #
-  # @param y
-  #   A y value.
   #
   # @return status - true if a valid InputPoint was picked and it
   #   is different than it was before.

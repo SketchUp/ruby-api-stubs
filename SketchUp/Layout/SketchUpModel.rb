@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A SketchUp Model entity. This is an instance of a SketchUp Model that is
@@ -18,10 +18,10 @@ class Layout::SketchUpModel < Layout::Entity
 
   # Constants
 
+  BACK_VIEW = nil # Stub value.
+
   BOTTOM_RELATIVE_VIEW = nil # Stub value.
   BOTTOM_VIEW = nil # Stub value.
-
-  BACK_VIEW = nil # Stub value.
 
   CUSTOM_VIEW = nil # Stub value.
 
@@ -33,9 +33,9 @@ class Layout::SketchUpModel < Layout::Entity
 
   LEFT_VIEW = nil # Stub value.
 
-  RIGHT_VIEW = nil # Stub value.
-
   RASTER_RENDER = nil # Stub value.
+
+  RIGHT_VIEW = nil # Stub value.
 
   TOP_RELATIVE_VIEW = nil # Stub value.
   TOP_VIEW = nil # Stub value.
@@ -73,13 +73,13 @@ class Layout::SketchUpModel < Layout::Entity
   #
   # @raise [ArgumentError] if clip_mask is already in a {Layout::Document}
   #
-  # @raise [LockedEntityError] if the {Layout::SketchUpModel} is locked
+  # @raise [ArgumentError] if clip_mask is not a {Layout::Rectangle},
+  #   {Layout::Ellipse}, or {Layout::Path}
   #
   # @raise [LockedLayerError] if the {Layout::SketchUpModel} is on a locked
   #   {Layout::Layer}
   #
-  # @raise [ArgumentError] if clip_mask is not a {Layout::Rectangle},
-  #   {Layout::Ellipse}, or {Layout::Path}
+  # @raise [LockedEntityError] if the {Layout::SketchUpModel} is locked
   #
   # @version LayOut 2018
   def clip_mask=(clip_mask)
@@ -113,10 +113,10 @@ class Layout::SketchUpModel < Layout::Entity
   #
   # @raise [IndexError] if index is out of range
   #
-  # @raise [LockedEntityError] if the {Layout::SketchUpModel} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::SketchUpModel} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::SketchUpModel} is locked
   #
   # @version LayOut 2018
   def current_scene=(index)
@@ -140,6 +140,41 @@ class Layout::SketchUpModel < Layout::Entity
   def current_scene_modified?
   end
 
+  # The {#dash_scale} method returns the dash scale for the
+  # {Layout::SketchUpModel}. A scale value of 0.0 means the dashes are scaled
+  # based on the line weight.
+  #
+  # @example
+  #   bounds = Geom::Bounds2d.new(1, 1, 3, 3)
+  #   model = Layout::SketchUpModel.new("C:/Path/to/model.skp", bounds)
+  #   dash_scale = model.dash_scale
+  #
+  # @return [Float]
+  #
+  # @version LayOut 2019
+  def dash_scale
+  end
+
+  # The {#dash_scale=} method sets the dash scale for the {Layout::SketchUpModel}.
+  # A scale value of 0.0 or lower will "auto" scale the dashes based on the line
+  # weight.
+  #
+  # @example
+  #   bounds = Geom::Bounds2d.new(1, 1, 3, 3)
+  #   model = Layout::SketchUpModel.new("C:/Path/to/model.skp", bounds)
+  #   model.dash_scale = 2.5
+  #
+  # @param [Float] dash_scale
+  #
+  # @raise [LockedLayerError] if the {Layout::SketchUpModel} is on a locked
+  #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::SketchUpModel} is locked
+  #
+  # @version LayOut 2018
+  def dash_scale=(dash_scale)
+  end
+
   # The {#display_background=} method sets whether the background is displayed
   # for the {Layout::SketchUpModel}.
   #
@@ -150,10 +185,10 @@ class Layout::SketchUpModel < Layout::Entity
   #
   # @param [Boolean] display
   #
-  # @raise [LockedEntityError] if the {Layout::SketchUpModel} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::SketchUpModel} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::SketchUpModel} is locked
   #
   # @version LayOut 2018
   def display_background=(display)
@@ -203,9 +238,9 @@ class Layout::SketchUpModel < Layout::Entity
   #
   # @param [Geom::Bounds2d] bounds
   #
-  # @raise [ArgumentError] if bounds is zero size
-  #
   # @raise [ArgumentError] if path does not point to a valid SketchUp Model file
+  #
+  # @raise [ArgumentError] if bounds is zero size
   #
   # @return [Layout::SketchUpModel]
   #
@@ -239,10 +274,10 @@ class Layout::SketchUpModel < Layout::Entity
   #
   # @raise [ArgumentError] if line_weight is less than 0.01
   #
-  # @raise [LockedEntityError] if the {Layout::SketchUpModel} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::SketchUpModel} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::SketchUpModel} is locked
   #
   # @version LayOut 2018
   def line_weight=(line_weight)
@@ -275,10 +310,10 @@ class Layout::SketchUpModel < Layout::Entity
   #
   # @param [Boolean] perspective
   #
-  # @raise [LockedEntityError] if the {Layout::SketchUpModel} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::SketchUpModel} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::SketchUpModel} is locked
   #
   # @version LayOut 2018
   def perspective=(perspective)
@@ -310,10 +345,10 @@ class Layout::SketchUpModel < Layout::Entity
   #
   # @param [Boolean] preserve_scale
   #
-  # @raise [LockedEntityError] if the {Layout::SketchUpModel} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::SketchUpModel} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::SketchUpModel} is locked
   #
   # @version LayOut 2018
   def preserve_scale_on_resize=(preserve_scale)
@@ -387,10 +422,10 @@ class Layout::SketchUpModel < Layout::Entity
   #
   # @raise [ArgumentError] if render_mode is not a valid render mode
   #
-  # @raise [LockedEntityError] if the {Layout::SketchUpModel} is locked
-  #
   # @raise [LockedLayertError] if the {Layout::SketchUpModel} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::SketchUpModel} is locked
   #
   # @version LayOut 2018
   def render_mode=(render_mode)
@@ -437,12 +472,12 @@ class Layout::SketchUpModel < Layout::Entity
   #
   # @raise [ArgumentError] if the {Layout::SketchUpModel} view is not orthographic
   #
-  # @raise [LockedEntityError] if the {Layout::SketchUpModel} is locked
+  # @raise [ArgumentError] if scale is less than 0.0000001
   #
   # @raise [LockedLayerError] if the {Layout::SketchUpModel} is on a locked
   #   {Layout::Layer}
   #
-  # @raise [ArgumentError] if scale is less than 0.0000001
+  # @raise [LockedEntityError] if the {Layout::SketchUpModel} is locked
   #
   # @version LayOut 2018
   def scale=(scale)
@@ -510,10 +545,10 @@ class Layout::SketchUpModel < Layout::Entity
   #
   # @raise [ArgumentError] if view is not a valid standard view
   #
-  # @raise [LockedEntityError] if the {Layout::SketchUpModel} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::SketchUpModel} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::SketchUpModel} is locked
   #
   # @version LayOut 2018
   def view=(view)

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Text class contains method to manipulate a Text entity object.
@@ -41,6 +41,33 @@ class Sketchup::Text < Sketchup::Drawingelement
   #
   # @version SketchUp 6.0
   def arrow_type=(type)
+  end
+
+  # The {#attached_to} method returns an array of the attached
+  # {Sketchup::InstancePath} object and the {Geom::Point3d}.
+  #
+  # @example
+  #   # Have a text annotation attached to a drawing element and selected
+  #   Sketchup.active_model.selection[0].attached_to
+  #
+  # @return [Array(Sketchup::InstancePath, Geom::Point3d), nil]
+  #
+  # @version SketchUp 2019
+  def attached_to
+  end
+
+  # The {#attached_to=} method will attach the {Sketchup::Text} to another
+  # {Sketchup::DrawingElement}.
+  #
+  # @example
+  #   # Have a text annotation attached to a drawing element and selected
+  #   array = Sketchup.active_model.selection[0].attached_to
+  #   Sketchup.active_model.selection[0].attached_to = [array[0], Geom::Point3d.new(0, 0, 0)]
+  #
+  # @param [Array(Sketchup::InstancePath, Geom::Point3d)] path
+  #
+  # @version SketchUp 2019
+  def attached_to=(path)
   end
 
   # The display_leader= method accepts true or false for whether to display the

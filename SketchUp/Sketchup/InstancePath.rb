@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Sketchup::InstancePath} class represent the instance path to a given
@@ -42,11 +42,11 @@ class Sketchup::InstancePath
   #
   # @param [Integer] index
   #
-  # @raise [TypeError] if the instance path refer to deleted entities.
+  # @raise [IndexError] if the given index is out of bounds
   #
   # @raise [TypeError] if the index is not of integer type
   #
-  # @raise [IndexError] if the given index is out of bounds
+  # @raise [TypeError] if the instance path refer to deleted entities.
   #
   # @return [Sketchup::Entity]
   #
@@ -251,9 +251,6 @@ class Sketchup::InstancePath
   def to_a
   end
 
-  # overload transformation
-  #   @return [Sketchup::Transformation] the combined transformation up to the
-  #     the leaf entity.
   #
   # @example
   #   model = Sketchup.active_model
@@ -262,19 +259,25 @@ class Sketchup::InstancePath
   #   path = Sketchup::InstancePath.new([group, edge])
   #   tr = path.transformation
   #
-  # @param [Integer] index
+  # @overload transformation
   #
-  # @raise [TypeError] if the index is not of integer type
+  #   @return [Geom::Transformation] the combined transformation up to the
+  #     the leaf entity.
+  #
+  # @overload transformation(index)
+  #
+  #   @param [Integer] index
+  #   @return [Geom::Transformation]  the combined transformation up to the
+  #     the given index.
   #
   # @raise [IndexError] if the given index is out of bounds
   #
+  # @raise [TypeError] if the index is not of integer type
+  #
   # @raise [TypeError] if the instance path refer to deleted entities.
   #
-  # @return [Sketchup::Transformation] the combined transformation up to the
-  #   the given index.
-  #
   # @version SketchUp 2017
-  def transformation(index)
+  def transformation(*args)
   end
 
   # An instance path is valid if it has at least one element and consist of

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A raster image entity.
@@ -48,12 +48,12 @@ class Layout::Image < Layout::Entity
   #
   # @raise [ArgumentError] if clip mask is already in a document
   #
-  # @raise [LockedEntityError] if the {Layout::Image} is locked
+  # @raise [ArgumentError] if clip mask is not a {Layout::Path},
+  #   {Layout::Rectangle}, or {Layout::Ellipse}
   #
   # @raise [LockedLayerError] if the {Layout::Image} is on a locked {Layout::Layer}
   #
-  # @raise [ArgumentError] if clip mask is not a {Layout::Path},
-  #   {Layout::Rectangle}, or {Layout::Ellipse}
+  # @raise [LockedEntityError] if the {Layout::Image} is locked
   #
   # @version LayOut 2018
   def clip_mask=(clip_mask)
@@ -72,10 +72,10 @@ class Layout::Image < Layout::Entity
   #
   # @raise [ArgumentError] if bounds are zero size
   #
-  # @raise [RuntimeError] if there was an error allocating memory for the image
-  #
   # @raise [ArgumentError] if there was an error reading the image file, such as
   #   the file name being invalid
+  #
+  # @raise [RuntimeError] if there was an error allocating memory for the image
   #
   # @return [Layout::Image]
   #

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A number of methods have been added to the Ruby Numeric class to do units
@@ -71,7 +71,7 @@ class Numeric
   def km
   end
 
-  # The m method is used to convert meters to inches.
+  # The m method is used to convert from meters to inches.
   #
   # @example
   #   meters = 1
@@ -95,7 +95,7 @@ class Numeric
   def mile
   end
 
-  # The mm method is used to convert a number to millimeters.
+  # The mm method is used to convert from millimeters to inches.
   #
   # It returns a Length value which is the same length as the given value. For
   # example len = 25.4.mm returns 1 inch.

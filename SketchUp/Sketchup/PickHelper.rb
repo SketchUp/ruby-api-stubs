@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The PickHelper class is used to pick entities that reside under the current
@@ -174,10 +174,10 @@ class Sketchup::PickHelper
   def element_at(index)
   end
 
-  # The init method is used to initialize the PickHelper for testing points.
+  # The {#init} method is used to initialize the PickHelper for testing points.
   #
   # You do not normally need to call this method, but you can use this if you
-  # want to call test_point or pick_segment on a lot of points.
+  # want to call {#test_point} or {#pick_segment} on a lot of points.
   #
   # If the optional aperture is given, it is given in pixels.
   #
@@ -189,16 +189,16 @@ class Sketchup::PickHelper
   #     ph.test_point(point)
   #   }
   #
-  # @param x
+  # @param [Integer] x
   #   X screen coordinate for the pick.
   #
-  # @param y
+  # @param [Integer] y
   #   Y screen coordinate for the pick.
   #
-  # @param [optional] aperture
+  # @param [Integer] aperture
   #   aperture in pixels.
   #
-  # @return p - the (receiver) PickHelper Object
+  # @return [PickHelper] self
   #
   # @version SketchUp 6.0
   def init(x, y, aperture = 0)
@@ -255,17 +255,18 @@ class Sketchup::PickHelper
   def path_at(index)
   end
 
-  # The pick_segment method is used to pick a segment of a polyline curve that
+  # The {#pick_segment} method is used to pick a segment of a polyline curve that
   # is defined by an array of points.
   #
   # If you click on a point in a polyline curve, the index of
-  # the point in the curve is returned (starting at 0). If you click on a
-  # segment in the polyline curve, the index of the segment is returned.
-  # Segments start at index -1 (for the segment connecting the first two points)
-  # and increase by a factor of -1 (for example, the segment connecting second
-  # and third point is -2).
+  # the point in the curve is returned (starting at 0).
   #
-  # There is no need to invoke do_pick for this and the results are unrelated.
+  # If you click on a segment in the polyline curve, the index of the segment is
+  # returned. Segments are returned by negative indicies and start at index -1
+  # (for the segment connecting the first two points) and increase by a factor
+  # of -1 (for example, the segment connecting second and third point is -2).
+  #
+  # There is no need to invoke {#do_pick} for this and the results are unrelated.
   #
   # @example
   #   point1 = Geom::Point3d.new(0 ,0, 0)
@@ -275,29 +276,33 @@ class Sketchup::PickHelper
   #   # If testing many points this is the fastest way to test.
   #   ph.init(x, y)
   #   picked = ph.pick_segment(segment)
-  #   # This do not require init(
+  #   # This do not require .init
   #   picked = ph.pick_segment(segment, x, y)
   #
-  # @param array_or_list
-  #   A series of Point3d objects in the polyline as a list
-  #   of parameters or an array containing Point3d objects.
+  # @note The return value will be a negative index when a segment is picked.
   #
-  # @param [optional] x
-  #   screen mouse position in pixels.
+  # @overload pick_segment(points)
   #
-  # @param [optional but requires x and y] aperture
-  #   aperture in pixels.
+  #   This is more efficient if you need to test a number of segments for the
+  #   same set of screen coordinates. But then you must use {#init} first.
+  #   @param [Array<Geom::Point3d>] points  A series of points in the polyline as
+  #                        a list of parameters or an array containing Point3d
+  #                        objects.
+  #   @return [Integer, false]  an index on success, +false+ on failure
   #
-  # @param [optional(required if x given)] y
-  #   screen mouse position
-  #   in pixels.
+  # @overload pick_segment(points, x, y, aperture = 0)
   #
-  # @return index - an index of the point in the array if you
-  #   clicked on a point or an index of a segment if you
-  #   clicked on a segment (if successful)
+  #   @param [Array<Geom::Point3d>] points  A series of points in the polyline as
+  #                        a list of parameters or an array containing Point3d
+  #                        objects.
+  #   @param [Integer] x   screen mouse position in pixels.
+  #   @param [Integer] y   (required if x given) screen mouse position
+  #                        in pixels.
+  #   @param aperture      aperture in pixels.
+  #   @return [Integer, false]  an index on success, +false+ on failure
   #
   # @version SketchUp 6.0
-  def pick_segment(array_or_list, x, y, aperture = 0)
+  def pick_segment(*args)
   end
 
   # The picked_edge method is used to retrieve the "best" Edge picked.
@@ -352,18 +357,10 @@ class Sketchup::PickHelper
   def picked_face
   end
 
-  # The test_point method is used to test a point to see if it would be selected
-  # using the default or given pick aperture.
+  # The {#test_point} method is used to test a point to see if it would be
+  # selected using the default or given pick aperture.
   #
-  # In the first form, you must have initialized the PickHelper using the init
-  # method. This is more efficient if you want to test a lot of points using the
-  # same screen point.
-  #
-  # In the second and third forms, it initializes the
-  # PickHelper using a screen point and an optional pick aperture that you pass
-  # in as the 2nd-4th arguments.
-  #
-  # There is no need to invoke do_pick for this and the results are unrelated.
+  # There is no need to invoke {#do_pick} for this and the results are unrelated.
   #
   # @example
   #   ph = view.pick_helper
@@ -374,22 +371,24 @@ class Sketchup::PickHelper
   #   picked = ph.test_point(point, x, y)
   #   picked = ph.test_point(point, x, y, aperture)
   #
-  # @param point
-  #   Screen point.
+  # @overload test_point(point)
   #
-  # @param [optional] x
-  #   x position of pick.
+  #   This is more efficient if you want to test a lot of points using the same
+  #   screen point. But you *must* have called the {#init} method first for this
+  #   to work.
+  #   @param [Geom::Point3d] point
   #
-  # @param [optional] aperture
-  #   aperture in pixels.
+  # @overload test_point(point, x, y, aperture = 0)
   #
-  # @param [optional] y
-  #   y position of pick.
+  #   @param [Geom::Point3d] point
+  #   @param [Integer] x
+  #   @param [Integer] y
+  #   @param [Integer] aperture
   #
-  # @return would_be_selected - true or false
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
-  def test_point(point, x, y, aperture = 0)
+  def test_point(*args)
   end
 
   # The transformation_at method is used to get a transformation at a specific

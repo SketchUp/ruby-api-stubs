@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Sketchup::ComponentInstance} class is used to represent component
@@ -262,24 +262,24 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   def locked?
   end
 
-  # The make_unique method is used to create a component definition for this
+  # The {#make_unique} method is used to create a component definition for this
   # instance that is not used by any other instances.
   #
   # @example
-  #   point = Geom::Point3d.new 10,20,30
-  #   transform = Geom::Transformation.new point
+  #   point = Geom::Point3d.new(10,20,30)
+  #   transform = Geom::Transformation.new(point)
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #
-  #   path = Sketchup.find_support_file "Bed.skp",
-  #     "Components/Components Sampler/"
+  #   path = Sketchup.find_support_file("Bed.skp",
+  #     "Components/Components Sampler/")
   #   definitions = model.definitions
-  #   componentdefinition = definitions.load path
-  #   instance = entities.add_instance componentdefinition, transform
+  #   componentdefinition = definitions.load(path)
+  #   instance = entities.add_instance(componentdefinition, transform)
   #   # Returns unique component instance
-  #   status = instance.make_unique
+  #   instance.make_unique
   #
-  # @return [Boolean] true if successful, false if unsuccessful
+  # @return [Sketchup::ComponentInstance] returns itself
   #
   # @version SketchUp 6.0
   def make_unique

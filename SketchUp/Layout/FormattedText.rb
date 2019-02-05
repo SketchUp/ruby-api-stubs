@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A formatted text entity.
@@ -56,11 +56,11 @@ class Layout::FormattedText < Entity
   #     {Layout::FormattedText} is set by anchor_point.
   #   @return [Layout::FormattedText]
   #
-  # @raise [ArgumentError] if path does not refer to a valid file
+  # @raise [ArgumentError] if the passed in string is empty
   #
   # @raise [ArgumentError] if bounds is zero size
   #
-  # @raise [ArgumentError] if the passed in string is empty
+  # @raise [ArgumentError] if path does not refer to a valid file
   #
   # @version LayOut 2018
   def self.new_from_file(*args)
@@ -84,10 +84,10 @@ class Layout::FormattedText < Entity
   #
   # @param [Layout::Style] style
   #
+  # @raise [ArgumentError] if plain_text is empty
+  #
   # @raise [LockedLayerError] if the {Layout::FormattedText} is on a locked
   #   {Layout::Layer}
-  #
-  # @raise [ArgumentError] if plain_text is empty
   #
   # @raise [LockedEntityError] if the {Layout::FormattedText} is locked
   #
@@ -105,18 +105,18 @@ class Layout::FormattedText < Entity
   #   style.text_bold = true
   #   text.apply_style(style, 2, 4)
   #
-  # @param [Integer] length
+  # @param [Layout::Style] style
   #
   # @param [Integer] index
   #
-  # @param [Layout::Style] style
+  # @param [Integer] length
   #
-  # @raise [RangeError] if the range specified by index and length is not
-  #   valid for this {Layout::FormattedText}
+  # @raise [IndexError] if index is out of range
   #
   # @raise [ArgumentError] if length is not greater than zero
   #
-  # @raise [IndexError] if index is out of range
+  # @raise [RangeError] if the range specified by index and length is not
+  #   valid for this {Layout::FormattedText}
   #
   # @raise [LockedLayerError] if the {Layout::FormattedText} is on a locked
   #   {Layout::Layer}
@@ -182,12 +182,12 @@ class Layout::FormattedText < Entity
   #   text = Layout::FormattedText.new("Test", anchor, Layout::FormattedText::ANCHOR_TYPE_TOP_LEFT)
   #   text.grow_mode = GROW_MODE_UNBOUNDED
   #
-  # @raise [ArgumentError] if grow_mode is not a valid grow mode
-  #
   # @raise [LockedLayerError] if the {Layout::FormattedText} is on a locked
   #   {Layout::Layer}
   #
   # @raise [LockedEntityError] if the {Layout::FormattedText} is locked
+  #
+  # @raise [ArgumentError] if grow_mode is not a valid grow mode
   #
   # @return [Integer] grow_mode
   #
@@ -227,9 +227,9 @@ class Layout::FormattedText < Entity
   #     {Layout::FormattedText} is set by anchor_point.
   #   @return [Layout::FormattedText]
   #
-  # @raise [ArgumentError] if bounds is zero size
-  #
   # @raise [ArgumentError] if the passed in string is empty
+  #
+  # @raise [ArgumentError] if bounds is zero size
   #
   # @version LayOut 2018
   def initialize(*args)
@@ -261,10 +261,10 @@ class Layout::FormattedText < Entity
   #
   # @raise [ArgumentError] if plain_text is empty
   #
-  # @raise [LockedEntityError] if the {Layout::FormattedText} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::FormattedText} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::FormattedText} is locked
   #
   # @version LayOut 2018
   def plain_text=(plain_text)
@@ -312,10 +312,10 @@ class Layout::FormattedText < Entity
   #
   # @raise [ArgumentError] if rtf_text is an empty string
   #
-  # @raise [LockedEntityError] if the {Layout::FormattedText} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::FormattedText} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::FormattedText} is locked
   #
   # @version LayOut 2018
   def rtf=(rtf_text)
@@ -329,13 +329,13 @@ class Layout::FormattedText < Entity
   #   text = Layout::FormattedText.new("Test", anchor, Layout::FormattedText::ANCHOR_TYPE_TOP_LEFT)
   #   style = text.style(0)
   #
-  # @param [Integer] length
-  #
   # @param [Integer] index
   #
-  # @raise [ArgumentError] if length is not greater than zero
+  # @param [Integer] length
   #
   # @raise [IndexError] if index is out of range
+  #
+  # @raise [ArgumentError] if length is not greater than zero
   #
   # @raise [RangeError] if the range specified by index and length is not
   #   valid for this {Layout::FormattedText}

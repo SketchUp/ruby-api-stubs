@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This observer interface is implemented to react to model events. To
@@ -57,9 +57,9 @@ class Sketchup::ModelObserver
   #
   # @return [nil]
   #
-  # @see Sketchup::Model#edit_transform
-  #
   # @see Sketchup::Model#active_path
+  #
+  # @see Sketchup::Model#edit_transform
   def onActivePathChanged(model)
   end
 

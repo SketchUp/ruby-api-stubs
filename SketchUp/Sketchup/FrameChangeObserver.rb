@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This observer interface is implemented to react to changes in camera
@@ -86,11 +86,11 @@ class Sketchup::FrameChangeObserver
   #   the +to_scene+ and then use that on a subsequent Scene selection to
   #   determine the last Page that the user was on.
   #
-  # @param [Sketchup::Page] to_scene
-  #   The selected scene page the view is transitioning towards.
-  #
   # @param [Sketchup::Page, nil] from_scene
   #   The previous scene page the view is transitioning from.
+  #
+  # @param [Sketchup::Page] to_scene
+  #   The selected scene page the view is transitioning towards.
   #
   # @param [Float] percent_done
   #   The percentage of transition between the two scene pages.

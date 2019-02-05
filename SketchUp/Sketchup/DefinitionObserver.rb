@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This observer interface is implemented to react to component definition
@@ -47,22 +47,21 @@ class Sketchup::DefinitionObserver < Sketchup::EntityObserver
   # The {#onComponentInstanceRemoved} method is called when a component
   # instance is removed from a model.
   #
-  # implemented, this method is fired on a Move + Copy operation even
-  # though no {Sketchup::ComponentInstance} is apparently removed.
-  #
   # @example
   #   def onComponentInstanceRemoved(definition, instance)
   #     puts "onComponentInstanceRemoved(#{definition}, #{instance})"
   #   end
   #
   # @note Due to the underlying way that the SketchUp Move Tool is
-  #
-  # @param [Sketchup::ComponentInstance] instance
-  #   The removed instance
+  #   implemented, this method is fired on a Move + Copy operation even
+  #   though no {Sketchup::ComponentInstance} is apparently removed.
   #
   # @param [Sketchup::ComponentDefinition] definition
   #   The definition of the
   #   instance removed
+  #
+  # @param [Sketchup::ComponentInstance] instance
+  #   The removed instance
   #
   # @return [nil]
   #

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Layer class contains methods modifying and extracting information for a
@@ -101,6 +101,32 @@ class Sketchup::Layer < Sketchup::Entity
   #
   # @version SketchUp 2014
   def color=(color)
+  end
+
+  # The {#line_style} method retrieves the line style on this layer.
+  #
+  # @example
+  #   line_style = Sketchup.active_model.layers[0].line_style
+  #
+  # @return [Sketchup::LineStyle, nil] The line style retrieved.
+  #
+  # @version SketchUp 2019
+  def line_style
+  end
+
+  # The {#line_style=} method lets you set a specific line style to a layer
+  #
+  # @example
+  #   line_style = Sketchup.active_model.line_styles["Dot"]
+  #   Sketchup.active_model.layers[0].line_style = line_style
+  #
+  # @param [Sketchup::LineStyle, nil] line_style
+  #   The line style to set on this layer.
+  #
+  # @return [Sketchup::Layer] The layer that the line style was applied on.
+  #
+  # @version SketchUp 2019
+  def line_style=(line_style)
   end
 
   # The name method is used to retrieve the name of the layer.

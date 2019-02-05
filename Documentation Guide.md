@@ -16,7 +16,7 @@ Then we'll regenerate the documentation and stubs - finally closing the Pull Req
 
 This document will act as a guide for how we want the documentation to be formatted. We will expand upon it as we go along and questions arise. Feel free to contribute with suggestions.
 
-One recent class to refer to for examples is +UI::HtmlDialog+.
+One recent class to refer to for examples is `UI::HtmlDialog`.
 
 ## References
 
@@ -45,21 +45,19 @@ Examples:
 
 `@param` tags should follow this format:
 
-`@param name [types] Full sentence (capitalized with proper punctuation.)`
+`@param [types] name Full sentence (capitalized with proper punctuation.)`
 
 Example (imagine a search or find method):
 
 **Not so good**
 
 `@param [Sketchup::Entities] entities - the {Sketchup::Entities} search context, or Model{Model#entities} if none.`
-- The param name can get lost or overlooked when it follows the TypeList.
 - The dash separating the param name and description is frivolous. This is syntax formatting inherited from the previous documentation engine. We will try to eliminate it as we work out way through the docs.
 - The second class link is unneeded because the class in the TypeList will be automatically linked by YARD.
 
 **Better**
 
-`@param entities [Sketchup::Entities] The entities context in which to search. Defaults to the current model's entities.`
-- The param name is immediately following the @param tag (just as a method name immediately follows the `def` keyword in a method definition.) Ie, it is the form we are used to using when we code in Ruby (or most other modern programming languages.)
+`# @param [Sketchup::Entities] entities The entities context in which to search. Defaults to the current model's entities.`
 - No dash need even be considered as the Typelist separates the parameter name from the description.
 - The descriptions are proper grammatical sentences, that can be more easily translated using online translators.
 

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A collection of Materials objects. Each model contains a Materials collection
@@ -170,6 +170,10 @@ class Sketchup::Materials < Sketchup::Entity
   #   materials = Sketchup.active_model.materials
   #   number = materials.length
   #
+  # @note The returned number includes {Sketchup::Image} materials as well.
+  #   It will not reflect the number of materials yielded by {#each}. To get
+  #   the number of non-image materials use {#count} or +materials.to_a.size+.
+  #
   # @return [Integer]
   #
   # @see #size
@@ -273,6 +277,10 @@ class Sketchup::Materials < Sketchup::Entity
   # @example
   #   materials = Sketchup.active_model.materials
   #   number = materials.size
+  #
+  # @note The returned number includes {Sketchup::Image} materials as well.
+  #   It will not reflect the number of materials yielded by {#each}. To get
+  #   the number of non-image materials use {#count} or +materials.to_a.size+.
   #
   # @return [Integer]
   #

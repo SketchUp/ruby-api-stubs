@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A DefinitionList object holds a list of all of the ComponentDefinition
@@ -32,14 +32,14 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #   @param [Integer] index The index for a specific component definition.
   #   @return [Sketchup::ComponentDefinition, nil]
   #
-  # @overload [](guid)
-  #
-  #   @param [String] guid The name of an existing component definition.
-  #   @return [Sketchup::ComponentDefinition, nil]
-  #
   # @overload [](name)
   #
   #   @param [String] name The unique GUID for the component definition.
+  #   @return [Sketchup::ComponentDefinition, nil]
+  #
+  # @overload [](guid)
+  #
+  #   @param [String] guid The name of an existing component definition.
   #   @return [Sketchup::ComponentDefinition, nil]
   #
   # @version SketchUp 6.0
@@ -99,14 +99,14 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #   @param [Integer] index The index for a specific component definition.
   #   @return [Sketchup::ComponentDefinition, nil]
   #
-  # @overload [](guid)
-  #
-  #   @param [String] guid The name of an existing component definition.
-  #   @return [Sketchup::ComponentDefinition, nil]
-  #
   # @overload [](name)
   #
   #   @param [String] name The unique GUID for the component definition.
+  #   @return [Sketchup::ComponentDefinition, nil]
+  #
+  # @overload [](guid)
+  #
+  #   @param [String] guid The name of an existing component definition.
   #   @return [Sketchup::ComponentDefinition, nil]
   #
   # @version SketchUp 6.0
@@ -177,6 +177,9 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #
   # @param [String] path
   #   The path where the component definition file is located.
+  #
+  # @raise RuntimeError If filename is an invalid SketchUp model. Added in
+  #   SketchUp 2019. Possible that prior versions of SketchUp will crash.
   #
   # @return [Sketchup::ComponentDefinition] the loaded ComponentDefinition
   #   object if successful

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This is the base class for all SketchUp entities. Entities are basically
@@ -121,16 +121,11 @@ class Sketchup::Entity
   def attribute_dictionary(name, create = false)
   end
 
-  # The delete_attribute method is used to delete an attribute from an entity.
+  # The {#delete_attribute} method is used to delete an attribute from an entity.
   #
   # If only the dictionary_name is given, then it deletes the entire
-  # AttributeDictionary. Otherwise, delete_attribute deletes the attribute with
+  # AttributeDictionary. Otherwise, {#delete_attribute} deletes the attribute with
   # the given key from the given dictionary.
-  #
-  # In SketchUp 2018, special attribute dictionaries have been added. The name
-  # of these dictionaries are "SU_InstanceSet" and "SU_DefinitionSet". The
-  # dictionaries cannot be deleted via ruby and an ArgumentError will be raised.
-  # The key/value pairs in the dictionary can be deleted safely.
   #
   # @example
   #   depth = 100
@@ -151,16 +146,23 @@ class Sketchup::Entity
   #   status = entity1.set_attribute "testdictionary", "test", 115
   #   status = entity1.delete_attribute "testdictionary"
   #
+  # @note In SketchUp 2018, special attribute dictionaries have been added.
+  #   The name of these dictionaries are "SU_InstanceSet" and "SU_DefinitionSet".
+  #   The dictionaries cannot be deleted via ruby and an ArgumentError will be
+  #   raised. The key/value pairs in the dictionary can be deleted safely.
+  #
+  # @note The return values are fixed in SketchUp 2019 M0.
+  #
   # @overload delete_attribute(dictionary_name)
   #
   #   @param dictionary_name [String] The name of an attribute dictionary.
-  #   @return                [nil]
+  #   @return                [Boolean]
   #
   # @overload delete_attribute(dictionary_name, key)
   #
   #   @param dictionary_name [String] The name of an attribute dictionary.
   #   @param key             [String] An attribute key.
-  #   @return                [nil]
+  #   @return                [Boolean]
   #
   # @version SketchUp 6.0
   def delete_attribute(*args)
@@ -239,11 +241,11 @@ class Sketchup::Entity
   # @param [String] dict_name
   #   The name of an attribute dictionary.
   #
-  # @param [Object] default_value
-  #   A default value to return if no attribute is found.
-  #
   # @param [String] key
   #   An attribute key.
+  #
+  # @param [Object] default_value
+  #   A default value to return if no attribute is found.
   #
   # @return [Object] the retrieved value
   #
@@ -342,14 +344,9 @@ class Sketchup::Entity
   #
   # The persistent id persistent between sessions.
   #
-  # Note that only a subset of entity types support PIDs. Refer to the table
-  # below for which and when support was added.
-  #
   # [SketchUp 2018]
   #   - {Sketchup::Page}
   # [SketchUp 2017]
-  #   - {Sketchup::Axes}
-  #   - {Sketchup::ComponentDefinition}
   #   - {Sketchup::ComponentInstance}
   #   - {Sketchup::ConstructionLine}
   #   - {Sketchup::ConstructionPoint}
@@ -357,21 +354,23 @@ class Sketchup::Entity
   #   - {Sketchup::Dimension}
   #   - {Sketchup::Edge}
   #   - {Sketchup::Face}
+  #   - {Sketchup::Group}
+  #   - {Sketchup::Image}
   #   - {Sketchup::SectionPlane}
   #   - {Sketchup::Text}
   #   - {Sketchup::Vertex}
   #   - Polyline3d entities exposed only as {Sketchup::Drawingelement} Use
   #     {#typename} to determine if a {Sketchup::Drawingelement} is
-  #     a <tt>"Polyline3d"</tt>.
+  #     a +"Polyline3d"+.
   #
   # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   pts = [
-  #     Geom::Point3d.new(0, 0, 0)
-  #     Geom::Point3d.new(9, 0, 0)
-  #     Geom::Point3d.new(9, 9, 0)
-  #     Geom::Point3d.new(0, 9, 0)
+  #     Geom::Point3d.new(0, 0, 0),
+  #     Geom::Point3d.new(9, 0, 0),
+  #     Geom::Point3d.new(9, 9, 0),
+  #     Geom::Point3d.new(0, 9, 0),
   #   ]
   #
   #   # Add the face to the entities in the model
@@ -380,6 +379,10 @@ class Sketchup::Entity
   #   pid = face.persistent_id
   #   # Exploding the group will preserve the pid.
   #   pid == face.persistent_id # Should return true
+  #
+  # @note Only a subset of entity types support PIDs. Refer to the table
+  #   below for which and when support was added. In general it is entities that
+  #   you can iterate over in a {Sketchup::Entities} collection.
   #
   # @return [Integer] the id for the {Sketchup::Entity} object
   #
@@ -436,11 +439,11 @@ class Sketchup::Entity
   # @param [String] dict_name
   #   The name of an attribute dictionary.
   #
-  # @param [Object] value
-  #   The value for the attribute.
-  #
   # @param [String] key
   #   An attribute key.
+  #
+  # @param [Object] value
+  #   The value for the attribute.
   #
   # @return [Object] the newly set value if successful
   #

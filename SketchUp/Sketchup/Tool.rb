@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # Tool is the interface that you implement to create a SketchUp tool.
@@ -101,9 +101,9 @@ class Sketchup::Tool
   #
   # @return nil
   #
-  # @see Sketchup::View#draw
-  #
   # @see getExtents
+  #
+  # @see Sketchup::View#draw
   #
   # @version SketchUp 6.0
   def draw(view)
@@ -214,25 +214,25 @@ class Sketchup::Tool
   #    end
   #   end
   #
+  # @param menu
+  #   A Menu object.
+  #
   # @param [optional] flags
   #   A bit mask that tells the state of the
   #   modifier keys and other mouse buttons at the time.
   #   Added in SU2015.
   #
-  # @param menu
-  #   A Menu object.
-  #
   # @param [optional] x
   #   The X coordinate on the screen where the
+  #   event occurred. Added in SU2015.
+  #
+  # @param [optional] y
+  #   The Y coordinate on the screen where the
   #   event occurred. Added in SU2015.
   #
   # @param [optional] view
   #   A View object where the method was invoked.
   #   Added in SU2015.
-  #
-  # @param [optional] y
-  #   The Y coordinate on the screen where the
-  #   event occurred. Added in SU2015.
   #
   # @return nil
   #
@@ -240,8 +240,8 @@ class Sketchup::Tool
   def getMenu(menu, flags, x, y, view)
   end
 
-  # The onCancel method is called by SketchUp to cancel the current operation of
-  # the tool. The typical response will be to reset the tool to its initial
+  # The {#onCancel} method is called by SketchUp to cancel the current operation
+  # of the tool. The typical response will be to reset the tool to its initial
   # state.
   #
   # The reason identifies the action that triggered the call. The reason can be
@@ -256,13 +256,16 @@ class Sketchup::Tool
   #     puts "MyTool was canceled for reason ##{reason} in view: #{view}"
   #   end
   #
-  # @param reason
+  # @note When something is undone {#onCancel} is called before the undo is
+  #   actually executed. If you need to do something with the model after an undo
+  #   use {Sketchup::ModelObserver#onTransactionUndo}.
+  #
+  # @param [Integer] reason
   #   A reason value (see comments).
   #
-  # @param view
-  #   A View object where the method was invoked.
+  # @param [Sketchup::View] view
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onCancel(reason, view)
@@ -315,12 +318,12 @@ class Sketchup::Tool
   #   A value of 1 for a single press of a key.  A value of 2
   #   if the user has pressed a key and is holding it down.
   #
-  # @param view
-  #   A View object where the method was invoked.
-  #
   # @param flags
   #   A bit mask that tells the state of the modifier keys at
   #   the time of the onKeyDown.
+  #
+  # @param view
+  #   A View object where the method was invoked.
   #
   # @return nil
   #
@@ -346,12 +349,12 @@ class Sketchup::Tool
   #   A value of 1 for a single press of a key.  A value of 2
   #   if the user has pressed a key and is holding it down.
   #
-  # @param view
-  #   A View object where the method was invoked.
-  #
   # @param flags
   #   A bit mask that tells the state of the modifier keys at
   #   the time of the onKeyUp.
+  #
+  # @param view
+  #   A View object where the method was invoked.
   #
   # @return nil
   #
@@ -377,11 +380,11 @@ class Sketchup::Tool
   # @param x
   #   The X coordinate on the screen where the event occurred.
   #
-  # @param view
-  #   A View object where the method was invoked.
-  #
   # @param y
   #   The Y coordinate on the screen where the event occurred.
+  #
+  # @param view
+  #   A View object where the method was invoked.
   #
   # @return nil
   #
@@ -407,11 +410,11 @@ class Sketchup::Tool
   # @param x
   #   The X coordinate on the screen where the event occurred.
   #
-  # @param view
-  #   A View object where the method was invoked.
-  #
   # @param y
   #   The Y coordinate on the screen where the event occurred.
+  #
+  # @param view
+  #   A View object where the method was invoked.
   #
   # @return nil
   #
@@ -437,11 +440,11 @@ class Sketchup::Tool
   # @param x
   #   The X coordinate on the screen where the event occurred.
   #
-  # @param view
-  #   A View object where the method was invoked.
-  #
   # @param y
   #   The Y coordinate on the screen where the event occurred.
+  #
+  # @param view
+  #   A View object where the method was invoked.
   #
   # @return nil
   #
@@ -475,11 +478,11 @@ class Sketchup::Tool
   # @param x
   #   The X coordinate on the screen where the event occurred.
   #
-  # @param view
-  #   A View object where the method was invoked.
-  #
   # @param y
   #   The Y coordinate on the screen where the event occurred.
+  #
+  # @param view
+  #   A View object where the method was invoked.
   #
   # @return nil
   #
@@ -509,11 +512,11 @@ class Sketchup::Tool
   # @param x
   #   The X coordinate on the screen where the event occurred.
   #
-  # @param view
-  #   A View object where the method was invoked.
-  #
   # @param y
   #   The Y coordinate on the screen where the event occurred.
+  #
+  # @param view
+  #   A View object where the method was invoked.
   #
   # @return nil
   #
@@ -544,11 +547,11 @@ class Sketchup::Tool
   # @param x
   #   The X coordinate on the screen where the event occurred.
   #
-  # @param view
-  #   A View object where the method was invoked.
-  #
   # @param y
   #   The Y coordinate on the screen where the event occurred.
+  #
+  # @param view
+  #   A View object where the method was invoked.
   #
   # @return nil
   #
@@ -611,11 +614,11 @@ class Sketchup::Tool
   # @param x
   #   The X coordinate on the screen where the event occurred.
   #
-  # @param view
-  #   A View object where the method was invoked.
-  #
   # @param y
   #   The Y coordinate on the screen where the event occurred.
+  #
+  # @param view
+  #   A View object where the method was invoked.
   #
   # @return nil
   #
@@ -641,11 +644,11 @@ class Sketchup::Tool
   # @param x
   #   The X coordinate on the screen where the event occurred.
   #
-  # @param view
-  #   A View object where the method was invoked.
-  #
   # @param y
   #   The Y coordinate on the screen where the event occurred.
+  #
+  # @param view
+  #   A View object where the method was invoked.
   #
   # @return nil
   #
@@ -673,11 +676,11 @@ class Sketchup::Tool
   # @param x
   #   The X coordinate on the screen where the event occurred.
   #
-  # @param view
-  #   A View object where the method was invoked.
-  #
   # @param y
   #   The Y coordinate on the screen where the event occurred.
+  #
+  # @param view
+  #   A View object where the method was invoked.
   #
   # @return nil
   #
@@ -703,11 +706,11 @@ class Sketchup::Tool
   # @param x
   #   The X coordinate on the screen where the event occurred.
   #
-  # @param view
-  #   A View object where the method was invoked.
-  #
   # @param y
   #   The Y coordinate on the screen where the event occurred.
+  #
+  # @param view
+  #   A View object where the method was invoked.
   #
   # @return nil
   #
@@ -715,19 +718,18 @@ class Sketchup::Tool
   def onRButtonUp(flags, x, y, view)
   end
 
-  # The onReturn method is called by SketchUp when the user hit the Return key
+  # The {#onReturn} method is called by SketchUp when the user hit the Return key
   # to complete an operation in the tool. This method will rarely need to be
   # implemented.
   #
   # @example
-  #   def onMouseLeave(view)
-  #     puts "onMouseLeave: view = #{view}"
+  #   def onReturn(view)
+  #     puts "onReturn(#{view})"
   #   end
   #
-  # @param view
-  #   A View object where the method was invoked.
+  # @param [Sketchup::View] view
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onReturn(view)
@@ -749,21 +751,23 @@ class Sketchup::Tool
   def onSetCursor
   end
 
-  # The onUserText method is called by SketchUp when the user has typed text
+  # The {#onUserText} method is called by SketchUp when the user has typed text
   # into the VCB and hit return.
   #
   # @example
   #   def onUserText(text, view)
-  #     puts "onSetCursor: text = #{text}, view = #{view}"
+  #     @distance = text.to_l
+  #   rescue ArgumentError
+  #     view.tooltop = 'Invalid length'
   #   end
   #
-  # @param text
+  # @param [String] text
   #   The text string that was typed into the VCB.
   #
-  # @param view
-  #   A View object where the method was invoked.
+  # @param [Sketchup::View] view
+  #   A view object where the method was invoked.
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def onUserText(text, view)

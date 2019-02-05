@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This class contains methods to manipulate the current point of view of the
@@ -80,15 +80,14 @@ class Sketchup::View
   def camera
   end
 
-  # The camera= method is used to set the camera for the view. If a transition
+  # The {#camera=} method is used to set the camera for the view. If a transition
   # time is given, then it will animate the transition from the current camera
   # to the new one.
   #
   # @example
-  #   camera2 = Sketchup.Camera.new
-  #   model = Sketchup.active_model
-  #   view = model.active_view
-  #   status = view.camera=camera2
+  #   camera = Sketchup::Camera.new([5, 5, 9], [5, 10, 0], Z_AXIS)
+  #   view = Sketchup.active_model.active_view
+  #   view.camera = camera
   #
   # @overload camera=(camera)
   #
@@ -333,16 +332,16 @@ class Sketchup::View
   # @param [Array<Geom::Point3d>] pts
   #   An array of Point3d objects.
   #
-  # @param [Integer] pointstyle
-  #   Style of the point. 1 = open square,
-  #   2 = filled square, 3 = "+", 4 = "X", 5 = "*",
-  #   6 = open triangle, 7 = filled triangle.
+  # @param [Integer] pointsize
+  #   Size of the point in pixels.
   #
   # @param [Sketchup::Color] pointcolor
   #   Color of the point.
   #
-  # @param [Integer] pointsize
-  #   Size of the point in pixels.
+  # @param [Integer] pointstyle
+  #   Style of the point. 1 = open square,
+  #   2 = filled square, 3 = "+", 4 = "X", 5 = "*",
+  #   6 = open triangle, 7 = filled triangle.
   #
   # @return [Sketchup::View] a View object
   #
@@ -404,30 +403,33 @@ class Sketchup::View
   # @note Under Windows the font name must be less than 32 characters - due to
   #   system limitations.
   #
+  # @note As of SU2017 this will automatically scale the font-size by the same
+  #   factor as {UI.scale_factor}.
+  #
+  # @option options [String] :font The name of the font to use. If it does not
+  #   exist on the system, a default font will be used instead.
+  #
+  # @option options [Integer] :size The size of the font in points
+  #
+  # @option options [Boolean] :bold Controls the Bold property of the font.
+  #
+  # @option options [Boolean] :italic Controls the Italic property of the font.
+  #
   # @option options [Sketchup::Color] :color The color to draw the text with.
   #
   # @option options [Integer] :align The text alignment, one of the following
   #   constants +TextAlignLeft+, +TextAlignCenter+ or +TextAlignRight+.
   #
-  # @option options [Boolean] :italic Controls the Italic property of the font.
-  #
-  # @option options [Boolean] :bold Controls the Bold property of the font.
-  #
-  # @option options [Integer] :size The size of the font in points
-  #
-  # @option options [String] :font The name of the font to use. If it does not
-  #   exist on the system, a default font will be used instead.
-  #
-  # @param options [Hash]
-  #   The text can be customized by providing a hash or
-  #   named arguments of options. Available from SketchUp 2016.
-  #
-  # @param text [String]
-  #   The text string to draw.
-  #
-  # @param point [Geom::Point3d]
+  # @param [Geom::Point3d] point
   #   A Point3d object representing a 2D coordinate
   #   in view space.
+  #
+  # @param [String] text
+  #   The text string to draw.
+  #
+  # @param [Hash] options
+  #   The text can be customized by providing a hash or
+  #   named arguments of options. Available from SketchUp 2016.
   #
   # @return [Sketchup::View]
   #
@@ -543,11 +545,11 @@ class Sketchup::View
   # @param [Numeric] x
   #   A x value.
   #
-  # @param [Sketchup::InputPoint] inputpoint1
-  #   An InputPoint object.
-  #
   # @param [Numeric] y
   #   A y value.
+  #
+  # @param [Sketchup::InputPoint] inputpoint1
+  #   An InputPoint object.
   #
   # @return [Sketchup::InputPoint]
   #
@@ -616,6 +618,9 @@ class Sketchup::View
   #
   # @example
   #   view.line_width = width
+  #
+  # @note As of SU2017 this will automatically scale the line width by the same
+  #   factor as {UI.scale_factor}.
   #
   # @param [Integer] width
   #   The width in pixels.
@@ -724,7 +729,10 @@ class Sketchup::View
   # desired size in pixels.
   #
   # @example
-  #   size = view.pixels_to_model pixels, point
+  #   size = view.pixels_to_model(pixels, point)
+  #
+  # @note As of SU2017 this will automatically scale the pixel-size by the same
+  #   factor as {UI.scale_factor}.
   #
   # @param [Numeric] pixels
   #   The pixel size.
@@ -878,32 +886,9 @@ class Sketchup::View
   #
   # If a hash is passed as the first parameter, then the contents of that hash
   # define how the image is exported.
-  # The keys are:
-  #  - filename        The filename for the saved image.
-  #  - width           (optional) Width in pixels (max 16000).
-  #  - height          (optional) Height in pixels (max 16000).
-  #  - antialias       (optional) true or false
-  #  - compression     (optional) Float compression factor for JPEG images,
-  #                    between 0.0 and 1.0
-  #  - transparent     true or false
   #
-  # @example
-  #   depth = 100
-  #   width = 100
-  #   model = Sketchup.active_model
-  #   entities = model.active_entities
-  #   pts = []
-  #   pts[0] = [0, 0, 0]
-  #   pts[1] = [width, 0, 0]
-  #   pts[2] = [width, depth, 0]
-  #   pts[3] = [0, depth, 0]
-  #   # Add the face to the entities in the model
-  #   face = entities.add_face pts
-  #   UI.messagebox "Now Lets Write the Image"
-  #   view = model.active_view
-  #   # Puts in SketchUp install directory by default
-  #   status = view.write_image "test.jpg"
-  #   keys = {
+  # @example With options hash.
+  #   options = {
   #     :filename => "c:/tmp/write_image.png",
   #     :width => 640,
   #     :height => 480,
@@ -913,7 +898,15 @@ class Sketchup::View
   #   }
   #   model = Sketchup.active_model
   #   view = model.active_view
-  #   view.write_image keys
+  #   view.write_image(options)
+  #
+  # @example Legacy arguments variant.
+  #   filename => "c:/tmp/write_image.png"
+  #   antialias => false
+  #   compression => 0.9
+  #   model = Sketchup.active_model
+  #   view = model.active_view
+  #   view.write_image(filename, 640, 480, antialias, compression)
   #
   # @overload write_image(filename, width = view.vpwidth, height = view.vpheight, antialias = false, compression = 1.0)
   #
@@ -931,7 +924,15 @@ class Sketchup::View
   #
   # @overload write_image(options)
   #
+  #   @version SketchUp 7
   #   @param [Hash] options
+  #   @option options [String] filename  The filename for the saved image.
+  #   @option options [Integer] width (#vpwidth)  Width in pixels (max 16000).
+  #   @option options [Integer] height (#vpheight)  Height in pixels (max 16000).
+  #   @option options [Boolean] antialias (false)
+  #   @option options [Float] compression (1.0)  Compression factor for JPEG,
+  #     images between 0.0 and 1.0
+  #   @option options [Boolean] transparent (false) Added in SketchUp 8.
   #
   # @return [Boolean]
   #

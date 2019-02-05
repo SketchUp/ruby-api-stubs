@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The ShadowInfo class contains method to extract the shadow information for a
@@ -156,9 +156,9 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   #
   # @yield [key, value]
   #
-  # @yieldparam [Object] value
-  #
   # @yieldparam [String] key
+  #
+  # @yieldparam [Object] value
   def each
   end
 

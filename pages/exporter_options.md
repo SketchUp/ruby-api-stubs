@@ -57,7 +57,7 @@ If an **invalid** option is provided, it will be silently ignored.
 - `:hidden_geometry` - Boolean to indicate whether to export hidden geometry.
 - `:doublesided_faces` - Boolean to indicate whether to export 2-sided faces.
 - `:ifc_mapped_items` - Boolean to indicate whether to export IFC mapped items.
-- `:ifc types` - An Array of strings indicating IFC elements to export. One or more of the following values can be in the array.
+- `:ifc_types` - An Array of strings indicating IFC elements to export. One or more of the following values can be in the array. If there are no values in the array, no geometry will be exported.
 	- values: `"IfcNonDefined"`, `"IfcBeam"`, `"IfcBuilding"`, `"IfcBuildingElementProxy"`, `"IfcBuildingStorey"`, `"IfcColumn"`, `"IfcCurtainWall"`, `"IfcDoor"`, `"IfcFooting"`, `"IfcFurnishingElement"`, `"IfcMember"`, `"IfcPile"`, `"IfcPlate"`, `"IfcProject"`, `"IfcRailing"`, `"IfcRamp"`, `"IfcRampFlight"`, `"IfcRoof"`, `"IfcSite"`, `"IfcSlab"`, `"IfcSpace"`, `"IfcStair"`, `"IfcStairFlight"`, `"IfcWall"`, `"IfcWallStandardCase"`, `"IfcWindow"`
 
 ## Google Earth (KMZ)

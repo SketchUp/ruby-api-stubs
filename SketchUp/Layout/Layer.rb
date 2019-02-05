@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This is the interface to a LayOut Layer Definition. A layer definition
@@ -167,9 +167,9 @@ class Layout::Layer
   #   The share action that specifies what to do
   #   with {Layout::Entity}s after the {Layout::Layer} is non-shared.
   #
-  # @raise [ArgumentError] if unshare_action is not a valid value
-  #
   # @raise [LockedLayerError] if the {Layout::Layer} is locked
+  #
+  # @raise [ArgumentError] if unshare_action is not a valid value
   #
   # @version LayOut 2018
   def set_nonshared(page, unshare_action)
@@ -196,9 +196,9 @@ class Layout::Layer
   #   The share action that specifies what to do with
   #   {Layout::Entity}s after the {Layout::Layer} is shared.
   #
-  # @raise [ArgumentError] if share_action is not a valid value
-  #
   # @raise [Layout::LockedLayerError] if the {Layout::Layer} is locked
+  #
+  # @raise [ArgumentError] if share_action is not a valid value
   #
   # @version LayOut 2018
   def set_shared(page, share_action)

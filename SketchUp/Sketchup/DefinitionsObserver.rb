@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This observer interface is implemented to react to events on a definitions
@@ -69,9 +69,9 @@ class Sketchup::DefinitionsObserver
   #
   # @note This methods fires twice for each Component/Group erased.
   #
-  # @param [Sketchup::ComponentDefinition] definition
-  #
   # @param [Sketchup::DefinitionList] definitions
+  #
+  # @param [Sketchup::ComponentDefinition] definition
   #
   # @return [nil]
   #

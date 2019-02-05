@@ -1,6 +1,9 @@
-/.yardoc/
-/doc/
+.yardoc/
+doc/
+debug/
 
 pkg/
 
 Gemfile\.lock
+
+rubocop-changelog.txt

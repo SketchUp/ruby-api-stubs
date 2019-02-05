@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # Transformations are a standard construct in the 3D world for representing
@@ -129,6 +129,13 @@ class Geom::Transformation
   #   @param zscale [Float] The scale factor in the z direction for the transform.
   #   @return [Geom::Transformation]
   #
+  # @overload scaling(point, scale)
+  #
+  #   With two arguments, it does a uniform scale about an arbitrary point.
+  #   @param [Geom::Point3d] point
+  #   @param [Float] scale  The global scale factor for the transform.
+  #   @return [Geom::Transformation]
+  #
   # @overload scaling(point, xscale, yscale, zscale)
   #
   #   With four arguments it does a non-uniform scale about an arbitrary point.
@@ -136,13 +143,6 @@ class Geom::Transformation
   #   @param xscale [Float] The scale factor in the x direction for the transform.
   #   @param yscale [Float] The scale factor in the y direction for the transform.
   #   @param zscale [Float] The scale factor in the z direction for the transform.
-  #   @return [Geom::Transformation]
-  #
-  # @overload scaling(point, scale)
-  #
-  #   With two arguments, it does a uniform scale about an arbitrary point.
-  #   @param point [Geom::Point3d]
-  #   @param scale [Float]The global scale factor for the transform.
   #   @return [Geom::Transformation]
   #
   # @version SketchUp 6.0
@@ -196,20 +196,20 @@ class Geom::Transformation
   #   @param transformation [Geom::Transformation]
   #   @return [Geom::Transformation]
   #
-  # @overload *(plane)
+  # @overload *(point)
   #
-  #   @param plane [Array(Numeric, Numeric, Numeric, Numeric)]
-  #   @return [Array(Float, Float, Float, Float)] transformed plane
+  #   @param [Array<Float, Float, Float>] point
+  #   @return [Array<Float, Float, Float>]
   #
   # @overload *(plane)
   #
   #   @param plane [Array(Geom::Point3d, Geom::Vector3d)]
   #   @return [Array(Float, Float, Float, Float)] transformed plane
   #
-  # @overload *(point)
+  # @overload *(plane)
   #
-  #   @param [Array((Numeric, Numeric, Numeric)] point
-  #   @return [Array(Float, Float, Float)]
+  #   @param [Array<Float, Float, Float, Float>] plane
+  #   @return [Array<Float, Float, Float, Float>] transformed plane
   #
   # @version SketchUp 6.0
   def *(arg)
@@ -232,13 +232,15 @@ class Geom::Transformation
   # {IDENTITY} transform.
   #
   # @example
-  #   tr = Geom::Transformation.new(ORIGIN)
+  #   point = Geom::Point3d.new(10, 20, 30)
+  #   tr = Geom::Transformation.new(point)
   #   # Returns false.
   #   status = tr.identity?
   #
   # @example
-  #   # Returns true.
-  #   status = IDENTITY.identity?
+  #   tr = Geom::Transformation.new(ORIGIN)
+  #   # Returns false.
+  #   status = tr.identity?
   #
   # @example
   #   tr = Geom::Transformation.new
@@ -246,10 +248,8 @@ class Geom::Transformation
   #   status = tr.identity?
   #
   # @example
-  #   point = Geom::Point3d.new(10, 20, 30)
-  #   tr = Geom::Transformation.new(point)
-  #   # Returns false.
-  #   status = tr.identity?
+  #   # Returns true.
+  #   status = IDENTITY.identity?
   #
   # @note As of SketchUp 2018, this now looks at the data to determine if the
   #   transformation is identity. Prior to SU2018, this only looks at the flag to
@@ -298,12 +298,12 @@ class Geom::Transformation
   #   @param matrix [Array<Numeric>] Creates a Transformation from a 16 element Array.
   #   @return [Geom::Transformation]
   #
-  # @overload initialize(xaxis, yaxis, zaxis, origin)
+  # @overload initialize(scale)
   #
-  #   @param xaxis [Geom::Vector3d]
-  #   @param yaxis [Geom::Vector3d]
-  #   @param zaxis [Geom::Vector3d]
-  #   @param origin [Geom::Point3d]
+  #   Creates a transformation that does uniform scaling.
+  #   @note Versions prior to SU2018 would produce transformations which
+  #     didn't always work right in SketchUp. See {.scaling} for more info.
+  #   @param [Float] scale
   #   @return [Geom::Transformation]
   #
   # @overload initialize(origin, zaxis)
@@ -331,12 +331,12 @@ class Geom::Transformation
   #   @param angle  [Numeric]
   #   @return [Geom::Transformation]
   #
-  # @overload initialize(scale)
+  # @overload initialize(xaxis, yaxis, zaxis, origin)
   #
-  #   Creates a transformation that does uniform scaling.
-  #   @note Versions prior to SU2018 would produce transformations which
-  #     didn't always work right in SketchUp. See {.scaling} for more info.
-  #   @param [Float] scale
+  #   @param [Geom::Vector3d] xaxis
+  #   @param [Geom::Vector3d] yaxis
+  #   @param [Geom::Vector3d] zaxis
+  #   @param [Geom::Point3d] origin
   #   @return [Geom::Transformation]
   #
   # @version SketchUp 6.0
@@ -402,9 +402,9 @@ class Geom::Transformation
   #   @param point [Geom::Point3d]
   #   @return [Geom::Transformation]
   #
-  # @overload set!(scale)
+  # @overload set!(vector)
   #
-  #   @param scale [Numeric]
+  #   @param [Geom::Vector3d] vector
   #   @return [Geom::Transformation]
   #
   # @overload set!(matrix)
@@ -412,9 +412,9 @@ class Geom::Transformation
   #   @param matrix [Array<Numeric>]  Array of 16 floats.
   #   @return [Geom::Transformation]
   #
-  # @overload set!(vector)
+  # @overload set!(scale)
   #
-  #   @param vector [Geom::Vector3d]
+  #   @param [Float] scale
   #   @return [Geom::Transformation]
   #
   # @version SketchUp 6.0

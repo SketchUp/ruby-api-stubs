@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Camera class contains methods for creating and manipulating a camera.
@@ -353,37 +353,32 @@ class Sketchup::Camera
   end
 
   # Returns a new camera with eye (where the camera is) and targets (where the
-  # camera is looking) of type Point3d, up direction of type Vector3d, optional
-  # perspective flag of value true or false, and optional field-of-view value in
-  # degrees of type Float.
+  # camera is looking).
   #
   # @example
+  #   eye = Geom::Point3d.new(20, 5, 30)
+  #   target = Geom::Point3d.new(20, 60, 25)
+  #   up = Z_AXIS
+  #   camera = Sketchup::Camera.new(eye, target, up)
+  #
+  # @example Default paramaters
   #   camera = Sketchup::Camera.new
-  #   if (camera)
-  #     UI.messagebox camera
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
-  # @param target
-  #   See {#target}.
+  # @overload initialize
   #
-  # @param eye
-  #   See {#eye}.
+  #   @return [Sketchup::Camera]
   #
-  # @param up
-  #   See {#up}.
+  # @overload initialize(eye, target, up, perspective = true, fov = 30.0)
   #
-  # @param fov
-  #   see {#fov}.
-  #
-  # @param perspective
-  #   see {#perspective?}.
-  #
-  # @return camera - a new Camera object if successful
+  #   @param [Geom::Point3d] eye  See {#eye}.
+  #   @param [Geom::Point3d] target  See {#target}.
+  #   @param [Geom::Point3d] up  See {#up}.
+  #   @param [Boolean] perspective  see {#perspective?}.
+  #   @param [Float] fov  see {#fov}.
+  #   @return [Sketchup::Camera]
   #
   # @version SketchUp 6.0
-  def initialize(eye, target, up, perspective = true, fov = 30.0)
+  def initialize(*args)
   end
 
   # The is_2d? method indicates if the camera is in 2d mode. 2 point
@@ -456,33 +451,27 @@ class Sketchup::Camera
   def scale_2d
   end
 
-  # The set method sets the camera orientation. You have to set the camera eye,
+  # The {#set} method sets the camera orientation. You have to set the camera eye,
   # target and up parameters at the same time to make sure that you have a valid
   # camera definition.
   #
   # @example
   #   camera = Sketchup::Camera.new
-  #   eye = camera.eye
-  #   target = camera.target
-  #   up = camera.up
-  #   # We just set it to exactly what it was pointing at in the first place
-  #   camera.set eye, target, up
-  #   if (camera)
-  #     UI.messagebox camera.to_s
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   eye = Geom::Point3d.new(20, 5, 30)
+  #   target = Geom::Point3d.new(20, 60, 25)
+  #   up = Z_AXIS
+  #   camera.set(eye, target, up)
   #
-  # @param eye
-  #   See Camera.eye.
+  # @param [Geom::Point3d] eye
+  #   See {#eye}.
   #
-  # @param target
-  #   See Camera.target.
+  # @param [Geom::Point3d] target
+  #   See {#target}.
   #
-  # @param up
-  #   See Camera.up.
+  # @param [Geom::Point3d] up
+  #   See {#up}.
   #
-  # @return camera - the modified camera
+  # @return [Sketchup::Camera]
   #
   # @version SketchUp 6.0
   def set(eye, target, up)

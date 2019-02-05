@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This is the interface to a LayOut document. A {Layout::Document} is the 2D
@@ -44,6 +44,7 @@ class Layout::Document
   VERSION_2016 = nil # Stub value.
   VERSION_2017 = nil # Stub value.
   VERSION_2018 = nil # Stub value.
+  VERSION_2019 = nil # Stub value.
   VERSION_3 = nil # Stub value.
   VERSION_CURRENT = nil # Stub value.
 
@@ -118,11 +119,11 @@ class Layout::Document
   # @raise [ArgumentError] if no {Layout::Page} is passed in and layer is
   #   non-shared
   #
-  # @raise [ArgumentError] if entity already belongs to a {Layout::Document}
+  # @raise [ArgumentError] if page does not belong to the {Layout::Document}
   #
   # @raise [ArgumentError] if layer does not belong to the {Layout::Document}
   #
-  # @raise [ArgumentError] if page does not belong to the {Layout::Document}
+  # @raise [ArgumentError] if entity already belongs to a {Layout::Document}
   #
   # @version LayOut 2018
   def add_entity(*args)
@@ -202,9 +203,9 @@ class Layout::Document
   #   @return [Layout::Document] an unsaved {Layout::Document} based on the
   #     template
   #
-  # @raise [ArgumentError] if the template file could not be found
-  #
   # @raise [RuntimeError] if there was an error reading the template file
+  #
+  # @raise [ArgumentError] if the template file could not be found
   #
   # @version LayOut 2018
   def initialize(*args)

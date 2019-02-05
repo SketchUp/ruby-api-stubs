@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A group is a special type of {Layout::Entity} that does not belong to a
@@ -47,19 +47,19 @@ class Layout::Group < Layout::Entity
   #
   # @raise [ArgumentError] if entities is empty.
   #
-  # @raise [ArgumentError] if entities contains the same {Layout::Entity} more
-  #   than once
-  #
-  # @raise [ArgumentError] if entities contains {Layout::Entity}s on both shared
-  #   and non-shared {Layout::Layer}s, or on non-shared {Layout::Layer}s
-  #   belonging to different {Layout::Page}s
+  # @raise [ArgumentError] if entities contains {Layout::Entity}s that belong to
+  #   different {Layout::Document}s
   #
   # @raise [ArgumentError] if entities contains a mix of {Layout::Entity}s that
   #   belong to a {Layout::Document} and {Layout::Entity}s that don't belong to a
   #   {Layout::Document}
   #
-  # @raise [ArgumentError] if entities contains {Layout::Entity}s that belong to
-  #   different {Layout::Document}s
+  # @raise [ArgumentError] if entities contains {Layout::Entity}s on both shared
+  #   and non-shared {Layout::Layer}s, or on non-shared {Layout::Layer}s
+  #   belonging to different {Layout::Page}s
+  #
+  # @raise [ArgumentError] if entities contains the same {Layout::Entity} more
+  #   than once
   #
   # @return [Layout::Group]
   #
@@ -84,9 +84,9 @@ class Layout::Group < Layout::Entity
   #
   # @raise [ArgumentError] if the {Layout::Group} does not have a scale factor
   #
-  # @raise [Layout::LockedLayerError] if the {Layout::Group} is on a locked layer
-  #
   # @raise [Layout::LockedEntityError] if the {Layout::Group} is locked
+  #
+  # @raise [Layout::LockedLayerError] if the {Layout::Group} is on a locked layer
   #
   # @version LayOut 2018
   def remove_scale_factor(resize_behavior)
@@ -187,11 +187,11 @@ class Layout::Group < Layout::Entity
   #
   # @raise [ArgumentError] if the {Layout::Group} does not have a scale factor
   #
-  # @raise [ArgumentError] if scale_units is not a valid value
+  # @raise [Layout::LockedEntityError] if the {Layout::Group} is locked
   #
   # @raise [Layout::LockedLayerError] if the {Layout::Group} is on a locked layer
   #
-  # @raise [Layout::LockedEntityError] if the {Layout::Group} is locked
+  # @raise [ArgumentError] if scale_units is not a valid value
   #
   # @version LayOut 2018
   def scale_units=(units_format)
@@ -219,24 +219,24 @@ class Layout::Group < Layout::Entity
   #   group = doc.shared_entities.first
   #   group.set_scale_factor(2.0, Layout::Group::RESIZE_BEHAVIOR_BOUNDS)
   #
-  # @param [Integer] units_format
-  #
   # @param [Float] scale_factor
+  #
+  # @param [Integer] units_format
   #
   # @param [Integer] resize_behavior
   #
   # @raise [LockedLayerError] if the {Layout::Group} is on a locked
   #   {Layout::Layer}
   #
-  # @raise [ArgumentError] if a scale factor cannot be set for the
-  #   {Layout::Group}
+  # @raise [LockedEntityError] if the {Layout::Group} is locked
   #
   # @raise [ArgumentError] if scale_factor is an invalid value
   #
   # @raise [ArgumentError] if the {Layout::Group} cannot be assigned a scale
   #   factor because it is already inheriting a scale factor from its parent
   #
-  # @raise [LockedEntityError] if the {Layout::Group} is locked
+  # @raise [ArgumentError] if a scale factor cannot be set for the
+  #   {Layout::Group}
   #
   # @version LayOut 2018
   def set_scale_factor(scale_factor, units_format, resize_behavior)

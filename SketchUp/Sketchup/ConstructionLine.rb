@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The ConstructionLine class contains methods for modifying construction
@@ -214,25 +214,26 @@ class Sketchup::ConstructionLine < Sketchup::Drawingelement
   def start=(arg)
   end
 
-  # The stipple method is used to retrieve the stipple pattern used to display
+  # The {#stipple} method is used to retrieve the stipple pattern used to display
   # the construction line.
   #
   # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
-  #   point1 = Geom::Point3d.new(0,0,0)
-  #   point2 = Geom::Point3d.new(20,20,20)
+  #   point1 = Geom::Point3d.new(0, 0, 0)
+  #   point2 = Geom::Point3d.new(20, 20, 20)
   #   constline = entities.add_cline(point1, point2)
-  #   UI.messagebox(constline.stipple)
+  #   puts constline.stipple
   #
-  # @return pattern - the stipple pattern being used
+  # @return [String]
   #
   # @version SketchUp 6.0
   def stipple
   end
 
-  # The stipple= method is used to set the stipple pattern used to display
+  # The {#stipple=} method is used to set the stipple pattern used to display
   # the construction line. The stipple pattern is given as a string.
+  #
   # Valid strings are:
   # - <code>"."</code> (Dotted Line),
   # - <code>"-"</code> (Short Dashes Line),
@@ -242,13 +243,12 @@ class Sketchup::ConstructionLine < Sketchup::Drawingelement
   # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
-  #   point1 = Geom::Point3d.new(0,0,0)
-  #   point2 = Geom::Point3d.new(20,20,20)
+  #   point1 = Geom::Point3d.new(0, 0, 0)
+  #   point2 = Geom::Point3d.new(20, 20, 20)
   #   constline = entities.add_cline(point1, point2)
   #   constline.stipple = "-.-"
   #
-  # @param pattern
-  #   - the stipple pattern to use
+  # @param [String, Integer] pattern
   #
   # @version SketchUp 6.0
   def stipple=(pattern)

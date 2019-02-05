@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A {Layout::TableCell} is a single cell from a table that contains data.
@@ -65,10 +65,10 @@ class Layout::TableCell
   #
   # @param [Layout::Entity] entity
   #
-  # @raise [LockedEntityError] if the {Layout::Table} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::Table} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::Table} is locked
   #
   # @version LayOut 2018
   def data=(entity)
@@ -118,10 +118,10 @@ class Layout::TableCell
   # @raise [ArgumentError] if the cell is invalid due to residing within a
   #   merged cell
   #
-  # @raise [LockedEntityError] if the {Layout::Table} is locked
-  #
   # @raise [LockedLayerError] if the {Layout::Table} is on a locked
   #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::Table} is locked
   #
   # @version LayOut 2018
   def rotation=(cell_rotation)

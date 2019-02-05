@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2017 Trimble Inc.
+# Copyright:: Copyright 2019 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The UI module contains a number of methods for creating simple UI elements
@@ -73,6 +73,10 @@ module UI
   # @param [String] filename
   #   Filename for an image.
   #
+  # @param [Integer] hot_x
+  #   An x coordinate that is the "hotpoint" for the cursor
+  #   computed from the left edge of your cursor image.
+  #
   # @param [Integer] hot_y
   #   A y coordinate that is the "hotpoint" for the cursor
   #   computed from the top edge of the of your cursor image.
@@ -80,10 +84,6 @@ module UI
   #   identify the hotpoint of the cursor at 5 pixels from
   #   the left edge of your cursor image and 10 pixels from
   #   the top edge of your cursor image.
-  #
-  # @param [Integer] hot_x
-  #   An x coordinate that is the "hotpoint" for the cursor
-  #   computed from the left edge of your cursor image.
   #
   # @return [Integer] ID associated with the cursor
   #
@@ -160,7 +160,7 @@ module UI
   def self.inspector_names
   end
 
-  # The {#menu} method retrieves a SketchUp's menu object with a given name. This
+  # The {.menu} method retrieves a SketchUp's menu object with a given name. This
   # is the first step toward adding your own custom items to the bottom
   # of SketchUp's menus.
   #
@@ -278,6 +278,9 @@ module UI
   # @param [String] title
   #   The title to apply to the open dialog box.
   #
+  # @param [String] directory
+  #   The default directory for the open panel.
+  #
   # @param [String] filename
   #   The default filename for the open panel. On Windows, you
   #   can alternatively pass a wildcard filter using this
@@ -288,9 +291,6 @@ module UI
   #   Also multiple wildcard filters can be combined into a
   #   single line using a semicolon-separated list in the
   #   filter field: ui_name|wildcard1;wildcard2||.
-  #
-  # @param [String] directory
-  #   The default directory for the open panel.
   #
   # @return [String] the full path and name of the file selected, or
   #   nil if the dialog was canceled.
@@ -377,6 +377,9 @@ module UI
   # @param [String] title
   #   The title to apply to the save dialog box.
   #
+  # @param [String] directory
+  #   The default directory for the save panel.
+  #
   # @param [String] filename
   #   The default filename for the save panel. On Windows, you
   #   can alternatively pass a mask, like "*.txt", to have all
@@ -384,9 +387,6 @@ module UI
   #   to display, you can supply multiple masks for the
   #   filename and separate them with a semicolon, like this:
   #   "*.txt;*.doc".
-  #
-  # @param [String] directory
-  #   The default directory for the save panel.
   #
   # @return [String] the full path and name of the file
   #   selected or nil if the dialog was canceled.
@@ -580,12 +580,12 @@ module UI
   #   # Beep once after 10 seconds.
   #   id = UI.start_timer(10, false) { UI.beep }
   #
+  # @param [Numeric] seconds
+  #   The time in seconds before your code should be called.
+  #
   # @param [Boolean] repeat
   #   true if you want the timer to repeat, false
   #   (or omit) if you do not want it to repeat.
-  #
-  # @param [Numeric] seconds
-  #   The time in seconds before your code should be called.
   #
   # @return [Integer] a timer ID
   #
