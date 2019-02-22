@@ -116,7 +116,7 @@ Now it adds a space between the number and the unit indicator. If your extension
 * Added {Layout::SketchUpModel#dash_scale=} to set the scale value of stipples for the SketchUp Model Ref. A value at or below 0.0 will cause the scale to automatically be determined by the line weight.
 * Fix documentation of {Layout::Path#append_point}. When appending a bezier path segment, the params should have been (`control_1, control_2, point`) and not (`point, control_1, control_2`).
 
-## Updated Chromium (CEF), used i {UI::HtmlDialog}
+## Updated Chromium (CEF), used in {UI::HtmlDialog}
 
 * **SketchUp 2019:** Chrome/64.0.3282.119
 * **SketchUp 2018:** Chrome/56.0.2924.76
