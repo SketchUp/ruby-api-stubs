@@ -246,7 +246,7 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #   object if successful
   #
   # @version SketchUp 7.0
-  def load_from_url(url, load_handler)
+  def load_from_url(url, load_handler = nil)
   end
 
   # The purge_unused method is used to remove the unused component definitions.

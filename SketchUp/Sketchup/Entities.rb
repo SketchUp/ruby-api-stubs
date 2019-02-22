@@ -254,7 +254,7 @@ class Sketchup::Entities
   #   successful
   #
   # @version SketchUp 6.0
-  def add_curve(pts_or_array)
+  def add_curve(*pts_or_array)
   end
 
   # The {#add_dimension_linear} method adds a linear dimension to the entities.
@@ -433,7 +433,7 @@ class Sketchup::Entities
   # @return [Sketchup::Face] a Face object if successful
   #
   # @version SketchUp 6.0
-  def add_face(some_entities)
+  def add_face(*some_entities)
   end
 
   # The {#add_faces_from_mesh} method is used to add Face objects to the
@@ -509,7 +509,7 @@ class Sketchup::Entities
   # @return [Sketchup::Group] the new group
   #
   # @version SketchUp 6.0
-  def add_group(entities)
+  def add_group(*entities)
   end
 
   # The add_image method is used to add an image to the collection of entities.
@@ -546,7 +546,7 @@ class Sketchup::Entities
   # @return [Sketchup::Image] an Image object if successful.
   #
   # @version SketchUp 6.0
-  def add_image(filename, point, width, height)
+  def add_image(filename, point, width, height = "relative to aspect ratio")
   end
 
   # The add_instance method adds a component instance to the collection of
@@ -839,7 +839,7 @@ class Sketchup::Entities
   # @return [nil]
   #
   # @version SketchUp 6.0
-  def erase_entities(entities)
+  def erase_entities(*entities)
   end
 
   # The {#fill_from_mesh} method is used to add faces and edges to the collection

@@ -219,10 +219,10 @@ module UI
   #     UI.messagebox('SketchUp likes cheese too!')
   #   end
   #
-  # @param [String] message
+  # @param message [String]
   #   The message that you want to display.
   #
-  # @param [Integer] type
+  # @param type [Integer]
   #   The message box type, which will be a constant from
   #   the list in the method comments.
   #
@@ -251,7 +251,7 @@ module UI
   # @example
   #   status = UI.openURL("http://www.sketchup.com")
   #
-  # @param [String] url
+  # @param url [String]
   #
   # @return [Boolean]
   #
@@ -459,7 +459,7 @@ module UI
   #   or nil if the user cancelled.
   #
   # @version SketchUp 2015
-  def self.select_directory(options)
+  def self.select_directory(options = {})
   end
 
   # The set_cursor method is used to change the cursor to a new cursor with a
@@ -650,8 +650,6 @@ module UI
   #
   # @param [String] name
   #   The name of a native toolbar.
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #

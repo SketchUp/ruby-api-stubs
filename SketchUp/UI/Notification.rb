@@ -33,7 +33,7 @@ class UI::Notification
   #   notification.icon_name = "/path/to/icon"
   #   notification.show
   #
-  # @param [String] icon_name
+  # @param icon_name [String]
   #   String providing the icon filesystem path.
   #
   # @return [Boolean]
@@ -64,7 +64,7 @@ class UI::Notification
   #   notification.icon_tooltip = "icon Tooltip"
   #   notification.show
   #
-  # @param [String] icon_tooltip
+  # @param icon_tooltip [String]
   #   String providing the new icon Tooltip.
   #
   # @return [Boolean]
@@ -121,7 +121,7 @@ class UI::Notification
   #   notification.message = "Hello world"
   #   notification.show
   #
-  # @param [String] message
+  # @param message [String]
   #   String providing the new message.
   #
   # @return [Boolean]
@@ -140,10 +140,10 @@ class UI::Notification
   #   end
   #   notification.show
   #
-  # @param [String] title
+  # @param title [String]
   #   Sets the title of the button.
   #
-  # @param [Block] block
+  # @param block [Block]
   #   Sets the action callback, this will be called when
   #   the user clicks on the dismiss button.
   #
@@ -181,10 +181,10 @@ class UI::Notification
   #   end
   #   notification.show
   #
-  # @param [String] title
+  # @param title [String]
   #   Sets the title of the button.
   #
-  # @param [Block] block
+  # @param block [Block]
   #   Sets the action callback, this will be called when
   #   the user clicks on the dismiss button.
   #

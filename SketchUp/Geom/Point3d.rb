@@ -250,6 +250,8 @@ class Geom::Point3d
   # @return [Float] the distance between a point and line in
   #   internal units if successful
   #
+  # @note Take care that this method does not return a Length as expected.
+  #
   # @version SketchUp 6.0
   def distance_to_line(line)
   end
@@ -269,6 +271,8 @@ class Geom::Point3d
   #
   # @return [Float] a distance between a point and a plane in
   #   internal units if successful
+  #
+  # @note Take care that this method does not return a Length as expected.
   #
   # @version SketchUp 6.0
   def distance_to_plane(plane)
@@ -401,8 +405,6 @@ class Geom::Point3d
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def on_line?(line)
   end
@@ -417,8 +419,6 @@ class Geom::Point3d
   #   status = point.on_plane?(plane)
   #
   # @param plane
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -539,7 +539,7 @@ class Geom::Point3d
   # @return [Geom::Point3d] the newly transformed point
   #
   # @version SketchUp 6.0
-  def transform(transform)
+  def transform!(transform)
   end
 
   # Apply a Transformation to a point. The point itself is modified.
@@ -556,7 +556,7 @@ class Geom::Point3d
   # @return [Geom::Point3d] the transformed point
   #
   # @version SketchUp 6.0
-  def transform!(transform)
+  def transform(transform)
   end
 
   # The vector_to team method retrieves the vector between points.

@@ -291,7 +291,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   # @return [Sketchup::UVHelper] a UVHelper object
   #
   # @version SketchUp 6.0
-  def get_UVHelper(front, back, texturewriter)
+  def get_UVHelper(front, back, texturewriter = nil)
   end
 
   # The get_glued_instances method returns an Array any ComponentInstances
@@ -475,7 +475,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   flags = kPoints | kUVQFront | kUVQBack | kNormals # equals to 7
   #   mesh = face.mesh(flags)
   #
-  # @param [Integer] flags
+  # @param flags [Integer]
   #   One or more flags used to generate a mesh.
   #
   # @return [Geom::PolygonMesh]

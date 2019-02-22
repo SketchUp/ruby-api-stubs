@@ -233,8 +233,6 @@ class UI::Toolbar
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def visible?
   end

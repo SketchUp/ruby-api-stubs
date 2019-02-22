@@ -223,7 +223,7 @@ class Sketchup::View
   #   The item you are going to draw, one of the constants
   #   from the comments, such as +GL_LINES+.
   #
-  # @param [Array<Geom::Point3d>] points
+  # @param points [Array<Geom::Point3d>]
   #
   # @return [Sketchup::View]
   #
@@ -526,8 +526,6 @@ class Sketchup::View
   #   model = Sketchup.active_model
   #   view = model.active_view
   #   status = view.inference_locked
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #

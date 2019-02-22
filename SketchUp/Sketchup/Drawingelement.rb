@@ -87,8 +87,6 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def casts_shadows?
   end
@@ -163,8 +161,6 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #   face = entities.add_face pts
   #   status = face.hidden?
   #   UI.messagebox "hidden? " + status.to_s
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -335,8 +331,6 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def receives_shadows?
   end
@@ -386,8 +380,6 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #   UI.messagebox "Click OK to Hide the Box"
   #   face.visible = false
   #   UI.messagebox "Is the face visible? " + face.visible?.to_s
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #

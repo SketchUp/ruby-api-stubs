@@ -118,8 +118,6 @@ module Sketchup
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 7.0
   def self.break_edges?
   end
@@ -156,8 +154,6 @@ module Sketchup
   #
   # @example
   #   debug_mode = Sketchup.debug_mode?
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -288,8 +284,6 @@ module Sketchup
   #
   # @example
   #   is_on = Sketchup.fix_shadow_strings?
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -486,7 +480,7 @@ module Sketchup
   #     UI.messagebox("Error during unzip: " + error)
   #   end
   #
-  # @param [String] filename
+  # @param filename [String]
   #   The path to the RBZ or ZIP file to install.
   #
   # @raise [Exception] If the archive cannot be installed.
@@ -514,8 +508,6 @@ module Sketchup
   #   else
   #     # Load 32bit binaries.
   #   end
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -548,8 +540,6 @@ module Sketchup
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 7.0
   def self.is_pro?
   end
@@ -562,8 +552,6 @@ module Sketchup
   #
   # @param [String] filename
   #   A filename string.
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -697,8 +685,6 @@ module Sketchup
   #
   # @example
   #   is_disabled = Sketchup.plugins_disabled?
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -1055,7 +1041,7 @@ module Sketchup
   # @example
   #   result = Sketchup.send_action("selectArcTool:")
   #
-  # @param [String, Integer] action
+  # @param action [String, Integer]
   #   The action to be performed.
   #
   # @return [Boolean] +true+ if successful, +false+ if unsuccessful
@@ -1282,7 +1268,7 @@ module Sketchup
   # @example
   #   result = Sketchup.write_default("section", "key", "my_value")
   #
-  # @param [String] section
+  # @param section [String]
   #   A section in a .plist file (Mac) or the registry
   #   (Windows).
   #

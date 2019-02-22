@@ -150,12 +150,10 @@ module Geom
   #   line = Geom.intersect_plane_plane(plane1, plane2)
   #
   # @param [Array(Geom::Point3d, Geom::Point3d)] plane1
-  #   The first plane to
-  #   intersect
+  #   The first plane to intersect
   #
   # @param [Array(Geom::Point3d, Geom::Point3d)] plane2
-  #   The second plane to
-  #   intersect
+  #   The second plane to intersect
   #
   # @return [Array(Geom::Point3d, Geom::Vector3d)] A line where the planes
   #   intersect if successful. Returns +nil+ if the planes do not intersect.

@@ -118,7 +118,7 @@ class Sketchup::Entity
   #   if successful, or nil if there is no attribute dictionary
   #
   # @version SketchUp 6.0
-  def attribute_dictionary(name, create)
+  def attribute_dictionary(name, create = false)
   end
 
   # The {#delete_attribute} method is used to delete an attribute from an entity.
@@ -186,8 +186,6 @@ class Sketchup::Entity
   #   face = entities.add_face pts
   #   entity1 = entities[1]
   #   status = entity1.deleted?
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -529,8 +527,6 @@ class Sketchup::Entity
   #   face = entities.add_face pts
   #   entity1 = entities[1]
   #   status = entity1.valid?
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #

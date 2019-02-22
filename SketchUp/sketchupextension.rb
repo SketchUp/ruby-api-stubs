@@ -220,8 +220,6 @@ class SketchupExtension
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 8.0 M2
   def load_on_start?
   end
@@ -234,8 +232,6 @@ class SketchupExtension
   #   UI.messagebox("loaded? is false: #{ext.loaded?.to_s}")
   #   Sketchup.register_extension(ext, true)
   #   UI.messagebox("loaded? is now true: #{ext.loaded?.to_s}")
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -284,8 +280,6 @@ class SketchupExtension
   #   UI.messagebox("My registered? is false: #{ext.registered?.to_s}")
   #   Sketchup.register_extension(ext, true)
   #   UI.messagebox("Now registered? is now true: #{ext.registered?.to_s}")
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #

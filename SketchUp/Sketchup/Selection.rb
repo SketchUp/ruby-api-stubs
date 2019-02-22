@@ -35,7 +35,7 @@ class Sketchup::Selection
   #   selection.add(entities.to_a)
   #   p selection[0]
   #
-  # @param [Integer] index
+  # @param index [Integer]
   #   The index of the Entity object to retrieve.
   #
   # @return [Sketchup::Entitiy, nil]
@@ -73,7 +73,7 @@ class Sketchup::Selection
   # @return [Integer] the number of Entity objects added
   #
   # @version SketchUp 6.0
-  def add(ents_or_array)
+  def add(*ents_or_array)
   end
 
   # The add_observer method is used to add an observer to the selection object.
@@ -100,7 +100,7 @@ class Sketchup::Selection
   #   selection.add(entities.to_a)
   #   p selection.at(0)
   #
-  # @param [Integer] index
+  # @param index [Integer]
   #   The index of the Entity object to retrieve.
   #
   # @return [Sketchup::Entitiy, nil]
@@ -134,9 +134,7 @@ class Sketchup::Selection
   #   selection.add(entity)
   #   p selection.contains?(entity)
   #
-  # @param [Sketchup::Entity] entity
-  #
-  # @return [Boolean]
+  # @param entity [Sketchup::Entity]
   #
   # @return [Boolean]
   #
@@ -189,8 +187,6 @@ class Sketchup::Selection
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def empty?
   end
@@ -221,9 +217,7 @@ class Sketchup::Selection
   #   selection.add(entity)
   #   p selection.include?(entity)
   #
-  # @param [Sketchup::Entity] entity
-  #
-  # @return [Boolean]
+  # @param entity [Sketchup::Entity]
   #
   # @return [Boolean]
   #
@@ -242,8 +236,6 @@ class Sketchup::Selection
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def is_curve?
   end
@@ -254,8 +246,6 @@ class Sketchup::Selection
   # @example
   #   selection.add entity
   #   status = selection.is_surface
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -331,7 +321,7 @@ class Sketchup::Selection
   # @return [Integer] the number of Entity objects removed
   #
   # @version SketchUp 6.0
-  def remove(ents_or_array)
+  def remove(*ents_or_array)
   end
 
   # The remove_observer method is used to remove an observer from the selection
@@ -373,8 +363,6 @@ class Sketchup::Selection
   #
   # @example
   #   status = selection.single_object
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -424,7 +412,7 @@ class Sketchup::Selection
   # @return [Integer] the number of Entity objects changed
   #
   # @version SketchUp 6.0
-  def toggle(ents_or_array)
+  def toggle(*ents_or_array)
   end
 
 end

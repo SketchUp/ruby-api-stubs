@@ -65,11 +65,11 @@ class UI::WebDialog
   #   # JavaScript inside the page loaded into the WebDialog:
   #   # window.location = 'skp:ruby_messagebox@Hello World';
   #
-  # @param callback_name
+  # @param callback_name [String]
   #   The name of the callback method to be invoked from the
   #   webdialog.
   #
-  # @return nil
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   #
@@ -377,8 +377,6 @@ class UI::WebDialog
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 7.0
   def navigation_buttons_enabled?
   end
@@ -588,8 +586,6 @@ class UI::WebDialog
   #
   # @example
   #   vis = dialog.visible?
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #
