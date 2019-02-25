@@ -134,8 +134,6 @@ class Layout::SketchUpModel < Layout::Entity
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version LayOut 2018
   def current_scene_modified?
   end
@@ -201,8 +199,6 @@ class Layout::SketchUpModel < Layout::Entity
   #   bounds = Geom::Bounds2d.new(1, 1, 3, 3)
   #   model = Layout::SketchUpModel.new("C:/Path/to/model.skp", bounds)
   #   displayed = model.display_background?
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -329,8 +325,6 @@ class Layout::SketchUpModel < Layout::Entity
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version LayOut 2018
   def perspective?
   end
@@ -361,8 +355,6 @@ class Layout::SketchUpModel < Layout::Entity
   #   bounds = Geom::Bounds2d.new(1, 1, 3, 3)
   #   model = Layout::SketchUpModel.new("C:/Path/to/model.skp", bounds)
   #   will_scale = model.preserve_scale_on_resize?
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -438,8 +430,6 @@ class Layout::SketchUpModel < Layout::Entity
   #   bounds = Geom::Bounds2d.new(1, 1, 3, 3)
   #   model = Layout::SketchUpModel.new("C:/Path/to/model.skp", bounds)
   #   model.render if model.render_needed?
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #

@@ -653,8 +653,6 @@ module UI
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def self.toolbar_visible?(name)
   end

@@ -184,8 +184,6 @@ class Sketchup::Texture < Sketchup::Entity
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def valid?
   end

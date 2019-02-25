@@ -74,8 +74,6 @@ class Layout::Grid
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version LayOut 2018
   def print?
   end
@@ -87,8 +85,6 @@ class Layout::Grid
   #   doc = Layout::Document.open("C:/path/to/document.layout")
   #   grid = doc.grid
   #   show = grid.show?
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -106,8 +102,6 @@ class Layout::Grid
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version LayOut 2018
   def show_major?
   end
@@ -119,8 +113,6 @@ class Layout::Grid
   #   doc = Layout::Document.open("C:/path/to/document.layout")
   #   grid = doc.grid
   #   show_minor = grid.show_minor?
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #

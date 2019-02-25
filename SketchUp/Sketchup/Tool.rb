@@ -121,8 +121,6 @@ class Sketchup::Tool
   #
   # @return enable - true if you want the VCB enabled
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def enableVCB?
   end

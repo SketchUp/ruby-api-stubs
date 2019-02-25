@@ -349,8 +349,6 @@ class UI::HtmlDialog
   #
   # @return [Boolean] Returns true if the dialog is open.
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 2017
   def visible?
   end

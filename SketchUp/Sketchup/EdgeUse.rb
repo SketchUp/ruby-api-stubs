@@ -182,8 +182,6 @@ class Sketchup::EdgeUse < Sketchup::Entity
   #
   # @return boolean - true if reversed, false if not reversed.
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def reversed?
   end

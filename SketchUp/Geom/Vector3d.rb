@@ -423,8 +423,6 @@ class Geom::Vector3d
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def parallel?(vector2)
   end
@@ -439,8 +437,6 @@ class Geom::Vector3d
   #
   # @param [Geom::Vector3d] vector2
   #   A Vector3d object.
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -483,8 +479,6 @@ class Geom::Vector3d
   #
   # @param [Geom::Vector3d] vector2
   #   A Vector3d object.
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -593,8 +587,6 @@ class Geom::Vector3d
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def unitvector?
   end
@@ -609,8 +601,6 @@ class Geom::Vector3d
   #   # A non-zero length vector is valid
   #   vector = Geom::Vector3d.new(0,0,1)
   #   status = vector.valid?
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #

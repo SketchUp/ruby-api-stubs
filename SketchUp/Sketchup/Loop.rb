@@ -28,8 +28,6 @@ class Sketchup::Loop < Sketchup::Entity
   #
   # @return status - true if convex, false if not convex.
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def convex?
   end
@@ -112,8 +110,6 @@ class Sketchup::Loop < Sketchup::Entity
   #
   # @return status - true if the loop is an outer loop, false if it
   #   is not an outer loop.
-  #
-  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def outer?

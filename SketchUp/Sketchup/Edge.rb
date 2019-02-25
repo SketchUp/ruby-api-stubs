@@ -491,8 +491,6 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def used_by?(element)
   end

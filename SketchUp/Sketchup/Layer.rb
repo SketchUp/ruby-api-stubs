@@ -255,8 +255,6 @@ class Sketchup::Layer < Sketchup::Entity
   #
   # @return true if the layer is visible
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def visible?
   end

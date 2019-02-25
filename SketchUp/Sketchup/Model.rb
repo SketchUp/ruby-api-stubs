@@ -847,8 +847,6 @@ class Sketchup::Model
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 7.0
   def mipmapping?
   end
@@ -862,8 +860,6 @@ class Sketchup::Model
   #   # Add a group to force the status return value to be true
   #   entities.add_group
   #   status = model.modified?
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -1475,8 +1471,6 @@ class Sketchup::Model
   #   else
   #     UI.messagebox('This model is NOT valid.')
   #   end
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #

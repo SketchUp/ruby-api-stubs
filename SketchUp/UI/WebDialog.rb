@@ -377,8 +377,6 @@ class UI::WebDialog
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 7.0
   def navigation_buttons_enabled?
   end
@@ -588,8 +586,6 @@ class UI::WebDialog
   #
   # @example
   #   vis = dialog.visible?
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #

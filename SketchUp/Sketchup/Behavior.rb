@@ -78,8 +78,6 @@ class Sketchup::Behavior < Sketchup::Entity
   #   the camera, false if the component is not set to always
   #   face camera.
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def always_face_camera?
   end
@@ -124,8 +122,6 @@ class Sketchup::Behavior < Sketchup::Entity
   # @return status - the status of the cuts_opening behavior
   #   (either true or false)
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def cuts_opening?
   end
@@ -168,8 +164,6 @@ class Sketchup::Behavior < Sketchup::Entity
   #
   # @return status - the status of the 2D behavior (either true or
   #   false)
-  #
-  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def is2d?
@@ -225,8 +219,6 @@ class Sketchup::Behavior < Sketchup::Entity
   # @return scale_mask - an integer describing which scale tool
   #   handles are hidden.
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 7.0
   def no_scale_mask?
   end
@@ -274,8 +266,6 @@ class Sketchup::Behavior < Sketchup::Entity
   #   component's current position as though the component
   #   were facing the sun. False to cause the shadow to be
   #   cast from the component's current position.
-  #
-  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def shadows_face_sun?

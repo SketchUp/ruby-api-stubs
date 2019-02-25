@@ -69,8 +69,6 @@ class Sketchup::Console
   #
   # @return true if visible, false if not.
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 2014
   def visible?
   end

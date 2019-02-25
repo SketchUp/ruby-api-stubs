@@ -127,8 +127,6 @@ class Layout::Path < Layout::Entity
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version LayOut 2018
   def closed?
   end

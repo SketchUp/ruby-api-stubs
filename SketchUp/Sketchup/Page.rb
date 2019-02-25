@@ -155,8 +155,6 @@ class Sketchup::Page < Sketchup::Entity
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 2018
   def include_in_animation?
   end
@@ -392,8 +390,6 @@ class Sketchup::Page < Sketchup::Entity
   #   the page, false if you are not storing this property
   #   with the page.
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def use_axes?
   end
@@ -430,8 +426,6 @@ class Sketchup::Page < Sketchup::Entity
   #   the page, false if you are not storing this property
   #   with the page.
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def use_camera?
   end
@@ -467,8 +461,6 @@ class Sketchup::Page < Sketchup::Entity
   # @return status - true if you are storing the this property with
   #   the page, false if you are not storing this property
   #   with the page.
-  #
-  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def use_hidden?
@@ -507,8 +499,6 @@ class Sketchup::Page < Sketchup::Entity
   #   the page, false if you are not storing this property
   #   with the page.
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def use_hidden_layers?
   end
@@ -545,8 +535,6 @@ class Sketchup::Page < Sketchup::Entity
   # @return status - true if you are storing the this property with
   #   the page, false if you are not storing this property
   #   with the page.
-  #
-  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def use_rendering_options?
@@ -585,8 +573,6 @@ class Sketchup::Page < Sketchup::Entity
   #   the page, false if you are not storing this property
   #   with the page.
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def use_section_planes?
   end
@@ -623,8 +609,6 @@ class Sketchup::Page < Sketchup::Entity
   #   the page, false if you are not storing this property
   #   with the page.
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def use_shadow_info?
   end
@@ -658,8 +642,6 @@ class Sketchup::Page < Sketchup::Entity
   # @return status - true if you are storing the this property with
   #   the page, false if you are not storing this property
   #   with the page.
-  #
-  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def use_style?

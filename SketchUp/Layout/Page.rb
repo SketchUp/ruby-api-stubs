@@ -79,8 +79,6 @@ class Layout::Page
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version LayOut 2018
   def in_presentation?
   end
@@ -109,8 +107,6 @@ class Layout::Page
   # @param [Layout::Layer] layer
   #
   # @raise [ArgumentError] if layer and page are not in the same document
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #

@@ -177,8 +177,6 @@ class Layout::Document
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version LayOut 2018
   def grid_snap_enabled?
   end
@@ -243,8 +241,6 @@ class Layout::Document
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")
   #   enabled = doc.object_snap_enabled?
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #

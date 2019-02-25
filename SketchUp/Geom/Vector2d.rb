@@ -295,8 +295,6 @@ class Geom::Vector2d
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version LayOut 2018
   def parallel?(vector)
   end
@@ -311,8 +309,6 @@ class Geom::Vector2d
   #   status = vector.perpendicular?(vector2)
   #
   # @param [Geom::Vector2d] vector
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -355,8 +351,6 @@ class Geom::Vector2d
   #   status = vector.sime_direction?(vector2)
   #
   # @param [Geom::Vector2d] vector
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -455,8 +449,6 @@ class Geom::Vector2d
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version LayOut 2018
   def unit_vector?
   end
@@ -467,8 +459,6 @@ class Geom::Vector2d
   # @example
   #   vector = Geom::Vector2d.new(0, 4)
   #   status = vector.valid
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #

@@ -183,8 +183,6 @@ class Sketchup::Importer
   #
   # @return supports_options - a boolean
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def supports_options?
   end

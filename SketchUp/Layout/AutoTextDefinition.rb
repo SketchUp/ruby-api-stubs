@@ -175,8 +175,6 @@ class Layout::AutoTextDefinition
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version LayOut 2018
   def display_file_extension?
   end
@@ -213,8 +211,6 @@ class Layout::AutoTextDefinition
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version LayOut 2018
   def display_full_path?
   end
@@ -240,8 +236,6 @@ class Layout::AutoTextDefinition
   #   definitions.each { |auto_text|
   #     definitions.remove(auto_text) unless auto_text.mandatory?
   #   }
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #

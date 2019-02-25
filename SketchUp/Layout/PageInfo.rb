@@ -250,8 +250,6 @@ class Layout::PageInfo
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version LayOut 2018
   def print_margins?
   end
@@ -275,8 +273,6 @@ class Layout::PageInfo
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")
   #   paper_color = doc.page_info.print_paper_color?
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -328,8 +324,6 @@ class Layout::PageInfo
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")
   #   show_margins = doc.page_info.show_margins?
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #

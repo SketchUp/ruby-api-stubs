@@ -401,8 +401,6 @@ class Geom::Point3d
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def on_line?(line)
   end
@@ -417,8 +415,6 @@ class Geom::Point3d
   #   status = point.on_plane?(plane)
   #
   # @param plane
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #

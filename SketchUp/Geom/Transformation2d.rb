@@ -168,8 +168,6 @@ class Geom::Transformation2d
   #
   # @return [Boolean] +true+ if the transform is the identity
   #
-  # @return [Boolean]
-  #
   # @version LayOut 2018
   def identity?
   end

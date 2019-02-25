@@ -118,8 +118,6 @@ module Sketchup
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 7.0
   def self.break_edges?
   end
@@ -156,8 +154,6 @@ module Sketchup
   #
   # @example
   #   debug_mode = Sketchup.debug_mode?
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -288,8 +284,6 @@ module Sketchup
   #
   # @example
   #   is_on = Sketchup.fix_shadow_strings?
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -517,8 +511,6 @@ module Sketchup
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 2015
   def self.is_64bit?
   end
@@ -548,8 +540,6 @@ module Sketchup
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 7.0
   def self.is_pro?
   end
@@ -562,8 +552,6 @@ module Sketchup
   #
   # @param [String] filename
   #   A filename string.
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -697,8 +685,6 @@ module Sketchup
   #
   # @example
   #   is_disabled = Sketchup.plugins_disabled?
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #

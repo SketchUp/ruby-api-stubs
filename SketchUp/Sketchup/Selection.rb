@@ -194,8 +194,6 @@ class Sketchup::Selection
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def empty?
   end
@@ -230,8 +228,6 @@ class Sketchup::Selection
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @see #contains?
   #
   # @version SketchUp 6.0
@@ -247,8 +243,6 @@ class Sketchup::Selection
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def is_curve?
   end
@@ -259,8 +253,6 @@ class Sketchup::Selection
   # @example
   #   selection.add entity
   #   status = selection.is_surface
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -383,8 +375,6 @@ class Sketchup::Selection
   #
   # @example
   #   status = selection.single_object
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #

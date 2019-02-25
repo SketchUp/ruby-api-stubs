@@ -144,8 +144,6 @@ class Layout::Style
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version LayOut 2018
   def self.arrow_type_filled?(arrow_type)
   end

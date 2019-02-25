@@ -112,8 +112,6 @@ class Layout::Layer
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version LayOut 2018
   def locked?
   end
@@ -210,8 +208,6 @@ class Layout::Layer
   #   doc = Layout::Document.open("C:/path/to/document.layout")
   #   layers = doc.layers
   #   is_shared = layers.first.shared?
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #

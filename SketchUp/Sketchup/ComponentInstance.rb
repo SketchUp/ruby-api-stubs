@@ -100,8 +100,6 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 8.0
   def equals?(instance)
   end
@@ -260,8 +258,6 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def locked?
   end
@@ -297,8 +293,6 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   transformation = Geom::Transformation.new([0,0,0])
   #   componentinstance = entities.add_instance(definition, transformation)
   #   status = componentinstance.manifold?
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #

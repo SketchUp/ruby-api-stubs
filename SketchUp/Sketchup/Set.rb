@@ -121,8 +121,6 @@ class Sketchup::Set
   # @return status - true if the set is empty, false if it is not
   #   empty.
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def empty?
   end

@@ -112,8 +112,6 @@ class Sketchup::Curve < Sketchup::Entity
   # @return True if this edge was originally created by the polygon
   #   tool, otherwise false.
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 7.1 M1
   def is_polygon?
   end

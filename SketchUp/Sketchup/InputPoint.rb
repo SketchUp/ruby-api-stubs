@@ -145,8 +145,6 @@ class Sketchup::InputPoint
   # @return status - true if the draw method will draw something,
   #   false if the draw method has nothing to draw
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def display?
   end
@@ -369,8 +367,6 @@ class Sketchup::InputPoint
   #
   # @return status - true if the input point has valid data, false
   #   if it does not have valid data.
-  #
-  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def valid?

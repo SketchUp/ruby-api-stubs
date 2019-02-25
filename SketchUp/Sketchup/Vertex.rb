@@ -57,8 +57,6 @@ class Sketchup::Vertex < Sketchup::Entity
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def curve_interior?
   end
@@ -134,8 +132,6 @@ class Sketchup::Vertex < Sketchup::Entity
   #
   # @param [Sketchup::Edge, Sketchup::Face] face_or_edge
   #   A Face or Edge ot test against.
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #

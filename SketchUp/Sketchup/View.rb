@@ -529,8 +529,6 @@ class Sketchup::View
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def inference_locked?
   end

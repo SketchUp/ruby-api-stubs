@@ -240,8 +240,6 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def group?
   end
@@ -269,8 +267,6 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def hidden?
   end
@@ -287,8 +283,6 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #     UI.messagebox status.to_s
   #     UI.messagebox "Component definition does not define an image"
   #   end
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -362,8 +356,6 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   definitions = model.definitions
   #   componentdefinition = definitions.load path
   #   status = componentdefinition.internal?
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #

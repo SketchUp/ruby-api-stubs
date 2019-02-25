@@ -38,8 +38,6 @@ class Sketchup::SectionPlane < Sketchup::Drawingelement
   #
   # @return boolean - true if active
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 2014
   def active?
   end

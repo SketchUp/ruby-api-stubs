@@ -258,8 +258,6 @@ class Geom::Transformation
   #
   # @return [Boolean] +true+ if the transformation is the identity
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def identity?
   end

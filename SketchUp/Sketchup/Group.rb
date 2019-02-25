@@ -178,8 +178,6 @@ class Sketchup::Group < Sketchup::Drawingelement
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 8.0
   def equals?(group)
   end
@@ -301,8 +299,6 @@ class Sketchup::Group < Sketchup::Drawingelement
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 6.0
   def locked?
   end
@@ -338,8 +334,6 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   transformation = Geom::Transformation.new([0,0,0])
   #   group = entities.add_instance(definition, transformation)
   #   status = group.manifold?
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #

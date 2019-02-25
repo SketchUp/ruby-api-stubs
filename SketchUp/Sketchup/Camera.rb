@@ -258,8 +258,6 @@ class Sketchup::Camera
   #
   # @return bool - true if vertical, false otherwise
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 2015
   def fov_is_height?
   end
@@ -389,8 +387,6 @@ class Sketchup::Camera
   #
   # @return Boolean - true if camera is in 2d mode, false otherwise
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 2015
   def is_2d?
   end
@@ -429,8 +425,6 @@ class Sketchup::Camera
   #   end
   #
   # @return status - true if perspective, false if orthographic
-  #
-  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def perspective?

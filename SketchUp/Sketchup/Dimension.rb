@@ -101,8 +101,6 @@ class Sketchup::Dimension < Sketchup::Drawingelement
   # @return status - true if text is aligned to the dimension.
   #   False if dimension text is aligned to the screen.
   #
-  # @return [Boolean]
-  #
   # @version SketchUp 2014
   def has_aligned_text?
   end

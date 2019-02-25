@@ -138,8 +138,6 @@ class Layout::Entity
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @version LayOut 2018
   def locked?
   end
@@ -227,8 +225,6 @@ class Layout::Entity
   #   on_shared_layer = entities.first.on_shared_layer?
   #
   # @raise [ArgumentError] if the {Layout::Entity} is not in a {Layout::Document}
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #
