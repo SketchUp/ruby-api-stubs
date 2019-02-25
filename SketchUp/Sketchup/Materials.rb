@@ -193,7 +193,7 @@ class Sketchup::Materials < Sketchup::Entity
   #   materials = Sketchup.active_model.materials
   #   material = materials.load(path)
   #
-  # @param filename [String]
+  # @param [String] filename
   #   the path to the SKM file to load.
   #
   # @raise [RuntimeError] if the material failed to load.

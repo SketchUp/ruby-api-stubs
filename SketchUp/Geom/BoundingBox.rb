@@ -116,6 +116,8 @@ class Geom::BoundingBox
   #
   # @return [Boolean]
   #
+  # @return [Boolean]
+  #
   # @version SketchUp 6.0
   def contains?(point_or_bb)
   end
@@ -193,6 +195,8 @@ class Geom::BoundingBox
   #   boundingbox.add([100, 200, -400], [200, 400, 100])
   #   # This will return false.
   #   boundingbox.empty?
+  #
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -294,6 +298,8 @@ class Geom::BoundingBox
   #   boundingbox.add([100, 200, -400], [200, 400, 100])
   #   # This will return true.
   #   boundingbox.valid?
+  #
+  # @return [Boolean]
   #
   # @return [Boolean]
   #

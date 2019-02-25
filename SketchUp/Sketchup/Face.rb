@@ -475,7 +475,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   flags = kPoints | kUVQFront | kUVQBack | kNormals # equals to 7
   #   mesh = face.mesh(flags)
   #
-  # @param flags [Integer]
+  # @param [Integer] flags
   #   One or more flags used to generate a mesh.
   #
   # @return [Geom::PolygonMesh]

@@ -28,7 +28,7 @@ class Sketchup::Menu
   #
   # @overload add_item(command)
   #
-  #   @param command [UI::Command]
+  #   @param [UI::Command] command
   #   @return [Integer] A unique integer id for the added menu item.
   #
   # @version SketchUp 6.0
@@ -56,7 +56,7 @@ class Sketchup::Menu
   #     UI.messagebox("Hi there!")
   #   }
   #
-  # @param title [String]
+  # @param [String] title
   #   The title of the sub menu.
   #
   # @return [Sketchup::Menu] a Menu object

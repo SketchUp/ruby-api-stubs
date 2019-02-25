@@ -189,6 +189,8 @@ class Sketchup::Entity
   #
   # @return [Boolean]
   #
+  # @return [Boolean]
+  #
   # @version SketchUp 6.0
   def deleted?
   end
@@ -527,6 +529,8 @@ class Sketchup::Entity
   #   face = entities.add_face pts
   #   entity1 = entities[1]
   #   status = entity1.valid?
+  #
+  # @return [Boolean]
   #
   # @return [Boolean]
   #

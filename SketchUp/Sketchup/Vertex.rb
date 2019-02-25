@@ -137,6 +137,8 @@ class Sketchup::Vertex < Sketchup::Entity
   #
   # @return [Boolean]
   #
+  # @return [Boolean]
+  #
   # @version SketchUp 6.0
   def used_by?(face_or_edge)
   end

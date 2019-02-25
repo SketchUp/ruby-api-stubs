@@ -289,7 +289,7 @@ class Geom::Vector3d
   #   vector2 = Geom::Vector3d.new(0, 1, 0)
   #   dot = vector1.dot(vector2)
   #
-  # @param vector [Geom::Vector]
+  # @param [Geom::Vector] vector
   #
   # @return [Float]
   #
@@ -346,7 +346,7 @@ class Geom::Vector3d
   # @example
   #   vector = Geom::Vector3d.new(0,0,1)
   #   out_string = vector.inspect
-  #   puts(out_string)
+  #   puts out_string
   #
   # @return [Geom::Vector3d] the Vector3d object
   #
@@ -423,6 +423,8 @@ class Geom::Vector3d
   #
   # @return [Boolean]
   #
+  # @return [Boolean]
+  #
   # @version SketchUp 6.0
   def parallel?(vector2)
   end
@@ -437,6 +439,8 @@ class Geom::Vector3d
   #
   # @param [Geom::Vector3d] vector2
   #   A Vector3d object.
+  #
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -479,6 +483,8 @@ class Geom::Vector3d
   #
   # @param [Geom::Vector3d] vector2
   #   A Vector3d object.
+  #
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -540,7 +546,7 @@ class Geom::Vector3d
   # @example
   #   vector = Geom::Vector3d.new(0,0,1)
   #   out_string = vector.to_s
-  #   puts(out_string)
+  #   puts out_string
   #
   # @return [String] a string representation of vector
   #
@@ -560,7 +566,7 @@ class Geom::Vector3d
   # @return [Geom::Vector3d] the newly transformed vector
   #
   # @version SketchUp 6.0
-  def transform!(transform)
+  def transform(transform)
   end
 
   # Apply a Transformation to a vector. The vector itself is modified.
@@ -574,7 +580,7 @@ class Geom::Vector3d
   # @return [Geom::Vector3d] the transformed vector
   #
   # @version SketchUp 6.0
-  def transform(transform)
+  def transform!(transform)
   end
 
   # The unitvector? method is used to see if the vector is a unit vector.
@@ -584,6 +590,8 @@ class Geom::Vector3d
   # @example
   #   vector = Geom::Vector3d.new(0,0,1)
   #   status = vector.unitvector?
+  #
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -601,6 +609,8 @@ class Geom::Vector3d
   #   # A non-zero length vector is valid
   #   vector = Geom::Vector3d.new(0,0,1)
   #   status = vector.valid?
+  #
+  # @return [Boolean]
   #
   # @return [Boolean]
   #

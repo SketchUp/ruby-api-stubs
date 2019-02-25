@@ -219,10 +219,10 @@ module UI
   #     UI.messagebox('SketchUp likes cheese too!')
   #   end
   #
-  # @param message [String]
+  # @param [String] message
   #   The message that you want to display.
   #
-  # @param type [Integer]
+  # @param [Integer] type
   #   The message box type, which will be a constant from
   #   the list in the method comments.
   #
@@ -251,7 +251,7 @@ module UI
   # @example
   #   status = UI.openURL("http://www.sketchup.com")
   #
-  # @param url [String]
+  # @param [String] url
   #
   # @return [Boolean]
   #
@@ -650,6 +650,8 @@ module UI
   #
   # @param [String] name
   #   The name of a native toolbar.
+  #
+  # @return [Boolean]
   #
   # @return [Boolean]
   #

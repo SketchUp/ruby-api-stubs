@@ -123,7 +123,7 @@ class Sketchup::Model
   #   layer = layers.add('My Layer')
   #   model.active_layer = layer
   #
-  # @param layer [Sketchup::Layer]
+  # @param [Sketchup::Layer] layer
   #   The layer to be set as the active layer.
   #
   # @return [Sketchup::Layer]
@@ -405,7 +405,7 @@ class Sketchup::Model
   #   description = model.description = "This is a model of a house on the " <<
   #     "North West Corner of 10th and Dolores Street in Carmel, California"
   #
-  # @param description [String]
+  # @param [String] description
   #   the description string to be set.
   #
   # @return [String]
@@ -573,7 +573,7 @@ class Sketchup::Model
   #   entities = model.find_entity_by_persistent_id(id1, id2, id3)
   #   entities = model.find_entity_by_persistent_id([id1, id2, id3])
   #
-  # @param ids_or_array [Array<Integer>]
+  # @param [Array<Integer>] ids_or_array
   #   Pass either a series of ids or a
   #   single array containing persistent ids.
   #
@@ -739,7 +739,7 @@ class Sketchup::Model
   #   # pid_path will look something like this: "658.723"
   #   instance_path = model.instance_path_from_pid_path(pid_path)
   #
-  # @param pid_path [String]
+  # @param [String] pid_path
   #   a string with persistent ids delimited by period.
   #
   # @raise [ArgumentError] if a valid instance path cannot be created from the
@@ -847,6 +847,8 @@ class Sketchup::Model
   #
   # @return [Boolean]
   #
+  # @return [Boolean]
+  #
   # @version SketchUp 7.0
   def mipmapping?
   end
@@ -860,6 +862,8 @@ class Sketchup::Model
   #   # Add a group to force the status return value to be true
   #   entities.add_group
   #   status = model.modified?
+  #
+  # @return [Boolean]
   #
   # @return [Boolean]
   #
@@ -1098,7 +1102,7 @@ class Sketchup::Model
   # @example
   #   model = Sketchup.active_model
   #   # Save the model using the current SketchUp format
-  #   filename = File.join(ENV['Home'], 'Desktop', 'mysketchup.skp')
+  #   filename = File.join(ENV['HOME'], 'Desktop', 'mysketchup.skp')
   #   status = model.save(filename)
   #   # Save the model to the current file using the current SketchUp format
   #   status = model.save
@@ -1471,6 +1475,8 @@ class Sketchup::Model
   #   else
   #     UI.messagebox('This model is NOT valid.')
   #   end
+  #
+  # @return [Boolean]
   #
   # @return [Boolean]
   #

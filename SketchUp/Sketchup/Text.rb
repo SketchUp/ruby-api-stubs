@@ -95,6 +95,8 @@ class Sketchup::Text < Sketchup::Drawingelement
   #
   # @return [Boolean]
   #
+  # @return [Boolean]
+  #
   # @version SketchUp 6.0
   def display_leader?
   end
@@ -103,6 +105,8 @@ class Sketchup::Text < Sketchup::Drawingelement
   #
   # @example
   #   status = text.has_leader
+  #
+  # @return [Boolean]
   #
   # @return [Boolean]
   #

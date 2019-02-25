@@ -28,19 +28,19 @@ class Geom::Transformation
   #
   # @overload axes(origin, xaxis, yaxis, zaxis)
   #
-  #   @param origin [Geom::Point3d]
-  #   @param xaxis  [Geom::Vector3d]
-  #   @param yaxis  [Geom::Vector3d]
-  #   @param zaxis  [Geom::Vector3d]
+  #   @param [Geom::Point3d] origin
+  #   @param [Geom::Vector3d] xaxis
+  #   @param [Geom::Vector3d] yaxis
+  #   @param [Geom::Vector3d] zaxis
   #   @return [Geom::Transformation]
   #
   # @overload axes(origin, xaxis, yaxis)
   #
   #   When the Z axis is omitted and arbitrary axis is computed from the X and Y
   #   axes.
-  #   @param origin [Geom::Point3d]
-  #   @param xaxis  [Geom::Vector3d]
-  #   @param yaxis  [Geom::Vector3d]
+  #   @param [Geom::Point3d] origin
+  #   @param [Geom::Vector3d] xaxis
+  #   @param [Geom::Vector3d] yaxis
   #   @return [Geom::Transformation]
   #
   # @raise [ArgumentError] if any of the vectors are zero length.
@@ -66,11 +66,11 @@ class Geom::Transformation
   #   # This produce a transformation that is a mix of 75% t1 and 25% t2.
   #   t3 = Geom::Transformation.interpolate(t1, t2, 0.25)
   #
-  # @param transform1 [Geom::Transformation]
+  # @param [Geom::Transformation] transform1
   #
-  # @param transform2 [Geom::Transformation]
+  # @param [Geom::Transformation] transform2
   #
-  # @param weight [Float]
+  # @param [Float] weight
   #   A value between 0.0 and 1.0 (see comments).
   #
   # @return [Geom::Transformation]
@@ -90,11 +90,11 @@ class Geom::Transformation
   #   angle = 45.degrees # Return 45 degrees in radians.
   #   transformation = Geom::Transformation.rotation(point, vector, angle)
   #
-  # @param point [Geom::Point3d]
+  # @param [Geom::Point3d] point
   #
-  # @param vector [Geom::Vector3d]
+  # @param [Geom::Vector3d] vector
   #
-  # @param angle [Float]
+  # @param [Float] angle
   #   The angle in radians.
   #
   # @return [Geom::Transformation]
@@ -118,15 +118,15 @@ class Geom::Transformation
   #     transformation expects. Consider using +scaling(xscale, yscale, zscale)+
   #     instead.
   #   With one argument, it does a uniform scale about the origin.
-  #   @param scale [Float] The global scale factor for the transform.
+  #   @param [Float] scale  The global scale factor for the transform.
   #   @return [Geom::Transformation]
   #
   # @overload scaling(xscale, yscale, zscale)
   #
   #   With three arguments, it does a non-uniform scale about the origin.
-  #   @param xscale [Float] The scale factor in the x direction for the transform.
-  #   @param yscale [Float] The scale factor in the y direction for the transform.
-  #   @param zscale [Float] The scale factor in the z direction for the transform.
+  #   @param [Float] xscale  The scale factor in the x direction for the transform.
+  #   @param [Float] yscale  The scale factor in the y direction for the transform.
+  #   @param [Float] zscale  The scale factor in the z direction for the transform.
   #   @return [Geom::Transformation]
   #
   # @overload scaling(point, scale)
@@ -139,10 +139,10 @@ class Geom::Transformation
   # @overload scaling(point, xscale, yscale, zscale)
   #
   #   With four arguments it does a non-uniform scale about an arbitrary point.
-  #   @param point  [Geom::Point3d]
-  #   @param xscale [Float] The scale factor in the x direction for the transform.
-  #   @param yscale [Float] The scale factor in the y direction for the transform.
-  #   @param zscale [Float] The scale factor in the z direction for the transform.
+  #   @param [Geom::Point3d] point
+  #   @param [Float] xscale  The scale factor in the x direction for the transform.
+  #   @param [Float] yscale  The scale factor in the y direction for the transform.
+  #   @param [Float] zscale  The scale factor in the z direction for the transform.
   #   @return [Geom::Transformation]
   #
   # @version SketchUp 6.0
@@ -158,12 +158,12 @@ class Geom::Transformation
   #
   # @overload translation(vector)
   #
-  #   @param vector [Geom::Vector3d]
+  #   @param [Geom::Vector3d] vector
   #   @return [Geom::Transformation]
   #
   # @overload translation(point)
   #
-  #   @param point [Geom::Point3d]
+  #   @param [Geom::Point3d] point
   #   @return [Geom::Transformation]
   #
   # @version SketchUp 6.0
@@ -183,17 +183,17 @@ class Geom::Transformation
   #
   # @overload *(point)
   #
-  #   @param point [Geom::Point3d]
+  #   @param [Geom::Point3d] point
   #   @return [Geom::Point3d]
   #
   # @overload *(vector)
   #
-  #   @param vector [Geom::Vector3d]
+  #   @param [Geom::Vector3d] vector
   #   @return [Geom::Vector3d]
   #
   # @overload *(transformation)
   #
-  #   @param transformation [Geom::Transformation]
+  #   @param [Geom::Transformation] transformation
   #   @return [Geom::Transformation]
   #
   # @overload *(point)
@@ -203,8 +203,8 @@ class Geom::Transformation
   #
   # @overload *(plane)
   #
-  #   @param plane [Array(Geom::Point3d, Geom::Vector3d)]
-  #   @return [Array(Float, Float, Float, Float)] transformed plane
+  #   @param [Array<Geom::Point3d, Geom::Vector3d>] plane
+  #   @return [Array<Float, Float, Float, Float>] transformed plane
   #
   # @overload *(plane)
   #
@@ -258,6 +258,8 @@ class Geom::Transformation
   #
   # @return [Boolean] +true+ if the transformation is the identity
   #
+  # @return [Boolean]
+  #
   # @version SketchUp 6.0
   def identity?
   end
@@ -278,24 +280,24 @@ class Geom::Transformation
   # @overload initialize(point)
   #
   #   Translates the origin to point.
-  #   @param point [Geom::Point3d]
+  #   @param [Geom::Point3d] point
   #   @return [Geom::Transformation]
   #
   # @overload initialize(vector)
   #
-  #   @param vector [Geom::Vector3d]
+  #   @param [Geom::Vector3d] vector
   #   @return [Geom::Transformation]
   #
   # @overload initialize(transform)
   #
   #   Creates a Transformation that is a copy of another Transformation. This is
   #   equivalent to {#clone}.
-  #   @param transform [Geom::Transformation]
+  #   @param [Geom::Transformation] transform
   #   @return [Geom::Transformation]
   #
   # @overload initialize(array)
   #
-  #   @param matrix [Array<Numeric>] Creates a Transformation from a 16 element Array.
+  #   @param [Array<Float>] Creates a Transformation from a 16 element Array.
   #   @return [Geom::Transformation]
   #
   # @overload initialize(scale)
@@ -310,25 +312,25 @@ class Geom::Transformation
   #
   #   Creates a Transformation where origin is the new origin, and zaxis is the
   #   z axis. The x and y axes are determined using an arbitrary axis rule.
-  #   @param origin [Geom::Point3d]
-  #   @param zaxis [Geom::Vector3d]
+  #   @param [Geom::Point3d] origin
+  #   @param [Geom::Vector3d] zaxis
   #   @return [Geom::Transformation]
   #
   # @overload initialize(origin, xaxis, yaxis)
   #
   #   Creates a Transformation given a new origin, x axis and y axis.
-  #   @param origin [Geom::Point3d]
-  #   @param xaxis  [Geom::Vector3d]
-  #   @param yaxis  [Geom::Vector3d]
+  #   @param [Geom::Point3d] origin
+  #   @param [Geom::Vector3d] xaxis
+  #   @param [Geom::Vector3d] yaxis
   #   @return [Geom::Transformation]
   #
   # @overload initialize(pt, axis, angle)
   #
   #   Creates a Transformation that rotates by angle (given in radians) about a
   #   line defined by pt and axis.
-  #   @param origin [Geom::Point3d]
-  #   @param axis   [Geom::Vector3d]
-  #   @param angle  [Numeric]
+  #   @param [Geom::Point3d] origin
+  #   @param [Geom::Vector3d] axis
+  #   @param [Float] angle
   #   @return [Geom::Transformation]
   #
   # @overload initialize(xaxis, yaxis, zaxis, origin)
@@ -394,12 +396,12 @@ class Geom::Transformation
   #
   # @overload set!(transformation)
   #
-  #   @param transformation [Geom::Transformation]
+  #   @param [Geom::Transformation] transformation
   #   @return [Geom::Transformation]
   #
   # @overload set!(point)
   #
-  #   @param point [Geom::Point3d]
+  #   @param [Geom::Point3d] point
   #   @return [Geom::Transformation]
   #
   # @overload set!(vector)
@@ -409,7 +411,7 @@ class Geom::Transformation
   #
   # @overload set!(matrix)
   #
-  #   @param matrix [Array<Numeric>]  Array of 16 floats.
+  #   @param [Array<Float>] matrix  Array of 16 floats.
   #   @return [Geom::Transformation]
   #
   # @overload set!(scale)
