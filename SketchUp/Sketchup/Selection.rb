@@ -67,13 +67,18 @@ class Sketchup::Selection
   #   entity = entities[0]
   #   status = selection.add entity
   #
-  # @param [Array<Sketchup::Entity>] ents_or_array
-  #   List or Array of Entity objects.
+  # @overload add(entities)
+  #
+  #   @param [Array<Sketchup::Entity>] entities
+  #
+  # @overload add(*entities)
+  #
+  #   @param [Array<Sketchup::Entity>] entities
   #
   # @return [Integer] the number of Entity objects added
   #
   # @version SketchUp 6.0
-  def add(*ents_or_array)
+  def add(*args)
   end
 
   # The add_observer method is used to add an observer to the selection object.
@@ -325,13 +330,18 @@ class Sketchup::Selection
   #   entity = entities[0]
   #   status = selection.add entity
   #
-  # @param [Array<Sketchup::Entity>] ents_or_array
-  #   List or Array of Entity objects.
+  # @overload remove(entities)
+  #
+  #   @param [Array<Sketchup::Entity>] entities
+  #
+  # @overload remove(*entities)
+  #
+  #   @param [Array<Sketchup::Entity>] entities
   #
   # @return [Integer] the number of Entity objects removed
   #
   # @version SketchUp 6.0
-  def remove(*ents_or_array)
+  def remove(*args)
   end
 
   # The remove_observer method is used to remove an observer from the selection
@@ -418,13 +428,18 @@ class Sketchup::Selection
   #   entity = entities[0]
   #   status = selection.add entity
   #
-  # @param [Array<Sketchup::Entity>] ents_or_array
-  #   List or Array of Entity objects.
+  # @overload toggle(entities)
+  #
+  #   @param [Array<Sketchup::Entity>] entities
+  #
+  # @overload toggle(*entities)
+  #
+  #   @param [Array<Sketchup::Entity>] entities
   #
   # @return [Integer] the number of Entity objects changed
   #
   # @version SketchUp 6.0
-  def toggle(*ents_or_array)
+  def toggle(*args)
   end
 
 end

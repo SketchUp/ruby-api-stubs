@@ -419,16 +419,8 @@ module UI
   def self.scale_factor
   end
 
-  # The select_directory method is used to display the OS dialog for selecting
+  # The {#select_directory} method is used to display the OS dialog for selecting
   # one or several directories from the file system.
-  #
-  # Options:
-  # - :title             string  The title for the dialog.
-  # - :directory         string  Force the starting directory for the dialog. If
-  #                              not specified the last chosen directory will be
-  #                              used
-  # - :select_multiple   boolean Set to true to allow multiple items to be
-  #                              selected.
   #
   # @example
   #   # Default title and folder:
@@ -449,10 +441,18 @@ module UI
   #     directory: "C:/images"
   #   )
   #
-  # @param [Hash] options
-  #   The dialog can be customized by providing a hash or named arguments of options.
+  # @option options [String] :title (nil) The title for the dialog.
   #
-  # @return [String, Array<String>] A string with the full path of the
+  # @option options [String] :directory (nil) Force the starting directory for the dialog. If not specified the last
+  #   chosen directory will be used.
+  #
+  # @option options [Boolean] :select_multiple (false) Set to true to allow multiple items to be selected.
+  #
+  # @param [Hash] options
+  #   The dialog can be customized by providing a hash or named arguments of
+  #   options.
+  #
+  # @return [String, Array<String>, nil] A string with the full path of the
   #   directory selected when
   #   :select_multiple option is set to
   #   false otherwise an array of strings

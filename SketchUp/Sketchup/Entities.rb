@@ -246,15 +246,18 @@ class Sketchup::Entities
   #   entities = Sketchup.active_model.entities
   #   curve = entities.add_curve [0,0,0], [0,10,0], [1,20,0]
   #
-  # @param [Array<Geom::Point3d>] pts_or_array
-  #   You can pass either a series of Point3d objects or a
-  #   single array containing Point3d objects.
+  # @overload add_curve(points)
   #
-  # @return [Array<Sketchup::Edge>] an array of Edges that make up the curve if
-  #   successful
+  #   @param [Array<Geom::Point3d>] points
+  #
+  # @overload add_curve(*points)
+  #
+  #   @param [Array<Geom::Point3d>] points
+  #
+  # @return [Array<Sketchup::Edge>]
   #
   # @version SketchUp 6.0
-  def add_curve(*pts_or_array)
+  def add_curve(*args)
   end
 
   # The {#add_dimension_linear} method adds a linear dimension to the entities.
@@ -428,12 +431,18 @@ class Sketchup::Entities
   #   # Add the face to the entities in the model
   #   face = entities.add_face(pts)
   #
-  # @param [Array<Sketchup::Edge>, Array<Geom::Point3d>, Sketchup::Curve] some_entities
+  # @overload add_face(entities)
   #
-  # @return [Sketchup::Face] a Face object if successful
+  #   @param [Array<Sketchup::Edge>, Array<Geom::Point3d>, Sketchup::Curve] entities
+  #
+  # @overload add_face(*entities)
+  #
+  #   @param [Array<Sketchup::Edge>, Array<Geom::Point3d>] entities
+  #
+  # @return [Sketchup::Face, nil]
   #
   # @version SketchUp 6.0
-  def add_face(*some_entities)
+  def add_face(*args)
   end
 
   # The {#add_faces_from_mesh} method is used to add Face objects to the
@@ -489,27 +498,29 @@ class Sketchup::Entities
   # The add_group method is used to create an empty group or a group with
   # entities.
   #
-  # NOTE: calling add_group with entities in its parameters has been known to
-  # crash SketchUp before version 8.0. It is preferable to create an empty
-  # group and then add things to its Entities collection.
-  #
   # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
   #   group = entities.add_group
-  #   if (group)
-  #     UI.messagebox group
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
-  # @param [Array<Sketchup::Entity>] entities
-  #   an entities collection to add to the group.
+  # @note Calling add_group with entities in its parameters has been known to
+  #   crash SketchUp before version 8.0. It is preferable to create an empty
+  #   group and then add things to its Entities collection.
   #
-  # @return [Sketchup::Group] the new group
+  # @overload add_group(entities)
+  #
+  #   @param [Array<Sketchup::Entity>] entities
+  #     an entities collection to add to the group.
+  #
+  # @overload add_group(*entities)
+  #
+  #   @param [Array<Sketchup::Entity>] entities
+  #     an entities collection to add to the group.
+  #
+  # @return [Sketchup::Group]
   #
   # @version SketchUp 6.0
-  def add_group(*entities)
+  def add_group(*args)
   end
 
   # The add_image method is used to add an image to the collection of entities.
@@ -541,12 +552,13 @@ class Sketchup::Entities
   #
   # @param [Numeric] height
   #   height for the image if you want to control
-  #   width and height independently.
+  #   width and height independently. Leave as default +0.0+ when you want it
+  #   to be relative to the aspect ratio.
   #
-  # @return [Sketchup::Image] an Image object if successful.
+  # @return [Sketchup::Image, nil] an Image object if successful.
   #
   # @version SketchUp 6.0
-  def add_image(filename, point, width, height = "relative to aspect ratio")
+  def add_image(filename, point, width, height = 0.0)
   end
 
   # The add_instance method adds a component instance to the collection of
@@ -833,13 +845,18 @@ class Sketchup::Entities
   #   entities.erase_entities entities[1]
   #   UI.messagebox entities
   #
-  # @param [Array<Sketchup::Entity>] entities
-  #   An entity or array of entities.
+  # @overload erase_entities(entities)
+  #
+  #   @param [Array<Sketchup::Entity>] entities
+  #
+  # @overload erase_entities(*entities)
+  #
+  #   @param [Array<Sketchup::Entity>] entities
   #
   # @return [nil]
   #
   # @version SketchUp 6.0
-  def erase_entities(*entities)
+  def erase_entities(*args)
   end
 
   # The {#fill_from_mesh} method is used to add faces and edges to the collection

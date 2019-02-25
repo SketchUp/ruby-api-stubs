@@ -277,21 +277,33 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   tw = Sketchup.create_texture_writer
   #   uvHelp = face.get_UVHelper(true, true, tw)
   #
-  # @param [Boolean] front
-  #   True if you want the texture coordinates for the front
-  #   face, false if not. Defaults to true.
+  # @overload get_UVHelper(front = true, back = true)
   #
-  # @param [Boolean] back
-  #   True if you want the texture coordinates for the back
-  #   face, false if not. Defaults to true.
+  #   @param [Boolean] front
+  #    True if you want the texture coordinates for the front
+  #    face, false if not.
   #
-  # @param [Sketchup::TextureWriter] texturewriter
-  #   An optional TextureWriter object.
+  #   @param [Boolean] back
+  #    True if you want the texture coordinates for the back
+  #    face, false if not.
   #
-  # @return [Sketchup::UVHelper] a UVHelper object
+  # @overload get_UVHelper(front = true, back = true, texturewriter)
+  #
+  #   @param [Boolean] front
+  #    True if you want the texture coordinates for the front
+  #    face, false if not.
+  #
+  #   @param [Boolean] back
+  #    True if you want the texture coordinates for the back
+  #    face, false if not.
+  #
+  #   @param [Sketchup::TextureWriter] texturewriter
+  #    An optional TextureWriter object.
+  #
+  # @return [Sketchup::UVHelper]
   #
   # @version SketchUp 6.0
-  def get_UVHelper(front, back, texturewriter = nil)
+  def get_UVHelper(*args)
   end
 
   # The get_glued_instances method returns an Array any ComponentInstances
