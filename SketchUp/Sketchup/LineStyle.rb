@@ -5,6 +5,8 @@
 # layer.
 #
 # @version SketchUp 2019
+#
+# @category Entity Classes
 class Sketchup::LineStyle < Sketchup::Entity
 
   # Instance Methods

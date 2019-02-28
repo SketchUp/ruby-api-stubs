@@ -53,6 +53,9 @@
 #     end
 #   end
 #   @id = Sketchup::Pages.add_frame_change_observer(MyFrameChangeObserver.new)
+#
+# @abstract
+# @category Observer Interfaces
 class Sketchup::FrameChangeObserver
 
   # Instance Methods

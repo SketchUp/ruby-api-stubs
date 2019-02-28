@@ -29,6 +29,8 @@
 #   no longer the case.
 #
 # @version SketchUp 6.0
+#
+# @category Core Ruby Classes
 class Length < Float
 
   # Instance Methods

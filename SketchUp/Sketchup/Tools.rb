@@ -8,6 +8,9 @@
 #   tools = Sketchup.active_model.tools
 #
 # @version SketchUp 6.0
+#
+# @category Collections
+# @category Entity Classes
 class Sketchup::Tools
 
   # Instance Methods

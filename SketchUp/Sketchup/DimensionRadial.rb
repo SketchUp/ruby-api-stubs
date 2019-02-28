@@ -5,6 +5,8 @@
 # arcs and circles.
 #
 # @version SketchUp 2014
+#
+# @category Entity Classes
 class Sketchup::DimensionRadial < Sketchup::Dimension
 
   # Instance Methods

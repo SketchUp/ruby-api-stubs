@@ -16,6 +16,9 @@
 #   dim.add_observer(MyDimensionObserver.new)
 #
 # @version SketchUp 2014
+#
+# @abstract
+# @category Observer Interfaces
 class Sketchup::DimensionObserver
 
   # Instance Methods

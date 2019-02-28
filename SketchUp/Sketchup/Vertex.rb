@@ -4,6 +4,8 @@
 # A Vertex. A Vertex represents the end of an Edge or a point inside a Face.
 #
 # @version SketchUp 6.0
+#
+# @category Entity Classes
 class Sketchup::Vertex < Sketchup::Entity
 
   # Instance Methods

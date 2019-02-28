@@ -4,6 +4,8 @@
 # An interface to a menu.
 #
 # @version SketchUp 6.0
+#
+# @category UI
 class Sketchup::Menu
 
   # Instance Methods

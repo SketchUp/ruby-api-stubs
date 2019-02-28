@@ -7,6 +7,8 @@
 # Note that inside the SketchUp user interface pages are called "Scenes".
 #
 # @version SketchUp 6.0
+#
+# @category Entity Classes
 class Sketchup::Page < Sketchup::Entity
 
   # Instance Methods

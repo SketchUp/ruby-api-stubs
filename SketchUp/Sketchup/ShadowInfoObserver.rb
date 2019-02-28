@@ -19,6 +19,9 @@
 #   Sketchup.active_model.shadow_info.add_observer(MyShadowInfoObserver.new)
 #
 # @version SketchUp 6.0
+#
+# @abstract
+# @category Observer Interfaces
 class Sketchup::ShadowInfoObserver
 
   # Instance Methods

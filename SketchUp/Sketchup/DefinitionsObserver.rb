@@ -16,6 +16,9 @@
 #   Sketchup.active_model.definitions.add_observer(MyDefinitionsObserver.new)
 #
 # @version SketchUp 6.0
+#
+# @abstract
+# @category Observer Interfaces
 class Sketchup::DefinitionsObserver
 
   # Instance Methods

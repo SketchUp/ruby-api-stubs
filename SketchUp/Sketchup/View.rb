@@ -12,6 +12,8 @@
 #   view = Sketchup.active_model.active_view
 #
 # @version SketchUp 6.0
+#
+# @category Model
 class Sketchup::View
 
   # Instance Methods

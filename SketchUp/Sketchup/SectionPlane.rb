@@ -8,6 +8,8 @@
 # entities array to find the SectionPlane object.
 #
 # @version SketchUp 6.0
+#
+# @category Entity Classes
 class Sketchup::SectionPlane < Sketchup::Drawingelement
 
   # Instance Methods

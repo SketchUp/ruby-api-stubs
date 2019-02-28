@@ -18,6 +18,9 @@
 #   Sketchup.active_model.pages.add_observer(MyPagesObserver.new)
 #
 # @version SketchUp 6.0
+#
+# @abstract
+# @category Observer Interfaces
 class Sketchup::PagesObserver < Sketchup::EntitiesObserver
 
   # Instance Methods

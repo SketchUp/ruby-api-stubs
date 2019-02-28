@@ -6,6 +6,8 @@
 # infinite in one direction) or finite.
 #
 # @version SketchUp 6.0
+#
+# @category Entity Classes
 class Sketchup::ConstructionLine < Sketchup::Drawingelement
 
   # Instance Methods

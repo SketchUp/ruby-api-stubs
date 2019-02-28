@@ -12,6 +12,8 @@
 # ComponentInstance observers.)
 #
 # @version SketchUp 6.0
+#
+# @category Entity Classes
 class Sketchup::Group < Sketchup::Drawingelement
 
   # Instance Methods

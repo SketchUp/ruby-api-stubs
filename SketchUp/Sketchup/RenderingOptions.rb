@@ -80,6 +80,8 @@
 # - +SectionDefaultFillColor+
 #
 # @version SketchUp 6.0
+#
+# @category Model
 class Sketchup::RenderingOptions < Sketchup::Entity
 
   # Includes

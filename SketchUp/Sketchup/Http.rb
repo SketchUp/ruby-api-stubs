@@ -6,6 +6,8 @@
 # Ruby StdLib - which is known to have issues within SketchUp.
 #
 # @version SketchUp 2017
+#
+# @category Networking
 module Sketchup::Http
 
   # Constants

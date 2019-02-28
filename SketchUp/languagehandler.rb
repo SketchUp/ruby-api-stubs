@@ -28,6 +28,9 @@
 #   gocorp_swiveldriver/Resources/es/swiveldriver.strings
 #
 # @version SketchUp 2014
+#
+# @category Application
+# @category UI
 class LanguageHandler
 
   # Instance Methods

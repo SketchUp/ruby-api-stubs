@@ -39,6 +39,8 @@
 #   UI.messagebox("My city is: " + shadowinfo["City"].to_s)
 #
 # @version SketchUp 6.0
+#
+# @category Model
 class Sketchup::ShadowInfo < Sketchup::Entity
 
   # Includes

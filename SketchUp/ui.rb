@@ -5,6 +5,8 @@
 # from a SketchUp Ruby script.
 #
 # @version SketchUp 6.0
+#
+# @category UI
 module UI
 
   # Class Methods
@@ -419,7 +421,7 @@ module UI
   def self.scale_factor
   end
 
-  # The {#select_directory} method is used to display the OS dialog for selecting
+  # The {.select_directory} method is used to display the OS dialog for selecting
   # one or several directories from the file system.
   #
   # @example

@@ -6,6 +6,8 @@
 # definitions from the list.
 #
 # @version SketchUp 6.0
+#
+# @category Collections
 class Sketchup::DefinitionList < Sketchup::Entity
 
   # Includes

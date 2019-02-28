@@ -15,7 +15,7 @@
 # wall and roof entities different groups, associate layers with those groups,
 # and then hide those layers so as to display just the floor plan in the model.
 #
-# You can programatically create a new layer by calling the Layers.add method.
+# You can programmatically create a new layer by calling the Layers.add method.
 #
 # @example
 #   model = Sketchup.active_model
@@ -23,6 +23,8 @@
 #   new_layer = layers.add "test layer"
 #
 # @version SketchUp 6.0
+#
+# @category Entity Classes
 class Sketchup::Layer < Sketchup::Entity
 
   # Includes

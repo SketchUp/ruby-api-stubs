@@ -2,9 +2,12 @@
 # License:: The MIT License (MIT)
 
 # The Dimension class provides base functionality for classes DimensionLinear
-# and DimensionRadial. It's not instantiable.
+# and DimensionRadial. It's not insatiable.
 #
 # @version SketchUp 2014
+#
+# @abstract
+# @category Entity Classes
 class Sketchup::Dimension < Sketchup::Drawingelement
 
   # Constants

@@ -5,6 +5,9 @@
 # a model.
 #
 # @version SketchUp 2015
+#
+# @category Collections
+# @category Model
 class Sketchup::Classifications
 
   # Includes

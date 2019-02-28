@@ -11,6 +11,8 @@
 #   pages = model.pages
 #
 # @version SketchUp 6.0
+#
+# @category Collections
 class Sketchup::Pages < Sketchup::Entity
 
   # Includes

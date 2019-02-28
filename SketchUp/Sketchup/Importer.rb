@@ -60,6 +60,8 @@
 #   Sketchup.register_importer(TextImporter.new)
 #
 # @version SketchUp 6.0
+#
+# @category Application
 class Sketchup::Importer
 
   # Constants

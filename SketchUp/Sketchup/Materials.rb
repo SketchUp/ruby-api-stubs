@@ -10,6 +10,8 @@
 #   materials = model.materials
 #
 # @version SketchUp 6.0
+#
+# @category Collections
 class Sketchup::Materials < Sketchup::Entity
 
   # Includes

@@ -5,6 +5,8 @@
 # Model.
 #
 # @version SketchUp 6.0
+#
+# @category Model
 class Sketchup::OptionsManager
 
   # Includes

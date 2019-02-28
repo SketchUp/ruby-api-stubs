@@ -10,6 +10,8 @@
 #   puts "Your first style is named #{styles.first.name}"
 #
 # @version SketchUp 6.0
+#
+# @category Entity Classes
 class Sketchup::Style < Sketchup::Entity
 
   # Instance Methods

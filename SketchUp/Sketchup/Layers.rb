@@ -9,6 +9,8 @@
 #   layers = model.layers
 #
 # @version SketchUp 6.0
+#
+# @category Collections
 class Sketchup::Layers < Sketchup::Entity
 
   # Includes

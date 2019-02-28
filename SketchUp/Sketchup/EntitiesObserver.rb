@@ -24,6 +24,9 @@
 #   use a {Sketchup::ToolsObserver} to watch what the user is doing instead.
 #
 # @version SketchUp 6.0
+#
+# @abstract
+# @category Observer Interfaces
 class Sketchup::EntitiesObserver
 
   # Instance Methods

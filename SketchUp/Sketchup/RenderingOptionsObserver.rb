@@ -18,6 +18,9 @@
 #   # Attach the observer.
 #   rendering_options = Sketchup.active_model.rendering_options
 #   rendering_options.add_observer(MyRenderingOptionsObserver.new)
+#
+# @abstract
+# @category Observer Interfaces
 class Sketchup::RenderingOptionsObserver
 
   # Instance Methods

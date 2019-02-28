@@ -29,6 +29,8 @@
 #   UI.messagebox("There are " + face_count.to_s + " faces selected.")
 #
 # @version SketchUp 6.0
+#
+# @category Entity Classes
 class Sketchup::Entity
 
   # Instance Methods

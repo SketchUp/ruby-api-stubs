@@ -29,6 +29,8 @@
 #   entities.transform_entities(transformation, construction_point)
 #
 # @version SketchUp 6.0
+#
+# @category Core Ruby Classes
 class Array
 
   # Instance Methods

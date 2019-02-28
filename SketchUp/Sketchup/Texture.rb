@@ -7,6 +7,8 @@
 # "tile" when painted on a surface.
 #
 # @version SketchUp 6.0
+#
+# @category Entity Classes
 class Sketchup::Texture < Sketchup::Entity
 
   # Instance Methods

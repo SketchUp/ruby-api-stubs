@@ -19,6 +19,9 @@
 #   Sketchup.active_model.selection.add_observer(MySelectionObserver.new)
 #
 # @version SketchUp 6.0
+#
+# @abstract
+# @category Observer Interfaces
 class Sketchup::SelectionObserver
 
   # Instance Methods

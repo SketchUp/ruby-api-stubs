@@ -5,6 +5,8 @@
 # edges.
 #
 # @version SketchUp 6.0
+#
+# @category Entity Classes
 class Sketchup::Edge < Sketchup::Drawingelement
 
   # Instance Methods

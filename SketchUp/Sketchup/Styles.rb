@@ -9,6 +9,8 @@
 #   puts "There are #{styles.size} styles in your model."
 #
 # @version SketchUp 6.0
+#
+# @category Collections
 class Sketchup::Styles < Sketchup::Entity
 
   # Includes

@@ -4,6 +4,8 @@
 # The ClassificationSchema class represent schemas loaded in the model.
 #
 # @version SketchUp 2015
+#
+# @category Model
 class Sketchup::ClassificationSchema
 
   # Includes

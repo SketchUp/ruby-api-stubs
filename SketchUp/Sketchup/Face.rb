@@ -4,6 +4,8 @@
 # Faces in SketchUp are flat, 2-sided polygons with 3 or more sides.
 #
 # @version SketchUp 6.0
+#
+# @category Entity Classes
 class Sketchup::Face < Sketchup::Drawingelement
 
   # Constants

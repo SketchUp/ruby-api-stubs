@@ -30,6 +30,9 @@
 #   model.definitions[0].instances[0].add_observer(MyInstanceObserver.new)
 #
 # @version SketchUp 6.0
+#
+# @abstract
+# @category Observer Interfaces
 class Sketchup::InstanceObserver < Sketchup::EntityObserver
 
   # Instance Methods

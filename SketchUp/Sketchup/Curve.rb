@@ -12,6 +12,8 @@
 # created with the Freehand drawing tool.
 #
 # @version SketchUp 6.0
+#
+# @category Entity Classes
 class Sketchup::Curve < Sketchup::Entity
 
   # Instance Methods

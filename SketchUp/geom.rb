@@ -25,6 +25,8 @@
 # @note Lines and Planes are infinite.
 #
 # @version SketchUp 6.0
+#
+# @category Geometry
 module Geom
 
   # Class Methods

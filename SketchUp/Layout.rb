@@ -20,6 +20,8 @@
 #   number_pages = pages.length
 #
 # @version LayOut 2018
+#
+# @category Application
 module Layout
 
 end

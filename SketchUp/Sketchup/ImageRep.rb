@@ -4,6 +4,8 @@
 # References an image representation object.
 #
 # @version SketchUp 2018
+#
+# @category Model
 class Sketchup::ImageRep
 
   # Instance Methods

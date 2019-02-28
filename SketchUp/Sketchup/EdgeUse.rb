@@ -4,6 +4,8 @@
 # The EdgeUse class defines how an Edge is used in the definition of a Face.
 #
 # @version SketchUp 6.0
+#
+# @category Entity Classes
 class Sketchup::EdgeUse < Sketchup::Entity
 
   # Instance Methods

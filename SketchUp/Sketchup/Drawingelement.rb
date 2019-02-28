@@ -7,6 +7,8 @@
 # drawing elements by themselves, but are a composition of edges.
 #
 # @version SketchUp 6.0
+#
+# @category Entity Classes
 class Sketchup::Drawingelement < Sketchup::Entity
 
   # Instance Methods

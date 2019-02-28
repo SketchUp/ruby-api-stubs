@@ -5,6 +5,8 @@
 # All string arguments in Ruby API expect utf-8 strings.
 #
 # @version SketchUp 6.0
+#
+# @category Core Ruby Classes
 class String
 
   # Instance Methods

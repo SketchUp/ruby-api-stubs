@@ -14,6 +14,8 @@
 # originate.
 #
 # @version SketchUp 2016
+#
+# @category Entity Classes
 class Sketchup::Axes < Sketchup::Entity
 
   # Instance Methods

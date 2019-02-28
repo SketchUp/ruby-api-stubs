@@ -16,6 +16,8 @@
 #   behavior = definition.behavior
 #
 # @version SketchUp 6.0
+#
+# @category Model
 class Sketchup::Behavior < Sketchup::Entity
 
   # Instance Methods

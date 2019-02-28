@@ -4,6 +4,8 @@
 # An Image object represents a raster image placed in the Model.
 #
 # @version SketchUp 6.0
+#
+# @category Entity Classes
 class Sketchup::Image < Sketchup::Drawingelement
 
   # Instance Methods

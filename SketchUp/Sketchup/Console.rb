@@ -25,6 +25,8 @@
 #   t.join
 #
 # @version SketchUp 2014
+#
+# @category Application
 class Sketchup::Console
 
   # Instance Methods

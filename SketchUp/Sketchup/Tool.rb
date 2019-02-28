@@ -33,6 +33,12 @@
 # - +ALT_MODIFIER_MASK+ = Command on Mac, Alt on PC
 #
 # @version SketchUp 6.0
+#
+# @abstract This isn't a true abstract class you can inherit from. It's a
+#    reference of what events is available to the class that register itself
+#    as a tool class.
+#
+# @category UI
 class Sketchup::Tool
 
   # Instance Methods

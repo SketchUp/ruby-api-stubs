@@ -17,6 +17,12 @@
 #   Sketchup.active_model.layers.add("Hello World")
 #
 # @version SketchUp 6.0
+#
+# @abstract
+# @category Observer Interfaces
+#
+# @bug Something bad happens.
+# @bug Some other bad thing might also happen.
 class Sketchup::LayersObserver
 
   # Instance Methods

@@ -8,6 +8,8 @@
 # it yourself and you can instead use {String#to_l} and {Length#to_s}.
 #
 # @version SketchUp 2016 M1
+#
+# @category Model
 module Sketchup::RegionalSettings
 
   # Class Methods

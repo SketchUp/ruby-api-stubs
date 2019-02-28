@@ -11,6 +11,8 @@
 # are placed in an indexed list.
 #
 # @version SketchUp 6.0
+#
+# @category UI
 class Sketchup::PickHelper
 
   # Constants

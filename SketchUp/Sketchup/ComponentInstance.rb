@@ -16,6 +16,8 @@
 # will be raised. The key/value pairs in the dictionary can be deleted safely.
 #
 # @version SketchUp 6.0
+#
+# @category Entity Classes
 class Sketchup::ComponentInstance < Sketchup::Drawingelement
 
   # Instance Methods

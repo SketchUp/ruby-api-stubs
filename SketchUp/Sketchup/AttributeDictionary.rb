@@ -12,6 +12,8 @@
 # or materials.
 #
 # @version SketchUp 6.0
+#
+# @category Model
 class Sketchup::AttributeDictionary < Sketchup::Entity
 
   # Includes

@@ -5,6 +5,8 @@
 # conversions.
 #
 # @version SketchUp 6.0
+#
+# @category Core Ruby Classes
 class Numeric
 
   # Instance Methods

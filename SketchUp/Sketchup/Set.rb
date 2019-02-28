@@ -37,6 +37,8 @@
 #   end
 #
 # @version SketchUp 6.0
+#
+# @category Obsolete
 class Sketchup::Set
 
   # Instance Methods

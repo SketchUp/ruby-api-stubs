@@ -27,6 +27,8 @@
 #   arccurve = first_edge.curve
 #
 # @version SketchUp 6.0
+#
+# @category Entity Classes
 class Sketchup::ArcCurve < Sketchup::Curve
 
   # Instance Methods

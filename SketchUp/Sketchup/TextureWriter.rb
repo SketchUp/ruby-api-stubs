@@ -24,6 +24,8 @@
 #   tw = Sketchup.create_texture_writer
 #
 # @version SketchUp 6.0
+#
+# @category Model
 class Sketchup::TextureWriter
 
   # Instance Methods

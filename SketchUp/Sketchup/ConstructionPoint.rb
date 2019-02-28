@@ -7,6 +7,8 @@
 # performing other operations.
 #
 # @version SketchUp 6.0
+#
+# @category Entity Classes
 class Sketchup::ConstructionPoint < Sketchup::Drawingelement
 
   # Instance Methods

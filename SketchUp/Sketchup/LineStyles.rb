@@ -4,6 +4,8 @@
 # Provides access to the different line style objects in the model.
 #
 # @version SketchUp 2019
+#
+# @category Collections
 class Sketchup::LineStyles < Sketchup::Entity
 
   # Includes

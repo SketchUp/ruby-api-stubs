@@ -4,6 +4,8 @@
 # The DimensionLinear class represents linear dimensions.
 #
 # @version SketchUp 2014
+#
+# @category Entity Classes
 class Sketchup::DimensionLinear < Sketchup::Dimension
 
   # Constants

@@ -6,6 +6,8 @@
 # name/value pairs.
 #
 # @version SketchUp 6.0
+#
+# @category Model
 class Sketchup::OptionsProvider
 
   # Includes

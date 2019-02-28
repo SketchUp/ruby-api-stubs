@@ -13,6 +13,8 @@
 #   selection = model.selection
 #
 # @version SketchUp 6.0
+#
+# @category Collections
 class Sketchup::Selection
 
   # Includes

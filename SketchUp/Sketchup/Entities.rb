@@ -5,6 +5,8 @@
 # collection of Entity objects).
 #
 # @version SketchUp 6.0
+#
+# @category Collections
 class Sketchup::Entities
 
   # Includes

@@ -22,6 +22,8 @@
 #   face.material = [255, 0, 0]
 #
 # @version SketchUp 6.0
+#
+# @category Model
 class Sketchup::Color
 
   # Class Methods

@@ -10,6 +10,8 @@
 # See the TextureWriter class as well.
 #
 # @version SketchUp 6.0
+#
+# @category Model
 class Sketchup::UVHelper
 
   # Instance Methods

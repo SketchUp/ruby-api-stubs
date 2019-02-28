@@ -11,6 +11,8 @@
 # examples of using the InputPoint class.
 #
 # @version SketchUp 6.0
+#
+# @category UI
 class Sketchup::InputPoint
 
   # Instance Methods

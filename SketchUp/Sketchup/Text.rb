@@ -4,6 +4,8 @@
 # The Text class contains method to manipulate a Text entity object.
 #
 # @version SketchUp 6.0
+#
+# @category Entity Classes
 class Sketchup::Text < Sketchup::Drawingelement
 
   # Instance Methods

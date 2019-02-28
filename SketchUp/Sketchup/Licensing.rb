@@ -13,6 +13,8 @@
 # {Developer Center Licensing Tutorial}[https://extensions.sketchup.com/en/developer_center/tutorial_licensing]
 #
 # @version SketchUp 2015
+#
+# @category Licensing
 module Sketchup::Licensing
 
   # Constants

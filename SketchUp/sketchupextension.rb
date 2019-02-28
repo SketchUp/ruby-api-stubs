@@ -34,6 +34,8 @@
 #   Sketchup.register_extension(stair_extension, true)
 #
 # @version SketchUp 6.0
+#
+# @category Application
 class SketchupExtension
 
   # Instance Methods

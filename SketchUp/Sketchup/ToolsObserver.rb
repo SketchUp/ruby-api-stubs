@@ -54,6 +54,9 @@
 #   Sketchup.active_model.tools.add_observer(MyToolsObserver.new)
 #
 # @version SketchUp 6.0
+#
+# @abstract
+# @category Observer Interfaces
 class Sketchup::ToolsObserver
 
   # Instance Methods

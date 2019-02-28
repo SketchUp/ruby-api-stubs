@@ -5,6 +5,8 @@
 # entity within the model hierarchy.
 #
 # @version SketchUp 2017
+#
+# @category Model
 class Sketchup::InstancePath
 
   # Includes

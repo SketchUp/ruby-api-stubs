@@ -16,6 +16,8 @@
 #   face.material = 0xff0000
 #
 # @version SketchUp 6.0
+#
+# @category Entity Classes
 class Sketchup::Material < Sketchup::Entity
 
   # Includes

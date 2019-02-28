@@ -19,6 +19,9 @@
 #   {#onMaterialRemove} instead.
 #
 # @version SketchUp 6.0
+#
+# @abstract
+# @category Observer Interfaces
 class Sketchup::MaterialsObserver
 
   # Instance Methods

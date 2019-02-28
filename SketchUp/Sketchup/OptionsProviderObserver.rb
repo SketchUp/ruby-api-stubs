@@ -32,6 +32,9 @@
 #   options_provider.add_observer(MyOptionsProviderObserver.new)
 #
 # @version SketchUp 6.0
+#
+# @abstract
+# @category Observer Interfaces
 class Sketchup::OptionsProviderObserver
 
   # Instance Methods

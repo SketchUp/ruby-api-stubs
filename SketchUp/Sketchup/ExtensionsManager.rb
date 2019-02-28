@@ -9,6 +9,8 @@
 # Sketchup.extensions method.
 #
 # @version SketchUp 8.0 M2
+#
+# @category Application
 class Sketchup::ExtensionsManager
 
   # Includes

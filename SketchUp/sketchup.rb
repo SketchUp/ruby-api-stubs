@@ -30,6 +30,8 @@
 #   new_edge = entities.add_line( [0,0,0], [500,500,0])
 #
 # @version SketchUp 6.0
+#
+# @category Application
 module Sketchup
 
   # Class Methods

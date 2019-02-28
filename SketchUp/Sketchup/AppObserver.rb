@@ -32,6 +32,9 @@
 #   Sketchup.add_observer(MyAppObserver.new)
 #
 # @version SketchUp 6.0
+#
+# @abstract
+# @category Observer Interfaces
 class Sketchup::AppObserver
 
   # Instance Methods

@@ -5,6 +5,8 @@
 # Loop is a chain of Edges that bound a Face.
 #
 # @version SketchUp 6.0
+#
+# @category Entity Classes
 class Sketchup::Loop < Sketchup::Entity
 
   # Instance Methods

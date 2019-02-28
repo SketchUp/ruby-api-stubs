@@ -19,6 +19,8 @@
 #   view.camera = my_camera
 #
 # @version SketchUp 6.0
+#
+# @category Model
 class Sketchup::Camera
 
   # Instance Methods

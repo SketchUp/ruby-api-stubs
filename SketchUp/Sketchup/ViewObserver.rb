@@ -17,6 +17,9 @@
 #   Sketchup.active_model.active_view.add_observer(MyViewObserver.new)
 #
 # @version SketchUp 6.0
+#
+# @abstract
+# @category Observer Interfaces
 class Sketchup::ViewObserver
 
   # Instance Methods

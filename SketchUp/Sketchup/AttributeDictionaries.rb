@@ -20,6 +20,9 @@
 #   attrdicts = my_layer.attribute_dictionaries
 #
 # @version SketchUp 6.0
+#
+# @category Collections
+# @category Model
 class Sketchup::AttributeDictionaries < Sketchup::Entity
 
   # Includes

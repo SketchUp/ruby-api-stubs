@@ -40,6 +40,8 @@
 #   method calls if +#singleton_class+ was called on the model object.
 #
 # @version SketchUp 6.0
+#
+# @category Entity Classes
 class Sketchup::Model
 
   # Constants
