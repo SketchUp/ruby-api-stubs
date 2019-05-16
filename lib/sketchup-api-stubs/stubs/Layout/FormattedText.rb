@@ -4,7 +4,7 @@
 # A formatted text entity.
 #
 # @version LayOut 2018
-class Layout::FormattedText < Entity
+class Layout::FormattedText < Layout::Entity
 
   # Constants
 

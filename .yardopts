@@ -2,6 +2,6 @@
 --no-api
 --no-private
 --plugin yard-sketchup
-SketchUp/**/*.rb
+lib/sketchup-api-stubs/stubs/**/*.rb
 -
 pages/*.md

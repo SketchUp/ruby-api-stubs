@@ -2,9 +2,10 @@
 # License:: The MIT License (MIT)
 
 # This is raised whenever a method attempts to modify any {Layout::Entity}
-# that is individually locked.
+# that resides on a locked {Layout::Layer}, or when attempting to change the
+# shared attribute of a locked {Layout::Layer}.
 #
 # @version LayOut 2018
-class Layout::LockedEntityError < ArgError
+class Layout::LockedLayerError < ArgumentError
 
 end
