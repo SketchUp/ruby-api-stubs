@@ -1,7 +1,7 @@
 --title "SketchUp Ruby API Documentation"
 --no-api
 --no-private
--p su-template
-SketchUp/**/*.rb
+--plugin yard-sketchup
+lib/sketchup-api-stubs/stubs/**/*.rb
 -
 pages/*.md
