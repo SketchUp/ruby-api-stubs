@@ -127,6 +127,8 @@ class Sketchup::Entity
   # AttributeDictionary. Otherwise, {#delete_attribute} deletes the attribute with
   # the given key from the given dictionary.
   #
+  # @bug Prior to SketchUp 2019.0 the return values was always +true+.
+  #
   # @example
   #   depth = 100
   #   width = 100
@@ -150,8 +152,6 @@ class Sketchup::Entity
   #   The name of these dictionaries are "SU_InstanceSet" and "SU_DefinitionSet".
   #   The dictionaries cannot be deleted via ruby and an ArgumentError will be
   #   raised. The key/value pairs in the dictionary can be deleted safely.
-  #
-  # @note The return values are fixed in SketchUp 2019 M0.
   #
   # @overload delete_attribute(dictionary_name)
   #

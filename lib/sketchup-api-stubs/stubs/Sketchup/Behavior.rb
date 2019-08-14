@@ -74,7 +74,7 @@ class Sketchup::Behavior < Sketchup::Entity
   #     UI.messagebox "Failure"
   #   end
   #
-  # @return behavior - true if the component is set to always face
+  # @return [Boolean] behavior - true if the component is set to always face
   #   the camera, false if the component is not set to always
   #   face camera.
   #
@@ -119,7 +119,7 @@ class Sketchup::Behavior < Sketchup::Entity
   #     # if status is false, do something else
   #   end
   #
-  # @return status - the status of the cuts_opening behavior
+  # @return [Boolean] status - the status of the cuts_opening behavior
   #   (either true or false)
   #
   # @version SketchUp 6.0
@@ -162,7 +162,7 @@ class Sketchup::Behavior < Sketchup::Entity
   #     # if status is false, do something else
   #   end
   #
-  # @return status - the status of the 2D behavior (either true or
+  # @return [Boolean] status - the status of the 2D behavior (either true or
   #   false)
   #
   # @version SketchUp 6.0
@@ -216,7 +216,7 @@ class Sketchup::Behavior < Sketchup::Entity
   #   behavior = definition.behavior
   #   no_scale_mask = behavior.no_scale_mask?
   #
-  # @return scale_mask - an integer describing which scale tool
+  # @return [Boolean] scale_mask - an integer describing which scale tool
   #   handles are hidden.
   #
   # @version SketchUp 7.0
@@ -262,7 +262,7 @@ class Sketchup::Behavior < Sketchup::Entity
   #     UI.messagebox $!.message
   #   end
   #
-  # @return status - true if the component's is to be cast from the
+  # @return [Boolean] status - true if the component's is to be cast from the
   #   component's current position as though the component
   #   were facing the sun. False to cause the shadow to be
   #   cast from the component's current position.

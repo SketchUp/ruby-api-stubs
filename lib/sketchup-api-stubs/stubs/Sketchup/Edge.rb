@@ -311,8 +311,6 @@ class Sketchup::Edge < Sketchup::Drawingelement
   # @param [Sketchup::Face] face
   #   The face that is bounded by the edge.
   #
-  # @return [Boolean]
-  #
   # @return [Boolean] +true+ if the edge is reversed, +false+ if it is not
   #   reversed. +nil+ if the edge and face is not connected.
   #

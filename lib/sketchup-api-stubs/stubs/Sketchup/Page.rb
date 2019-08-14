@@ -386,7 +386,7 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   status = page.use_axes?
   #
-  # @return status - true if you are storing the this property with
+  # @return [Boolean] status - true if you are storing the this property with
   #   the page, false if you are not storing this property
   #   with the page.
   #
@@ -422,7 +422,7 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   status = page.use_camera?
   #
-  # @return status - true if you are storing the this property with
+  # @return [Boolean] status - true if you are storing the this property with
   #   the page, false if you are not storing this property
   #   with the page.
   #
@@ -458,7 +458,7 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   status = page.use_hidden?
   #
-  # @return status - true if you are storing the this property with
+  # @return [Boolean] status - true if you are storing the this property with
   #   the page, false if you are not storing this property
   #   with the page.
   #
@@ -495,7 +495,7 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   status = page.use_hidden_layers?
   #
-  # @return status - true if you are storing the this property with
+  # @return [Boolean] status - true if you are storing the this property with
   #   the page, false if you are not storing this property
   #   with the page.
   #
@@ -532,7 +532,7 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   status = page.use_rendering_options?
   #
-  # @return status - true if you are storing the this property with
+  # @return [Boolean] status - true if you are storing the this property with
   #   the page, false if you are not storing this property
   #   with the page.
   #
@@ -569,7 +569,7 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   status = page.use_section_planes?
   #
-  # @return status - true if you are storing the this property with
+  # @return [Boolean] status - true if you are storing the this property with
   #   the page, false if you are not storing this property
   #   with the page.
   #
@@ -605,7 +605,7 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   status = page.use_shadow_info?
   #
-  # @return status - true if you are storing the this property with
+  # @return [Boolean] status - true if you are storing the this property with
   #   the page, false if you are not storing this property
   #   with the page.
   #
@@ -639,7 +639,7 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   use_style = page.use_style?
   #
-  # @return status - true if you are storing the this property with
+  # @return [Boolean] status - true if you are storing the this property with
   #   the page, false if you are not storing this property
   #   with the page.
   #

@@ -56,7 +56,7 @@ class Sketchup::Licensing::ExtensionLicense
   #      puts "Extension is licensed."
   #   end
   #
-  # @return Boolean - true if the extension is allowed to run, false
+  # @return [Boolean] Boolean - true if the extension is allowed to run, false
   #   if it is not licensed and should quit.
   #
   # @version SketchUp 2015

@@ -9,27 +9,79 @@
 # stores values in inches as well. A number of methods have been added to the
 # Ruby Numeric class to do units conversions.
 #
-# Constants:
-# Length Format:
-# - Length::Decimal
-# - Length::Architectural
-# - Length::Engineering
-# - Length::Fractional
-# Length Unit:
-# - Length::Inches
-# - Length::Feet
-# - Length::Millimeter
-# - Length::Centimeter
-# - Length::Meter
-# The setting for the Length format and Length unit can be retrieved from the
-# model options by querying the "UnitsOptions" OptionsProvider for
-# "LengthFormat" and "LengthUnit" respectively.
+# The setting for the Length Format and Length Unit can be retrieved from the
+# {Sketchup::Model#options} by querying the +"UnitsOptions"+
+# {Sketchup::OptionsProvider} for +"LengthFormat"+ and +"LengthUnit"+
+# respectively.
 #
-# @note Prior to SketchUp 2015, Length used to be derived from Float. This is
-#   no longer the case.
+# *Constants:*
+#
+# [Length Format]
+#   - +Length::Decimal+
+#   - +Length::Architectural+
+#   - +Length::Engineering+
+#   - +Length::Fractional+
+#
+# [Length Unit]
+#   - +Length::Inches+
+#   - +Length::Feet+
+#   - +Length::Millimeter+
+#   - +Length::Centimeter+
+#   - +Length::Meter+
+#
+# [Area Unit]
+#   (Added in SketchUp 2019.1)
+#   - +Length::SquareInches+
+#   - +Length::SquareFeet+
+#   - +Length::SquareMillimeter+
+#   - +Length::SquareCentimeter+
+#   - +Length::SquareMeter+
+#
+# [Volume Unit]
+#   (Added in SketchUp 2019.1)
+#   - +Length::CubicInches+
+#   - +Length::CubicFeet+
+#   - +Length::CubicMillimeter+
+#   - +Length::CubicCentimeter+
+#   - +Length::CubicMeter+
+#
+# @note Prior to SketchUp 2015, +Length+ used to be derived from +Float+. This
+#   is no longer the case.
 #
 # @version SketchUp 6.0
 class Length < Float
+
+  # Constants
+
+  Architectural = nil # Stub value.
+
+  Centimeter = nil # Stub value.
+
+  CubicCentimeter = nil # Stub value.
+  CubicFeet = nil # Stub value.
+  CubicInches = nil # Stub value.
+  CubicMeter = nil # Stub value.
+  CubicMillimeter = nil # Stub value.
+
+  Decimal = nil # Stub value.
+
+  Engineering = nil # Stub value.
+
+  Fractional = nil # Stub value.
+
+  Feet = nil # Stub value.
+
+  Inches = nil # Stub value.
+
+  Millimeter = nil # Stub value.
+
+  Meter = nil # Stub value.
+
+  SquareCentimeter = nil # Stub value.
+  SquareFeet = nil # Stub value.
+  SquareInches = nil # Stub value.
+  SquareMeter = nil # Stub value.
+  SquareMillimeter = nil # Stub value.
 
   # Instance Methods
 

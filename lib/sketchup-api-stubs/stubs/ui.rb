@@ -419,7 +419,7 @@ module UI
   def self.scale_factor
   end
 
-  # The {.select_directory} method is used to display the OS dialog for selecting
+  # The {#select_directory} method is used to display the OS dialog for selecting
   # one or several directories from the file system.
   #
   # @example
@@ -462,7 +462,7 @@ module UI
   def self.select_directory(options = {})
   end
 
-  # The set_cursor method is used to change the cursor to a new cursor with a
+  # The #{set_cursor} method is used to change the cursor to a new cursor with a
   # given cursor id. See UI.create_cursor and the Tool class for details
   # on creating your own tools with arbitrary cursors.
   #
@@ -478,7 +478,7 @@ module UI
   # @param [Integer] cursor_id
   #   The id of the cursor you want to display.
   #
-  # @return [nil]
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def self.set_cursor(cursor_id)

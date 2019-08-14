@@ -109,7 +109,7 @@ class Sketchup::Curve < Sketchup::Entity
   #   ents.each { |e| curve = e.curve if e.is_a? Sketchup::Edge }
   #   is_poly = curve.is_polygon?
   #
-  # @return True if this edge was originally created by the polygon
+  # @return [Boolean] True if this edge was originally created by the polygon
   #   tool, otherwise false.
   #
   # @version SketchUp 7.1 M1

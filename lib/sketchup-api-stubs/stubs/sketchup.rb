@@ -306,19 +306,19 @@ module Sketchup
   def self.format_angle(number)
   end
 
-  # The format_area method formats a number as an area using the current units
+  # The #{format_area} method formats a number as an area using the current units
   # settings.
   #
-  # The default unit setting is inches. For example, 10 becomes 10 inches
-  # squared.
+  # The +number+ must be in square inches.
   #
   # @example
-  #   area = Sketchup.format_area(number)
+  #   number = 3.m * 4.m # This will result in 12m2 in inches.
+  #   formatted_area = Sketchup.format_area(number)
   #
   # @param [Numeric] number
   #   A number to be formatted.
   #
-  # @return [String] an area if successful, false if unsuccessful.
+  # @return [String]
   #
   # @version SketchUp 6.0
   def self.format_area(number)
@@ -339,24 +339,46 @@ module Sketchup
   def self.format_degrees(number)
   end
 
-  # The format_length method formats a number as a length using the current
+  # The {#format_length} method formats a number as a length using the current
   # units settings.
   #
   # The default unit setting is inches. For example, 10 becomes 10".
   #
   # @example
   #   length = Sketchup.format_length(10)
-  #   if length
-  #     UI.messagebox(length)
-  #   end
+  #
+  # @overload format_length(number)
+  #
+  #   @param [Numeric] number  A number to be formatted.
+  #
+  # @overload format_length(number, precision)
+  #
+  #   @param [Numeric] number  A number to be formatted.
+  #   @param [Integer] number  A custom precision. Negative number will strip
+  #                            trailing zeros.
+  #
+  # @return [String]
+  #
+  # @version SketchUp 6.0
+  def self.format_length(*args)
+  end
+
+  # The #{format_volume} method formats a number as a volume using the current
+  # units settings.
+  #
+  # The +number+ must be in cubic inches.
+  #
+  # @example
+  #   number = 3.m * 4.m * 5.m # This will result in 60m3 in inches.
+  #   formatted_volume = Sketchup.format_area(number)
   #
   # @param [Numeric] number
   #   A number to be formatted.
   #
-  # @return [String] length if successful, false if unsuccessful
+  # @return [String]
   #
-  # @version SketchUp 6.0
-  def self.format_length(number)
+  # @version SketchUp 2019.2
+  def self.format_volume(number)
   end
 
   # The get_datfile_info method is used to retrieve the value for the given key
@@ -983,7 +1005,8 @@ module Sketchup
   # - 21096: select the Circle tool
   # - 21098: open the Open Window
   # - 21100: select the Offset tool
-  # - 21101: slect all objects
+  # - 21101: select all objects
+  # - 21107: invert selection
   # - 21112: open the Import Window
   # - 21124: launch the validity check tool
   # - 21126: select the Axes tool

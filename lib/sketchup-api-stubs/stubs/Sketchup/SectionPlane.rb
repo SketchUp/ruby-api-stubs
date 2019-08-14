@@ -36,7 +36,7 @@ class Sketchup::SectionPlane < Sketchup::Drawingelement
   #      puts "Yes, it is active"
   #   end
   #
-  # @return boolean - true if active
+  # @return [Boolean] boolean - true if active
   #
   # @version SketchUp 2014
   def active?
