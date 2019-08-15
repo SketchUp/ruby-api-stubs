@@ -15,6 +15,14 @@ class Layout::Style
 
   # Constants
 
+  ALIGN_CENTER = nil # Stub value.
+  ALIGN_LEFT = nil # Stub value.
+  ALIGN_RIGHT = nil # Stub value.
+
+  ANCHOR_BOTTOM = nil # Stub value.
+  ANCHOR_CENTER = nil # Stub value.
+  ANCHOR_TOP = nil # Stub value.
+
   ARCHITECTURAL_INCHES = nil # Stub value.
 
   ARROW_FILLED_CIRCLE = nil # Stub value.
@@ -37,23 +45,18 @@ class Layout::Style
   ARROW_T = nil # Stub value.
   ARROW_UNDERRUN = nil # Stub value.
 
-  ALIGN_CENTER = nil # Stub value.
-  ALIGN_LEFT = nil # Stub value.
-  ALIGN_RIGHT = nil # Stub value.
-
-  ANCHOR_BOTTOM = nil # Stub value.
-  ANCHOR_CENTER = nil # Stub value.
-  ANCHOR_TOP = nil # Stub value.
-
   CAP_STYLE_FLAT = nil # Stub value.
   CAP_STYLE_ROUND = nil # Stub value.
   CAP_STYLE_SQUARE = nil # Stub value.
 
-  DIMENSION_END_EXTENSION_LINE = nil # Stub value.
-  DIMENSION_LEADER_LINE = nil # Stub value.
-  DIMENSION_LINE = nil # Stub value.
-  DIMENSION_START_EXTENSION_LINE = nil # Stub value.
-  DIMENSION_TEXT = nil # Stub value.
+  DIMENSION_TEXT_ABOVE = nil # Stub value.
+  DIMENSION_TEXT_BELOW = nil # Stub value.
+  DIMENSION_TEXT_CENTER = nil # Stub value.
+  DIMENSION_TEXT_HORIZONTAL = nil # Stub value.
+  DIMENSION_TEXT_OFFSET = nil # Stub value.
+  DIMENSION_TEXT_PARALLEL = nil # Stub value.
+  DIMENSION_TEXT_PERPENDICULAR = nil # Stub value.
+  DIMENSION_TEXT_VERTICAL = nil # Stub value.
 
   DECIMAL_CENTIMETERS = nil # Stub value.
   DECIMAL_FEET = nil # Stub value.
@@ -64,14 +67,11 @@ class Layout::Style
 
   DEGREES = nil # Stub value.
 
-  DIMENSION_TEXT_ABOVE = nil # Stub value.
-  DIMENSION_TEXT_BELOW = nil # Stub value.
-  DIMENSION_TEXT_CENTER = nil # Stub value.
-  DIMENSION_TEXT_HORIZONTAL = nil # Stub value.
-  DIMENSION_TEXT_OFFSET = nil # Stub value.
-  DIMENSION_TEXT_PARALLEL = nil # Stub value.
-  DIMENSION_TEXT_PERPENDICULAR = nil # Stub value.
-  DIMENSION_TEXT_VERTICAL = nil # Stub value.
+  DIMENSION_END_EXTENSION_LINE = nil # Stub value.
+  DIMENSION_LEADER_LINE = nil # Stub value.
+  DIMENSION_LINE = nil # Stub value.
+  DIMENSION_START_EXTENSION_LINE = nil # Stub value.
+  DIMENSION_TEXT = nil # Stub value.
 
   ENGINEERING_FEET = nil # Stub value.
 
@@ -102,9 +102,9 @@ class Layout::Style
   STROKE_PATTERN_SHORT_DASH = nil # Stub value.
   STROKE_PATTERN_SOLID = nil # Stub value.
 
-  SUB_SCRIPT = nil # Stub value.
-
   SUPER_SCRIPT = nil # Stub value.
+
+  SUB_SCRIPT = nil # Stub value.
 
   UNDERLINE_DOUBLE = nil # Stub value.
   UNDERLINE_NONE = nil # Stub value.

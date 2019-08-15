@@ -253,7 +253,7 @@ class Sketchup::Layer < Sketchup::Entity
   #   new_layer = layers.add "test layer"
   #   UI.messagebox(new_layer.visible?)
   #
-  # @return true if the layer is visible
+  # @return [Boolean] true if the layer is visible
   #
   # @version SketchUp 6.0
   def visible?

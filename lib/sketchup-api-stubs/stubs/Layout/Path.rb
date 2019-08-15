@@ -9,16 +9,16 @@ class Layout::Path < Layout::Entity
 
   # Constants
 
-  PATH_WINDING_CLOCKWISE = nil # Stub value.
-  PATH_WINDING_COUNTER_CLOCKWISE = nil # Stub value.
-  PATH_WINDING_NONE = nil # Stub value.
-
   POINT_TYPE_ARC_CENTER = nil # Stub value.
   POINT_TYPE_BEZIER_CONTROL = nil # Stub value.
   POINT_TYPE_BEZIER_TO = nil # Stub value.
   POINT_TYPE_CLOSE = nil # Stub value.
   POINT_TYPE_LINE_TO = nil # Stub value.
   POINT_TYPE_MOVE_TO = nil # Stub value.
+
+  PATH_WINDING_CLOCKWISE = nil # Stub value.
+  PATH_WINDING_COUNTER_CLOCKWISE = nil # Stub value.
+  PATH_WINDING_NONE = nil # Stub value.
 
   # Class Methods
 

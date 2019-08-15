@@ -180,7 +180,7 @@ class Sketchup::EdgeUse < Sketchup::Entity
   #   edgeuse = edgeuses[0]
   #   reversed = edgeuse.reversed?
   #
-  # @return boolean - true if reversed, false if not reversed.
+  # @return [Boolean] boolean - true if reversed, false if not reversed.
   #
   # @version SketchUp 6.0
   def reversed?

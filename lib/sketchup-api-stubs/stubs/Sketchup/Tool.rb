@@ -2,8 +2,8 @@
 # License:: The MIT License (MIT)
 
 # Tool is the interface that you implement to create a SketchUp tool.
-# See the file Plugins/Examples/linetool.rb (in your SketchUp install
-# directory) for an example of how to create a custom tool in Ruby.
+# See https://github.com/SketchUp/sketchup-ruby-api-tutorials/tree/master/examples/02_custom_tool
+# for an example of how to create a custom tool in Ruby.
 #
 # To create a new tool in Ruby, you must define a new class that implements
 # the methods for the events that you want to respond to. You do not have
@@ -37,7 +37,7 @@ class Sketchup::Tool
 
   # Instance Methods
 
-  # The activate method is called by SketchUp when the tool is selected.
+  # The #{activate} method is called by SketchUp when the tool is selected.
   # It is a good place to put most of your initialization, such as instance
   # variables to track the state of the tool.
   #
@@ -46,13 +46,11 @@ class Sketchup::Tool
   #     puts 'Your tool has been activated.'
   #   end
   #
-  # @return nil
-  #
   # @version SketchUp 6.0
   def activate
   end
 
-  # The deactivate method is called when the tool is deactivated because a
+  # The #{deactivate} method is called when the tool is deactivated because a
   # different tool was selected.
   #
   # @example
@@ -60,10 +58,7 @@ class Sketchup::Tool
   #     puts "Your tool has been deactivated in view: #{view}"
   #   end
   #
-  # @param view
-  #   A View object where the method was invoked.
-  #
-  # @return nil
+  # @param [Sketchup::View] view
   #
   # @version SketchUp 6.0
   def deactivate(view)
@@ -99,8 +94,6 @@ class Sketchup::Tool
   # @param [Sketchup::View] view
   #   A View object where the method was invoked.
   #
-  # @return nil
-  #
   # @see getExtents
   #
   # @see Sketchup::View#draw
@@ -109,8 +102,8 @@ class Sketchup::Tool
   def draw(view)
   end
 
-  # The enableVCB? method is used to tell SketchUp whether to allow the user to
-  # enter text into the VCB (value control box, aka the "measurements" panel).
+  # The #{enableVCB?} method is used to tell SketchUp whether to allow the user
+  # to enter text into the VCB (value control box, aka the "measurements" panel).
   # If you do not implement this method, then the vcb is disabled by default.
   #
   # @example
@@ -119,7 +112,7 @@ class Sketchup::Tool
   #     return true
   #   end
   #
-  # @return enable - true if you want the VCB enabled
+  # @return [Boolean] Return +true+ if you want the VCB enabled
   #
   # @version SketchUp 6.0
   def enableVCB?
@@ -132,9 +125,9 @@ class Sketchup::Tool
   # the tool is drawing gets clipped to the extents of the rest of the
   # model.
   #
-  # This must return a BoundingBox. In a typical implementation, you
-  # will create a new BoundingBox, add points to set the extents of the drawing
-  # that the tool will do and then return it.
+  # This must return a {Geom::BoundingBox}. In a typical implementation, you
+  # will create a new {Geom::BoundingBox}, add points to set the extents of the
+  # drawing that the tool will do and then return it.
   #
   # @example
   #   def getExtents
@@ -142,22 +135,17 @@ class Sketchup::Tool
   #     return bb
   #   end
   #
-  # @return BoundingBox - a BoundingBox object
+  # @return [Geom::BoundingBox]
   #
   # @version SketchUp 6.0
   def getExtents
   end
 
-  # The getInstructorContentDirectory method is used to tell SketchUp the
+  # The #{getInstructorContentDirectory} method is used to tell SketchUp the
   # directory containing your Tool's instructor content. To use this, create
   # a custom instructor directory, put an index.html file inside of it, and then
   # return that path via this method. If the SketchUp user has the Instructor
   # window open when they activate your tool, they will see your html file.
-  #
-  # NOTE: Prior to SketchUp 2014 this method would assume the path was relative
-  # to the SketchUp resource folder. From 2014 and onwards you can specify the
-  # absolute path to an HTML file or the absolute path to a directory containing
-  # an index.html file.
   #
   # @example
   #   def getInstructorContentDirectory
@@ -166,14 +154,18 @@ class Sketchup::Tool
   #     return instructor_path
   #   end
   #
-  # @return directory - the string directory where the Instructor
-  #   content exists.
+  # @note Prior to SketchUp 2014 this method would assume the path was relative
+  #   to the SketchUp resource folder. From 2014 and onwards you can specify the
+  #   absolute path to an HTML file or the absolute path to a directory
+  #   containing an index.html file.
+  #
+  # @return [String] the directory path where the Instructor content exists.
   #
   # @version SketchUp 6.0
   def getInstructorContentDirectory
   end
 
-  # The getMenu method is called by SketchUp to let the tool provide its own
+  # The #{getMenu} method is called by SketchUp to let the tool provide its own
   # context menu. Most tools will not want to implement this method and,
   # instead, use the normal context menu found on all entities.
   #
@@ -263,13 +255,11 @@ class Sketchup::Tool
   #
   # @param [Sketchup::View] view
   #
-  # @return [nil]
-  #
   # @version SketchUp 6.0
   def onCancel(reason, view)
   end
 
-  # The onKeyDown method is called by SketchUp when the user presses a key on
+  # The #{onKeyDown} method is called by SketchUp when the user presses a key on
   # the keyboard. If you want to get input from the VCB, you should implement
   # onUserText rather than this method.
   #
@@ -309,28 +299,29 @@ class Sketchup::Tool
   #     puts "          view = #{view}"
   #   end
   #
-  # @param key
+  # @param [Integer] key
   #   The key that was pressed.
   #
-  # @param repeat
-  #   A value of 1 for a single press of a key.  A value of 2
-  #   if the user has pressed a key and is holding it down.
+  # @param [Integer] repeat
+  #   A value of 1 for a single press of a key.  A value
+  #   of 2 if the user has pressed a key and is holding
+  #   it down.
   #
-  # @param flags
-  #   A bit mask that tells the state of the modifier keys at
-  #   the time of the onKeyDown.
+  # @param [Integer] flags
+  #   A bit mask that tells the state of the modifier
+  #   keys at the time of the event.
   #
-  # @param view
-  #   A View object where the method was invoked.
+  # @param [Sketchup::View] view
   #
-  # @return nil
+  # @return [Boolean] Return +true+ to prevent SketchUp from processing the
+  #   event.
   #
   # @version SketchUp 6.0
   def onKeyDown(key, repeat, flags, view)
   end
 
-  # The onKeyUp method is called by SketchUp when the user releases a key on the
-  # keyboard.
+  # The #{onKeyUp} method is called by SketchUp when the user releases a key on
+  # the keyboard.
   #
   # @example
   #   def onKeyUp(key, repeat, flags, view)
@@ -340,27 +331,28 @@ class Sketchup::Tool
   #     puts "        view = #{view}"
   #   end
   #
-  # @param key
+  # @param [Integer] key
   #   The key that was pressed.
   #
-  # @param repeat
-  #   A value of 1 for a single press of a key.  A value of 2
-  #   if the user has pressed a key and is holding it down.
+  # @param [Integer] repeat
+  #   A value of 1 for a single press of a key.  A value
+  #   of 2 if the user has pressed a key and is holding
+  #   it down.
   #
-  # @param flags
-  #   A bit mask that tells the state of the modifier keys at
-  #   the time of the onKeyUp.
+  # @param [Integer] flags
+  #   A bit mask that tells the state of the modifier
+  #   keys at the time of the event.
   #
-  # @param view
-  #   A View object where the method was invoked.
+  # @param [Sketchup::View] view
   #
-  # @return nil
+  # @return [Boolean] Return +true+ to prevent SketchUp from processing the
+  #   event.
   #
   # @version SketchUp 6.0
   def onKeyUp(key, repeat, flags, view)
   end
 
-  # The onLButtonDoubleClick is called by SketchUp when the user double clicks
+  # The #{onLButtonDoubleClick} is called by SketchUp when the user double clicks
   # with the left mouse button.
   #
   # @example
@@ -371,27 +363,24 @@ class Sketchup::Tool
   #     puts "                       view = #{view}"
   #   end
   #
-  # @param flags
-  #   A bit mask that tells the state of the modifier keys
-  #   and other mouse buttons at the time.
+  # @param [Integer] flags
+  #   A bit mask that tells the state of the modifier
+  #   keys and other mouse buttons at the time.
   #
-  # @param x
+  # @param [Integer] x
   #   The X coordinate on the screen where the event occurred.
   #
-  # @param y
+  # @param [Integer] y
   #   The Y coordinate on the screen where the event occurred.
   #
-  # @param view
-  #   A View object where the method was invoked.
-  #
-  # @return nil
+  # @param [Sketchup::View] view
   #
   # @version SketchUp 6.0
   def onLButtonDoubleClick(flags, x, y, view)
   end
 
-  # The onLButtonDown method is called by SketchUp when the left mouse button is
-  # pressed. Most tools will implement this method.
+  # The #{onLButtonDown} method is called by SketchUp when the left mouse button
+  # is pressed. Most tools will implement this method.
   #
   # @example
   #   def onLButtonDown(flags, x, y, view)
@@ -401,26 +390,23 @@ class Sketchup::Tool
   #     puts "                view = #{view}"
   #   end
   #
-  # @param flags
-  #   A bit mask that tells the state of the modifier keys and
-  #   other mouse buttons at the time.
+  # @param [Integer] flags
+  #   A bit mask that tells the state of the modifier
+  #   keys and other mouse buttons at the time.
   #
-  # @param x
+  # @param [Integer] x
   #   The X coordinate on the screen where the event occurred.
   #
-  # @param y
+  # @param [Integer] y
   #   The Y coordinate on the screen where the event occurred.
   #
-  # @param view
-  #   A View object where the method was invoked.
-  #
-  # @return nil
+  # @param [Sketchup::View] view
   #
   # @version SketchUp 6.0
   def onLButtonDown(flags, x, y, view)
   end
 
-  # The onLButtonUp method is called by SketchUp when the left mouse button is
+  # The #{onLButtonUp} method is called by SketchUp when the left mouse button is
   # released.
   #
   # @example
@@ -431,32 +417,24 @@ class Sketchup::Tool
   #     puts "              view = #{view}"
   #   end
   #
-  # @param flags
-  #   A bit mask that tells the state of the modifier keys and
-  #   other mouse buttons at the time.
+  # @param [Integer] flags
+  #   A bit mask that tells the state of the modifier
+  #   keys and other mouse buttons at the time.
   #
-  # @param x
+  # @param [Integer] x
   #   The X coordinate on the screen where the event occurred.
   #
-  # @param y
+  # @param [Integer] y
   #   The Y coordinate on the screen where the event occurred.
   #
-  # @param view
-  #   A View object where the method was invoked.
-  #
-  # @return nil
+  # @param [Sketchup::View] view
   #
   # @version SketchUp 6.0
   def onLButtonUp(flags, x, y, view)
   end
 
-  # NOTE: Though this method has been documented in the Ruby API for many years,
-  # it has never worked properly. We are leaving this documentation in place
-  # for now in the hopes of fixing the implementation, but you won't have any
-  # luck trying to use it in SU7 and earlier.
-  #
-  # The onMButtonDoubleClick method is called by SketchUp when the middle mouse
-  # button (on a three button mouse) is double-clicked.
+  # The #{onMButtonDoubleClick} method is called by SketchUp when the middle
+  # mouse button (on a three button mouse) is double-clicked.
   #
   # Only implement this method if you want SketchUp to react to a middle mouse
   # button being double-clicked.
@@ -469,27 +447,29 @@ class Sketchup::Tool
   #     puts "                       view = #{view}"
   #   end
   #
-  # @param flags
-  #   A bit mask that tells the state of the modifier keys and
-  #   other mouse buttons at the time.
+  # @note Though this method has been documented in the Ruby API for many years,
+  #   it has never worked properly. We are leaving this documentation in place
+  #   for now in the hopes of fixing the implementation, but you won't have any
+  #   luck trying to use it in SU7 and earlier.
   #
-  # @param x
+  # @param [Integer] flags
+  #   A bit mask that tells the state of the modifier
+  #   keys and other mouse buttons at the time.
+  #
+  # @param [Integer] x
   #   The X coordinate on the screen where the event occurred.
   #
-  # @param y
+  # @param [Integer] y
   #   The Y coordinate on the screen where the event occurred.
   #
-  # @param view
-  #   A View object where the method was invoked.
-  #
-  # @return nil
+  # @param [Sketchup::View] view
   #
   # @version SketchUp 6.0
   def onMButtonDoubleClick(flags, x, y, view)
   end
 
-  # The onMButtonDown method is called by SketchUp when the middle mouse button
-  # (on a three button mouse) is down.
+  # The #{onMButtonDown} method is called by SketchUp when the middle mouse
+  # button (on a three button mouse) is down.
   #
   # The Orbit tool is activated by default when the middle mouse button is down.
   # Implement this method if you want a middle mouse button to do something
@@ -503,26 +483,23 @@ class Sketchup::Tool
   #     puts "                 view = #{view}"
   #   end
   #
-  # @param flags
-  #   A bit mask that tells the state of the modifier keys and
-  #   other mouse buttons at the time.
+  # @param [Integer] flags
+  #   A bit mask that tells the state of the modifier
+  #   keys and other mouse buttons at the time.
   #
-  # @param x
+  # @param [Integer] x
   #   The X coordinate on the screen where the event occurred.
   #
-  # @param y
+  # @param [Integer] y
   #   The Y coordinate on the screen where the event occurred.
   #
-  # @param view
-  #   A View object where the method was invoked.
-  #
-  # @return nil
+  # @param [Sketchup::View] view
   #
   # @version SketchUp 6.0
   def onMButtonDown(flags, x, y, view)
   end
 
-  # The onMButtonUp method is called by SketchUp when the middle mouse button
+  # The #{onMButtonUp} method is called by SketchUp when the middle mouse button
   # (on a three button mouse) is released.
   #
   # SketchUp returns to the previous tool from the Orbit tool when the middle
@@ -538,60 +515,51 @@ class Sketchup::Tool
   #     puts "               view = #{view}"
   #   end
   #
-  # @param flags
-  #   A bit mask that tells the state of the modifier keys and
-  #   other mouse buttons at the time.
+  # @param [Integer] flags
+  #   A bit mask that tells the state of the modifier
+  #   keys and other mouse buttons at the time.
   #
-  # @param x
+  # @param [Integer] x
   #   The X coordinate on the screen where the event occurred.
   #
-  # @param y
+  # @param [Integer] y
   #   The Y coordinate on the screen where the event occurred.
   #
-  # @param view
-  #   A View object where the method was invoked.
-  #
-  # @return nil
+  # @param [Sketchup::View] view
   #
   # @version SketchUp 6.0
   def onMButtonUp(flags, x, y, view)
   end
 
-  # The onMouseEnter method is called by SketchUp when the mouse enters the View
-  # object.
+  # The #{onMouseEnter} method is called by SketchUp when the mouse enters the
+  # viewport.
   #
   # @example
   #   def onMouseEnter(view)
   #     puts "onMouseEnter: view = #{view}"
   #   end
   #
-  # @param view
-  #   A View object where the method was invoked.
-  #
-  # @return nil
+  # @param [Sketchup::View] view
   #
   # @version SketchUp 6.0
   def onMouseEnter(view)
   end
 
-  # The onMouseLeave method is called by SketchUp when the mouse leaves the View
-  # object.
+  # The #{onMouseLeave} method is called by SketchUp when the mouse leaves the
+  # viewport.
   #
   # @example
   #   def onMouseLeave(view)
   #     puts "onMouseLeave: view = #{view}"
   #   end
   #
-  # @param view
-  #   A View object where the method was invoked.
-  #
-  # @return nil
+  # @param [Sketchup::View] view
   #
   # @version SketchUp 6.0
   def onMouseLeave(view)
   end
 
-  # The onMouseMove method is called by SketchUp whenever the mouse is moved.
+  # The #{onMouseMove} method is called by SketchUp whenever the mouse is moved.
   # You will often want to implement this method.
   #
   # Try to make this method as efficient as possible because this method is
@@ -605,26 +573,94 @@ class Sketchup::Tool
   #     puts "               view = #{view}"
   #   end
   #
-  # @param flags
-  #   A bit mask that tells the state of the modifier keys and
-  #   other mouse buttons at the time.
+  # @param [Integer] flags
+  #   A bit mask that tells the state of the modifier
+  #   keys and other mouse buttons at the time.
   #
-  # @param x
+  # @param [Integer] x
   #   The X coordinate on the screen where the event occurred.
   #
-  # @param y
+  # @param [Integer] y
   #   The Y coordinate on the screen where the event occurred.
   #
-  # @param view
-  #   A View object where the method was invoked.
-  #
-  # @return nil
+  # @param [Sketchup::View] view
   #
   # @version SketchUp 6.0
   def onMouseMove(flags, x, y, view)
   end
 
-  # The onRButtonDoubleClick is called by SketchUp when the user double clicks
+  # The #{onMouseWheel} method is called by SketchUp when the mouse scroll wheel
+  # is used.
+  #
+  # @example
+  #   class ExampleTool
+  #
+  #     def initialize
+  #       @property_value = 0
+  #       @rect = [
+  #         Geom::Point3d.new(100, 150, 0),
+  #         Geom::Point3d.new(300, 150, 0),
+  #         Geom::Point3d.new(300, 250, 0),
+  #         Geom::Point3d.new(100, 250, 0),
+  #       ]
+  #     end
+  #
+  #     def onMouseMove(flags, x, y, view)
+  #       view.invalidate
+  #     end
+  #
+  #     def onMouseWheel(flags, delta, x, y, view)
+  #       # If the cursor is not within the bounds of the rectangle, return false
+  #       # to let SketchUp do its default action (zoom).
+  #       point = Geom::Point3d.new(x, y)
+  #       return false unless Geom.point_in_polygon_2D(point, @rect, true)
+  #
+  #       # If cursor is within the bounds of the rectangle, update the value
+  #       # and prevent the default zoom.
+  #       @property_value += delta
+  #       view.invalidate
+  #       true
+  #     end
+  #
+  #     def draw(view)
+  #       view.line_width = 2
+  #       view.line_stipple = ''
+  #       view.drawing_color = 'red'
+  #       view.draw2d(GL_QUADS, @rect)
+  #
+  #       point = Geom::Point3d.new(120, 170)
+  #       view.draw_text(point, "Value: #{@property_value}",
+  #          size: 20, bold: true, color: 'black')
+  #     end
+  #
+  #   end
+  #
+  #   Sketchup.active_model.select_tool(ExampleTool.new)
+  #
+  # @param [Integer] flags
+  #   A bit mask that tells the state of the modifier
+  #   keys and other mouse buttons at the time.
+  #
+  # @param [Integer] delta
+  #   Either +1+ or +-1+ depending on which direction the
+  #   mouse wheel scrolled.
+  #
+  # @param [Float] x
+  #   The X coordinate on the screen where the event occurred.
+  #
+  # @param [Float] y
+  #   The Y coordinate on the screen where the event occurred.
+  #
+  # @param [Sketchup::View] view
+  #
+  # @return [Boolean] Return +true+ to prevent SketchUp from performing default
+  #   zoom action.
+  #
+  # @version SketchUp 2019.2
+  def onMouseWheel(flags, delta, x, y, view)
+  end
+
+  # The #{onRButtonDoubleClick} is called by SketchUp when the user double clicks
   # with the right mouse button.
   #
   # @example
@@ -635,26 +671,23 @@ class Sketchup::Tool
   #     puts "                       view = #{view}"
   #   end
   #
-  # @param flags
-  #   A bit mask that tells the state of the modifier keys and
-  #   other mouse buttons at the time.
+  # @param [Integer] flags
+  #   A bit mask that tells the state of the modifier
+  #   keys and other mouse buttons at the time.
   #
-  # @param x
+  # @param [Integer] x
   #   The X coordinate on the screen where the event occurred.
   #
-  # @param y
+  # @param [Integer] y
   #   The Y coordinate on the screen where the event occurred.
   #
-  # @param view
-  #   A View object where the method was invoked.
-  #
-  # @return nil
+  # @param [Sketchup::View] view
   #
   # @version SketchUp 6.0
   def onRButtonDoubleClick(flags, x, y, view)
   end
 
-  # The onRButtonDown method is called by SketchUp when the user presses
+  # The #{onRButtonDown} method is called by SketchUp when the user presses
   # the right mouse button. Implement this method, along with the tool.getMenu
   # method, when you want your tool to do something other than display the
   # default context menu when the right mouse button is clicked.
@@ -667,26 +700,23 @@ class Sketchup::Tool
   #     puts "                view = #{view}"
   #   end
   #
-  # @param flags
-  #   A bit mask that tells the state of the modifier keys and
-  #   other mouse buttons at the time.
+  # @param [Integer] flags
+  #   A bit mask that tells the state of the modifier
+  #   keys and other mouse buttons at the time.
   #
-  # @param x
+  # @param [Integer] x
   #   The X coordinate on the screen where the event occurred.
   #
-  # @param y
+  # @param [Integer] y
   #   The Y coordinate on the screen where the event occurred.
   #
-  # @param view
-  #   A View object where the method was invoked.
-  #
-  # @return nil
+  # @param [Sketchup::View] view
   #
   # @version SketchUp 6.0
   def onRButtonDown(flags, x, y, view)
   end
 
-  # The onRButtonUp method is called by SketchUp when the user releases the
+  # The #{onRButtonUp} method is called by SketchUp when the user releases the
   # right mouse button.
   #
   # @example
@@ -697,20 +727,17 @@ class Sketchup::Tool
   #     puts "              view = #{view}"
   #   end
   #
-  # @param flags
-  #   A bit mask that tells the state of the modifier keys and
-  #   other mouse buttons at the time.
+  # @param [Integer] flags
+  #   A bit mask that tells the state of the modifier
+  #   keys and other mouse buttons at the time.
   #
-  # @param x
+  # @param [Integer] x
   #   The X coordinate on the screen where the event occurred.
   #
-  # @param y
+  # @param [Integer] y
   #   The Y coordinate on the screen where the event occurred.
   #
-  # @param view
-  #   A View object where the method was invoked.
-  #
-  # @return nil
+  # @param [Sketchup::View] view
   #
   # @version SketchUp 6.0
   def onRButtonUp(flags, x, y, view)
@@ -733,17 +760,17 @@ class Sketchup::Tool
   def onReturn(view)
   end
 
-  # The onSetCursor method is called by SketchUp when the tool wants to set the
-  # cursor.
+  # The #{onSetCursor} method is called by SketchUp when the tool wants to set
+  # the cursor.
   #
   # @example
   #   def onSetCursor
   #     puts "onSetCursor: view = #{view}"
   #     # You would set your cursor here. See UI.set_cursor method.
-  #     UI.set_cursor(@cursor_id)
+  #     UI.set_cursor(@cursor_id) # UI.set_cursor return true
   #   end
   #
-  # @return nil
+  # @return [Boolean] Return +true+ to prevent SketchUp using the default cursor.
   #
   # @version SketchUp 6.0
   def onSetCursor
@@ -765,13 +792,11 @@ class Sketchup::Tool
   # @param [Sketchup::View] view
   #   A view object where the method was invoked.
   #
-  # @return [nil]
-  #
   # @version SketchUp 6.0
   def onUserText(text, view)
   end
 
-  # The resume method is called by SketchUp when the tool becomes active again
+  # The #{resume} method is called by SketchUp when the tool becomes active again
   # after being suspended.
   #
   # @example
@@ -779,16 +804,13 @@ class Sketchup::Tool
   #     puts "resume: view = #{view}"
   #   end
   #
-  # @param view
-  #   A View object where the method was invoked.
-  #
-  # @return nil
+  # @param [Sketchup::View] view
   #
   # @version SketchUp 6.0
   def resume(view)
   end
 
-  # The suspend method is called by SketchUp when the tool temporarily becomes
+  # The #{suspend} method is called by SketchUp when the tool temporarily becomes
   # inactive because another tool has been activated. This typically happens
   # when a viewing tool is activated, such as when orbit is active due to the
   # middle mouse button.
@@ -798,10 +820,7 @@ class Sketchup::Tool
   #     puts "suspend: view = #{view}"
   #   end
   #
-  # @param view
-  #   A View object where the method was invoked.
-  #
-  # @return nil
+  # @param [Sketchup::View] view
   #
   # @version SketchUp 6.0
   def suspend(view)

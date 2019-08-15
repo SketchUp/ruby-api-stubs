@@ -691,7 +691,7 @@ class Sketchup::Entities
   def add_section_plane(plane)
   end
 
-  # The {#add_text} method adds a note or label text entity to the entities
+  # The {#add_text} method adds a note or label text entity to the entities.
   #
   # @example
   #   coordinates = [10, 10, 10]
@@ -718,14 +718,17 @@ class Sketchup::Entities
   #
   # @overload add_text(text, point, vector)
   #
+  #   @bug SketchUp 2019.0 had a regression bug where an error was thrown if
+  #     +point+ was provided as a {Sketchup::Vertex} or {Sketchup::InputPoint}.
+  #     This was fixed in SketchUp 2019.1.
   #   @param [String] text The text string to add.
-  #   @param [Geom::Point3d] point A Point3d object representing the insertion
-  #     point.
+  #   @param [Geom::Point3d, Sketchup::Vertex, Sketchup::InputPoint] point
+  #     A Point3d object representing the insertion point.
   #   @param [Geom::Vector3d] vector The Vector representing an arrow leader.
   #
   # @overload add_text(text, instance_path_and_pt, vector)
   #
-  #   @note Added in SketchUp 2019.
+  #   @version SketchUp 2019
   #   @param [String] text The text to add.
   #   @param [Array<Sketchup::InstancePath, Geom::Point3d>] instance_path_and_pt
   #     The array containing a {Sketchup::InstancePath} and a {Geom::Point3d}.
@@ -733,7 +736,7 @@ class Sketchup::Entities
   #
   # @overload add_text(text, instance_array_and_pt, vector)
   #
-  #   @note Added in SketchUp 2019.
+  #   @version SketchUp 2019
   #   @param [String] text The text to add.
   #   @param [Array(Array<Sketchup::Entity>, Geom::Point3d)] instance_array_with_pt
   #     The array containing one or more {Sketchup::ComponentInstance}'s and a

@@ -393,8 +393,6 @@ class Array
   #   @return [Boolean] +true+ if the point is on the line, +false+ if the
   #     point is not on the line.
   #
-  # @return [Boolean]
-  #
   # @see Geom
   #   The Geom module for instructions on how to create a line.
   #

@@ -67,7 +67,7 @@ class Sketchup::Console
   # @example
   #   puts SKETCHUP_CONSOLE.visible?
   #
-  # @return true if visible, false if not.
+  # @return [Boolean] true if visible, false if not.
   #
   # @version SketchUp 2014
   def visible?

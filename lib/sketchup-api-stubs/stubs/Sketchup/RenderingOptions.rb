@@ -27,7 +27,6 @@
 # - +EdgeType+
 # - +ExtendLines+
 # - +FaceBackColor+
-# - +FaceColorMode+
 # - +FaceFrontColor+
 # - +FogColor+
 # - +FogEndDist+
@@ -57,6 +56,9 @@
 # - +SkyColor+
 # - +Texture+
 # - +TransparencySort+ SketchUp 2017 treats Medium transparency as Faster.
+#
+# Removed in SketchUp 2019.1
+# - +FaceColorMode+ This option was previously included but it was ineffective.
 #
 # Added in SketchUp 7:
 # - +DisplayDims+

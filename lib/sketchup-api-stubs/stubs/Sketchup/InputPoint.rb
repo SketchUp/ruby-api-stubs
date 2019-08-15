@@ -142,7 +142,7 @@ class Sketchup::InputPoint
   #   ip1 = view.inputpoint x,y
   #   status = ip1.display
   #
-  # @return status - true if the draw method will draw something,
+  # @return [Boolean] status - true if the draw method will draw something,
   #   false if the draw method has nothing to draw
   #
   # @version SketchUp 6.0
@@ -365,7 +365,7 @@ class Sketchup::InputPoint
   #   ip1 = view.inputpoint x,y
   #   status = ip1.valid?
   #
-  # @return status - true if the input point has valid data, false
+  # @return [Boolean] status - true if the input point has valid data, false
   #   if it does not have valid data.
   #
   # @version SketchUp 6.0

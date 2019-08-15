@@ -18,10 +18,10 @@ class Layout::SketchUpModel < Layout::Entity
 
   # Constants
 
-  BACK_VIEW = nil # Stub value.
-
   BOTTOM_RELATIVE_VIEW = nil # Stub value.
   BOTTOM_VIEW = nil # Stub value.
+
+  BACK_VIEW = nil # Stub value.
 
   CUSTOM_VIEW = nil # Stub value.
 

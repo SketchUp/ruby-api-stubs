@@ -24,6 +24,9 @@ class Sketchup::ViewObserver
   # The {#onViewChanged} method is called whenever the view is altered, such as
   # when the user uses the Pan, Orbit, or Zoom tools are used.
   #
+  # @bug Prior to SketchUp 2019.2 this event did not trigger when the viewport
+  #   size changed.
+  #
   # @example
   #   def onViewChanged(view)
   #     puts "onViewChanged: #{view}"

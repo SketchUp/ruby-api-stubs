@@ -878,37 +878,20 @@ class Sketchup::View
   def vpwidth
   end
 
-  # The write_image method is used to write the current view to an image file.
-  #
-  # All arguments except for the filename are optional.
-  #
-  # If antialias is specified, it should be either true or false.
-  #
-  # If a hash is passed as the first parameter, then the contents of that hash
-  # define how the image is exported.
-  #
-  # @example With options hash.
-  #   options = {
-  #     :filename => "c:/tmp/write_image.png",
-  #     :width => 640,
-  #     :height => 480,
-  #     :antialias => false,
-  #     :compression => 0.9,
-  #     :transparent => true
-  #   }
-  #   model = Sketchup.active_model
-  #   view = model.active_view
-  #   view.write_image(options)
-  #
-  # @example Legacy arguments variant.
-  #   filename => "c:/tmp/write_image.png"
-  #   antialias => false
-  #   compression => 0.9
-  #   model = Sketchup.active_model
-  #   view = model.active_view
-  #   view.write_image(filename, 640, 480, antialias, compression)
+  # The {#write_image} method is used to write the current view to an image file.
   #
   # @overload write_image(filename, width = view.vpwidth, height = view.vpheight, antialias = false, compression = 1.0)
+  #
+  #   @note Prefer the overload with option hash instead of this variant. This
+  #     overload is not updated with new options.
+  #
+  #   @example
+  #     filename => "c:/tmp/write_image.png"
+  #     antialias => false
+  #     compression => 0.9
+  #     model = Sketchup.active_model
+  #     view = model.active_view
+  #     view.write_image(filename, 640, 480, antialias, compression)
   #
   #   @param [String] filename
   #     The filename for the saved image
@@ -917,22 +900,60 @@ class Sketchup::View
   #   @param [Integer] height
   #     Height in pixels, defaults to the current viewport height {#vpheight}.
   #   @param [Boolean] antialias
-  #     true or false
   #   @param [Float] compression
-  #     Float compression factor for JPEG images,
-  #     between 0.0 and 1.0
+  #     Compression factor for JPEG images, between +0.0+ and +1.0+.
   #
   # @overload write_image(options)
+  #
+  #   @example
+  #     options = {
+  #       :filename => "c:/tmp/write_image.png",
+  #       :width => 640,
+  #       :height => 480,
+  #       :antialias => false,
+  #       :compression => 0.9,
+  #       :transparent => true
+  #     }
+  #     model = Sketchup.active_model
+  #     view = model.active_view
+  #     view.write_image(options)
   #
   #   @version SketchUp 7
   #   @param [Hash] options
   #   @option options [String] filename  The filename for the saved image.
-  #   @option options [Integer] width (#vpwidth)  Width in pixels (max 16000).
-  #   @option options [Integer] height (#vpheight)  Height in pixels (max 16000).
+  #   @option options [Integer] width (#vpwidth)  Width in pixels (max +1600+).
+  #   @option options [Integer] height (#vpheight)  Height in pixels (max +16000+).
+  #   @option options [Float] scale_factor (1.0)  Scaling factor for
+  #     elements that are viewport dependent, such as text heights, arrow heads,
+  #     line widths, stipple patterns, etc. (Added in  SketchUp 2019.1)
   #   @option options [Boolean] antialias (false)
   #   @option options [Float] compression (1.0)  Compression factor for JPEG,
-  #     images between 0.0 and 1.0
+  #     images between +0.0+ and +1.0+.
   #   @option options [Boolean] transparent (false) Added in SketchUp 8.
+  #
+  # @overload write_image(options)
+  #
+  #   It is possible to dump the framebuffer to file by setting +:source+ to
+  #   +:framebuffer+. When saving the framebuffer only the following options are
+  #   valid.
+  #
+  #   @example
+  #     options = {
+  #       :filename => "c:/tmp/write_image.png",
+  #       :source => :framebuffer,
+  #       :compression => 0.9,
+  #     }
+  #     model = Sketchup.active_model
+  #     view = model.active_view
+  #     view.write_image(options)
+  #
+  #   @version SketchUp 7
+  #   @param [Hash] options
+  #   @option options [String] filename  The filename for the saved image.
+  #   @option options [Boolean] source (:image) Set to +:framebuffer+ to dump the
+  #     current framebuffer.
+  #   @option options [Float] compression (1.0)  Compression factor for JPEG,
+  #     images between +0.0+ and +1.0+.
   #
   # @return [Boolean]
   #

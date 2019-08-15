@@ -5,15 +5,18 @@
 
   # Constants
 
+  ALT_MODIFIER_KEY = nil # Stub value.
+  ALT_MODIFIER_MASK = nil # Stub value.
+
   ALeaderModel = nil # Stub value.
   ALeaderNone = nil # Stub value.
   ALeaderView = nil # Stub value.
 
-  ALT_MODIFIER_KEY = nil # Stub value.
-  ALT_MODIFIER_MASK = nil # Stub value.
-
   COPY_MODIFIER_KEY = nil # Stub value.
   COPY_MODIFIER_MASK = nil # Stub value.
+
+  CONSTRAIN_MODIFIER_KEY = nil # Stub value.
+  CONSTRAIN_MODIFIER_MASK = nil # Stub value.
 
   CMD_ARC = nil # Stub value.
   CMD_CAMERA_UNDO = nil # Stub value.
@@ -83,9 +86,6 @@
   CMD_ZOOM_EXTENTS = nil # Stub value.
   CMD_ZOOM_WINDOW = nil # Stub value.
 
-  CONSTRAIN_MODIFIER_KEY = nil # Stub value.
-  CONSTRAIN_MODIFIER_MASK = nil # Stub value.
-
   DimensionArrowClosed = nil # Stub value.
   DimensionArrowDot = nil # Stub value.
   DimensionArrowNone = nil # Stub value.
@@ -107,6 +107,9 @@
   GL_TRIANGLE_FAN = nil # Stub value.
   GL_TRIANGLE_STRIP = nil # Stub value.
 
+  IDENTITY = nil # Stub value.
+  IDENTITY_2D = nil # Stub value.
+
   IDABORT = nil # Stub value.
   IDCANCEL = nil # Stub value.
   IDIGNORE = nil # Stub value.
@@ -114,9 +117,6 @@
   IDOK = nil # Stub value.
   IDRETRY = nil # Stub value.
   IDYES = nil # Stub value.
-
-  IDENTITY = nil # Stub value.
-  IDENTITY_2D = nil # Stub value.
 
   LAYER_HIDDEN_BY_DEFAULT = nil # Stub value.
   LAYER_IS_HIDDEN_ON_NEW_PAGES = nil # Stub value.
@@ -151,11 +151,11 @@
   PAGE_USE_SHADOWINFO = nil # Stub value.
   PAGE_USE_SKETCHCS = nil # Stub value.
 
-  SKETCHUP_CONSOLE = nil # Stub value.
-
   SB_PROMPT = nil # Stub value.
   SB_VCB_LABEL = nil # Stub value.
   SB_VCB_VALUE = nil # Stub value.
+
+  SKETCHUP_CONSOLE = nil # Stub value.
 
   SnapTo_Arbitrary = nil # Stub value.
   SnapTo_Horizontal = nil # Stub value.

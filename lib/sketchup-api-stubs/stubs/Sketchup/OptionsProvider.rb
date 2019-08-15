@@ -5,6 +5,14 @@
 # get an OptionsProvider from the OptionsManager. The options are given as
 # name/value pairs.
 #
+# List of keys added in different SketchUp versions:
+#
+# [+UnitsOptions+] * +AreaUnit+ (SketchUp 2019.1)
+#                  * +VolumeUnit+ (SketchUp 2019.1)
+#
+# The +AreaUnit+ and +VolumeUnit+ options in +UnitsOptions+ only applies if
+# the +UnitFormat+ is +Length::Decimal+.
+#
 # @version SketchUp 6.0
 class Sketchup::OptionsProvider
 
@@ -173,8 +181,6 @@ class Sketchup::OptionsProvider
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @see #key?
   #
   # @version SketchUp 6.0
@@ -191,8 +197,6 @@ class Sketchup::OptionsProvider
   #
   # @param [String] name
   #   The name of the key you are looking for.
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #

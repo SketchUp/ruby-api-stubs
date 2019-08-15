@@ -31,6 +31,10 @@ class Sketchup::Material < Sketchup::Entity
   MATERIAL_SOLID = nil # Stub value.
   MATERIAL_TEXTURED = nil # Stub value.
 
+  OWNER_IMAGE = nil # Stub value.
+  OWNER_LAYER = nil # Stub value.
+  OWNER_MANAGER = nil # Stub value.
+
   # Instance Methods
 
   # The <=> method is used to compare two materials based on name. The number
@@ -289,6 +293,20 @@ class Sketchup::Material < Sketchup::Entity
   #
   # @version SketchUp 8.0 M1
   def name=(str)
+  end
+
+  # The {#owner_type} method is used to determine if the material is owned
+  # by a {Sketchup::Materials}.
+  #
+  # Returned value is one of:
+  # * +Sketchup::Material::OWNER_MANAGER+
+  # * +Sketchup::Material::OWNER_IMAGE+
+  # * +Sketchup::Material::OWNER_LAYER+
+  #
+  # @return [Integer]
+  #
+  # @version SketchUp 2019.2
+  def owner_type
   end
 
   # The {#save_as} method is used to write a material to a SKM file.

@@ -69,8 +69,6 @@ class Sketchup::Set
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @see #include?
   #
   # @version SketchUp 6.0
@@ -118,7 +116,7 @@ class Sketchup::Set
   #   set.insert(3)
   #   puts set.empty?
   #
-  # @return status - true if the set is empty, false if it is not
+  # @return [Boolean] status - true if the set is empty, false if it is not
   #   empty.
   #
   # @version SketchUp 6.0
@@ -136,8 +134,6 @@ class Sketchup::Set
   #   p set.include?(2)
   #
   # @param [Sketchup::Entity] entity
-  #
-  # @return [Boolean]
   #
   # @return [Boolean]
   #

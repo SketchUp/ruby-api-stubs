@@ -143,8 +143,6 @@ class Sketchup::Selection
   #
   # @return [Boolean]
   #
-  # @return [Boolean]
-  #
   # @see #include?
   #
   # @version SketchUp 6.0
@@ -232,6 +230,27 @@ class Sketchup::Selection
   #
   # @version SketchUp 6.0
   def include?(entity)
+  end
+
+  # The #{invert} method is used to invert the selection.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   entities = model.active_entities
+  #   selection = model.selection
+  #   # Create a cube
+  #   face = entities.add_face([0, 0, 0], [9, 0, 0], [9, 9, 0], [0, 9, 0])
+  #   face.pushpull(-9)
+  #   # Add the first two faces to the selection
+  #   faces = entities.grep(Sketchup::Face).take(2)
+  #   selection.add(faces)
+  #   # Invert selection
+  #   selection.invert
+  #
+  # @return [nil]
+  #
+  # @version SketchUp 2019.2
+  def invert
   end
 
   # The is_curve? method is used to determine if the selection contains all

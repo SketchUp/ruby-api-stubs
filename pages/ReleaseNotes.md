@@ -18,15 +18,16 @@ Though our adoption rate to the latest version is quite high, it can take time a
 
 Here are the build numbers for recent SketchUp releases. Note that build numbers in languages besides English are larger for each release, so it is best to check for builds that are greater than or equal to the numbers here.
 
-- **SU2019 M0** = 19.0.634 on Windows 64-bit, 19.0.635 on Mac 64-bit.
+- **SU2019.2** = 19.2.222 on Windows 64-bit, 19.2.221 on Mac 64-bit.
+- **SU2019.1** = 19.1.174 on Windows 64-bit, 19.1.173 on Mac 64-bit.
+- **SU2019** = 19.0.685 on Windows 64-bit, 19.0.684 on Mac 64-bit.
 
 - **SU2018 M1** = 18.1.1180 on Mac 64-bit. (Contained no Ruby API changes)
+- **SU2018** = 18.0.16975 on Windows 64-bit, 18.0.16976 on Mac 64-bit.
 
-- **SU2018 M0** = 18.0.16975 on Windows 64-bit, 18.0.16976 on Mac 64-bit.
+- **SU2017** = 17.0.18899 on Windows 64-bit, 17.0.18898 on Mac 64-bit.
 
-- **SU2017 M0** = 17.0.18899 on Windows 64-bit, 17.0.18898 on Mac 64-bit.
-
-- **SU2016 M0** = 16.0.19912 on Windows 64-bit, 16.0.19911 on Windows 32-bit, 16.0.19913 on Mac 64-bit.
+- **SU2016** = 16.0.19912 on Windows 64-bit, 16.0.19911 on Windows 32-bit, 16.0.19913 on Mac 64-bit.
 
 - **SU2015 M2** = 15.2.685 on Windows 64-bit, 15.2.687 on Windows 32-bit, 15.2.686 on Mac 64-bit.
 - **SU2015 M1** = 15.1.106 on Windows 64-bit, 15.1.105 on Windows 32-bit, 15.1.104 on Mac 64-bit.
@@ -45,11 +46,40 @@ Here are the build numbers for recent SketchUp releases. Note that build numbers
 
 - **SU7.1 M2** = 7.1.6860 on Windows, 7.1.6859 on Mac.
 - **SU7.0 M1** = 7.0.10247 on Windows, 7.0.10246 on Mac.
-- **SU7.0 M0** = 7.0.8657 on Windows, 7.0.8656 on Mac.
+- **SU7.0** = 7.0.8657 on Windows, 7.0.8656 on Mac.
 
 - **SU6 M6** = 6.4.265 on Windows, 6.4.263 on Mac.
 
-# What's new in SketchUp 2019 M0
+# What's new in SketchUp 2019.2
+
+## Ruby API Additions and Improvments
+
+* Added {Sketchup::Selection#invert} 
+* Added `:scale_factor` option to {Sketchup::View#write_image} allowing control over the scale of viewport dependant elements such as text    heights, arrow heads, line widths, stipple patterns, etc
+* Documented `:source => :framebuffer` option in {Sketchup::View#write_image} that dumps the current frame as drawn in viewport. This has existed since SketchUp 7
+* Added the new area and volume unit settings to {Sketchup::OptionsProvider}
+* Added {Sketchup.format_volume}
+* Added constants to the Length class for area and volume units to be used with the OptionsProvider
+* Added checks to prevent Image materials from being assigned to normal drawing elements. Doing so will now throw an ArgumentError 
+* Increased performance of PNG image export for colorized materials. Previously, it used to use max compression.  Now we use a more balanced compression setting. This affects {Sketchup::Texture#write} as well as the texture writer. We also added some general optimizations for {Sketchup::Texture#write}. On a 4Kx4K texture we saw the processing time drop from ~50 seconds to ~6 seconds.
+* Added `onMouseWheel` event to the Tool interface
+* Dynamic Component no longer throws an error on deleted entity
+
+## Ruby API Bug Fixes
+
+* Updated Ruby from 2.5.1 to 2.5.5 to address a logic bug in Ruby
+* Fixed possible crash in {Sketchup::Entities#clear!}
+* Fixed a bug in .skm serialisation where arrays in material attributes were not written out to file
+
+# What's new in SketchUp 2019.1
+
+## Ruby API Bug Fixes
+
+* Fixed the accepted types for the "point" in {Sketchup::Entities#add_text}
+* Fixed {Sketchup::Model#save} for `VERSION_2019`
+* Fixed crash when `rendering_options["RenderMode"] = 4`
+
+# What's new in SketchUp 2019
 
 ## Upgrade to Ruby 2.5.1
 

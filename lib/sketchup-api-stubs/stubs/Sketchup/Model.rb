@@ -1149,7 +1149,8 @@ class Sketchup::Model
   #     Sketchup::Model::VERSION_2015,
   #     Sketchup::Model::VERSION_2016,
   #     Sketchup::Model::VERSION_2017,
-  #     Sketchup::Model::VERSION_2018
+  #     Sketchup::Model::VERSION_2018,
+  #     Sketchup::Model::VERSION_2019
   #
   # @return [Boolean] true if successful, false if unsuccessful
   #
@@ -1184,7 +1185,8 @@ class Sketchup::Model
   #   Sketchup::Model::VERSION_2015,
   #   Sketchup::Model::VERSION_2016,
   #   Sketchup::Model::VERSION_2017,
-  #   Sketchup::Model::VERSION_2018
+  #   Sketchup::Model::VERSION_2018,
+  #   Sketchup::Model::VERSION_2019
   #
   # @return [Boolean] true if successful, false if unsuccessful
   #
