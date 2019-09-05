@@ -1,1 +1,1 @@
-require 'sketchup-api-stubs/autoload.rb'
+require 'sketchup-api-stubs/sketchup'
