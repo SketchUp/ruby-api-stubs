@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2019 Trimble Inc.
+# Copyright:: Copyright 2020 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Geom module defines a number of Module methods that let you perform
@@ -228,6 +228,121 @@ module Geom
   #
   # @version SketchUp 6.0
   def self.point_in_polygon_2D(point, polygon, check_border)
+  end
+
+  # Tessellates a polygon, represented as a collection of 3D points. Can include
+  # holes by providing collections of points describing the inner loops. This is
+  # intended to be used for planar polygons.
+  #
+  # Useful to draw concave polygons using {Sketchup::View#draw} or
+  # {Sketchup::View#draw2d}.
+  #
+  # It can also be useful for importers where the input format describes only the
+  # loops for a polygon and you want to work with a collection of triangles.
+  #
+  # <b>Polygon with two holes, one empty and one filled:</b>
+  #
+  # <i>(See "Drawing a polygon with holes from a custom tool" example)</i>
+  #
+  # rdoc-image:images/geom-tesselation-polygon-with-holes.png
+  #
+  # @example Iterate over each triangle in the returned set
+  #   polygon = [
+  #     Geom::Point3d.new(0, 0, 0),
+  #     Geom::Point3d.new(90, 0, 0),
+  #     Geom::Point3d.new(60, 40, 0),
+  #     Geom::Point3d.new(90, 90, 0),
+  #     Geom::Point3d.new(30, 70, 0),
+  #   ]
+  #   triangles = Geom.tesselate(polygon)
+  #   triangles.each_slice(3) { |triangle|
+  #     # Work with each triangle set...
+  #   }
+  #   # Or get an array of triangles:
+  #   triangles_set = triangles.each_slice(3).to_a
+  #
+  # @example Drawing a polygon with holes from a custom tool
+  #   class ExampleTool
+  #
+  #     def initialize
+  #       polygon = [
+  #         Geom::Point3d.new(0, 0, 0),
+  #         Geom::Point3d.new(90, 0, 0),
+  #         Geom::Point3d.new(60, 40, 0),
+  #         Geom::Point3d.new(90, 90, 0),
+  #         Geom::Point3d.new(30, 70, 0),
+  #       ] # Counter-clockwise order
+  #       hole1 = [
+  #         Geom::Point3d.new(20, 10, 0),
+  #         Geom::Point3d.new(40, 10, 0),
+  #         Geom::Point3d.new(45, 25, 0),
+  #         Geom::Point3d.new(30, 20, 0),
+  #         Geom::Point3d.new(25, 25, 0),
+  #       ].reverse # Clockwise order - empty hole
+  #       hole2 = [
+  #         Geom::Point3d.new(30, 40, 0),
+  #         Geom::Point3d.new(50, 40, 0),
+  #         Geom::Point3d.new(50, 50, 0),
+  #         Geom::Point3d.new(30, 50, 0),
+  #       ].reverse # Counter-clockwise order - filled hole
+  #       @triangles = Geom.tesselate(polygon, hole1, hole2)
+  #     end
+  #
+  #     def activate
+  #       Sketchup.active_model.active_view.invalidate
+  #     end
+  #
+  #     def onMouseMove(flags, x, y, view)
+  #       view.invalidate
+  #     end
+  #
+  #     def getExtents
+  #       bounds = Geom::BoundingBox.new
+  #       bounds.add(@triangles)
+  #       bounds
+  #     end
+  #
+  #     def draw(view)
+  #       view.drawing_color = Sketchup::Color.new(192, 0, 0)
+  #       view.draw(GL_TRIANGLES, @triangles)
+  #     end
+  #
+  #   end
+  #
+  #   Sketchup.active_model.select_tool(ExampleTool.new)
+  #
+  # @note The winding order of the polygons matter. The outer loop should be
+  #   in counter-clockwise order. To cut an empty hole the inner loops should be
+  #   in clockwise order, otherwise they will create a loop filled with
+  #   triangles.
+  #
+  # @note The tesselation is using the same logic as SketchUp its rendering
+  #   pipeline. But the exact result is an implementation detail which may change
+  #   between versions. In particularly the results of degenerate polygons and
+  #   non-planar  polygons is undefined  as part of the API contract. Such
+  #   polygons are for example polygons where all points are colinear, polygons
+  #   with duplicate points, non-planar polygons.
+  #
+  # @note If you want the triangles from an existing {Sketchup::Face} it's better
+  #   to use {Sketchup::Face#mesh}.
+  #
+  # @param [Array<Geom::Point3d>] polygon_loop_points
+  #
+  # @param [Array<Array<Geom::Point3d>>] inner_loop_points
+  #
+  # @raise [ArgumentError] if any of the loops contain less than three points.
+  #
+  # @raise [RuntimeError] if the tesselator returned an error.
+  #
+  # @return [Array<Geom::Point3d>] an array of points with a stride of three
+  #   representing a set of triangles.
+  #
+  # @see Sketchup::View#draw
+  #
+  # @see Sketchup::View#draw2d
+  #
+  # @version SketchUp 2020.0
+  def self.tesselate(polygon_loop_points, *inner_loop_points)
   end
 
 end

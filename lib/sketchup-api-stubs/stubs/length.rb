@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2019 Trimble Inc.
+# Copyright:: Copyright 2020 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # Because length units are used so often in SketchUp, a special class has been
@@ -28,22 +28,30 @@
 #   - +Length::Millimeter+
 #   - +Length::Centimeter+
 #   - +Length::Meter+
+#   (Added in SketchUp 2020.0)
+#   - +Length::Yard+
 #
 # [Area Unit]
-#   (Added in SketchUp 2019.1)
+#   (Added in SketchUp 2019.2)
 #   - +Length::SquareInches+
 #   - +Length::SquareFeet+
 #   - +Length::SquareMillimeter+
 #   - +Length::SquareCentimeter+
 #   - +Length::SquareMeter+
+#   (Added in SketchUp 2020.0)
+#   - +Length::SquareYard+
 #
 # [Volume Unit]
-#   (Added in SketchUp 2019.1)
+#   (Added in SketchUp 2019.2)
 #   - +Length::CubicInches+
 #   - +Length::CubicFeet+
 #   - +Length::CubicMillimeter+
 #   - +Length::CubicCentimeter+
 #   - +Length::CubicMeter+
+#   (Added in SketchUp 2020.0)
+#   - +Length::CubicYard+
+#   - +Length::Liter+
+#   - +Length::USGallon+
 #
 # @note Prior to SketchUp 2015, +Length+ used to be derived from +Float+. This
 #   is no longer the case.
@@ -62,6 +70,7 @@ class Length < Float
   CubicInches = nil # Stub value.
   CubicMeter = nil # Stub value.
   CubicMillimeter = nil # Stub value.
+  CubicYard = nil # Stub value.
 
   Decimal = nil # Stub value.
 
@@ -73,6 +82,8 @@ class Length < Float
 
   Inches = nil # Stub value.
 
+  Liter = nil # Stub value.
+
   Millimeter = nil # Stub value.
 
   Meter = nil # Stub value.
@@ -82,6 +93,11 @@ class Length < Float
   SquareInches = nil # Stub value.
   SquareMeter = nil # Stub value.
   SquareMillimeter = nil # Stub value.
+  SquareYard = nil # Stub value.
+
+  USGallon = nil # Stub value.
+
+  Yard = nil # Stub value.
 
   # Instance Methods
 

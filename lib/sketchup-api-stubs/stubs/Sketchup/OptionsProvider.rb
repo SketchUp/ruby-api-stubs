@@ -1,14 +1,16 @@
-# Copyright:: Copyright 2019 Trimble Inc.
+# Copyright:: Copyright 2020 Trimble Inc.
 # License:: The MIT License (MIT)
 
-# An OptionsProvider class provides various kinds of options on a Model. You
-# get an OptionsProvider from the OptionsManager. The options are given as
-# name/value pairs.
+# An +OptionsProvider+ class provides various kinds of options on a
+# {Sketchup::Model}. You get an +OptionsProvider+ from the
+# {Sketchup::OptionsManager}. The options are given as name/value pairs.
 #
 # List of keys added in different SketchUp versions:
 #
-# [+UnitsOptions+] * +AreaUnit+ (SketchUp 2019.1)
-#                  * +VolumeUnit+ (SketchUp 2019.1)
+# [+UnitsOptions+] * +AreaUnit+ (SketchUp 2019.2)
+#                  * +VolumeUnit+ (SketchUp 2019.2)
+#                  * +AreaPrecision+ (SketchUp 2020.0)
+#                  * +VolumePrecision+ (SketchUp 2020.0)
 #
 # The +AreaUnit+ and +VolumeUnit+ options in +UnitsOptions+ only applies if
 # the +UnitFormat+ is +Length::Decimal+.

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2019 Trimble Inc.
+# Copyright:: Copyright 2020 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The RenderingOptions class contains method to extract the rendering
@@ -57,9 +57,6 @@
 # - +Texture+
 # - +TransparencySort+ SketchUp 2017 treats Medium transparency as Faster.
 #
-# Removed in SketchUp 2019.1
-# - +FaceColorMode+ This option was previously included but it was ineffective.
-#
 # Added in SketchUp 7:
 # - +DisplayDims+
 # - +DisplaySketchAxes+
@@ -81,6 +78,13 @@
 # - +SectionCutFilled+
 # - +SectionDefaultFillColor+
 #
+# Removed in SketchUp 2019.1
+# - +FaceColorMode+ This option was previously included but it was ineffective.
+#
+# Added in SketchUp 2020.0:
+# - +ROPDrawHiddenGeometry+
+# - +ROPDrawHiddenObjects+
+#
 # @version SketchUp 6.0
 class Sketchup::RenderingOptions < Sketchup::Entity
 
@@ -92,7 +96,10 @@ class Sketchup::RenderingOptions < Sketchup::Entity
 
   ROPAssign = nil # Stub value.
   ROPDrawHidden = nil # Stub value.
+  ROPDrawHiddenGeometry = nil # Stub value.
+  ROPDrawHiddenObjects = nil # Stub value.
   ROPEditComponent = nil # Stub value.
+  ROPSectionDisplayTurnedOff = nil # Stub value.
   ROPSetBackgroundColor = nil # Stub value.
   ROPSetConstructionColor = nil # Stub value.
   ROPSetDepthQueEdges = nil # Stub value.
@@ -128,6 +135,7 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   ROPSetLineEndEdges = nil # Stub value.
   ROPSetLineEndWidth = nil # Stub value.
   ROPSetLineExtension = nil # Stub value.
+  ROPSetLineStyleEdges = nil # Stub value.
   ROPSetLockedColor = nil # Stub value.
   ROPSetMaterialTransparency = nil # Stub value.
   ROPSetModelTransparency = nil # Stub value.

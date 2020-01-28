@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2019 Trimble Inc.
+# Copyright:: Copyright 2020 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This is the base class for all SketchUp entities. Entities are basically
@@ -344,6 +344,9 @@ class Sketchup::Entity
   #
   # The persistent id persistent between sessions.
   #
+  # [SketchUp 2020.0]
+  #   - {Sketchup::Layer}
+  #   - {Sketchup::LineStyle}
   # [SketchUp 2018]
   #   - {Sketchup::Page}
   # [SketchUp 2017]

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2019 Trimble Inc.
+# Copyright:: Copyright 2020 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This is the interface to a LayOut document. A {Layout::Document} is the 2D
@@ -45,6 +45,7 @@ class Layout::Document
   VERSION_2017 = nil # Stub value.
   VERSION_2018 = nil # Stub value.
   VERSION_2019 = nil # Stub value.
+  VERSION_2020 = nil # Stub value.
   VERSION_3 = nil # Stub value.
   VERSION_CURRENT = nil # Stub value.
 
@@ -367,6 +368,9 @@ class Layout::Document
   #   @param [Integer] version LayOut file format to save.
   #
   # @raise [ArgumentError] if version is not a valid version
+  #
+  # @raise [ArgumentError] if saving failed. This may be due to the LayOut file
+  #   being open in the LayOut application
   #
   # @version LayOut 2018
   def save(*args)

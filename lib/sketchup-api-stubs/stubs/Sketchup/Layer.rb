@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2019 Trimble Inc.
+# Copyright:: Copyright 2020 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Layer class contains methods modifying and extracting information for a
@@ -103,6 +103,26 @@ class Sketchup::Layer < Sketchup::Entity
   def color=(color)
   end
 
+  # The {#display_name} method is used to retrieve the display name of the layer.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   layers = model.layers
+  #   new_layer = layers.add ("test layer")
+  #   name = new_layer.display_name
+  #
+  # @return [String] the display name of the Layer object
+  #
+  # @see #name
+  #
+  # @version SketchUp 2020.0
+  def display_name
+  end
+
+  # Layer Group methods
+  def layer_group
+  end
+
   # The {#line_style} method retrieves the line style on this layer.
   #
   # @example
@@ -129,7 +149,7 @@ class Sketchup::Layer < Sketchup::Entity
   def line_style=(line_style)
   end
 
-  # The name method is used to retrieve the name of the layer.
+  # The {#name} method is used to retrieve the name of the layer.
   #
   # @example
   #   model = Sketchup.active_model
@@ -137,7 +157,9 @@ class Sketchup::Layer < Sketchup::Entity
   #   new_layer = layers.add "test layer"
   #   name = new_layer.name
   #
-  # @return name - the name of the Layer object
+  # @return [String]
+  #
+  # @see #display_name
   #
   # @version SketchUp 6.0
   def name
