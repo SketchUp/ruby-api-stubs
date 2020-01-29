@@ -119,10 +119,6 @@ class Sketchup::Layer < Sketchup::Entity
   def display_name
   end
 
-  # Layer Group methods
-  def layer_group
-  end
-
   # The {#line_style} method retrieves the line style on this layer.
   #
   # @example
