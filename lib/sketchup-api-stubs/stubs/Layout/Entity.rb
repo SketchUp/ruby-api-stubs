@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2019 Trimble Inc.
+# Copyright:: Copyright 2020 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # An entity is an object shown on a page of a LayOut document.
@@ -7,16 +7,10 @@
 #   doc = Layout::Document.open("C:/path/to/document.layout")
 #   # Get the shared entities in the document. If there are no shared layers,
 #   # the resulting array will be empty.
-#   entities = doc.entities
-#   # Count how many of the entites are a rectangle
-#   rectangle_count = 0
+#   entities = doc.shared_entities
 #
-#   # Look at all of the entities in the array.
-#   entities.each { |entity|
-#     if entity.is_a?(Layout::Rectangle)
-#       rectangle_count = rectangle_count++
-#     end
-#   }
+#   # Count how many of the shared entites are rectangles.
+#   rectangle_count = entities.grep(Layout::Rectangle).size
 #
 # @version LayOut 2018
 class Layout::Entity

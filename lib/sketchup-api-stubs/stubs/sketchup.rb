@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2019 Trimble Inc.
+# Copyright:: Copyright 2020 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Sketchup module contains a number of important utility methods for use in
@@ -339,7 +339,7 @@ module Sketchup
   def self.format_degrees(number)
   end
 
-  # The {#format_length} method formats a number as a length using the current
+  # The {.format_length} method formats a number as a length using the current
   # units settings.
   #
   # The default unit setting is inches. For example, 10 becomes 10".

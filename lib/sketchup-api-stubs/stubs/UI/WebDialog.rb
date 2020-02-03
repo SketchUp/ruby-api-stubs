@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2019 Trimble Inc.
+# Copyright:: Copyright 2020 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Ruby WebDialog class allows you to create and interact with DHTML dialog

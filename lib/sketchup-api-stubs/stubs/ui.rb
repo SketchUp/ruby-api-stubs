@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2019 Trimble Inc.
+# Copyright:: Copyright 2020 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The UI module contains a number of methods for creating simple UI elements
@@ -246,7 +246,14 @@ module UI
   def self.model_info_pages
   end
 
-  # The {.openURL} method is used to open the default Web browser to a URL.
+  # The {.openURL} method is used to open the default browser to a URL.
+  #
+  # @bug Before SketchUp 2019.3 the mac version would URL encode the given URL.
+  #   This could inadvertently mangle some URLs, if for example if they had
+  #   URL fragments (# character).
+  #   The Windows version would not. As of SketchUp 2019.3 both platforms do
+  #   not perform URL encoding and the API user is expected to provide a valid
+  #   URL.
   #
   # @example
   #   status = UI.openURL("http://www.sketchup.com")
@@ -419,7 +426,7 @@ module UI
   def self.scale_factor
   end
 
-  # The {#select_directory} method is used to display the OS dialog for selecting
+  # The {.select_directory} method is used to display the OS dialog for selecting
   # one or several directories from the file system.
   #
   # @example

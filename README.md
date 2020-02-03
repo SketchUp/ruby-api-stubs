@@ -58,6 +58,10 @@ As an example of how to set up your IDE we created an example that describe the 
 
 https://github.com/SketchUp/sketchup-ruby-api-tutorials/wiki/RubyMine-Project-Setup#making-the-ide-sketchup-api-aware
 
+VSCode example:
+
+https://github.com/SketchUp/sketchup-extension-vscode-project
+
 ## Documentation
 
-If you find a typo, unclear description etc in the documentation, please log a new issue in the issue tracker for our Ruby API stubs: https://github.com/SketchUp/ruby-api-stubs/issues
+If you find a typo, unclear description etc in the documentation, please log a new issue in the issue tracker for our APIs: https://github.com/SketchUp/api-issue-tracker/issues

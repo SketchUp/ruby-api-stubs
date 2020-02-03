@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2019 Trimble Inc.
+# Copyright:: Copyright 2020 Trimble Inc.
 # License:: The MIT License (MIT)
 
 
@@ -66,6 +66,8 @@
   CMD_SHADED = nil # Stub value.
   CMD_SHOWGUIDES = nil # Stub value.
   CMD_SHOWHIDDEN = nil # Stub value.
+  CMD_SHOWHIDDENGEOMETRY = nil # Stub value.
+  CMD_SHOWHIDDENOBJECTS = nil # Stub value.
   CMD_SKETCHAXES = nil # Stub value.
   CMD_SKETCHCS = nil # Stub value.
   CMD_TEXT = nil # Stub value.
@@ -169,6 +171,10 @@
   TextAlignCenter = nil # Stub value.
   TextAlignLeft = nil # Stub value.
   TextAlignRight = nil # Stub value.
+  TextVerticalAlignBaseline = nil # Stub value.
+  TextVerticalAlignBoundsTop = nil # Stub value.
+  TextVerticalAlignCapHeight = nil # Stub value.
+  TextVerticalAlignCenter = nil # Stub value.
 
   VK_DELETE = nil # Stub value.
   VK_DOWN = nil # Stub value.

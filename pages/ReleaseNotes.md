@@ -18,6 +18,9 @@ Though our adoption rate to the latest version is quite high, it can take time a
 
 Here are the build numbers for recent SketchUp releases. Note that build numbers in languages besides English are larger for each release, so it is best to check for builds that are greater than or equal to the numbers here.
 
+- **SU2020.0** = 20.0.363 on Windows 64-bit, 20.0.362 on Mac 64-bit.
+
+- **SU2019.3** = 19.3.253 on Windows 64-bit, 19.3.252 on Mac 64-bit.
 - **SU2019.2** = 19.2.222 on Windows 64-bit, 19.2.221 on Mac 64-bit.
 - **SU2019.1** = 19.1.174 on Windows 64-bit, 19.1.173 on Mac 64-bit.
 - **SU2019** = 19.0.685 on Windows 64-bit, 19.0.684 on Mac 64-bit.
@@ -50,20 +53,65 @@ Here are the build numbers for recent SketchUp releases. Note that build numbers
 
 - **SU6 M6** = 6.4.265 on Windows, 6.4.263 on Mac.
 
+# What's new in SketchUp 2020.0
+
+## Ruby API Additions and Improvements
+
+* Added {Geom.tesselate} that takes a set of loop points and return triangle sets.
+* Added optional `:normals` parameter to {Sketchup::View#draw} allowing polygons to be drawn with lighting.
+* Added ability to draw textured polygons with {Sketchup::View#draw} and {Sketchup::View#draw2d}
+    * Added optional `:uvs` and `:texture` parameters to {Sketchup::View#draw} and {Sketchup::View#draw2d}.
+    * Added {Sketchup::View#load_texture}.
+    * Added {Sketchup::View#release_texture}.
+* Added ability to vertically align text drawn with {Sketchup::View#draw_text}. New option parameter `:vertical_align` can be set to one of the following values: {TextVerticalAlignBoundsTop}, {TextVerticalAlignBaseline}, {TextVerticalAlignCapHeight} or {TextVerticalAlignCenter}.
+* Added {Sketchup::View#text_bounds}, returning the bounding box of the area SketchUp uses to draw text using {Sketchup::View#draw_text}.
+* Added {Sketchup::Model#active_path=} to allow the API to open an instance path for editing by the user.
+* Added new unit constants:
+    * {Length::Yard}
+    * {Length::SquareYard}
+    * {Length::CubicYard}
+    * {Length::Liter}
+    * {Length::USGallon}
+* Added `AreaPrecision` and `VolumePrecision` to `Sketchup.active_model.options["UnitsOptions"]`
+* Added {Sketchup::Layer#display_name} - this will return `"Untagged"` for layer0 while the old {Sketchup::Layer#name} will continue to return `"Layer0"`
+* Additional entity types now return PIDs for {Sketchup::Entity#persistent_id}:
+    * {Sketchup::Layer}
+    * {Sketchup::LineStyle}
+* Deprecated {Sketchup::ComponentDefinition#insertion_point} and {Sketchup::ComponentDefinition#insertion_point=} as this feature was removed in SketchUp. It now returns the origin of the definition and the setter is now a noop
+* Added {Sketchup::Page#get_drawingelement_visibility} and
+{Sketchup::Page#set_drawingelement_visibility} to pages to adjust element visibility in scenes.
+
+
+
+## Ruby API Bug Fixes
+
+* Fixed potential crash in {UI::HtmlDialog}'s callbacks due to values not protected against Ruby's garbage collection.
+* Fixed model validation where it incorrectly flagged some valid UV mapping as invalid and reset it
+* Fixed {Sketchup::Entities#add_face} with duplicate points will crash
+* Restored the missing Racc Ruby library in Windows
+* Fixed {Sketchup::Page#set_drawingelement_visibility} to only affect drawing elements on the root  of the model. Nested instances of components, groups, and images are controlled by Page visibility.
+
+
+# What's new in SketchUp 2019.3
+
+## Ruby API Bug Fixes
+
+* (Win) Updated libcrypto and libssl dlls to 1.1.1c.
+* Fixed {UI.openURL} to not perform URL encoding on Mac for cross platform consistency.
+
 # What's new in SketchUp 2019.2
 
-## Ruby API Additions and Improvments
+## Ruby API Additions and Improvements
 
-* Added {Sketchup::Selection#invert} 
-* Added `:scale_factor` option to {Sketchup::View#write_image} allowing control over the scale of viewport dependant elements such as text    heights, arrow heads, line widths, stipple patterns, etc
+* Added {Sketchup::Selection#invert}
+* Added `:scale_factor` option to {Sketchup::View#write_image} allowing control over the scale of viewport dependant elements such as text heights, arrow heads, line widths, stipple patterns, etc
 * Documented `:source => :framebuffer` option in {Sketchup::View#write_image} that dumps the current frame as drawn in viewport. This has existed since SketchUp 7
 * Added the new area and volume unit settings to {Sketchup::OptionsProvider}
 * Added {Sketchup.format_volume}
-* Added constants to the Length class for area and volume units to be used with the OptionsProvider
-* Added checks to prevent Image materials from being assigned to normal drawing elements. Doing so will now throw an ArgumentError 
+* Added constants to the {Length} class for area and volume units to be used with the OptionsProvider
+* Added checks to prevent Image materials from being assigned to normal drawing elements. Doing so will now throw an `ArgumentError`
 * Increased performance of PNG image export for colorized materials. Previously, it used to use max compression.  Now we use a more balanced compression setting. This affects {Sketchup::Texture#write} as well as the texture writer. We also added some general optimizations for {Sketchup::Texture#write}. On a 4Kx4K texture we saw the processing time drop from ~50 seconds to ~6 seconds.
-* Added `onMouseWheel` event to the Tool interface
-* Dynamic Component no longer throws an error on deleted entity
+* Added {Sketchup::Tool#onMouseWheel} event to the {Sketchup::Tool} interface
 
 ## Ruby API Bug Fixes
 

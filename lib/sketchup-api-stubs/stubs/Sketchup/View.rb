@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2019 Trimble Inc.
+# Copyright:: Copyright 2020 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This class contains methods to manipulate the current point of view of the
@@ -219,18 +219,64 @@ class Sketchup::View
   #   {Tool#getExtents} which returns a bounding box large enough to include the
   #   points you draw. Otherwise your drawing will be clipped.
   #
-  # @param [Integer] openglenum
-  #   The item you are going to draw, one of the constants
-  #   from the comments, such as +GL_LINES+.
+  # @overload draw(openglenum, points)
   #
-  # @param [Array<Geom::Point3d>] points
+  #   @param [Integer] openglenum
+  #     The item you are going to draw, one of the constants
+  #     from the comments, such as +GL_LINES+.
+  #   @param [Array<Geom::Point3d>] points
+  #
+  # @overload draw(openglenum, *points)
+  #
+  #   @param [Integer] openglenum
+  #     The item you are going to draw, one of the constants
+  #     from the comments, such as +GL_LINES+.
+  #   @param [Array<Geom::Point3d>] points
+  #
+  # @overload draw(openglenum, points, **options)
+  #
+  #   @version SketchUp 2020.0
+  #   @param [Integer] openglenum
+  #     The item you are going to draw, one of the constants
+  #     from the comments, such as +GL_LINES+.
+  #   @param [Array<Geom::Point3d>] points
+  #   @param [Hash] options
+  #   @option options [Array<Geom::Vector3d>] :normals
+  #     Without normals the polygons will be rendered with flat shading. No
+  #     light will affect it. By providing an array of vertex normals lighting
+  #     is turned on and will use the model's current light. Note that the number
+  #     of normals must match the number of points provided.
+  #   @option options [Integer] :texture_id
+  #     A texture id provided by {#load_texture}.
+  #   @option options [Array<Geom::Vector3d>] :uvs
+  #     Set of UV (Not UVQ) coordinates matching the number of points provided.
+  #     This must be used along with the +:texture_id+ option.
+  #
+  # @overload draw(openglenum, *points, **options)
+  #
+  #   @version SketchUp 2020.0
+  #   @param [Integer] openglenum
+  #     The item you are going to draw, one of the constants
+  #     from the comments, such as +GL_LINES+.
+  #   @param [Array<Geom::Point3d>] points
+  #   @param [Hash] options
+  #   @option options [Array<Geom::Vector3d>] :normals ([])
+  #     Without normals the polygons will be rendered with flat shading. No
+  #     light will affect it. By providing an array of vertex normals lighting
+  #     is turned on and will use the model's current light. Note that the number
+  #     of normals must match the number of points provided.
+  #   @option options [Integer] :texture_id
+  #     A texture id provided by {#load_texture}.
+  #   @option options [Array<Geom::Vector3d>] :uvs
+  #     Set of UV (Not UVQ) coordinates matching the number of points provided.
+  #     This must be used along with the +:texture_id+ option.
   #
   # @return [Sketchup::View]
   #
   # @see Tool#getExtents
   #
   # @version SketchUp 6.0
-  def draw(openglenum, points)
+  def draw(*args)
   end
 
   # The {#draw2d} method is used to draw in screen space (using 2D screen
@@ -252,20 +298,56 @@ class Sketchup::View
   #   ]
   #   view.draw2d(GL_LINE_STRIP, points)
   #
-  # @param [Integer] openglenum
-  #   An OpenGL enumerator (unsigned integer). See
-  #   comments in the {#draw} method for a list of constants.
+  # @overload draw2d(openglenum, points)
   #
-  # @param [Array<Geom::Point3d>] points
+  #   @param [Integer] openglenum
+  #     The item you are going to draw, one of the constants
+  #     from the comments, such as +GL_LINES+.
+  #   @param [Array<Geom::Point3d>] points
   #
-  # @return [Sketchup::View] returns the View object.
+  # @overload draw2d(openglenum, *points)
+  #
+  #   @param [Integer] openglenum
+  #     The item you are going to draw, one of the constants
+  #     from the comments, such as +GL_LINES+.
+  #   @param [Array<Geom::Point3d>] points
+  #
+  # @overload draw2d(openglenum, points, **options)
+  #
+  #   @version SketchUp 2020.0
+  #   @param [Integer] openglenum
+  #     The item you are going to draw, one of the constants
+  #     from the comments, such as +GL_LINES+.
+  #   @param [Array<Geom::Point3d>] points
+  #   @param [Hash] options
+  #   @option options [Integer] :texture_id
+  #     A texture id provided by {#load_texture}.
+  #   @option options [Array<Geom::Vector3d>] :uvs
+  #     Set of UV (Not UVQ) coordinates matching the number of points provided.
+  #     This must be used along with the +:texture_id+ option.
+  #
+  # @overload draw2d(openglenum, *points, **options)
+  #
+  #   @version SketchUp 2020.0
+  #   @param [Integer] openglenum
+  #     The item you are going to draw, one of the constants
+  #     from the comments, such as +GL_LINES+.
+  #   @param [Array<Geom::Point3d>] points
+  #   @param [Hash] options
+  #   @option options [Integer] :texture_id
+  #     A texture id provided by {#load_texture}.
+  #   @option options [Array<Geom::Vector3d>] :uvs
+  #     Set of UV (Not UVQ) coordinates matching the number of points provided.
+  #     This must be used along with the +:texture_id+ option.
+  #
+  # @return [Sketchup::View]
   #
   # @see #draw
   #
   # @see UI.scale_factor
   #
   # @version SketchUp 6.0
-  def draw2d(openglenum, points)
+  def draw2d(*args)
   end
 
   # The draw_lines method is used to draw disconnected lines.
@@ -378,27 +460,63 @@ class Sketchup::View
   # This method is used to draw text on the screen and is usually invoked within
   # the draw method of a tool.
   #
+  # The {TextVerticalAlignCenter} option will align the text to the center of the
+  # height of the first line, not the whole boundingbox of the text. To align
+  # around the full bounds of the text, use {#text_bounds} to compute the
+  # desired alignment.
+  #
+  # <b>Example of different vertical alignment and text bounds:</b>
+  #
+  # rdoc-image:../images/view-draw-text-with-bounds.png
+  #
   # @example
-  #   view = Sketchup.active_model.active_view
+  #   class ExampleTool
+  #     def draw(view)
+  #       # This works in all SketchUp versions and draws the text using the
+  #       # default font, color and size.
+  #       point = Geom::Point3d.new(200, 100, 0)
+  #       view.draw_text(point, "This is a test")
   #
-  #   # This works in all SketchUp versions and draws the text using the
-  #   # default font, color and size.
-  #   point = Geom::Point3d.new(200, 100, 0)
-  #   view.draw_text(point, "This is a test")
+  #       # This works in SketchUp 2016 and up.
+  #       options = {
+  #         :font => "Arial",
+  #         :size => 20,
+  #         :bold => true,
+  #         :align => TextAlignRight
+  #       }
+  #       point = Geom::Point3d.new(200, 200, 0)
+  #       view.draw_text(point, "This is another\ntest", options)
   #
-  #   # This works in SketchUp 2016 and up.
-  #   options = {
-  #     :font => "Arial",
-  #     :size => 20,
-  #     :bold => true,
-  #     :align => TextAlignRight
-  #   }
-  #   point = Geom::Point3d.new(200, 200, 0)
-  #   view.draw_text(point, "This is another\ntest", options)
+  #       # You can also use Ruby 2.0's named arguments:
+  #       point = Geom::Point3d.new(200, 200, 0)
+  #       view.draw_text(point, "Hello world!", color: "Red")
+  #     end
+  #   end
   #
-  #   # You can also use Ruby 2.0's named arguments:
-  #   point = Geom::Point3d.new(200, 200, 0)
-  #   view.draw_text(point, "Hello world!", color: "Red")
+  # @example Cross Platform Font Size
+  #   class ExampleTool
+  #     IS_WIN = Sketchup.platform == :platform_win
+  #
+  #     def draw(view)
+  #       draw_text(view, "Hello World", size: 20)
+  #     end
+  #
+  #     private
+  #
+  #     # This will ensure text is drawn with consistent size across platforms,
+  #     # using pixels as size units.
+  #     def draw_text(view, text, **options)
+  #       native_options = options.dup
+  #       if IS_WIN && options.key?(:size)
+  #         native_options[:size] = pixels_to_points(size)
+  #       end
+  #       view.draw_text(position, text, **native_options)
+  #     end
+  #
+  #     def pixels_to_points(pixels)
+  #       ((pixels.to_f / 96.0) * 72.0).round
+  #     end
+  #   end
   #
   # @note Under Windows the font name must be less than 32 characters - due to
   #   system limitations.
@@ -406,35 +524,43 @@ class Sketchup::View
   # @note As of SU2017 this will automatically scale the font-size by the same
   #   factor as {UI.scale_factor}.
   #
-  # @option options [String] :font The name of the font to use. If it does not
-  #   exist on the system, a default font will be used instead.
+  # @note The font size is platform dependent. On Windows the method expects
+  #   points, where on Mac it's pixels. See "Cross Platform Font Size" example
+  #   for details.
   #
-  # @option options [Integer] :size The size of the font in points
+  # @overload draw_text(point, text)
   #
-  # @option options [Boolean] :bold Controls the Bold property of the font.
+  #   @param [Geom::Point3d] point  A Point3d object representing a 2D coordinate
+  #       in view space.
+  #   @param [String] text  The text string to draw.
   #
-  # @option options [Boolean] :italic Controls the Italic property of the font.
+  # @overload draw_text(point, text, options = {})
   #
-  # @option options [Sketchup::Color] :color The color to draw the text with.
-  #
-  # @option options [Integer] :align The text alignment, one of the following
-  #   constants +TextAlignLeft+, +TextAlignCenter+ or +TextAlignRight+.
-  #
-  # @param [Geom::Point3d] point
-  #   A Point3d object representing a 2D coordinate
-  #   in view space.
-  #
-  # @param [String] text
-  #   The text string to draw.
-  #
-  # @param [Hash] options
-  #   The text can be customized by providing a hash or
-  #   named arguments of options. Available from SketchUp 2016.
+  #   @version SketchUp 2016
+  #   @param [Geom::Point3d] point  A Point3d object representing a 2D coordinate
+  #       in view space.
+  #   @param [String] text  The text string to draw.
+  #   @param [Hash] options  The text can be customized by providing a hash or
+  #       named arguments of options.
+  #   @option options [String] :font  The name of the font to use. If it does not
+  #       exist on the system, a default font will be used instead.
+  #   @option options [Integer] :size  The size of the font in points
+  #   @option options [Boolean] :bold  Controls the Bold property of the font.
+  #   @option options [Boolean] :italic  Controls the Italic property of the font.
+  #   @option options [Sketchup::Color] :color  The color to draw the text with.
+  #   @option options [Integer] :align  The text alignment, one of the following
+  #       constants: {TextAlignLeft}, {TextAlignCenter} or {TextAlignRight}.
+  #   @option options [Integer] :vertical_align  <b>Added SketchUp 2020.0.</b>
+  #       The vertical text alignment, one of the following constants:
+  #       {TextVerticalAlignBoundsTop}, {TextVerticalAlignBaseline},
+  #       {TextVerticalAlignCapHeight} or {TextVerticalAlignCenter}. Note that
+  #       some fonts on Mac might not align as expected due to the system
+  #       reporting incorrect font metrics.
   #
   # @return [Sketchup::View]
   #
   # @version SketchUp 6.0
-  def draw_text(point, text, options = {})
+  def draw_text(*args)
   end
 
   # The drawing_color method is used to set the color that is used for drawing
@@ -462,11 +588,12 @@ class Sketchup::View
   # See also camera.rb which is part of the film and stage ruby
   # scripts.
   #
+  # @deprecated This method is no longer doing anything.
+  #
   # @example
   #   view.dynamic = true
   #
   # @param [Boolean] value
-  #   true or false
   #
   # @return [Boolean]
   #
@@ -631,6 +758,55 @@ class Sketchup::View
   def line_width=(width)
   end
 
+  # Loads a texture to be drawn with {#draw} or {#draw2d}.
+  #
+  # @example
+  #   module Example
+  #     class MyTool
+  #
+  #       def activate
+  #         view = Sketchup.active_model.active_view
+  #         image_rep = view.model.materials.current.texture.image_rep
+  #         @texture_id = view.load_texture(image_rep)
+  #       end
+  #
+  #       def deactivate(view)
+  #         view.release_texture(@texture_id)
+  #       end
+  #
+  #       def draw(view)
+  #         points = [ [0, 0, 0], [9, 0, 0], [9, 9, 0], [0, 9, 0] ]
+  #         uvs = [ [0, 0, 0], [1, 0, 0], [1, 1, 0], [0, 1, 0] ]
+  #         view.draw(points, texture_id: @texture_id, uvs: uvs)
+  #       end
+  #
+  #     end
+  #   end
+  #   Sketchup.active_model.select_tool(Example::MyTool.new)
+  #
+  # @note To conserve resources on the user's machine, textures can be loaded
+  #   only when there is a Ruby tool on the tool stack. Make sure to release the
+  #   texture when it's no longer needed. Any textures not already released
+  #   when the last Ruby tool on the tool stack is removed will be automatically
+  #   released by SketchUp.
+  #
+  # @note Avoid loading and releasing textures within the {Sketchup::Tool#draw}
+  #   event as that is not efficient.
+  #
+  # @param [Sketchup::ImageRep] image_rep
+  #
+  # @raise [ArgumentError] if the provided {Sketchup::ImageRep} is not valid.
+  #
+  # @raise [RuntimeError] if a Ruby tool was not on the tool stack.
+  #
+  # @return [Integer] A resource ID referring to the image loaded.
+  #
+  # @see #release_texture
+  #
+  # @see #draw
+  def load_texture(image_rep)
+  end
+
   # The lock_inference method is used to lock or unlock an inference.
   #
   # This method will typically be called from inside a tool class when the user
@@ -763,6 +939,45 @@ class Sketchup::View
   def refresh
   end
 
+  # Releases a texture loaded via {#load_texture}, freeing up it's memory.
+  # It's good practice to do so whenever there is no longer any need for the
+  # resource.
+  #
+  # For example, when your tool deactivates you probably want to release your
+  # resources as you don't know if your tool will be used again.
+  #
+  # @example
+  #   module Example
+  #     class MyTool
+  #
+  #       def activate
+  #         view = Sketchup.active_model.active_view
+  #         image_rep = view.model.materials.current.texture.image_rep
+  #         @texture_id = view.load_texture(image_rep)
+  #       end
+  #
+  #       def deactivate(view)
+  #         view.release_texture(@texture_id)
+  #       end
+  #
+  #       def draw(view)
+  #         points = [ [0, 0, 0], [9, 0, 0], [9, 9, 0], [0, 9, 0] ]
+  #         uvs = [ [0, 0, 0], [1, 0, 0], [1, 1, 0], [0, 1, 0] ]
+  #         view.draw(points, texture_id: @texture_id, uvs: uvs)
+  #       end
+  #
+  #     end
+  #   end
+  #   Sketchup.active_model.select_tool(Example::MyTool.new)
+  #
+  # @param [Integer] texture_id
+  #
+  # @return [Boolean] +true+ if texture was released. +false+ otherwise.
+  #
+  # @see #load_texture
+  def release_texture(texture_id)
+  end
+
   # The remove_observer method is used to remove an observer from the current
   # object.
   #
@@ -835,6 +1050,97 @@ class Sketchup::View
   #
   # @version SketchUp 6.0
   def show_frame(delay)
+  end
+
+  # This method is used to compute the bounds of the text when
+  # using {#draw_text}. The bounds are not a tight fit around the top and bottom
+  # as they include varying amount of line spacing depending on the font used.
+  #
+  # The {TextVerticalAlignCenter} option will align the text to the center of the
+  # height of the first line, not the whole boundingbox of the text.
+  #
+  # <b>Example of different vertical alignment and text bounds:</b>
+  #
+  # rdoc-image:../images/view-draw-text-with-bounds.png
+  #
+  # @example
+  #   class ExampleTool
+  #     TEXT_OPTIONS = {
+  #       :font => "Arial",
+  #       :size => 20,
+  #       :bold => true,
+  #       :align => TextAlignRight,
+  #       :align => TextVerticalAlignBaseline
+  #     }
+  #
+  #     # Since `draw` is called frequently it can be useful to pre-compute and
+  #     # cache values used by `draw`.
+  #     def activate
+  #       @text = "Hello SketchUp"
+  #       @position = Geom::Point3d.new(200, 200, 0)
+  #
+  #       # Compute text bounds
+  #       view = Sketchup.active_model.active_view
+  #       bounds = view.text_bounds(@position, @text, TEXT_OPTIONS)
+  #
+  #       # Compute polygon for the text bounds
+  #       x1, y1 = bounds.upper_left.to_a
+  #       x2, y2 = bounds.lower_right.to_a
+  #       @points = [
+  #         Geom::Point3d.new(x1, y1),
+  #         Geom::Point3d.new(x1, y2),
+  #         Geom::Point3d.new(x2, y2),
+  #         Geom::Point3d.new(x2, y1),
+  #       ]
+  #     end
+  #
+  #     def draw(view)
+  #       # Draw text bounds
+  #       view.drawing_color = Sketchup::Color.new(255, 0, 0, 64)
+  #       view.draw2d(GL_QUADS, @points)
+  #
+  #       # Draw text
+  #       view.draw_text(@position, @text, TEXT_OPTIONS)
+  #     end
+  #   end
+  #
+  # @note Under Windows the font name must be less than 32 characters - due to
+  #   system limitations.
+  #
+  # @option options [String] :font The name of the font to use. If it does not
+  #   exist on the system, a default font will be used instead.
+  #
+  # @option options [Integer] :size The size of the font in points
+  #
+  # @option options [Boolean] :bold Controls the Bold property of the font.
+  #
+  # @option options [Boolean] :italic Controls the Italic property of the font.
+  #
+  # @option options [Integer] :align The text alignment, one of the following
+  #   constants: {TextAlignLeft}, {TextAlignCenter} or {TextAlignRight}.
+  #
+  # @option options [Integer] :vertical_align The vertical text alignment
+  #   one of the following constants:
+  #   {TextVerticalAlignBoundsTop}, {TextVerticalAlignBaseline},
+  #   {TextVerticalAlignCapHeight} or {TextVerticalAlignCenter}.
+  #
+  # @param [Geom::Point3d] point
+  #   A Point3d object representing a 2D coordinate
+  #   in view space.
+  #
+  # @param [String] text
+  #   The text string to draw.
+  #
+  # @param [Hash] options
+  #   The text can be customized by providing a hash or
+  #   named arguments of options.
+  #
+  # @return [Geom::Bounds2d]
+  #
+  # @see #draw_text
+  #
+  # @version SketchUp 2020.0
+  def text_bounds(point, text, options = {})
   end
 
   # Set a tooltip to display in the view. This is useful for displaying tooltips
@@ -925,7 +1231,7 @@ class Sketchup::View
   #   @option options [Integer] height (#vpheight)  Height in pixels (max +16000+).
   #   @option options [Float] scale_factor (1.0)  Scaling factor for
   #     elements that are viewport dependent, such as text heights, arrow heads,
-  #     line widths, stipple patterns, etc. (Added in  SketchUp 2019.1)
+  #     line widths, stipple patterns, etc. (Added in  SketchUp 2019.2)
   #   @option options [Boolean] antialias (false)
   #   @option options [Float] compression (1.0)  Compression factor for JPEG,
   #     images between +0.0+ and +1.0+.

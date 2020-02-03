@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2019 Trimble Inc.
+# Copyright:: Copyright 2020 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Page class contains methods to extract information and modify the
@@ -112,6 +112,26 @@ class Sketchup::Page < Sketchup::Entity
   #
   # @version SketchUp 6.0
   def description=(description)
+  end
+
+  # The {#get_drawingelement_visibility} method is used to get the visibility
+  # of a drawing element on a particular page.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   entities = model.active_entities
+  #   point1 = Geom::Point3d.new(10,0,0)
+  #   constpoint = entities.add_cpoint(point1)
+  #   pages = model.pages
+  #   page = pages.add("My Page")
+  #   result = page.get_drawingelement_visibility(constpoint)
+  #
+  # @param [Sketchup::Drawingelement] element
+  #
+  # @return [Boolean] - true if visible, false if not.
+  #
+  # @version SketchUp 2020.0
+  def get_drawingelement_visibility(element)
   end
 
   # The hidden_entities method retrieves all hidden entities within a page.
@@ -233,6 +253,30 @@ class Sketchup::Page < Sketchup::Entity
   #
   # @version SketchUp 6.0
   def rendering_options
+  end
+
+  # The {#set_drawingelement_visibility} method is used to change the visibility
+  # of a drawing element on a particular page. Only drawing elements on the root
+  # of the model, as well as nested instances of components, groups, and images
+  # are controlled by Page visibility.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   entities = model.active_entities
+  #   point1 = Geom::Point3d.new(10, 0, 0)
+  #   constpoint = entities.add_cpoint(point1)
+  #   pages = model.pages
+  #   page = pages.add("My Page")
+  #   page.set_drawingelement_visibility(constpoint, false)
+  #
+  # @param [Sketchup::Drawingelement] element
+  #
+  # @param [Boolean] visibility
+  #
+  # @return [Boolean]
+  #
+  # @version SketchUp 2020.0
+  def set_drawingelement_visibility(element, visibility)
   end
 
   # The set_visibility method sets the visibility for a layer on a page.

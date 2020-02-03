@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2019 Trimble Inc.
+# Copyright:: Copyright 2020 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A SketchUp Model entity. This is an instance of a SketchUp Model that is
@@ -107,6 +107,10 @@ class Layout::SketchUpModel < Layout::Entity
   #   bounds = Geom::Bounds2d.new(1, 1, 3, 3)
   #   model = Layout::SketchUpModel.new("C:/Path/to/model.skp", bounds)
   #   model.current_scene = 1
+  #
+  # @note LayOut automatically adds the scene "Last Saved SketchUp View" to each
+  #   {Layout::SketchUpModel}. This means that the {Sketchup::Model}'s scenes
+  #   start with index 1.
   #
   # @param [Integer] index
   #   The index into the list of available scenes.

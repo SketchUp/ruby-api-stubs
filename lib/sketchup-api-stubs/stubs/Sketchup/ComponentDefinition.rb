@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2019 Trimble Inc.
+# Copyright:: Copyright 2020 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Sketchup::ComponentDefinition} class is used to define the contents for
@@ -293,6 +293,10 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   # The insertion_point method is used to retrieve the Point3d object where the
   # component was inserted.
   #
+  # @deprecated SketchUp 2020.0 removed the insertion point feature.
+  #   The getter will always return the origin point and the
+  #   setter becomes a no-op.
+  #
   # @example
   #   point = Geom::Point3d.new 10,20,30
   #   transform = Geom::Transformation.new point
@@ -313,6 +317,10 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   end
 
   # Sets the insertion point of your definition.
+  #
+  # @deprecated SketchUp 2020.0 removed the insertion point feature.
+  #   The getter will always return the origin point and the
+  #   setter becomes a no-op.
   #
   # @example
   #   point = Geom::Point3d.new(10, 20, 0)

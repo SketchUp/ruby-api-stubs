@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2019 Trimble Inc.
+# Copyright:: Copyright 2020 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This is the interface to a SketchUp model. The model is the 3D drawing that
@@ -13,6 +13,9 @@
 # - Model::ProLicensed
 # - Model::MakeTrial
 # - Model::MakeTrialExpired
+#
+# @bug Prior to SketchUp 2019.0 this class would yield +TypeError+ for all
+#   method calls if +#singleton_class+ was called on the model object.
 #
 # @example
 #   # Grab a handle to the currently active model (aka the one the user is
@@ -36,9 +39,6 @@
 #
 #   new_edge = entities.add_line([0,0,0], [500,500,0])
 #
-# @note Prior to SketchUp 2019 this class would yield +TypeError+ for all
-#   method calls if +#singleton_class+ was called on the model object.
-#
 # @version SketchUp 6.0
 class Sketchup::Model
 
@@ -56,6 +56,7 @@ class Sketchup::Model
   VERSION_2017 = nil # Stub value.
   VERSION_2018 = nil # Stub value.
   VERSION_2019 = nil # Stub value.
+  VERSION_2020 = nil # Stub value.
   VERSION_3 = nil # Stub value.
   VERSION_4 = nil # Stub value.
   VERSION_5 = nil # Stub value.
@@ -150,6 +151,73 @@ class Sketchup::Model
   #
   # @version SketchUp 7.0
   def active_path
+  end
+
+  # The {#active_path=} method is used to open a given instance path for editing.
+  #
+  # It is expected that no entities are modified in an operation that
+  # opens/closes instances.
+  #
+  # To ensure that undo/redo is done correctly this method breaks up any open
+  # Ruby operations into a set of chained operations:
+  #
+  # If the API user tries to do this:
+  #
+  #     model.start_operation('...', true)
+  #     model.entities.add_face(...)
+  #     model.active_path = instance_path
+  #     model.entities.add_face(...)
+  #     model.commit_operation
+  #
+  # Then the method will break it up to something like this:
+  #
+  #     model.start_operation('...', true)
+  #     model.entities.add_face(...)
+  #     model.commit_operation
+  #
+  #     model.start_operation('...', true, false, true)
+  #     model.active_path = instance_path
+  #     model.commit_operation
+  #
+  #     model.start_operation('...', true, false, true)
+  #     model.entities.add_face(...)
+  #     model.commit_operation
+  #
+  # For the end user this will be experienced as a single operation.
+  # For the API user the side-effect is multiple transaction notifications.
+  #
+  # @example Open an instance
+  #   model = Sketchup.active_model
+  #   instance = model.active_entities.grep(Sketchup::ComponentInstance).first
+  #   instance_path = Sketchup::InstancePath.new([instance])
+  #   model.active_path = instance_path
+  #
+  # @example Close all instances
+  #   model = Sketchup.active_model
+  #   model.active_path = nil
+  #
+  # @note An instance path can only be opened if the instances are not locked.
+  #   This also include instances of the same component definition that are not
+  #   on the given path. A definition cannot be edited if any of its instances
+  #   are locked.
+  #
+  # @note Open/close operations are special operations in SketchUp which has to
+  #   be treated with special care.
+  #
+  # @param [Sketchup::InstancePath, Array<Sketchup::ComponentInstance, Sketchup::Group>, nil] instance_path
+  #   Passing +nil+ or an empty array will close all open instances.
+  #
+  # @raise [ArgumentError] if the instance path is not valid.
+  #
+  # @raise [ArgumentError] if the instance path contains locked instances.
+  #
+  # @raise [ArgumentError] if the instance path contains instances who's
+  #   siblings are locked.
+  #
+  # @return [Sketchup::Model]
+  #
+  # @version SketchUp 2020.0
+  def active_path=(instance_path)
   end
 
   # The {#active_view} method returns the active View object for this model.
@@ -338,16 +406,16 @@ class Sketchup::Model
   def close(ignore_changes = false)
   end
 
-  # The close_active method is used to close the currently active (open) group
+  # The {#close_active} method is used to close the currently active (open) group
   # or component.
-  #
-  # Note: before SketchUp 2014 this method had a bug where it didn't create an
-  # undo operation and that could lead to corrupted geometry when undo/redo was
-  # used after invoking this method.
   #
   # @example
   #   model = Sketchup.active_model
   #   status = model.close_active
+  #
+  # @note Before SketchUp 2014 this method had a bug where it didn't create an
+  #   undo operation and that could lead to corrupted geometry when undo/redo was
+  #   used after invoking this method.
   #
   # @return [Boolean] true if successful, false if unsuccessful.
   #
@@ -412,6 +480,54 @@ class Sketchup::Model
   #
   # @version SketchUp 6.0
   def description=(description)
+  end
+
+  # The {#drawing_element_visible?} method reports whether the given drawing
+  # element in an instance path is visible given the current model options.
+  #
+  # @example Traversing every visible entity in the model
+  #   module Example
+  #
+  #     def self.instance?(entity)
+  #       entity.is_a?(Sketchup::ComponentInstance) || entity.is_a?(Sketchup::Group)
+  #     end
+  #
+  #     # Walk the visible entities in the model, taking into account
+  #     # "DrawHiddenGeometry" and "DrawHiddenObjects" rendering options.
+  #     def self.walk(entities, transformation = IDENTITY, path = [], &block)
+  #       entities.each { |entity|
+  #         entity_path = path + [entity]
+  #         next unless entity.model.drawing_element_visible?(entity_path)
+  #         block.call(entity, transformation, path)
+  #         if instance?(entity)
+  #           child_entities = entity.definition.entities
+  #           child_transformation = transformation * entity.transformation
+  #           walk(child_entities, child_transformation, entity_path, &block)
+  #         end
+  #       }
+  #     end
+  #
+  #   end
+  #
+  #   model = Sketchup.active_model
+  #   Example.walk(model.entities) do |entity, transformation, path|
+  #     # Do something to every visible entity in the model...
+  #   end
+  #
+  # @param [Sketchup::InstancePath, Array<Sketchup::Drawingelement>] instance_path
+  #
+  # @raise [ArgumentError] if the +instance_path+ is not valid.
+  #
+  # @return [Boolean]
+  #
+  # @see Sketchup::RenderingOptions
+  #
+  # @see Sketchup::Drawingelement#visible?
+  #
+  # @see Sketchup::Layer#visible?
+  #
+  # @version SketchUp 2020.0
+  def drawing_element_visible?(instance_path)
   end
 
   # Returns the transformation of the current component edit session. If a user
@@ -1150,7 +1266,8 @@ class Sketchup::Model
   #     Sketchup::Model::VERSION_2016,
   #     Sketchup::Model::VERSION_2017,
   #     Sketchup::Model::VERSION_2018,
-  #     Sketchup::Model::VERSION_2019
+  #     Sketchup::Model::VERSION_2019,
+  #     Sketchup::Model::VERSION_2020
   #
   # @return [Boolean] true if successful, false if unsuccessful
   #
@@ -1186,7 +1303,8 @@ class Sketchup::Model
   #   Sketchup::Model::VERSION_2016,
   #   Sketchup::Model::VERSION_2017,
   #   Sketchup::Model::VERSION_2018,
-  #   Sketchup::Model::VERSION_2019
+  #   Sketchup::Model::VERSION_2019,
+  #   Sketchup::Model::VERSION_2020
   #
   # @return [Boolean] true if successful, false if unsuccessful
   #
