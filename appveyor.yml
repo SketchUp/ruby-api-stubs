@@ -1,0 +1,31 @@
+version: "{build}-{branch}"
+
+branches:
+  only:
+    - master
+    - dev-appveyor
+
+cache:
+  - vendor/bundle
+
+environment:
+  matrix:
+    - RUBY_VERSION: 25
+    - RUBY_VERSION: 26
+
+install:
+  - set PATH=C:\Ruby%RUBY_VERSION%\bin;%PATH%
+  - gem update --no-document --system 2.7.8
+  - gem install bundler --no-document --version="<2.0.0"
+  - bundle config --local path vendor/bundle
+  - bundle install
+
+build: off
+
+before_test:
+  - ruby -v
+  - gem -v
+  - bundle -v
+
+test_script:
+  - bundle exec rake
