@@ -342,7 +342,7 @@ module Geom
   # @see Sketchup::View#draw2d
   #
   # @version SketchUp 2020.0
-  def self.tesselate(polygon_loop_points123, *inner_loop_points)
+  def self.tesselate(polygon_loop_points, *inner_loop_points)
   end
 
 end
