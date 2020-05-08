@@ -1,8 +1,7 @@
 # Copyright:: Copyright 2020 Trimble Inc.
 # License:: The MIT License (MIT)
 
-# The Vector2d class represents vectors in a 2 dimensional space.
-# Vectors in LayOut have a direction and a length, but not a starting point.
+# The {Geom::Vector2d} class represents vectors in a 2 dimensional space.
 #
 # There are numerous tutorials on 2D vectors available on the internet.
 #

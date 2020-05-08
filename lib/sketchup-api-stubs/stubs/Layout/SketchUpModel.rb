@@ -44,6 +44,20 @@ class Layout::SketchUpModel < Layout::Entity
 
   # Instance Methods
 
+  # The {#camera_modified?} method returns whether the camera of the
+  # {Layout::SketchUpModel} has been modified.
+  #
+  # @example
+  #   bounds = Geom::Bounds2d.new(1, 1, 3, 3)
+  #   model = Layout::SketchUpModel.new("C:/Path/to/model.skp", bounds)
+  #   modified = model.camera_modified?
+  #
+  # @return [Boolean]
+  #
+  # @version LayOut 2020.1
+  def camera_modified?
+  end
+
   # The {#clip_mask} method returns the clip mask entity for the
   # {Layout::SketchUpModel}, or +nil+ if it does not have one. clip_mask can be a
   # {Layout::Rectangle}, {Layout::Ellipse}, or {Layout::Path}.
@@ -61,7 +75,8 @@ class Layout::SketchUpModel < Layout::Entity
 
   # The {#clip_mask=} method sets a clip mask for the {Layout::SketchUpModel}.
   # clip_mask can be a {Layout::Rectangle}, {Layout::Ellipse}, or {Layout::Path},
-  # and it must not currently exist in a {Layout::Document}.
+  # or +nil+, and it must not currently exist in a {Layout::Document},
+  # or {Layout::Group}.
   #
   # @example
   #   bounds = Geom::Bounds2d.new(1, 1, 3, 3)
@@ -69,9 +84,14 @@ class Layout::SketchUpModel < Layout::Entity
   #   rect = Layout::Rectangle.new([[2, 2], [3, 3]]);
   #   model.clip_mask = rect
   #
-  # @param [Layout::Entity] clip_mask
+  # @note +clip_mask+ may be +nil+ as of LayOut 2020.1.
   #
-  # @raise [ArgumentError] if clip_mask is already in a {Layout::Document}
+  # @param [Layout::Entity, nil] clip_mask
+  #   The clip mask can be a {Layout::Path},
+  #   {Layout::Rectangle}, {Layout::Ellipse}, or +nil+.
+  #
+  # @raise [ArgumentError] if clip_mask is already in a {Layout::Document} or
+  #   {Layout::Group}
   #
   # @raise [ArgumentError] if clip_mask is not a {Layout::Rectangle},
   #   {Layout::Ellipse}, or {Layout::Path}
@@ -210,6 +230,20 @@ class Layout::SketchUpModel < Layout::Entity
   def display_background?
   end
 
+  # The {#effects_modified?} method returns whether the shadow or fog settings
+  # of the {Layout::SketchUpModel} have been modified.
+  #
+  # @example
+  #   bounds = Geom::Bounds2d.new(1, 1, 3, 3)
+  #   model = Layout::SketchUpModel.new("C:/Path/to/model.skp", bounds)
+  #   modified = model.effects_modified?
+  #
+  # @return [Boolean]
+  #
+  # @version LayOut 2020.1
+  def effects_modified?
+  end
+
   # The {#entities} method returns the {Layout::Group} that represents the
   # {Layout::SketchUpModel} in its exploded form. The {Layout::Group} will
   # contain a {Layout::Image} for raster and hybrid-rendered models, and
@@ -246,6 +280,25 @@ class Layout::SketchUpModel < Layout::Entity
   #
   # @version LayOut 2018
   def initialize(path, bounds)
+  end
+
+  # The {#layers_modified?} method returns whether the layers of the
+  # {Layout::SketchUpModel} has been modified.
+  #
+  #
+  # @note: In SketchUp 2020, SketchUp "layers" were renamed to "tags". For
+  #   consistency with the SketchUp API, this will continue to refer to
+  #   "tags" as "layers".
+  #
+  # @example
+  #   bounds = Geom::Bounds2d.new(1, 1, 3, 3)
+  #   model = Layout::SketchUpModel.new("C:/Path/to/model.skp", bounds)
+  #   modified = model.layers_modified?
+  #
+  # @return [Boolean]
+  #
+  # @version LayOut 2020.1
+  def layers_modified?
   end
 
   # The {#line_weight} method returns the line weight for the
@@ -366,7 +419,10 @@ class Layout::SketchUpModel < Layout::Entity
   def preserve_scale_on_resize?
   end
 
-  # The {#render} method renders the {Layout::SketchUpModel}.
+  # The {#render} method renders the {Layout::SketchUpModel}. If the model
+  # belongs to a {Layout::Document}, then the render will be performed at the
+  # quality set in document.page_info (see {Layout::Document} and
+  # {Layout::PageInfo}). Otherwise, the render will be performed at Low quality.
   #
   # @example
   #   bounds = Geom::Bounds2d.new(1, 1, 3, 3)
@@ -441,6 +497,79 @@ class Layout::SketchUpModel < Layout::Entity
   def render_needed?
   end
 
+  # The {#reset_camera} method resets the {Layout::SketchUpModel}'s camera to
+  # the scene's setting.
+  #
+  # @example
+  #   bounds = Geom::Bounds2d.new(1, 1, 3, 3)
+  #   model = Layout::SketchUpModel.new("C:/Path/to/model.skp", bounds)
+  #   model.reset_camera if model.camera_modified?
+  #
+  # @raise [LockedLayerError] if the {Layout::SketchUpModel} is on a locked
+  #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::SketchUpModel} is locked
+  #
+  # @version LayOut 2020.1
+  def reset_camera
+  end
+
+  # The {#reset_effects} method resets the {Layout::SketchUpModel}'s shadow and
+  # fog settings to the scene's settings.
+  #
+  # @example
+  #   bounds = Geom::Bounds2d.new(1, 1, 3, 3)
+  #   model = Layout::SketchUpModel.new("C:/Path/to/model.skp", bounds)
+  #   model.reset_effects if model.effects_modified?
+  #
+  # @raise [LockedLayerError] if the {Layout::SketchUpModel} is on a locked
+  #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::SketchUpModel} is locked
+  #
+  # @version LayOut 2020.1
+  def reset_effects
+  end
+
+  # The {#reset_layers} method resets the {Layout::SketchUpModel}'s layers to
+  # the scene's setting.
+  #
+  #
+  # @note: In SketchUp 2020, SketchUp "layers" were renamed to "tags". For
+  #   consistency with the SketchUp API, this will continue to refer to
+  #   "tags" as "layers".
+  #
+  # @example
+  #   bounds = Geom::Bounds2d.new(1, 1, 3, 3)
+  #   model = Layout::SketchUpModel.new("C:/Path/to/model.skp", bounds)
+  #   model.reset_layers if model.layers_modified?
+  #
+  # @raise [LockedLayerError] if the {Layout::SketchUpModel} is on a locked
+  #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::SketchUpModel} is locked
+  #
+  # @version LayOut 2020.1
+  def reset_layers
+  end
+
+  # The {#reset_style} method resets the {Layout::SketchUpModel}'s style to
+  # the scene's setting.
+  #
+  # @example
+  #   bounds = Geom::Bounds2d.new(1, 1, 3, 3)
+  #   model = Layout::SketchUpModel.new("C:/Path/to/model.skp", bounds)
+  #   model.reset_style if model.style_modified?
+  #
+  # @raise [LockedLayerError] if the {Layout::SketchUpModel} is on a locked
+  #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::SketchUpModel} is locked
+  #
+  # @version LayOut 2020.1
+  def reset_style
+  end
+
   # The {#scale} method returns the scale of the {Layout::SketchUpModel}.
   #
   # @example
@@ -490,6 +619,20 @@ class Layout::SketchUpModel < Layout::Entity
   #
   # @version LayOut 2018
   def scenes
+  end
+
+  # The {#style_modified?} method returns whether the style of the
+  # {Layout::SketchUpModel} has been modified.
+  #
+  # @example
+  #   bounds = Geom::Bounds2d.new(1, 1, 3, 3)
+  #   model = Layout::SketchUpModel.new("C:/Path/to/model.skp", bounds)
+  #   modified = model.style_modified?
+  #
+  # @return [Boolean]
+  #
+  # @version LayOut 2020.1
+  def style_modified?
   end
 
   # The {#view} method returns the standard view of the {Layout::SketchUpModel}.

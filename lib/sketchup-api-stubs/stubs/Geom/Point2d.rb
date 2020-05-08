@@ -1,12 +1,11 @@
 # Copyright:: Copyright 2020 Trimble Inc.
 # License:: The MIT License (MIT)
 
-# The {Geom::Vector2d} class allows you to work with a point in 2D space.
-# {Geom::Point2d} is basically just a series of values representing x and y
-# coordinates.
+# The {Geom::Point2d} class allows you to work with a point in 2D space.
+# {Geom::Point2d} is a series of values representing x and y coordinates.
 #
-# The values are specified as [x, y]. For example [1, 1].
-# To create a point call Geom::Point2d.new, where the creation method
+# The values are specified as +[x, y]+. For example [1, 1].
+# To create a point call +Geom::Point2d.new+, where the creation method
 # can take a variety of arguments:
 #
 # @example

@@ -147,6 +147,8 @@
   PAGE_USE_ALL = nil # Stub value.
   PAGE_USE_CAMERA = nil # Stub value.
   PAGE_USE_HIDDEN = nil # Stub value.
+  PAGE_USE_HIDDEN_GEOMETRY = nil # Stub value.
+  PAGE_USE_HIDDEN_OBJECTS = nil # Stub value.
   PAGE_USE_LAYER_VISIBILITY = nil # Stub value.
   PAGE_USE_RENDERING_OPTIONS = nil # Stub value.
   PAGE_USE_SECTION_PLANES = nil # Stub value.

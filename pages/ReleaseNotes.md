@@ -18,7 +18,8 @@ Though our adoption rate to the latest version is quite high, it can take time a
 
 Here are the build numbers for recent SketchUp releases. Note that build numbers in languages besides English are larger for each release, so it is best to check for builds that are greater than or equal to the numbers here.
 
-- **SU2020.0** = 20.0.363 on Windows 64-bit, 20.0.362 on Mac 64-bit.
+- **SU2020.1** = 20.1.229 on Windows 64-bit, 20.1.228 on Mac 64-bit.
+- **SU2020.0** = 20.0.133 on Windows 64-bit, 20.0.134 on Mac 64-bit.
 
 - **SU2019.3** = 19.3.253 on Windows 64-bit, 19.3.252 on Mac 64-bit.
 - **SU2019.2** = 19.2.222 on Windows 64-bit, 19.2.221 on Mac 64-bit.
@@ -53,6 +54,41 @@ Here are the build numbers for recent SketchUp releases. Note that build numbers
 
 - **SU6 M6** = 6.4.265 on Windows, 6.4.263 on Mac.
 
+# What's new in SketchUp 2020.1
+
+## Ruby API Additions and Improvements
+* Added {Sketchup::Entities#weld}
+* Added {Sketchup::Page#use_hidden_geometry=}
+* Added {Sketchup::Page#use_hidden_geometry?}
+* Added {Sketchup::Page#use_hidden_objects=}
+* Added {Sketchup::Page#use_hidden_objects?}
+* Deprecated {Sketchup::Page#use_hidden?}
+* Added {Layout::Grid#major_spacing=}
+* Added {Layout::Grid#minor_divisions=}
+* Added {Layout::Grid#major_color=}
+* Added {Layout::Grid#minor_color=}
+* Added {Layout::Grid#show=}
+* Added {Layout::Grid#show_major=}
+* Added {Layout::Grid#show_minor=}
+* Added {Layout::Grid#print=}
+* Added {Layout::Grid#in_front?}
+* Added {Layout::Grid#in_front=}
+* Added {Layout::Grid#clip_to_margins?}
+* Added {Layout::Grid#clip_to_margins=}
+* Added {Layout::SketchUpModel#camera_modified?}
+* Added {Layout::SketchUpModel#reset_camera}
+* Added {Layout::SketchUpModel#effects_modified?}
+* Added {Layout::SketchUpModel#reset_effects}
+* Added {Layout::SketchUpModel#style_modified?}
+* Added {Layout::SketchUpModel#reset_style}
+* Added {Layout::SketchUpModel#layers_modified?}
+* Added {Layout::SketchUpModel#reset_layers}
+* Fixed bug in {Layout::LinearDimension#text} where the display text of the copy returned the plain text instead
+* Fixed bug in {Layout::AngularDimension#text} where the display text of the copy returned the plain text instead
+* Fixed issues with {Layout::SketchUpModel#current_scene} and {Layout::SketchUpModel#current_scene_modified?} Unexpectedly raising an assert stating that "The most recently selected scene no longer exists"
+* Fixed {Layout::Document#export} documentation
+* Fixed {Layout::SketchUpModel#render} documentation
+
 # What's new in SketchUp 2020.0
 
 ## Ruby API Additions and Improvements
@@ -73,24 +109,16 @@ Here are the build numbers for recent SketchUp releases. Note that build numbers
     * {Length::Liter}
     * {Length::USGallon}
 * Added `AreaPrecision` and `VolumePrecision` to `Sketchup.active_model.options["UnitsOptions"]`
-* Added {Sketchup::Layer#display_name} - this will return `"Untagged"` for layer0 while the old {Sketchup::Layer#name} will continue to return `"Layer0"`
+* Added {Sketchup::Layer#display_name} - this will return `"Untagged"` for layer0 while the old {Sketchup::Layer#name} will continue to return `"Layer0"`.
 * Additional entity types now return PIDs for {Sketchup::Entity#persistent_id}:
     * {Sketchup::Layer}
     * {Sketchup::LineStyle}
-* Deprecated {Sketchup::ComponentDefinition#insertion_point} and {Sketchup::ComponentDefinition#insertion_point=} as this feature was removed in SketchUp. It now returns the origin of the definition and the setter is now a noop
-* Added {Sketchup::Page#get_drawingelement_visibility} and
-{Sketchup::Page#set_drawingelement_visibility} to pages to adjust element visibility in scenes.
-
-
+* Deprecated {Sketchup::ComponentDefinition#insertion_point} and {Sketchup::ComponentDefinition#insertion_point=} as this feature was removed in SketchUp. It now returns the origin of the definition and the setter is now a noop.
 
 ## Ruby API Bug Fixes
 
 * Fixed potential crash in {UI::HtmlDialog}'s callbacks due to values not protected against Ruby's garbage collection.
-* Fixed model validation where it incorrectly flagged some valid UV mapping as invalid and reset it
-* Fixed {Sketchup::Entities#add_face} with duplicate points will crash
-* Restored the missing Racc Ruby library in Windows
-* Fixed {Sketchup::Page#set_drawingelement_visibility} to only affect drawing elements on the root  of the model. Nested instances of components, groups, and images are controlled by Page visibility.
-
+* Fixed model validation where it incorrectly flagged some valid UV mapping as invalid and reset it.
 
 # What's new in SketchUp 2019.3
 

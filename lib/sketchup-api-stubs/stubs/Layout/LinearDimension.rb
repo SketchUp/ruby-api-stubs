@@ -532,6 +532,10 @@ class Layout::LinearDimension < Layout::Entity
   #   dim = Layout::LinearDimension.new(start_point, end_point, height)
   #   text = dim.text
   #
+  # @note With the addition of auto-text in dimensions for LayOut 2019.2, the
+  #   copy of the dimension text incorrectly provided the plain text when
+  #   requesting the display text. This has been fixed for LayOut 2020.1.
+  #
   # @return [Layout::FormattedText]
   #
   # @version LayOut 2018

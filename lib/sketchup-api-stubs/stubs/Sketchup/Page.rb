@@ -374,9 +374,11 @@ class Sketchup::Page < Sketchup::Entity
   #   - 2 - Drawing Style,
   #   - 4 - Shadow Settings,
   #   - 8 - Axes Location,
-  #   - 16 - Hidden Geometry,
+  #   - 16 - Hidden Geometry & Objects,
   #   - 32 - Visible Layers,
-  #   - 64 - Active Section Planes.
+  #   - 64 - Active Section Planes,
+  #   - 128 - Hidden Geometry,
+  #   - 256 - Hidden Objects
   #
   # The bit code values are added together to provide the flags value.  For
   # example, to update the Camera Location, Axes Location, and Active Section
@@ -476,11 +478,14 @@ class Sketchup::Page < Sketchup::Entity
 
   # The use_hidden= method sets the page's hidden property.
   #
+  # @deprecated The functionality is replaced by {use_hidden_geometry=}
+  #   and {use_hidden_objects=} in SketchUp 2020.1.
+  #
   # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
-  #   status = page.use_hidden=false
+  #   status = page.use_hidden = false
   #
   # @param setting
   #   true if you want your page to save this property, false
@@ -489,6 +494,10 @@ class Sketchup::Page < Sketchup::Entity
   # @return status - true if you are saving the property, false if
   #   you are not saving the property.
   #
+  # @see #use_hidden_geometry=
+  #
+  # @see #use_hidden_objects=
+  #
   # @version SketchUp 6.0
   def use_hidden=(setting)
   end
@@ -496,18 +505,55 @@ class Sketchup::Page < Sketchup::Entity
   # The use_hidden? method determines whether you are storing the hidden
   # property with the page.
   #
+  # @deprecated The functionality is replaced by {use_hidden_geometry?}
+  #   and {use_hidden_objects?} in SketchUp 2020.1.
+  #
   # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
-  #   page = pages.add "My Page"
+  #   page = pages.add("My Page")
   #   status = page.use_hidden?
   #
   # @return [Boolean] status - true if you are storing the this property with
   #   the page, false if you are not storing this property
   #   with the page.
   #
+  # @see #use_hidden_geometry?
+  #
+  # @see #use_hidden_objects?
+  #
   # @version SketchUp 6.0
   def use_hidden?
+  end
+
+  # Sets the page's use hidden geometry property.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   pages = model.pages
+  #   page = pages.add("My Page")
+  #   status = page.use_hidden_geometry = false
+  #
+  # @param [Boolean] setting
+  #   `true` if you want your page to save this property,
+  #   `false` if you do not want your page to save this property.
+  #
+  # @version SketchUp 2020.1
+  def use_hidden_geometry=(setting)
+  end
+
+  # Returns the use hidden geometry property from the page.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   pages = model.pages
+  #   page = pages.add("My Page")
+  #   status = page.use_hidden_geometry?
+  #
+  # @return [Boolean]
+  #
+  # @version SketchUp 2020.1
+  def use_hidden_geometry?
   end
 
   # The use_hidden_layers= method sets the page's hidden layers
@@ -545,6 +591,36 @@ class Sketchup::Page < Sketchup::Entity
   #
   # @version SketchUp 6.0
   def use_hidden_layers?
+  end
+
+  # Sets the page's use hidden objects property.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   pages = model.pages
+  #   page = pages.add("My Page")
+  #   status = page.use_hidden_objects = false
+  #
+  # @param [Boolean] setting
+  #   `true` if you want your page to save this property,
+  #   `false` if you do not want your page to save this property.
+  #
+  # @version SketchUp 2020.1
+  def use_hidden_objects=(setting)
+  end
+
+  # Returns the use hidden objects property from the page.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   pages = model.pages
+  #   page = pages.add("My Page")
+  #   status = page.use_hidden_objects?
+  #
+  # @return [Boolean]
+  #
+  # @version SketchUp 2020.1
+  def use_hidden_objects?
   end
 
   # The use_rendering_optoins= method sets the page's display
