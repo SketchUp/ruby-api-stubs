@@ -143,6 +143,61 @@ class Layout::Document
   def auto_text_definitions
   end
 
+  # The {#export} method exports the {Layout::Document} to a given file format.
+  # It knows which format to export based on the file extension you place on the
+  # file name. For example, a filename of "thing.pdf" will export a PDF file,
+  # whereas "thing.png" will export a set of PNG images.
+  #
+  # For LayOut version 2020.1, valid extensions include .pdf, .jpg, and .png.
+  #
+  # @example PDF Export Examples
+  #   doc = Layout::Document.open("c:/path/to/document.layout")
+  #
+  #   # Export pdf file on a PC, with default settings.
+  #   status = doc.export("c:/my_export.pdf")
+  #
+  #   # Export pages one through three at high quality, compressing jpeg images
+  #   # at 0.75 compression quality (valid range is 0.0 - 1.0). Note that the
+  #   # first page of a {Layout::Document} is index 0.
+  #   options = { start_page: 1,
+  #               end_page: 3,
+  #               output_resolution: Layout::PageInfo::RESOLUTION_HIGH,
+  #               compress_images: TRUE,
+  #               compress_quality: 0.75 }
+  #
+  #   status = doc.export("c:/my_export.pdf", options)
+  #
+  # @example Image Set Export Examples
+  #   doc = Layout::Document.open("c:/path/to/document.layout")
+  #
+  #   # Export png files on macOS, with default settings.
+  #   status = doc.export('/Users/username/Desktop/pngs/page.png')
+  #
+  #   # Export pages one through three at 300 dpi as JPGs.
+  #   options = { start_page: 1,
+  #               end_page: 3,
+  #               dpi: 300 }
+  #   status = doc.export('c:/page.jpg', options)
+  #
+  # @param [String] file_path
+  #   The file or image set to create. The directory
+  #   path must already exist. The path must include the file extension.
+  #
+  # @param [Hash, nil] options
+  #   An optional hash of settings for the export.
+  #
+  # @raise [TypeError] if an options value is the wrong type
+  #
+  # @raise [RangeError] if an options value is out of range
+  #
+  # @raise [ArgumentError] if the full file path does not exist
+  #
+  # @raise [ArgumentError] if the specified file type is missing or not supported
+  #
+  # @version LayOut 2020.1
+  def export(file_path, options = nil)
+  end
+
   # The {#grid} method returns the {Layout::Grid} for a {Layout::Document}.
   #
   # @example

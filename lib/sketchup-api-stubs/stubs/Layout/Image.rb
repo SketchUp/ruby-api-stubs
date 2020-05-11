@@ -32,7 +32,9 @@ class Layout::Image < Layout::Entity
   def clip_mask
   end
 
-  # The {#clip_mask=} method sets the clip mask of the {Layout::Image}.
+  # The {#clip_mask=} method sets the clip mask of the {Layout::Image}. clip_mask
+  # can be a {Layout::Rectangle}, {Layout::Ellipse}, or {Layout::Path}, or +nil+,
+  # and it must not currently exist in a {Layout::Document}, or {Layout::Group}.
   #
   # @example
   #   image = Layout::Image.new("my_image.png", [[1, 1], [3, 3]])
@@ -42,11 +44,14 @@ class Layout::Image < Layout::Entity
   #   clip_mask = Layout::Rectangle.new(bounds)
   #   image.clip_mask = clip_mask
   #
-  # @param [Layout::Entity] clip_mask
+  # @note +clip_mask+ may be +nil+ as of LayOut 2020.1.
+  #
+  # @param [Layout::Entity, nil] clip_mask
   #   The clip mask can be a {Layout::Path},
   #   {Layout::Rectangle}, {Layout::Ellipse}, or +nil+.
   #
-  # @raise [ArgumentError] if clip mask is already in a document
+  # @raise [ArgumentError] if clip mask is already in a {Layout::Document} or
+  #   {Layout::Group}
   #
   # @raise [ArgumentError] if clip mask is not a {Layout::Path},
   #   {Layout::Rectangle}, or {Layout::Ellipse}

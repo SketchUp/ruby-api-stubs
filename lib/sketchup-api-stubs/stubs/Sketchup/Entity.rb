@@ -344,6 +344,10 @@ class Sketchup::Entity
   #
   # The persistent id persistent between sessions.
   #
+  # [SketchUp 2020.1]
+  #   - {Sketchup::ComponentDefinition}
+  #   - {Sketchup::Material}
+  #   - {Sketchup::Style}
   # [SketchUp 2020.0]
   #   - {Sketchup::Layer}
   #   - {Sketchup::LineStyle}

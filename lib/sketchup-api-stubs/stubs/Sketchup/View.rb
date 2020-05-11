@@ -498,14 +498,14 @@ class Sketchup::View
   #     IS_WIN = Sketchup.platform == :platform_win
   #
   #     def draw(view)
-  #       draw_text(view, "Hello World", size: 20)
+  #       draw_text(view, [100, 200, 0], "Hello World", size: 20)
   #     end
   #
   #     private
   #
   #     # This will ensure text is drawn with consistent size across platforms,
   #     # using pixels as size units.
-  #     def draw_text(view, text, **options)
+  #     def draw_text(view, position, text, **options)
   #       native_options = options.dup
   #       if IS_WIN && options.key?(:size)
   #         native_options[:size] = pixels_to_points(size)

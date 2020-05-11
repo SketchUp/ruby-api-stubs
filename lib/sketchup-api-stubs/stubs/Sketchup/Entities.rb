@@ -1094,4 +1094,26 @@ class Sketchup::Entities
   def transform_entities(transform, entities)
   end
 
+  # The {#weld} method takes a set of edges and find all possible chains of edges
+  # and connect them with a {Sketchup::Curve}.
+  #
+  # A curve will not cross another curve. They will split where multiple curves
+  # meet.
+  #
+  # @example
+  #   entities = Sketchup.active_model.entities
+  #   edges = model.selection.grep(Sketchup::Edge)
+  #   curves = entities.weld(edges)
+  #
+  # @param [Array<Sketchup::Edge>] edges
+  #
+  # @raise [ArgumentError] if the given entities are not part of the same
+  #   {Sketchup::Entities} collection.
+  #
+  # @return [Array<Sketchup::Curve>]
+  #
+  # @version SketchUp 2020.1
+  def weld(edges)
+  end
+
 end
