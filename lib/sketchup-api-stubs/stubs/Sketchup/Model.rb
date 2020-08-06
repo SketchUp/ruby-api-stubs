@@ -689,15 +689,52 @@ class Sketchup::Model
   #   entities = model.find_entity_by_persistent_id(id1, id2, id3)
   #   entities = model.find_entity_by_persistent_id([id1, id2, id3])
   #
-  # @param [Array<Integer>] ids_or_array
-  #   Pass either a series of ids or a
-  #   single array containing persistent ids.
+  # @example Limit search by scope
+  #   model = Sketchup.active_model
+  #   edge_pid = model.entities.add_line([0,0,0], [9,9,9]).persistent_id
+  #   layer_pid = model.layers.add('Hello World').persistent_id
   #
-  # @return [Array<Sketchup::Entity, nil>] Returns an array with
-  #   {Sketchup::Entity} objects for each id found and nil otherwise.
+  #   # Search in all scopes:
+  #   entities = model.find_entity_by_persistent_id(edge_pid, layer_pid)
+  #   # => [#<Sketchup::Edge:0x000002567da4a8f0>, #<Sketchup::Layer:0x000002567da49e50>]
+  #
+  #   # Search in layer scope:
+  #   entities = model.find_entity_by_persistent_id(edge_pid, layer_pid, layers: true)
+  #   # => [nil, #<Sketchup::Layer:0x000002567da49e50>]
+  #
+  # @overload find_entity_by_persistent_id(ids_or_array)
+  #
+  #   @param [Array<Integer>] ids_or_array Pass either a series of ids or a
+  #     single array containing persistent ids.
+  #
+  #   @return [Array<Sketchup::Entity, nil>] Returns an array with
+  #     {Sketchup::Entity} objects for each id found and nil otherwise.
+  #
+  # @overload find_entity_by_persistent_id(ids_or_array, **scope)
+  #
+  #   @version SketchUp 2020.2
+  #   @param [Array<Integer>] ids_or_array Pass either a series of ids or a
+  #     single array containing persistent ids.
+  #   @param [Hash<Symbol, Boolean>] scope Limit the scope of the search to the
+  #     given scope categories.
+  #   @option [Boolean] scope :entities Search entities parent to
+  #     {Sketchup::Entities}.
+  #   @option [Boolean] scope :layers Search {Sketchup::Layers} for
+  #     {Sketchup::Layer} entities.
+  #   @option [Boolean] scope :materials Search {Sketchup::Materials} for
+  #     {Sketchup::Material} entities.
+  #   @option [Boolean] scope :pages Search {Sketchup::Pages} for
+  #     {Sketchup::Page} entities.
+  #   @option [Boolean] scope :styles Search {Sketchup::Styles} for
+  #     {Sketchup::Style} entities.
+  #   @option [Boolean] scope :definitions Search {Sketchup::DefinitionList} for
+  #     {Sketchup::ComponentDefinition} entities.
+  #
+  #   @return [Array<Sketchup::Entity, nil>] Returns an array with
+  #     {Sketchup::Entity} objects for each id found and nil otherwise.
   #
   # @version SketchUp 2017
-  def find_entity_by_persistent_id(ids_or_array)
+  def find_entity_by_persistent_id(*args)
   end
 
   # This methods determines if the model is georeferenced.

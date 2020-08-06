@@ -8,6 +8,10 @@
 #   model = Sketchup.active_model
 #   layers = model.layers
 #
+# @note As of SketchUp 2020 "Layers" were renamed to "Tags" in the UI.
+#   The API retains the use of "Layer" for compatibility and is synonymous with
+#   "Tag".
+#
 # @version SketchUp 6.0
 class Sketchup::Layers < Sketchup::Entity
 
@@ -38,7 +42,7 @@ class Sketchup::Layers < Sketchup::Entity
   def [](index_or_name)
   end
 
-  # The add method is used to add a new layer.
+  # The {#add} method is used to add a new layer.
   #
   # If you give the name of a Layer that is already defined, it will return the
   # existing Layer rather than adding a new one.
@@ -47,25 +51,43 @@ class Sketchup::Layers < Sketchup::Entity
   #   layers = Sketchup.active_model.layers
   #   layer = layers.add("Test Layer")
   #
-  # @param layer_name
+  # @param [String] layer_name
   #   The name of the added layer.
   #
-  # @return layer - the new Layer object
+  # @return [Sketchup::Layer]
   #
   # @version SketchUp 6.0
   def add(layer_name)
   end
 
-  # The add_observer method is used to add an observer to the layers collection.
+  # The {#add} method is used to add a new layer.
+  #
+  # If you give the name of a Layer that is already defined, it will return the
+  # existing Layer rather than adding a new one.
+  #
+  # @example
+  #   layers = Sketchup.active_model.layers
+  #   layer = layers.add("Test Layer")
+  #
+  # @param [String] layer_name
+  #   The name of the added layer.
+  #
+  # @return [Sketchup::Layer]
+  #
+  # @version SketchUp 6.0
+  def add_layer
+  end
+
+  # The {#add_observer} method is used to add an observer to the layers
+  # collection.
   #
   # @example
   #   layers = Sketchup.active_model.layers
   #   status = layers.add_observer observer
   #
-  # @param observer
-  #   An observer.
+  # @param [Sketchup::LayersObserver] observer
   #
-  # @return success - true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def add_observer(observer)
@@ -105,17 +127,19 @@ class Sketchup::Layers < Sketchup::Entity
   def count
   end
 
-  # The each method is used to iterate through all of the layers.
+  # The {#each} method is used to iterate through all of the layers in the model.
   #
   # @example
   #   model = Sketchup.active_model
   #   layers = model.layers
-  #   layers.add("test layer")
+  #   layers.add("Test layer")
   #   layers.each { | layer | puts layer.name }
   #
   # @version SketchUp 6.0
   #
-  # @yield [layer] - a variable that will hold each Layer object as they are found.
+  # @yield [layer]
+  #
+  # @yieldparam [Sketchup::Layer] layer
   def each
   end
 
@@ -133,16 +157,28 @@ class Sketchup::Layers < Sketchup::Entity
   def length
   end
 
-  # The purged_unused method is used to remove unused layers.
+  # The {#purge_unused} method is used to remove unused layers.
   #
   # @example
   #   layers = Sketchup.active_model.layers
-  #   status = layers.purge_unused
+  #   num_layers_removed = layers.purge_unused
   #
-  # @return success - true if successful, false if unsuccessful.
+  # @return [Integer] Number of unused layers removed
   #
   # @version SketchUp 6.0
   def purge_unused
+  end
+
+  # The {#purge_unused} method is used to remove unused layers.
+  #
+  # @example
+  #   layers = Sketchup.active_model.layers
+  #   num_layers_removed = layers.purge_unused
+  #
+  # @return [Integer] Number of unused layers removed
+  #
+  # @version SketchUp 6.0
+  def purge_unused_layers
   end
 
   # Remove the given layer from the model, optionally removing the geometry.
@@ -164,31 +200,61 @@ class Sketchup::Layers < Sketchup::Entity
   #   edge.layer = Sketchup.active_model.layers.add("MyLayer")
   #   Sketchup.active_model.layers.remove("MyLayer", true)
   #
-  # @param layer
-  #   Integer index, String name or Layer
+  # @param [Sketchup::Layer, Integer, String] layer
   #
-  # @param remove_geometry
-  #   Boolean - If true, geometry in the removed layer will
+  # @param [Boolean] remove_geometry
+  #   If true, geometry in the removed layer will
   #   be removed as well. If false (which is the default),
   #   this geometry will be placed on Layer 0.
   #
-  # @return boolean - true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 2015
   def remove(layer, remove_geometry = false)
   end
 
-  # The remove_observer method is used to remove an observer from the current
+  # Remove the given layer from the model, optionally removing the geometry.
+  #
+  # @example
+  #   # Remove layer by layer reference.
+  #   layer = Sketchup.active_model.layers.add("MyLayer")
+  #   Sketchup.active_model.layers.remove(layer)
+  #
+  #   # Remove layer by name.
+  #   Sketchup.active_model.layers.add("MyLayer")
+  #   Sketchup.active_model.layers.remove("MyLayer")
+  #
+  #   # Remove layer by index.
+  #   Sketchup.active_model.layers.remove(1)
+  #
+  #   # Remove layer and the entities on the layer.
+  #   edge = Sketchup.active_model.entities.add_line([0, 0, 0], [9, 9, 9])
+  #   edge.layer = Sketchup.active_model.layers.add("MyLayer")
+  #   Sketchup.active_model.layers.remove("MyLayer", true)
+  #
+  # @param [Sketchup::Layer, Integer, String] layer
+  #
+  # @param [Boolean] remove_geometry
+  #   If true, geometry in the removed layer will
+  #   be removed as well. If false (which is the default),
+  #   this geometry will be placed on Layer 0.
+  #
+  # @return [Boolean] true if successful, false if unsuccessful.
+  #
+  # @version SketchUp 2015
+  def remove_layer
+  end
+
+  # The {#remove_observer} method is used to remove an observer from the current
   # object.
   #
   # @example
   #   layers = Sketchup.active_model.layers
   #   status = layers.remove_observer observer
   #
-  # @param observer
-  #   An observer.
+  # @param [Sketchup::LayersObserver] observer
   #
-  # @return success - true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def remove_observer(observer)
@@ -208,7 +274,7 @@ class Sketchup::Layers < Sketchup::Entity
   def size
   end
 
-  # The unique_name method can be used to get a string that will be a unique
+  # The {#unique_name} method can be used to get a string that will be a unique
   # layer name inside this collection.
   #
   # @example
@@ -217,15 +283,20 @@ class Sketchup::Layers < Sketchup::Entity
   #   # Will return "Joe" since there are probably no other layers named that.
   #   # Or might return something like "Joe #2" if there is already a layer
   #   # named Joe.
-  #   good_name = layers.unique_name "Joe"
+  #   good_name = layers.unique_name("Joe")
   #
-  # @param [optional] base_name
-  #   The base name to build the unique name from.
+  # @overload unique_name
   #
-  # @return name - the unique name
+  #   @return [String]  Will default to using "Layer" (SketchUp2019 and older)
+  #                     or "Tag" as basename for a unique name.
+  #
+  # @overload unique_name(base_name)
+  #
+  #   @param [String] base_name  The base name to build the unique name from.
+  #   @return [String]
   #
   # @version SketchUp 6.0
-  def unique_name(base_name)
+  def unique_name(*args)
   end
 
 end

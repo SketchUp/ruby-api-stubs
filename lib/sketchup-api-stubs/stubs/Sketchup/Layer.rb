@@ -4,7 +4,8 @@
 # The Layer class contains methods modifying and extracting information for a
 # layer.
 #
-# By default, a SketchUp model has one layer, Layer 0 (zero), which is the base
+# By default, a SketchUp model has one layer, Layer 0 (Named "Untagged" in the
+# UI since SketchUp 2020), which is the base
 # layer. You can't delete or rename Layer 0. Unlike certain other CAD software
 # packages, entities associated with different layers in SketchUp still
 # intersect with each other. (If you want collections of entities to not
@@ -15,12 +16,14 @@
 # wall and roof entities different groups, associate layers with those groups,
 # and then hide those layers so as to display just the floor plan in the model.
 #
-# You can programatically create a new layer by calling the Layers.add method.
-#
 # @example
 #   model = Sketchup.active_model
 #   layers = model.layers
-#   new_layer = layers.add "test layer"
+#   new_layer = layers.add('Doors')
+#
+# @note As of SketchUp 2020 "Layers" were renamed to "Tags" in the UI.
+#   The API retains the use of "Layer" for compatibility and is synonymous with
+#   "Tag".
 #
 # @version SketchUp 6.0
 class Sketchup::Layer < Sketchup::Entity
@@ -31,8 +34,8 @@ class Sketchup::Layer < Sketchup::Entity
 
   # Instance Methods
 
-  # The <=> method is used to compare two layers based on their names. You could
-  # use this for sorting if you're building a list of layer names.
+  # The {#<=>} method is used to compare two layers based on their names. You
+  # could use this for sorting if you're building a list of layer names.
   #
   # @example
   #   model = Sketchup.active_model
@@ -42,37 +45,31 @@ class Sketchup::Layer < Sketchup::Entity
   #   layer2 = layers[1]
   #   status = layer1 <=> layer2
   #
-  # @param layer2
-  #   A Layer object.
+  # @param [Sketchup::Layer] layer2
   #
-  # @return status - -1 if layer1 is less than layer2. 1 if layer2
-  #   is less than layer1. 0 if layer1 and layer2 are
-  #   equal.
+  # @return [Integer] -1 if layer1 is less than layer2. 1 if layer2
+  #   is less than layer1. 0 if layer1 and layer2 are equal.
   #
   # @version SketchUp 6.0
   def <=>(layer2)
   end
 
-  # The == method is used to determine if two layers are the same.
+  # The {#==} method is used to determine if two layers are the same.
   #
   # @example
   #   model = Sketchup.active_model
   #   layers = model.layers
-  #   layer1 = layers.add "test layer 1"
-  #   layer2 = layers.add "test layer 2"
-  #   status = layer1 == layer2
+  #   layer1 = layers.add("Test layer 1")
+  #   layer2 = layers.add("Test layer 2")
+  #   equal = layer1 == layer2
   #
-  # @param layer2
-  #   A Layer object.
-  #
-  # @return status - true if layer1 and layer2 are equal. false if
-  #   layer1 and layer2 are not equal.
+  # @param [Object] other
   #
   # @version SketchUp 6.0
-  def ==(layer2)
+  def ==(other)
   end
 
-  # The color method is used to retrieve the color of the layer.
+  # The {#color} method is used to retrieve the color of the layer.
   #
   # @example
   #   model = Sketchup.active_model
@@ -80,13 +77,13 @@ class Sketchup::Layer < Sketchup::Entity
   #   new_layer = layers.add('Test layer')
   #   color = new_layer.color
   #
-  # @return color - the color of the Layer object
+  # @return [Sketchup::Color]
   #
   # @version SketchUp 2014
   def color
   end
 
-  # The color= method is used to set the name of a layer.
+  # The {#color=} method is used to set the name of a layer.
   #
   # @example
   #   model = Sketchup.active_model
@@ -94,10 +91,7 @@ class Sketchup::Layer < Sketchup::Entity
   #   new_layer = layers.add('Test layer')
   #   new_layer.color = Sketchup::Color.new(192, 0, 0)
   #
-  # @param color
-  #   The new color for the Layer object.
-  #
-  # @return color
+  # @param [Sketchup::Color] color
   #
   # @version SketchUp 2014
   def color=(color)
@@ -111,7 +105,7 @@ class Sketchup::Layer < Sketchup::Entity
   #   new_layer = layers.add ("test layer")
   #   name = new_layer.display_name
   #
-  # @return [String] the display name of the Layer object
+  # @return [String]
   #
   # @see #name
   #
@@ -161,7 +155,7 @@ class Sketchup::Layer < Sketchup::Entity
   def name
   end
 
-  # The name= method is used to set the name of a layer.
+  # The {#name=} method is used to set the name of a layer.
   #
   # @example
   #   model = Sketchup.active_model
@@ -169,16 +163,13 @@ class Sketchup::Layer < Sketchup::Entity
   #   new_layer = layers.add "test layer"
   #   name = new_layer.name = "new test layer"
   #
-  # @param name
-  #   The new name for the Layer object.
-  #
-  # @return name - the newly set name
+  # @param [String] name
   #
   # @version SketchUp 6.0
   def name=(name)
   end
 
-  # The page_behavior method is used to retrieve the visibility behavior of the
+  # The {#page_behavior} method is used to retrieve the visibility behavior of the
   # layer for new pages and existing pages. For example, you may want your layer
   # to be visible or hidden by default in any new pages (aka Scenes) created by
   # the user.
@@ -188,15 +179,25 @@ class Sketchup::Layer < Sketchup::Entity
   # determined by one of these values:
   #
   # The behaviour is composed of a combination of these flags:
-  #   - LAYER_VISIBLE_BY_DEFAULT: 0x0000
-  #   - LAYER_HIDDEN_BY_DEFAULT: 0x0001
-  #   - LAYER_USES_DEFAULT_VISIBILITY_ON_NEW_PAGES: 0x0000
-  #   - LAYER_IS_VISIBLE_ON_NEW_PAGES: 0x0010
-  #   - LAYER_IS_HIDDEN_ON_NEW_PAGES: 0x0020
+  #
+  # [Default visibility]
+  #   These flags are used to set the value of {#page_behavior}. A page keeps
+  #   a list of layers that do not have their default behavior. If a layer
+  #   is not in that list, then it is set to its default visibility which
+  #   is determined by one of these flags.
+  #   - {LAYER_VISIBLE_BY_DEFAULT}: +0x0000+
+  #   - {LAYER_HIDDEN_BY_DEFAULT}: +0x0001+
+  #
+  # [Visibility on new pages]
+  #   You can also set this addition flag that controls the visibility of
+  #   a layer on newly created pages.
+  #   - {LAYER_USES_DEFAULT_VISIBILITY_ON_NEW_PAGES}: +0x0000+
+  #   - {LAYER_IS_VISIBLE_ON_NEW_PAGES}: +0x0010+
+  #   - {LAYER_IS_HIDDEN_ON_NEW_PAGES}: +0x0020+
   #
   # The default visibility for a layer is set by either
-  # <code>LAYER_VISIBLE_BY_DEFAULT</code> or
-  # <code>LAYER_HIDDEN_BY_DEFAULT</code>. This is what will be used when a page
+  # {LAYER_VISIBLE_BY_DEFAULT} or
+  # {LAYER_HIDDEN_BY_DEFAULT}. This is what will be used when a page
   # does not contain the visibility state of a layer.
   #
   # The remaining flags control the visibility of the layer for new pages.
@@ -208,8 +209,7 @@ class Sketchup::Layer < Sketchup::Entity
   #   hidden_by_default = (layer.page_behavior & LAYER_HIDDEN_BY_DEFAULT) ==
   #                       LAYER_HIDDEN_BY_DEFAULT
   #
-  # @return pagebehavior - an integer representing the current
-  #   behavior of the layer.
+  # @return [Integer] an integer representing the current behavior of the layer.
   #
   # @version SketchUp 6.0
   def page_behavior
@@ -222,11 +222,25 @@ class Sketchup::Layer < Sketchup::Entity
   # visibility of the layer is used.
   #
   # The behavior is composed of a combination of these flags:
-  # [+LAYER_VISIBLE_BY_DEFAULT: 0x0000+]
-  # [+LAYER_HIDDEN_BY_DEFAULT: 0x0001+]
-  # [+LAYER_USES_DEFAULT_VISIBILITY_ON_NEW_PAGES: 0x0000+]
-  # [+LAYER_IS_VISIBLE_ON_NEW_PAGES: 0x0010+]
-  # [+LAYER_IS_HIDDEN_ON_NEW_PAGES: 0x0020+]
+  #
+  # [Default visibility]
+  #   These flags are used to set the value of {#page_behavior}. A page keeps
+  #   a list of layers that do not have their default behavior. If a layer
+  #   is not in that list, then it is set to its default visibility which
+  #   is determined by one of these flags.
+  #   - {LAYER_VISIBLE_BY_DEFAULT}: +0x0000+
+  #   - {LAYER_HIDDEN_BY_DEFAULT}: +0x0001+
+  #
+  # [Visibility on new pages]
+  #   You can also set this addition flag that controls the visibility of
+  #   a layer on newly created pages.
+  #   - {LAYER_USES_DEFAULT_VISIBILITY_ON_NEW_PAGES}: +0x0000+
+  #   - {LAYER_IS_VISIBLE_ON_NEW_PAGES}: +0x0010+
+  #   - {LAYER_IS_HIDDEN_ON_NEW_PAGES}: +0x0020+
+  #
+  # @bug Prior to SketchUp 2014 the +LAYER_HIDDEN_BY_DEFAULT+ flag
+  #   would trigger the validation check in SketchUp that would reset the
+  #   {#page_behavior} of the layer.
   #
   # @example
   #   layers = Sketchup.active_model.layers
@@ -234,44 +248,35 @@ class Sketchup::Layer < Sketchup::Entity
   #   behavior = LAYER_HIDDEN_BY_DEFAULT | LAYER_IS_HIDDEN_ON_NEW_PAGES
   #   layer.page_behavior = behavior
   #
-  # @note Prior to SketchUp 2014 the +LAYER_HIDDEN_BY_DEFAULT+ flag
-  #   would trigger the validation check in SketchUp that would reset the
-  #   {#page_behavior} of the layer.
-  #
   # @param [Integer] page_behavior
-  #
-  # @return [Integer]
   #
   # @version SketchUp 6.0
   def page_behavior=(page_behavior)
   end
 
-  # The visible= method is used to set if the layer is visible.
+  # The {#visible=} method is used to set if the layer is visible.
   #
   # @example
   #   model = Sketchup.active_model
   #   layers = model.layers
-  #   new_layer = layers.add "test layer"
+  #   layer = layers.add('Hello World')
+  #   layer.visible = false
   #
-  #   # Hide the layer.
-  #   new_layer.visible = false
-  #
-  # @param is_visible
-  #   The new visibility setting.
+  # @param [Boolean] visible
   #
   # @version SketchUp 6.0
-  def visible=(is_visible)
+  def visible=(visible)
   end
 
-  # The visible? method is used to determine if the layer is visible.
+  # The {#visible?} method is used to determine if the layer is visible.
   #
   # @example
   #   model = Sketchup.active_model
   #   layers = model.layers
-  #   new_layer = layers.add "test layer"
-  #   UI.messagebox(new_layer.visible?)
+  #   layer = layers.add('Hello World')
+  #   layer.visible? # Returns: true
   #
-  # @return [Boolean] true if the layer is visible
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def visible?
