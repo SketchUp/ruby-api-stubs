@@ -18,7 +18,7 @@ Though our adoption rate to the latest version is quite high, it can take time a
 
 Here are the build numbers for recent SketchUp releases. Note that build numbers in languages besides English are larger for each release, so it is best to check for builds that are greater than or equal to the numbers here.
 
-- **SU2020.2** = 20.2.166 on Windows 64-bit, 20.2.165 on Mac 64-bit.
+- **SU2020.2** = 20.2.172 on Windows 64-bit, 20.2.171 on Mac 64-bit.
 - **SU2020.1.1** = 20.1.235 on Windows 64-bit. (Contained no Ruby API changes)
 - **SU2020.1** = 20.1.229 on Windows 64-bit, 20.1.228 on Mac 64-bit.
 - **SU2020.0** = 20.0.133 on Windows 64-bit, 20.0.134 on Mac 64-bit.

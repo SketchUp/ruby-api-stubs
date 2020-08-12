@@ -59,24 +59,8 @@ class Sketchup::Layers < Sketchup::Entity
   # @version SketchUp 6.0
   def add(layer_name)
   end
-
-  # The {#add} method is used to add a new layer.
-  #
-  # If you give the name of a Layer that is already defined, it will return the
-  # existing Layer rather than adding a new one.
-  #
-  # @example
-  #   layers = Sketchup.active_model.layers
-  #   layer = layers.add("Test Layer")
-  #
-  # @param [String] layer_name
-  #   The name of the added layer.
-  #
-  # @return [Sketchup::Layer]
-  #
-  # @version SketchUp 6.0
-  def add_layer
-  end
+  # @version SketchUp 2020.2
+  alias_method :add_layer, :add
 
   # The {#add_observer} method is used to add an observer to the layers
   # collection.
@@ -168,18 +152,7 @@ class Sketchup::Layers < Sketchup::Entity
   # @version SketchUp 6.0
   def purge_unused
   end
-
-  # The {#purge_unused} method is used to remove unused layers.
-  #
-  # @example
-  #   layers = Sketchup.active_model.layers
-  #   num_layers_removed = layers.purge_unused
-  #
-  # @return [Integer] Number of unused layers removed
-  #
-  # @version SketchUp 6.0
-  def purge_unused_layers
-  end
+  alias_method :purge_unused_layers, :purge_unused
 
   # Remove the given layer from the model, optionally removing the geometry.
   #
@@ -212,38 +185,7 @@ class Sketchup::Layers < Sketchup::Entity
   # @version SketchUp 2015
   def remove(layer, remove_geometry = false)
   end
-
-  # Remove the given layer from the model, optionally removing the geometry.
-  #
-  # @example
-  #   # Remove layer by layer reference.
-  #   layer = Sketchup.active_model.layers.add("MyLayer")
-  #   Sketchup.active_model.layers.remove(layer)
-  #
-  #   # Remove layer by name.
-  #   Sketchup.active_model.layers.add("MyLayer")
-  #   Sketchup.active_model.layers.remove("MyLayer")
-  #
-  #   # Remove layer by index.
-  #   Sketchup.active_model.layers.remove(1)
-  #
-  #   # Remove layer and the entities on the layer.
-  #   edge = Sketchup.active_model.entities.add_line([0, 0, 0], [9, 9, 9])
-  #   edge.layer = Sketchup.active_model.layers.add("MyLayer")
-  #   Sketchup.active_model.layers.remove("MyLayer", true)
-  #
-  # @param [Sketchup::Layer, Integer, String] layer
-  #
-  # @param [Boolean] remove_geometry
-  #   If true, geometry in the removed layer will
-  #   be removed as well. If false (which is the default),
-  #   this geometry will be placed on Layer 0.
-  #
-  # @return [Boolean] true if successful, false if unsuccessful.
-  #
-  # @version SketchUp 2015
-  def remove_layer
-  end
+  alias_method :remove_layer, :remove
 
   # The {#remove_observer} method is used to remove an observer from the current
   # object.
