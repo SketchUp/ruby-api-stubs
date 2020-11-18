@@ -108,6 +108,7 @@ class Layout::Entities
   # @version LayOut 2018
   def length
   end
+  alias_method :size, :length
 
   # The {#reverse_each} method iterates through all of the {Layout::Entity}s in
   # reverse order. When iterating over a {Layout::LayerInstance}'s
@@ -137,19 +138,6 @@ class Layout::Entities
   #
   # @version LayOut 2018
   def reverse_each(*args)
-  end
-
-  # The {#length} method returns the number of {Layout::Entity}s.
-  #
-  # @example
-  #   doc = Layout::Document.open("C:/path/to/document.layout")
-  #   entities = doc.shared_entities
-  #   num_entities = entities.length
-  #
-  # @return [Integer]
-  #
-  # @version LayOut 2018
-  def size
   end
 
 end

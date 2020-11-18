@@ -129,6 +129,7 @@ class Layout::AutoTextDefinitions
   # @version LayOut 2018
   def length
   end
+  alias_method :size, :length
 
   # The {#remove} method removes an {Layout::AutoTextDefinition} from the
   # {Layout::Document}.
@@ -168,19 +169,6 @@ class Layout::AutoTextDefinitions
   #
   # @version LayOut 2018
   def remove(*args)
-  end
-
-  # The {#length} method returns the number of {Layout::AutoTextDefinition}s.
-  #
-  # @example
-  #   doc = Layout::Document.open("C:/path/to/document.layout")
-  #   auto_texts = doc.auto_text_definitions
-  #   num_auto_texts = auto_texts.length
-  #
-  # @return [Integer]
-  #
-  # @version LayOut 2018
-  def size
   end
 
 end

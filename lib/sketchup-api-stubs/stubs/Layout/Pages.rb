@@ -142,6 +142,7 @@ class Layout::Pages
   # @version LayOut 2018
   def length
   end
+  alias_method :size, :length
 
   # The {#remove} method deletes the given {Layout::Page} from the
   # {Layout::Document}.
@@ -198,19 +199,6 @@ class Layout::Pages
   #
   # @version LayOut 2018
   def reorder(page, new_index)
-  end
-
-  # The {#length} method returns the number of {Layout::Page}s.
-  #
-  # @example
-  #   doc = Layout::Document.open("C:/path/to/document.layout")
-  #   pages = doc.pages
-  #   num_pages = pages.length
-  #
-  # @return [Integer]
-  #
-  # @version LayOut 2018
-  def size
   end
 
 end

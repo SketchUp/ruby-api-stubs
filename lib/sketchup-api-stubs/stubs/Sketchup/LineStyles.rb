@@ -74,18 +74,6 @@ class Sketchup::LineStyles < Sketchup::Entity
   def each
   end
 
-  # The {#size} method returns the number of line styles that SketchUp supports.
-  #
-  # @example
-  #   line_styles = Sketchup.active_model.line_styles
-  #   line_styles.size
-  #
-  # @return [Integer] The count of line styles.
-  #
-  # @version SketchUp 2019
-  def length
-  end
-
   # The {#names} method return the support line styles as strings.
   #
   # @example
@@ -108,6 +96,7 @@ class Sketchup::LineStyles < Sketchup::Entity
   # @version SketchUp 2019
   def size
   end
+  alias_method :length, :size
 
   # The {#to_a} method returns an array of all the line styles.
   #

@@ -153,6 +153,7 @@ class Layout::Layers
   # @version LayOut 2018
   def length
   end
+  alias_method :size, :length
 
   # The {#remove} method deletes the given {Layout::Layer} from the
   # {Layout::Document}.
@@ -214,19 +215,6 @@ class Layout::Layers
   #
   # @version LayOut 2018
   def reorder(layer, new_index)
-  end
-
-  # The {#length} method returns the number of {Layout::Layer}s.
-  #
-  # @example
-  #   doc = Layout::Document.open("C:/path/to/document.layout")
-  #   layers = doc.layers
-  #   num_layers = layers.length
-  #
-  # @return [Integer]
-  #
-  # @version LayOut 2018
-  def size
   end
 
 end

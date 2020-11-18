@@ -18,6 +18,8 @@ Though our adoption rate to the latest version is quite high, it can take time a
 
 Here are the build numbers for recent SketchUp releases. Note that build numbers in languages besides English are larger for each release, so it is best to check for builds that are greater than or equal to the numbers here.
 
+- **SU2020.2** = 20.2.172 on Windows 64-bit, 20.2.171 on Mac 64-bit.
+- **SU2020.1.1** = 20.1.235 on Windows 64-bit. (Contained no Ruby API changes)
 - **SU2020.1** = 20.1.229 on Windows 64-bit, 20.1.228 on Mac 64-bit.
 - **SU2020.0** = 20.0.133 on Windows 64-bit, 20.0.134 on Mac 64-bit.
 
@@ -54,9 +56,35 @@ Here are the build numbers for recent SketchUp releases. Note that build numbers
 
 - **SU6 M6** = 6.4.265 on Windows, 6.4.263 on Mac.
 
+# What's new in SketchUp 2020.2
+
+## Ruby and C Exchange API
+
+To allow better interoperability of the Ruby API and C API within the SketchUp application we introduced the ability to exchange entities and image reps between the APIs.
+
+Entities because it's a key type and ImageRep because it can be an expensive object to copy.
+
+* `SUEntityToRuby`
+* `SUEntityFromRuby`
+* `SUImageRepToRuby`
+* `SUImageRepFromRuby`
+
+For more details refer to the C API documentation.
+
+## Ruby API Additions and Improvements
+
+* Added scope filter to {Sketchup::Model#find_entity_by_persistent_id}.
+
+## Ruby API Bug Fixes
+
+* Fixed Unicode characters not displaying correctly in the Ruby Console.
+* Fixed crash in {UI::HtmlDialog} when closing the dialog right after opening it.
+* Fixed DWG import option, `:preserve_origin` is ignored.
+
 # What's new in SketchUp 2020.1
 
 ## Ruby API Additions and Improvements
+
 * Added {Sketchup::Entities#weld}
 * Added {Sketchup::Page#use_hidden_geometry=}
 * Added {Sketchup::Page#use_hidden_geometry?}
