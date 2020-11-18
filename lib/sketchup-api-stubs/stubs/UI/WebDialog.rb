@@ -5,7 +5,7 @@
 # boxes from Ruby.
 #
 # If your goal is to simply display a website to your users, consider using
-# UI.getURL, which will show them a web page in their default browser rather
+# {UI.openURL}, which will show them a web page in their default browser rather
 # than inside a dialog in SketchUp.
 #
 # See this blog post for a detailed, step-by-step example:
@@ -428,7 +428,7 @@ class UI::WebDialog
   def set_background_color(color)
   end
 
-  # The #{set_file} method is used to identify a local HTML file to display in
+  # The {#set_file} method is used to identify a local HTML file to display in
   # the webdialog.
   #
   # @example

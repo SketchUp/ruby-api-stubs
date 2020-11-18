@@ -3,6 +3,10 @@
 
 # This observer interface is implemented to react to changes in dimension text.
 #
+# @abstract To implement this observer, create a Ruby class of this type,
+#   override the desired methods, and add an instance of the observer to the
+#   dimensions of interest.
+#
 # @example
 #   # This is an example of a DimensionObserver
 #   class MyDimensionObserver < Sketchup::DimensionObserver

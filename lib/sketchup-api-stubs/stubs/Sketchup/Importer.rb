@@ -53,7 +53,8 @@
 #     # processing the file.
 #     def load_file(file_path, status)
 #       UI.messagebox(file_path)
-#       return 0 # 0 is the code for a successful import
+#
+#       return Sketchup::Importer::ImportSuccess
 #     end
 #   end
 #
@@ -68,7 +69,6 @@ class Sketchup::Importer
   ImportFail = nil # Stub value.
   ImportFileNotFound = nil # Stub value.
   ImportSuccess = nil # Stub value.
-  ImporterNotFound = nil # Stub value.
 
   # Instance Methods
 
@@ -144,20 +144,19 @@ class Sketchup::Importer
   # File object and processing it in whatever way you need.
   #
   # You must return an integer success code to SketchUp when you are done.
-  # These are the codes that SketchUp understands and what will happen when
-  # SketchUp receives each key.
+  # These are the codes that SketchUp understands:
   #
-  #   - 0 = Import Success (no additional dialog shown)
-  #   - 1 = Import Failed (no additional dialog shown)
-  #   - 2 = Import Cancelled by User (SketchUp will show a "cancelled" dialog)
-  #   - 4 = Import File not Found (SketchUp will show a "not found" dialog)
-  #   - 5 = SketchUp version not supported (no additional dialog shown)
+  #   - Sketchup::Importer::ImportSuccess
+  #   - Sketchup::Importer::ImportFail
+  #   - Sketchup::Importer::ImportCanceled - SketchUp will show a "cancelled" dialog
+  #   - Sketchup::Importer::ImportFileNotFound - SketchUp will show a "not found" dialog
   #
   # @example
   #   def load_file(file_path, status)
   #     # Here is where you would open the file and process it.
-  #     UI.messagebox(file_path)
-  #     return 0   # Success
+  #     puts file_path
+  #
+  #     return Sketchup::Importer::ImportSuccess
   #   end
   #
   # @param file_path

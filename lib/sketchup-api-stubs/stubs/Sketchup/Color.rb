@@ -78,10 +78,10 @@ class Sketchup::Color
   #   color = Sketchup::Color.new "AliceBlue"
   #   alpha = color.alpha = 255
   #
-  # @param [Integer] alpha
+  # @param [Integer, Float] alpha
   #   The new opacity value.
   #
-  # @return [Integer]
+  # @return [Integer, Float]
   #
   # @version SketchUp 8.0 M1
   def alpha=(alpha)
@@ -133,10 +133,10 @@ class Sketchup::Color
   #   color = Sketchup::Color.new "AliceBlue"
   #   blue = color.blue = 200
   #
-  # @param [Integer] blue
+  # @param [Integer, Float] blue
   #   The blue value for the color.
   #
-  # @return [Integer]
+  # @return [Integer, Float]
   #
   # @version SketchUp 6.0
   def blue=(blue)
@@ -164,10 +164,10 @@ class Sketchup::Color
   #   color = Sketchup::Color.new "AliceBlue"
   #   green = color.green = 200
   #
-  # @param [Integer] green
+  # @param [Integer, Float] green
   #   The green value for the color.
   #
-  # @return [Integer]
+  # @return [Integer, Float]
   #
   # @version SketchUp 6.0
   def green=(green)
@@ -188,8 +188,6 @@ class Sketchup::Color
   #   face.material = color_from_rgba
   #   face.material.alpha = 0.5
   #
-  # @note When assigning colors via a hexadecimal, R and B will be flipped.
-  #
   # @overload initialize(red, green, blue, alpha = 255)
   #
   #   @param [Integer] red   A red value between 0 and 255.
@@ -198,12 +196,27 @@ class Sketchup::Color
   #   @param [Integer] alpha A alpha value between 0 and 255.
   #   @return [Sketchup::Color]
   #
+  # @overload initialize(red, green, blue, alpha = 1.0)
+  #
+  #   @param [Float] red   A red value between 0.0 and 1.0.
+  #   @param [Float] green A green value between 0.0 and 1.0.
+  #   @param [Float] blue  A blue value between 0.0 and 1.0.
+  #   @param [Float] alpha A alpha value between 0.0 and 1.0.
+  #   @return [Sketchup::Color]
+  #
   # @overload initialize(name)
   #
   #   @param [String] name  A string name of a color that currently exists in
   #     SketchUp. See the table at the start of this class description for more
   #     info.
   #   @return [Sketchup::Color]
+  #
+  # @overload initialize(hex)
+  #
+  #   @param [Integer] hex  A hexadecimal color code.
+  #   @return [Sketchup::Color]
+  #   @note When assigning colors via a hexadecimal, R and B will be flipped.
+  #   @note When assigning colors via a hexadecimal, Alpha is not supported.
   #
   # @version SketchUp 6.0
   def initialize(*args)
@@ -231,10 +244,10 @@ class Sketchup::Color
   #   color = Sketchup::Color.new "AliceBlue"
   #   red = color.red=200
   #
-  # @param [Integer] red
+  # @param [Integer, Float] red
   #   The red value for the color.
   #
-  # @return [Integer]
+  # @return [Integer, Float]
   #
   # @version SketchUp 6.0
   def red=(red)

@@ -14,45 +14,55 @@ class Sketchup::UVHelper
 
   # Instance Methods
 
-  # The get_back_UVQ method is used to get the UV coordinates for the back of a
-  # face.
+  # The {#get_back_UVQ} method is used to get the UV texture coordinates on the
+  # back of a face.
   #
   # @example
-  #   uv_helper = face.get_UVHelper true, true, my_texture_writer
+  #   uv_helper = face.get_UVHelper(true, true, my_texture_writer)
   #   face.outer_loop.vertices.each do |vert|
-  #     uvq = uv_help.get_back_UVQ(vert.position)
-  #     puts "u=" + uvq.x.to_s + " v=" + uvq.y.to_s
+  #     uvq = uv_helper.get_back_UVQ(vert.position)
+  #     # "Normalize" UVQ to UV.
+  #     u = uvq.u / unq.q
+  #     v = uvq.v / unq.q
+  #     puts "u=#{u} v=#{v}""
   #   end
   #
-  # @param point
-  #   A Point3d object containing one of the 3D vertexes of
-  #   the face.
+  # @note To convert UVQ coordinates to UV,
+  #   divide U and V by Q.
+  #       u = uvq.u / uvq.q
+  #       v = uvq.v / uvq.q
   #
-  # @return point - a Point3d containing the UV coordinates where
-  #   the X value is the U value, the Y value is the V value
-  #   and the Z value is a Q value (which is not used).
+  # @param [Geom::Point3d] point
+  #   A point on the face.
+  #
+  # @return [Geom::Point3d] Point where X represents U, Y represents V and Z represents Q.
   #
   # @version SketchUp 6.0
   def get_back_UVQ(point)
   end
 
-  # The get_front_UVQ method is used to get the UV coordinates for a front of a
-  # face.
+  # The {#get_front_UVQ} method is used to get the UV texture coordinates on the
+  # front of a face.
   #
   # @example
-  #   uv_helper = face.get_UVHelper true, true, my_texture_writer
+  #   uv_helper = face.get_UVHelper(true, true, my_texture_writer)
   #   face.outer_loop.vertices.each do |vert|
   #     uvq = uv_helper.get_front_UVQ(vert.position)
-  #     puts "u=" + uvq.x.to_s + " v=" + uvq.y.to_s
+  #     # "Normalize" UVQ to UV.
+  #     u = uvq.u / unq.q
+  #     v = uvq.v / unq.q
+  #     puts "u=#{u} v=#{v}""
   #   end
   #
-  # @param point
-  #   A Point3d object containing one of the 3D vertexes of
-  #   the face.
+  # @note To convert UVQ coordinates to UV,
+  #   divide U and V by Q.
+  #       u = uvq.u / uvq.q
+  #       v = uvq.v / uvq.q
   #
-  # @return point - a Point3d containing the UV coordinates where
-  #   the X value is the U value, the Y value is the V value
-  #   and the Z value is a Q value (which is not used).
+  # @param [Geom::Point3d] point
+  #   A point on the face.
+  #
+  # @return [Geom::Point3d] Point where X represents U, Y represents V and Z represents Q.
   #
   # @version SketchUp 6.0
   def get_front_UVQ(point)

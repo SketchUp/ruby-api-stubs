@@ -333,7 +333,7 @@ class Geom::Vector3d
   #
   # @overload initialize(vector)
   #
-  #   @param vector [Geom::Vector3d] A Vector3d object.
+  #   @param [Geom::Vector3d] vector A Vector3d object.
   #   @return [Geom::Vector3d]
   #
   # @version SketchUp 6.0
@@ -504,12 +504,12 @@ class Geom::Vector3d
   #
   # @overload set!(array3d)
   #
-  #   @param array3d [Array(Numeric, Numeric, Numeric)]
+  #   @param [Array(Numeric, Numeric, Numeric)] array3d
   #   @return [Geom::Vector3d]
   #
   # @overload set!(vector)
   #
-  #   @param vector [Geom::Vector3d]
+  #   @param [Geom::Vector3d] vector
   #   @return [Geom::Vector3d]
   #
   # @overload set!(x, y, z)

@@ -2,7 +2,7 @@
 # License:: The MIT License (MIT)
 
 # The Pages class contains methods for manipulating a collection of Pages
-# (scenes) in a model.
+# (Named "scenes" in the UI.) in a model.
 #
 # You get a handle to this collection by calling Model.pages.
 #
@@ -16,6 +16,16 @@ class Sketchup::Pages < Sketchup::Entity
   # Includes
 
   include Enumerable
+
+  # Constants
+
+  ImageEmbedded = nil # Stub value.
+  ImageEmbeddedAndLinked = nil # Stub value.
+  ImageLinked = nil # Stub value.
+
+  UnitsNormalizedX = nil # Stub value.
+  UnitsNormalizedY = nil # Stub value.
+  UnitsPixels = nil # Stub value.
 
   # Class Methods
 
@@ -47,7 +57,7 @@ class Sketchup::Pages < Sketchup::Entity
   def self.add_frame_change_observer(object)
   end
 
-  # The #{remove_frame_change_observer} method is used to remove a frame change
+  # The {.remove_frame_change_observer} method is used to remove a frame change
   # observer
   #
   # @example
@@ -87,15 +97,15 @@ class Sketchup::Pages < Sketchup::Entity
   def [](index_or_name)
   end
 
-  # The add method is used to add an empty Page object to the collection.
+  # The {#add} method is used to add a new Page object to the collection.
   #
   # If no name is given, then a new name is generated using the default name for
   # new Pages. If a name is given, then a new Page with that name is
   # added.
   #
   # If the flags parameter is given, it controls which properties are saved with
-  # the Page. See the Page.update method for a description of the flags that can
-  # be set.
+  # the Page. See the {Page#update} method for a description of the flags that
+  # can be set.
   #
   # If index is given, it specifies the position in the page list that the new
   # page is added.  Otherwise the new page is added to the end.
@@ -111,19 +121,19 @@ class Sketchup::Pages < Sketchup::Entity
   #     UI.messagebox "Failure"
   #   end
   #
-  # @param name
+  # @param [String] name
   #   The name of the specific page.
   #
-  # @param [optional] flags
+  # @param [Integer] flags
   #   Bit flags in integer form.
   #
-  # @param [optional] index
+  # @param [Integer] index
   #   Index of where to inset.
   #
-  # @return nil
+  # @return [Sketchup::Page]
   #
   # @version SketchUp 6.0
-  def add(name, flags, index)
+  def add(name = nil, flags = PAGE_USE_ALL, index = self.size)
   end
 
   # The add_matchphoto_page method is used to add a photomatch page to the
@@ -191,7 +201,7 @@ class Sketchup::Pages < Sketchup::Entity
   #   pages = model.pages
   #   status = pages.add "Page 1"
   #   status = pages.add "Page 2"
-  #   pages.each {|page| UI.messagebox page}
+  #   pages.each {|page| puts page}
   #
   # @return nil
   #

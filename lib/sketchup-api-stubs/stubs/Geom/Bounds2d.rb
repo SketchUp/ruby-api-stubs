@@ -27,7 +27,7 @@ class Geom::Bounds2d
   # The {#height} method returns the height of the {Geom::Bounds2d}.
   #
   # @example
-  #   bounds = Geom::Bounds2d.new({0.0, 0.0, 1.0, 1.0})
+  #   bounds = Geom::Bounds2d.new(0.0, 0.0, 1.0, 1.0)
   #   height = bounds.height
   #
   # @return [Geom::Point2d]
@@ -80,7 +80,7 @@ class Geom::Bounds2d
   # corner of the {Geom::Bounds2d}.
   #
   # @example
-  #   bounds = Geom::Bounds2d.new({0.0, 0.0, 1.0, 1.0})
+  #   bounds = Geom::Bounds2d.new(0.0, 0.0, 1.0, 1.0)
   #   l_r = bounds.lower_right
   #
   # @return [Geom::Point2d]
@@ -148,7 +148,7 @@ class Geom::Bounds2d
   # of the {Geom::Bounds2d}.
   #
   # @example
-  #   bounds = Geom::Bounds2d.new({0.0, 0.0, 1.0, 1.0})
+  #   bounds = Geom::Bounds2d.new(0.0, 0.0, 1.0, 1.0)
   #   u_l = bounds.upper_left
   #
   # @return [Geom::Point2d]
@@ -160,7 +160,7 @@ class Geom::Bounds2d
   # The {#width} method returns the width of the {Geom::Bounds2d}.
   #
   # @example
-  #   bounds = Geom::Bounds2d.new({0.0, 0.0, 1.0, 1.0})
+  #   bounds = Geom::Bounds2d.new(0.0, 0.0, 1.0, 1.0)
   #   width = bounds.width
   #
   # @return [Geom::Point2d]

@@ -20,9 +20,9 @@ class Sketchup::Menu
   #   menu = UI.menu('Plugins')
   #   menu.add_item("Test") { puts 'Hello World' }
   #
-  # @overload add_item(menu, &block)
+  # @overload add_item(title, &block)
   #
-  #   @param [String] menu The name of the menu to add.
+  #   @param [String] title
   #   @yield  A block that will be invoked when the menu item is selected.
   #   @return [Integer] A unique integer id for the added menu item.
   #
@@ -35,7 +35,7 @@ class Sketchup::Menu
   def add_item(*args)
   end
 
-  # The add_separator method is used to add a menu separator to a menu.
+  # The {#add_separator} method is used to add a menu separator to a menu.
   #
   # @example
   #   plugins_menu = UI.menu("Plugins")
@@ -47,7 +47,7 @@ class Sketchup::Menu
   def add_separator
   end
 
-  # The add_submenu method is used to add a sub-menu to a menu.
+  # The {#add_submenu} method is used to add a sub-menu to a menu.
   #
   # @example
   #   plugins_menu = UI.menu("Plugins")
@@ -65,7 +65,7 @@ class Sketchup::Menu
   def add_submenu(title)
   end
 
-  # The set_validation_proc method is used to identify the menu validation
+  # The {#set_validation_proc} method is used to specify the menu validation
   # procedure. Your procedure should return either MF_ENABLED, MF_DISABLED,
   # MF_CHECKED, MF_UNCHECKED, or MF_GRAYED.
   #
@@ -80,16 +80,14 @@ class Sketchup::Menu
   #     end
   #   }
   #
-  # @param [String] menu
-  #   A string name of the menu to add.
-  #
-  # @return [Integer] a unique numerical item id for the menu
+  # @param [Integer] item
+  #   The numerical identifier for the menu item.
   #
   # @version SketchUp 6.0
   #
   # @yield A method that will be invoked when the menu item is
   #   selected.
-  def set_validation_proc(menu, &block)
+  def set_validation_proc(item, &block)
   end
 
 end

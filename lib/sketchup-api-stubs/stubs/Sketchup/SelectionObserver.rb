@@ -1,10 +1,11 @@
 # Copyright:: Copyright 2020 Trimble Inc.
 # License:: The MIT License (MIT)
 
-# This observer interface is implemented to react to selection events. To
-# implement this observer, create a Ruby class of this type, override the
-# desired methods, and add an instance of the observer to the objects of
-# interests.
+# This observer interface is implemented to react to selection events.
+#
+# @abstract To implement this observer, create a Ruby class of this type, override the
+#   desired methods, and add an instance of the observer to the objects of
+#   interests.
 #
 # @example
 #   # This is an example of an observer that watches the selection for
@@ -30,7 +31,7 @@ class Sketchup::SelectionObserver
   #   end
   #
   # @note This event might not trigger even if a single element is selected. For
-  #   instance the Selection tool will trigger #onSelectionBulkChange regardless.
+  #   instance the Selection tool will trigger {#onSelectionBulkChange} regardless.
   #
   # @param [Sketchup::Selection] selection
   #
@@ -53,7 +54,7 @@ class Sketchup::SelectionObserver
   #
   # @example
   #   def onSelectionBulkChange(selection)
-  #     puts "onSelectionRemoved: #{selection}"
+  #     puts "onSelectionBulkChange: #{selection}"
   #   end
   #
   # @param [Sketchup::Selection] selection
@@ -81,26 +82,25 @@ class Sketchup::SelectionObserver
   end
 
   #
+  # @bug Due to a bug in SketchUp this event doesn't trigger. Instead
+  #   +onSelectedRemoved+ is called.
+  #
   # @example
   #   class MySelectionObserver < Sketchup::SelectionObserver
-  #     # Note that there is a bug that prevent this from being called. Instead
-  #     # listen to onSelectedRemoved until the bug is fixed.
-  #     def onSelectionRemoved(selection, entity)
-  #       puts "onSelectionRemoved: #{entity}"
-  #     end
-  #     # To work around this you must catch this event instead until the bug is
-  #     # fixed:
-  #     def onSelectedRemoved(selection, entity)
-  #       # You can forward it to the correct event to be future compatible.
-  #       onSelectionRemoved(selection, entity)
-  #     end
+  #    def onSelectionRemoved(selection, entity)
+  #      puts "onSelectionRemoved: #{entity}"
+  #    end
+  #
+  #    # Due to a SketchUp bug, this method is called by the wrong name.
+  #    alias_method :onSelectedRemoved, :onSelectionRemoved
   #   end
   #
   #   # Attach the observer.
   #   Sketchup.active_model.selection.add_observer(MySelectionObserver.new)
   #
-  # @note Due to a bug in SketchUp this event doesn't trigger. Instead
-  #   +onSelectedRemoved+ is called.
+  # @note This event might not trigger even if a single element is deselected.
+  #   For instance the Selection tool will trigger {#onSelectionBulkChange}
+  #   regardless.
   #
   # @param [Sketchup::Selection] selection
   #

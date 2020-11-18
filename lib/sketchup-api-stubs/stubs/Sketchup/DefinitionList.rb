@@ -131,16 +131,19 @@ class Sketchup::DefinitionList < Sketchup::Entity
   def count
   end
 
-  # The each method is used to iterate through all of the component definitions
-  # in the definition list.
-  #
-  # Throws an exception if there are no component definitions.
+  # The {#each} method is used to iterate through all of the component
+  # definitions in the definition list.
   #
   # @example
   #   model = Sketchup.active_model
   #   definitions = model.definitions
   #   definitions.add("BedTraditional")
   #   number = definitions.each { |definition| puts definition.name }
+  #
+  # @note Don't remove content from this collection while iterating over it with
+  #   {#each}. This would change the size of the collection and cause elements to
+  #   be skipped as the indices change. Instead copy the current collection to an
+  #   array using +to_a+ and then use +each+ on the array, when removing content.
   #
   # @return [nil]
   #
@@ -166,29 +169,55 @@ class Sketchup::DefinitionList < Sketchup::Entity
   def length
   end
 
-  # The load method is used to load a component from a file.
+  # The {#load} method is used to load a component from a file.
+  #
+  # @bug In SketchUp versions prior to SketchUp 2019 the application would crash
+  #   if you tried to open a newer model instead of raising the expected
+  #   +RuntimeError+.
   #
   # @example
-  #   path=Sketchup.find_support_file "Bed.skp",
-  #     "Components/Components Sampler/"
+  #   path = Sketchup.find_support_file("Bed.skp",
+  #     "Components/Components Sampler/")
   #   model = Sketchup.active_model
   #   definitions = model.definitions
-  #   componentdefinition = definitions.load path
+  #   definition = definitions.load(path)
   #
-  # @param [String] path
-  #   The path where the component definition file is located.
+  # @overload load(path)
   #
-  # @raise RuntimeError If filename is an invalid SketchUp model. Added in
-  #   SketchUp 2019. Possible that prior versions of SketchUp will crash.
+  #   @param [String] path
+  #     The path where the component definition file is located.
+  #
+  # @overload load(path, allow_newer: true)
+  #
+  #   Starting with SketchUp 2021.0 SketchUp attempts to load newer SketchUp
+  #   models. If a newer model is loaded some information might have been skipped
+  #   and extensions should be careful to not save over the file they loaded from
+  #   as information might be lost.
+  #
+  #   @version SketchUp 2021.0
+  #   @param [String] path
+  #     The path where the component definition file is located.
+  #   @param [Boolean] allow_newer
+  #     Indicate that it is ok to load a model with of a newer version.
+  #
+  # @raise IOError If the file is not a valid SketchUp model.
+  #
+  # @raise RuntimeError If the file is the same as the model being loaded into.
+  #
+  # @raise IOError If the file is an empty component.
+  #
+  # @raise RuntimeError If the file contains only screen text.
+  #
+  # @raise RuntimeError If the file is of a newer file version that the executing
+  #   SketchUp version cannot open.
   #
   # @return [Sketchup::ComponentDefinition] the loaded ComponentDefinition
-  #   object if successful
   #
   # @version SketchUp 6.0
-  def load(path)
+  def load(*args)
   end
 
-  # The load_from_url method loads a component from a location specified by
+  # The {#load_from_url} method loads a component from a location specified by
   # string url. This method throws an exception if an url string is not
   # given, or an error occurs during retrieval from url and a
   # load_handler was not given. Optional second parameter load_handler can be
@@ -201,11 +230,10 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #
   # @example
   #   class LoadHandler
-  #
-  #     attr :error
+  #     attr_accessor :error
   #
   #     def onPercentChange(percent)
-  #       Sketchup::set_status_text("LOADING: #{percent}%")
+  #       Sketchup::set_status_text("loading: #{percent.round}%")
   #     end
   #
   #     def cancelled?
@@ -223,30 +251,35 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #       self.error = error_message
   #       Sketchup::set_status_text('')
   #     end
-  #
   #   end
   #
   #   # Replace this with a real URL...
   #   url = 'http://www.sketchup.com/model.skp'
   #   model = Sketchup.active_model
+  #   load_handler = LoadHandler.new
   #   definition = model.definitions.load_from_url(url, load_handler)
   #
   #   if definition.nil?
   #     puts "Error: #{load_handler.error}"
   #   end
   #
-  # @param [String] url
-  #   URL to load a .skp file from.
+  # @overload load_from_url(url)
   #
-  # @param [Object] load_handler
-  #   Ruby object that has methods defined
-  #   as described in the load_from_url details.
+  #   @param [String] url
+  #     URL to load a .skp file from.
   #
-  # @return [Sketchup::ComponentDefinition] the loaded ComponentDefinition
-  #   object if successful
+  # @overload load_from_url(url, load_handler)
+  #
+  #   @param [String] url
+  #     URL to load a .skp file from.
+  #   @param [Object] load_handler
+  #     Ruby object that has methods defined
+  #     as described in the load_from_url details.
+  #
+  # @return [Sketchup::ComponentDefinition]
   #
   # @version SketchUp 7.0
-  def load_from_url(url, load_handler = nil)
+  def load_from_url(*args)
   end
 
   # The purge_unused method is used to remove the unused component definitions.

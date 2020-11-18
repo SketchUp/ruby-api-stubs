@@ -3,6 +3,14 @@
 
 # An Image object represents a raster image placed in the Model.
 #
+# @example Create material from image (SU 2018 and later)
+#   model = Sketchup.active_model
+#   entities = model.active_entities
+#   image = entities.grep(Sketchup::Image).first
+#   img_rep = image.image_rep
+#   material = model.materials.add("New Name")
+#   material.texture = img_rep
+#
 # @version SketchUp 6.0
 class Sketchup::Image < Sketchup::Drawingelement
 

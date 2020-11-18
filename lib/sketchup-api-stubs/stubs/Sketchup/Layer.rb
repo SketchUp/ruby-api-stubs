@@ -113,6 +113,48 @@ class Sketchup::Layer < Sketchup::Entity
   def display_name
   end
 
+  # The {#folder} method is used to return the parent layer folder of a layer.
+  #
+  # @api TagFolder
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   layers = model.layers
+  #   folder1 = layers.add('Folder1')
+  #   parent_folder = folder1.folder # Returns: nil
+  #
+  #   folder2 = folder1.add('Folder2')
+  #   parent_folder = folder2.folder # Returns: folder1
+  #
+  # @return [Sketchup::LayerFolder, nil] +nil+ if the folder is a direct child to
+  #   the layer manager.
+  #
+  # @version SketchUp 2021.0
+  def folder
+  end
+
+  # The {#folder=} method is used to set the parent layer folder of a layer.
+  #
+  # This will trigger +onParentFolderChanged+ in normal cases and
+  # +onLayerChanged+ during undo/redo.
+  #
+  # @api TagFolder
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   layers = model.layers
+  #   folder = layers.add_folder('Hello')
+  #   layer = layers.add_layer('World')
+  #   layer.folder = folder
+  #
+  # @param [Sketchup::LayerFolder, nil] parent
+  #   +nil+ will make the layer a
+  #   direct child to the layer manager.
+  #
+  # @version SketchUp 2021.0
+  def folder=(parent)
+  end
+
   # The {#line_style} method retrieves the line style on this layer.
   #
   # @example

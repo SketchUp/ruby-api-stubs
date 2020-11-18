@@ -389,6 +389,25 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   def invalidate_bounds
   end
 
+  # The {#live_component?} method is used to identify Live Components and
+  # sub-definitions of Live Components.
+  #
+  # @example Skipping Live Components
+  #   model = Sketchup.active_model
+  #   model.definitions.each { |definition|
+  #     next if definition.live_component?
+  #     puts definition.name
+  #   }
+  #
+  # @note These components are parametrically generated and API users should not
+  #   modify them.
+  #
+  # @return [Boolean]
+  #
+  # @version SketchUp 2021.0
+  def live_component?
+  end
+
   # The name method retrieves the name of the component definition.
   #
   # @example
@@ -426,18 +445,14 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
 
   # The path method is used to retrieve the path where the component was loaded.
   #
-  # Returns nil if it is an internal component.
-  #
   # @example
-  #   path = Sketchup.find_support_file "Bed.skp",
-  #     "Components/Components Sampler/"
+  #   path = Sketchup.find_support_file("Bed.skp", "Components/Components Sampler/")
   #   model = Sketchup.active_model
   #   definitions = model.definitions
-  #   componentdefinition = definitions.load path
+  #   componentdefinition = definitions.load(path)
   #   path = componentdefinition.path
   #
-  # @return [String, false] a valid path if successful, false if
-  #   unsuccessful
+  # @return [String] Returns empty string if it is an internal component.
   #
   # @version SketchUp 6.0
   def path

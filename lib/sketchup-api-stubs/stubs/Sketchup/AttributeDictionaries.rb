@@ -103,9 +103,9 @@ class Sketchup::AttributeDictionaries < Sketchup::Entity
   #
   # @example
   #   model = Sketchup.active_model
-  #   attrdicts = model.attribute_dictionaries
+  #   dictionaries = model.attribute_dictionaries
   #   # Iterates through all dictionaries and prints to screen.
-  #   attrdicts.each { | dict | UI.messagebox dict }
+  #   dictionaries.each { |dictionary| puts dictionary.name }
   #
   # @return nil
   #

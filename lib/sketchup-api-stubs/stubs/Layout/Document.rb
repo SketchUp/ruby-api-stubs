@@ -46,6 +46,7 @@ class Layout::Document
   VERSION_2018 = nil # Stub value.
   VERSION_2019 = nil # Stub value.
   VERSION_2020 = nil # Stub value.
+  VERSION_2021 = nil # Stub value.
   VERSION_3 = nil # Stub value.
   VERSION_CURRENT = nil # Stub value.
 
@@ -402,15 +403,15 @@ class Layout::Document
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")
   #   # Save the model using the current Layout format
-  #   filename = File.join(ENV['Home'], 'Desktop', 'mydoc.layout')
-  #   status = doc.save(filename)
+  #   path = File.join(ENV['Home'], 'Desktop', 'mydoc.layout')
+  #   status = doc.save(path)
   #   # Save the document to the current file using the current LayOut format
   #   status = doc.save
   #   # Save the document to the current file in LayOut 3 format
   #   status = doc.save(Layout::Document::VERSION_3)
   #   # Save the document in LayOut 2013 format
-  #   filename = File.join(ENV['Home'], 'Desktop', 'mydoc_v2013.layout')
-  #   status = doc.save(filename, Layout::Document::VERSION_2013)
+  #   path = File.join(ENV['Home'], 'Desktop', 'mydoc_v2013.layout')
+  #   status = doc.save(path, Layout::Document::VERSION_2013)
   #
   # @overload save
   #

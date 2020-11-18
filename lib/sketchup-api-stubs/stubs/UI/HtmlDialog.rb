@@ -14,6 +14,9 @@
 # "normal" DPI. The units given will be multiplied by the same factor as
 # returned by {UI.scale_factor}.
 #
+# For usage examples, including how to migrate from the old WebDialog class,
+# see https://github.com/SketchUp/htmldialog-examples.
+#
 # @version SketchUp 2017
 class UI::HtmlDialog
 
@@ -141,7 +144,7 @@ class UI::HtmlDialog
   # [+UI::HtmlDialog::STYLE_UTILITY+]  HtmlDialog is shown with small titlebar
   #                                    and stays on top of SketchUp.
   #
-  # @example
+  # @example With options Hash
   #   dialog = UI::HtmlDialog.new(
   #   {
   #     :dialog_title => "Dialog Example",
@@ -161,9 +164,37 @@ class UI::HtmlDialog
   #   dialog.set_url("http://www.sketchup.com")
   #   dialog.show
   #
+  # @example With keyword style argument
+  #   dialog = UI::HtmlDialog.new(
+  #     dialog_title: "Dialog Example",
+  #     preferences_key: "my_name_my_extension_my_dialog",
+  #     scrollable: true,
+  #     resizable: true,
+  #     width: 600,
+  #     height: 400,
+  #     left: 100,
+  #     top: 100,
+  #     min_width: 50,
+  #     min_height: 50,
+  #     max_width: 1000,
+  #     max_height: 1000,
+  #     style: UI::HtmlDialog::STYLE_DIALOG
+  #   )
+  #   dialog.set_url("https://www.sketchup.com")
+  #   dialog.show
+  #
   # @note Prior to SketchUp 2019 the +:width+ and +:height+ provided is ignored
   #   if a +:preference_key+ is also present. To work around this bug on older
   #   versions use {#set_size} after you initialize the dialog.
+  #
+  # @note Prefix +preference_key+ with something unique to your extension.
+  #
+  # @note If there is no reference kept to the HtmlDialog object, the window
+  #   will close once the garbage collection runs. This behavior can be confusing
+  #   in trivial test code but is usually not a concern in real life scenarios.
+  #   Typically a persistent reference, e.g. an instance variable, should be kept
+  #   to bring the dialog to front, rather than creating a duplicate, if the user
+  #   should request it a second time.
   #
   # @option properties [String] :dialog_title
   #
@@ -301,7 +332,7 @@ class UI::HtmlDialog
   # specific URL. This method allows you to load web sites in a HtmlDialog.
   #
   # @example
-  #   dialog.set_url("http://www.sketchup.com")
+  #   dialog.set_url("https://www.sketchup.com")
   #
   # @param [String] url
   #   The URL for a specific web site.
@@ -343,7 +374,7 @@ class UI::HtmlDialog
   #     dialog.bring_to_front
   #   else
   #     dialog = UI::HtmlDialog.new
-  #     dialog.set_url("http://www.sketchup.com")
+  #     dialog.set_url("https://www.sketchup.com")
   #     dialog.show
   #   end
   #

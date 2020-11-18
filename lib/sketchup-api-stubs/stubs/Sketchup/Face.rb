@@ -41,7 +41,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   def all_connected
   end
 
-  # The area method is used to retrieve the area of a face in current units.
+  # The area method is used to retrieve the area of a face.
   #
   # You can pass in an optional Transformation (or an array that can represent a
   # transformation), to correct for a parent group's transformation. For example,
@@ -66,13 +66,14 @@ class Sketchup::Face < Sketchup::Drawingelement
   #
   # @overload area
   #
-  #   @return [Float] the area of the face in current units (if successful)
+  #   @return [Float] the area of the face in square inches.
   #
   # @overload area(transform)
   #
-  #   @param transform [Geom::Transformation] A Transformation object or array
-  #                      that can be interpreted as a Transformation object.
-  #   @return [Float] the area of the face in current units (if successful)
+  #   @param [Geom::Transformation] transform
+  #    A Transformation object or array that can be interpreted as a
+  #    Transformation object.
+  #   @return [Float] the area of the face in square inches.
   #
   # @version SketchUp 6.0
   def area(*args)
@@ -639,8 +640,8 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   face = entities.add_face(pts)
   #   status = face.pushpull(100, true)
   #
-  # @param [Numeric] distance
-  #   The distance, in current units, to push/pull the face.
+  # @param [Length] distance
+  #   The distance to push/pull the face.
   #
   # @param [Boolean] copy
   #   Create a new push/pull starting face if true (equivalent

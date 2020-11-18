@@ -1,14 +1,23 @@
 # Copyright:: Copyright 2020 Trimble Inc.
 # License:: The MIT License (MIT)
 
-# The InputPoint used to pick entities that reside under the current cursor
-# location. InputPoint and PickHelper are similar, but InputPoint also uses
-# inferencing.   Only tools react to cursor location. Therefore, most of the
-# methods in this class are only useful in the context of a tool you are
-# writing. For example, if you want to determine the entity that you just
-# clicked on with the mouse, you would use InputPoint.pick from within your
-# onLMouseButton method in a tool. See the example script linetool.rb for
-# examples of using the InputPoint class.
+# The {Sketchup::InputPoint} class is used to pick 3d points and/or entities
+# that reside under the current cursor location, similar to native Line tool
+# and other drawing tools. Unlike {Sketchup::PickHelper},
+# {Sketchup::InputPoint} uses inference, i.e. "snaps" to vertices and other
+# entities when the cursor is close to them.
+#
+# Only {Sketchup::Tool}s react to cursor location and most of these methods are
+# only useful in the context of a tool. For example, if you want to determine
+# the 3d point you just moved the cursor over, you would use
+# {#pick} from within your {Sketchup::Tool#onMouseMove} method.
+# {Sketchup::InputPoints} are best picked from mouse move, as you want them to
+# draw them to the view.
+#
+# For an example, see https://github.com/SketchUp/sketchup-ruby-api-tutorials/tree/master/examples/02_custom_tool.
+#
+# To lock inference similar to native SketchUp tools, see
+# {View#lock_inference}.
 #
 # @version SketchUp 6.0
 class Sketchup::InputPoint
@@ -188,10 +197,8 @@ class Sketchup::InputPoint
   def edge
   end
 
-  # The face method retrieves the face if the input point is getting its
-  # position from a face.
-  #
-  # Otherwise it returns nil.
+  # The face method retrieves the face at or behind the input point. This can be
+  # used to determine a plane, similar to what native Rotate tool does.
   #
   # @example
   #   view = Sketchup.active_model.active_view
@@ -200,8 +207,10 @@ class Sketchup::InputPoint
   #   ip1 = view.inputpoint x,y
   #   f = ip1.face
   #
-  # @return face - a Face object if successful, or nil if
-  #   unsuccessful
+  # @note The InputPoint doesn't necessarily lie on the face, but can be e.g. on
+  #   an edge in front of the face.
+  #
+  # @return [Sketchup::Face, nil]
   #
   # @version SketchUp 6.0
   def face
@@ -220,15 +229,18 @@ class Sketchup::InputPoint
   #   sub-class {Sketchup::InputPoint} due to a bug in how SketchUp initialized
   #   the class.
   #
-  # @param pt_or_vertex
-  #   An optional Point3d or Vertex where the new InputPoint
-  #   should be created.
+  # @overload initialize()
   #
-  # @return inputpoint - the newly created InputPoint object if
-  #   successful
+  #   @return [Sketchup::InputPoint]
+  #
+  # @overload initialize(pt_or_vertex)
+  #
+  #   @param pt_or_vertex  [Geom::Point3d, Sketchup::Vertex] An optional Point3d
+  #                        or Vertex where the new InputPoint should be created.
+  #   @return              [Sketchup::InputPoint]
   #
   # @version SketchUp 6.0
-  def initialize(pt_or_vertex)
+  def initialize(*args)
   end
 
   # The {#instance_path} method retrieves the instance path for the picked point.

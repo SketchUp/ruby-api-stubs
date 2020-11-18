@@ -3,13 +3,11 @@
 
 # A Group class contains methods for manipulating groups of entities.
 #
-# Groups in SketchUp are very similar to Components, except that there is no
-# instancing of groups. That means that you always will have one and only one
-# of each of your groups. (In the actual implementation, SketchUp keeps track
-# of groups as a special kind of Component that combines properties of
-# definitions and instances, which is why you will see deprecated methods
-# like Group.make_unique, and the class of observer you attach to Groups are
-# ComponentInstance observers.)
+# Groups in SketchUp are very similar to components, but can from a user point
+# of view be thought of as unique objects. Groups can be instanced when copied
+# but are silently made unique when edited through the GUI. To honor this
+# behavior, make sure to call {#make_unique} before modifying a group through
+# the API.
 #
 # @version SketchUp 6.0
 class Sketchup::Group < Sketchup::Drawingelement
@@ -228,6 +226,8 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   group2 = entities[1]
   #   result = group1.intersect(group2)
   #
+  # @note This method is not available in SketchUp Make.
+  #
   # @param [Sketchup::Group, Sketchup::ComponentInstance] group
   #   The group to intersect this group with.
   #
@@ -239,11 +239,11 @@ class Sketchup::Group < Sketchup::Drawingelement
   def intersect(group)
   end
 
-  # The local_bounds method returns the BoundingBox object that defines the size
-  # of the group in an untransformed state. Useful for determining the original
-  # width, height, and depth of a group regardless of its current position or
-  # scale. For components, you can get a similar result by checking
-  # my_instance.definition.bounds.
+  # The {#local_bounds} method is used to retrieve the {Geom::BoundingBox}
+  # bounding the contents of a {Sketchup::Group}, in the group's own internal
+  # coordinate system.
+  #
+  # @deprecated In favor of `group.definition.bounds`.
   #
   # @example
   #   # Add a group to the model.
@@ -257,7 +257,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   group.transform! transformation
   #   local_bounds_2 = group.local_bounds
   #
-  # @return [Geom::BoundingBox] a BoundingBox object
+  # @return [Geom::BoundingBox]
   #
   # @version SketchUp 7.0
   def local_bounds
@@ -303,14 +303,14 @@ class Sketchup::Group < Sketchup::Drawingelement
   def locked?
   end
 
-  # The make_unique method is used to force a group to have a unique definition.
+  # The {#make_unique} method is used to force a group to have a unique
+  # definition. If the group is already unique in the model, nothing happens.
   #
-  # Copying a group using the copy tool in SketchUp will create copies of the
-  # group that share a common definition until an instance is edited manually or
-  # this method is used. If multiple copies are made, all copies share a
-  # definition until all copies are edited manually, or all copies have this
-  # method used on them. This method ensures that the group uses a unique
-  # definition entry in the drawing database.
+  # Copying a group in SketchUp will create a group that shares the same
+  # definition. SketchUp implicitly makes group unique when edited from the GUI,
+  # and from a user point of view groups could be thought of as always being
+  # unique. To honor this behavior, call this method before editing a group
+  # through the API.
   #
   # @example
   #   # Assume we have 2 groups, one copied from the other and sharing definitions
@@ -341,15 +341,16 @@ class Sketchup::Group < Sketchup::Drawingelement
   def manifold?
   end
 
-  # The move! method is used to apply a transformation to the group.
+  # The {#move!} method is used to set the transformation of this group
+  # instance, similarly to {#transformation=} but without recording to the undo
+  # stack.
   #
-  # This method is the same as the transform! method except that it does not
-  # record the move in an undo operation. This method is useful for
-  # transparently moving things during an animation.
+  # This method is useful for moving entities inside of an animation or page
+  # transition.
   #
   # @example
   #   point = Geom::Point3d.new 500,500,500
-  #   t = Geom::Transformation.new point
+  #   transformation = Geom::Transformation.new point
   #   depth = 100
   #   width = 100
   #   model = Sketchup.active_model
@@ -369,21 +370,17 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   # Add a face to within the group
   #   face = entities2.add_face pts
   #   UI.messagebox "Group before Move"
-  #   group = group.move! t
-  #   if (group)
-  #     UI.messagebox "Group after move"
-  #     UI.messagebox group
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   group = group.move!(transformation)
   #
-  # @param [Geom::Transformation] transform
-  #   A Transformation object.
+  # @note Despite the name being similar to {#transform!}, this method closer
+  #   corresponds to {#transformation=}.
+  #
+  # @param [Geom::Transformation] transformation
   #
   # @return [Sketchup::Group] the transformed Group object if successful
   #
   # @version SketchUp 6.0
-  def move!(transform)
+  def move!(transformation)
   end
 
   # The name method is used to retrieve the name of the group.
@@ -503,6 +500,8 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   group2 = entities[1]
   #   result = group1.split(group2)
   #
+  # @note This method is not available in SketchUp Make.
+  #
   # @param [Sketchup::Group, Sketchup::ComponentInstance] group
   #   The group to split this group with.
   #
@@ -527,6 +526,8 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   group1 = entities[0]
   #   group2 = entities[1]
   #   result = group1.subtract(group2)
+  #
+  # @note This method is not available in SketchUp Make.
   #
   # @param [Sketchup::Group, Sketchup::ComponentInstance] group
   #   The group to subtract this group from.
@@ -613,24 +614,21 @@ class Sketchup::Group < Sketchup::Drawingelement
   def transformation
   end
 
-  # The transformation= method is used to set the transformation for the
-  # group.
+  # The {#transformation=} method is used to set the transformation of this
+  # group
   #
   # @example
   #   # Add a group to the model.
   #   group = Sketchup.active_model.entities.add_group
   #   group.entities.add_line([0,0,0],[100,100,100])
   #
-  #   new_transform = Geom::Transformation.new([100,0,0])
-  #   group.transformation = new_transform
+  #   new_transformation = Geom::Transformation.new([100,0,0])
+  #   group.transformation = new_transformation
   #
-  # @param [Geom::Transformation] transform
-  #   The Transformation object to apply
-  #
-  # @return [Geom::Transformation] the applied transformation
+  # @param [Geom::Transformation] transformation
   #
   # @version SketchUp 6.0
-  def transformation=(transform)
+  def transformation=(transformation)
   end
 
   # The trim method is used to compute the (non-destructive) boolean difference
@@ -643,6 +641,8 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   group1 = entities[0]
   #   group2 = entities[1]
   #   result = group1.trim(group2)
+  #
+  # @note This method is not available in SketchUp Make.
   #
   # @param [Sketchup::Group, Sketchup::ComponentInstance] group
   #   The group to trim this group against.
@@ -664,6 +664,8 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   group1 = entities[0]
   #   group2 = entities[1]
   #   result = group1.union(group2)
+  #
+  # @note This method is not available in SketchUp Make.
   #
   # @param [Sketchup::Group, Sketchup::ComponentInstance] group
   #   The group to union this group with.

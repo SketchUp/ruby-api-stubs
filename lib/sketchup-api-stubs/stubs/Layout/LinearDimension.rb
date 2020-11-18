@@ -77,7 +77,7 @@ class Layout::LinearDimension < Layout::Entity
   #   point_1 = Geom::Point2d.new(5, 7.5)
   #   point_2 = Geom::Point2d.new(8.5, 9)
   #   table = Layout::Rectangle.new([point_1, point_2])
-  #   doc.add_entity(table, @doc.layers.first, @doc.pages.first)
+  #   doc.add_entity(table, doc.layers.first, doc.pages.first)
   #   start_point = Layout::ConnectionPoint.new(table, point_1)
   #   end_point = Layout::ConnectionPoint.new(table, point_2)
   #   height = 1.0

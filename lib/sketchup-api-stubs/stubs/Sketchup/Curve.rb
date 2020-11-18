@@ -50,7 +50,7 @@ class Sketchup::Curve < Sketchup::Entity
   #   edgearray = entities.add_circle centerpoint, vector2, 10
   #   edge = edgearray[0]
   #   curve = edge.curve
-  #   curve.each_edge {|e| UI.messagebox e}
+  #   curve.each_edge {|edge| puts "Edge {edge.entityID}: {edge.length}" }
   #
   # @return edge - a variable that will hold each Edge object as
   #   they are found.
@@ -150,22 +150,29 @@ class Sketchup::Curve < Sketchup::Entity
   #   curve = edge.curve
   #   length = curve.length
   #
-  # @return length - the length of the curve in current units if
-  #   successful
+  # @return [Length]
   #
   # @version SketchUp 6.0
   def length
   end
 
-  # The vertices method retrieves a collection of all vertices in a curve.
+  # The {#move_vertices} method moves the vertices in the curve to points.
   #
   # @example
-  #   # Need example ruby code here.
+  #   model = Sketchup.active_model
+  #   entities = model.entities
+  #   new_edges = entities.add_arc(ORIGIN, X_AXIS, Z_AXIS, 20.cm, 0, 270.degrees, 32)
+  #   curve = new_edges.first.curve
+  #   points = curve.vertices.map(&:position)
+  #   points.each_with_index { |pt, i| pt.z = i * 1.cm }
+  #   curve.move_vertices(points)
   #
-  # @param point_array
-  #   Array of Point3d objects to move each vertex to match.
+  # @param [Array<Geom::Point3d>] point_array
   #
-  # @return success - true or false
+  # @raise ArgumentError if the number of points doesn't match number of vertices
+  #   in curve
+  #
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def move_vertices(point_array)

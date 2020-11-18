@@ -1,14 +1,25 @@
 # Copyright:: Copyright 2020 Trimble Inc.
 # License:: The MIT License (MIT)
 
-# The PickHelper class is used to pick entities that reside under the current
-# cursor location. PickHelper and InputPoint are similar, but InputPoint also
-# uses inferencing. You can retrieve a PickHelper object using the pick_helper
-# method on a View object.
+# The {Sketchup::PickHelper} class is used to pick entities that reside under
+# the current cursor location, similar to native Select tool. Unlike
+# {Sketchup::InputPoint}, {Sketchup::PickHelper} uses no inference.
+#
+# Only {Sketchup::Tool}s react to cursor location and most of these methods are
+# only useful in the context of a tool. For example, if you want to determine
+# the entity you just clicked, you would use {#do_pick} from within your
+# {Sketchup::Tool#onLButtonDown} method.
+#
+# You can retrieve a PickHelper object using the {Sketchup::View#pick_helper}
+# method.
 #
 # Entities that are picked (found under the
 # cursor when a mouse or keyboard event occurs), are called Pick Records and
 # are placed in an indexed list.
+#
+# @note The same {Sketchup::Pickhelper} instance is being reused by SketchUp.
+#   Don't extend, add methods or redefine methods on this object as it can
+#   clash with other extensions.
 #
 # @version SketchUp 6.0
 class Sketchup::PickHelper
@@ -110,8 +121,8 @@ class Sketchup::PickHelper
   # entities in the list of pick records.
   #
   # @example
-  #   ph = view.pick_helper
-  #   ph.do_pick(x, y)
+  #   pickhelper = view.pick_helper
+  #   pickhelper.do_pick(x, y)
   #   # Iterate all pick-routes:
   #   pickhelper.count.times { |pick_path_index|
   #     puts pickhelper.depth_at(pick_path_index)
@@ -156,8 +167,8 @@ class Sketchup::PickHelper
   # Use count() to get the number of possible pick paths.
   #
   # @example
-  #   ph = view.pick_helper
-  #   ph.do_pick(x, y)
+  #   pickhelper = view.pick_helper
+  #   pickhelper.do_pick(x, y)
   #   # Iterate all pick-routes:
   #   pickhelper.count.times { |pick_path_index|
   #     puts pickhelper.element_at(pick_path_index)
@@ -212,8 +223,8 @@ class Sketchup::PickHelper
   # Use count() to get the number of possible pick paths.
   #
   # @example
-  #   ph = view.pick_helper
-  #   ph.do_pick(x, y)
+  #   pickhelper = view.pick_helper
+  #   pickhelper.do_pick(x, y)
   #   # Iterate all pick-routes:
   #   pickhelper.count.times { |pick_path_index|
   #     p pickhelper.leaf_at(pick_path_index)
@@ -239,8 +250,8 @@ class Sketchup::PickHelper
   # item will be a drawing element that is not a group, component or image.
   #
   # @example
-  #   ph = view.pick_helper
-  #   ph.do_pick(x, y)
+  #   pickhelper = view.pick_helper
+  #   pickhelper.do_pick(x, y)
   #   # Iterate all pick-routes:
   #   pickhelper.count.times { |pick_path_index|
   #     p pickhelper.path_at(pick_path_index)
@@ -399,12 +410,23 @@ class Sketchup::PickHelper
   # coordinates of the leaf entity into the coordinates of the active entities.
   #
   # @example
-  #   ph = view.pick_helper
-  #   ph.do_pick(x, y)
+  #   pickhelper = view.pick_helper
+  #   pickhelper.do_pick(x, y)
   #   # Iterate all pick-routes:
   #   pickhelper.count.times { |pick_path_index|
   #     puts pickhelper.transformation_at(pick_path_index)
   #   }
+  #
+  # @example Get transformation for specific picked element
+  #   pickhelper = view.pick_helper
+  #   pickhelper.do_pick(x, y)
+  #   face = pickhelper.picked_face # Face may be inside a group or component.
+  #
+  #   index = pickhelper.count.times.find { |i| pickhelper.leaf_at(i) == face }
+  #   transformation = index ? pickhelper.transformation_at(index) : IDENTITY
+  #
+  #   # Face#area is one method that may need a transformation.
+  #   area = face.area(transformation)
   #
   # @param index
   #   The index where the transformation should be retrieved.

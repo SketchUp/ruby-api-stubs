@@ -11,13 +11,15 @@ Though our adoption rate to the latest version is quite high, it can take time a
     if (Sketchup.version.to_f < version_required)
       UI.messagebox("You must have Sketchup 20#{version_required} to run this "\
                     "extension. Visit sketchup.com to upgrade.")
-      return
+    else
+      # Your stuff...
     end
 
 ## Build Numbers
 
 Here are the build numbers for recent SketchUp releases. Note that build numbers in languages besides English are larger for each release, so it is best to check for builds that are greater than or equal to the numbers here.
 
+- **SU2021.0** = 21.0.339 on Windows 64-bit, 21.0.338 on Mac 64-bit.
 - **SU2020.2** = 20.2.172 on Windows 64-bit, 20.2.171 on Mac 64-bit.
 - **SU2020.1.1** = 20.1.235 on Windows 64-bit. (Contained no Ruby API changes)
 - **SU2020.1** = 20.1.229 on Windows 64-bit, 20.1.228 on Mac 64-bit.
@@ -55,6 +57,48 @@ Here are the build numbers for recent SketchUp releases. Note that build numbers
 - **SU7.0** = 7.0.8657 on Windows, 7.0.8656 on Mac.
 
 - **SU6 M6** = 6.4.265 on Windows, 6.4.263 on Mac.
+
+# What's new in SketchUp 2021.0
+
+## Upgrade Ruby to 2.7.1
+
+For SketchUp 2021.0 we have upgraded the version of Ruby that we ship with SketchUp from 2.5.5 to 2.7.1. Developers should verify that their extensions are working as expected in this new version of Ruby.
+
+## Ruby API Additions and Improvements
+
+* Added class {Sketchup::LayerFolder}
+* Added method {Sketchup::Layer#folder}
+* Added method {Sketchup::Layer#folder=}
+* Added method {Sketchup::Layers#add_folder}
+* Added method {Sketchup::Layers#count_folders}
+* Added method {Sketchup::Layers#count_layers}
+* Added method {Sketchup::Layers#each_folder}
+* Added method {Sketchup::Layers#each_layer}
+* Added method {Sketchup::Layers#folders}
+* Added method {Sketchup::Layers#layers}
+* Added method {Sketchup::Layers#purge_unused_folders}
+* Added method {Sketchup::Layers#remove_folder}
+* Added method {Sketchup::LayersObserver#onLayerFolderAdded}
+* Added method {Sketchup::LayersObserver#onLayerFolderChanged}
+* Added method {Sketchup::LayersObserver#onLayerFolderRemoved}
+* Added method {Sketchup::LayersObserver#onParentFolderChanged}
+* Added method {Sketchup::Page#layer_folders}
+* Added method signature to {Sketchup::Page#set_visibility}: `Sketchup::Page#set_visibility(layer_group, visibility)`
+* Added method {Sketchup.redo}
+* Added method {Sketchup::ComponentDefinition#live_component?}
+* Added new method signature to {Sketchup.open_file}: `Sketchup.open_file(filename, with_status: true)`
+    This signature will open the new SketchUp file format if the format is newer.
+* Deprecated old method signature: `Sketchup.open_file(filename)`
+    Because opening a newer file format might lead to data missing, extension
+    developers have to explicitly migrate to the new signature.
+    This is to ensure that no extension inadvertently open and save a file
+    without knowing of potential data loss.
+* Added new method signature to {Sketchup::DefinitionList#load}: `Sketchup::DefinitionList#load(filename, allow_newer: true)`
+* Added method {Sketchup::Skp.read_guid} for reading a model's guid without having to open it in SketchUp.
+* Updated OpenSSL to 1.1.1g.
+
+## Ruby API Bug Fixes
+* Fixed {Sketchup::Texture#filename} such that it appends a file extension matching the data format it was loaded from when the internal texture filename is missing the extension.
 
 # What's new in SketchUp 2020.2
 
@@ -239,6 +283,7 @@ Now it adds a space between the number and the unit indicator. If your extension
 * Fixed unicode characters in the Ruby Console on Windows
 * Fixed {UI::HtmlDialog} such that non-resizable dialog doesn't use width and height from preferences.
 * {Sketchup::View#write_image} should throw an error if there are more than 5 params passed in.
+* Fixed {UI::HtmlDialog} content flashing when resizing.
 
 ## SketchUp C API Documentation
 * Updated SDK docs on VC++ runtime versions

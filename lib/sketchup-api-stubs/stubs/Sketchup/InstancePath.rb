@@ -30,7 +30,7 @@ class Sketchup::InstancePath
   def ==(other)
   end
 
-  # The elements of an instance path can be accessed like an array.
+  # The elements of an instance path can be accessed similarly to an array.
   #
   # @example
   #   model = Sketchup.active_model
@@ -39,6 +39,9 @@ class Sketchup::InstancePath
   #   path = Sketchup::InstancePath.new([group, edge])
   #   path[0] == group # returns true
   #   path[1] == edge # returns true
+  #
+  # @note This method does not accept negative indices. For the exact behavior
+  #   of an array, use +{#to_a}+.
   #
   # @param [Integer] index
   #

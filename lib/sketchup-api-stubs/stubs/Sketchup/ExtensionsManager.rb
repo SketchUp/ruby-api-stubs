@@ -21,11 +21,11 @@ class Sketchup::ExtensionsManager
   #
   # @example
   #   manager = Sketchup.extensions
-  #   extension = manager[0]
+  #   extension = manager[1]
   #   if (extension)
-  #     UI.messagebox extension.name
+  #     puts extension.name
   #   else
-  #     UI.messagebox "Failure"
+  #     puts "No Extensions installed"
   #   end
   #
   #   # You can also get extensions by name.
@@ -34,11 +34,12 @@ class Sketchup::ExtensionsManager
   #   # You can also get extensions by ID.
   #   my_extension = manager['2475A758-6503-46D5-AC5E-16AEA0A3162A']
   #
-  # @param index_or_name
+  # @note Index starts at 1.
+  #
+  # @param [Integer, String] index_or_name
   #   The index, name or ID of the SketchupExtension object.
   #
-  # @return extension - an SketchupExtension object if
-  #   successful, otherwise nil.
+  # @return [SketchupExtension, nil]
   #
   # @version SketchUp 8.0 M2
   def [](index_or_name)
@@ -66,7 +67,7 @@ class Sketchup::ExtensionsManager
   # @example
   #   manager = Sketchup.extensions
   #   # Retrieves each extension
-  #   manager.each { |extension| UI.messagebox extension.name }
+  #   manager.each { |extension| puts extension.name }
   #
   # @return nil
   #

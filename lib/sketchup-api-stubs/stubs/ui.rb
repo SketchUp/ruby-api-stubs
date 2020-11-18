@@ -70,8 +70,8 @@ module UI
   #     UI.set_cursor(cursor_id)
   #   end
   #
-  # @param [String] filename
-  #   Filename for an image.
+  # @param [String] path
+  #   File path to an image.
   #
   # @param [Integer] hot_x
   #   An x coordinate that is the "hotpoint" for the cursor
@@ -88,7 +88,7 @@ module UI
   # @return [Integer] ID associated with the cursor
   #
   # @version SketchUp 6.0
-  def self.create_cursor(filename, hot_x, hot_y)
+  def self.create_cursor(path, hot_x, hot_y)
   end
 
   # Creates a dialog box for inputting user information. The dialog box contains
@@ -325,7 +325,9 @@ module UI
   end
 
   # The preferences_pages method is used to returns the names of all the
-  # preferences pages. These include windows like Extensions.
+  # preferences pages. These include windows like Templates.
+  #
+  # [SketchUp 2017] <code>"Extensions"</code> page was removed.
   #
   # @example
   #   prefs = UI.preferences_pages
@@ -469,7 +471,7 @@ module UI
   def self.select_directory(options = {})
   end
 
-  # The #{set_cursor} method is used to change the cursor to a new cursor with a
+  # The {.set_cursor} method is used to change the cursor to a new cursor with a
   # given cursor id. See UI.create_cursor and the Tool class for details
   # on creating your own tools with arbitrary cursors.
   #
@@ -543,7 +545,6 @@ module UI
   # {UI.model_info_pages}.
   #
   # [SketchUp 2014] <code>"Classifications"</code> page was added.
-  # [SketchUp 2017] <code>"Extensions"</code> page was removed.
   #
   # @example
   #   UI.show_model_info('Credits')
@@ -558,9 +559,9 @@ module UI
   end
 
   # The show_preferences method is used to display a SketchUp preferences dialog.
-  # You can get the list of valid dialogs with UI.preferences_pages.
+  # You can get the list of valid dialogs with {UI.preferences_pages}.
   #
-  # Note that under OSX this method doesn't currently work.
+  # @bug Under OSX this method doesn't currently work.
   #
   # @example
   #   status = UI.show_preferences('GraphicsCard')

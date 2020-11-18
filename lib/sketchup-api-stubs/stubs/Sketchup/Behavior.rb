@@ -88,13 +88,9 @@ class Sketchup::Behavior < Sketchup::Entity
   # @example
   #   model = Sketchup.active_model
   #   behavior = model.definitions[0].behavior
-  #   status = behavior.cuts_opening = false
-  #   if (status)
-  #     # if status is true, print the status
-  #     UI.messagebox status
-  #   else
-  #     # code to respond cuts_opening being false
-  #   end
+  #   behavior.cuts_opening = false
+  #
+  # @note To enable cut opening, also set {#is2d=} to true.
   #
   # @param setting
   #   Sets the cuts_opening behavior to true or false.
@@ -113,57 +109,39 @@ class Sketchup::Behavior < Sketchup::Entity
   #   model = Sketchup.active_model
   #   behavior = model.definitions[0].behavior
   #   status = behavior.cuts_opening?
-  #   if (status)
-  #     # if status is true, do something
-  #   else
-  #     # if status is false, do something else
-  #   end
   #
-  # @return [Boolean] status - the status of the cuts_opening behavior
-  #   (either true or false)
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def cuts_opening?
   end
 
-  # The is2d= method is used to set the 2D behavior for a component: whether it
-  # can be glued or aligned to a face.
+  # The {#is2d=} method is used to set whether the component can glue to other
+  # entities or not.
   #
   # @example
   #   model = Sketchup.active_model
   #   behavior = model.definitions[0].behavior
-  #   status = behavior.is2d = false
-  #   if (status)
-  #     # if status is true, print the status
-  #     UI.messagebox status
-  #   else
-  #     # code to respond is2d behavior being false
-  #   end
+  #   behavior.is2d = false
   #
-  # @param setting
-  #   Sets the 2D behavior to true or false.
-  #
-  # @return status - the new setting
+  # @param [Boolean] is2d
   #
   # @version SketchUp 6.0
-  def is2d=(setting)
+  def is2d=(is2d)
   end
 
-  # The is2d? method is used to get the 2D behavior for a component: whether it
-  # can be glued or aligned to a face.
+  # The {#is2d?} method is used to get whether the component can glue to other
+  # entities or not.
   #
   # @example
   #   model = Sketchup.active_model
   #   behavior = model.definitions[0].behavior
-  #   status = behavior.is2d?
-  #   if (status)
-  #     # if status is true, do something
-  #   else
-  #     # if status is false, do something else
+  #   if behavior.is2d?
+  #     # We can also set what planes component can glue to.
+  #     behavior.snapto = SnapTo_Arbitrary
   #   end
   #
-  # @return [Boolean] status - the status of the 2D behavior (either true or
-  #   false)
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def is2d?
@@ -271,14 +249,14 @@ class Sketchup::Behavior < Sketchup::Entity
   def shadows_face_sun?
   end
 
-  # The snapto method is used to verify the status of a component's "snap to"
-  # behavior.
+  # The {#snapto} method is used to see how a component can glue to other
+  # entities.
   #
-  # Returns a constant indicating the snapping behavior of the component
-  # described by behavior. Snapping behavior is how the x-y plane of a component
-  # instance will be snapped against a face. Possible values are:
+  # Returns a value indicating the snapping behavior of the component. Snapping
+  # behavior is how the x-y plane of a component instance will be snapped against
+  # a face. Possible values are:
   #
-  # - +SnapTo_Arbitrary+ => Snap to any aribrary face,
+  # - +SnapTo_Arbitrary+ => Snap to any arbitrary face,
   # - +SnapTo_Horizontal+ => Snap to horizontal face like floors,
   # - +SnapTo_Vertical+ => Snap to vertical face like walls,
   # - +SnapTo_Sloped+ => Snap to sloped face like sloping roofs.
@@ -286,26 +264,21 @@ class Sketchup::Behavior < Sketchup::Entity
   # @example
   #   model = Sketchup.active_model
   #   behavior = model.definitions[0].behavior
-  #   status = behavior.snapto
-  #   if (status)
-  #     # if status is true, do something
-  #   else
-  #     # if status is false, do something else
-  #   end
+  #   snapto = behavior.snapto
   #
-  # @return status - the status of the snapto behavior (either true
-  #   or false)
+  # @return [Integer]
   #
   # @version SketchUp 6.0
   def snapto
   end
 
-  # The snapto= method sets a component's "snap to" behavior.
+  # The {#snapto=} method is used to set how a component can glue to other
+  # entities.
   #
   # Snapping behavior is how the x-y plane of a component instance will be
   # snapped against a face. Possible constant values are:
   #
-  # - +SnapTo_Arbitrary+ => Snap to any aribrary face,
+  # - +SnapTo_Arbitrary+ => Snap to any arbitrary face,
   # - +SnapTo_Horizontal+ => Snap to horizontal face like floors,
   # - +SnapTo_Vertical+ => Snap to vertical face like walls,
   # - +SnapTo_Sloped+ => Snap to sloped face like sloping roofs.
@@ -313,13 +286,14 @@ class Sketchup::Behavior < Sketchup::Entity
   # @example
   #   model = Sketchup.active_model
   #   behavior = model.definitions[0].behavior
+  #   behavior.is2d = true
   #   behavior.snapto = SnapTo_Horizontal
   #
-  # @param snapto
-  #   A numeric constant identifying one of the snapto
-  #   types.
+  # @note To enable gluing, also set {#is2d=} to true.
   #
-  # @return behavior - the Behavior object
+  # @note To disable gluing, set {#is2d=} to false.
+  #
+  # @param [Integer] snapto
   #
   # @version SketchUp 6.0
   def snapto=(snapto)

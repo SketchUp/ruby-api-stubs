@@ -3,6 +3,12 @@
 
 # References an image representation object.
 #
+# @example
+#   # Get the color of the center of the first material texture found in model.
+#   texture = Sketchup.active_model.materials.map(&:texture).compact.first
+#   image_rep = texture.image_rep
+#   color = image_rep.color_at_uv(0.5, 0.5)
+#
 # @version SketchUp 2018
 class Sketchup::ImageRep
 
@@ -23,7 +29,8 @@ class Sketchup::ImageRep
   end
 
   # The {#color_at_uv} method returns a color corresponding to the UV texture
-  # coordinates
+  # coordinates. +0.0, 0.0+ maps to the bottom left and +1.0, 1.0+ to the top
+  # right of the image.
   #
   # @example
   #   image_rep = Sketchup::ImageRep.new
@@ -69,6 +76,8 @@ class Sketchup::ImageRep
   #   byte_string = image_rep.data
   #   byte_string.each_byte { |byte| puts byte, ' ' }
   #
+  # @note The byte order of the pixels are RGB(A) on macOS and BGR(A) on Windows.
+  #
   # @return [String, nil]
   #
   # @version SketchUp 2018
@@ -93,6 +102,7 @@ class Sketchup::ImageRep
   #
   # @example Default constructor
   #   image_rep = Sketchup::ImageRep.new
+  #   # Use #set_data or #load_file to add image data.
   #
   # @example Construct from file
   #   image_rep = Sketchup::ImageRep.new("/path/to/image.jpg")
@@ -155,15 +165,45 @@ class Sketchup::ImageRep
   def save_file(filepath)
   end
 
-  # The {#set_data} method sets the pixel data of the {Sketchup::ImageRep}.
+  # The {#set_data} method discards any existing data and sets new pixel data for
+  # the {Sketchup::ImageRep}.
   #
   # @example Setting new data
   #   image_rep = Sketchup::ImageRep.new
-  #   image_rep.load_file("/path/to/image.jpg")
-  #   new_image_rep = image_rep.set_data(800, 600, 24, 0, pixel_data)
+  #   width = 800
+  #   height = 600
+  #   bpp = 24
+  #   pixel = [127, 127, 127].pack("C*")
+  #   pixels = pixel * width * height
+  #   image_rep.set_data(width, height, bpp, 0, pixels)
+  #   image_rep.save_file(UI.savepanel)
+  #
+  # @example Handling system color differences
+  #   # Generates red image on Mac and blue on Windows.
+  #   image_rep = Sketchup::ImageRep.new
+  #   color = Sketchup::Color.new("Red")
+  #   rgba = color.to_a # Red, green , blue, alpha
+  #   color_data = rgba.pack("C*")
+  #   image_rep.set_data(1, 1, 32, 0, color_data)
+  #   image_rep.save_file(UI.savepanel)
+  #
+  #   # Generates red image on both systems.
+  #   image_rep = Sketchup::ImageRep.new
+  #   color = Sketchup::Color.new("Red")
+  #   color_code = color.to_a # Red, green, blue, alpha
+  #   if Sketchup.platform == :platform_win
+  #     # Change order to Blue, green, red, alpha on Windows.
+  #     color_code = color_code.values_at(2, 1, 0, 3)
+  #   end
+  #   color_data = color_code.pack("C*")
+  #   image_rep.set_data(1, 1, 32, 0, color_data)
+  #   image_rep.save_file(UI.savepanel)
+  #
+  # @note The byte order of the pixels are RGB(A) on macOS and BGR(A) on Windows.
   #
   # @note The encoding of the pixel_data {String} parameter should be ASCII-8BIT.
-  #   Any other encoding could corrupt the binary data.
+  #   Any other encoding could corrupt the binary data. Using
+  #   `Array#pack("C*")` gives correct encoding.
   #
   # @param [Integer] width
   #   The width of the pixel data. Must be greater than 0.
@@ -179,7 +219,7 @@ class Sketchup::ImageRep
   # @param [Integer] row_padding
   #   The row padding for the pixel data which is
   #   sized in bytes. Row padding is used to pad each row with zeros so that each
-  #   scanline on the pixel data will end on the data-type boundry.
+  #   scanline on the pixel data will end on the data-type boundary.
   #
   # @param [String] pixel_data
   #   The binary string containing the pixel data

@@ -20,7 +20,7 @@
 # - +Latitude+ (in Model Info > Geo-location > Set Manual Location...)
 # - +Light+ (in Window > Shadows)
 # - +Longitude+ (in Model Info > Geo-location > Set Manual Location...)
-# - +North+ Angle (in View > Toolbars > Solar North) Note that 'Toolbar' is called 'Tool Palettes' on Mac
+# - +NorthAngle+ (in View > Toolbars > Solar North) Note that 'Toolbar' is called 'Tool Palettes' on Mac
 # - +ShadowTime+ (in Window > Shadows)
 # - +ShadowTime_time_t+ (ShadowTime in Epoch time)
 # - +SunDirection+ (Generated based on ShadowTime)
@@ -50,7 +50,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   # The each_key method iterates through all of the shadow information keys.
   #
   # @example
-  #   shadowinfo.each_key { |key| UI.messagebox(key) }
+  #   shadowinfo.each_key { |key| puts key }
   #
   # @return [nil]
   #
@@ -165,7 +165,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   # The each_key method iterates through all of the shadow information keys.
   #
   # @example
-  #   shadowinfo.each_key { |key| UI.messagebox(key) }
+  #   shadowinfo.each_key { |key| puts key }
   #
   # @return [nil]
   #
@@ -175,7 +175,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   def each_key
   end
 
-  # The #{each_pair} method is an alias for {#each}.
+  # The {#each_pair} method is an alias for {#each}.
   #
   # @example
   #   model = Sketchup.active_model

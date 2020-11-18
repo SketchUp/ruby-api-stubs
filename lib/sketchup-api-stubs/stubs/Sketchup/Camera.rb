@@ -23,86 +23,68 @@ class Sketchup::Camera
 
   # Instance Methods
 
-  # The aspect_ratio method is used to retrieve the aspect ratio of the Camera.
+  # The {#aspect_ratio} method is used to retrieve the aspect ratio of the Camera.
+  #
+  # `0.0` is the default value and denotes an aspect ratio matching that of the
+  # View.
   #
   # @example
-  #   camera = Sketchup::Camera.new
-  #   ar = camera.aspect_ratio
-  #   if (ar)
-  #     UI.messagebox ar.to_s
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   camera = Sketchup.active_model.active_view.camera
+  #   aspect_ratio = camera.aspect_ratio
   #
-  # @return aspectratio - an aspect ratio, such as 1.85, if
-  #   successful
+  # @return [Float]
   #
   # @version SketchUp 6.0
   def aspect_ratio
   end
 
-  # The aspect_ratio= method is used to set the aspect ratio for a Camera.
+  # The {#aspect_ratio=} method is used to set the aspect ratio for a Camera.
   # Changing this value will cause SketchUp to show gray bars over the screen
   # to show the resulting view.
   #
-  # If you set the value to 0.0, then the aspect ratio of the Camera will match
+  # If you set the value to `0.0`, then the aspect ratio of the Camera will match
   # the aspect ratio of its View.
   #
   # @example
   #   camera = Sketchup::Camera.new
-  #   ar = camera.aspect_ratio = 1.85
-  #   if (ar)
-  #     UI.messagebox ar.to_s
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   camera.aspect_ratio = 1.85
   #
   # @param [Float] ratio
-  #
-  # @return aspectratio - an aspect ratio, such as 1.85, if
-  #   successful
   #
   # @version SketchUp 6.0
   def aspect_ratio=(ratio)
   end
 
-  # The center_2d method returns a point with the x and y offset of the camera
-  # when it's in 2d mode. When the camera is in two-point perspective and the
-  # user pans around, the x and y values will change. These values are in
-  # normalized device coordinates, so for instance, the range [-1.0, 1.0] spans
-  # the full width or height of the screen.
+  # The {#center_2d} method returns a point with the x and y offset of the camera
+  # when it's in two-point perspective or math photo mode. When the camera is
+  # in two-point perspective and the user pans around, the x and y values will
+  # change. These values are in normalized device coordinates, so for instance,
+  # the range [-1.0, 1.0] spans the full width or height of the screen.
   #
   # The z value is unused and it is always zero.
   #
   # @example
   #   Sketchup.active_model.active_view.camera.center_2d
   #
-  # @return Point3d
+  # @return [Geom::Point3d] ]
   #
   # @version SketchUp 2015
   def center_2d
   end
 
-  # The description method is used to retrieve the description for a Camera
-  # object.
+  # The {#description} method is used to retrieve the description for a Camera.
   #
   # @example
   #   camera = Sketchup::Camera.new
   #   description = camera.description
-  #   if (description)
-  #     UI.messagebox description
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
-  # @return description - a string description for the camera if
-  #   successful
+  # @return [String]
   #
   # @version SketchUp 6.0
   def description
   end
 
-  # The description= method is used to set the description for the Camera.
+  # The {#description=} method is used to set the description for the Camera.
   #
   # @example
   #   camera = Sketchup::Camera.new
@@ -110,46 +92,30 @@ class Sketchup::Camera
   #
   # @param [String] description
   #
-  # @return description - a string description for the camera if
-  #   successful
-  #
   # @version SketchUp 6.0
   def description=(description)
   end
 
-  # The direction method is used to retrieve a Vector3d object in the direction
-  # that the Camera is pointing.
+  # The {#direction} method is used to retrieve a Vector3d object in the
+  # direction that the Camera is pointing.
   #
   # @example
   #   camera = Sketchup::Camera.new
-  #   # Returns 0,0,-1 which indicates it is pointed down the Z axis
   #   direction = camera.direction
-  #   if (direction)
-  #     UI.messagebox direction.to_s
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
-  # @return direction - a Vector3d object pointing in the direction
-  #   that the Camera is pointing if successful
+  # @return [Geom::Vector3d]
   #
   # @version SketchUp 6.0
   def direction
   end
 
-  # The eye method is used to retrieve the eye Point3d object for the Camera.
+  # The {#eye} method is used to retrieve the eye Point3d object for the Camera.
   #
   # @example
   #   camera = Sketchup::Camera.new
-  #   # Returns 0,0,1 which indicates it is right in line with the Z axis.
   #   eye = camera.eye
-  #   if (eye)
-  #     UI.messagebox eye
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
-  # @return eye - a Point3d object if successful
+  # @return [Geom::Point3d]
   #
   # @version SketchUp 6.0
   def eye
@@ -158,93 +124,82 @@ class Sketchup::Camera
   # The focal_length method is used to get the focal length in millimeters of
   # perspective Camera.
   #
-  # This value is computed based on the field of view (see the fov method) and
-  # the image width (see image_width).
+  # This value is computed on the fly based on the camera {#fov} value and
+  # the camera {#image_width} value.
   #
   # @example
+  #   # Calculate focal length based on camera's current #image_width.
   #   camera = Sketchup::Camera.new
-  #   l = camera.focal_length
-  #   if (l)
-  #     UI.messagebox l.to_s
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   focal_length = camera.focal_length
   #
-  # @param length
-  #   The focal length for the camera if successful.
+  #   # If you want the 35 mm focal length equivalent, a common measurement of
+  #   # camera field of view, you can instead calculate it from the #fov angle.
+  #   camera = Sketchup.active_model.active_view.camera
+  #   focal_length_35_eqv = 36.0 / (2 * Math.tan(camera.fov.degrees / 2))
   #
-  # @return nil
+  # @return [Float]
   #
   # @version SketchUp 6.0
   def focal_length(length)
   end
 
-  # The focal_length= method allows you to sent the focal length (in
-  # millimeters) of a perspective camera. It must be between 1 and 3000,
-  # inclusive. This is an alternate way of setting the field of view.
+  # The {#focal_length=} method allows you to set the field of view by specifying
+  # a focal length in millimeters. Focal length must be between 1 and 3000,
+  # inclusive.
+  #
+  # The camera {#fov} value is set based on the provided +focal_length+ and
+  # the current {#image_width} for the camera.
   #
   # @example
-  #   camera = Sketchup::Camera.new
-  #   l = camera.focal_length=120
-  #   if (l)
-  #     UI.messagebox l
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   # Set field of view from focal length using camera's current #image_width.
+  #   camera = Sketchup.active_model.active_view.camera
+  #   camera.focal_length = 120
   #
-  # @param [Float] value
+  #   # If you instead want to set the 35 mm focal length equivalent, a common
+  #   # measurement of camera field of view, you can first convert it to an angle
+  #   # and use #fov=.
+  #   camera = Sketchup.active_model.active_view.camera
+  #   focal_length_35_eqv = 120
+  #   camera.fov = 2 * Math.atan(36.0 / (2 * focal_length_35_eqv)).radians
   #
-  # @return length - the new focal length for the camera if
-  #   successful
+  # @param [Float] focal_length
   #
   # @version SketchUp 6.0
-  def focal_length=(value)
+  def focal_length=(focal_length)
   end
 
-  # The fov method retrieves the field of view of the camera (in degrees).
+  # The {#fov} method retrieves the field of view of the Camera.
   #
   # This is only applicable to perspective cameras.
   #
   # @example
   #   camera = Sketchup::Camera.new
   #   fov = camera.fov
-  #   if (fov)
-  #     UI.messagebox fov.to_s
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
-  # @return fov - field of view, in degrees, if successful
+  # @return [Float] Field of view in degrees
   #
   # @version SketchUp 6.0
   def fov
   end
 
-  # The fov= method sets the field of view, in millimeters, for a Camera. It
-  # must be between 1 and 120, inclusive.
+  # The {#fov=} method sets the field of view for a Camera. Field of view
+  # must be between 1 and 120 degrees, inclusive.
   #
   # This is only valid on a perspective camera.
   #
   # @example
   #   camera = Sketchup::Camera.new
   #   fov = camera.fov = 56.78
-  #   if (fov)
-  #     UI.messagebox fov.to_s
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
-  # @param fov
-  #   A field of view in millimeters.
-  #
-  # @return fov - the new field of view if successful
+  # @param [Numeric] fov
+  #   Field of view in degrees
   #
   # @version SketchUp 6.0
   def fov=(fov)
   end
 
-  # The fov_is_height? method indicates whether the field of view is horizontal
-  # or vertical.
+  # The {#fov_is_height?} method indicates whether the field of view is
+  # measured vertically, as opposed horizontally.
   #
   # @example
   #   camera = Sketchup.active_model.active_view.camera
@@ -256,98 +211,76 @@ class Sketchup::Camera
   #     # Compute the vertical FOV.
   #   end
   #
-  # @return [Boolean] bool - true if vertical, false otherwise
+  # @return [Boolean]
   #
   # @version SketchUp 2015
   def fov_is_height?
   end
 
-  # The height method retrieves the height of a Camera in inches.
+  # The {#height} method retrieves the height of a Camera.
   #
   # This is only valid if it is not a perspective camera.
   #
   # @example
   #   camera = Sketchup::Camera.new
   #   camera.perspective = false
-  #   h = camera.height
-  #   if (h)
-  #     UI.messagebox h.to_s
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   height = camera.height
   #
-  # @return height - height in current units if successful
+  # @return [Float] height in inches.
   #
   # @version SketchUp 6.0
   def height
   end
 
-  # The height= method is used to set the height for the Camera in inches.
+  # The {#height=} method is used to set the height for the Camera in inches.
   #
   # This is only valid if it is not a perspective camera.
   #
   # @example
   #   camera = Sketchup::Camera.new
   #   camera.perspective = false
-  #   h = camera.height = 20
-  #   if (h)
-  #     UI.messagebox h.to_s
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   camera.height = 20
   #
   # @param [Float] value
-  #
-  # @return height - height in current units if successful
   #
   # @version SketchUp 6.0
   def height=(value)
   end
 
-  # The image_width method retrieves the size of the image on the image plane of
-  # the Camera.
+  # The {#image_width} method returns the width of the image, as used to
+  # calculate the {#focal_length}. This value has no effect on how the view
+  # is displayed in SketchUp.
   #
-  # By default, this value is not set. If it is set, it is used in the
-  # calculation of the focal length from the field of view. Unlike most length
-  # values in SketchUp, the image_width and focal_length values are specified in
-  # millimeters rather than in inches.
+  # The default value, 0, is interpreted by SketchUp as 36 mm (the width of
+  # traditional 35 mm film).
   #
   # @example
   #   camera = Sketchup::Camera.new
-  #   w = camera.image_width
-  #   if (w)
-  #     UI.messagebox w.to_s
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   width = camera.image_width
   #
-  # @return width - the width of the camera if successful
+  # @return [Float] Width in mm.
   #
   # @version SketchUp 6.0
   def image_width
   end
 
-  # The image_width= method is used to set the size of the image on the "film"
-  # for a perspective camera.
+  # The {#image_width=} method is used to set the width of the image, as used to
+  # calculate the {#focal_length}. This value has no effect on how the view
+  # is displayed in SketchUp.
   #
-  # The value is given in millimeters. It is used in the conversions between
-  # field of view and focal length.
+  # The default value, 0, is interpreted by SketchUp as 36 mm (the width of
+  # traditional 35 mm film).
   #
   # @example
   #   camera = Sketchup::Camera.new
-  #   w = camera.image_width=1.0
-  #   if (w)
-  #     UI.messagebox w.to_s
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   camera.image_width = 1.0
+  #   focal_length = camera.focal_length
   #
-  # @param [Float] value
-  #
-  # @return width - the width of the camera if successful
+  # @param [Float] image_width
+  #   Width in mm.
   #
   # @version SketchUp 6.0
-  def image_width=(value)
+  def image_width=(image_width)
   end
 
   # Returns a new camera with eye (where the camera is) and targets (where the
@@ -359,7 +292,7 @@ class Sketchup::Camera
   #   up = Z_AXIS
   #   camera = Sketchup::Camera.new(eye, target, up)
   #
-  # @example Default paramaters
+  # @example Arbitrary camera
   #   camera = Sketchup::Camera.new
   #
   # @overload initialize
@@ -379,59 +312,52 @@ class Sketchup::Camera
   def initialize(*args)
   end
 
-  # The is_2d? method indicates if the camera is in 2d mode. 2 point
-  # perspective mode and PhotoMatch mode are 2d cameras.
+  # The {#is_2d?} method indicates if the camera two-point perspective or match photo
+  # mode.
   #
   # @example
   #   Sketchup.active_model.active_view.camera.is_2d?
   #
-  # @return [Boolean] Boolean - true if camera is in 2d mode, false otherwise
+  # @return [Boolean]
   #
   # @version SketchUp 2015
   def is_2d?
   end
 
-  # The perspective= method is used to set whether or not this is a perspective
-  # camera or an orthographic camera.
+  # The {#perspective=} method is used to set whether or not this is a
+  # perspective camera or an orthographic camera.
   #
   # @example
   #   camera = Sketchup::Camera.new
-  #   status = camera.perspective = false
-  #   if (status)
-  #     UI.messagebox "Perspective"
-  #   else
-  #     UI.messagebox "Orthographic"
-  #   end
+  #   camera.perspective = false
   #
-  # @param perspective
-  #   true for perspective, false for orthographic
+  # @param [Boolean] perspective
   #
-  # @return status - true if perspective, false if orthographic
   #
   # @version SketchUp 6.0
   def perspective=(perspective)
   end
 
-  # The perspective? method is used to determine whether a camera is a
+  # The {#perspective?} method is used to determine whether a camera is a
   # perspective or orthographic camera.
   #
   # @example
   #   camera = Sketchup::Camera.new
   #   status = camera.perspective?
   #   if (status)
-  #     UI.messagebox "Perspective"
+  #     puts "Perspective"
   #   else
-  #     UI.messagebox "Orthographic"
+  #     puts "Orthographic"
   #   end
   #
-  # @return [Boolean] status - true if perspective, false if orthographic
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def perspective?
   end
 
-  # The scale_2d method returns a float indicating the scaling factor of 2d
-  # cameras.
+  # The {#scale_2d} method returns a float indicating the scaling factor of 2
+  # point perspective cameras.
   #
   # When the camera is in two-point perspective and the user uses the zoom tools,
   # this value will change. Zooming out will produce a value greater than 1.0.
@@ -471,67 +397,48 @@ class Sketchup::Camera
   def set(eye, target, up)
   end
 
-  # The target method retrieves Point3d that the camera is pointing at.
+  # The {#target} method retrieves Point3d that the camera is pointing at.
   #
   # @example
   #   camera = Sketchup::Camera.new
-  #   # Target point is 0,0,0
-  #   t = camera.target
-  #   if (t)
-  #     UI.messagebox t.to_s
-  #   else
-  #     UI.messagebox "Failure".
-  #   end
+  #   target = camera.target
   #
-  # @return target - a Point3d object if successful
+  # @return [Geom::Point3d]
   #
   # @version SketchUp 6.0
   def target
   end
 
-  # The up method is used to retrieve the up vector for the camera. This is the
-  # direction that the top of the camera is facing.
+  # The {#up} method is used to retrieve the up vector for the camera. This is
+  #  the direction that the top of the camera is facing.
   #
   # @example
   #   camera = Sketchup::Camera.new
-  #   # 0.0, 1.0, 0.0
   #   up = camera.up
-  #   if (up)
-  #     UI.messagebox up.to_s
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
-  # @return up - a Vector3d object if successful
+  # @return [Geom::Vector3d]
   #
   # @version SketchUp 6.0
   def up
   end
 
-  # The xaxis method is used to retrieve the x axis of the camera coordinate
-  # system defined by the camera's direction and up vector.
+  # The {#xaxis} method is used to retrieve the x axis of the camera coordinate
+  # system.
   #
   # This value is computed from the cross product between the camera direction
   # and the up vector.
   #
   # @example
   #   camera = Sketchup::Camera.new
-  #   # 1.0, 0.0, 0.0
-  #   v = camera.xaxis
-  #   if (v)
-  #     UI.messagebox v.to_s
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   xaxis = camera.xaxis
   #
-  # @return vector - a Vector3d object if successful
+  # @return [Geom::Vector3d] ]
   #
   # @version SketchUp 6.0
   def xaxis
   end
 
-  # The yaxis method retrieves the y axis of the camera coordinate system
-  # defined by the camera's direction and up vector.
+  # The {#yaxis} method retrieves the y axis of the camera coordinate system.
   #
   # This value is computed to be perpendicular the camera x and z axes. It is
   # equivalent to the up direction, but is computed to make sure that it is
@@ -540,21 +447,15 @@ class Sketchup::Camera
   # @example
   #   camera = Sketchup::Camera.new
   #   # 0.0, 1.0, 0.0
-  #   v = camera.yaxis
-  #   if (v)
-  #     UI.messagebox v.to_s
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   yaxis = camera.yaxis
   #
-  # @return vector - a Vector3d object if successful
+  # @return [Geom::Vector3d] ]
   #
   # @version SketchUp 6.0
   def yaxis
   end
 
-  # The zaxis method retrieves the z axis of the camera coordinate system
-  # defined by the camera's direction and up vector.
+  # The {#zaxis} method retrieves the z axis of the camera coordinate system.
   #
   # This value is computed. It is the same as Camera.direction
   #
