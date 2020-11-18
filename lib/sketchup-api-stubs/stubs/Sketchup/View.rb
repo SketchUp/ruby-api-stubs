@@ -800,7 +800,7 @@ class Sketchup::View
   #
   # @see #draw
   #
-  # @version 2020.0
+  # @version SketchUp 2020.0
   def load_texture(image_rep)
   end
 
