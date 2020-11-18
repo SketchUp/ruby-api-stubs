@@ -38,7 +38,12 @@ class Sketchup::Styles < Sketchup::Entity
   def [](arg)
   end
 
-  # The #{active_style} method is used to retrieve the active style.
+  # The {#active_style} method is used to retrieve the active style.
+  #
+  # While {#selected_style} is the style being selected in the Style Browser,
+  # the #{active_style} is a different object also including any unsaved style
+  # changes. These changes are silently dropped once a new style is selected.
+  # To save these changes to the selected style, call #{update_selected_style}.
   #
   # @example
   #   styles = Sketchup.active_model.styles
@@ -152,7 +157,8 @@ class Sketchup::Styles < Sketchup::Entity
   def purge_unused
   end
 
-  # The {#selected_style} method is used to retrieve the currently selected style.
+  # The {#selected_style} method is used to retrieve the style currently
+  # selected in the Styles Browser.
   #
   # @example
   #   styles = Sketchup.active_model.styles

@@ -193,17 +193,42 @@ class Sketchup::Page < Sketchup::Entity
   def label
   end
 
-  # The layers method retrieves the non-visible layers associated with a page.
+  # The {#layer_folders} method retrieves the hidden layer folders
+  # associated with a page.
   #
   # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
-  #   page = pages.add "My Page"
-  #   layers = page.layers
-  #   # layers now contains the layers in the model that are
-  #   # set to non-visible on the page
+  #   page = pages.add("My Page")
+  #   folders = page.layer_folders
   #
-  # @return layers - an array with zero or more Layers objects.
+  # @return [Array<Sketchup::LayerFolder>, nil] Returns +nil+ if {#use_hidden?}
+  #   returns +false+
+  #
+  # @version SketchUp 2021.0
+  def layer_folders
+  end
+
+  # The {#layers} method retrieves layers that don't use their default visibility
+  # on this page.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   pages = model.pages
+  #   page = pages.add("My Page")
+  #   layers = page.layers
+  #
+  # @example Test layer visibility
+  #   def visible_in_scene?(layer, scene)
+  #     scene.layers.include?(layer) == hidden_by_default?(layer)
+  #   end
+  #
+  #   def hidden_by_default?(layer)
+  #     layer.page_behavior & LAYER_HIDDEN_BY_DEFAULT == LAYER_HIDDEN_BY_DEFAULT
+  #   end
+  #
+  # @return [Array<Sketchup::Layer>, nil] Returns +nil+ if {#use_hidden?} returns
+  #   +false+
   #
   # @version SketchUp 6.0
   def layers
@@ -279,26 +304,31 @@ class Sketchup::Page < Sketchup::Entity
   def set_drawingelement_visibility(element, visibility)
   end
 
-  # The set_visibility method sets the visibility for a layer on a page.
+  # The {#set_visibility} method sets the visibility for a layer or
+  # layer folder on a page.
   #
   # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
-  #   page = pages.add "My Page"
-  #   layer = page.layers[0]
-  #   visibility = true
-  #   page = page.set_visibility layer, visibility
+  #   page = pages.add("My Page")
+  #   layer = model.layers.add("My Layer")
+  #   page.set_visibility(layer, false)
   #
-  # @param layer
-  #   The layer whose visibility you are setting.
+  # @overload set_visibility(layer, visible_for_page)
   #
-  # @param visibility
-  #   true if you want items on the layer to be visible, false if you do not want items visible.
+  #   @param [Sketchup::Layer] layer
+  #   @param [Boolean] visible_for_page
   #
-  # @return page - the page whose visibility was set.
+  # @overload set_visibility(layer_folder, visible_for_page)
+  #
+  #   @version SketchUp 20201.0
+  #   @param [Sketchup::LayerFolder] layer_folder
+  #   @param [Boolean] visible_for_page
+  #
+  #   @return [Sketchup::Page] the page whose visibility was set.
   #
   # @version SketchUp 6.0
-  def set_visibility(layer, visibility)
+  def set_visibility(arg1, arg2)
   end
 
   # The shadow_info method retrieves the ShadowInfo object for the page.
@@ -365,24 +395,21 @@ class Sketchup::Page < Sketchup::Entity
   def transition_time=(trans_time)
   end
 
-  # The update method performs an update on the page properties based on the
-  # current view that the user has. Which parts of the Page get updated are
-  # controlled via an integer whose bits represent which parts to update. You
-  # can determine the integer you need to pass by adding these numbers together:
+  # The {#update} method performs an update on the page properties based on the
+  # current view that the user has. What properties of the Page get updated are
+  # controlled via an integer whose bits corresponds to different properties.
+  # These flags can be used individually or combined using bitwise OR.
   #
-  #   - 1 - Camera Location,
-  #   - 2 - Drawing Style,
-  #   - 4 - Shadow Settings,
-  #   - 8 - Axes Location,
-  #   - 16 - Hidden Geometry & Objects,
-  #   - 32 - Visible Layers,
-  #   - 64 - Active Section Planes,
-  #   - 128 - Hidden Geometry,
-  #   - 256 - Hidden Objects
-  #
-  # The bit code values are added together to provide the flags value.  For
-  # example, to update the Camera Location, Axes Location, and Active Section
-  # Planes properties, the flag would be 73 (1 + 8 + 64).
+  #   PAGE_USE_CAMERA            # Camera Location
+  #   PAGE_USE_RENDERING_OPTIONS # Drawing Style
+  #   PAGE_USE_SHADOWINFO        # Shadow Setting
+  #   PAGE_USE_SKETCHCS          # Axes Location
+  #   PAGE_USE_HIDDEN            # Hidden Geometry & Objects (Up 2019 and older)
+  #   PAGE_USE_HIDDEN_GEOMETRY   # Hidden Geometry (SU 2020 and later)
+  #   PAGE_USE_HIDDEN_OBJECTS    # Hidden Objects (SU 2020 and later)
+  #   PAGE_USE_LAYER_VISIBILITY  # Visible Layers
+  #   PAGE_USE_SECTION_PLANES    # Active Section Planes
+  #   PAGE_USE_ALL               # All possible scene properties
   #
   # @example
   #   model = Sketchup.active_model
@@ -390,14 +417,14 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   status = page.update
   #
-  #   # Updates Camera Location (+1), Shadow Settings(+4),
-  #   # and Visible Layers (+32).
-  #   status = page.update(37)
+  #   # Updates Camera Location, Shadow Settings and Visible Layers.
+  #   flags = PAGE_USE_CAMERA | PAGE_USE_SHADOWINFO | PAGE_USE_LAYER_VISIBILITY
+  #   status = page.update(flags)
   #
-  # @param flags
-  #   Integer representing the sum of the bit flags.
+  # @param [Integer] flags
+  #   The bitwise OR of the bit flags.
   #
-  # @return status - true if successful, false if unsuccessful
+  # @return [Boolean]
   #
   # @version SketchUp 6.0
   def update(flags)

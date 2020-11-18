@@ -155,20 +155,13 @@ class Sketchup::Edge < Sketchup::Drawingelement
   def explode_curve
   end
 
-  # The faces method is used to retrieve all of the faces common to the edge.
+  # The {#faces} method is used to retrieve all of the faces common to the edge.
   #
   # @example
-  #   edge = Sketchup.active_model.entities.add_line([0,0,0],[100,100,0])
+  #   edge = Sketchup.active_model.entities.add_line([0, 0, 0], [100, 100, 0])
   #   faces = edge.faces
-  #   if (faces)
-  #     # Display the pointer to the first face returned in the array
-  #     UI.messagebox faces[0]
-  #   else
-  #     UI.messagebox "Failure: No Faces Found"
-  #   end
   #
-  # @return [Array<Sketchup::Face>] an array of Face objects if successful, false
-  #   if unsuccessful
+  # @return [Array<Sketchup::Face>]
   #
   # @version SketchUp 6.0
   def faces
@@ -229,8 +222,9 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #
   # @overload length(transform)
   #
-  #   @param transform [Geom::Transformation] A Transformation object or array
-  #                       that can be interpreted as a Transformation object.
+  #   @param [Geom::Transformation] transform
+  #     A Transformation object or array that can be interpreted as a
+  #     Transformation object.
   #   @return [Length] the length of the edge
   #
   # @version SketchUp 6.0
@@ -416,7 +410,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   def soft?
   end
 
-  # The split method is used to  to split an edge into to or more distinct
+  # The split method is used to  to split an edge into two or more distinct
   # edges. If a Point3d is given, it must be a point that is on the Edge.
   #
   # If a Float is given, it is a number between 0 and 1 that gives the

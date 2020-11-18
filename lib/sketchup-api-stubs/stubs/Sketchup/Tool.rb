@@ -32,12 +32,15 @@
 # - +ALT_MODIFIER_KEY+ = Command on Mac, Alt on PC
 # - +ALT_MODIFIER_MASK+ = Command on Mac, Alt on PC
 #
+# @abstract Implement the methods described in this class to create a tool.
+#   You can not sub-class this class because it is not defined by the API.
+#
 # @version SketchUp 6.0
 class Sketchup::Tool
 
   # Instance Methods
 
-  # The #{activate} method is called by SketchUp when the tool is selected.
+  # The {#activate} method is called by SketchUp when the tool is selected.
   # It is a good place to put most of your initialization, such as instance
   # variables to track the state of the tool.
   #
@@ -50,7 +53,7 @@ class Sketchup::Tool
   def activate
   end
 
-  # The #{deactivate} method is called when the tool is deactivated because a
+  # The {#deactivate} method is called when the tool is deactivated because a
   # different tool was selected.
   #
   # @example
@@ -102,7 +105,7 @@ class Sketchup::Tool
   def draw(view)
   end
 
-  # The #{enableVCB?} method is used to tell SketchUp whether to allow the user
+  # The {#enableVCB?} method is used to tell SketchUp whether to allow the user
   # to enter text into the VCB (value control box, aka the "measurements" panel).
   # If you do not implement this method, then the vcb is disabled by default.
   #
@@ -141,7 +144,7 @@ class Sketchup::Tool
   def getExtents
   end
 
-  # The #{getInstructorContentDirectory} method is used to tell SketchUp the
+  # The {#getInstructorContentDirectory} method is used to tell SketchUp the
   # directory containing your Tool's instructor content. To use this, create
   # a custom instructor directory, put an index.html file inside of it, and then
   # return that path via this method. If the SketchUp user has the Instructor
@@ -165,7 +168,7 @@ class Sketchup::Tool
   def getInstructorContentDirectory
   end
 
-  # The #{getMenu} method is called by SketchUp to let the tool provide its own
+  # The {#getMenu} method is called by SketchUp to let the tool provide its own
   # context menu. Most tools will not want to implement this method and,
   # instead, use the normal context menu found on all entities.
   #
@@ -250,6 +253,9 @@ class Sketchup::Tool
   #   actually executed. If you need to do something with the model after an undo
   #   use {Sketchup::ModelObserver#onTransactionUndo}.
   #
+  # @note When {#onKeyDown} is implemented and returns +true+, pressing Esc
+  #   doesn't trigger {#onCancel}.
+  #
   # @param [Integer] reason
   #   A reason value (see comments).
   #
@@ -259,7 +265,7 @@ class Sketchup::Tool
   def onCancel(reason, view)
   end
 
-  # The #{onKeyDown} method is called by SketchUp when the user presses a key on
+  # The {#onKeyDown} method is called by SketchUp when the user presses a key on
   # the keyboard. If you want to get input from the VCB, you should implement
   # onUserText rather than this method.
   #
@@ -320,7 +326,7 @@ class Sketchup::Tool
   def onKeyDown(key, repeat, flags, view)
   end
 
-  # The #{onKeyUp} method is called by SketchUp when the user releases a key on
+  # The {#onKeyUp} method is called by SketchUp when the user releases a key on
   # the keyboard.
   #
   # @example
@@ -352,7 +358,7 @@ class Sketchup::Tool
   def onKeyUp(key, repeat, flags, view)
   end
 
-  # The #{onLButtonDoubleClick} is called by SketchUp when the user double clicks
+  # The {#onLButtonDoubleClick} is called by SketchUp when the user double clicks
   # with the left mouse button.
   #
   # @example
@@ -379,7 +385,7 @@ class Sketchup::Tool
   def onLButtonDoubleClick(flags, x, y, view)
   end
 
-  # The #{onLButtonDown} method is called by SketchUp when the left mouse button
+  # The {#onLButtonDown} method is called by SketchUp when the left mouse button
   # is pressed. Most tools will implement this method.
   #
   # @example
@@ -406,7 +412,7 @@ class Sketchup::Tool
   def onLButtonDown(flags, x, y, view)
   end
 
-  # The #{onLButtonUp} method is called by SketchUp when the left mouse button is
+  # The {#onLButtonUp} method is called by SketchUp when the left mouse button is
   # released.
   #
   # @example
@@ -433,7 +439,7 @@ class Sketchup::Tool
   def onLButtonUp(flags, x, y, view)
   end
 
-  # The #{onMButtonDoubleClick} method is called by SketchUp when the middle
+  # The {#onMButtonDoubleClick} method is called by SketchUp when the middle
   # mouse button (on a three button mouse) is double-clicked.
   #
   # Only implement this method if you want SketchUp to react to a middle mouse
@@ -468,7 +474,7 @@ class Sketchup::Tool
   def onMButtonDoubleClick(flags, x, y, view)
   end
 
-  # The #{onMButtonDown} method is called by SketchUp when the middle mouse
+  # The {#onMButtonDown} method is called by SketchUp when the middle mouse
   # button (on a three button mouse) is down.
   #
   # The Orbit tool is activated by default when the middle mouse button is down.
@@ -499,7 +505,7 @@ class Sketchup::Tool
   def onMButtonDown(flags, x, y, view)
   end
 
-  # The #{onMButtonUp} method is called by SketchUp when the middle mouse button
+  # The {#onMButtonUp} method is called by SketchUp when the middle mouse button
   # (on a three button mouse) is released.
   #
   # SketchUp returns to the previous tool from the Orbit tool when the middle
@@ -531,7 +537,7 @@ class Sketchup::Tool
   def onMButtonUp(flags, x, y, view)
   end
 
-  # The #{onMouseEnter} method is called by SketchUp when the mouse enters the
+  # The {#onMouseEnter} method is called by SketchUp when the mouse enters the
   # viewport.
   #
   # @example
@@ -545,7 +551,7 @@ class Sketchup::Tool
   def onMouseEnter(view)
   end
 
-  # The #{onMouseLeave} method is called by SketchUp when the mouse leaves the
+  # The {#onMouseLeave} method is called by SketchUp when the mouse leaves the
   # viewport.
   #
   # @example
@@ -559,7 +565,7 @@ class Sketchup::Tool
   def onMouseLeave(view)
   end
 
-  # The #{onMouseMove} method is called by SketchUp whenever the mouse is moved.
+  # The {#onMouseMove} method is called by SketchUp whenever the mouse is moved.
   # You will often want to implement this method.
   #
   # Try to make this method as efficient as possible because this method is
@@ -589,7 +595,7 @@ class Sketchup::Tool
   def onMouseMove(flags, x, y, view)
   end
 
-  # The #{onMouseWheel} method is called by SketchUp when the mouse scroll wheel
+  # The {#onMouseWheel} method is called by SketchUp when the mouse scroll wheel
   # is used.
   #
   # @example
@@ -660,7 +666,7 @@ class Sketchup::Tool
   def onMouseWheel(flags, delta, x, y, view)
   end
 
-  # The #{onRButtonDoubleClick} is called by SketchUp when the user double clicks
+  # The {#onRButtonDoubleClick} is called by SketchUp when the user double clicks
   # with the right mouse button.
   #
   # @example
@@ -687,7 +693,7 @@ class Sketchup::Tool
   def onRButtonDoubleClick(flags, x, y, view)
   end
 
-  # The #{onRButtonDown} method is called by SketchUp when the user presses
+  # The {#onRButtonDown} method is called by SketchUp when the user presses
   # the right mouse button. Implement this method, along with the tool.getMenu
   # method, when you want your tool to do something other than display the
   # default context menu when the right mouse button is clicked.
@@ -716,7 +722,7 @@ class Sketchup::Tool
   def onRButtonDown(flags, x, y, view)
   end
 
-  # The #{onRButtonUp} method is called by SketchUp when the user releases the
+  # The {#onRButtonUp} method is called by SketchUp when the user releases the
   # right mouse button.
   #
   # @example
@@ -760,7 +766,7 @@ class Sketchup::Tool
   def onReturn(view)
   end
 
-  # The #{onSetCursor} method is called by SketchUp when the tool wants to set
+  # The {#onSetCursor} method is called by SketchUp when the tool wants to set
   # the cursor.
   #
   # @example
@@ -783,7 +789,7 @@ class Sketchup::Tool
   #   def onUserText(text, view)
   #     @distance = text.to_l
   #   rescue ArgumentError
-  #     view.tooltop = 'Invalid length'
+  #     view.tooltip = 'Invalid length'
   #   end
   #
   # @param [String] text
@@ -796,7 +802,7 @@ class Sketchup::Tool
   def onUserText(text, view)
   end
 
-  # The #{resume} method is called by SketchUp when the tool becomes active again
+  # The {#resume} method is called by SketchUp when the tool becomes active again
   # after being suspended.
   #
   # @example
@@ -810,7 +816,7 @@ class Sketchup::Tool
   def resume(view)
   end
 
-  # The #{suspend} method is called by SketchUp when the tool temporarily becomes
+  # The {#suspend} method is called by SketchUp when the tool temporarily becomes
   # inactive because another tool has been activated. This typically happens
   # when a viewing tool is activated, such as when orbit is active due to the
   # middle mouse button.

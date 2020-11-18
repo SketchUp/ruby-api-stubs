@@ -168,17 +168,11 @@ class Sketchup::DimensionLinear < Sketchup::Dimension
   #
   # @example
   #   dim.offset_vector = Geom::Vector3d.new(0, 0, 10)
-  #   # or
-  #   dim.offset_vector = [0, 0, 10]
   #
-  # @param vec
-  #   the offset vector to be set, either a Vector3d or in
-  #   array form.
-  #
-  # @return the offset vector that was set
+  # @param [Geom::Vector3d] offset_vector
   #
   # @version SketchUp 2014
-  def offset_vector=(vec)
+  def offset_vector=(offset_vector)
   end
 
   # The start method returns the point or entity the dimension is referencing at

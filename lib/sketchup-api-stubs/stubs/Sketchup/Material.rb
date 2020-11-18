@@ -358,20 +358,18 @@ class Sketchup::Material < Sketchup::Entity
   #
   # @overload texture=(filename)
   #
-  #   @param filename [String] The file path to the texture the material should use.
-  #   @return [String]
+  #   @param [String] filename
+  #     The file path to the texture the material should use.
   #
   # @overload texture=(properties)
   #
-  #   @param properties [Array(String, Integer, Integer)] An array with the
-  #     texture filename and optionally the width and height in model units.
-  #   @return [Array(String, Integer, Integer)]
+  #   @param [Array(String, Length, Length)] properties
+  #     An array with the texture file path and optionally the width and height.
   #
   # @overload texture=(image_rep)
   #
   #   @param [Sketchup::ImageRep] image_rep The pixel data representing the
   #     texture. (Added in SketchUp 2018)
-  #   @return [Sketchup::ImageRep]
   #
   # @version SketchUp 6.0
   def texture=(arg)
@@ -401,8 +399,8 @@ class Sketchup::Material < Sketchup::Entity
   #     material.write_thumbnail(thumbnail_file, 128)
   #   }
   #
-  # @param [String] filename
-  #   The file name for the thumbnail.
+  # @param [String] path
+  #   The file path for the thumbnail.
   #
   # @param [Integer] resolution
   #   The resolution of the thumbnail.
@@ -410,7 +408,7 @@ class Sketchup::Material < Sketchup::Entity
   # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 8.0 M1
-  def write_thumbnail(filename, resolution)
+  def write_thumbnail(path, resolution)
   end
 
 end

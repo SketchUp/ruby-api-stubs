@@ -205,9 +205,8 @@ class Layout::Label < Layout::Entity
   #   @param [Geom::Bounds2d] bounds
   #   @return [Layout::Label]
   #
-  # @overload initialize(text, leader_type, target_point, anchor_point,
+  # @overload initialize(text, leader_type, target_point, anchor_point, anchor_type)
   #
-  #   anchor_type)
   #   @param [String] text The label text
   #   @param [Integer] leader_type The leader line type
   #   @param [Geom::Point2d] target_point Where the label leader should point to

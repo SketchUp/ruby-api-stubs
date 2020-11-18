@@ -1,10 +1,11 @@
 # Copyright:: Copyright 2020 Trimble Inc.
 # License:: The MIT License (MIT)
 
-# This observer interface is implemented to react to entity events. To
-# implement this observer, create a Ruby class of this type, override the
-# desired methods, and add an instance of the observer to the entity of
-# interests.
+# This observer interface is implemented to react to entity events.
+#
+# @abstract To  implement this observer, create a Ruby class of this type, override the
+#   desired methods, and add an instance of the observer to the entity of
+#   interests.
 #
 # @example
 #   class MyEntityObserver < Sketchup::EntityObserver

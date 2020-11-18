@@ -70,8 +70,7 @@ class Sketchup::OptionsManager
   # @example
   #   model = Sketchup.active_model
   #   manager = model.options
-  #   # Retrieves each provider
-  #   manager.each { |provider| UI.messagebox provider.name }
+  #   manager.each { |provider| puts provider.name }
   #
   # @return nil
   #

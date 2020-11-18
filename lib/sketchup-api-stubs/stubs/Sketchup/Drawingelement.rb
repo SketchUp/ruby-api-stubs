@@ -11,8 +11,14 @@ class Sketchup::Drawingelement < Sketchup::Entity
 
   # Instance Methods
 
-  # The bounds method is used to retrieve the BoundingBox for an drawing
-  # element.
+  # The {#bounds} method is used to retrieve the {Geom::BoundingBox} bounding a
+  # {Sketchup::Drawingelement}.
+  #
+  # For a {Sketchup::Edge}, {Sketchup::ComponentInstance} and most other
+  # {Sketchup::Drawingelement}s, the boundingbox follows the coordinate system
+  # the drawing element is placed in.
+  # For {Sketchup::ComponentDefinition}, the box bounds the contents of the
+  # component and follows the component's own internal coordinate system.
   #
   # @example
   #   depth = 100
@@ -31,7 +37,7 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #   # is a sub-class of Drawingelement.
   #   boundingbox = face.bounds
   #
-  # @return [Geom::BoundingBox] A BoundingBox object if successful
+  # @return [Geom::BoundingBox]
   #
   # @version SketchUp 6.0
   def bounds

@@ -1,8 +1,9 @@
 # Copyright:: Copyright 2020 Trimble Inc.
 # License:: The MIT License (MIT)
 
-# The Entities class is a container class for all entities in a model (it is a
-# collection of Entity objects).
+# The {Sketchup::Entities} class is a collection of Entity objects, either in a
+# {Sketchup::ComponentDefinition} or directly in the {Sketchup::Model}. A
+# {Sketchup::Entities} object corresponds to a drawing context in the GUI.
 #
 # @version SketchUp 6.0
 class Sketchup::Entities
@@ -540,8 +541,8 @@ class Sketchup::Entities
   #     UI.messagebox "Failure"
   #   end
   #
-  # @param [String] filename
-  #   A filename for the image file.
+  # @param [String] path
+  #   A path for the image file.
   #
   # @param [Geom::Point3d] point
   #   A Point3d object representing the insertion point of
@@ -558,7 +559,7 @@ class Sketchup::Entities
   # @return [Sketchup::Image, nil] an Image object if successful.
   #
   # @version SketchUp 6.0
-  def add_image(filename, point, width, height = 0.0)
+  def add_image(path, point, width, height = 0.0)
   end
 
   # The add_instance method adds a component instance to the collection of
@@ -806,8 +807,8 @@ class Sketchup::Entities
   def count
   end
 
-  # The each method is used to iterate through the entities in the collection of
-  # entities.
+  # The {#each} method is used to iterate through the entities in the collection
+  # of entities.
   #
   # @example
   #   coordinates = [10, 10, 10]
@@ -815,7 +816,12 @@ class Sketchup::Entities
   #   entities = model.entities
   #   point = Geom::Point3d.new coordinates
   #   text = entities.add_text "This is a Test", point
-  #   entities.each { | entity| UI.messagebox entity }
+  #   entities.each { | entity| puts entity }
+  #
+  # @note Don't remove content from this collection while iterating over it with
+  #   {#each}. This would change the size of the collection and cause elements to
+  #   be skipped as the indices change. Instead copy the current collection to an
+  #   array using +to_a+ and then use +each+ on the array, when removing content.
   #
   # @return [nil]
   #
@@ -1045,8 +1051,15 @@ class Sketchup::Entities
   # sub-entities all at once.
   #
   # @example
-  #   # Need better Ruby example.
-  #   entities = entities.transform_by_vectors sub_entities, vector_array
+  #   # Raise vertices in selection by their distance to the origin.
+  #   model = Sketchup.active_model
+  #   entities = model.active_entities
+  #   with_vertices = entities.select { |entity| entity.respond_to?(:vertices) }
+  #   vertices = with_vertices.flat_map(&:vertices).uniq
+  #   lengths = vertices.map { |vertex| vertex.position.distance(ORIGIN) }
+  #   vectors = lengths.map { |length| Geom::Vector3d.new(0, 0, length) }
+  #
+  #   entities.transform_by_vectors(vertices, vectors)
   #
   # @param [Array<Sketchup::Entity>] sub_entities
   #   An array of entities to transform.
@@ -1063,24 +1076,18 @@ class Sketchup::Entities
   # The transform_entities method is used to apply a transform to several
   # sub-entities all at once.
   #
-  # Important note: If you apply a transformation to entities that are
-  # not in the current edit context (i.e. faces that are inside a group),
-  # SketchUp will apply the transformation incorrectly, since the geometry
-  # has one origin and the current edit context has another. You can correct
-  # for this by watching the Model.edit_transform and Model.active_path. See
-  # ModelObserver.onActivePathChanged for more information.
+  # If you are transforming entities in the active drawing context or any of its
+  # parent drawing contexts, the transformation will be interpreted as relative
+  # to the global coordinate system. Otherwise the transformation will be
+  # interpreted as being on the local coordinate system.
   #
   # @example
   #   entities = Sketchup.active_model.entities
-  #   entities.add_line([0,0,0],[100,100,100])
-  #   entities.add_line([0,0,0],[200,-10,-10])
+  #   entity1 = entities.add_line([0,0,0],[100,100,100])
+  #   entity2 = entities.add_line([0,0,0],[200,-10,-10])
   #
-  #   entities_to_transform = []
-  #   entities_to_transform.push(entities[0])
-  #   entities_to_transform.push(entities[1])
-  #
-  #   transform = Geom::Transformation.new([100,0,0])
-  #   entities.transform_entities(transform, ent1, ent2, ent3)
+  #   transformation = Geom::Transformation.new([100,0,0])
+  #   entities.transform_entities(transformation, [entity1, entity2])
   #
   # @param [Geom::Transformation] transform
   #   The Transformation to apply.
@@ -1088,7 +1095,7 @@ class Sketchup::Entities
   # @param [Array<Sketchup::Entity>] entities
   #   An array or series of entities to transform.
   #
-  # @return [Boolean] results of the transform.
+  # @return [Boolean] +false+ if the entities array was empty.
   #
   # @version SketchUp 6.0
   def transform_entities(transform, entities)
@@ -1101,9 +1108,9 @@ class Sketchup::Entities
   # meet.
   #
   # @example
-  #   entities = Sketchup.active_model.entities
+  #   model = Sketchup.active_model
   #   edges = model.selection.grep(Sketchup::Edge)
-  #   curves = entities.weld(edges)
+  #   curves = model.active_entities.weld(edges)
   #
   # @param [Array<Sketchup::Edge>] edges
   #

@@ -2,9 +2,11 @@
 # License:: The MIT License (MIT)
 
 # This observer interface is implemented to react to component definition
-# events. To implement this observer, create a Ruby class of this type,
-# override the desired methods, and add an instance of the observer to the
-# definitions of interests.
+# events.
+#
+# @abstract To implement this observer, create a Ruby class of this type,
+#   override the desired methods, and add an instance of the observer to the
+#   definitions of interests.
 #
 # @example
 #   # This is an example of an observer that watches a specific definition

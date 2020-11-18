@@ -73,12 +73,11 @@ class Sketchup::Entity
   #   status = entity1.set_attribute "testdictionary", "test", 115
   #   attrdicts = entity1.attribute_dictionaries
   #
-  # @return [Sketchup::AttributeDictionaries, nil] the AttributeDictionaries
-  #   object associated with the entity, or nil if there are
-  #   no attribute_dictionary objects associated with the
-  #   model. Care must be taken if nil is returned, for
-  #   example: invoking attribute_dictionaries.length will
-  #   throw a NoMethodError exception, not return 0.
+  # @note The return value may be either +nil+ or an empty
+  #   {Sketchup::AttributeDictionaries} collection if this entity has no
+  #   {Sketchup::AttributeDictionary}s.
+  #
+  # @return [Sketchup::AttributeDictionaries, nil]
   #
   # @version SketchUp 6.0
   def attribute_dictionaries
@@ -155,14 +154,14 @@ class Sketchup::Entity
   #
   # @overload delete_attribute(dictionary_name)
   #
-  #   @param dictionary_name [String] The name of an attribute dictionary.
-  #   @return                [Boolean]
+  #   @param [String] dictionary_name The name of an attribute dictionary.
+  #   @return [Boolean]
   #
   # @overload delete_attribute(dictionary_name, key)
   #
-  #   @param dictionary_name [String] The name of an attribute dictionary.
-  #   @param key             [String] An attribute key.
-  #   @return                [Boolean]
+  #   @param [String] dictionary_name The name of an attribute dictionary.
+  #   @param [String] key An attribute key.
+  #   @return [Boolean]
   #
   # @version SketchUp 6.0
   def delete_attribute(*args)
@@ -508,16 +507,18 @@ class Sketchup::Entity
   #   entity1 = entities[1]
   #   type = entity1.typename
   #
+  # @note Prefer +is_a?+ over +typename+ when possible as it is faster.
+  #
   # @return [String] the type of the entity
   #
   # @version SketchUp 6.0
   def typename
   end
 
-  # The valid? method is used to determine if your entity is still valid (not
-  # deleted by another script, for example.)
+  # The {#valid?} method is used to determine if your entity is still valid (not
+  # deleted by another script, for example).
   #
-  # This method is functionally identical to the deleted? method.
+  # This method is functionally the inverse to the {#deleted?} method.
   #
   # @example
   #   depth = 100

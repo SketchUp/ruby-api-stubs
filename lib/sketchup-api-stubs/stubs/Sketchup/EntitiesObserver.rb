@@ -2,9 +2,11 @@
 # License:: The MIT License (MIT)
 
 # This observer interface is implemented to react to {Sketchup::Entities}
-# collection events. To implement this observer, create a Ruby class of this
-# type, override the desired methods, and add an instance of the observer to
-# the objects of interests.
+# collection events.
+#
+# @abstract To implement this observer, create a Ruby class of this
+#   type, override the desired methods, and add an instance of the observer to
+#   the objects of interests.
 #
 # @example
 #   # This is an example of an observer that watches the entities collection

@@ -31,8 +31,10 @@ class Geom::Point3d
 
   # Class Methods
 
-  # The linear_combination method is used to create a new point as a linear
-  # combination of two points. This method is generally used to get a point at
+  # The {.linear_combination} method is used to create a new point as a linear
+  # combination of two points.
+  #
+  # This method is generally used to get a point at
   # some percentage along a line connecting the two points.
   #
   # A linear combination is a standard term for vector math. It is defined as
@@ -41,26 +43,24 @@ class Geom::Point3d
   # @example
   #   point1 = Geom::Point3d.new(1,1,1)
   #   point2 = Geom::Point3d.new(10,10,10)
-  #   # Gets the point on the line segment connecting point1 and point2 that is
-  #   # 3/4 the way from point1 to point2.
+  #
+  #   # Get the point that is half the way from point1 to point2.
+  #   points = Geom::Point3d.linear_combination(0.5, point1, 0.5, point2)
+  #
+  #   # Get the point that is 3/4 the way from point1 to point2.
   #   point = Geom::Point3d.linear_combination(0.25, point1, 0.75, point2)
-  #   if (point)
-  #     UI.messagebox(point)
-  #   else
-  #     UI.messagebox("Failure")
-  #   end
+  #
+  #   # Get the point that is 70% the way from point1 to point2.
+  #   percentage = 0.7
+  #   point = Geom::Point3d.linear_combination(1.0 - percentage, point1, percentage, point2)
   #
   # @param [Float] weight1
-  #   A weight or percentage.
   #
-  # @param [Float] point1
-  #   The start point on the line.
+  # @param [Geom::Point3d] point1
   #
   # @param [Float] weight2
-  #   A weight or percentage.
   #
-  # @param [Float] point2
-  #   The end point of the line.
+  # @param [Geom::Point3d] point2
   #
   # @return [Geom::Point3d]
   #
@@ -226,7 +226,7 @@ class Geom::Point3d
   # @param [Geom::Point3d] point2
   #   The Point3d object to compute the distance to.
   #
-  # @return [Length] the distance in current units
+  # @return [Length]
   #
   # @version SketchUp 6.0
   def distance(point2)
@@ -484,7 +484,7 @@ class Geom::Point3d
   #
   # @overload set!(point3d)
   #
-  #   @param point3d [Geom::Point3d]
+  #   @param [Geom::Point3d] point3d
   #   @return [Geom::Point3d]
   #
   # @version SketchUp 6.0

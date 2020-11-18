@@ -2,9 +2,10 @@
 # License:: The MIT License (MIT)
 
 # This observer interface is implemented to react to rendering options events.
-# To implement this observer, create a Ruby class of this type, implement the
-# desired methods, and add an instance of the observer to the objects of
-# interests.
+#
+# @abstract To implement this observer, create a Ruby class of this type, implement the
+#   desired methods, and add an instance of the observer to the objects of
+#   interests.
 #
 # @example
 #   # This is an example of an observer that watches the rendering options

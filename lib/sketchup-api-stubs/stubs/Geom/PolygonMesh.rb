@@ -353,6 +353,8 @@ class Geom::PolygonMesh
   #   index = mesh.add_point(point1)
   #   mesh.set_point(index, point2)
   #
+  # @note Index starts at 1.
+  #
   # @param [Integer] index
   #   The index where the point will be set.
   #
@@ -408,6 +410,8 @@ class Geom::PolygonMesh
   # @note If you don't specify how many points you will be adding to the mesh
   #   when you initiate it you may risk the UV data becoming out of sync.
   #
+  # @note Index starts at 1.
+  #
   # @param [Integer] index
   #   An Integer representing the UV index.
   #
@@ -457,6 +461,8 @@ class Geom::PolygonMesh
   #
   # @example
   #   point = mesh.uv_at(1, true)
+  #
+  # @note Index starts at 1.
   #
   # @param [Integer] index
   #   The index for the texture coordinate.

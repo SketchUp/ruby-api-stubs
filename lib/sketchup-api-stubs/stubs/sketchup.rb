@@ -306,7 +306,7 @@ module Sketchup
   def self.format_angle(number)
   end
 
-  # The #{format_area} method formats a number as an area using the current units
+  # The {#format_area} method formats a number as an area using the current units
   # settings.
   #
   # The +number+ must be in square inches.
@@ -363,7 +363,7 @@ module Sketchup
   def self.format_length(*args)
   end
 
-  # The #{format_volume} method formats a number as a volume using the current
+  # The {#format_volume} method formats a number as a volume using the current
   # units settings.
   #
   # The +number+ must be in cubic inches.
@@ -427,10 +427,9 @@ module Sketchup
   # The os_language method returns the language code for the language SketchUp
   # is running in. This is an alias for the get_locale method.
   #
-  # Valid return values are: en-US, fr, it, de, es, ja, ko, zh-CN, zh-TW,
-  # pt-BR, nl, ru.
-  # If the OS language does not have corresponding folder and files in the
-  # SketchUp Resources folder, the returned language is, by default, en-US.
+  # Examples of return values are: en-US, fr, it, de, es, ja, ko, zh-CN, zh-TW,
+  # pt-BR, nl, ru and sv. For an up to date list os supported languages, see
+  # the SketchUp download page.
   #
   # @example
   #   language = Sketchup.os_language
@@ -461,7 +460,7 @@ module Sketchup
   # The get_shortcuts method retrieves an array of all keyboard shortcuts
   # currently registered with SketchUp. Each shortcut is returned as a
   # string with the shortcut and the command separated by a tab, similar
-  # to "Ctrl+A\tEdit/Select All"
+  # to "Ctrl+A\\tEdit/Select All"
   #
   # @example
   #   shortcuts = Sketchup.get_shortcuts
@@ -502,8 +501,14 @@ module Sketchup
   #     UI.messagebox("Error during unzip: " + error)
   #   end
   #
-  # @param [String] filename
+  # @param [String] filepath
   #   The path to the RBZ or ZIP file to install.
+  #
+  # @param [Boolean] show_warning
+  #   Whether to warn the user not to install untrusted extensions.
+  #   In certain cases the warning can be confusing and redundant, e.g. when
+  #   automatically updating a trusted extension. When the user has selected
+  #   the archive themselves, it is best to warn about the possible risks.
   #
   # @raise [Exception] If the archive cannot be installed.
   #
@@ -514,7 +519,7 @@ module Sketchup
   # @return [Boolean]
   #
   # @version SketchUp 8.0 M2
-  def self.install_from_archive(filename)
+  def self.install_from_archive(filepath, show_warning = true)
   end
 
   # This methods indicates whether the host SketchUp application is 64bit.
@@ -551,14 +556,14 @@ module Sketchup
   end
 
   # Returns a boolean flag indicating whether the application is SketchUp Pro.
-  # Note that after the free trial period, SketchUp Pro will revert to regular
-  # SketchUp and this method will return false until the user registers
-  # the product.
   #
   # @example
   #   if Sketchup.is_pro?
   #     UI.messagebox("You are running SU Pro.")
   #   end
+  #
+  # @note In SketchUp Make this method will return +true+ during the Pro trial
+  #   period and revert to +false+ when the trial period is over.
   #
   # @return [Boolean]
   #
@@ -603,28 +608,44 @@ module Sketchup
   def self.load(path)
   end
 
-  # The open_file method is used to open a file.
+  # The {.open_file} method is used to open a SketchUp model.
   #
   # @example
   #   result = Sketchup.open_file("C:\\model.skp")
   #
-  # @param [String] filename
-  #   The path and filename to open.
+  # @overload open_file(filename)
   #
-  # @return [Boolean] true if opening the file succeeded,
-  #   false otherwise.
+  #   @deprecated Prefer +with_status+ overload instead of this variant.
+  #   @param [String] filename  The model file to open.
+  #   @return [Boolean] +true+ if opening the file succeeded,
+  #     +false+ otherwise.
+  #
+  # @overload open_file(filename, with_status: true)
+  #
+  #   Starting with SketchUp 2021.0 SketchUp attempts to load newer SketchUp
+  #   models. If a newer model is loaded some information might have been skipped
+  #   and extensions should be careful to not save over the file they loaded from
+  #   as information might be lost.
+  #
+  #   Success status codes:
+  #   * {Sketchup::Model::LOAD_STATUS_SUCCESS}
+  #   * {Sketchup::Model::LOAD_STATUS_SUCCESS_MORE_RECENT}
+  #
+  #   @version SketchUp 2021.0
+  #   @param [String] filename  The model file to open.
+  #   @return [Integer, false]  status code if opening the file succeeded,
+  #     +false+ otherwise.
   #
   # @version SketchUp 6.0
-  def self.open_file(filename)
+  def self.open_file(*args)
   end
 
   # The os_language method returns the language code for the language SketchUp
   # is running in. This is an alias for the get_locale method.
   #
-  # Valid return values are: en-US, fr, it, de, es, ja, ko, zh-CN, zh-TW,
-  # pt-BR, nl, ru.
-  # If the OS language does not have corresponding folder and files in the
-  # SketchUp Resources folder, the returned language is, by default, en-US.
+  # Examples of return values are: en-US, fr, it, de, es, ja, ko, zh-CN, zh-TW,
+  # pt-BR, nl, ru and sv. For an up to date list os supported languages, see
+  # the SketchUp download page.
   #
   # @example
   #   language = Sketchup.os_language
@@ -749,6 +770,17 @@ module Sketchup
   #
   # @version SketchUp 6.0
   def self.read_default(section, variable, default = nil)
+  end
+
+  # The redo method is used redo the last transaction on the redo stack.
+  #
+  # @example
+  #   Sketchup.redo
+  #
+  # @return [nil]
+  #
+  # @version SketchUp 2021.0
+  def self.redo
   end
 
   # The register_extension method is used to register an extension with

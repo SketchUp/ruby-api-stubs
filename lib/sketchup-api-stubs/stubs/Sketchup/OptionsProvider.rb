@@ -101,7 +101,7 @@ class Sketchup::OptionsProvider
   # The {#each} method is used to iterate through all of the options.
   #
   # @example
-  #   model = Sketchup.active_model.options
+  #   model = Sketchup.active_model
   #   provider = model.options['UnitsOptions']
   #   provider.each { |key, value| puts "#{key} = #{value}" }
   #
@@ -122,7 +122,7 @@ class Sketchup::OptionsProvider
   # The {#each_key} method is used to iterate through all of the attribute keys.
   #
   # @example
-  #   provider.each_key { |key| UI.messagebox key }
+  #   provider.each_key { |key| puts key }
   #
   # @return [nil]
   #
@@ -137,7 +137,7 @@ class Sketchup::OptionsProvider
   # The {#each} method is used to iterate through all of the options.
   #
   # @example
-  #   model = Sketchup.active_model.options
+  #   model = Sketchup.active_model
   #   provider = model.options['UnitsOptions']
   #   provider.each { |key, value| puts "#{key} = #{value}" }
   #
@@ -161,7 +161,7 @@ class Sketchup::OptionsProvider
   # Throws an exception if there are no keys.
   #
   # @example
-  #   provider.each_value { |value| UI.messagebox value }
+  #   provider.each_value { |value| puts value }
   #
   # @return nil
   #
@@ -174,7 +174,7 @@ class Sketchup::OptionsProvider
   # The {#has_key?} method is an alias for {#key?}.
   #
   # @example
-  #   model = Sketchup.active_model.options
+  #   model = Sketchup.active_model
   #   provider = model.options['UnitsOptions']
   #   p provider.has_key?("LengthFormat")
   #
@@ -193,7 +193,7 @@ class Sketchup::OptionsProvider
   # specific key.
   #
   # @example
-  #   model = Sketchup.active_model.options
+  #   model = Sketchup.active_model
   #   provider = model.options['UnitsOptions']
   #   p provider.key?("LengthFormat")
   #

@@ -38,7 +38,7 @@ class Sketchup::Selection
   # @param [Integer] index
   #   The index of the Entity object to retrieve.
   #
-  # @return [Sketchup::Entitiy, nil]
+  # @return [Sketchup::Entity, nil]
   #
   # @see #at
   #
@@ -108,7 +108,7 @@ class Sketchup::Selection
   # @param [Integer] index
   #   The index of the Entity object to retrieve.
   #
-  # @return [Sketchup::Entitiy, nil]
+  # @return [Sketchup::Entity, nil]
   #
   # @see #[]
   #
@@ -172,7 +172,12 @@ class Sketchup::Selection
   # efficient than using [].
   #
   # @example
-  #   selection.each { |entity| UI.messagebox(entity) }
+  #   selection.each { |entity| puts entity }
+  #
+  # @note Don't remove content from this collection while iterating over it with
+  #   {#each}. This would change the size of the collection and cause elemnts to
+  #   be skipped as the indices change. Instead copy the current collection to an
+  #   array using +to_a+ and then use +each+ on the array, when removing content.
   #
   # @return [nil]
   #
@@ -232,7 +237,7 @@ class Sketchup::Selection
   def include?(entity)
   end
 
-  # The #{invert} method is used to invert the selection.
+  # The {#invert} method is used to invert the selection.
   #
   # @example
   #   model = Sketchup.active_model

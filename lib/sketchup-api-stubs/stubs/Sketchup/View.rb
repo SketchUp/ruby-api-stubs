@@ -91,15 +91,13 @@ class Sketchup::View
   #
   # @overload camera=(camera)
   #
-  #   @param camera [Sketchup::Camera] The new Camera object.
-  #   @return [Sketchup::Camera]
+  #   @param [Sketchup::Camera] camera The new camera object.
   #
   # @overload camera=(camera_and_transition)
   #
-  #   @param camera_and_transition [Array(Sketchup::Camera, Float)]
+  #   @param [Array(Sketchup::Camera, Float)] camera_and_transition
   #     The second item in the array represents the transition time from the
-  #     existing camera to the new one
-  #   @return [Array(Sketchup::Camera, Float)]
+  #     existing camera to the new one.
   #
   # @version SketchUp 6.0
   def camera=(arg)
@@ -246,11 +244,11 @@ class Sketchup::View
   #     light will affect it. By providing an array of vertex normals lighting
   #     is turned on and will use the model's current light. Note that the number
   #     of normals must match the number of points provided.
-  #   @option options [Integer] :texture_id
+  #   @option options [Integer] :texture
   #     A texture id provided by {#load_texture}.
   #   @option options [Array<Geom::Vector3d>] :uvs
   #     Set of UV (Not UVQ) coordinates matching the number of points provided.
-  #     This must be used along with the +:texture_id+ option.
+  #     This must be used along with the +:texture+ option.
   #
   # @overload draw(openglenum, *points, **options)
   #
@@ -265,11 +263,11 @@ class Sketchup::View
   #     light will affect it. By providing an array of vertex normals lighting
   #     is turned on and will use the model's current light. Note that the number
   #     of normals must match the number of points provided.
-  #   @option options [Integer] :texture_id
+  #   @option options [Integer] :texture
   #     A texture id provided by {#load_texture}.
   #   @option options [Array<Geom::Vector3d>] :uvs
   #     Set of UV (Not UVQ) coordinates matching the number of points provided.
-  #     This must be used along with the +:texture_id+ option.
+  #     This must be used along with the +:texture+ option.
   #
   # @return [Sketchup::View]
   #
@@ -320,11 +318,11 @@ class Sketchup::View
   #     from the comments, such as +GL_LINES+.
   #   @param [Array<Geom::Point3d>] points
   #   @param [Hash] options
-  #   @option options [Integer] :texture_id
+  #   @option options [Integer] :texture
   #     A texture id provided by {#load_texture}.
   #   @option options [Array<Geom::Vector3d>] :uvs
   #     Set of UV (Not UVQ) coordinates matching the number of points provided.
-  #     This must be used along with the +:texture_id+ option.
+  #     This must be used along with the +:texture+ option.
   #
   # @overload draw2d(openglenum, *points, **options)
   #
@@ -334,11 +332,11 @@ class Sketchup::View
   #     from the comments, such as +GL_LINES+.
   #   @param [Array<Geom::Point3d>] points
   #   @param [Hash] options
-  #   @option options [Integer] :texture_id
+  #   @option options [Integer] :texture
   #     A texture id provided by {#load_texture}.
   #   @option options [Array<Geom::Vector3d>] :uvs
   #     Set of UV (Not UVQ) coordinates matching the number of points provided.
-  #     This must be used along with the +:texture_id+ option.
+  #     This must be used along with the +:texture+ option.
   #
   # @return [Sketchup::View]
   #
@@ -362,15 +360,16 @@ class Sketchup::View
   #   status = view.drawing_color="red"
   #   status = view.draw_lines point4, point5
   #
-  # @overload draw_lines(point_list, ...)
+  # @overload draw_lines(points, ...)
   #
-  #   @param point_list [Array<Geom::Point3d>] An even number of Point3d objects.
-  #   @return [Sketchup::View] returns the View object
+  #   @param [Array<Geom::Point3d>] points
+  #     An even number of Point3d objects.
+  #   @return [Sketchup::View]
   #
-  # @overload draw_lines(pts)
+  # @overload draw_lines(points)
   #
-  #   @param pts [Array<Geom::Point3d>] An array of Point3d objects.
-  #   @return [Sketchup::View] returns the View object
+  #   @param [Array<Geom::Point3d>] points An array of Point3d objects.
+  #   @return [Sketchup::View]
   #
   # @version SketchUp 6.0
   def draw_line(*args)
@@ -388,15 +387,16 @@ class Sketchup::View
   #   status = view.drawing_color="red"
   #   status = view.draw_lines point4, point5
   #
-  # @overload draw_lines(point_list, ...)
+  # @overload draw_lines(points, ...)
   #
-  #   @param point_list [Array<Geom::Point3d>] An even number of Point3d objects.
-  #   @return [Sketchup::View] returns the View object
+  #   @param [Array<Geom::Point3d>] points
+  #     An even number of Point3d objects.
+  #   @return [Sketchup::View]
   #
-  # @overload draw_lines(pts)
+  # @overload draw_lines(points)
   #
-  #   @param pts [Array<Geom::Point3d>] An array of Point3d objects.
-  #   @return [Sketchup::View] returns the View object
+  #   @param [Array<Geom::Point3d>] points An array of Point3d objects.
+  #   @return [Sketchup::View]
   #
   # @version SketchUp 6.0
   def draw_lines(*args)
@@ -409,26 +409,23 @@ class Sketchup::View
   # @example
   #   point3 = Geom::Point3d.new 0,0,0
   #   # returns a view
-  #   status = view.draw_points point3, 10, 1, "red"
+  #   status = view.draw_points(point3, 10, 1, "red")
   #
-  # @param [Array<Geom::Point3d>] pts
-  #   An array of Point3d objects.
+  # @param [Array<Geom::Point3d>] points
   #
-  # @param [Integer] pointsize
+  # @param [Integer] size
   #   Size of the point in pixels.
   #
-  # @param [Sketchup::Color] pointcolor
-  #   Color of the point.
-  #
-  # @param [Integer] pointstyle
-  #   Style of the point. 1 = open square,
-  #   2 = filled square, 3 = "+", 4 = "X", 5 = "*",
+  # @param [Integer] style
+  #   1 = open square, 2 = filled square, 3 = "+", 4 = "X", 5 = "*",
   #   6 = open triangle, 7 = filled triangle.
+  #
+  # @param [Sketchup::Color] color
   #
   # @return [Sketchup::View] a View object
   #
   # @version SketchUp 6.0
-  def draw_points(pts, pointsize = 6, pointstyle = 3, pointcolor = 'black')
+  def draw_points(points, size = 6, style = 3, color = 'black')
   end
 
   # The draw_polyline method is used to draw a series of connected line segments
@@ -443,15 +440,15 @@ class Sketchup::View
   #   point15 = Geom::Point3d.new 30,30,30
   #   status = view.draw_polyline point12, point13, point14, point15
   #
-  # @overload draw_polyline(point_list, ...)
+  # @overload draw_polyline(points, ...)
   #
-  #   @param point_list [Array<Geom::Point3d>] An even number of Point3d objects.
-  #   @return [Sketchup::View] a View object
+  #   @param [Array<Geom::Point3d>] points An even number of Point3d objects.
+  #   @return [Sketchup::View]
   #
-  # @overload draw_polyline(pts)
+  # @overload draw_polyline(points)
   #
-  #   @param pts [Array<Geom::Point3d>] An array of Point3d objects.
-  #   @return [Sketchup::View] a View object
+  #   @param [Array<Geom::Point3d>] points An array of Point3d objects.
+  #   @return [Sketchup::View]
   #
   # @version SketchUp 6.0
   def draw_polyline(*args)
@@ -473,7 +470,7 @@ class Sketchup::View
   #   class ExampleTool
   #     def draw(view)
   #       # This works in all SketchUp versions and draws the text using the
-  #       # default font, color and size.
+  #       # default font, size and color (i.e. the model edge color).
   #       point = Geom::Point3d.new(200, 100, 0)
   #       view.draw_text(point, "This is a test")
   #
@@ -763,7 +760,6 @@ class Sketchup::View
   # @example
   #   module Example
   #     class MyTool
-  #
   #       def activate
   #         view = Sketchup.active_model.active_view
   #         image_rep = view.model.materials.current.texture.image_rep
@@ -777,9 +773,8 @@ class Sketchup::View
   #       def draw(view)
   #         points = [ [0, 0, 0], [9, 0, 0], [9, 9, 0], [0, 9, 0] ]
   #         uvs = [ [0, 0, 0], [1, 0, 0], [1, 1, 0], [0, 1, 0] ]
-  #         view.draw(points, texture_id: @texture_id, uvs: uvs)
+  #         view.draw(GL_QUADS, points, texture: @texture_id, uvs: uvs)
   #       end
-  #
   #     end
   #   end
   #   Sketchup.active_model.select_tool(Example::MyTool.new)
@@ -804,16 +799,20 @@ class Sketchup::View
   # @see #release_texture
   #
   # @see #draw
+  #
+  # @version 2020.0
   def load_texture(image_rep)
   end
 
-  # The lock_inference method is used to lock or unlock an inference.
+  # The {#lock_inference} method is used to lock or unlock an inference.
   #
   # This method will typically be called from inside a tool class when the user
-  # presses the shift key.
+  # presses the shift key or arrow keys.
   #
-  # With no arguments it unlocks all inferences. With one or two arguments, it
-  # locks the inference based on the given InputPoint(s).
+  # With no arguments it unlocks all inferences. With one argument it locks
+  # inference based on that passed {Sketchup::InputPoint}'s entities, e.g. along
+  # a {Sketchup::Edge}'s line or a {Sketchup::Face}'s plane. With two arguments,
+  # it locks inference along an axis.
   #
   # @example
   #   view = view.lock_inference
@@ -826,14 +825,19 @@ class Sketchup::View
   # @overload lock_inference(inputpoint)
   #
   #   @param [Sketchup::InputPoint] inputpoint
-  #     1st InputPoint to inference to.
   #
   # @overload lock_inference(inputpoint, inputpoint2)
   #
   #   @param [Sketchup::InputPoint] inputpoint
-  #     1st InputPoint to inference to.
   #   @param [Sketchup::InputPoint] inputpoint2
-  #     2nd InputPoint to inference to.
+  #   @example
+  #     # Lock inference to X axis.
+  #     # The points can be anywhere; only the vector between them affects
+  #     # the result.
+  #     view.lock_inference(
+  #       Sketchup::InputPoint.new(ORIGIN),
+  #       Sketchup::InputPoint.new(Geom::Point3d.new(1, 0, 0))
+  #     )
   #
   # @return [Sketchup::View] a View object
   #
@@ -949,7 +953,6 @@ class Sketchup::View
   # @example
   #   module Example
   #     class MyTool
-  #
   #       def activate
   #         view = Sketchup.active_model.active_view
   #         image_rep = view.model.materials.current.texture.image_rep
@@ -963,9 +966,8 @@ class Sketchup::View
   #       def draw(view)
   #         points = [ [0, 0, 0], [9, 0, 0], [9, 9, 0], [0, 9, 0] ]
   #         uvs = [ [0, 0, 0], [1, 0, 0], [1, 1, 0], [0, 1, 0] ]
-  #         view.draw(points, texture_id: @texture_id, uvs: uvs)
+  #         view.draw(GL_QUADS, points, texture: @texture_id, uvs: uvs)
   #       end
-  #
   #     end
   #   end
   #   Sketchup.active_model.select_tool(Example::MyTool.new)
@@ -1166,7 +1168,7 @@ class Sketchup::View
   #   view = model.active_view
   #   height = view.vpheight
   #
-  # @return [Integer] the height of the viewport in pixels.
+  # @return [Integer] the height of the viewport in physical pixels.
   #
   # @version SketchUp 6.0
   def vpheight
@@ -1178,7 +1180,7 @@ class Sketchup::View
   # @example
   #   width = view.vpwidth
   #
-  # @return [Integer] the width of the viewport in pixels.
+  # @return [Integer] the width of the viewport in physical pixels.
   #
   # @version SketchUp 6.0
   def vpwidth
@@ -1186,15 +1188,19 @@ class Sketchup::View
 
   # The {#write_image} method is used to write the current view to an image file.
   #
+  # Supported file types are `.png`, `.jpg`, `.jpeg`, `gif`, `.bmp`, `.tif`.
+  # For other file formats  available from the GUI in File > Export > 2D
+  # Graphics, .e.g `.pdf`, use {Sketchup::Model#export}.
+  #
   # @overload write_image(filename, width = view.vpwidth, height = view.vpheight, antialias = false, compression = 1.0)
   #
   #   @note Prefer the overload with option hash instead of this variant. This
   #     overload is not updated with new options.
   #
   #   @example
-  #     filename => "c:/tmp/write_image.png"
-  #     antialias => false
-  #     compression => 0.9
+  #     filename = File.join(Sketchup.temp_dir, 'example.png')
+  #     antialias = false
+  #     compression = 0.9
   #     model = Sketchup.active_model
   #     view = model.active_view
   #     view.write_image(filename, 640, 480, antialias, compression)
@@ -1213,7 +1219,7 @@ class Sketchup::View
   #
   #   @example
   #     options = {
-  #       :filename => "c:/tmp/write_image.png",
+  #       :filename => File.join(Sketchup.temp_dir, 'example.png'),
   #       :width => 640,
   #       :height => 480,
   #       :antialias => false,
@@ -1227,7 +1233,7 @@ class Sketchup::View
   #   @version SketchUp 7
   #   @param [Hash] options
   #   @option options [String] filename  The filename for the saved image.
-  #   @option options [Integer] width (#vpwidth)  Width in pixels (max +1600+).
+  #   @option options [Integer] width (#vpwidth)  Width in pixels (max +16000+).
   #   @option options [Integer] height (#vpheight)  Height in pixels (max +16000+).
   #   @option options [Float] scale_factor (1.0)  Scaling factor for
   #     elements that are viewport dependent, such as text heights, arrow heads,
@@ -1245,7 +1251,7 @@ class Sketchup::View
   #
   #   @example
   #     options = {
-  #       :filename => "c:/tmp/write_image.png",
+  #       :filename => File.join(Sketchup.temp_dir, 'example.png'),
   #       :source => :framebuffer,
   #       :compression => 0.9,
   #     }

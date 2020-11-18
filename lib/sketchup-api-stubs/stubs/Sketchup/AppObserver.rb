@@ -12,9 +12,9 @@
 # callbacks unless you've attached a {Sketchup::SelectionObserver} to the new
 # model as well. By watching for {#onNewModel}, you can be sure to do so.
 #
-# To implement this observer, create a Ruby class of this type, override the
-# desired methods, and add an instance of the observer to the
-# application class.
+# @abstract To implement this observer, create a Ruby class of this type, override the
+#   desired methods, and add an instance of the observer to the
+#   application class.
 #
 # @example
 #   # This is an example of an observer that watches the application for

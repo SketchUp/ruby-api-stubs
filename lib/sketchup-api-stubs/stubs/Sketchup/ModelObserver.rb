@@ -1,9 +1,7 @@
 # Copyright:: Copyright 2020 Trimble Inc.
 # License:: The MIT License (MIT)
 
-# This observer interface is implemented to react to model events. To
-# implement this observer, create a Ruby class of this type, override the
-# desired methods, and add an instance of the observer to the model.
+# This observer interface is implemented to react to model events.
 #
 # Note that the observers related to transactions (aka undoable operations)
 # are primarily for reporting and debugging. Performing any edit operations
@@ -14,6 +12,9 @@
 # {Sketchup::Model#commit_operation} calls are somehow conflicting with
 # SketchUp's native undo operations. You can set up an observer set to watch
 # precisely what is going on.
+#
+# @abstract To implement this observer, create a Ruby class of this type, override the
+#   desired methods, and add an instance of the observer to the model.
 #
 # @example
 #   # This is an example of an observer that watches the

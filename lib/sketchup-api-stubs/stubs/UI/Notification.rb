@@ -2,9 +2,25 @@
 # License:: The MIT License (MIT)
 
 # UI::Notification objects allows you to show native notifications in the
-# desktop, they are positioned in the top right of your screen, they can be
-# customized to have a message, icon and accept and/or dismiss buttons with
-# callback blocks.
+# desktop. Notifications can have a message, icon and accept and/or dismiss
+# buttons with callback blocks.
+#
+# @example
+#   # For consistency, the accept (yes) and the dismiss (no) buttons
+#   # are always displayed in the same order.
+#   message = "A new version of pizza is available. Install now?"
+#   notification = UI::Notification.new(sketchup_extension, message)
+#   notification.on_accept("Pizza!") { puts "Pizza" }
+#   notification.on_dismiss("No thanks") { puts "No pizza" }
+#   notification.show
+#
+#   # The two options are however not treated differently by SketchUp and can
+#   # also be used for questions with no strict yes/no answer.
+#   message = "Pizza clashes with health. Select which one to keep."
+#   notification = UI::Notification.new(sketchup_extension, message)
+#   notification.on_accept("Pizza") { puts "Pizza" }
+#   notification.on_dismiss("Health") { puts "Salad" }
+#   notification.show
 #
 # @version SketchUp 2017
 class UI::Notification
@@ -77,6 +93,9 @@ class UI::Notification
   #
   # In order to insert line breaks into the message you need to use +\\r\\n+.
   #
+  # @bug Prior to SketchUp 2018 messages could only be 3 lines long on Windows
+  #   and 2 lines on Mac. Now the notification expands to fit its content.
+  #
   # @example
   #   notification = UI::Notification.new(sketchup_extension, "Hello world", "/path/to/icon", "icon Tooltip")
   #   notification.show
@@ -113,8 +132,8 @@ class UI::Notification
   def message
   end
 
-  # Sets a new message, notifications are meant for quick & brief messages,
-  # remember that they are dismissed automatically.
+  # Sets a new message. Notifications are meant for quick & brief messages.
+  # Remember that they disappear automatically.
   #
   # @example
   #   notification = UI::Notification.new(sketchup_extension)
@@ -132,6 +151,9 @@ class UI::Notification
 
   # Shows a button in the notification with the given title and callback block,
   # both arguments are required.
+  #
+  # @bug Prior to SketchUp 2019 both the accept and dismiss buttons were
+  #   displayed, even if only one had been implemented.
   #
   # @example
   #   notification = UI::Notification.new(sketchup_extension, "Hello world")
@@ -171,8 +193,13 @@ class UI::Notification
   def on_accept_title
   end
 
-  # Shows a button in the notification with the given title and callback block,
-  # both arguments are required.
+  # Shows a button in the notification with the given title and callback block.
+  # Both arguments are required. This callback is only called if you press the
+  # Dismiss button, not when the time runs out and the notification automatically
+  # disappears.
+  #
+  # @bug Prior to SketchUp 2019 both the accept and dismiss buttons were
+  #   displayed, even if only one had been implemented.
   #
   # @example
   #   notification = UI::Notification.new(sketchup_extension, "Hello world")
@@ -212,9 +239,8 @@ class UI::Notification
   def on_dismiss_title
   end
 
-  # Shows the notification in the top right of the screen, the notifications will
-  # be ordered from top to bottom if multiple notifications are shown, it will
-  # automatically be dismissed if no action is taken.
+  # Shows the notification. If not interacted with, the notification will
+  # disappear without calling any callbacks.
   #
   # @example
   #   notification = UI::Notification.new(sketchup_extension, "Hello world")

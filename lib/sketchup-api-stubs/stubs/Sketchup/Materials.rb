@@ -29,13 +29,14 @@ class Sketchup::Materials < Sketchup::Entity
   #
   # @overload [](index)
   #
-  #   @param index [Integer] A number representing the material's index in an array
-  #                        of Material objects.
+  #   @param [Integer] index
+  #    A number representing the material's index in an array of Material
+  #    objects.
   #   @return [Sketchup::Material, nil] a Material object on success, Nil on failure
   #
   # @overload [](name)
   #
-  #   @param name [String] The name of the material.
+  #   @param [String] name The name of the material.
   #   @return [Sketchup::Material, nil] a Material object on success, Nil on failure
   #
   # @version SketchUp 6.0
@@ -89,13 +90,14 @@ class Sketchup::Materials < Sketchup::Entity
   #
   # @overload [](index)
   #
-  #   @param index [Integer] A number representing the material's index in an array
-  #                        of Material objects.
+  #   @param [Integer] index
+  #    A number representing the material's index in an array of Material
+  #    objects.
   #   @return [Sketchup::Material, nil] a Material object on success, Nil on failure
   #
   # @overload [](name)
   #
-  #   @param name [String] The name of the material.
+  #   @param [String] name The name of the material.
   #   @return [Sketchup::Material, nil] a Material object on success, Nil on failure
   #
   # @version SketchUp 6.0
@@ -147,13 +149,18 @@ class Sketchup::Materials < Sketchup::Entity
   def current=(material)
   end
 
-  # The each method is used to iterate through all of the materials.
+  # The {#each} method is used to iterate through all of the materials.
   #
   # @example
   #   model = Sketchup.active_model
   #   model.materials.each { |material|
   #     puts material.display_name
   #   }
+  #
+  # @note Don't remove content from this collection while iterating over it with
+  #   {#each}. This would change the size of the collection and cause elements to
+  #   be skipped as the indices change. Instead copy the current collection to an
+  #   array using +to_a+ and then use +each+ on the array, when removing content.
   #
   # @return [nil]
   #

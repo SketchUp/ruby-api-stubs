@@ -16,9 +16,9 @@
 # {Sketchup::OptionsManager} and {Sketchup::OptionsProvider} classes for more
 # details.
 #
-# To implement this observer, create a Ruby class of this type,
-# override the desired methods, and add an instance of the observer to the
-# objects of interests.
+# @abstract To implement this observer, create a Ruby class of this type,
+#   override the desired methods, and add an instance of the observer to the
+#   objects of interests.
 #
 # @example
 #   class MyOptionsProviderObserver < Sketchup::OptionsProviderObserver

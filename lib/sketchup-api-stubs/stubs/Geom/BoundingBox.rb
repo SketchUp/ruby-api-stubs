@@ -2,7 +2,7 @@
 # License:: The MIT License (MIT)
 
 # Bounding boxes are three-dimensional boxes (eight corners), aligned with the
-# global axes, that surround entities within your model. There is a default
+# axes, that surround entities within your model. There is a default
 # bounding box for any new model that will surround all entities,
 # including all groups and components. Additionally, there are
 # bounding boxes for Drawingelement objects, including components and groups.
@@ -154,15 +154,17 @@ class Geom::BoundingBox
   def corner(corner_index)
   end
 
-  # The {#depth} method is used to retrieve the depth of the bounding box.
+  # The {#depth} method is used to retrieve the Z extents of the bounding box.
   #
   # @example
   #   boundingbox = Geom::BoundingBox.new
   #   boundingbox.add([100, 200, -400], [200, 400, 100])
   #   # This will return a Length of 500.0.
-  #   length = boundingbox.depth
+  #   height = boundingbox.depth
   #
-  # @return [Length] the depth of the bounding box
+  # @note In SketchUp's coordinate system, this corresponds to the height.
+  #
+  # @return [Length]
   #
   # @version SketchUp 6.0
   def depth
@@ -200,15 +202,17 @@ class Geom::BoundingBox
   def empty?
   end
 
-  # The {#height} method is used to retrieve the height of the bounding box.
+  # The {#height} method is used to retrieve the Y extent of the bounding box.
   #
   # @example
   #   boundingbox = Geom::BoundingBox.new
   #   boundingbox.add([100, 200, -400], [200, 400, 100])
   #   # This will return a Length of 200.0.
-  #   length = boundingbox.height
+  #   depth = boundingbox.height
   #
-  # @return [Length] the height of the bounding box
+  # @note In SketchUp's coordinate system, this corersponds to the depth.
+  #
+  # @return [Length]
   #
   # @version SketchUp 6.0
   def height
@@ -301,15 +305,15 @@ class Geom::BoundingBox
   def valid?
   end
 
-  # The {#width} method is used to retrieve the width of the bounding box.
+  # The {#width} method is used to retrieve the X extent of the bounding box.
   #
   # @example
   #   boundingbox = Geom::BoundingBox.new
   #   boundingbox.add([100, 200, -400], [200, 400, 100])
   #   # This will return a Length of 100.0.
-  #   length = boundingbox.width
+  #   width = boundingbox.width
   #
-  # @return [Length] the width of the bounding box
+  # @return [Length]
   #
   # @version SketchUp 6.0
   def width

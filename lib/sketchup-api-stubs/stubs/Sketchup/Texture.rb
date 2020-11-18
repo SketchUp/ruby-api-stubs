@@ -41,27 +41,19 @@ class Sketchup::Texture < Sketchup::Entity
   def average_color
   end
 
-  # The filename method retrieves the entire path, including the file, for a
+  # The {#filename} method retrieves the entire path, including the file, for a
   # texture object.
   #
   # @example
   #   model = Sketchup.active_model
-  #   materials=model.materials
-  #   # Adds a material as an in model material
-  #   m = materials.add "Test Color"
-  #   begin
-  #     # Returns nil if not successful, path if successful
-  #     m.texture = "c:\\Materials\\Carpet.jpg"
-  #   rescue
-  #     UI.messagebox $!.message
-  #   end
-  #   texture = m.texture
+  #   materials = model.materials
+  #   material = materials.add("Test Color")
+  #   material.texture = "c:\\Materials\\Carpet.jpg"
+  #   texture = material.texture
   #   filename = texture.filename
-  #   if (filename)
-  #     UI.messagebox filename
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #
+  # @note Since SketchUp 2021.0 this method will append a file extension matching
+  #   the image format if the file extension is missing from stored filepath.
   #
   # @return [String] a string representation of the path and
   #   filename used for the texture.
@@ -206,11 +198,11 @@ class Sketchup::Texture < Sketchup::Entity
   # @example
   #   material = Sketchup.active_model.materials[0]
   #   basename = File.basename(material.texture.filename)
-  #   filename = File.join(Sketchup.temp_dir, basename)
-  #   material.texture.write(filename)
+  #   path = File.join(Sketchup.temp_dir, basename)
+  #   material.texture.write(path)
   #
-  # @param [String] filename
-  #   String - The filename to write the texture to.
+  # @param [String] path
+  #   The file path to write the texture to.
   #
   # @param [Boolean] colorize
   #   Boolean - Allows for the texture to
@@ -219,7 +211,7 @@ class Sketchup::Texture < Sketchup::Entity
   # @return [Boolean] true if the method succeeded
   #
   # @version SketchUp 2016
-  def write(filename, colorize = false)
+  def write(path, colorize = false)
   end
 
 end

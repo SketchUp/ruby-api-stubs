@@ -2,9 +2,11 @@
 # License:: The MIT License (MIT)
 
 # This observer interface is implemented to react to events on a definitions
-# collection. To implement this observer, create a Ruby class of this type,
-# override the desired methods, and add an instance of the observer to the
-# collection of interest.
+# collection.
+#
+# @abstract To implement this observer, create a Ruby class of this type,
+#   override the desired methods, and add an instance of the observer to the
+#   collection of interest.
 #
 # @example
 #   class MyDefinitionsObserver < Sketchup::DefinitionsObserver

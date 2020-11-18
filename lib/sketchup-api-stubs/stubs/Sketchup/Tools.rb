@@ -16,7 +16,7 @@ class Sketchup::Tools
   #
   # @example
   #   tools = Sketchup.active_model.tools
-  #   tool = tools.current
+  #   tool = tools.active_tool
   #
   # @return [Object, nil] Returns the active Ruby tool, or `nil` otherwise.
   #

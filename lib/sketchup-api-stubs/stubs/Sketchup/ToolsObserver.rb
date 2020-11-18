@@ -1,9 +1,7 @@
 # Copyright:: Copyright 2020 Trimble Inc.
 # License:: The MIT License (MIT)
 
-# This observer interface is implemented to react to tool events. To implement
-# this observer, create a Ruby class of this type, override the desired
-# methods, and add an instance of the observer to the {Sketchup::Tools} object.
+# This observer interface is implemented to react to tool events.
 #
 # Some of the code below mentions +tool_names+ and +tool_ids+. Here is a list
 # of the common tool IDs and names:
@@ -41,6 +39,10 @@
 # - +21337+ = SectionPlaneTool
 # - +21020+ = SketchTool
 # - +21405+ = TextTool
+#
+# @abstract To implement this observer, create a Ruby class of this type,
+#   override the desired methods, and add an instance of the observer to the
+#   {Sketchup::Tools} object.
 #
 # @example
 #   # This is an example of an observer that watches tool interactions.

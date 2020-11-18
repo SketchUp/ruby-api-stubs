@@ -26,18 +26,18 @@ class Geom::LatLong
   #
   # @overload initialize(latlong)
   #
-  #   @param latlong [Geom::LatLong]
+  #   @param [Geom::LatLong] latlong
   #   @return [Geom::LatLong]
   #
   # @overload initialize(latlong_array)
   #
-  #   @param latlong_array [Array(Numeric, Numeric)]
+  #   @param [Array(Numeric, Numeric)] latlong_array
   #   @return [Geom::LatLong]
   #
   # @overload initialize(lat, long)
   #
-  #   @param lat  [Numeric]
-  #   @param long [Numeric]
+  #   @param [Numeric] lat
+  #   @param [Numeric] long
   #   @return [Geom::LatLong]
   #
   # @version SketchUp 6.0

@@ -59,8 +59,37 @@ class Sketchup::Layers < Sketchup::Entity
   # @version SketchUp 6.0
   def add(layer_name)
   end
-  # @version SketchUp 2020.2
   alias_method :add_layer, :add
+
+  # The {#add_folder} method adds or moves a layer folder.
+  #
+  # @api TagFolder
+  #
+  # @example
+  #   manager = Sketchup.active_model.layers
+  #   folder = manager.add_folder('Doors')
+  #
+  # @overload add_folder(name)
+  #
+  #   Adds a new folder with the given name. Unlike layers, folders do not
+  #   need to have a unique name. But the name does have to be non-empty.
+  #   @param [String] name
+  #
+  # @overload add_folder(folder)
+  #
+  #   Moves an existing {Sketchup::LayerFolder} to the receiver. This will
+  #   include any children in the given folder.
+  #   @param [Sketchup::LayerFolder] folder
+  #   @see Sketchup::LayerFolder#folder= Information on how which notifications
+  #     trigger when reparenting an existing folder.
+  #
+  # @return [Sketchup::LayerFolder]
+  #
+  # @see #count_layers
+  #
+  # @version SketchUp 2021.0
+  def add_folder(arg)
+  end
 
   # The {#add_observer} method is used to add an observer to the layers
   # collection.
@@ -111,7 +140,42 @@ class Sketchup::Layers < Sketchup::Entity
   def count
   end
 
+  # The {#count_folders} method counts the number of folders which are direct
+  # children of the layer manager.
+  #
+  # @api TagFolder
+  #
+  # @example
+  #   manager = Sketchup.active_model.layers
+  #   folder = manager.add_folder('Doors')
+  #   num_folders = manager.count_folders
+  #
+  # @return [Integer]
+  #
+  # @version SketchUp 2021.0
+  def count_folders
+  end
+
+  # The {#count_layers} method retrieves the number of layers not in a folder.
+  #
+  # @api TagFolder
+  #
+  # @example
+  #   layers = Sketchup.active_model.layers
+  #   number = layers.count_layers
+  #
+  # @return [Integer]
+  #
+  # @see #size
+  #
+  # @see #length
+  #
+  # @version SketchUp 2021.0
+  def count_layers
+  end
+
   # The {#each} method is used to iterate through all of the layers in the model.
+  # This include layers that are nested inside folders.
   #
   # @example
   #   model = Sketchup.active_model
@@ -119,12 +183,90 @@ class Sketchup::Layers < Sketchup::Entity
   #   layers.add("Test layer")
   #   layers.each { | layer | puts layer.name }
   #
+  # @note Don't remove content from this collection while iterating over it with
+  #   {#each}. This would change the size of the collection and cause elements to
+  #   be skipped as the indices change. Instead copy the current collection to an
+  #   array using +to_a+ and then use +each+ on the array, when removing content.
+  #
   # @version SketchUp 6.0
   #
   # @yield [layer]
   #
   # @yieldparam [Sketchup::Layer] layer
   def each
+  end
+
+  # The {#each_folder} method is used to iterate through the folders that are
+  # direct children to the layer manager.
+  #
+  # @api TagFolder
+  #
+  # @example
+  #   manager = Sketchup.active_model.layers
+  #   folder = manager.add_folder('Doors')
+  #   folder = manager.add_folder('Windows')
+  #   manager.each_folder { |folder|
+  #     puts folder.name
+  #   }
+  #
+  # @version SketchUp 2021.0
+  #
+  # @yield [folder]
+  #
+  # @yieldparam [Sketchup::LayerFolder] folder
+  def each_folder
+  end
+
+  # The {#each_layer} method is used to iterate through the layers that are not
+  # inside a layer folder.
+  #
+  # @api TagFolder
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   layers = model.layers
+  #   layers.add('Test layer')
+  #   layers.each_layer { | layer | puts layer.name }
+  #
+  # @version SketchUp 2021.0
+  #
+  # @yield [layer]
+  #
+  # @yieldparam [Sketchup::Layer] layer
+  def each_layer
+  end
+
+  # The {#folders} method returns the folders of the layer manager.
+  #
+  # @api TagFolder
+  #
+  # @example
+  #   manager = Sketchup.active_model.layers
+  #   manager.add_folder('Doors')
+  #   manager.add_folder('Windows')
+  #   folders = manager.folders
+  #
+  # @note This does not return all the folders in the model, only those that are
+  #   direct children of the layer manager.
+  #
+  # @return [Array<Sketchup::LayerFolder>]
+  #
+  # @version SketchUp 2021.0
+  def folders
+  end
+
+  # The {#layers} method retrieves the layers not in a folder.
+  #
+  # @api TagFolder
+  #
+  # @example
+  #   manager = Sketchup.active_model.layers
+  #   layers = manager.layers
+  #
+  # @return [Array<Sketchup::Layer>]
+  #
+  # @version SketchUp 2021.0
+  def layers
   end
 
   # The {#length} method retrieves the number of layers.
@@ -149,10 +291,31 @@ class Sketchup::Layers < Sketchup::Entity
   #
   # @return [Integer] Number of unused layers removed
   #
+  # @see #purge_unused_folders
+  #
   # @version SketchUp 6.0
   def purge_unused
   end
   alias_method :purge_unused_layers, :purge_unused
+
+  # The {#purge_unused_folders} method is used to remove all layer folder with
+  # no children.
+  #
+  # @api TagFolder
+  #
+  # @example
+  #   manager = Sketchup.active_model.layers
+  #   folder = manager.add_folder('Doors')
+  #   folder = manager.add_folder('Windows')
+  #   manager.purge_unused_folders
+  #
+  # @version SketchUp 2021.0
+  #
+  # @yield [folder]
+  #
+  # @yieldparam [Sketchup::LayerFolder] folder
+  def purge_unused_folders
+  end
 
   # Remove the given layer from the model, optionally removing the geometry.
   #
@@ -186,6 +349,26 @@ class Sketchup::Layers < Sketchup::Entity
   def remove(layer, remove_geometry = false)
   end
   alias_method :remove_layer, :remove
+
+  # The {#remove_folder} method removes the folder from the model. All children are
+  # preserved, but moved up one level.
+  #
+  # @api TagFolder
+  #
+  # @example
+  #   manager = Sketchup.active_model.layers
+  #   folder = manager.add_folder('Doors')
+  #   manager.remove_folder(folder)
+  #
+  # @param [Sketchup::LayerFolder] folder
+  #
+  # @raise [ArgumentError] if the +folder+ is not a direct child of the receiver.
+  #
+  # @return [nil]
+  #
+  # @version SketchUp 2021.0
+  def remove_folder(folder)
+  end
 
   # The {#remove_observer} method is used to remove an observer from the current
   # object.

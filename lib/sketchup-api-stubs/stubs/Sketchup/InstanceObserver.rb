@@ -2,12 +2,14 @@
 # License:: The MIT License (MIT)
 
 # This observer interface is implemented to react to component instance
-# events. To implement this observer, create a Ruby class of this type,
-# override the desired methods, and add an instance of the observer to the
-# objects of interests.
+# events.
 #
 # Note that you may also attach {Sketchup::InstanceObserver}s to
 # {Sketchup::Group}s.
+#
+# @abstract To implement this observer, create a Ruby class of this type,
+#   override the desired methods, and add an instance of the observer to the
+#   objects of interests.
 #
 # @example
 #   # This is an example of an observer that watches a specific instance

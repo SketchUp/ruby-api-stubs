@@ -44,6 +44,9 @@ class Sketchup::Model
 
   # Constants
 
+  LOAD_STATUS_SUCCESS = nil # Stub value.
+  LOAD_STATUS_SUCCESS_MORE_RECENT = nil # Stub value.
+
   Make = nil # Stub value.
   MakeTrial = nil # Stub value.
   ProLicensed = nil # Stub value.
@@ -57,6 +60,7 @@ class Sketchup::Model
   VERSION_2018 = nil # Stub value.
   VERSION_2019 = nil # Stub value.
   VERSION_2020 = nil # Stub value.
+  VERSION_2021 = nil # Stub value.
   VERSION_3 = nil # Stub value.
   VERSION_4 = nil # Stub value.
   VERSION_5 = nil # Stub value.
@@ -66,14 +70,18 @@ class Sketchup::Model
 
   # Instance Methods
 
-  # The abort_operation method aborts the current operation started with the
+  # The {#abort_operation} method aborts the current operation started with the
   # start_operation method.
   #
-  # The abort_operation method is normally called from inside of a rescue clause
-  # to cancel an operation if something goes wrong.
+  # The {#abort_operation} method is normally called from inside of a rescue
+  # clause to cancel an operation if something goes wrong.
   #
   # @example
   #   status = model.abort_operation
+  #
+  # @note Never abort a transparent operation. Doing so would abort the operation
+  #   it chains to. Instead, try to clean up and simply commit in order to make
+  #   sure the operation is closed.
   #
   # @return [Boolean] true if successful, false if unsuccessful
   #
@@ -155,37 +163,6 @@ class Sketchup::Model
 
   # The {#active_path=} method is used to open a given instance path for editing.
   #
-  # It is expected that no entities are modified in an operation that
-  # opens/closes instances.
-  #
-  # To ensure that undo/redo is done correctly this method breaks up any open
-  # Ruby operations into a set of chained operations:
-  #
-  # If the API user tries to do this:
-  #
-  #     model.start_operation('...', true)
-  #     model.entities.add_face(...)
-  #     model.active_path = instance_path
-  #     model.entities.add_face(...)
-  #     model.commit_operation
-  #
-  # Then the method will break it up to something like this:
-  #
-  #     model.start_operation('...', true)
-  #     model.entities.add_face(...)
-  #     model.commit_operation
-  #
-  #     model.start_operation('...', true, false, true)
-  #     model.active_path = instance_path
-  #     model.commit_operation
-  #
-  #     model.start_operation('...', true, false, true)
-  #     model.entities.add_face(...)
-  #     model.commit_operation
-  #
-  # For the end user this will be experienced as a single operation.
-  # For the API user the side-effect is multiple transaction notifications.
-  #
   # @example Open an instance
   #   model = Sketchup.active_model
   #   instance = model.active_entities.grep(Sketchup::ComponentInstance).first
@@ -201,8 +178,37 @@ class Sketchup::Model
   #   on the given path. A definition cannot be edited if any of its instances
   #   are locked.
   #
-  # @note Open/close operations are special operations in SketchUp which has to
-  #   be treated with special care.
+  # @note Since changing the active entities in SketchUp also changes what
+  #   coordinate system is used, entities can't be modified in the same operation
+  #   as the active entities changes. The API handles this automatically by
+  #   starting and committing transparent operations as needed.
+  #
+  #   If the API user tries to do this:
+  #
+  #       model.start_operation('...', true)
+  #       model.entities.add_face(...)
+  #       model.active_path = instance_path
+  #       model.entities.add_face(...)
+  #       model.commit_operation
+  #
+  #   Then SketchUp will automatically break it up to something like to this:
+  #
+  #       model.start_operation('...', true)
+  #       model.entities.add_face(...)
+  #       model.commit_operation
+  #
+  #       model.start_operation('...', true, false, true)
+  #       model.active_path = instance_path
+  #       model.commit_operation
+  #
+  #       model.start_operation('...', true, false, true)
+  #       model.entities.add_face(...)
+  #       model.commit_operation
+  #
+  #   For the end user this will be experienced as a single operation.
+  #
+  #   For the API user the side-effect is multiple transaction notifications to
+  #   {Sketchup::ModelObserver}s.
   #
   # @param [Sketchup::InstancePath, Array<Sketchup::ComponentInstance, Sketchup::Group>, nil] instance_path
   #   Passing +nil+ or an empty array will close all open instances.
@@ -213,6 +219,8 @@ class Sketchup::Model
   #
   # @raise [ArgumentError] if the instance path contains instances who's
   #   siblings are locked.
+  #
+  # @raise [ArgumentError] if the instance path contains Live Components.
   #
   # @return [Sketchup::Model]
   #
@@ -360,13 +368,14 @@ class Sketchup::Model
   def behavior
   end
 
-  # The {#bounds} method retrieves the bounding box of the model.
+  # The {#bounds} method is used to retrieve the {Geom::BoundingBox} bounding the
+  # contents of a {Sketchup::Model}.
   #
   # @example
   #   model = Sketchup.active_model
   #   bounds = model.bounds
   #
-  # @return [Geom::BoundingBox] bounding box for the model if successful
+  # @return [Geom::BoundingBox]
   #
   # @version SketchUp 6.0
   def bounds
@@ -614,15 +623,15 @@ class Sketchup::Model
   #                    :ifc_types => ['IfcBuilding', 'IfcDoor']}
   #   status = model.export('c:/my_export.ifc', options_hash)
   #
-  # @overload export(filename, show_summary = false)
+  # @overload export(path, show_summary = false)
   #
-  #   @param [String] filename The name of the file to export.
+  #   @param [String] path The name of the file to export.
   #   @param [Boolean] show_summary Boolean to show summary dialog.
   #   @return [Boolean]
   #
-  # @overload export(filename, options)
+  # @overload export(path, options)
   #
-  #   @param [String] filename The name of the file to export.
+  #   @param [String] path The path to save the export at.
   #   @param [Hash] options
   #   @return [Boolean]
   #
@@ -721,6 +730,8 @@ class Sketchup::Model
   #     {Sketchup::Entities}.
   #   @option [Boolean] scope :layers Search {Sketchup::Layers} for
   #     {Sketchup::Layer} entities.
+  #   @option [Boolean] scope :layer_folders Search {Sketchup::Layers} for
+  #     {Sketchup::LayerFolder} entities.
   #   @option [Boolean] scope :materials Search {Sketchup::Materials} for
   #     {Sketchup::Material} entities.
   #   @option [Boolean] scope :pages Search {Sketchup::Pages} for
@@ -857,16 +868,16 @@ class Sketchup::Model
   #               :show_summary => true }
   #   status = model.import("filename", options)
   #
-  # @overload import(filename, options)
+  # @overload import(path, options)
   #
-  #   @param [String] filename The input filename.
+  #   @param [String] path The input file path.
   #   @param [Hash] options The options.
   #   @return [Boolean]
   #
-  # @overload import(filename, show_summary = false)
+  # @overload import(path, show_summary = false)
   #
   #   @note This variant is for SketchUp 2017 and earlier.
-  #   @param [String] filename The input filename.
+  #   @param [String] path The input file path.
   #   @param [Boolean] show_summary Show the summary dialog.
   #   @return [Boolean]
   #
@@ -1068,7 +1079,7 @@ class Sketchup::Model
   # @example
   #   # Output all options available.
   #   options_manager = Sketchup.active_model.options
-  #   options_manager.keys.each { |options_provider|
+  #   options_manager.each { |options_provider|
   #     puts options_provider.name
   #     options_provider.each { |key, value|
   #       puts "> #{key} - #{value}"
@@ -1251,15 +1262,15 @@ class Sketchup::Model
   # @example
   #   model = Sketchup.active_model
   #   # Save the model using the current SketchUp format
-  #   filename = File.join(ENV['HOME'], 'Desktop', 'mysketchup.skp')
-  #   status = model.save(filename)
+  #   path = File.join(ENV['HOME'], 'Desktop', 'mysketchup.skp')
+  #   status = model.save(path)
   #   # Save the model to the current file using the current SketchUp format
   #   status = model.save
   #   # Save the model to the current file in SketchUp 8 format
   #   status = model.save("", Sketchup::Model::VERSION_8)
   #   # Save the model in SketchUp 8 format
-  #   filename = File.join(ENV['Home'], 'Desktop', 'mysketchup_v8.skp')
-  #   status = model.save("filename", Sketchup::Model::VERSION_8)
+  #   path = File.join(ENV['Home'], 'Desktop', 'mysketchup_v8.skp')
+  #   status = model.save(path, Sketchup::Model::VERSION_8)
   #
   # @note A bug in SketchUp 2016 and older caused the +.skb+ backup file
   #   written during save to be empty. The +.skp+ file was however valid.
@@ -1271,19 +1282,19 @@ class Sketchup::Model
   #   will be saved to the file to which it is associated. It must have
   #   already been saved to a file.
   #
-  # @overload save(filename)
+  # @overload save(path)
   #
-  #   @param [String] filename
+  #   @param [String] path
   #     The name of the file to save.
   #     Starting with SketchUp 2014, this parameter is optional.
   #     If not provided or an empty string, model will be saved
   #     to the file to which it is associated. It must have
   #     already been saved to a file.
   #
-  # @overload save(filename, version)
+  # @overload save(path, version)
   #
-  #   @param [String] filename
-  #     The name of the file to save.
+  #   @param [String] path
+  #     The path of the file to save to.
   #     Starting with SketchUp 2014, this parameter is optional.
   #     If not provided or an empty string, model will be saved
   #     to the file to which it is associated. It must have
@@ -1304,7 +1315,8 @@ class Sketchup::Model
   #     Sketchup::Model::VERSION_2017,
   #     Sketchup::Model::VERSION_2018,
   #     Sketchup::Model::VERSION_2019,
-  #     Sketchup::Model::VERSION_2020
+  #     Sketchup::Model::VERSION_2020,
+  #     Sketchup::Model::VERSION_2021
   #
   # @return [Boolean] true if successful, false if unsuccessful
   #
@@ -1317,14 +1329,14 @@ class Sketchup::Model
   # @example
   #   model = Sketchup.active_model
   #   # Save copy of the model using the current SketchUp format
-  #   filename = File.join(ENV['Home'], 'Desktop', 'myModelCopy.skp')
-  #   status = model.save_copy(filename)
+  #   path = File.join(ENV['Home'], 'Desktop', 'myModelCopy.skp')
+  #   status = model.save_copy(path)
   #   # Save copy of the model in SketchUp 8 format
-  #   filename = File.join(ENV['Home'], 'Desktop', 'mysketchupcopy_v8.skp')
-  #   status = model.save_copy(filename, Sketchup::Model::VERSION_8)
+  #   path = File.join(ENV['Home'], 'Desktop', 'mysketchupcopy_v8.skp')
+  #   status = model.save_copy(path, Sketchup::Model::VERSION_8)
   #
-  # @param [String] filename
-  #   The name of the file to save the model copy.
+  # @param [String] path
+  #   The path of the file to save the model copy to.
   #
   # @param [Integer] version
   #   (SketchUp 2014+)
@@ -1341,12 +1353,13 @@ class Sketchup::Model
   #   Sketchup::Model::VERSION_2017,
   #   Sketchup::Model::VERSION_2018,
   #   Sketchup::Model::VERSION_2019,
-  #   Sketchup::Model::VERSION_2020
+  #   Sketchup::Model::VERSION_2020,
+  #   Sketchup::Model::VERSION_2021
   #
   # @return [Boolean] true if successful, false if unsuccessful
   #
   # @version SketchUp 2014
-  def save_copy(filename, version)
+  def save_copy(path, version)
   end
 
   # The save_thumbnail method is used to save a thumbnail image to a file.

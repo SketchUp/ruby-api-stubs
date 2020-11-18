@@ -218,6 +218,8 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   instance2 = entities[1]
   #   result = instance1.intersect(instance2)
   #
+  # @note This method is not available in SketchUp Make.
+  #
   # @param [Sketchup::ComponentInstance] instance
   #   The instance to intersect this instance with.
   #
@@ -263,7 +265,8 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   end
 
   # The {#make_unique} method is used to create a component definition for this
-  # instance that is not used by any other instances.
+  # instance that is not used by any other instances. If the component is already
+  # unique in the model, nothing happens.
   #
   # @example
   #   point = Geom::Point3d.new(10,20,30)
@@ -300,8 +303,9 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   def manifold?
   end
 
-  # The move! method is the same as the transform! method, except that it does
-  # not record the move as an undo operation.
+  # The {#move!} method is used to set the transformation of this component
+  # instance, similarly to {#transformation=} but without recording to the undo
+  # stack.
   #
   # This method is useful for moving entities inside of an animation or page
   # transition.
@@ -312,15 +316,17 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   transformation = Geom::Transformation.new([0,0,0])
   #   componentinstance = entities.add_instance(definition, transformation)
   #   new_transformation = Geom::Transformation.new([100,0,0])
-  #   componentinstance.move! new_transformation
+  #   componentinstance.move!(new_transformation)
   #
-  # @param [Geom::Transformation] transform
-  #   The transform object to apply to the component instance.
+  # @note Despite the name being similar to {#transform!}, this method closer
+  #   corresponds to {#transformation=}.
+  #
+  # @param [Geom::Transformation] transformation
   #
   # @return [Boolean] true if successful, false if unsuccessful
   #
   # @version SketchUp 6.0
-  def move!(transform)
+  def move!(transformation)
   end
 
   # The name method is used to get the name of this instance.
@@ -438,6 +444,8 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   instance2 = entities[1]
   #   result = instance1.split(instance2)
   #
+  # @note This method is not available in SketchUp Make.
+  #
   # @param [Sketchup::ComponentInstance, nil] instance
   #   The instance to split this instance with.
   #
@@ -462,6 +470,8 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   instance1 = entities[0]
   #   instance2 = entities[1]
   #   result = instance1.subtract(instance2)
+  #
+  # @note This method is not available in SketchUp Make.
   #
   # @param [Sketchup::ComponentInstance] instance
   #   The instance to subtract this instance from.
@@ -509,8 +519,8 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   def transformation
   end
 
-  # The transformation= method is used to set the transformation on this
-  # instance.
+  # The {#transformation=} method is used to set the transformation of this
+  # component instance.
   #
   # @example
   #   entities = Sketchup.active_model.entities
@@ -521,9 +531,6 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   componentinstance.transformation = new_transformation
   #
   # @param [Geom::Transformation] transformation
-  #   A Transformation object to apply.
-  #
-  # @return [Sketchup::ComponentInstance] the transformed ComponentInstance
   #
   # @version SketchUp 6.0
   def transformation=(transformation)
@@ -539,6 +546,8 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   instance1 = entities[0]
   #   instance2 = entities[1]
   #   result = instance1.trim(instance2)
+  #
+  # @note This method is not available in SketchUp Make.
   #
   # @param [Sketchup::ComponentInstance] instance
   #   The instance to trim this instance against.
@@ -560,6 +569,8 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   instance1 = entities[0]
   #   instance2 = entities[1]
   #   result = instance1.union(instance2)
+  #
+  # @note This method is not available in SketchUp Make.
   #
   # @param [Sketchup::ComponentInstance] instance
   #   The instance to union this instance with.

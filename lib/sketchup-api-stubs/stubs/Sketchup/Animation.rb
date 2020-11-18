@@ -32,6 +32,10 @@
 #
 #   Sketchup.active_model.active_view.animation = nil
 #
+# @abstract Implement the methods described in this class to create a an
+#   animation. You can not sub-class this class because it is not defined by
+#   the API.
+#
 # @version SketchUp 6.0
 class Sketchup::Animation
 

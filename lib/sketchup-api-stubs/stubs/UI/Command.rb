@@ -87,10 +87,10 @@ class UI::Command
   end
 
   # The large_icon= method is used to identify the icon file for the command's
-  # large icon. large icons should be 24x24 pixel images for best display
+  # large icon. large icons should be 32x32 pixel images for best display
   # quality.
   #
-  # Since SketchUp 2016 it is possible to provide vector images for the cursors.
+  # Since SketchUp 2016 it is possible to provide vector images for the command.
   # SVG format for Windows and PDF format for OS X. Since the vector images scale
   # for both small and large icon sizes, you may choose to use only one vector
   # image for both variants.
@@ -150,8 +150,11 @@ class UI::Command
   end
 
   # The {#set_validation_proc} method allows you to change whether the command
-  # is enabled, checked, etc. based on the user state. For example, you might
-  # want your command to be disabled unless the user has a current selection.
+  # is enabled, checked, etc. For instance, the command toggling a dialog window
+  # may be displayed as checked while the dialog is open.
+  #
+  # @bug On Mac the validation proc isn't called as often as it should. For
+  #   instance a selection change doesn't trigger it.
   #
   # @example
   #   # Create a command object.
@@ -167,6 +170,10 @@ class UI::Command
   #     end
   #   }
   #   UI.menu("Draw").add_item(cmd)
+  #
+  # @note Avoid disabling an command as it often isn't obvious to the user why
+  #   it is disabled. Prefer keeping the command enabled but show an error
+  #   message if pressed when it cannot be used.
   #
   # @return [UI::Command]
   #
@@ -199,7 +206,7 @@ class UI::Command
   end
 
   # The small_icon= method is used to identify the icon file for the command's
-  # small icon. Small icons should be 16x16 pixel images for best display
+  # small icon. Small icons should be 24x24 pixel images for best display
   # quality.
   #
   # Since SketchUp 2016 it is possible to provide vector images for the cursors.

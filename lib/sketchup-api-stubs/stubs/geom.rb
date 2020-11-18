@@ -167,6 +167,9 @@ module Geom
   # The {.linear_combination} method is used to compute the linear combination of
   # points or vectors.
   #
+  # A linear combination is a standard term for vector math. It is defined as
+  # vector = weight1 * vector1 + weight2 * vector2.
+  #
   # @example
   #   point1 = Geom::Point3d.new(1, 1, 1)
   #   point2 = Geom::Point3d.new(10, 10, 10)
