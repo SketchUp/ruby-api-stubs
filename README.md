@@ -8,7 +8,7 @@ The SketchUp Ruby API allows you to interact with SketchUp models and the Sketch
   Get started with the <a href="_index.html">Ruby API Overview</a>.
 </p>
 
-Visit our {https://developer.sketchup.com/ SketchUp Developer Center} for more information and resources on SketchUp's APIs.
+Visit our [SketchUp Developer Center](https://developer.sketchup.com) for more information and resources on SketchUp's APIs.
 
 ## LayOut API
 

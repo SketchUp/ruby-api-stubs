@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2021 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # Tool is the interface that you implement to create a SketchUp tool.

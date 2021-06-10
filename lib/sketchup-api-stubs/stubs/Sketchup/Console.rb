@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2021 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Console class is used by SketchUp to direct $stdout and $stderr to the

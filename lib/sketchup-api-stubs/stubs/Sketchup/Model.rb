@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2021 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This is the interface to a SketchUp model. The model is the 3D drawing that
@@ -852,6 +852,9 @@ class Sketchup::Model
 
   # The import method is used to load a file by recognizing the file extension
   # and calling appropriate importer.
+  #
+  # See {Sketchup::DefinitionList#import} for importing a 3d model file as a
+  # component definition, without activating the UI for placing an instance.
   #
   # See the {file:pages/importer_options.md Importer Options} file for information
   # on creating a valid hash for the various importers.

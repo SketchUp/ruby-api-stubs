@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2021 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Sketchup::ComponentDefinition} class is used to define the contents for
@@ -20,7 +20,7 @@
 # will be raised. The key/value pairs in the dictionary can be deleted safely.
 #
 # @version SketchUp 6.0
-class Sketchup::ComponentDefinition < Sketchup::Drawingelement
+class Sketchup::ComponentDefinition < DrawingElement
 
   # Includes
 

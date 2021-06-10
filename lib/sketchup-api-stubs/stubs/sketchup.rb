@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2021 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Sketchup module contains a number of important utility methods for use in
@@ -291,6 +291,17 @@ module Sketchup
   def self.fix_shadow_strings?
   end
 
+  # The {.focus} method is used to focus the active model window.
+  #
+  # @example
+  #   Sketchup.focus
+  #
+  # @see UI::HtmlDialog.bring_to_front
+  #
+  # @version SketchUp 2021.1
+  def self.focus
+  end
+
   # The format_angle method takes a number as an angle in radians and formats it
   # into degrees. For example, format_angle(Math::PI) will return 180.0.
   #
@@ -306,7 +317,7 @@ module Sketchup
   def self.format_angle(number)
   end
 
-  # The {.format_area} method formats a number as an area using the current units
+  # The {#format_area} method formats a number as an area using the current units
   # settings.
   #
   # The +number+ must be in square inches.
@@ -363,7 +374,7 @@ module Sketchup
   def self.format_length(*args)
   end
 
-  # The {.format_volume} method formats a number as a volume using the current
+  # The {#format_volume} method formats a number as a volume using the current
   # units settings.
   #
   # The +number+ must be in cubic inches.

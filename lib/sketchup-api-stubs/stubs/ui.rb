@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2021 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The UI module contains a number of methods for creating simple UI elements
@@ -165,7 +165,7 @@ module UI
   # of SketchUp's menus.
   #
   # Valid menu names are: "File", "Edit", "View", "Camera", "Draw", "Tools",
-  # "Window", "Extensions" and "Help".
+  # "Window", "Extensions", "Help" and "Developer".
   #
   # @example
   #   tool_menu = UI.menu("Tools")
@@ -471,7 +471,7 @@ module UI
   def self.select_directory(options = {})
   end
 
-  # The {.set_cursor} method is used to change the cursor to a new cursor with a
+  # The {#set_cursor} method is used to change the cursor to a new cursor with a
   # given cursor id. See UI.create_cursor and the Tool class for details
   # on creating your own tools with arbitrary cursors.
   #
@@ -541,10 +541,14 @@ module UI
   end
 
   # The {.show_model_info} method is used to display the model info dialog for a
-  # specific page. You can get the list of valid dialogs with
-  # {UI.model_info_pages}.
+  # specific page. You can get the list of valid page names with {UI.model_info_pages}.
   #
   # [SketchUp 2014] <code>"Classifications"</code> page was added.
+  #
+  # @bug Until SketchUp 2021.1 SketchUp on Mac didn't display the desired page in,
+  #   but only selected it in the navigation.
+  #
+  # @bug Until SketchUp 2021.1 SketchUp on Mac didn't accept English page names on localized builds.
   #
   # @example
   #   UI.show_model_info('Credits')

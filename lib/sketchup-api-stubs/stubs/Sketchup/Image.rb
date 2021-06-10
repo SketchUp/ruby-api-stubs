@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2021 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # An Image object represents a raster image placed in the Model.
@@ -37,6 +37,53 @@ class Sketchup::Image < Sketchup::Drawingelement
   #
   # @version SketchUp 6.0
   def explode
+  end
+
+  # The {#glued_to} method is used to retrieve the entity that this image is
+  # glued to.
+  #
+  # @example
+  #   point = Geom::Point3d.new(10, 20, 30)
+  #   transform = Geom::Transformation.new(point)
+  #   model = Sketchup.active_model
+  #   entities = model.active_entities
+  #   group = entities.add_group
+  #   group.entities.add_face([[0, 0, 0], [10, 0, 0], [10, 10, 0], [0, 10, 0]])
+  #   status = group.glued_to
+  #
+  # @return [Sketchup::Face, Sketchup::Group, Sketchup::ComponentInstance, Sketchup::Image, nil]
+  #
+  # @version SketchUp 2021.1
+  def glued_to
+  end
+
+  # The {glued_to=} method glues this image to a drawing element.
+  # When moving this other drawing elment with the Move tool, the image moves with it.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   entities = model.active_entities
+  #
+  #   # Create a face
+  #   face = entities.add_face([[0, 0, 0], [100, 0, 0], [100, 100, 0], [0, 100, 0]])
+  #
+  #   # Create a group
+  #   path = "Plugins/su_dynamiccomponents/images"
+  #   image_file = Sketchup.find_support_file("report_tool.png", path)
+  #   image = model.active_entities.add_image(image_file, ORIGIN, 300)
+  #
+  #   # Glue the group to the face.
+  #   # If you now move the face, the group will follow.
+  #   image.glued_to = face
+  #
+  # @param [Sketchup::Face, Sketchup::Group, Sketchup::ComponentInstance, Sketchup::Image, nil] drawing_element
+  #
+  # @raise ArgumentError if this would lead to cyclic gluing.
+  #
+  # @return [Sketchup::Face, Sketchup::Group, Sketchup::ComponentInstance, Sketchup::Image, nil] the entity the group was glued to.
+  #
+  # @version SketchUp 2021.1
+  def glued_to=(drawing_element)
   end
 
   # The height method is used to retrieve the height of the image.
@@ -92,12 +139,16 @@ class Sketchup::Image < Sketchup::Drawingelement
   # The {#image_rep} method returns a copy of a {Sketchup::ImageRep} object
   # representing the pixel data.
   #
+  # @bug Prior to SketchUp 2021.1, SketchUp crashes when the Image is corrupt and lacks image data.
+  #
   # @example
   #   model = Sketchup.active_model
   #   path = "Plugins/su_dynamiccomponents/images"
   #   image_file = Sketchup.find_support_file("report_tool.png", path)
   #   image = model.active_entities.add_image(image_file, ORIGIN, 300)
   #   image_rep = image.image_rep
+  #
+  # @raise ArgumentError if the Image is corrupt and lacks image data.
   #
   # @return [Sketchup::ImageRep]
   #

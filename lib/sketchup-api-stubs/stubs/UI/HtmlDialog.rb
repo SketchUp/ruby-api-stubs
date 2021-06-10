@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2021 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Ruby HtmlDialog class allows you to create and interact with HTML dialog
@@ -17,10 +17,25 @@
 # For usage examples, including how to migrate from the old WebDialog class,
 # see https://github.com/SketchUp/htmldialog-examples.
 #
+# HtmlDialog uses the following versions of CEF (Chromium Embedded Framework):
+#
+# [SketchUp 2021.1]
+#   CEF 88
+# [SketchUp 2019.0]
+#   CEF 64
+# [SketchUp 2018.0]
+#   CEF 56
+# [SketchUp 2017.0]
+#   CEF 52
+#
 # @version SketchUp 2017
 class UI::HtmlDialog
 
   # Constants
+
+  CEF_VERSION = nil # Stub value.
+
+  CHROME_VERSION = nil # Stub value.
 
   STYLE_DIALOG = nil # Stub value.
   STYLE_UTILITY = nil # Stub value.
@@ -81,10 +96,15 @@ class UI::HtmlDialog
   # The {#bring_to_front} method is used to bring the window to the front,
   # putting it on top of other windows even if its minimized.
   #
+  # @bug Prior to SketchUp 2021.1, on Mac, the focus the was not being set
+  #   on the {UI::HtmlDialog}.
+  #
   # @example
   #   dialog.bring_to_front
   #
   # @return [nil]
+  #
+  # @see Sketchup.focus
   #
   # @version SketchUp 2017
   def bring_to_front
@@ -97,7 +117,7 @@ class UI::HtmlDialog
   # @example
   #   dialog.center
   #
-  # @return [true]
+  # @return [true] This always return true, never false.
   #
   # @version SketchUp 2017
   def center
@@ -130,7 +150,53 @@ class UI::HtmlDialog
   def execute_script(script)
   end
 
+  # The {#get_content_size} method is used to get the content size of the HtmlDialog, in logical pixels.
+  #
+  # @example
+  #   width, height = dialog.get_content_size
+  #
+  # @return [Array(Integer, Integer), nil] Content width and height of the HtmlDialog.
+  #   A nil value is returned if the HtmlDialog
+  #   is not visible.
+  #
+  # @version SketchUp 2021.1
+  def get_content_size
+  end
+
+  # The {#get_position} method is used to get the position of the HtmlDialog
+  # relative to the screen, in logical pixels.
+  #
+  # @example
+  #   left, top = dialog.get_position
+  #
+  # @return [Array(Integer, Integer), nil] Left and top position of the dialog.
+  #   A nil value is returned if the HtmlDialog
+  #   is not visible.
+  #
+  # @version SketchUp 2021.1
+  def get_position
+  end
+
+  # The {#get_size} method is used to get the outer frame size of the HtmlDialog, in logical pixels.
+  #
+  # @example
+  #   width, height = dialog.get_size
+  #
+  # @return [Array(Integer, Integer), nil] Outer frame width and height of the HtmlDialog.
+  #   A nil value is returned if the HtmlDialog
+  #   is not visible.
+  #
+  # @version SketchUp 2021.1
+  def get_size
+  end
+
   # The new method is used to create a new HtmlDialog.
+  #
+  # When +use_content_size+ is set to +true+, +width+, +height+, +min_width+,
+  # +max width+, +min_height+, +max_height+ will represent the size of the
+  # content area of the window. This excludes the titlebar and the window frame.
+  # When +use_content_size+ is set to +false+ (the default value),
+  # the size dimensions will represent the outer frame size.
   #
   # The +properties+ hash accepts an optional key +style+ where the value is
   # one of:
@@ -204,6 +270,8 @@ class UI::HtmlDialog
   #
   # @option properties [Boolean] :resizable (true)
   #
+  # @option properties [Boolean] :use_content_size (false)
+  #
   # @option properties [Integer] :width (250)
   #
   # @option properties [Integer] :height (250)
@@ -246,6 +314,23 @@ class UI::HtmlDialog
   # @yieldreturn [Boolean] Return a boolean to indicate if the dialogs should
   #   close.
   def set_can_close
+  end
+
+  # The {#set_content_size} method is used to set the content size of the HtmlDialog, in logical pixels.
+  #
+  # @example
+  #   dialog.set_content_size(600, 400)
+  #
+  # @param [Integer] width
+  #   Content width of the HtmlDialog.
+  #
+  # @param [Integer] height
+  #   Content height of the HtmlDialog.
+  #
+  # @return [nil]
+  #
+  # @version SketchUp 2021.1
+  def set_content_size(width, height)
   end
 
   # The {#set_file} method is used to identify a local HTML file to display in the
@@ -296,6 +381,9 @@ class UI::HtmlDialog
   # The {#set_position} method is used to set the position of the HtmlDialog
   # relative to the screen, in pixels.
   #
+  # @bug Prior to SketchUp 2021.1, on Windows, calling this method incorrectly
+  #   set the focus on the {UI::HtmlDialog}.
+  #
   # @example
   #   dialog.set_position(100, 50)
   #
@@ -305,24 +393,27 @@ class UI::HtmlDialog
   # @param [Integer] top
   #   The number of pixels from the top of the screen.
   #
-  # @return [true]
+  # @return [true] This always return true, never false.
   #
   # @version SketchUp 2017
   def set_position(left, top)
   end
 
-  # The {#set_size} method is used to set the size of the HtmlDialog, in pixels.
+  # The {#set_size} method is used to set the outer frame size of the HtmlDialog, in pixels.
+  #
+  # @bug Prior to SketchUp 2021.1, on Windows, calling this method incorrectly
+  #   set the focus on the {UI::HtmlDialog}.
   #
   # @example
   #   dialog.set_size(320, 240)
   #
   # @param [Integer] width
-  #   Width of the HtmlDialog.
+  #   Outer frame width of the HtmlDialog.
   #
   # @param [Integer] height
-  #   Height of the HtmlDialog.
+  #   Outer frame height of the HtmlDialog.
   #
-  # @return [true]
+  # @return [true] This always return true, never false.
   #
   # @version SketchUp 2017
   def set_size(width, height)

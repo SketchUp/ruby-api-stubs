@@ -19,7 +19,10 @@ Though our adoption rate to the latest version is quite high, it can take time a
 
 Here are the build numbers for recent SketchUp releases. Note that build numbers in languages besides English are larger for each release, so it is best to check for builds that are greater than or equal to the numbers here.
 
+- **SU2021.1** = 21.1.279 on Windows 64-bit, 21.1.278 on Mac 64-bit.
+- **SU2021.0.1** = 21.0.391 on Windows 64-bit, 21.0.392 on Mac 64-bit. (Contained no Ruby API changes)
 - **SU2021.0** = 21.0.339 on Windows 64-bit, 21.0.338 on Mac 64-bit.
+- **SU2021.0** = 21.0.114 on Windows 64-bit, 21.0.113 on Mac 64-bit.
 - **SU2020.2** = 20.2.172 on Windows 64-bit, 20.2.171 on Mac 64-bit.
 - **SU2020.1.1** = 20.1.235 on Windows 64-bit. (Contained no Ruby API changes)
 - **SU2020.1** = 20.1.229 on Windows 64-bit, 20.1.228 on Mac 64-bit.
@@ -57,6 +60,63 @@ Here are the build numbers for recent SketchUp releases. Note that build numbers
 - **SU7.0** = 7.0.8657 on Windows, 7.0.8656 on Mac.
 
 - **SU6 M6** = 6.4.265 on Windows, 6.4.263 on Mac.
+
+# What's new in SketchUp 2021.1
+
+## Upgrade Ruby to 2.7.2
+
+For SketchUp 2021.1 we have upgraded the version of Ruby that we ship with SketchUp from 2.7.1 to 2.7.2.
+
+Notable bug-fix in Ruby 2.7.2 is correcting a bug that prevented profiling tools such as ruby-prof from reporting correct results. (https://bugs.ruby-lang.org/issues/17152)
+
+## Update OpenSSL to 1.1.1k
+
+The version of OpenSSL in Ruby was updated to 1.1.1k.
+
+## Ruby Console Improvements
+
+* The Ruby Console now remembers its visibility between sessions.
+* The Ruby Console was moved from the Windows menu to the new Developer menu.
+
+## Ruby API Additions and Improvements
+
+* Upgraded CEF (used by {UI::HtmlDialog}) to version 88.
+* Added method {UI::HtmlDialog#get_position}
+* Added method {UI::HtmlDialog#get_size}
+* Added method {UI::HtmlDialog#get_content_size}
+* Added method {UI::HtmlDialog#set_content_size}
+* Added method {Sketchup.focus}
+* Added constant {UI::HtmlDialog::CEF_VERSION}
+* Added constant {UI::HtmlDialog::CHROME_VERSION}
+* Added method {Sketchup::Face#clear_texture_projection}
+* Added method {Sketchup::Face#texture_positioned?}
+* Added method {Sketchup::Face#texture_projected?}
+* Added method {Sketchup::Face#uv_tile_at}
+* Added method overload to {Sketchup::Face#position_material} allowing projected materials to be applied.
+* Added method {Sketchup::DefinitionList#import}
+* Added method {Sketchup::Group#glued_to}
+* Added method {Sketchup::Group#glued_to=}
+* Added method {Sketchup::Image#glued_to}
+* Added method {Sketchup::Image#glued_to=}
+* Added method overload to {Sketchup::ComponentInstance#glued_to=} allowing to glue to groups images, and components.
+* Increased display time for {UI::Notification} to 10 seconds.
+* Add a separator when a menu is added for the first time to a top level menu. This creates a visual distinction between built-in menus and that of extensions.
+* Added support for adding submenus to the Developer menu.
+* {Geom::PolygonMesh} is now faster when looking up points in large meshes.
+  This also improve performance when adding points to large meshes. Note that
+  the mesh need to be created with an estimated total number of points for this
+  performance improvement to kick in. The lookup of points for large meshes are
+  now O(logN) instead of O(N^2).
+
+## Ruby API Bug Fixes
+
+* Fixed crash when passing invalid parameters to {Sketchup::Model#drawing_element_visible?}.
+* Fixed {UI::HtmlDialog#bring_to_front} on Mac, such that calling the method sets focus on the HtmlDialog. This makes the behavior of the method consistent with that on Windows.
+* Fixed {UI::HtmlDialog#set_size} and {UI::HtmlDialog#set_position} on Windows, such that calling the methods doesn't set the focus on the HtmlDialog. This makes the behavior of the method consistent with that on Mac.
+* Fixed {UI::HtmlDialog#set_can_close} Mac implementation so that the callback provided can properly prevent the window from closing.
+* Fixed crash in {Sketchup::Image#image_rep} when the Image lacks a texture.
+* Fixed {UI.show_model_info} not showing the chosen page on Mac.
+* Fixed {UI.show_model_info} not supporting English page names on localized build on Mac.
 
 # What's new in SketchUp 2021.0
 
@@ -98,6 +158,7 @@ For SketchUp 2021.0 we have upgraded the version of Ruby that we ship with Sketc
 * Updated OpenSSL to 1.1.1g.
 
 ## Ruby API Bug Fixes
+
 * Fixed {Sketchup::Texture#filename} such that it appends a file extension matching the data format it was loaded from when the internal texture filename is missing the extension.
 
 # What's new in SketchUp 2020.2
@@ -255,6 +316,7 @@ Now it adds a space between the number and the unit indicator. If your extension
 ## Ruby API Additions and Improvements
 
 * Upgraded Ruby version from 2.2.4 to 2.5.1 for both Mac and Windows
+* Upgraded CEF (used by {UI::HtmlDialog}) to version 64.
 * Added {Sketchup::Tools#active_tool} that returns the active Ruby tool
 * Added `import_materials` option to {Sketchup::Model#import} for dwg importer
 * Added instance path support for {Sketchup::Entities#add_text}
@@ -295,11 +357,6 @@ Now it adds a space between the number and the unit indicator. If your extension
 * Added {Layout::SketchUpModel#dash_scale=} to set the scale value of stipples for the SketchUp Model Ref. A value at or below 0.0 will cause the scale to automatically be determined by the line weight.
 * Fix documentation of {Layout::Path#append_point}. When appending a bezier path segment, the params should have been (`control_1, control_2, point`) and not (`point, control_1, control_2`).
 
-## Updated Chromium (CEF), used in {UI::HtmlDialog}
-
-* **SketchUp 2019:** Chrome/64.0.3282.119
-* **SketchUp 2018:** Chrome/56.0.2924.76
-
 # What's new in SketchUp 2018 M0
 
 ## LayOut Ruby API for SketchUp
@@ -328,6 +385,7 @@ SketchUp core added a feature called Advanced Attributes. This adds some new att
 
 ## Ruby Improvements and Fixes
 
+* Upgraded CEF (used by {UI::HtmlDialog}) to version 56.
 * Added method: {UI.refresh_toolbars}
 * Added constants to {Geom::PolygonMesh}:
     * {Geom::PolygonMesh::MESH_NORMALS}

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2021 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This class contains methods to manipulate the current point of view of the
@@ -800,7 +800,7 @@ class Sketchup::View
   #
   # @see #draw
   #
-  # @version SketchUp 2020.0
+  # @version 2020.0
   def load_texture(image_rep)
   end
 

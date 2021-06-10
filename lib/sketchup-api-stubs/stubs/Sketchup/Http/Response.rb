@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2021 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # Http::Response objects allows you to get the response information from the
@@ -15,9 +15,9 @@ class Sketchup::Http::Response
   # no charset is specified, ASCII-8BIT will be used.
   #
   # @example
-  #   request = Sketchup::Http::Request.new("http://localhost:8080")
+  #   @request = Sketchup::Http::Request.new("http://localhost:8080")
   #
-  #   request.start do |request, response|
+  #   @request.start do |request, response|
   #     puts "body: " + response.body
   #   end
   #
@@ -30,9 +30,9 @@ class Sketchup::Http::Response
   # Returns the http headers that were sent by the server.
   #
   # @example
-  #   request = Sketchup::Http::Request.new("http://localhost:8080")
+  #   @request = Sketchup::Http::Request.new("http://localhost:8080")
   #
-  #   request.start do |request, response|
+  #   @request.start do |request, response|
   #     response.headers.each do |key, value|
   #       puts "#{key}: #{value}"
   #     end
@@ -47,9 +47,9 @@ class Sketchup::Http::Response
   # Returns the HTTP response status code as defined in rfc2616.
   #
   # @example
-  #   request = Sketchup::Http::Request.new("http://localhost:8080")
+  #   @request = Sketchup::Http::Request.new("http://localhost:8080")
   #
-  #   request.start do |request, response|
+  #   @request.start do |request, response|
   #     puts "http status code: #{response.status_code}"
   #   end
   #

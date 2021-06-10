@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2021 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # Allows layers to be organized in folders. Folders may have duplicate names.
@@ -39,7 +39,7 @@ class Sketchup::LayerFolder < Sketchup::Entity
   #   +0+ if the receiver and +other+ are equal.
   #   +nil+ if +other+ is not comparable with the receiver.
   #
-  # @version SketchUp 2020.2
+  # @version 2020.2
   def <=>(other)
   end
 
@@ -165,7 +165,7 @@ class Sketchup::LayerFolder < Sketchup::Entity
   #   model = Sketchup.active_model
   #   layers = model.layers
   #   folder1 = layers.add_folder('Hello')
-  #   folder1.add_folder('World)
+  #   folder1.add_folder('World')
   #   folder1.each_folder { | folder | puts folder.name }
   #
   # @version SketchUp 2021.0

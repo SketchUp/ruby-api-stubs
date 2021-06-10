@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2021 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {#Geom::PolygonMesh} class contains methods to create polygon mesh
@@ -9,17 +9,18 @@
 # a mesh from it, and draws faces based on the mesh.
 #
 # You can construct a mesh manually using the methods of this class, or you
-# can get a mesh from a face by calling the Face.mesh method. See
+# can get a mesh from a face by calling the {Sketchup::Face#mesh} method. See
 # {Sketchup::Entities#add_faces_from_mesh} for an easy way to convert a mesh
 # back into faces.
 #
 # @example
-#   # Grab a mesh from a given face.
-#   my_mesh = some_face.mesh
+#   entities = Sketchup.active_model.active_entities
+#   face = entities.grep(Sketchup::Face).first
 #
-#   # Create a new group that we will populate with the mesh.
-#   group = Sketchup.active_model.entities.add_group
-#   group.entities.add_faces_from_mesh(my_mesh)
+#   mesh = face.mesh
+#
+#   group = entities.add_group
+#   group.entities.add_faces_from_mesh(mesh)
 #
 # @version SketchUp 6.0
 class Geom::PolygonMesh
@@ -166,12 +167,22 @@ class Geom::PolygonMesh
   def count_polygons
   end
 
-  # Create a new empty polygon mesh. The number of points and polygons are
-  # optional and are just used as a hint to decide how much space to
-  # pre-allocate to speed up adding points and polygons.
+  # Create a new empty polygon mesh.
+  #
+  # The number of points and polygons are optional and are used as a hint to
+  # decide how much space to pre-allocate to speed up adding points and polygons.
+  #
+  # As of SketchUp 2021.1 the performance of looking up and inserting points is
+  # significantly better provided the mesh was initialized with roughly the
+  # correct number of total points.
   #
   # @example
   #   mesh = Geom::PolygonMesh.new
+  #
+  # @note When creating a mesh with normals and/or UVQ data it's critical that
+  #   the number of points estimated is equal to or higher than the final number
+  #   of points added. If fewer points are estimated the normals and UVQ data
+  #   might end up out of sync.
   #
   # @overload initialize
   #
