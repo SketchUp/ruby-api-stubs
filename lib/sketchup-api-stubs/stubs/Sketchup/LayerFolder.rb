@@ -39,7 +39,7 @@ class Sketchup::LayerFolder < Sketchup::Entity
   #   +0+ if the receiver and +other+ are equal.
   #   +nil+ if +other+ is not comparable with the receiver.
   #
-  # @version 2020.2
+  # @version SketchUp 2020.2
   def <=>(other)
   end
 
