@@ -168,7 +168,7 @@ class Sketchup::DefinitionList < Entity
   #
   # @param [String] path
   #
-  # @param [Hash] Options
+  # @param [Hash] options
   #
   # @raise [IOError] if the file is missing.
   #

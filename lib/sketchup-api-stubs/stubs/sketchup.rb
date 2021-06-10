@@ -317,7 +317,7 @@ module Sketchup
   def self.format_angle(number)
   end
 
-  # The {#format_area} method formats a number as an area using the current units
+  # The {.format_area} method formats a number as an area using the current units
   # settings.
   #
   # The +number+ must be in square inches.
@@ -374,7 +374,7 @@ module Sketchup
   def self.format_length(*args)
   end
 
-  # The {#format_volume} method formats a number as a volume using the current
+  # The {.format_volume} method formats a number as a volume using the current
   # units settings.
   #
   # The +number+ must be in cubic inches.

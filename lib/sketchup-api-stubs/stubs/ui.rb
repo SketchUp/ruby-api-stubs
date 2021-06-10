@@ -471,7 +471,7 @@ module UI
   def self.select_directory(options = {})
   end
 
-  # The {#set_cursor} method is used to change the cursor to a new cursor with a
+  # The {.set_cursor} method is used to change the cursor to a new cursor with a
   # given cursor id. See UI.create_cursor and the Tool class for details
   # on creating your own tools with arbitrary cursors.
   #
