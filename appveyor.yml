@@ -2,7 +2,7 @@ version: "{build}-{branch}"
 
 branches:
   only:
-    - master
+    - main
     - dev-appveyor
 
 cache:
