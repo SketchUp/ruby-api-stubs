@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2021 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # Http::Request objects allows you to send HTTP request to HTTP servers.

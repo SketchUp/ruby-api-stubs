@@ -1,8 +1,8 @@
-# Copyright:: Copyright 2021 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
-# References an auto text definition. Some auto text definitions are mandatory.
-# Mandatory auto text definitions may not be removed, added, or modified.
+# References an auto-text definition. Some auto-text definitions are mandatory.
+# Mandatory auto-text definitions may not be removed, added, or modified.
 #
 # A mandatory {Layout::AutoTextDefinition} is one of the following types:
 # [+Layout::AutoTextDefinition::TYPE_MODEL_GROUP_NAME+]
@@ -15,6 +15,11 @@
 # [+Layout::AutoTextDefinition::TYPE_MODEL_COORDINATES+]
 # [+Layout::AutoTextDefinition::TYPE_MODEL_DYNAMIC_COMPONENT_ATTRIBUTE+]
 # [+Layout::AutoTextDefinition::TYPE_MODEL_CLASSIFIER_ATTRIBUTE+]
+# [+Layout::AutoTextDefinition::TYPE_MODEL_SCENE_NAME+]
+# [+Layout::AutoTextDefinition::TYPE_MODEL_SCENE_DESCRIPTION+]
+# [+Layout::AutoTextDefinition::TYPE_MODEL_SCALE+]
+# [+Layout::AutoTextDefinition::TYPE_MODEL_SECTION_NAME+]
+# [+Layout::AutoTextDefinition::TYPE_MODEL_SECTION_SYMBOL+]
 #
 # @example
 #   doc = Layout::Document.open("C:/path/to/document.layout")
@@ -52,9 +57,17 @@ class Layout::AutoTextDefinition
   TYPE_MODEL_EDGE_LENGTH = nil # Stub value.
   TYPE_MODEL_FACE_AREA = nil # Stub value.
   TYPE_MODEL_GROUP_NAME = nil # Stub value.
+  TYPE_MODEL_RATIO = nil # Stub value.
+  TYPE_MODEL_SCALE = nil # Stub value.
+  TYPE_MODEL_SCENE_DESCRIPTION = nil # Stub value.
+  TYPE_MODEL_SCENE_NAME = nil # Stub value.
+  TYPE_MODEL_SECTION_NAME = nil # Stub value.
+  TYPE_MODEL_SECTION_SYMBOL = nil # Stub value.
   TYPE_MODEL_VOLUME = nil # Stub value.
+  TYPE_PAGE_COUNT = nil # Stub value.
   TYPE_PAGE_NAME = nil # Stub value.
   TYPE_PAGE_NUMBER = nil # Stub value.
+  TYPE_SEQUENCE = nil # Stub value.
 
   # Instance Methods
 
@@ -105,6 +118,8 @@ class Layout::AutoTextDefinition
   # @raise [ArgumentError] if the {Layout::AutoTextDefinition}'s type is not
   #   +Layout::AutoTextDefinition::TYPE_CUSTOM_TEXT+
   #
+  # @raise [TypeError] if +custom_text+ is not a String or convertable to a String.
+  #
   # @version LayOut 2018
   def custom_text=(custom_text)
   end
@@ -138,6 +153,8 @@ class Layout::AutoTextDefinition
   #
   # @raise [ArgumentError] if the {Layout::AutoTextDefinition}'s type is not
   #   +Layout::AutoTextDefinition::TYPE_DATE_*+.
+  #
+  # @raise [TypeError] if date_format is not a String or convertable to a String.
   #
   # @version LayOut 2018
   def date_format=(date_format)
@@ -215,6 +232,82 @@ class Layout::AutoTextDefinition
   def display_full_path?
   end
 
+  # The {#end_page} method returns the end page for the
+  # +Layout::AutoTextDefinition::TYPE_PAGE_COUNT+ {Layout::AutoTextDefinition}.
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   page_count_def =
+  #       doc.auto_text_definitions.add("PageCount", Layout::AutoTextDefinition::TYPE_PAGE_COUNT)
+  #   # Default end_page value is nil, meaning count to the end of the document
+  #   page = page_count_def.end_page
+  #
+  # @raise [ArgumentError] if the {Layout::AutoTextDefinition}'s type is not
+  #   +Layout::AutoTextDefinition::TYPE_PAGE_COUNT+.
+  #
+  # @return [Layout::Page, nil]
+  #
+  # @version LayOut 2022.0
+  def end_page
+  end
+
+  # The {#end_page=} method sets the end page for the
+  # +Layout::AutoTextDefinition::TYPE_PAGE_COUNT+ {Layout::AutoTextDefinition}.
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   definitions = doc.auto_text_definitions
+  #   page_count_def =
+  #       doc.auto_text_definitions.add("PageCount", Layout::AutoTextDefinition::TYPE_PAGE_COUNT)
+  #   # Stop the PageCount auto-text at this newly created page instead of at the end of the document
+  #   page_count_def.end_page = doc.pages.add("new page")
+  #
+  # @param [Layout::Page, nil] page
+  #
+  # @raise [ArgumentError] if the {Layout::AutoTextDefinition}'s type is not
+  #   +Layout::AutoTextDefinition::TYPE_PAGE_COUNT+.
+  #
+  # @version LayOut 2022.0
+  def end_page=(page)
+  end
+
+  # The {#increment} method returns the increment value for
+  # +Layout::AutoTextDefinition::TYPE_SEQUENCE+ {Layout::AutoTextDefinition}s.
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   sequence_def =
+  #       doc.auto_text_definitions.add("Seq1", Layout::AutoTextDefinition::TYPE_SEQUENCE)
+  #   # Default sequence increment value is 1
+  #   increment = sequence_def.increment
+  #
+  # @raise [ArgumentError] if the {Layout::AutoTextDefinition}'s type is not
+  #   +Layout::AutoTextDefinition::TYPE_SEQUENCE+.
+  #
+  # @return [Integer]
+  #
+  # @version LayOut 2022.0
+  def increment
+  end
+
+  # The {#increment=} method sets the increment value for
+  # +Layout::AutoTextDefinition::TYPE_SEQUENCE+ {Layout::AutoTextDefinition}s.
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   sequence_def =
+  #       doc.auto_text_definitions.add("Seq1", Layout::AutoTextDefinition::TYPE_SEQUENCE)
+  #   sequence_def.increment = 10
+  #
+  # @param [Integer] increment
+  #
+  # @raise [ArgumentError] if the {Layout::AutoTextDefinition}'s type is not
+  #   +Layout::AutoTextDefinition::TYPE_SEQUENCE+.
+  #
+  # @version LayOut 2022.0
+  def increment=(increment)
+  end
+
   # The {#mandatory?} method returns whether the {Layout::AutoTextDefinition} is
   # mandatory or not.
   #
@@ -229,6 +322,11 @@ class Layout::AutoTextDefinition
   # [+Layout::AutoTextDefinition::TYPE_MODEL_COORDINATES+]
   # [+Layout::AutoTextDefinition::TYPE_MODEL_DYNAMIC_COMPONENT_ATTRIBUTE+]
   # [+Layout::AutoTextDefinition::TYPE_MODEL_CLASSIFIER_ATTRIBUTE+]
+  # [+Layout::AutoTextDefinition::TYPE_MODEL_SCENE_NAME+]
+  # [+Layout::AutoTextDefinition::TYPE_MODEL_SCENE_DESCRIPTION+]
+  # [+Layout::AutoTextDefinition::TYPE_MODEL_SCALE+]
+  # [+Layout::AutoTextDefinition::TYPE_MODEL_SECTION_NAME+]
+  # [+Layout::AutoTextDefinition::TYPE_MODEL_SECTION_SYMBOL+]
   #
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")
@@ -272,14 +370,18 @@ class Layout::AutoTextDefinition
   #
   # @raise [ArgumentError] if name is an empty string
   #
+  # @raise [TypeError] if name is not a String or convertable to a String.
+  #
   # @version LayOut 2018
   def name=(name)
   end
 
-  # The {#page_number_style} method returns the numbering style for the
-  # +Layout::AutoTextDefinition::TYPE_PAGE_NUMBER+ {Layout::AutoTextDefinition}.
+  # The {#number_style} method returns the numbering style for
+  # +Layout::AutoTextDefinition::TYPE_PAGE_NUMBER+,
+  # +Layout::AutoTextDefinition::TYPE_PAGE_COUNT+, and
+  # +Layout::AutoTextDefinition::TYPE_SEQUENCE+ {Layout::AutoTextDefinition}s.
   #
-  # The page numbering style can be one of the following values:
+  # The numbering style can be one of the following values:
   # [+Layout::AutoTextDefinition::NUMBER_STYLE_ARABIC+]
   # [+Layout::AutoTextDefinition::NUMBER_STYLE_ARABIC_PADDED+]
   # [+Layout::AutoTextDefinition::NUMBER_STYLE_UC_ALPHA+]
@@ -289,8 +391,70 @@ class Layout::AutoTextDefinition
   #
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")
-  #   definitions = doc.auto_text_definitions
-  #   number_style = definitions.last.page_number_style
+  #   sequence_def = doc.auto_text_definitions.add("Seq1", Layout::AutoTextDefinition::TYPE_SEQUENCE)
+  #   number_style = sequence_def.number_style
+  #
+  # @raise [ArgumentError] if the {Layout::AutoTextDefinition}'s type is not
+  #   +Layout::AutoTextDefinition::TYPE_PAGE_NUMBER+,
+  #   +Layout::AutoTextDefinition::TYPE_PAGE_COUNT+, or
+  #   +Layout::AutoTextDefinition::TYPE_SEQUENCE+.
+  #
+  # @return [Integer]
+  #
+  # @version LayOut 2022.0
+  def number_style
+  end
+
+  # The {#number_style=} method sets the numbering style for
+  # +Layout::AutoTextDefinition::TYPE_PAGE_NUMBER+,
+  # +Layout::AutoTextDefinition::TYPE_PAGE_COUNT+, and
+  # +Layout::AutoTextDefinition::TYPE_SEQUENCE+ {Layout::AutoTextDefinition}s.
+  #
+  # The numbering style can be one of the following values:
+  # [+Layout::AutoTextDefinition::NUMBER_STYLE_ARABIC+]
+  # [+Layout::AutoTextDefinition::NUMBER_STYLE_ARABIC_PADDED+]
+  # [+Layout::AutoTextDefinition::NUMBER_STYLE_UC_ALPHA+]
+  # [+Layout::AutoTextDefinition::NUMBER_STYLE_LC_ALPHA+]
+  # [+Layout::AutoTextDefinition::NUMBER_STYLE_UC_ROMAN+]
+  # [+Layout::AutoTextDefinition::NUMBER_STYLE_LC_ROMAN+]
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   sequence_def = doc.auto_text_definitions.add("Seq1", Layout::AutoTextDefinition::TYPE_SEQUENCE)
+  #   sequence_def.number_style = Layout::AutoTextDefinition::NUMBER_STYLE_UC_ROMAN
+  #
+  # @param [Integer] number_style
+  #
+  # @raise [ArgumentError] if the {Layout::AutoTextDefinition}'s type is not
+  #   +Layout::AutoTextDefinition::TYPE_PAGE_NUMBER+,
+  #   +Layout::AutoTextDefinition::TYPE_PAGE_COUNT+, or
+  #   +Layout::AutoTextDefinition::TYPE_SEQUENCE+.
+  #
+  # @raise [ArgumentError] if number_style is not a valid page numbering style
+  #
+  # @version LayOut 2022.0
+  def number_style=(number_style)
+  end
+
+  # The {#page_number_style} method returns the numbering style for
+  # +Layout::AutoTextDefinition::TYPE_PAGE_NUMBER+ {Layout::AutoTextDefinition}s.
+  #
+  # The numbering style can be one of the following values:
+  # [+Layout::AutoTextDefinition::NUMBER_STYLE_ARABIC+]
+  # [+Layout::AutoTextDefinition::NUMBER_STYLE_ARABIC_PADDED+]
+  # [+Layout::AutoTextDefinition::NUMBER_STYLE_UC_ALPHA+]
+  # [+Layout::AutoTextDefinition::NUMBER_STYLE_LC_ALPHA+]
+  # [+Layout::AutoTextDefinition::NUMBER_STYLE_UC_ROMAN+]
+  # [+Layout::AutoTextDefinition::NUMBER_STYLE_LC_ROMAN+]
+  #
+  # @deprecated LayOut 2022.0 This method is deprecated in favor of the more generic {#number_style}
+  #   method that also works on +Layout::AutoTextDefintion::TYPE_PAGE_COUNT+ and
+  #   +Layout::AutoTextDefintion::TYPE_SEQUENCE+ {Layout::AutoTextDefinition}s.
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   page_number_def = doc.auto_text_definitions.add("RomanPageNumbers",
+  #     Layout::AutoTextDefinition::TYPE_PAGE_NUMBER) number_style = page_number_def.number_style
   #
   # @raise [ArgumentError] if the {Layout::AutoTextDefinition}'s type is not
   #   +Layout::AutoTextDefinition::TYPE_PAGE_NUMBER+.
@@ -301,10 +465,10 @@ class Layout::AutoTextDefinition
   def page_number_style
   end
 
-  # The {#page_number_style=} method sets the numbering style for the
-  # +Layout::AutoTextDefinition::TYPE_PAGE_NUMBER+ {Layout::AutoTextDefinition}.
+  # The {#page_number_style=} method sets the numbering style for
+  # +Layout::AutoTextDefinition::TYPE_PAGE_NUMBER+ {Layout::AutoTextDefinition}s.
   #
-  # The page numbering style can be one of the following values:
+  # The numbering style can be one of the following values:
   # [+Layout::AutoTextDefinition::NUMBER_STYLE_ARABIC+]
   # [+Layout::AutoTextDefinition::NUMBER_STYLE_ARABIC_PADDED+]
   # [+Layout::AutoTextDefinition::NUMBER_STYLE_UC_ALPHA+]
@@ -312,32 +476,97 @@ class Layout::AutoTextDefinition
   # [+Layout::AutoTextDefinition::NUMBER_STYLE_UC_ROMAN+]
   # [+Layout::AutoTextDefinition::NUMBER_STYLE_LC_ROMAN+]
   #
+  # @deprecated LayOut 2022.0 This method is deprecated in favor of the more generic {#number_style=}
+  #   method that also works on +Layout::AutoTextDefintion::TYPE_PAGE_COUNT+ and
+  #   +Layout::AutoTextDefintion::TYPE_SEQUENCE+ {Layout::AutoTextDefinition}s.
+  #
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")
-  #   definitions = doc.auto_text_definitions
-  #   definitions.last.page_number_style = Layout::AutoTextDefinition::NUMBER_STYLE_UC_ROMAN
+  #   page_number_def = doc.auto_text_definitions.add("RomanPageNumbers",
+  #     Layout::AutoTextDefinition::TYPE_PAGE_NUMBER)
+  #   page_number_def.page_number_style = Layout::AutoTextDefinition::NUMBER_STYLE_UC_ROMAN
   #
   # @param [Integer] number_style
   #
   # @raise [ArgumentError] if the {Layout::AutoTextDefinition}'s type is not
   #   +Layout::AutoTextDefinition::TYPE_PAGE_NUMBER+.
   #
-  # @raise [ArgumentError] if number_style is not a valid page numbering style
+  # @raise [ArgumentError] if +number_style+ is not a valid page numbering style
   #
   # @version LayOut 2018
   def page_number_style=(number_style)
   end
 
-  # The {#start_index} method returns the start index for the
-  # +Layout::AutoTextDefinition::TYPE_PAGE_NUMBER+ {Layout::AutoTextDefinition}.
+  # The {#renumber} method iterates through all uses of the
+  # +Layout::AutoTextDefinition::TYPE_SEQUENCE+ {Layout::AutoTextDefinition} and eliminates gaps and
+  # duplicates in the sequence.
   #
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")
-  #   definitions = doc.auto_text_definitions
-  #   start_index = definitions.first.start_index
+  #   sequence_def =
+  #       doc.auto_text_definitions.add("Seq1", Layout::AutoTextDefinition::TYPE_SEQUENCE)
+  #   sequence_def.renumber
   #
   # @raise [ArgumentError] if the {Layout::AutoTextDefinition}'s type is not
-  #   +Layout::AutoTextDefinition::TYPE_PAGE_NUMBER+.
+  #   +Layout::AutoTextDefinition::TYPE_SEQUENCE+.
+  #
+  # @version LayOut 2022.0
+  def renumber
+  end
+
+  # The {#sequence_format} method returns the sequence format of a
+  # +Layout::AutoTextDefinition::TYPE_SEQUENCE+ {Layout::AutoTextDefinition}.
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   sequence_def =
+  #       doc.auto_text_definitions.add("Seq1", Layout::AutoTextDefinition::TYPE_SEQUENCE)
+  #   # Default sequence format is ###, meaning entirely replace the string with the sequence number
+  #   sequence = sequence_def.sequence
+  #
+  # @raise [ArgumentError] if the {Layout::AutoTextDefinition}'s type is not
+  #   +Layout::AutoTextDefinition::TYPE_SEQUENCE+.
+  #
+  # @return [String]
+  #
+  # @version LayOut 2022.0
+  def sequence_format
+  end
+
+  # The {#sequence_format=} method sets the sequence format of a
+  # +Layout::AutoTextDefinition::TYPE_SEQUENCE+ {Layout::AutoTextDefinition}.
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   sequence_def =
+  #       doc.auto_text_definitions.add("Seq1", Layout::AutoTextDefinition::TYPE_SEQUENCE)
+  #   sequence_def.sequence = "Figure ###"
+  #
+  # @param [String] sequence_format
+  #
+  # @raise [ArgumentError] if the {Layout::AutoTextDefinition}'s type is not
+  #   +Layout::AutoTextDefinition::TYPE_SEQUENCE+.
+  #
+  # @raise [TypeError] if +sequence_format+ is not a String or convertable to a String.
+  #
+  # @version LayOut 2022.0
+  def sequence_format=(sequence_format)
+  end
+
+  # The {#start_index} method returns the start index for
+  # +Layout::AutoTextDefinition::TYPE_PAGE_NUMBER+,
+  # +Layout::AutoTextDefinition::TYPE_PAGE_COUNT+, and
+  # +Layout::AutoTextDefinition::TYPE_SEQUENCE+ {Layout::AutoTextDefinition}s.
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   sequence_def = doc.auto_text_definitions.add("Seq1", Layout::AutoTextDefinition::TYPE_SEQUENCE)
+  #   start_index = sequence_def.start_index
+  #
+  # @raise [ArgumentError] if the {Layout::AutoTextDefinition}'s type is not
+  #   +Layout::AutoTextDefinition::TYPE_PAGE_NUMBER+,
+  #   +Layout::AutoTextDefinition::TYPE_PAGE_COUNT+, or
+  #   +Layout::AutoTextDefinition::TYPE_SEQUENCE+.
   #
   # @return [Integer]
   #
@@ -345,21 +574,72 @@ class Layout::AutoTextDefinition
   def start_index
   end
 
-  # The {#start_index} method returns the start index for the
-  # +Layout::AutoTextDefinition::TYPE_PAGE_NUMBER+ {Layout::AutoTextDefinition}.
+  # The {#start_index=} method sets the start index for
+  # +Layout::AutoTextDefinition::TYPE_PAGE_NUMBER+,
+  # +Layout::AutoTextDefinition::TYPE_PAGE_COUNT+, and
+  # +Layout::AutoTextDefinition::TYPE_SEQUENCE+ {Layout::AutoTextDefinition}s.
   #
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")
-  #   definitions = doc.auto_text_definitions
-  #   definitions.first.start_index = 3
+  #   sequence_def = doc.auto_text_definitions.add("Seq1", Layout::AutoTextDefinition::TYPE_SEQUENCE)
+  #   sequence_def.start_index = 10
   #
   # @param [Integer] index
   #
   # @raise [ArgumentError] if the {Layout::AutoTextDefinition}'s type is not
-  #   +Layout::AutoTextDefinition::TYPE_PAGE_NUMBER+.
+  #   +Layout::AutoTextDefinition::TYPE_PAGE_NUMBER+,
+  #   +Layout::AutoTextDefinition::TYPE_PAGE_COUNT+, or
+  #   +Layout::AutoTextDefinition::TYPE_SEQUENCE+.
   #
   # @version LayOut 2018
   def start_index=(index)
+  end
+
+  # The {#start_page} method returns the start page for
+  # +Layout::AutoTextDefinition::TYPE_PAGE_NUMBER+ and
+  # +Layout::AutoTextDefinition::TYPE_PAGE_COUNT+ {Layout::AutoTextDefinition}s.
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   page_number_def =
+  #       doc.auto_text_definitions.add("PageNumber", Layout::AutoTextDefinition::TYPE_PAGE_NUMBER)
+  #   # Default start page is the first page of the document. However we continue to start at that
+  #   # page even if that page is moved.
+  #   page = page_number_def.start_page
+  #   p page == doc.pages[0]
+  #   doc.pages.add('new page')
+  #   doc.pages.reorder(doc.pages[0], 1)
+  #   p page == doc.pages[1]
+  #
+  # @raise [ArgumentError] if the {Layout::AutoTextDefinition}'s type is not
+  #   +Layout::AutoTextDefinition::TYPE_PAGE_NUMBER+ or
+  #   +Layout::AutoTextDefinition::TYPE_PAGE_COUNT+.
+  #
+  # @return [Layout::Page]
+  #
+  # @version LayOut 2022.0
+  def start_page
+  end
+
+  # The {#start_page=} method sets the start page for
+  # +Layout::AutoTextDefinition::TYPE_PAGE_NUMBER+ and
+  # +Layout::AutoTextDefinition::TYPE_PAGE_COUNT+ {Layout::AutoTextDefinition}s.
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   page_number_def =
+  #       doc.auto_text_definitions.add("PageNumber", Layout::AutoTextDefinition::TYPE_PAGE_NUMBER)
+  #   # Start the PageCount auto-text on the new page
+  #   page_number_def.start_page = doc.pages.add('new page')
+  #
+  # @param [Layout::Page] page
+  #
+  # @raise [ArgumentError] if the {Layout::AutoTextDefinition}'s type is not
+  #   +Layout::AutoTextDefinition::TYPE_PAGE_NUMBER+ or
+  #   +Layout::AutoTextDefinition::TYPE_PAGE_COUNT+.
+  #
+  # @version LayOut 2022.0
+  def start_page=(page)
   end
 
   # The {#tag} method returns the tag string of the {Layout::AutoTextDefinition}.
@@ -396,6 +676,13 @@ class Layout::AutoTextDefinition
   # [+Layout::AutoTextDefinition::TYPE_MODEL_COORDINATES+]
   # [+Layout::AutoTextDefinition::TYPE_MODEL_DYNAMIC_COMPONENT_ATTRIBUTE+]
   # [+Layout::AutoTextDefinition::TYPE_MODEL_CLASSIFIER_ATTRIBUTE+]
+  # [+Layout::AutoTextDefinition::TYPE_MODEL_SCENE_NAME+]
+  # [+Layout::AutoTextDefinition::TYPE_MODEL_SCENE_DESCRIPTION+]
+  # [+Layout::AutoTextDefinition::TYPE_MODEL_SCALE+]
+  # [+Layout::AutoTextDefinition::TYPE_MODEL_SECTION_NAME+]
+  # [+Layout::AutoTextDefinition::TYPE_MODEL_SECTION_SYMBOL+]
+  # [+Layout::AutoTextDefinition::TYPE_PAGE_COUNT+]
+  # [+Layout::AutoTextDefinition::TYPE_SEQUENCE+]
   #
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")

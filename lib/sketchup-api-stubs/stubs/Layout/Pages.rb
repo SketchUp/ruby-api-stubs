@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2021 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Pages class is a container class for all pages in a {Layout::Document}.
@@ -45,7 +45,7 @@ class Layout::Pages
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")
   #   pages = doc.pages
-  #   new_page = doc.add
+  #   new_page = pages.add
   #
   # @param [String] name
   #   The name for the new page.

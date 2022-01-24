@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2021 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The UV Helper class contains methods allowing you to determine the location
@@ -22,8 +22,10 @@ class Sketchup::UVHelper
   #   face.outer_loop.vertices.each do |vert|
   #     uvq = uv_helper.get_back_UVQ(vert.position)
   #     # "Normalize" UVQ to UV.
-  #     u = uvq.u / unq.q
-  #     v = uvq.v / unq.q
+  #     # #x, #y and #z corresponds to U, V and Q respectively,
+  #     # as SketchUp re-uses the normal Point3d objects for UVQs
+  #     u = uvq.x / uvq.z
+  #     v = uvq.y / uvq.z
   #     puts "u=#{u} v=#{v}""
   #   end
   #
@@ -49,8 +51,10 @@ class Sketchup::UVHelper
   #   face.outer_loop.vertices.each do |vert|
   #     uvq = uv_helper.get_front_UVQ(vert.position)
   #     # "Normalize" UVQ to UV.
-  #     u = uvq.u / unq.q
-  #     v = uvq.v / unq.q
+  #     # #x, #y and #z corresponds to U, V and Q respectively,
+  #     # as SketchUp re-uses the normal Point3d objects for UVQs
+  #     u = uvq.x / uvq.z
+  #     v = uvq.y / uvq.z
   #     puts "u=#{u} v=#{v}""
   #   end
   #

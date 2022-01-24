@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2021 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Ruby HtmlDialog class allows you to create and interact with HTML dialog
@@ -16,6 +16,8 @@
 #
 # For usage examples, including how to migrate from the old WebDialog class,
 # see https://github.com/SketchUp/htmldialog-examples.
+# You may use the {https://sketchup.github.io/modus-for-sketchup-extensions Trimble Modus}
+# framework for a look and feel of your dialog that matches that of SketchUp's dialogs.
 #
 # HtmlDialog uses the following versions of CEF (Chromium Embedded Framework):
 #
@@ -150,7 +152,8 @@ class UI::HtmlDialog
   def execute_script(script)
   end
 
-  # The {#get_content_size} method is used to get the content size of the HtmlDialog, in logical pixels.
+  # The {#get_content_size} method is used to get the content size of the HtmlDialog, in logical
+  # pixels.
   #
   # @example
   #   width, height = dialog.get_content_size
@@ -192,7 +195,8 @@ class UI::HtmlDialog
 
   # The new method is used to create a new HtmlDialog.
   #
-  # When +use_content_size+ is set to +true+, +width+, +height+, +min_width+,
+  # In SketchUp 2021.1 +use_content_size+ was added.
+  # When set to +true+, +width+, +height+, +min_width+,
   # +max width+, +min_height+, +max_height+ will represent the size of the
   # content area of the window. This excludes the titlebar and the window frame.
   # When +use_content_size+ is set to +false+ (the default value),
@@ -209,6 +213,23 @@ class UI::HtmlDialog
   #
   # [+UI::HtmlDialog::STYLE_UTILITY+]  HtmlDialog is shown with small titlebar
   #                                    and stays on top of SketchUp.
+  #
+  # @bug Prior to SketchUp 2019 the +:width+ and +:height+ provided is ignored
+  #   if a +:preference_key+ is also present. To work around this bug on older
+  #   versions use {#set_size} after you initialize the dialog.
+  #
+  # @bug SketchUp 2022.0 fixed a bug where position was set incorrectly when
+  #   +use_content_size+ was set to +true+.
+  #
+  # @bug SketchUp 2022.0 fixed a bug where +max_height+ and +max_width+ were swapped
+  #   when +use_content_size+ was set to +true+.
+  #
+  # @bug SketchUp 2022.0 fixed a bug where +use_content_size+ was not persisted (when
+  #   +preferences_key+ is set).
+  #
+  # @bug SketchUp 2022.0 fixed a bug on Mac where size and position of the
+  #   HtmlDialog were not persisted when SketchUp was closed without first
+  #   closing the HtmlDialog window.
   #
   # @example With options Hash
   #   dialog = UI::HtmlDialog.new(
@@ -248,10 +269,6 @@ class UI::HtmlDialog
   #   )
   #   dialog.set_url("https://www.sketchup.com")
   #   dialog.show
-  #
-  # @note Prior to SketchUp 2019 the +:width+ and +:height+ provided is ignored
-  #   if a +:preference_key+ is also present. To work around this bug on older
-  #   versions use {#set_size} after you initialize the dialog.
   #
   # @note Prefix +preference_key+ with something unique to your extension.
   #
@@ -316,7 +333,8 @@ class UI::HtmlDialog
   def set_can_close
   end
 
-  # The {#set_content_size} method is used to set the content size of the HtmlDialog, in logical pixels.
+  # The {#set_content_size} method is used to set the content size of the HtmlDialog, in logical
+  # pixels.
   #
   # @example
   #   dialog.set_content_size(600, 400)

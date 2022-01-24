@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2021 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A formatted text entity.
@@ -37,9 +37,11 @@ class Layout::FormattedText < Layout::Entity
   # [+ANCHOR_TYPE_CENTER_CENTER+]
   # [+ANCHOR_TYPE_BOTTOM_CENTER+]
   #
+  # Layout::FormattedText::ANCHOR_TYPE_TOP_LEFT)
+  #
   # @example
   #   anchor = Geom::Point2d.new(1, 1)
-  #   text = Layout::FormattedText.new("C:/Test.txt", anchor, Layout::FormattedText::ANCHOR_TYPE_TOP_LEFT)
+  #   text = Layout::FormattedText.new("C:/Test.txt", anchor,
   #
   # @overload new_from_file(path, bounds)
   #
@@ -130,17 +132,18 @@ class Layout::FormattedText < Layout::Entity
   # The {#display_text} method returns the display text representation of the
   # {Layout::FormattedText}.
   #
+  # Layout::FormattedText::ANCHOR_TYPE_TOP_LEFT) doc.add_entity(text, doc.layers.first,
+  # doc.pages.first) text = text.display_text(doc.pages.first)
+  #
   # @example
   #   anchor = Geom::Point2d.new(1, 1)
-  #   text = Layout::FormattedText.new("<PageNumber>", anchor, Layout::FormattedText::ANCHOR_TYPE_TOP_LEFT)
-  #   doc.add_entity(text, doc.layers.first, doc.pages.first)
-  #   text = text.display_text(doc.pages.first)
+  #   text = Layout::FormattedText.new("<PageNumber>", anchor,
   #
-  # @note Passing an invalid {Layout::Page} will prevent an auto text tag from
+  # @note Passing an invalid {Layout::Page} will prevent an auto-text tag from
   #   being substituted with its display representation.
   #
   # @param [Layout::Page] page
-  #   The {Layout::Page} to use to convert an auto text
+  #   The {Layout::Page} to use to convert an auto-text
   #   tag to display text
   #
   # @raise [ArgumentError] if page is not in the same {Layout::Document} as
@@ -278,20 +281,20 @@ class Layout::FormattedText < Layout::Entity
   #   text = Layout::FormattedText.new("Test", anchor, Layout::FormattedText::ANCHOR_TYPE_TOP_LEFT)
   #   rtf_text = text.rtf
   #
-  # @note Passing an invalid {Layout::Page} will prevent an auto text tag from
+  # @note Passing an invalid {Layout::Page} will prevent an auto-text tag from
   #   being substituted with its display representation.
   #
   # @overload rtf
   #
   #   @return [String] The RTF text string. If the {Layout::FormattedText} is
-  #     auto text, this will be an auto text tag.
+  #     auto-text, this will be an auto-text tag.
   #
   # @overload rtf(page)
   #
   #   @param [Layout::Page] page The {Layout::Page} to use to convert an auto
   #     text tag to display text
   #   @return [String] The RTF text string. If the {Layout::FormattedText} is
-  #     auto text, this will be the display text.
+  #     auto-text, this will be the display text.
   #
   # @raise [ArgumentError] if page is not in the same {Layout::Document} as
   #   the {Layout::FormattedText}
@@ -303,10 +306,12 @@ class Layout::FormattedText < Layout::Entity
   # The {#rtf=} method sets the raw RTF representation of the
   # {Layout::FormattedText}.
   #
+  # text.\par}"
+  #
   # @example
   #   anchor = Geom::Point2d.new(1, 1)
   #   text = Layout::FormattedText.new("Test", anchor, Layout::FormattedText::ANCHOR_TYPE_TOP_LEFT)
-  #   text.rtf = "{\rtf1\ansi{\fonttbl\f0\fswiss Helvetica;}\f0\pard This is some {\b bold} text.\par}"
+  #   text.rtf = "{\rtf1\ansi{\fonttbl\f0\fswiss Helvetica;}\f0\pard This is some {\b bold}
   #
   # @param [String] rtf_text
   #

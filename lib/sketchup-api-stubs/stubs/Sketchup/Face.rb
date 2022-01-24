@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2021 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # Faces in SketchUp are flat, 2-sided polygons with 3 or more sides.
@@ -200,6 +200,18 @@ class Sketchup::Face < Sketchup::Drawingelement
   def classify_point(point)
   end
 
+  # The {#clear_texture_position} method is used to remove any explicit
+  # texture positioning for a face and have SketchUp display it with the
+  # default texture positioning.
+  #
+  # @param [Boolean] front
+  #   +true+ Clears on the front side of the face, +false+
+  #   the back side.
+  #
+  # @version SketchUp 2022.0
+  def clear_texture_position(front)
+  end
+
   # The {#clear_texture_projection} method is used to clear the texture
   # projection. This is similar to toggling off Projection from the Position
   # Texture tool in the UI.
@@ -325,6 +337,8 @@ class Sketchup::Face < Sketchup::Drawingelement
   # The get_glued_instances method returns an Array any ComponentInstances
   # that are glued to the face.
   #
+  # ComponentInstance objects that are currently glued to the face.
+  #
   # @example
   #   # Create a series of points that define a new face.
   #   model = Sketchup.active_model
@@ -339,8 +353,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   face = entities.add_face(pts)
   #   glued_array = face.get_glued_instances
   #
-  # @return [Array<Sketchup::ComponentInstance, Sketchup::Group, Sketchup::Image>] An array of ComponentInstance objects that
-  #   are currently glued to the face.
+  # @return [Array<Sketchup::ComponentInstance, Sketchup::Group, Sketchup::Image>] An array of
   #
   # @version SketchUp 7.0 M1
   def get_glued_instances
@@ -645,6 +658,8 @@ class Sketchup::Face < Sketchup::Drawingelement
   #
   # @overload position_material(material, points, on_front, projection)
   #
+  #   @version SketchUp 2021.1
+  #
   #   This variant positions a material on the face's plane with projection.
   #
   #   @param [Sketchup::Material] material
@@ -742,7 +757,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #
   # @deprecated This function never worked correctly. It's not capable of
   #   controlling the position and orientation of the texture. In some cases it
-  #   produced an invalid model. After SketchUp 2021.1 the method will raise
+  #   produced an invalid model. As of SketchUp 2021.1 the method simply raises
   #   +NotImplementedError+.
   #
   # @param [Geom::Vector3d] vector
@@ -784,7 +799,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   }
   #
   # @param [Boolean] front
-  #   +true+ Checks the front side of the face, +face+
+  #   +true+ Checks the front side of the face, +false+
   #   the back side.
   #
   # @return [Boolean]
@@ -809,7 +824,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   # {#position_material}.
   #
   # @param [Boolean] front
-  #   +true+ Checks the front side of the face, +face+
+  #   +true+ Checks the front side of the face, +false+
   #   the back side.
   #
   # @return [Boolean]
@@ -841,6 +856,11 @@ class Sketchup::Face < Sketchup::Drawingelement
   # <i>The red quadrilateral represents the model points returned.</i>
   #
   # rdoc-image:../images/face-uv-tile-at.png
+  #
+  # @bug Fixed in SketchUp 2022.0: If the +position+ argument should line up exact
+  #   U or V axes of the UV coordinate system the returned set of points won't
+  #   be correct. A workaround for older SketchUp versions would be to slightly
+  #   offset the +position+ argument.
   #
   # @example Copy material from front to back
   #   model = Sketchup.active_model
@@ -876,7 +896,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   bounded by the UV tile.
   #
   # @param [Boolean] front
-  #   +true+ Checks the front side of the face, +face+
+  #   +true+ Checks the front side of the face, +false+
   #   the back side.
   #
   # @return [Array<Geom::Point3d>, nil] A set of 8 points. Each stride of two is

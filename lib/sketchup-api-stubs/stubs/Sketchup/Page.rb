@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2021 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Page class contains methods to extract information and modify the
@@ -169,7 +169,7 @@ class Sketchup::Page < Sketchup::Entity
   # The {#include_in_animation?} method determines whether the page should be
   # included when exporting an animation from the model.
   #
-  # @example Toggle inclusion in animation for all pages.
+  # @example
   #   model = Sketchup.active_model
   #   in_animation = model.pages.select { |page| page.include_in_animation? }
   #
@@ -202,7 +202,7 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add("My Page")
   #   folders = page.layer_folders
   #
-  # @return [Array<Sketchup::LayerFolder>, nil] Returns +nil+ if {#use_hidden?}
+  # @return [Array<Sketchup::LayerFolder>, nil] Returns +nil+ if {#use_hidden_layers?}
   #   returns +false+
   #
   # @version SketchUp 2021.0
@@ -227,8 +227,8 @@ class Sketchup::Page < Sketchup::Entity
   #     layer.page_behavior & LAYER_HIDDEN_BY_DEFAULT == LAYER_HIDDEN_BY_DEFAULT
   #   end
   #
-  # @return [Array<Sketchup::Layer>, nil] Returns +nil+ if {#use_hidden?} returns
-  #   +false+
+  # @return [Array<Sketchup::Layer>, nil] Returns +nil+ if {#use_hidden_layers?}
+  #   returns +false+
   #
   # @version SketchUp 6.0
   def layers
@@ -321,11 +321,11 @@ class Sketchup::Page < Sketchup::Entity
   #
   # @overload set_visibility(layer_folder, visible_for_page)
   #
-  #   @version SketchUp 20201.0
+  #   @version SketchUp 2021.0
   #   @param [Sketchup::LayerFolder] layer_folder
   #   @param [Boolean] visible_for_page
   #
-  #   @return [Sketchup::Page] the page whose visibility was set.
+  # @return [Sketchup::Page] the page whose visibility was set.
   #
   # @version SketchUp 6.0
   def set_visibility(arg1, arg2)

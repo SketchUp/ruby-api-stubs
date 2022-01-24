@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2021 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The +Sketchup::Licensing+ module contains methods for
@@ -9,8 +9,8 @@
 # native code should prefer using the native API, which should be more secure
 # than their Ruby API counterparts.
 #
-# For more details, see:
-# {Licensing Example}[https://github.com/SketchUp/sketchup-ruby-api-tutorials/tree/master/examples/99_license]
+# For more details, see
+# {Licensing Example}[https://github.com/SketchUp/sketchup-ruby-api-tutorials/tree/main/examples/99_license]
 #
 # @version SketchUp 2015
 module Sketchup::Licensing

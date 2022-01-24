@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2021 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Sketchup::ComponentInstance} class is used to represent component
@@ -428,6 +428,11 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   # instances representing manifold solid volumes (this - arg).  If the specified
   # objects (this and arg) do not represent manifold volumes, this method fails.
   #
+  # resultant groups if the two objects (this and arg) represent manifold solids and the operation
+  # succeeds otherwise nil is returned. The 3 groups are as follows: The intersection of volume 1 &
+  # volume 2, the difference of volume 1 minus volume 2, and the reverse difference of volume 2 minus
+  # volume 1.
+  #
   # @example
   #   entities = Sketchup.active_model.entities
   #   instance1 = entities[0]
@@ -439,13 +444,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   # @param [Sketchup::ComponentInstance, nil] instance
   #   The instance to split this instance with.
   #
-  # @return [Array(Sketchup::Group, Sketchup::Group, Sketchup::Group)] A vector (array) of the three resultant groups
-  #   if the two objects (this and arg) represent manifold
-  #   solids and the operation succeeds otherwise nil is
-  #   returned. The 3 groups are as follows: The intersection
-  #   of volume 1 & volume 2, the difference of
-  #   volume 1 minus volume 2, and the reverse difference of
-  #   volume 2 minus volume 1.
+  # @return [Array(Sketchup::Group, Sketchup::Group, Sketchup::Group)] A vector (array) of the three
   #
   # @version SketchUp 8.0
   def split(instance)

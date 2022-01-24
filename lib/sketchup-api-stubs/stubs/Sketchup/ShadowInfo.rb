@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2021 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The ShadowInfo class contains method to extract the shadow information for a
@@ -7,12 +7,14 @@
 #
 # The following shadow information keys are maintained in SketchUp:
 #
-# - +City+ (in Model Info > Geo-location > Set Manual Location...) Note that 'City' is called 'Location' in the UI
+# - +City+ (in Model Info > Geo-location > Set Manual Location...) Note that 'City' is called
+# 'Location' in the UI
 # - +Country+ (in Model Info > Geo-location > Set Manual Location...)
 # - +Dark+ (in Window > Shadows)
 # - +DayOfYear+
 # - +DaylightSavings+
-# - +DisplayNorth+ (in View > Toolbars > Solar North) Note that 'Toolbar' is called 'Tool Palettes' on Mac
+# - +DisplayNorth+ (in View > Toolbars > Solar North) Note that 'Toolbar' is called 'Tool Palettes'
+# on Mac
 # - +DisplayOnAllFaces+ (in Window > Shadows)
 # - +DisplayOnGroundPlane+ (in Window > Shadows)
 # - +DisplayShadows+ (in Window > Shadows)
@@ -20,7 +22,8 @@
 # - +Latitude+ (in Model Info > Geo-location > Set Manual Location...)
 # - +Light+ (in Window > Shadows)
 # - +Longitude+ (in Model Info > Geo-location > Set Manual Location...)
-# - +NorthAngle+ (in View > Toolbars > Solar North) Note that 'Toolbar' is called 'Tool Palettes' on Mac
+# - +NorthAngle+ (in View > Toolbars > Solar North) Note that 'Toolbar' is called 'Tool Palettes'
+# on Mac
 # - +ShadowTime+ (in Window > Shadows)
 # - +ShadowTime_time_t+ (ShadowTime in Epoch time)
 # - +SunDirection+ (Generated based on ShadowTime)

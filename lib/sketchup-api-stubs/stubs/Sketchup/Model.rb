@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2021 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This is the interface to a SketchUp model. The model is the 3D drawing that
@@ -186,15 +186,15 @@ class Sketchup::Model
   #   If the API user tries to do this:
   #
   #       model.start_operation('...', true)
-  #       model.entities.add_face(...)
+  #       model.active_entities.add_face(...)
   #       model.active_path = instance_path
-  #       model.entities.add_face(...)
+  #       model.active_entities.add_face(...)
   #       model.commit_operation
   #
   #   Then SketchUp will automatically break it up to something like to this:
   #
   #       model.start_operation('...', true)
-  #       model.entities.add_face(...)
+  #       model.active_entities.add_face(...)
   #       model.commit_operation
   #
   #       model.start_operation('...', true, false, true)
@@ -202,7 +202,7 @@ class Sketchup::Model
   #       model.commit_operation
   #
   #       model.start_operation('...', true, false, true)
-  #       model.entities.add_face(...)
+  #       model.active_entities.add_face(...)
   #       model.commit_operation
   #
   #   For the end user this will be experienced as a single operation.
@@ -1034,7 +1034,11 @@ class Sketchup::Model
   def modified?
   end
 
-  # The name method retrieves the string name of the model.
+  # The {#name} method retrieves the name of the model.
+  #
+  # This property can be seen in Model Info and maps to the component
+  # name if the model is inserted into another model. This property should not
+  # be confused with the model {#path}.
   #
   # @example
   #   model = Sketchup.active_model
@@ -1046,15 +1050,12 @@ class Sketchup::Model
   def name
   end
 
-  # The name= method sets the string name of the model.
+  # The {#name=} method sets the string name of the model.
   #
   # @example
   #   Sketchup.active_model.name = "My New Model Name"
   #
   # @param [String] name
-  #   new name of the model
-  #
-  # @return [String] the new name
   #
   # @version SketchUp 6.0
   def name=(name)
@@ -1111,15 +1112,13 @@ class Sketchup::Model
   # The path method retrieves the path of the file from which the model was
   # opened.
   #
-  # An empty string is returned for a new model (one which has not been saved
-  # and opened.)
+  # An empty string is returned for a model that has not been saved.
   #
   # @example
   #   model = Sketchup.active_model
   #   path = model.path
   #
-  # @return [String] an string containing the path for the currently
-  #   opened model.
+  # @return [String]
   #
   # @version SketchUp 6.0
   def path
@@ -1196,6 +1195,14 @@ class Sketchup::Model
   # normalized (e.g. direction = [0, 0, 0]), direction is taken as a point the
   # ray intersects.
   #
+  # first value is a Point3d where the item that the ray passed through exists. The second element is
+  # the instance path array of the entity that the ray hit. For example, if the ray hits a face that
+  # is contained by a component instance the instance path would be [Component1]. If the ray hit a
+  #   face that is contained by a component instance, which
+  #   is contained by another component instance and so on,
+  #   the instance path would be [Component1, Component2,
+  #   Component3...].
+  #
   # @example
   #   model = Sketchup.active_model
   #   ray = [Geom::Point3d.new(1, 2, 3), Geom::Vector3d.new(4, 5, 6)]
@@ -1214,16 +1221,7 @@ class Sketchup::Model
   #   defaults to true (WYSIWYG) - i.e. hidden geometry is
   #   not intersected against.
   #
-  # @return [Array(Geom::Point3d, Array<Sketchup::Drawingelement>), nil] an array of two values. The first value is a
-  #   Point3d where the item that the ray passed through
-  #   exists. The second element is the instance path array
-  #   of the entity that the ray hit. For example, if the ray
-  #   hits a face that is contained by a component instance the
-  #   instance path would be [Component1]. If the ray hit a
-  #   face that is contained by a component instance, which
-  #   is contained by another component instance and so on,
-  #   the instance path would be [Component1, Component2,
-  #   Component3...].
+  # @return [Array(Geom::Point3d, Array<Sketchup::Drawingelement>), nil] an array of two values. The
   #
   # @version SketchUp 6.0
   def raytest(ray, wysiwyg_flag = true)
@@ -1267,10 +1265,13 @@ class Sketchup::Model
   #   # Save the model using the current SketchUp format
   #   path = File.join(ENV['HOME'], 'Desktop', 'mysketchup.skp')
   #   status = model.save(path)
+  #
   #   # Save the model to the current file using the current SketchUp format
   #   status = model.save
+  #
   #   # Save the model to the current file in SketchUp 8 format
   #   status = model.save("", Sketchup::Model::VERSION_8)
+  #
   #   # Save the model in SketchUp 8 format
   #   path = File.join(ENV['Home'], 'Desktop', 'mysketchup_v8.skp')
   #   status = model.save(path, Sketchup::Model::VERSION_8)
@@ -1280,50 +1281,41 @@ class Sketchup::Model
   #
   # @overload save
   #
-  #   Starting with SketchUp 2014, this parameter is optional.
-  #   If no arguments are provided or the filename is an empty string, model
-  #   will be saved to the file to which it is associated. It must have
-  #   already been saved to a file.
+  #   Save model to the path it is already associated with.
+  #   @raise ArgumentError if the model is not previosly saved.
+  #   @version SketchUp 2014
   #
   # @overload save(path)
   #
+  #   Save the model to a given path.
+  #   @version SketchUp 6.0
   #   @param [String] path
-  #     The name of the file to save.
-  #     Starting with SketchUp 2014, this parameter is optional.
-  #     If not provided or an empty string, model will be saved
-  #     to the file to which it is associated. It must have
-  #     already been saved to a file.
+  #     If empty, the model saves to the path it is already associated with.
   #
   # @overload save(path, version)
   #
+  #   Save the model as a specific SketchUp file version to a given path.
+  #   @version SketchUp 2014
   #   @param [String] path
-  #     The path of the file to save to.
-  #     Starting with SketchUp 2014, this parameter is optional.
-  #     If not provided or an empty string, model will be saved
-  #     to the file to which it is associated. It must have
-  #     already been saved to a file.
-  #
   #   @param [Integer] version
-  #     (SketchUp 2014+)
-  #     Optional SketchUp file format to save.
-  #     If not provided, latest file format will be used.
   #     Possible values are:
-  #     Sketchup::Model::VERSION_3, Sketchup::Model::VERSION_4,
-  #     Sketchup::Model::VERSION_5, Sketchup::Model::VERSION_6,
-  #     Sketchup::Model::VERSION_7, Sketchup::Model::VERSION_8,
-  #     Sketchup::Model::VERSION_2013,
-  #     Sketchup::Model::VERSION_2014,
-  #     Sketchup::Model::VERSION_2015,
-  #     Sketchup::Model::VERSION_2016,
-  #     Sketchup::Model::VERSION_2017,
-  #     Sketchup::Model::VERSION_2018,
-  #     Sketchup::Model::VERSION_2019,
-  #     Sketchup::Model::VERSION_2020,
-  #     Sketchup::Model::VERSION_2021
+  #     - Sketchup::Model::VERSION_3,
+  #     - Sketchup::Model::VERSION_4,
+  #     - Sketchup::Model::VERSION_5,
+  #     - Sketchup::Model::VERSION_6,
+  #     - Sketchup::Model::VERSION_7,
+  #     - Sketchup::Model::VERSION_8,
+  #     - Sketchup::Model::VERSION_2013,
+  #     - Sketchup::Model::VERSION_2014,
+  #     - Sketchup::Model::VERSION_2015,
+  #     - Sketchup::Model::VERSION_2016,
+  #     - Sketchup::Model::VERSION_2017,
+  #     - Sketchup::Model::VERSION_2018,
+  #     - Sketchup::Model::VERSION_2019,
+  #     - Sketchup::Model::VERSION_2020,
+  #     - Sketchup::Model::VERSION_2021
   #
-  # @return [Boolean] true if successful, false if unsuccessful
-  #
-  # @version SketchUp 6.0
+  # @return [Boolean] +true+ if successful, +false+ if unsuccessful
   def save(*args)
   end
 
@@ -1334,6 +1326,7 @@ class Sketchup::Model
   #   # Save copy of the model using the current SketchUp format
   #   path = File.join(ENV['Home'], 'Desktop', 'myModelCopy.skp')
   #   status = model.save_copy(path)
+  #
   #   # Save copy of the model in SketchUp 8 format
   #   path = File.join(ENV['Home'], 'Desktop', 'mysketchupcopy_v8.skp')
   #   status = model.save_copy(path, Sketchup::Model::VERSION_8)
@@ -1342,22 +1335,24 @@ class Sketchup::Model
   #   The path of the file to save the model copy to.
   #
   # @param [Integer] version
-  #   (SketchUp 2014+)
-  #   Optional SketchUp file format to save.
+  #   Optional SketchUp file format to use.
   #   If not provided, latest file format will be used.
   #   Possible values are:
-  #   Sketchup::Model::VERSION_3, Sketchup::Model::VERSION_4,
-  #   Sketchup::Model::VERSION_5, Sketchup::Model::VERSION_6,
-  #   Sketchup::Model::VERSION_7, Sketchup::Model::VERSION_8,
-  #   Sketchup::Model::VERSION_2013,
-  #   Sketchup::Model::VERSION_2014,
-  #   Sketchup::Model::VERSION_2015,
-  #   Sketchup::Model::VERSION_2016,
-  #   Sketchup::Model::VERSION_2017,
-  #   Sketchup::Model::VERSION_2018,
-  #   Sketchup::Model::VERSION_2019,
-  #   Sketchup::Model::VERSION_2020,
-  #   Sketchup::Model::VERSION_2021
+  #   - Sketchup::Model::VERSION_3,
+  #   - Sketchup::Model::VERSION_4,
+  #   - Sketchup::Model::VERSION_5,
+  #   - Sketchup::Model::VERSION_6,
+  #   - Sketchup::Model::VERSION_7,
+  #   - Sketchup::Model::VERSION_8,
+  #   - Sketchup::Model::VERSION_2013,
+  #   - Sketchup::Model::VERSION_2014,
+  #   - Sketchup::Model::VERSION_2015,
+  #   - Sketchup::Model::VERSION_2016,
+  #   - Sketchup::Model::VERSION_2017,
+  #   - Sketchup::Model::VERSION_2018,
+  #   - Sketchup::Model::VERSION_2019,
+  #   - Sketchup::Model::VERSION_2020,
+  #   - Sketchup::Model::VERSION_2021
   #
   # @return [Boolean] true if successful, false if unsuccessful
   #
@@ -1539,6 +1534,8 @@ class Sketchup::Model
   #   append to the previous operation. This is particularly useful for
   #   creating observers that react to user actions without littering the
   #   undo stack with extra steps that Ruby is performing.
+  #
+  # @raise [RuntimeError] if called within the context of {Sketchup::Entities#build}.
   #
   # @return [Boolean] +true+ if successful, +false+ if unsuccessful
   #

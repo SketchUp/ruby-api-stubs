@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2021 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A DefinitionList object holds a list of all of the ComponentDefinition
@@ -6,7 +6,7 @@
 # definitions from the list.
 #
 # @version SketchUp 6.0
-class Sketchup::DefinitionList < Entity
+class Sketchup::DefinitionList < Sketchup::Entity
 
   # Includes
 
@@ -120,7 +120,7 @@ class Sketchup::DefinitionList < Entity
   #   number = definitions.count
   #
   # @note Since SketchUp 2014 the count method is inherited from Ruby's
-  #   +Enumable+ mix-in module. Prior to that the {#count} method is an alias
+  #   +Enumerable+ mix-in module. Prior to that the {#count} method is an alias
   #   for {#length}.
   #
   # @return [Integer]
@@ -155,7 +155,8 @@ class Sketchup::DefinitionList < Entity
 
   # The {#import} method is used to import a (non-SketchUp) 3d model file as a definition.
   #
-  # Importers using the C API +SketchUpModelImporterInterface+ interface are supported (those in the +Importers/+ directory).
+  # Importers using the C API +SketchUpModelImporterInterface+ interface are supported (those in the
+  # +Importers/+ directory).
   #
   # See the {file:pages/importer_options.md Importer Options} file for information
   # on creating a valid hash for the various importers.
@@ -258,8 +259,8 @@ class Sketchup::DefinitionList < Entity
   # - +onFailure(message_string)+
   #
   # @bug Calling this method from an {UI::HtmlDialog}'s action callback on macOS will cause the
-  #   SketchUp application to become unresponsive. To work around this, defer the call from the
-  #   action callback with a non-repeating zero-delay timer;
+  #   SketchUp application to become unresponsive or crash. To work around this, defer the call
+  #   from the action callback with a non-repeating zero-delay timer;
   #   +UI.start_timer(0, false) { method_calling_load_from_url }+
   #
   # @example Download a component using a LoadHandler

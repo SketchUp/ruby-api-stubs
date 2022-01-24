@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2021 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This is an interface to a label entity. A {Layout::Label} consists of a
@@ -173,7 +173,7 @@ class Layout::Label < Layout::Entity
   # @overload entities(page)
   #
   #   @param [Layout::Page] page The {Layout::Page} to use to convert an
-  #     auto text tag to display text
+  #     auto-text tag to display text
   #   @return [Layout::Entities]
   #
   # @raise [ArgumentError] if page does not belong to the same document as the

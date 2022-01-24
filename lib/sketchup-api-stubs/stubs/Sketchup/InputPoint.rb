@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2021 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Sketchup::InputPoint} class is used to pick 3d points and/or entities
@@ -14,7 +14,9 @@
 # {Sketchup::InputPoints} are best picked from mouse move, as you want them to
 # draw them to the view.
 #
-# For an example, see https://github.com/SketchUp/sketchup-ruby-api-tutorials/tree/master/examples/02_custom_tool.
+# For an example, see
+# {Tool
+# Example}[https://github.com/SketchUp/sketchup-ruby-api-tutorials/tree/main/examples/02_custom_tool].
 #
 # To lock inference similar to native SketchUp tools, see
 # {View#lock_inference}.

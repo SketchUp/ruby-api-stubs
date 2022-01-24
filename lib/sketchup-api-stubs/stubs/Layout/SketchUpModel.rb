@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2021 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A SketchUp Model entity. This is an instance of a SketchUp Model that is
@@ -285,15 +285,14 @@ class Layout::SketchUpModel < Layout::Entity
   # The {#layers_modified?} method returns whether the layers of the
   # {Layout::SketchUpModel} has been modified.
   #
-  #
-  # @note: In SketchUp 2020, SketchUp "layers" were renamed to "tags". For
-  #   consistency with the SketchUp API, this will continue to refer to
-  #   "tags" as "layers".
-  #
   # @example
   #   bounds = Geom::Bounds2d.new(1, 1, 3, 3)
   #   model = Layout::SketchUpModel.new("C:/Path/to/model.skp", bounds)
   #   modified = model.layers_modified?
+  #
+  # @note In SketchUp 2020, SketchUp "layers" were renamed to "tags". For
+  #   consistency with the SketchUp API, this will continue to refer to
+  #   "tags" as "layers".
   #
   # @return [Boolean]
   #
@@ -534,15 +533,14 @@ class Layout::SketchUpModel < Layout::Entity
   # The {#reset_layers} method resets the {Layout::SketchUpModel}'s layers to
   # the scene's setting.
   #
-  #
-  # @note: In SketchUp 2020, SketchUp "layers" were renamed to "tags". For
-  #   consistency with the SketchUp API, this will continue to refer to
-  #   "tags" as "layers".
-  #
   # @example
   #   bounds = Geom::Bounds2d.new(1, 1, 3, 3)
   #   model = Layout::SketchUpModel.new("C:/Path/to/model.skp", bounds)
   #   model.reset_layers if model.layers_modified?
+  #
+  # @note In SketchUp 2020, SketchUp "layers" were renamed to "tags". For
+  #   consistency with the SketchUp API, this will continue to refer to
+  #   "tags" as "layers".
   #
   # @raise [LockedLayerError] if the {Layout::SketchUpModel} is on a locked
   #   {Layout::Layer}

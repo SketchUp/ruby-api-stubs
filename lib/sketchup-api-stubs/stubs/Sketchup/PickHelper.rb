@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2021 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Sketchup::PickHelper} class is used to pick entities that reside under
@@ -73,6 +73,8 @@ class Sketchup::PickHelper
   # criteria can be for completely-contained or partially-contained entities,
   # similar to how the Selection tool works.
   #
+  # transformation) if num_picked > 0 Sketchup.active_model.selection.add(ph.all_picked) end
+  #
   # @example
   #   boundingbox = Geom::BoundingBox.new
   #   boundingbox.add([1, 1, 1], [100, 100, 100])
@@ -82,10 +84,7 @@ class Sketchup::PickHelper
   #   angle = 45
   #   transformation = Geom::Transformation.new(ORIGIN, Z_AXIS, angle)
   #
-  #   num_picked = ph.boundingbox_pick(boundingbox, Sketchup::PickHelper::PICK_CROSSING, transformation)
-  #   if num_picked > 0
-  #     Sketchup.active_model.selection.add(ph.all_picked)
-  #   end
+  #   num_picked = ph.boundingbox_pick(boundingbox, Sketchup::PickHelper::PICK_CROSSING,
   #
   # @param bounding_box
   #   BoundingBox object defining the volume to use for picking

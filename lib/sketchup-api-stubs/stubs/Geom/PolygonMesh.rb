@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2021 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {#Geom::PolygonMesh} class contains methods to create polygon mesh
@@ -22,6 +22,14 @@
 #   group = entities.add_group
 #   group.entities.add_faces_from_mesh(mesh)
 #
+# @note As of SketchUp 2022.0 the new {Sketchup::EntitiesBuilder} interface
+#   can be used to generate bulk geometry. It has similar performance as
+#   {Geom::PolygonMesh}, but with similar degree of per-entity control as
+#   {Sketchup::Entities}.
+#
+# @see file:pages/generating_geometry.md
+#   Guide on Generating Geometry
+#
 # @version SketchUp 6.0
 class Geom::PolygonMesh
 
@@ -42,12 +50,15 @@ class Geom::PolygonMesh
 
   # The {#add_point} method is used to add a point to the mesh.
   #
-  # The index can be used for creating polygons.
+  # The returned index can be used for creating polygons.
   #
   # @example
   #   mesh = Geom::PolygonMesh.new
   #   point = Geom::Point3d.new(0, 1, 2)
   #   index = mesh.add_point(point)
+  #
+  # @note In SketchUp 2021.1 this method was improved to be faster.
+  #   See {#initialize} for details.
   #
   # @param [Geom::Point3d] point
   #
@@ -57,9 +68,12 @@ class Geom::PolygonMesh
   def add_point(point)
   end
 
-  # The +add_polygon+ method is used for adding a polygon to a
-  # PolygonMesh. All variations of this method require at least 3 elements
+  # The {#add_polygon} method is used for adding a polygon to a
+  # {Geom::PolygonMesh}. All variations of this method require at least 3 elements
   # to define a polygon, although more may be given.
+  #
+  # @note In SketchUp 2021.1 this method was improved to be faster.
+  #   See {#initialize} for details.
   #
   # @overload add_polygon(index, index, index, ...)
   #

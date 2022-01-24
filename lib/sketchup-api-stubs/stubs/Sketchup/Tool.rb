@@ -1,9 +1,11 @@
-# Copyright:: Copyright 2021 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # Tool is the interface that you implement to create a SketchUp tool.
-# See https://github.com/SketchUp/sketchup-ruby-api-tutorials/tree/master/examples/02_custom_tool
-# for an example of how to create a custom tool in Ruby.
+# See
+# {our code
+# example}[https://github.com/SketchUp/sketchup-ruby-api-tutorials/tree/main/examples/02_custom_tool]
+# for how to create a custom tool in Ruby.
 #
 # To create a new tool in Ruby, you must define a new class that implements
 # the methods for the events that you want to respond to. You do not have

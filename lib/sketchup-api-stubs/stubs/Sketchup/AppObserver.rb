@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2021 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This observer interface is implemented to react to application events.
@@ -79,6 +79,18 @@ class Sketchup::AppObserver
   #
   # @version SketchUp 2015
   def onActivateModel(model)
+  end
+
+  # The {#onExtensionsLoaded} method is called when SketchUp has finished loading
+  # all extensions when the application starts.
+  #
+  # @example
+  #   def onExtensionsLoaded
+  #     puts "onExtensionsLoaded"
+  #   end
+  #
+  # @version SketchUp 2022.0
+  def onExtensionsLoaded
   end
 
   # The {#onNewModel} method is called when the application creates a new, empty
