@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The UI module contains a number of methods for creating simple UI elements
@@ -145,10 +145,12 @@ module UI
   def self.inputbox(*args)
   end
 
-  # The inspector_names method is used to returns the names of all the
+  # The {.inspector_names} method is used to returns the names of all the
   # inspectors. Inspectors are another name for the various floating dialog
   # windows that you can activate from withing SketchUp, such as the Materials
   # window.
+  #
+  # @bug Prior to SketchUp 2022.0 "EntityInfo" was not listed.
   #
   # @example
   #   inspectors = UI.inspector_names
@@ -165,7 +167,7 @@ module UI
   # of SketchUp's menus.
   #
   # Valid menu names are: "File", "Edit", "View", "Camera", "Draw", "Tools",
-  # "Window", "Extensions" and "Help".
+  # "Window", "Extensions", "Help" and "Developer".
   #
   # @example
   #   tool_menu = UI.menu("Tools")
@@ -266,16 +268,16 @@ module UI
   def self.openURL(url)
   end
 
-  # The openpanel method is used to display the Open dialog box. The path that
+  # The {.openpanel} method is used to display the Open dialog box. The path that
   # is returned can then be used inside code to open a text or image file.
   # See the standard Ruby class File for examples of reading and writing from
   # disk.
   #
-  # Bug Fixed in SketchUp 2014: Wildcards were not working properly from SU7 to
-  # SU2013. Wildcard filters did not populate the file type dropdown. The filter
-  # string would be shown in the file name field with '*' characters converted to
-  # '_' characters. Note, the format of a wildcard filter string has been changed.
-  #  See the description of the filename parameter below for details.
+  # @bug Fixed in SketchUp 2014: Wildcards were not working properly from SU7 to
+  #   SU2013. Wildcard filters did not populate the file type dropdown. The filter
+  #   string would be shown in the file name field with '*' characters converted to
+  #   '_' characters. Note, the format of a wildcard filter string has been changed.
+  #   See the description of the filename parameter below for details.
   #
   # @example
   #   chosen_image = UI.openpanel("Open SKP File", "c:/", "model.skp")
@@ -301,6 +303,8 @@ module UI
   #
   # @return [String] the full path and name of the file selected, or
   #   nil if the dialog was canceled.
+  #
+  # @see UI.savepanel
   #
   # @version SketchUp 6.0
   def self.openpanel(title, directory, filename)
@@ -370,15 +374,18 @@ module UI
   def self.refresh_toolbars
   end
 
-  # The savepanel method is used to display the Save dialog box. The path that
+  # The {.savepanel} method is used to display the Save dialog box. The path that
   # is returned can then be used inside code to save out a text or image file.
   # See the standard Ruby class File for examples of reading and writing from
   # disk.
   #
-  # Bug Fixed in SketchUp 2014: Wildcards were not working properly from SU7 to
-  # SU2013. Semicolon-separated lists of wildcards did not populate the file type
-  # dropdown. The filter string would be shown in the file name field with '*'
-  # characters converted to '_' characters.
+  # @bug Fixed in SketchUp 2014: Wildcards were not working properly from SU7 to
+  #   SU2013. Semicolon-separated lists of wildcards did not populate the file type
+  #   dropdown. The filter string would be shown in the file name field with '*'
+  #   characters converted to '_' characters.
+  #
+  # @bug Fixed in SketchUp 2022.0: if +filename+ begins with a +*+ it crashes
+  #   on macOS.
   #
   # @example
   #   path_to_save_to = UI.savepanel("Save Image File", "c:\\", "Shapes.jpg")
@@ -399,6 +406,8 @@ module UI
   #
   # @return [String] the full path and name of the file
   #   selected or nil if the dialog was canceled.
+  #
+  # @see UI.openpanel
   #
   # @version SketchUp 6.0
   def self.savepanel(title, directory, filename)
@@ -525,8 +534,10 @@ module UI
   def self.show_extension_manager
   end
 
-  # The show_inspector method is used to display the inspector with the given
+  # The {.show_inspector} method is used to display the inspector with the given
   # name. You can get the list of valid inspectors with UI.inspector_names.
+  #
+  # @bug Prior to SketchUp 2022.0 "EntityInfo" was not a supported parameter.
   #
   # @example
   #   status = UI.show_inspector("Components")
@@ -541,10 +552,14 @@ module UI
   end
 
   # The {.show_model_info} method is used to display the model info dialog for a
-  # specific page. You can get the list of valid dialogs with
-  # {UI.model_info_pages}.
+  # specific page. You can get the list of valid page names with {UI.model_info_pages}.
   #
   # [SketchUp 2014] <code>"Classifications"</code> page was added.
+  #
+  # @bug Until SketchUp 2021.1 SketchUp on Mac didn't display the desired page in,
+  #   but only selected it in the navigation.
+  #
+  # @bug Until SketchUp 2021.1 SketchUp on Mac didn't accept English page names on localized builds.
   #
   # @example
   #   UI.show_model_info('Credits')

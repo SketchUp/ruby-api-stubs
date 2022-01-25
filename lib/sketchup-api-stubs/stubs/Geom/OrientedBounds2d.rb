@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The OrientedBounds2d class is a bounding box represented by four

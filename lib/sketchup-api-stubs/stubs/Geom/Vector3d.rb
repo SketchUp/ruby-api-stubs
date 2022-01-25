@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Vector3d class is used to represent vectors in a 3 dimensional space.
@@ -68,28 +68,29 @@ class Geom::Vector3d
   def %(vector)
   end
 
-  # The {#cross} method is used to compute the cross product between two vectors.
+  # The {#*} method is used to compute the cross product between two vectors.
   #
   # The cross product, also called the vector product, is an operation on two
   # vectors. The cross product of two vectors produces a third vector which is
   # perpendicular to the plane in which the first two lie.
   #
+  # This is an alias of the {#cross} method.
+  #
   # @example
-  #   vector1 = Geom::Vector3d.new(1,0,0)
-  #   vector2 = Geom::Vector3d.new(0,1,0)
+  #   vector1 = Geom::Vector3d.new(1, 0, 0)
+  #   vector2 = Geom::Vector3d.new(0, 1, 0)
   #   vector3 = vector1 * vector2
   #
   # @example
-  #   vector = Geom::Vector3d.new(1,0,0)
-  #   vector2 = Geom::Vector3d.new(0,1,0)
+  #   vector = Geom::Vector3d.new(1, 0, 0)
+  #   vector2 = Geom::Vector3d.new(0, 1, 0)
   #   vector3 = vector.cross(vector2)
   #
   # @param [Geom::Vector3d] vector
-  #   A Vector3d object.
   #
   # @return [Geom::Vector3d] the cross of vector1 and vector2
   #
-  # @see #*
+  # @see #cross
   #
   # @version SketchUp 6.0
   def *(vector)
@@ -230,11 +231,13 @@ class Geom::Vector3d
   #
   # Returns an Array of three vectors [xaxis, yaxis, zaxis]
   #
+  # Vector3d objects
+  #
   # @example
   #   vector = Geom::Vector3d.new(1,0,0)
   #   a = vector.axes
   #
-  # @return [Array(Geom::Vector3d, Geom::Vector3d, Geom::Vector3d)] an Array object containing three Vector3d objects
+  # @return [Array(Geom::Vector3d, Geom::Vector3d, Geom::Vector3d)] an Array object containing three
   #
   # @version SketchUp 6.0
   def axes
@@ -262,17 +265,16 @@ class Geom::Vector3d
   # perpendicular to the plane in which the first two lie.
   #
   # @example
-  #   vector1 = Geom::Vector3d.new(1,0,0)
-  #   vector2 = Geom::Vector3d.new(0,1,0)
+  #   vector1 = Geom::Vector3d.new(1, 0, 0)
+  #   vector2 = Geom::Vector3d.new(0, 1, 0)
   #   vector3 = vector1 * vector2
   #
   # @example
-  #   vector = Geom::Vector3d.new(1,0,0)
-  #   vector2 = Geom::Vector3d.new(0,1,0)
+  #   vector = Geom::Vector3d.new(1, 0, 0)
+  #   vector2 = Geom::Vector3d.new(0, 1, 0)
   #   vector3 = vector.cross(vector2)
   #
   # @param [Geom::Vector3d] vector
-  #   A Vector3d object.
   #
   # @return [Geom::Vector3d] the cross of vector1 and vector2
   #

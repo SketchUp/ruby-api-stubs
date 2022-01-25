@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Sketchup::ComponentDefinition} class is used to define the contents for
@@ -512,20 +512,62 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   def remove_observer(observer)
   end
 
-  # The save_as method is used to save your definition as a SketchUp file at the
+  # The {#save_as} method is used to save your definition as a SketchUp file at the
   # specified file destination.
+  #
+  # Use this method when the user has chosen a path. If you want to "silently" save
+  # out the definition, without changing the path it is associated with, use
+  # {#save_copy} instead.
   #
   # @example
   #   my_definition = Sketchup.active_model.definitions[0]
-  #   success = my_definition.save_as "c:\\myComponent.skp"
+  #   my_definition.save_as("c:\\myComponent.skp")
   #
-  # @param [String] file_path
-  #   Local file path to save the .skp file to.
+  # @overload save_as(file_path)
+  #
+  #   Save as the current SketchUp version.
+  #   @param [String] file_path
+  #   @version SketchUp 7.0
+  #
+  # @overload save_as(file_path, version)
+  #
+  #   Save as a specific SketchUp version.
+  #   @param [String] file_path
+  #   @param [Integer] version
+  #     See {Sketchup::Model#save} for supported values.
+  #   @version SketchUp 2022.0
+  #
+  # @return [Boolean] true if successful
+  def save_as(*args)
+  end
+
+  # The {#save_copy} method is used to save your definition as a SketchUp file
+  # without changing the file path it is already associated with.
+  #
+  # This can be used to save out to a temporary file used by some other process,
+  # without having the temporary path permanentely written to the SketchUp
+  # model.
+  #
+  # @example
+  #   my_definition = Sketchup.active_model.definitions[0]
+  #   my_definition.save_copy("c:\\myComponent.skp")
+  #
+  # @overload save_copy(file_path)
+  #
+  #   Save as the current SketchUp version.
+  #   @param [String] file_path
+  #
+  # @overload save_copy(file_path, version)
+  #
+  #   Save as a specific SketchUp version.
+  #   @param [String] file_path
+  #   @param [Integer] version
+  #     See {Sketchup::Model#save} for supported values.
   #
   # @return [Boolean] true if successful
   #
-  # @version SketchUp 7.0
-  def save_as(file_path)
+  # @version SketchUp 2022.0
+  def save_copy(*args)
   end
 
   # Saves a component thumbnail image. The image format is specified by the

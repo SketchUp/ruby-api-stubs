@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The OptionsManager class manages various kinds of OptionsProviders on a
@@ -53,7 +53,7 @@ class Sketchup::OptionsManager
   #   number = manager.count
   #
   # @note Since SketchUp 2014 the count method is inherited from Ruby's
-  #   +Enumable+ mix-in module. Prior to that the {#count} method is an alias
+  #   +Enumerable+ mix-in module. Prior to that the {#count} method is an alias
   #   for {#length}.
   #
   # @return integer - number of OptionsProvider objects if

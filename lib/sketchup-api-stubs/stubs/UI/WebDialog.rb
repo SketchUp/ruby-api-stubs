@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Ruby WebDialog class allows you to create and interact with DHTML dialog
@@ -177,22 +177,7 @@ class UI::WebDialog
 
   # The +new+ method is used to create a new webdialog.
   #
-  # @example
-  #   dlg = UI::WebDialog.new("Show sketchup.com", true,
-  #     "ShowSketchupDotCom", 739, 641, 150, 150, true);
-  #   dlg.set_url "http://www.sketchup.com"
-  #   dlg.show
-  #
-  # @note Since SU2017 the position and size of the dialog is DPI aware - it will
-  #   scale to the DPI of the monitor automatically. Specify units as they would
-  #   be on a traditional low-DPI monitor.
-  #
-  # @note The browser which is embedded inside the dialog depends on the
-  #   user's OS. On Mac, Safari is embedded, while on the PC whatever version of
-  #   Internet Explorer is installed will be embedded.
-  #
-  # @overload initialize(dialog_title = "", scrollable = true, pref_key = nil, width = 250, height = 250, left = 0, top = 0, resizable = true)
-  #
+  # 250, left = 0, top = 0, resizable = true)
   #   @param [String] dialog_title   The title to be displayed in the webdialog.
   #   @param [Boolean] scrollable    true if you want to allow scrollbars, false
   #                                  if you do not want to allow scrollbars.
@@ -207,6 +192,23 @@ class UI::WebDialog
   #   @param [Integer] resizable     true if you want the webdialog to be resizable,
   #                                  false if not.
   #   @return [UI::WebDialog]
+  #
+  # @example
+  #   dlg = UI::WebDialog.new("Show sketchup.com", true,
+  #     "ShowSketchupDotCom", 739, 641, 150, 150, true);
+  #   dlg.set_url "http://www.sketchup.com"
+  #   dlg.show
+  #
+  # @note Since SU2017 the position and size of the dialog is DPI aware - it will
+  #   scale to the DPI of the monitor automatically. Specify units as they would
+  #   be on a traditional low-DPI monitor.
+  #
+  # @note The browser which is embedded inside the dialog depends on the
+  #   user's OS. On Mac, Safari is embedded, while on the PC whatever version of
+  #   Internet Explorer is installed will be embedded.
+  #
+  # @overload initialize(dialog_title = "", scrollable = true, pref_key = nil, width = 250, height =
+  #
   #
   # @overload initialize(properties)
   #

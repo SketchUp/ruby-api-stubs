@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Sketchup::Entities} class is a collection of Entity objects, either in a
@@ -69,6 +69,41 @@ class Sketchup::Entities
   # The add_3d_text is used to create 3D text. It will be added as edges and
   # faces drawn at the origin.
   #
+  # = 1.0, tolerance = 0.0, z = 0.0, is_filled = true, extrusion = 0.0)
+  #
+  #   @param [String] string
+  #     The text to create.
+  #
+  #   @param [Integer] alignment
+  #     Number that defines the alignment. There are constants
+  #     called TextAlignLeft, TextAlignRight, and
+  #     TextAlignCenter that can be passed.
+  #
+  #   @param [String] font
+  #     font name.
+  #
+  #   @param [Boolean] is_bold
+  #     true for bold.
+  #
+  #   @param [Boolean] is_italic
+  #     true for italic.
+  #
+  #   @param [Numeric] letter_height
+  #     Height of the text in inches.
+  #
+  #   @param [Numeric] tolerance
+  #     Tolerance of the curve creation. Defaults to
+  #     0.0, which creates the highest possible curve quality.
+  #
+  #   @param [Numeric] z
+  #     z position in inches.
+  #
+  #   @param [Boolean] is_filled
+  #     true for filled, which will put a face between the edges of the letters.
+  #
+  #   @param [Numeric] extrusion
+  #     Extrusion depth in inches.
+  #
   # @example
   #   # Draw the word "test" at the origin of the model, aligned left, in
   #   # Arial Bold, not italics, 1" in size, best tolerance quality, filled,
@@ -77,43 +112,10 @@ class Sketchup::Entities
   #   success = entities.add_3d_text('test', TextAlignLeft, "Arial",
   #     true, false, 1.0, 0.0, 0.5, true, 5.0)
   #
-  # @param [String] string
-  #   The text to create.
-  #
-  # @param [Integer] alignment
-  #   Number that defines the alignment. There are constants
-  #   called TextAlignLeft, TextAlignRight, and
-  #   TextAlignCenter that can be passed.
-  #
-  # @param [String] font
-  #   font name.
-  #
-  # @param [Boolean] is_bold
-  #   true for bold.
-  #
-  # @param [Boolean] is_italic
-  #   true for italic.
-  #
-  # @param [Numeric] letter_height
-  #   Height of the text in inches.
-  #
-  # @param [Numeric] tolerance
-  #   Tolerance of the curve creation. Defaults to
-  #   0.0, which creates the highest possible curve quality.
-  #
-  # @param [Numeric] z
-  #   z position in inches.
-  #
-  # @param [Boolean] is_filled
-  #   true for filled, which will put a face between the edges of the letters.
-  #
-  # @param [Numeric] extrusion
-  #   Extrusion depth in inches.
-  #
   # @return [Boolean] true if successful
   #
   # @version SketchUp 6.0
-  def add_3d_text(string, alignment, font, is_bold = false, is_italic = false, letter_height = 1.0, tolerance = 0.0, z = 0.0, is_filled = true, extrusion = 0.0)
+  def add_3d_text(string, alignment, font, is_bold = false, is_italic = false, letter_height)
   end
 
   # The add_arc method is used to create an arc curve segment.
@@ -263,6 +265,10 @@ class Sketchup::Entities
 
   # The {#add_dimension_linear} method adds a linear dimension to the entities.
   #
+  # [instance_path, end_point], vector)
+  #
+  # vector)
+  #
   # @example
   #   entities = Sketchup.active_model.entities
   #   # From point to point
@@ -288,7 +294,7 @@ class Sketchup::Entities
   #   start_point = edge.start.position
   #   end_point = edge.end.position
   #   vector = Geom::Vector3d.new(30, 30, 0)
-  #   Sketchup.active_model.entities.add_dimension_linear([instance_path, start_point], [instance_path, end_point], vector)
+  #   Sketchup.active_model.entities.add_dimension_linear([instance_path, start_point],
   #
   # @example Instance path as an array
   #   instance = Sketchup.active_model.active_entities.grep(Sketchup::ComponentInstance).first
@@ -297,7 +303,7 @@ class Sketchup::Entities
   #   start_point = edge.start.position
   #   end_point = edge.end.position
   #   vector = Geom::Vector3d.new(30, 30, 0)
-  #   Sketchup.active_model.entities.add_dimension_linear([path, start_point], [path, end_point], vector)
+  #   Sketchup.active_model.entities.add_dimension_linear([path, start_point], [path, end_point],
   #
   # @overload add_dimension_linear(start_pt_or_entity, end_pt_or_entity, offset_vector)
   #
@@ -400,6 +406,10 @@ class Sketchup::Entities
   #
   # @return [Array<Sketchup::Edge>] an array of Edge objects if successful
   #
+  # @see Sketchup::EntitiesBuilder#add_edges
+  #   EntitiesBuilder#add_edges, alternative
+  #   for generating bulk geometry with performance in mind.
+  #
   # @version SketchUp 6.0
   def add_edges(*args)
   end
@@ -416,9 +426,6 @@ class Sketchup::Entities
   # For the last form that takes a Curve, the curve must be closed - like a
   # circle.
   #
-  # Note that a special case exists for any face created on the ground plane, in
-  # which case the vertex order is ignored and the face is always facing down.
-  #
   # @example
   #   depth = 100
   #   width = 100
@@ -432,6 +439,9 @@ class Sketchup::Entities
   #   # Add the face to the entities in the model
   #   face = entities.add_face(pts)
   #
+  # @note A special case exists for any face created on the ground plane, in
+  #   which case the vertex order is ignored and the face is always facing down.
+  #
   # @overload add_face(entities)
   #
   #   @param [Array<Sketchup::Edge>, Array<Geom::Point3d>, Sketchup::Curve] entities
@@ -442,12 +452,19 @@ class Sketchup::Entities
   #
   # @return [Sketchup::Face, nil]
   #
+  # @see Sketchup::EntitiesBuilder#add_face
+  #   EntitiesBuilder#add_face, alternative
+  #   for generating bulk geometry with performance in mind.
+  #
+  # @see file:pages/generating_geometry.md
+  #   Guide on Generating Geometry
+  #
   # @version SketchUp 6.0
   def add_face(*args)
   end
 
-  # The {#add_faces_from_mesh} method is used to add Face objects to the
-  # collection of entities from a PolygonMesh.
+  # The {#add_faces_from_mesh} method is used to add {Sketchup::Face} entities to the
+  # collection of entities from a {Geom::PolygonMesh}.
   #
   # The +smooth_flags+ parameter can contain any of the following values if
   # passed. The constants were added in SketchUp 2014. For previous versions,
@@ -459,7 +476,7 @@ class Sketchup::Entities
   # - 4: {Geom::PolygonMesh::AUTO_SOFTEN} (Interior edges are softened.)
   # - 8: {Geom::PolygonMesh::SMOOTH_SOFT_EDGES} (All soft edges will also be smooth.)
   #
-  # The 3rd and 4th parameters will accept a {sketchup::Material} object or a
+  # The 3rd and 4th parameters will accept a {Sketchup::Material} object or a
   # string name of a material currently in the model.
   #
   # @example
@@ -491,6 +508,13 @@ class Sketchup::Entities
   #   material to paint back faces with.
   #
   # @return [Integer] Number of faces created
+  #
+  # @see Sketchup::EntitiesBuilder
+  #   EntitiesBuilder, alternative interface
+  #   for generating bulk geometry with performance in mind.
+  #
+  # @see file:pages/generating_geometry.md
+  #   Guide on Generating Geometry
   #
   # @version SketchUp 6.0
   def add_faces_from_mesh(polygon_mesh, smooth_flags = Geom::PolygonMesh::AUTO_SOFTEN|Geom::PolygonMesh::SMOOTH_SOFT_EDGES, f_material = nil, b_material = nil)
@@ -620,6 +644,13 @@ class Sketchup::Entities
   #   Point3d object representing the edge's ending point.
   #
   # @return [Sketchup::Edge] a Edge object if successful
+  #
+  # @see Sketchup::EntitiesBuilder#add_edge
+  #   EntitiesBuilder#add_edge, alternative
+  #   for generating bulk geometry with performance in mind.
+  #
+  # @see file:pages/generating_geometry.md
+  #   Guide on Generating Geometry
   #
   # @version SketchUp 6.0
   def add_line(point1, point2)
@@ -770,6 +801,47 @@ class Sketchup::Entities
   def at(entity_index)
   end
 
+  # Creates an {Sketchup::EntitiesBuilder} that can be used to generate bulk
+  # geometry with performance in mind. This is particularly useful for importers
+  # where the geometry is already well defined and one wants to recreate it
+  # without further processing.
+  #
+  # The call to {#build} starts an implicit operation, even if no other model
+  # changes are made within the block. This is not the same as
+  # {Sketchup::Model#start_operation}, so it's still recommended to wrap all
+  # model changes, including {#build} with {Sketchup::Model#start_operation} and
+  # {Sketchup::Model#commit_operation}.
+  #
+  # Refer to the documentation of {Sketchup::EntitiesBuilder} for more details.
+  #
+  # @api EntitiesBuilder
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   model.entities.build { |builder|
+  #     edge = builder.add_edge([0, 0, 0], [9, 0, 0])
+  #     edge.material = 'red'
+  #     face = builder.add_face([[0, 0, 0], [9, 0, 0], [9, 9, 0], [0, 9, 0]])
+  #     face.material = 'maroon'
+  #   }
+  #
+  # @note While using {Sketchup::Entities#build} it is important to not
+  #   add or remove vertices by other means of the builder. Also don't modify the
+  #   position of the vertices in the {Sketchup::Entities} container geometry is
+  #   added to. Doing so can break the vertex-cache that de-duplicates the vertices.
+  #
+  # @return [nil]
+  #
+  # @see Sketchup::EntitiesBuilder
+  #
+  # @version SketchUp 2022.0
+  #
+  # @yield [builder]
+  #
+  # @yieldparam [Sketchup::EntitiesBuilder] builder
+  def build
+  end
+
   # The clear! method is used to remove all entities from the collection of
   # entities.
   #
@@ -796,7 +868,7 @@ class Sketchup::Entities
   #   number = entities.count
   #
   # @note Since SketchUp 2014 the count method is inherited from Ruby's
-  #   +Enumable+ mix-in module. Prior to that the {#count} method is an alias
+  #   +Enumerable+ mix-in module. Prior to that the {#count} method is an alias
   #   for {#length}.
   #
   # @return [Integer]
@@ -921,6 +993,13 @@ class Sketchup::Entities
   #   material to paint back faces with.
   #
   # @return [Boolean]
+  #
+  # @see Sketchup::EntitiesBuilder
+  #   EntitiesBuilder, alternative interface
+  #   for generating bulk geometry with performance in mind.
+  #
+  # @see file:pages/generating_geometry.md
+  #   Guide on Generating Geometry
   #
   # @version SketchUp 6.0
   def fill_from_mesh(polygon_mesh, weld_vertices = true, smooth_flags = Geom::PolygonMesh::AUTO_SOFTEN|Geom::PolygonMesh::SMOOTH_SOFT_EDGES, f_material = nil, b_material = nil)

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Sketchup module contains a number of important utility methods for use in
@@ -140,6 +140,11 @@ module Sketchup
   # @example
   #   Sketchup.debug_mode = true
   #
+  # @note Changing this value within your extension can cause problems for other
+  #   extension developers who rely on the debug information for their own work.
+  #   Only use this locally; never change this value in an extension you
+  #   publish.
+  #
   # @param [Boolean] enabled
   #   If true, SketchUp will produce debug warnings.
   #
@@ -182,11 +187,13 @@ module Sketchup
   # Returns the ExtensionsManager where you can find all registered
   # SketchupExtension objects.
   #
+  # #{extension.loaded?}"
+  #   }
+  #
   # @example
   #   extensions = Sketchup.extensions
   #   extensions.each{ |extension|
-  #     puts "The next extension is named: #{extension.name} and its loaded? state is: #{extension.loaded?}"
-  #   }
+  #     puts "The next extension is named: #{extension.name} and its loaded? state is:
   #
   # @return [Sketchup::ExtensionsManager] an ExtensionsManager object.
   #
@@ -289,6 +296,17 @@ module Sketchup
   #
   # @version SketchUp 8.0 M1
   def self.fix_shadow_strings?
+  end
+
+  # The {.focus} method is used to focus the active model window.
+  #
+  # @example
+  #   Sketchup.focus
+  #
+  # @see UI::HtmlDialog.bring_to_front
+  #
+  # @version SketchUp 2021.1
+  def self.focus
   end
 
   # The format_angle method takes a number as an angle in radians and formats it

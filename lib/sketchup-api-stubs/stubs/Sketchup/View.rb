@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This class contains methods to manipulate the current point of view of the
@@ -462,9 +462,17 @@ class Sketchup::View
   # around the full bounds of the text, use {#text_bounds} to compute the
   # desired alignment.
   #
+  # The vertical alignment can vary between fonts and platforms. It's recommended
+  # to test different fonts and find one that fits well across both platforms
+  # for your purposes.
+  #
   # <b>Example of different vertical alignment and text bounds:</b>
   #
   # rdoc-image:../images/view-draw-text-with-bounds.png
+  #
+  # @bug Prior to SU2022.0, on macOS, the vertical text alignment for some fonts
+  #   could appear to be offset from their expected positions. As of SU2022.0 the
+  #   vertical alignment should be more accurate and consistent.
   #
   # @example
   #   class ExampleTool
@@ -505,7 +513,7 @@ class Sketchup::View
   #     def draw_text(view, position, text, **options)
   #       native_options = options.dup
   #       if IS_WIN && options.key?(:size)
-  #         native_options[:size] = pixels_to_points(size)
+  #         native_options[:size] = pixels_to_points(options[:size])
   #       end
   #       view.draw_text(position, text, **native_options)
   #     end
@@ -1192,8 +1200,7 @@ class Sketchup::View
   # For other file formats  available from the GUI in File > Export > 2D
   # Graphics, .e.g `.pdf`, use {Sketchup::Model#export}.
   #
-  # @overload write_image(filename, width = view.vpwidth, height = view.vpheight, antialias = false, compression = 1.0)
-  #
+  # compression = 1.0)
   #   @note Prefer the overload with option hash instead of this variant. This
   #     overload is not updated with new options.
   #
@@ -1214,6 +1221,9 @@ class Sketchup::View
   #   @param [Boolean] antialias
   #   @param [Float] compression
   #     Compression factor for JPEG images, between +0.0+ and +1.0+.
+  #
+  # @overload write_image(filename, width = view.vpwidth, height = view.vpheight, antialias = false,
+  #
   #
   # @overload write_image(options)
   #

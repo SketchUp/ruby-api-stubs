@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This is the interface to a LayOut document. A {Layout::Document} is the 2D
@@ -47,6 +47,7 @@ class Layout::Document
   VERSION_2019 = nil # Stub value.
   VERSION_2020 = nil # Stub value.
   VERSION_2021 = nil # Stub value.
+  VERSION_2022 = nil # Stub value.
   VERSION_3 = nil # Stub value.
   VERSION_CURRENT = nil # Stub value.
 

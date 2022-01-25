@@ -1,15 +1,15 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The AutoTextDefinitions class is a container class for all
 # {Layout::AutoTextDefinition}s in a {Layout::Document}.
 #
 # @example
-#   # Grab a handle to an existing LayOut document's auto text definitions.
+#   # Grab a handle to an existing LayOut document's auto-text definitions.
 #   doc = Layout::Document.open("C:/path/to/document.layout")
 #   auto_texts = doc.auto_text_definitions
 #
-#   # From here, we can add auto text definitions to or remove them from the
+#   # From here, we can add auto-text definitions to or remove them from the
 #   # document.
 #   auto_texts.add("PageNum", Layout::AutoTextDefinition::TYPE_PAGE_NUM)
 #   auto_texts.remove("PageNum")
@@ -61,6 +61,8 @@ class Layout::AutoTextDefinitions
   # [+Layout::AutoTextDefinition::TYPE_DATE_CREATED+]
   # [+Layout::AutoTextDefinition::TYPE_DATE_MODIFIED+]
   # [+Layout::AutoTextDefinition::TYPE_DATE_PUBLISHED+]
+  # [+Layout::AutoTextDefinition::TYPE_PAGE_COUNT+]
+  # [+Layout::AutoTextDefinition::TYPE_SEQUENCE+]
   #
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")
@@ -71,7 +73,7 @@ class Layout::AutoTextDefinitions
   #
   # @param [Integer] type
   #
-  # @raise [ArgumentError] if type is not a valid auto text type, or is mandatory.
+  # @raise [ArgumentError] if type is not a valid auto-text type, or is mandatory.
   #
   # @return [Layout::AutoTextDefinition]
   #
@@ -148,6 +150,8 @@ class Layout::AutoTextDefinitions
   # [+Layout::AutoTextDefinition::TYPE_DATE_CREATED+]
   # [+Layout::AutoTextDefinition::TYPE_DATE_MODIFIED+]
   # [+Layout::AutoTextDefinition::TYPE_DATE_PUBLISHED+]
+  # [+Layout::AutoTextDefinition::TYPE_PAGE_COUNT+]
+  # [+Layout::AutoTextDefinition::TYPE_SEQUENCE+]
   #
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")

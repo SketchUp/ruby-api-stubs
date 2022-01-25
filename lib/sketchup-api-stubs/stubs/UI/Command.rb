@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Command class is the preferred class for adding tools to the menus and
@@ -66,6 +66,58 @@ class UI::Command
   end
 
   # Instance Methods
+
+  # The {#extension} method returns the command's associated extension.
+  #
+  # @example
+  #   extension = Sketchup.extensions['Sandbox Tools']
+  #   cmd = UI::Command.new("Tester") {}
+  #   cmd.extension = extension
+  #   p cmd.extension == extension
+  #
+  # @note This is an advanced feature that extension developers normally won't
+  #   have to deal with. It's purpose is to address scenarios when SketchUp
+  #   isn't able to automatically infer which extension the command belongs to.
+  #
+  # @return [SketchupExtension, nil]
+  #
+  # @version SketchUp 2022.0
+  def extension
+  end
+
+  # The {#extension=} method explicitly sets the command's associated extension.
+  #
+  # @example
+  #   extension = Sketchup.extensions['Sandbox Tools']
+  #   cmd = UI::Command.new("Tester") {}
+  #   cmd.extension = extension
+  #
+  # @note This is an advanced feature that extension developers normally won't
+  #   have to deal with. It's purpose is to address scenarios when SketchUp
+  #   isn't able to automatically infer which extension the command belongs to.
+  #   These scenarios are for example an extension using a library to add its
+  #   commands or command manager extensions.
+  #
+  # @param [SketchupExtension, nil] extension
+  #
+  # @version SketchUp 2022.0
+  def extension=(extension)
+  end
+
+  # The {#get_validation_proc} method returns the command's validation proc.
+  #
+  # @example
+  #   cmd = UI::Command.new("Tester") {}
+  #   cmd.set_validation_proc { MF_DISABLED }
+  #   proc = cmd.get_validation_proc
+  #
+  # @return [Proc, nil]
+  #
+  # @see #set_validation_proc
+  #
+  # @version SketchUp 2022.0
+  def get_validation_proc
+  end
 
   # The large_icon method returns the icon file for the command's
   # large icon.
@@ -149,6 +201,21 @@ class UI::Command
   def menu_text=(menuitem)
   end
 
+  # The {#proc} method returns the command's proc that is called when the command
+  # is invoked.
+  #
+  # @example
+  #   cmd = UI::Command.new("Tester") {}
+  #   cmd.set_validation_proc { MF_DISABLED }
+  #   proc = cmd.proc
+  #   proc.call
+  #
+  # @return [Proc]
+  #
+  # @version SketchUp 2022.0
+  def proc
+  end
+
   # The {#set_validation_proc} method allows you to change whether the command
   # is enabled, checked, etc. For instance, the command toggling a dialog window
   # may be displayed as checked while the dialog is open.
@@ -176,6 +243,8 @@ class UI::Command
   #   message if pressed when it cannot be used.
   #
   # @return [UI::Command]
+  #
+  # @see #get_validation_proc
   #
   # @version SketchUp 6.0
   #
@@ -236,13 +305,13 @@ class UI::Command
   # command.
   #
   # @example
-  #   toolbar = UI::Toolbar.new "Test"
+  #   toolbar = UI::Toolbar.new("Test")
   #   # This toolbar tool simply displays Hello World on the screen
   #   # when clicked
   #   cmd = UI::Command.new("Tester") { UI.messagebox("Hello World") }
   #   cmd.small_icon = "ToolPencilSmall.png"
   #   cmd.large_icon = "ToolPencilLarge.png"
-  #   cmd.status_bar_text = $tStrings.GetString("Testing the toolbars class")
+  #   cmd.status_bar_text = "Testing the toolbars class."
   #   toolbar = toolbar.add_item cmd
   #   toolbar.show
   #   puts cmd.status_bar_text
@@ -254,15 +323,15 @@ class UI::Command
   end
 
   # The status_bar_text= method is used to set the status bar text for the
-  # command.
+  # command. This should be a description what the command does.
   #
   # @example
-  #   toolbar = UI::Toolbar.new "Test"
+  #   toolbar = UI::Toolbar.new("Test")
   #   # This toolbar tool simply displays Hello World on the screen when clicked
   #   cmd = UI::Command.new("Tester") { UI.messagebox("Hello World") }
   #   cmd.small_icon = "ToolPencilSmall.png"
   #   cmd.large_icon = "ToolPencilLarge.png"
-  #   cmd.status_bar_text = $tStrings.GetString("Testing the toolbars class")
+  #   cmd.status_bar_text = "Testing the toolbars class."
   #   toolbar = toolbar.add_item cmd
   #   toolbar.show
   #
@@ -293,7 +362,7 @@ class UI::Command
   def tooltip
   end
 
-  # The tooltip= method is used to define a command item's tooltip text. Tooltips
+  # The {#tooltip=} method is used to define a command item's tooltip header. Tooltips
   # will appear when the command is attached to a tool bar and the user hovers
   # their cursor over the icon.
   #
@@ -304,6 +373,9 @@ class UI::Command
   #   cmd.tooltip = "Hello World Tool"
   #   toolbar = toolbar.add_item cmd
   #   toolbar.show
+  #
+  # @note The tooltip text should repeat the commands' title text. For the command
+  #   description, use {#status_bar_text}.
   #
   # @param [String] text
   #   The text of the tooltip.

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A collection of Materials objects. Each model contains a Materials collection
@@ -110,7 +110,7 @@ class Sketchup::Materials < Sketchup::Entity
   #   count = materials.count
   #
   # @note Since SketchUp 2014 the count method is inherited from Ruby's
-  #   +Enumable+ mix-in module. Prior to that the {#count} method is an alias
+  #   +Enumerable+ mix-in module. Prior to that the {#count} method is an alias
   #   for {#length}.
   #
   # @return [Integer]
@@ -191,7 +191,7 @@ class Sketchup::Materials < Sketchup::Entity
 
   # The {#load} method is used to load a material from file into the model.
   #
-  # If a matching material exist in the model that will be returned instead.
+  # If a matching material exist in the model it will be returned instead.
   #
   # @example
   #   # Load a material from the shipped SketchUp library. (SketchUp 2016)

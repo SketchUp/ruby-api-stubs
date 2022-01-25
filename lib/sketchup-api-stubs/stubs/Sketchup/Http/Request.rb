@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # Http::Request objects allows you to send HTTP request to HTTP servers.
@@ -11,9 +11,9 @@ class Sketchup::Http::Request
   # Gets the http body that is going to be used when sending the request.
   #
   # @example
-  #   request = Sketchup::Http::Request.new("http://localhost:8080")
+  #   @request = Sketchup::Http::Request.new("http://localhost:8080")
   #
-  #   request.start do |request, response|
+  #   @request.start do |request, response|
   #     puts "body: #{request.body}"
   #   end
   #
@@ -26,10 +26,10 @@ class Sketchup::Http::Request
   # Sets the http body that is going to be used when sending the request.
   #
   # @example
-  #   request = Sketchup::Http::Request.new("http://localhost:8080")
-  #   request.body = "Hello World"
+  #   @request = Sketchup::Http::Request.new("http://localhost:8080")
+  #   @request.body = "Hello World"
   #
-  #   request.start do |request, response|
+  #   @request.start do |request, response|
   #     puts "body: #{request.body}"
   #   end
   #
@@ -45,12 +45,12 @@ class Sketchup::Http::Request
   # Cancels the request.
   #
   # @example
-  #   request = Sketchup::Http::Request.new("http://localhost:8080")
-  #   request.start do |request, response|
+  #   @request = Sketchup::Http::Request.new("http://localhost:8080")
+  #   @request.start do |request, response|
   #     puts "body: #{response.body}"
   #   end
   #
-  #   request.cancel
+  #   @request.cancel
   #
   # @return [true]
   #
@@ -61,10 +61,10 @@ class Sketchup::Http::Request
   # Returns the http headers that are going to be used when sending the request.
   #
   # @example
-  #   request = Sketchup::Http::Request.new("http://localhost:8080")
-  #   request.headers = { :key1 => "value1", :key2 => "value2" }
+  #   @request = Sketchup::Http::Request.new("http://localhost:8080")
+  #   @request.headers = { :key1 => "value1", :key2 => "value2" }
   #
-  #   request.headers.each do |key, value|
+  #   @request.headers.each do |key, value|
   #     puts "#{key}: #{value}"
   #   end
   #
@@ -77,10 +77,10 @@ class Sketchup::Http::Request
   # Sets the http headers that are going to be used when sending the request.
   #
   # @example
-  #   request = Sketchup::Http::Request.new("http://localhost:8080")
-  #   request.headers = { :key1 => "value1", :key2 => "value2" }
+  #   @request = Sketchup::Http::Request.new("http://localhost:8080")
+  #   @request.headers = { :key1 => "value1", :key2 => "value2" }
   #
-  #   request.headers.each do |key, value|
+  #   @request.headers.each do |key, value|
   #     puts "#{key}: #{value}"
   #   end
   #
@@ -96,10 +96,7 @@ class Sketchup::Http::Request
   # The new method is used to create a new Sketchup::Http::Request.
   #
   # The default port is 80, to use a different port define it in the URL when
-  # creating a new Http::Request
-  #
-  # Keeping a reference to the request is necessary in order to ensure the use of
-  # the response.
+  # creating a new {Sketchup::Http::Request}.
   #
   # The +method+ parameter accepts any custom http method or one of the
   # following:
@@ -111,11 +108,15 @@ class Sketchup::Http::Request
   # * +Sketchup::Http::OPTIONS+
   #
   # @example
-  #   request = Sketchup::Http::Request.new("http://localhost:8080", Sketchup::Http::GET)
+  #   @request = Sketchup::Http::Request.new("http://localhost:8080", Sketchup::Http::GET)
   #
-  #   request.start do |request, response|
+  #   @request.start do |request, response|
   #     puts "body: #{response.body}"
   #   end
+  #
+  # @note If no reference is kept to the {Sketchup::Http::Request}, it can be garbage collected,
+  #   making the download silently fail. This is especially noticeable for larger downloads that
+  #   takes longer time.
   #
   # @param [String] url
   #   The targetted URL.
@@ -133,9 +134,9 @@ class Sketchup::Http::Request
   # Returns the http method that is going to be used when sending the request.
   #
   # @example
-  #   request = Sketchup::Http::Request.new("http://localhost:8080")
+  #   @request = Sketchup::Http::Request.new("http://localhost:8080")
   #
-  #   request.start do |request, response|
+  #   @request.start do |request, response|
   #     puts "request.method: #{request.method}"
   #   end
   #
@@ -155,10 +156,10 @@ class Sketchup::Http::Request
   # * +Sketchup::Http::OPTIONS+
   #
   # @example
-  #   request = Sketchup::Http::Request.new("http://localhost:8080")
-  #   request.method = Sketchup::Http::POST
+  #   @request = Sketchup::Http::Request.new("http://localhost:8080")
+  #   @request.method = Sketchup::Http::POST
   #
-  #   request.start do |request, response|
+  #   @request.start do |request, response|
   #     puts "request.method: #{request.method}"
   #   end
   #
@@ -175,14 +176,20 @@ class Sketchup::Http::Request
   # have received data from the server until the download finishes.
   #
   # @example
-  #   request = Sketchup::Http::Request.new("http://localhost:8080")
+  #   @request = Sketchup::Http::Request.new("http://localhost:8080")
   #
-  #   request.set_download_progress_callback do |current, total|
-  #     puts "download current: #{current}"
-  #     puts "download total: #{total}"
+  #   @request.set_download_progress_callback do |current, total|
+  #     if total == -1
+  #       puts "#{current}B"
+  #     else
+  #       percentage = (current.to_f / total * 100).round
+  #       puts "#{current}B / #{total}B (#{percentage}%)"
+  #     end
   #   end
   #
-  #   request.start
+  #   @request.start
+  #
+  # @note +total+ is -1 if the server doesn't specify a file size in the response header.
   #
   # @return [Boolean]
   #
@@ -202,9 +209,9 @@ class Sketchup::Http::Request
   # uploaded data to the server until the upload finishes.
   #
   # @example
-  #   request = Sketchup::Http::Request.new("http://localhost:8080")
+  #   @request = Sketchup::Http::Request.new("http://localhost:8080")
   #
-  #   request.set_upload_progress_callback do |current, total|
+  #   @request.set_upload_progress_callback do |current, total|
   #     puts "upload current: #{current}"
   #     puts "upload total: #{total}"
   #   end
@@ -228,9 +235,9 @@ class Sketchup::Http::Request
   # Starts the request and optionally add a callback block.
   #
   # @example
-  #   request = Sketchup::Http::Request.new("http://localhost:8080")
+  #   @request = Sketchup::Http::Request.new("http://localhost:8080")
   #
-  #   request.start do |request, response|
+  #   @request.start do |request, response|
   #     puts "body: #{response.body}"
   #   end
   #
@@ -257,9 +264,9 @@ class Sketchup::Http::Request
   # * +Sketchup::Http::STATUS_FAILED+
   #
   # @example
-  #   request = Sketchup::Http::Request.new("http://localhost:8080")
-  #   request.start
-  #   puts "response.status: #{request.status}"
+  #   @request = Sketchup::Http::Request.new("http://localhost:8080")
+  #   @request.start
+  #   puts "response.status: #{@request.status}"
   #
   # @return [int]
   #
@@ -270,9 +277,9 @@ class Sketchup::Http::Request
   # Returns a copy of the Request's URL.
   #
   # @example
-  #   request = Sketchup::Http::Request.new("http://localhost:8080")
+  #   @request = Sketchup::Http::Request.new("http://localhost:8080")
   #
-  #   request.start do |request, response|
+  #   @request.start do |request, response|
   #     puts "url: #{request.url}"
   #   end
   #

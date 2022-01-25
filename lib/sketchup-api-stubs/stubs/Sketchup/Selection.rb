@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A set of the currently selected entities. Use the Model.selection method
@@ -155,7 +155,7 @@ class Sketchup::Selection
   #   number = selection.count
   #
   # @note Since SketchUp 2014 the count method is inherited from Ruby's
-  #   +Enumable+ mix-in module. Prior to that the {#count} method is an alias
+  #   +Enumerable+ mix-in module. Prior to that the {#count} method is an alias
   #   for {#length}.
   #
   # @return [Integer]

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Sketchup::ComponentInstance} class is used to represent component
@@ -123,73 +123,63 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   def explode
   end
 
-  # The glued_to method is used to retrieve the entity that this instance is
+  # The {#glued_to} method is used to retrieve the entity that this instance is
   # glued to.
   #
-  # Returns nil if it is not glued to anything.
-  #
   # @example
-  #   point = Geom::Point3d.new 10,20,30
-  #   transform = Geom::Transformation.new point
+  #   point = Geom::Point3d.new(10, 20, 30)
+  #   transform = Geom::Transformation.new(point)
   #   model = Sketchup.active_model
   #   entities = model.active_entities
-  #   path = Sketchup.find_support_file "Bed.skp",
-  #     "Components/Components Sampler/"
+  #   path = Sketchup.find_support_file("Bed.skp", "Components/Components Sampler/")
   #   definitions = model.definitions
-  #   componentdefinition = definitions.load path
-  #   instance = entities.add_instance componentdefinition, transform
+  #   componentdefinition = definitions.load(path)
+  #   instance = entities.add_instance(componentdefinition, transform)
   #   status = instance.glued_to
   #
-  # @return [Sketchup::Face, nil] the Entity object that the instance is glued
-  #   to (if successful)
+  # @return [Sketchup::Face, Sketchup::Group, Sketchup::ComponentInstance, Sketchup::Image, nil]
   #
   # @version SketchUp 6.0
   def glued_to
   end
 
-  # The glued_to= method glues this instance to a face.
+  # The {glued_to=} method glues this instance to a drawing element.
+  # When moving this other drawing elment with the Move tool, the glued instance moves with it.
   #
-  # This method will raise an exception if the instance cannot be glued to the
-  # given face. Instances cannot be glued if the definition of the instance
-  # doesn't support gluing or if the alignment is wrong.
+  # In SketchUp 2021.1 support for passing {Sketchup::Group}, {Sketchup::ComponentInstance} and
+  # {Sketchup::Image} was added.
   #
   # @example
-  #   depth = 100
-  #   width = 100
-  #   path=Sketchup.find_support_file "Bed.skp",
-  #     "Components/Components Sampler/"
   #   model = Sketchup.active_model
   #   entities = model.active_entities
-  #   pts = []
-  #   pts[0] = [0, 0, 0]
-  #   pts[1] = [width, 0, 0]
-  #   pts[2] = [width, depth, 0]
-  #   pts[3] = [0, depth, 0]
-  #   # Add the face to the entities in the model
-  #   face = entities.add_face pts
-  #   point = Geom::Point3d.new 10,10,0
-  #   transform = Geom::Transformation.new point
+  #
+  #   # Create a face
+  #   face = entities.add_face([[0, 0, 0], [100, 0, 0], [100, 100, 0], [0, 100, 0]])
+  #
+  #   # Add component
+  #   path = Sketchup.find_support_file("Bed.skp", "Components/Components Sampler/")
+  #   point = Geom::Point3d.new(10, 10, 0)
+  #   transformation = Geom::Transformation.new(point)
   #   definitions = model.definitions
-  #   componentdefinition = definitions.load path
-  #   instance = entities.add_instance componentdefinition, transform
-  #   begin
-  #     status = instance.glued_to = face
-  #   rescue
-  #     UI.messagebox $!.message
-  #   end
-  #   if (status)
-  #     UI.messagebox status.to_s
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   definition = definitions.load(path)
+  #   instance = entities.add_instance(definition, transformation)
   #
-  # @param [Sketchup::Face, nil] face
+  #   # Make component "gluable"
+  #   definition.behavior.is2d = true
   #
-  # @return [Sketchup::Face, nil] - the Face object where the component is glued if
-  #   successful
+  #   # Glue the component to the face.
+  #   # If you now move the face, the component will follow.
+  #   instance.glued_to = face
+  #
+  # @param [Sketchup::Face, Sketchup::Group, Sketchup::ComponentInstance, Sketchup::Image, nil] drawing_element
+  #
+  # @raise ArgumentError if the {Sketchup::Behavior} for this component doesn't allow gluing,
+  #   if the alignment is wrong, or if this would lead to cyclic gluing.
+  #
+  # @return [Sketchup::Face, Sketchup::Group, Sketchup::ComponentInstance, Sketchup::Image, nil] the entity the instance was glued to.
   #
   # @version SketchUp 6.0
-  def glued_to=(face)
+  def glued_to=(drawing_element)
   end
 
   # The guid method is used to get the base 64 encoded unique id
@@ -438,6 +428,11 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   # instances representing manifold solid volumes (this - arg).  If the specified
   # objects (this and arg) do not represent manifold volumes, this method fails.
   #
+  # resultant groups if the two objects (this and arg) represent manifold solids and the operation
+  # succeeds otherwise nil is returned. The 3 groups are as follows: The intersection of volume 1 &
+  # volume 2, the difference of volume 1 minus volume 2, and the reverse difference of volume 2 minus
+  # volume 1.
+  #
   # @example
   #   entities = Sketchup.active_model.entities
   #   instance1 = entities[0]
@@ -449,13 +444,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   # @param [Sketchup::ComponentInstance, nil] instance
   #   The instance to split this instance with.
   #
-  # @return [Array(Sketchup::Group, Sketchup::Group, Sketchup::Group)] A vector (array) of the three resultant groups
-  #   if the two objects (this and arg) represent manifold
-  #   solids and the operation succeeds otherwise nil is
-  #   returned. The 3 groups are as follows: The intersection
-  #   of volume 1 & volume 2, the difference of
-  #   volume 1 minus volume 2, and the reverse difference of
-  #   volume 2 minus volume 1.
+  # @return [Array(Sketchup::Group, Sketchup::Group, Sketchup::Group)] A vector (array) of the three
   #
   # @version SketchUp 8.0
   def split(instance)

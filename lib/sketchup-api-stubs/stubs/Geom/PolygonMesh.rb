@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {#Geom::PolygonMesh} class contains methods to create polygon mesh
@@ -9,17 +9,26 @@
 # a mesh from it, and draws faces based on the mesh.
 #
 # You can construct a mesh manually using the methods of this class, or you
-# can get a mesh from a face by calling the Face.mesh method. See
+# can get a mesh from a face by calling the {Sketchup::Face#mesh} method. See
 # {Sketchup::Entities#add_faces_from_mesh} for an easy way to convert a mesh
 # back into faces.
 #
 # @example
-#   # Grab a mesh from a given face.
-#   my_mesh = some_face.mesh
+#   entities = Sketchup.active_model.active_entities
+#   face = entities.grep(Sketchup::Face).first
 #
-#   # Create a new group that we will populate with the mesh.
-#   group = Sketchup.active_model.entities.add_group
-#   group.entities.add_faces_from_mesh(my_mesh)
+#   mesh = face.mesh
+#
+#   group = entities.add_group
+#   group.entities.add_faces_from_mesh(mesh)
+#
+# @note As of SketchUp 2022.0 the new {Sketchup::EntitiesBuilder} interface
+#   can be used to generate bulk geometry. It has similar performance as
+#   {Geom::PolygonMesh}, but with similar degree of per-entity control as
+#   {Sketchup::Entities}.
+#
+# @see file:pages/generating_geometry.md
+#   Guide on Generating Geometry
 #
 # @version SketchUp 6.0
 class Geom::PolygonMesh
@@ -41,12 +50,15 @@ class Geom::PolygonMesh
 
   # The {#add_point} method is used to add a point to the mesh.
   #
-  # The index can be used for creating polygons.
+  # The returned index can be used for creating polygons.
   #
   # @example
   #   mesh = Geom::PolygonMesh.new
   #   point = Geom::Point3d.new(0, 1, 2)
   #   index = mesh.add_point(point)
+  #
+  # @note In SketchUp 2021.1 this method was improved to be faster.
+  #   See {#initialize} for details.
   #
   # @param [Geom::Point3d] point
   #
@@ -56,9 +68,12 @@ class Geom::PolygonMesh
   def add_point(point)
   end
 
-  # The +add_polygon+ method is used for adding a polygon to a
-  # PolygonMesh. All variations of this method require at least 3 elements
+  # The {#add_polygon} method is used for adding a polygon to a
+  # {Geom::PolygonMesh}. All variations of this method require at least 3 elements
   # to define a polygon, although more may be given.
+  #
+  # @note In SketchUp 2021.1 this method was improved to be faster.
+  #   See {#initialize} for details.
   #
   # @overload add_polygon(index, index, index, ...)
   #
@@ -166,12 +181,22 @@ class Geom::PolygonMesh
   def count_polygons
   end
 
-  # Create a new empty polygon mesh. The number of points and polygons are
-  # optional and are just used as a hint to decide how much space to
-  # pre-allocate to speed up adding points and polygons.
+  # Create a new empty polygon mesh.
+  #
+  # The number of points and polygons are optional and are used as a hint to
+  # decide how much space to pre-allocate to speed up adding points and polygons.
+  #
+  # As of SketchUp 2021.1 the performance of looking up and inserting points is
+  # significantly better provided the mesh was initialized with roughly the
+  # correct number of total points.
   #
   # @example
   #   mesh = Geom::PolygonMesh.new
+  #
+  # @note When creating a mesh with normals and/or UVQ data it's critical that
+  #   the number of points estimated is equal to or higher than the final number
+  #   of points added. If fewer points are estimated the normals and UVQ data
+  #   might end up out of sync.
   #
   # @overload initialize
   #

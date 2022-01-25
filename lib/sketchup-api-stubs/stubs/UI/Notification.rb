@@ -1,7 +1,7 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
-# UI::Notification objects allows you to show native notifications in the
+# {UI::Notification} objects allows you to show native notifications in the
 # desktop. Notifications can have a message, icon and accept and/or dismiss
 # buttons with callback blocks.
 #
@@ -9,18 +9,18 @@
 #   # For consistency, the accept (yes) and the dismiss (no) buttons
 #   # are always displayed in the same order.
 #   message = "A new version of pizza is available. Install now?"
-#   notification = UI::Notification.new(sketchup_extension, message)
-#   notification.on_accept("Pizza!") { puts "Pizza" }
-#   notification.on_dismiss("No thanks") { puts "No pizza" }
-#   notification.show
+#   @notification = UI::Notification.new(sketchup_extension, message)
+#   @notification.on_accept("Pizza!") { puts "Pizza" }
+#   @notification.on_dismiss("No thanks") { puts "No pizza" }
+#   @notification.show
 #
 #   # The two options are however not treated differently by SketchUp and can
 #   # also be used for questions with no strict yes/no answer.
 #   message = "Pizza clashes with health. Select which one to keep."
-#   notification = UI::Notification.new(sketchup_extension, message)
-#   notification.on_accept("Pizza") { puts "Pizza" }
-#   notification.on_dismiss("Health") { puts "Salad" }
-#   notification.show
+#   @notification = UI::Notification.new(sketchup_extension, message)
+#   @notification.on_accept("Pizza") { puts "Pizza" }
+#   @notification.on_dismiss("Health") { puts "Salad" }
+#   @notification.show
 #
 # @version SketchUp 2017
 class UI::Notification
@@ -31,9 +31,10 @@ class UI::Notification
   # the file system path.
   #
   # @example
-  #   notification = UI::Notification.new(sketchup_extension, "Hello world", "/path/to/icon", "icon Tooltip")
-  #   puts "Icon Name: #{notification.icon_name}"
-  #   notification.show
+  #   @notification = UI::Notification.new(sketchup_extension, "Hello world", "/path/to/icon",
+  #       "Icon Tooltip")
+  #   puts "Icon Name: #{@notification.icon_name}"
+  #   @notification.show
   #
   # @return [String]
   #
@@ -45,9 +46,9 @@ class UI::Notification
   # has to be a local filesystem path.
   #
   # @example
-  #   notification = UI::Notification.new(sketchup_extension, "Hello world")
-  #   notification.icon_name = "/path/to/icon"
-  #   notification.show
+  #   @notification = UI::Notification.new(sketchup_extension, "Hello world")
+  #   @notification.icon_name = "/path/to/icon"
+  #   @notification.show
   #
   # @param [String] icon_name
   #   String providing the icon filesystem path.
@@ -62,9 +63,10 @@ class UI::Notification
   # the icon.
   #
   # @example
-  #   notification = UI::Notification.new(sketchup_extension, "Hello world", "/path/to/icon", "icon Tooltip")
-  #   puts "Tooltip: #{notification.icon_tooltip}"
-  #   notification.show
+  #   @notification = UI::Notification.new(sketchup_extension, "Hello world", "/path/to/icon",
+  #       "Icon Tooltip")
+  #   puts "Tooltip: #{@notification.icon_tooltip}"
+  #   @notification.show
   #
   # @return [String]
   #
@@ -76,9 +78,9 @@ class UI::Notification
   # icon.
   #
   # @example
-  #   notification = UI::Notification.new(sketchup_extension, "Hello world")
-  #   notification.icon_tooltip = "icon Tooltip"
-  #   notification.show
+  #   @notification = UI::Notification.new(sketchup_extension, "Hello world")
+  #   @notification.icon_tooltip = "icon Tooltip"
+  #   @notification.show
   #
   # @param [String] icon_tooltip
   #   String providing the new icon Tooltip.
@@ -89,42 +91,48 @@ class UI::Notification
   def icon_tooltip=(icon_tooltip)
   end
 
-  # The new method is used to create a new {UI::Notification}.
-  #
-  # In order to insert line breaks into the message you need to use +\\r\\n+.
+  # Creates a new {UI::Notification} object.
   #
   # @bug Prior to SketchUp 2018 messages could only be 3 lines long on Windows
   #   and 2 lines on Mac. Now the notification expands to fit its content.
   #
+  # @bug Prior to SketchUp 2021.1 SketchUp could crash if the {UI::Notification} object is garbaged
+  #   collected while it has notifications displayed on the screen. This could happen if the
+  #   {UI::Notification} object was assigned to a local variable. The local variable would go out of
+  #   scope and the garbage collector might collect it before the callbacks are invoked.
+  #
   # @example
-  #   notification = UI::Notification.new(sketchup_extension, "Hello world", "/path/to/icon", "icon Tooltip")
-  #   notification.show
+  #   @notification = UI::Notification.new(sketchup_extension, "Hello world", "/path/to/icon",
+  #       "Icon Tooltip")
+  #   @notification.show
+  #
+  # @note In order to insert line breaks into the message you need to use +\\r\\n+.
   #
   # @param [SketchupExtension] sketchup_extension
-  #   Required sketchup_extension
-  #   to identify the sender.
+  #   {SketchupExtension} instance used to identify
+  #   the source of the notification.
   #
   # @param [String] message
-  #   Optionally assign the message.
+  #   Message to display.
   #
   # @param [String] icon_name
-  #   Optionally set a path to an image.
+  #   Path to an icon to display along with the message.
   #
   # @param [String] icon_tooltip
-  #   Optionally set an image tooltip.
+  #   Tooltip for the icon.
   #
   # @return [UI::Notification]
   #
   # @version SketchUp 2017
-  def initialize(sketchup_extension, message, icon_name, icon_tooltip)
+  def initialize(sketchup_extension, message = nil, icon_name = nil, icon_tooltip = nil)
   end
 
   # Gets the message as string.
   #
   # @example
-  #   notification = UI::Notification.new(sketchup_extension)
-  #   puts "This is the current message: #{notification.message}"
-  #   notification.show
+  #   @notification = UI::Notification.new(sketchup_extension)
+  #   puts "This is the current message: #{@notification.message}"
+  #   @notification.show
   #
   # @return [String]
   #
@@ -132,13 +140,16 @@ class UI::Notification
   def message
   end
 
-  # Sets a new message. Notifications are meant for quick & brief messages.
-  # Remember that they disappear automatically.
+  # Sets a new message. Notifications are meant for quick and brief messages.
+  # These message disappear automatically after a short while if they are not
+  # interacted with.
   #
   # @example
-  #   notification = UI::Notification.new(sketchup_extension)
-  #   notification.message = "Hello world"
-  #   notification.show
+  #   @notification = UI::Notification.new(sketchup_extension)
+  #   @notification.message = "Hello world"
+  #   @notification.show
+  #
+  # @note In order to insert line breaks into the message you need to use +\\r\\n+.
   #
   # @param [String] message
   #   String providing the new message.
@@ -156,11 +167,11 @@ class UI::Notification
   #   displayed, even if only one had been implemented.
   #
   # @example
-  #   notification = UI::Notification.new(sketchup_extension, "Hello world")
-  #   notification.on_accept("Accept")  do |notification, title|
+  #   @notification = UI::Notification.new(sketchup_extension, "Hello world")
+  #   @notification.on_accept("Accept")  do |notification, title|
   #      puts "The user pressed [#{title}] with message #{notification.message}"
   #   end
-  #   notification.show
+  #   @notification.show
   #
   # @param [String] title
   #   Sets the title of the button.
@@ -181,11 +192,11 @@ class UI::Notification
   # Returns the accept's button title.
   #
   # @example
-  #   notification = UI::Notification.new(sketchup_extension, "Hello world")
-  #   notification.on_accept("Accept")  do |notification, title|
+  #   @notification = UI::Notification.new(sketchup_extension, "Hello world")
+  #   @notification.on_accept("Accept")  do |notification, title|
   #      puts "The user pressed #{notification.on_accept_title}"
   #   end
-  #   notification.show
+  #   @notification.show
   #
   # @return [String]
   #
@@ -202,11 +213,11 @@ class UI::Notification
   #   displayed, even if only one had been implemented.
   #
   # @example
-  #   notification = UI::Notification.new(sketchup_extension, "Hello world")
-  #   notification.on_dismiss("Close")  do |notification, title|
+  #   @notification = UI::Notification.new(sketchup_extension, "Hello world")
+  #   @notification.on_dismiss("Close")  do |notification, title|
   #      puts "The user pressed [#{title}] with message #{notification.message}"
   #   end
-  #   notification.show
+  #   @notification.show
   #
   # @param [String] title
   #   Sets the title of the button.
@@ -227,11 +238,11 @@ class UI::Notification
   # Returns the dismiss's button title.
   #
   # @example
-  #   notification = UI::Notification.new(sketchup_extension, "Hello world")
-  #   notification.on_dismiss("Close")  do |notification, title|
+  #   @notification = UI::Notification.new(sketchup_extension, "Hello world")
+  #   @notification.on_dismiss("Close")  do |notification, title|
   #      puts "The user pressed #{notification.on_dismiss_title}"
   #   end
-  #   notification.show
+  #   @notification.show
   #
   # @return [String]
   #
@@ -242,9 +253,12 @@ class UI::Notification
   # Shows the notification. If not interacted with, the notification will
   # disappear without calling any callbacks.
   #
+  # @bug If assigned to a local variable SketchUp might crash prior to SketchUp 2021.1.
+  #   See {#initialize} for more details.
+  #
   # @example
-  #   notification = UI::Notification.new(sketchup_extension, "Hello world")
-  #   notification.show
+  #   @notification = UI::Notification.new(sketchup_extension, "Hello world")
+  #   @notification.show
   #
   # @return [Boolean]
   #

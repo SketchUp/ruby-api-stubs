@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A Group class contains methods for manipulating groups of entities.
@@ -199,6 +199,57 @@ class Sketchup::Group < Sketchup::Drawingelement
   #
   # @version SketchUp 6.0
   def explode
+  end
+
+  # The {#glued_to} method is used to retrieve the entity that this group is
+  # glued to.
+  #
+  # @example
+  #   point = Geom::Point3d.new(10, 20, 30)
+  #   transform = Geom::Transformation.new(point)
+  #   model = Sketchup.active_model
+  #   entities = model.active_entities
+  #   group = entities.add_group
+  #   group.entities.add_face([[0, 0, 0], [10, 0, 0], [10, 10, 0], [0, 10, 0]])
+  #   status = group.glued_to
+  #
+  # @return [Sketchup::Face, Sketchup::Group, Sketchup::ComponentInstance, Sketchup::Image, nil]
+  #
+  # @version SketchUp 2021.1
+  def glued_to
+  end
+
+  # The {glued_to=} method glues this group to a drawing element.
+  # When moving this other drawing elment with the Move tool, the glued group moves with it.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   entities = model.active_entities
+  #
+  #   # Create a face
+  #   face = entities.add_face([[0, 0, 0], [100, 0, 0], [100, 100, 0], [0, 100, 0]])
+  #
+  #   # Create a group
+  #   definitions = model.definitions
+  #   group = entities.add_group
+  #   group.entities.add_face([[0, 0, 0], [10, 0, 0], [10, 10, 0], [0, 10, 0]])
+  #
+  #   # Make group "gluable"
+  #   group.definition.behavior.is2d = true
+  #
+  #   # Glue the group to the face.
+  #   # If you now move the face, the group will follow.
+  #   group.glued_to = face
+  #
+  # @param [Sketchup::Face, Sketchup::Group, Sketchup::ComponentInstance, Sketchup::Image, nil] drawing_element
+  #
+  # @raise ArgumentError if the {Sketchup::Behavior} for this group doesn't allow gluing,
+  #   if the alignment is wrong, or if this would lead to cyclic gluing.
+  #
+  # @return [Sketchup::Face, Sketchup::Group, Sketchup::ComponentInstance, Sketchup::Image, nil] the entity the group was glued to.
+  #
+  # @version SketchUp 2021.1
+  def glued_to=(drawing_element)
   end
 
   # The guid method is used to get the base 64 encoded unique id

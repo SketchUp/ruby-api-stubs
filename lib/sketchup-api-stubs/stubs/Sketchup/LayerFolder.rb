@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # Allows layers to be organized in folders. Folders may have duplicate names.
@@ -19,15 +19,15 @@ class Sketchup::LayerFolder < Sketchup::Entity
   # Instance Methods
 
   # The {#<=>} method is used to compare two layer folders based on their names.
-  # You could use this for sorting if you're building a list of folder names.
+  # This enables the Ruby +Array#sort+ method to sort SketchUp layer folders.
   #
   # @api TagFolder
   #
   # @example
   #   model = Sketchup.active_model
   #   layers = model.layers
-  #   folder1 = layers.add('Folder1')
-  #   folder2 = layers.add('Folder2')
+  #   folder1 = layers.add_folder('Folder1')
+  #   folder2 = layers.add_folder('Folder2')
   #   comparison = folder1 <=> folder2 # Returns: -1
   #   comparison = folder1 <=> folder1 # Returns: 0
   #   comparison = folder2 <=> folder1 # Returns: 1
@@ -39,7 +39,7 @@ class Sketchup::LayerFolder < Sketchup::Entity
   #   +0+ if the receiver and +other+ are equal.
   #   +nil+ if +other+ is not comparable with the receiver.
   #
-  # @version SketchUp 2020.2
+  # @version SketchUp 2021.0
   def <=>(other)
   end
 
@@ -165,7 +165,7 @@ class Sketchup::LayerFolder < Sketchup::Entity
   #   model = Sketchup.active_model
   #   layers = model.layers
   #   folder1 = layers.add_folder('Hello')
-  #   folder1.add_folder('World)
+  #   folder1.add_folder('World')
   #   folder1.each_folder { | folder | puts folder.name }
   #
   # @version SketchUp 2021.0
@@ -206,10 +206,10 @@ class Sketchup::LayerFolder < Sketchup::Entity
   # @example
   #   model = Sketchup.active_model
   #   layers = model.layers
-  #   folder1 = layers.add('Folder1')
+  #   folder1 = layers.add_folder('Folder1')
   #   parent_folder = folder1.folder # Returns: nil
   #
-  #   folder2 = folder1.add('Folder2')
+  #   folder2 = folder1.add_folder('Folder2')
   #   parent_folder = folder2.folder # Returns: folder1
   #
   # @return [Sketchup::LayerFolder, nil] +nil+ if the folder is a direct child to
@@ -229,8 +229,8 @@ class Sketchup::LayerFolder < Sketchup::Entity
   # @example
   #   model = Sketchup.active_model
   #   layers = model.layers
-  #   folder1 = layers.add('Folder1')
-  #   folder2 = layers.add('Folder2')
+  #   folder1 = layers.add_folder('Folder1')
+  #   folder2 = layers.add_folder('Folder2')
   #
   #   folder2.folder = folder1
   #

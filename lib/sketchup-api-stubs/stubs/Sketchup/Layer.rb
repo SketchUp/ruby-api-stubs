@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Layer class contains methods modifying and extracting information for a
@@ -34,8 +34,8 @@ class Sketchup::Layer < Sketchup::Entity
 
   # Instance Methods
 
-  # The {#<=>} method is used to compare two layers based on their names. You
-  # could use this for sorting if you're building a list of layer names.
+  # The {#<=>} method is used to compare two layers based on their names.
+  # This enables the Ruby +Array#sort+ method to sort SketchUp layers.
   #
   # @example
   #   model = Sketchup.active_model
@@ -120,11 +120,10 @@ class Sketchup::Layer < Sketchup::Entity
   # @example
   #   model = Sketchup.active_model
   #   layers = model.layers
-  #   folder1 = layers.add('Folder1')
-  #   parent_folder = folder1.folder # Returns: nil
-  #
-  #   folder2 = folder1.add('Folder2')
-  #   parent_folder = folder2.folder # Returns: folder1
+  #   folder1 = layers.add_folder('Folder1')
+  #   layer1 = layers.add('Layer1')
+  #   layer1.folder = folder1
+  #   parent_folder = layer1.folder # Returns: folder1
   #
   # @return [Sketchup::LayerFolder, nil] +nil+ if the folder is a direct child to
   #   the layer manager.

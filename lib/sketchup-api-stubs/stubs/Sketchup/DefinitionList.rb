@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2020 Trimble Inc.
+# Copyright:: Copyright 2022 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A DefinitionList object holds a list of all of the ComponentDefinition
@@ -120,7 +120,7 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #   number = definitions.count
   #
   # @note Since SketchUp 2014 the count method is inherited from Ruby's
-  #   +Enumable+ mix-in module. Prior to that the {#count} method is an alias
+  #   +Enumerable+ mix-in module. Prior to that the {#count} method is an alias
   #   for {#length}.
   #
   # @return [Integer]
@@ -151,6 +151,34 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #
   # @yield [Sketchup::ComponentDefinition] definition
   def each
+  end
+
+  # The {#import} method is used to import a (non-SketchUp) 3d model file as a definition.
+  #
+  # Importers using the C API +SketchUpModelImporterInterface+ interface are supported (those in the
+  # +Importers/+ directory).
+  #
+  # See the {file:pages/importer_options.md Importer Options} file for information
+  # on creating a valid hash for the various importers.
+  #
+  # For SketchUp models, instead use {#load}.
+  #
+  # @example
+  #   path = "C:/circle.dwg"
+  #   definition = Sketchup.active_model.definitions.import(path)
+  #
+  # @param [String] path
+  #
+  # @param [Hash] options
+  #
+  # @raise [IOError] if the file is missing.
+  #
+  # @raise [ArgumentError] if no suitable importer could be found.
+  #
+  # @return [Sketchup::ComponentDefinition]
+  #
+  # @version SketchUp 2021.1
+  def import(path, options = {})
   end
 
   # The {#length} method is used to retrieve number of component definitions in
@@ -218,20 +246,28 @@ class Sketchup::DefinitionList < Sketchup::Entity
   end
 
   # The {#load_from_url} method loads a component from a location specified by
-  # string url. This method throws an exception if an url string is not
-  # given, or an error occurs during retrieval from url and a
-  # load_handler was not given. Optional second parameter load_handler can be
-  # used to pass in a ruby object that responds to the following methods:
+  # string url.
   #
-  #   - cancelled?(a_boolean)
-  #   - onPercentChange(a_float)
-  #   - onSuccess()
-  #   - onFailure(message_string)
+  # This method throws an exception if an url string is not
+  # given, or an error occurs during retrieval from URL and a
+  # +load_handler+ was not given. Optional second parameter +load_handler+ can be
+  # used to pass in a Ruby object that responds to the following methods:
   #
-  # @example
+  # - +cancelled?+
+  # - +onPercentChange(percent)+
+  # - +onSuccess()+
+  # - +onFailure(message_string)+
+  #
+  # @bug Calling this method from an {UI::HtmlDialog}'s action callback on macOS will cause the
+  #   SketchUp application to become unresponsive or crash. To work around this, defer the call
+  #   from the action callback with a non-repeating zero-delay timer;
+  #   +UI.start_timer(0, false) { method_calling_load_from_url }+
+  #
+  # @example Download a component using a LoadHandler
   #   class LoadHandler
   #     attr_accessor :error
   #
+  #     # @param [Float] percent
   #     def onPercentChange(percent)
   #       Sketchup::set_status_text("loading: #{percent.round}%")
   #     end
@@ -247,6 +283,7 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #       Sketchup::set_status_text('')
   #     end
   #
+  #     # @param [String] error_message
   #     def onFailure(error_message)
   #       self.error = error_message
   #       Sketchup::set_status_text('')
@@ -254,13 +291,40 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #   end
   #
   #   # Replace this with a real URL...
-  #   url = 'http://www.sketchup.com/model.skp'
+  #   url = 'https://www.sketchup.com/model.skp'
   #   model = Sketchup.active_model
   #   load_handler = LoadHandler.new
   #   definition = model.definitions.load_from_url(url, load_handler)
   #
   #   if definition.nil?
   #     puts "Error: #{load_handler.error}"
+  #   end
+  #
+  # @example Workaround for macOS bug related to HtmlDialog action callbacks
+  #   module Example
+  #
+  #     def self.open_dialog
+  #       @dialog = UI::HtmlDialog.new
+  #       @dialog.add_action_callback("say") { |action_context, url|
+  #         self.load_component_deferred(url)
+  #       }
+  #       @dialog.set_file("path/to/file.html")
+  #       @dialog.show
+  #     end
+  #
+  #     def load_component_deferred
+  #       # The timer delay is enough to avoid .load_from_url from deadlocking.
+  #       UI.start_timer(0, false) do
+  #         self.load_component(url)
+  #       end
+  #     end
+  #
+  #     def self.load_component(url)
+  #       model = Sketchup.active_model
+  #       definition = model.definitions.load_from_url(url)
+  #       # ...
+  #     end
+  #
   #   end
   #
   # @overload load_from_url(url)
@@ -274,7 +338,7 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #     URL to load a .skp file from.
   #   @param [Object] load_handler
   #     Ruby object that has methods defined
-  #     as described in the load_from_url details.
+  #     as described in the +load_from_url+ details above.
   #
   # @return [Sketchup::ComponentDefinition]
   #
