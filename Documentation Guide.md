@@ -6,12 +6,6 @@ In 2016 they got migrated to use YARD as documentation engine, still using RDoc 
 
 The documentation is generated from our internal C++ source code. These stubs are generated automatically using a [custom YARD template](https://github.com/SketchUp/sketchup-yard-template).
 
-We accept improvements to the API documentations via Pull Requests to the https://github.com/SketchUp/ruby-api-stubs repository.
-
-Upon a Pull Request we will review the changes and maybe request some tweaks. Once we're ready to merge this we will pull your development branch and run a tool which will back-port the documentation changes to our C++ source.
-
-Then we'll regenerate the documentation and stubs - finally closing the Pull Request.
-
 ## Syntax Style
 
 This document will act as a guide for how we want the documentation to be formatted. We will expand upon it as we go along and questions arise. Feel free to contribute with suggestions.
