@@ -268,7 +268,7 @@ class Sketchup::Http::Request
   #   @request.start
   #   puts "response.status: #{@request.status}"
   #
-  # @return [int]
+  # @return [Integer]
   #
   # @version SketchUp 2017
   def status

@@ -4,6 +4,9 @@ debug/
 
 pkg/
 
+rbs/
+sig/
+
 Gemfile\.lock
 
 rubocop-changelog.txt

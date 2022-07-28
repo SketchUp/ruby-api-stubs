@@ -140,7 +140,7 @@ class Sketchup::EntitiesBuilder
   #
   # @raise [RuntimeError] If the builder is not valid.
   #
-  # @return [Array<Sketchup::Edge, nil>] In the array, for each pair in +points+ an edge is returned.
+  # @return [Array<Sketchup::Edge, NilClass>] In the array, for each pair in +points+ an edge is returned.
   #   If two point are so close they are considered identical then +nil+ is returned.
   #
   # @see Sketchup::Entities#add_edges

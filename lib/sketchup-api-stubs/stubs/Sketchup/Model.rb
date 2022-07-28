@@ -673,7 +673,7 @@ class Sketchup::Model
   #   ids. Ids must either be entityID Integers or GUID
   #   Strings.
   #
-  # @return [Array<Sketchup::Entity, nil>] Returns an array with Entity  objects for each id
+  # @return [Array<Sketchup::Entity, NilClass>] Returns an array with Entity  objects for each id
   #   found and nil otherwise. Single Entity or nil when
   #   called with a single id.
   #

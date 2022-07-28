@@ -176,7 +176,7 @@ class UI::Notification
   # @param [String] title
   #   Sets the title of the button.
   #
-  # @param [Block] block
+  # @param [Proc] block
   #   Sets the action callback, this will be called when
   #   the user clicks on the dismiss button.
   #
@@ -222,7 +222,7 @@ class UI::Notification
   # @param [String] title
   #   Sets the title of the button.
   #
-  # @param [Block] block
+  # @param [Proc] block
   #   Sets the action callback, this will be called when
   #   the user clicks on the dismiss button.
   #

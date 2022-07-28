@@ -295,7 +295,7 @@ class Sketchup::InputPoint
   # @param y
   #   A y value.
   #
-  # @param [optional] inputpoint
+  # @param inputpoint
   #   A second input point used as a reference
   #   for the pick.
   #
@@ -303,7 +303,7 @@ class Sketchup::InputPoint
   #   is different than it was before.
   #
   # @version SketchUp 6.0
-  def pick(view, x, y, inputpoint)
+  def pick(view, x, y, inputpoint = nil)
   end
 
   # The position method is used to get the 3D point from the input point.

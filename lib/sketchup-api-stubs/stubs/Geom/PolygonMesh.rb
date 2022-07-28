@@ -362,7 +362,7 @@ class Geom::PolygonMesh
   # @example
   #   polygons = polygonmesh.polygons
   #
-  # @return [Array<Array<Integer>>, Array<nil>]
+  # @return [Array<Array<Integer>>]
   #
   # @version SketchUp 6.0
   def polygons

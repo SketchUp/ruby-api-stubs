@@ -209,30 +209,35 @@ class Sketchup::Tool
   #    end
   #   end
   #
-  # @param menu
-  #   A Menu object.
+  # @overload getMenu(menu)
+  #   @param menu
+  #     A Menu object.
   #
-  # @param [optional] flags
-  #   A bit mask that tells the state of the
-  #   modifier keys and other mouse buttons at the time.
-  #   Added in SU2015.
-  #
-  # @param [optional] x
-  #   The X coordinate on the screen where the
-  #   event occurred. Added in SU2015.
-  #
-  # @param [optional] y
-  #   The Y coordinate on the screen where the
-  #   event occurred. Added in SU2015.
-  #
-  # @param [optional] view
-  #   A View object where the method was invoked.
-  #   Added in SU2015.
+  # @overload getMenu(menu, flags, x, y, view)
+  #   @param menu
+  #     A Menu object.
+  #  
+  #   @param flags
+  #     A bit mask that tells the state of the
+  #     modifier keys and other mouse buttons at the time.
+  #     Added in SU2015.
+  #  
+  #   @param x
+  #     The X coordinate on the screen where the
+  #     event occurred. Added in SU2015.
+  #  
+  #   @param y
+  #     The Y coordinate on the screen where the
+  #     event occurred. Added in SU2015.
+  #  
+  #   @param view
+  #     A View object where the method was invoked.
+  #     Added in SU2015.
   #
   # @return nil
   #
   # @version SketchUp 6.0
-  def getMenu(menu, flags, x, y, view)
+  def getMenu(*args)
   end
 
   # The {#onCancel} method is called by SketchUp to cancel the current operation

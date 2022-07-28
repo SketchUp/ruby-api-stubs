@@ -147,16 +147,16 @@ class Sketchup::Pages < Sketchup::Entity
   # @param image_name
   #   String image name.
   #
-  # @param [optional] camera
+  # @param camera
   #   Camera object.
   #
-  # @param [optional] page_name
+  # @param page_name
   #   String page name.
   #
   # @return page - the new photomatch page.
   #
   # @version SketchUp 7.0
-  def add_matchphoto_page(image_name, camera, page_name)
+  def add_matchphoto_page(image_name, camera = nil, page_name = nil)
   end
 
   # The add_observer method is used to add an observer to the Pages object.

@@ -93,7 +93,7 @@ class Sketchup::PickHelper
   #   PICK_INSIDE to select entities completely contained or
   #   PICK_CROSSING to select entities partially contained.
   #
-  # @param [optional] transformation
+  # @param transformation
   #   Transformation that will be applied to the
   #   volume defined by the BoundingBox that allows for a
   #   rotation.

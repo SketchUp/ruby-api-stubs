@@ -116,7 +116,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #     UI.messagebox "Failure"
   #   end
   #
-  # @return [Array<Sketchup:Entity>] An array of entity objects if successful, false if
+  # @return [Array<Sketchup::Entity>] An array of entity objects if successful, false if
   #   unsuccessful
   #
   # @version SketchUp 6.0
