@@ -5,7 +5,6 @@ debug/
 pkg/
 
 rbs/
-sig/
 
 Gemfile\.lock
 
