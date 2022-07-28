@@ -5334,7 +5334,7 @@ end
 #   entities.transform_entities(transformation, construction_point)
 # 
 # @version SketchUp 6.0
-class Array
+class Array[unchecked out Elem] < Object
   # sord omit - no YARD type given for "vector", using untyped
   # sord omit - no YARD return type given, using untyped
   # The {#cross} method is used to compute the cross product between two vectors.
