@@ -810,7 +810,7 @@ module UI
   # 
   # @version SketchUp 6.0
   class Toolbar
-    include Enumerable
+    include Enumerable[UI::Command]
 
     # The new method creates a new Toolbar object.
     # 
@@ -867,7 +867,7 @@ module UI
     #   puts item
     # }
     # ```
-    def each: () -> void
+    def each: () ?{ (UI::Command) -> void } -> void
 
     # The get_last_state method is used to determine if the toolbar was hidden or
     # visible in the previous session of SketchUp.
@@ -7011,7 +7011,7 @@ module Layout
   # 
   # @version LayOut 2018
   class Pages
-    include Enumerable
+    include Enumerable[Page]
 
     # The {#[]} method returns a value from the array of {Layout::Page}s.
     # 
@@ -8429,7 +8429,7 @@ module Layout
   # 
   # @version LayOut 2018
   class Table < Layout::Entity
-    include Enumerable
+    include Enumerable[TableCell]
 
     # The {#[]} method returns the {Layout::TableCell} at the specified row and
     # column.
@@ -8863,7 +8863,7 @@ module Layout
   # 
   # @version LayOut 2018
   class Layers
-    include Enumerable
+    include Enumerable[Layout::Layer]
 
     # The {#[]} method returns a value from the array of {Layout::Layer}s.
     # 
@@ -9407,7 +9407,7 @@ module Layout
   # 
   # @version LayOut 2018
   class Entities
-    include Enumerable
+    include Enumerable[Layout::Entity]
 
     # The {#[]} method returns the {Layout::Entity} at the given index. This method
     # is not valid for use when the {Layout::Entities} object came from a
@@ -12461,7 +12461,7 @@ module Layout
   # 
   # @version LayOut 2018
   class AutoTextDefinitions
-    include Enumerable
+    include Enumerable[AutoTextDefinition]
 
     # sord omit - no YARD type given for "index", using untyped
     # sord omit - no YARD return type given, using untyped
@@ -21630,7 +21630,7 @@ module Sketchup
   # 
   # @version SketchUp 6.0
   class Pages < Sketchup::Entity
-    include Enumerable
+    include Enumerable[Sketchup::Page]
     ImageEmbedded: untyped
     ImageEmbeddedAndLinked: untyped
     ImageLinked: untyped
@@ -21781,7 +21781,7 @@ module Sketchup
     # status = pages.add "Page 2"
     # pages.each {|page| puts page}
     # ```
-    def each: () -> untyped
+    def each: () ?{ (Page) -> void } -> untyped
 
     # The {#erase} method is used to remove a page from the collection.
     # 
@@ -22949,7 +22949,7 @@ module Sketchup
   # 
   # @version SketchUp 6.0
   class Layers < Sketchup::Entity
-    include Enumerable
+    include Enumerable[Sketchup::Layer]
 
     # The {#[]} method is used to retrieve a layer by index or name.
     # 
@@ -23238,7 +23238,7 @@ module Sketchup
   # 
   # @version SketchUp 6.0
   class Styles < Sketchup::Entity
-    include Enumerable
+    include Enumerable[Style]
 
     # sord omit - no YARD type given for "arg", using untyped
     # sord omit - no YARD return type given, using untyped
@@ -24371,7 +24371,7 @@ module Sketchup
   # 
   # @version SketchUp 6.0
   class Entities
-    include Enumerable
+    include Enumerable[Sketchup::Entity]
 
     # The {#[]} method is used to retrieve an entity by its index in an array of
     # entities. The index is a number between +0+ and entities.length - 1. In
@@ -26444,7 +26444,7 @@ module Sketchup
   # 
   # @version SketchUp 6.0
   class Materials < Sketchup::Entity
-    include Enumerable
+    include Enumerable[Sketchup::Material]
 
     # sord omit - no YARD type given for "arg", using untyped
     # sord omit - no YARD return type given, using untyped
@@ -26548,7 +26548,7 @@ module Sketchup
     # {#each}. This would change the size of the collection and cause elements to
     # be skipped as the indices change. Instead copy the current collection to an
     # array using +to_a+ and then use +each+ on the array, when removing content.
-    def each: () -> void
+    def each: () ?{ (Material) -> void } -> void
 
     # The number of materials in the collection.
     # 
@@ -26685,7 +26685,7 @@ module Sketchup
   # 
   # @version SketchUp 6.0
   class Selection
-    include Enumerable
+    include Enumerable[Sketchup::Entity]
 
     # The {#[]} method is used to retrieve an {Sketchup::Entity} from the selection
     # by index. Index 0 is the first entity in the selection.
@@ -26811,7 +26811,7 @@ module Sketchup
     # {#each}. This would change the size of the collection and cause elemnts to
     # be skipped as the indices change. Instead copy the current collection to an
     # array using +to_a+ and then use +each+ on the array, when removing content.
-    def each: () -> void
+    def each: () ?{ (Sketchup::Entity) -> void } -> void
 
     # The empty? method is used to determine if there are entities in the
     # selection.
@@ -27376,7 +27376,7 @@ module Sketchup
   # 
   # @version SketchUp 2019
   class LineStyles < Sketchup::Entity
-    include Enumerable
+    include Enumerable[LineStyle]
 
     # sord omit - no YARD type given for "arg", using untyped
     # The {#[]} method lets you retrieve a line style by name or index.
@@ -27412,7 +27412,7 @@ module Sketchup
     # line_styles = Sketchup.active_model.line_styles
     # line_styles.each{ |line_style| p line_style.name }
     # ```
-    def each: () -> void
+    def each: () ?{ (LineStyle) -> void } -> void
 
     # The {#names} method return the support line styles as strings.
     # 
@@ -27864,7 +27864,7 @@ module Sketchup
   # 
   # @version SketchUp 6.0
   class ShadowInfo < Sketchup::Entity
-    include Enumerable
+    include Enumerable[untyped]
 
     # The each_key method iterates through all of the shadow information keys.
     # 
@@ -28436,7 +28436,7 @@ module Sketchup
   # 
   # @version SketchUp 2017
   class InstancePath
-    include Enumerable
+    include Enumerable[Sketchup::Entity]
 
     # sord omit - no YARD type given for "other", using untyped
     # _@return_ — `true` if the instances paths represent the same set of
@@ -28481,7 +28481,7 @@ module Sketchup
     #   # do something
     # }
     # ```
-    def each: () -> void
+    def each: () ?{ (Sketchup::Entity) -> void } -> void
 
     # ```ruby
     # model = Sketchup.active_model
@@ -29443,7 +29443,7 @@ module Sketchup
   # 
   # @version SketchUp 6.0
   class DefinitionList < Sketchup::Entity
-    include Enumerable
+    include Enumerable[Sketchup::ComponentDefinition]
 
     # sord omit - no YARD type given for "arg", using untyped
     # sord omit - no YARD return type given, using untyped
@@ -29534,7 +29534,7 @@ module Sketchup
     # {#each}. This would change the size of the collection and cause elements to
     # be skipped as the indices change. Instead copy the current collection to an
     # array using +to_a+ and then use +each+ on the array, when removing content.
-    def each: () -> void
+    def each: () ?{ (ComponentDefinition) -> void } -> void
 
     # The {#import} method is used to import a (non-SketchUp) 3d model file as a definition.
     # 
@@ -30317,7 +30317,7 @@ module Sketchup
   # 
   # @version SketchUp 6.0
   class OptionsManager
-    include Enumerable
+    include Enumerable[untyped]
 
     # sord omit - no YARD type given for "arg", using untyped
     # sord omit - no YARD return type given, using untyped
@@ -30366,7 +30366,7 @@ module Sketchup
     # manager = model.options
     # manager.each { |provider| puts provider.name }
     # ```
-    def each: () -> untyped
+    def each: () ?{ (OptionsProvider) -> void } -> untyped
 
     # The keys method is used to get a list of keys in the OptionsManager.
     # 
@@ -30411,7 +30411,7 @@ module Sketchup
   # 
   # @version SketchUp 2015
   class Classifications
-    include Enumerable
+    include Enumerable[untyped]
 
     # The [] method is used to get a classification schema by name or index.
     # 
@@ -30438,7 +30438,7 @@ module Sketchup
     #   puts schema.name
     # }
     # ```
-    def each: () -> untyped
+    def each: ()  ?{ (ClassificationSchema) -> void } -> untyped
 
     # The keys method is used to get a list of keys in the Classifications class,
     # which are the same as the names of the schemas.
@@ -31028,7 +31028,7 @@ module Sketchup
   # 
   # @version SketchUp 6.0
   class OptionsProvider
-    include Enumerable
+    include Enumerable[untyped]
 
     # sord omit - no YARD type given for "arg", using untyped
     # sord omit - no YARD return type given, using untyped
@@ -31700,7 +31700,7 @@ module Sketchup
   # 
   # @version SketchUp 6.0
   class RenderingOptions < Sketchup::Entity
-    include Enumerable
+    include Enumerable[untyped]
     ROPAssign: untyped
     ROPDrawHidden: untyped
     ROPDrawHiddenGeometry: untyped
@@ -32478,7 +32478,7 @@ module Sketchup
   # 
   # @version SketchUp 8.0 M2
   class ExtensionsManager
-    include Enumerable
+    include Enumerable[SketchupExtension]
 
     # The [] method is used to get an extension by name, index or ID.
     # 
@@ -32524,7 +32524,7 @@ module Sketchup
     # # Retrieves each extension
     # manager.each { |extension| puts extension.name }
     # ```
-    def each: () -> untyped
+    def each: () ?{ (SketchupExtension) -> void } -> untyped
 
     # The keys method is used to get a list of keys in the ExtensionsManager,
     # which are the same as the names of the extensions.
@@ -32876,7 +32876,7 @@ module Sketchup
   # 
   # @version SketchUp 6.0
   class AttributeDictionary < Sketchup::Entity
-    include Enumerable
+    include Enumerable[untyped]
 
     # The [] method is used to retrieve the attribute with a given key.
     # 
@@ -32918,7 +32918,7 @@ module Sketchup
     #   UI.messagebox value
     # end
     # ```
-    def []=: (String key, (bool | Fixnum | Float | Length | String | Time | ::Array[untyped] | Geom::Point3d | Geom::Vector3d)? value) -> Object?
+    def []=: (String key, (bool | Integer | Float | Length | String | Time | ::Array[untyped] | Geom::Point3d | Geom::Vector3d)? value) -> Object?
 
     # The count method is inherited from the Enumerable mix-in module.
     # 
@@ -33825,7 +33825,7 @@ module Sketchup
   # 
   # @version SketchUp 6.0
   class AttributeDictionaries < Sketchup::Entity
-    include Enumerable
+    include Enumerable[untyped]
 
     # Get an AttributeDictionary by name. Returns nil if there is none with the
     # given name.
@@ -33895,7 +33895,7 @@ module Sketchup
     # # Iterates through all dictionaries and prints to screen.
     # dictionaries.each { |dictionary| puts dictionary.name }
     # ```
-    def each: () -> untyped
+    def each: () ?{ (Sketchup::AttributeDictionary) -> void } -> untyped
 
     # The {#length} method returns the number of attribute dictionary objects in
     # the collection.
