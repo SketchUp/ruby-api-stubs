@@ -85,12 +85,12 @@ class UI::HtmlDialog
   #
   # @version SketchUp 2017
   #
-  # @yield [action_context, ...]
+  # @yield [action_context, *args]
   #
   # @yieldparam [Object] action_context
   #   action_context  Currently unused.
   #
-  # @yieldparam [Object] ...
+  # @yieldparam [Object] args
   #   The parameters sent from JavaScript.
   def add_action_callback(callback_name)
   end

@@ -360,7 +360,7 @@ class Sketchup::View
   #   status = view.drawing_color="red"
   #   status = view.draw_lines point4, point5
   #
-  # @overload draw_lines(points, ...)
+  # @overload draw_lines(points)
   #
   #   @param [Array<Geom::Point3d>] points
   #     An even number of Point3d objects.
@@ -387,7 +387,7 @@ class Sketchup::View
   #   status = view.drawing_color="red"
   #   status = view.draw_lines point4, point5
   #
-  # @overload draw_lines(points, ...)
+  # @overload draw_lines(points)
   #
   #   @param [Array<Geom::Point3d>] points
   #     An even number of Point3d objects.
@@ -440,7 +440,7 @@ class Sketchup::View
   #   point15 = Geom::Point3d.new 30,30,30
   #   status = view.draw_polyline point12, point13, point14, point15
   #
-  # @overload draw_polyline(points, ...)
+  # @overload draw_polyline(points)
   #
   #   @param [Array<Geom::Point3d>] points An even number of Point3d objects.
   #   @return [Sketchup::View]

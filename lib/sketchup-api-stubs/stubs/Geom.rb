@@ -68,7 +68,7 @@ module Geom
   #   point3 = Geom::Point3d.new(25, 25, 25)
   #   plane = Geom.fit_plane_to_points(point1, point2, point3)
   #
-  # @overload fit_plane_to_points(point1, point2, point3, ...)
+  # @overload fit_plane_to_points(point1, point2, point3)
   #
   #   @param [Geom::Point3d] point1
   #   @param [Geom::Point3d] point2

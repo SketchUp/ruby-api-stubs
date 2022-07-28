@@ -75,7 +75,7 @@ class Geom::PolygonMesh
   # @note In SketchUp 2021.1 this method was improved to be faster.
   #   See {#initialize} for details.
   #
-  # @overload add_polygon(index, index, index, ...)
+  # @overload add_polygon(index, index, index)
   #
   #   Adds a polygon from a list of the mesh's vertex indices.
   #   @example
@@ -103,7 +103,7 @@ class Geom::PolygonMesh
   #   @param [Array<Integer>] index_array
   #     An {Array} of point indices.
   #
-  # @overload add_polygon(point3d, point3d, point3d, ...)
+  # @overload add_polygon(point3d, point3d, point3d)
   #
   #   Adds a polygon from a list of Point3d objects.
   #   @example
