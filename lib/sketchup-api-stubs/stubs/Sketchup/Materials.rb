@@ -166,8 +166,7 @@ class Sketchup::Materials < Sketchup::Entity
   #
   # @version SketchUp 6.0
   #
-  # @yield [Sketchup::Material] A variable that will hold each Material object as they
-  #   are found.
+  # @yieldparam [Sketchup::Material] material
   def each
   end
 

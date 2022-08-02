@@ -71,6 +71,8 @@ class Sketchup::LineStyles < Sketchup::Entity
   # @return [nil]
   #
   # @version SketchUp 2019
+  #
+  # @yieldparam [Sketchup::LineStyle] linestyle
   def each
   end
 

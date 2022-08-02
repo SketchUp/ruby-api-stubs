@@ -69,11 +69,11 @@ class Sketchup::ExtensionsManager
   #   # Retrieves each extension
   #   manager.each { |extension| puts extension.name }
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 8.0 M2
   #
-  # @yield [SketchupExtension] extension
+  # @yieldparam [SketchupExtension] extension
   def each
   end
 

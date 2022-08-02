@@ -192,20 +192,20 @@ class Sketchup::Pages < Sketchup::Entity
   def count
   end
 
-  # The each method is used to iterate through pages.
+  # The {#each} method is used to iterate through pages in the model.
   #
   # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
-  #   status = pages.add "Page 1"
-  #   status = pages.add "Page 2"
-  #   pages.each {|page| puts page}
+  #   pages.add("Page 1")
+  #   pages.add("Page 2")
+  #   pages.each { |page| puts page.name }
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   #
-  # @yield [page] Variables that will hold each page as it is found.
+  # @yieldparam [Sketchup::Page] page
   def each
   end
 

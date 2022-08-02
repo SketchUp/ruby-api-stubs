@@ -149,7 +149,7 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #
   # @version SketchUp 6.0
   #
-  # @yield [Sketchup::ComponentDefinition] definition
+  # @yieldparam [Sketchup::ComponentDefinition] definition
   def each
   end
 

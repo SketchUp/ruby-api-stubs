@@ -43,7 +43,7 @@ class Sketchup::Classifications
   #
   # @version SketchUp 2015
   #
-  # @yield [Sketchup::ClassificationSchema] schema
+  # @yieldparam [Sketchup::ClassificationSchema] schema
   def each
   end
 

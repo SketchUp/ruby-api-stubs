@@ -74,7 +74,7 @@ class Sketchup::InstancePath
   #
   # @version SketchUp 2017
   #
-  # @yield [Sketchup::Entity] entity
+  # @yieldparam [Sketchup::Entity] entity
   def each
   end
 
