@@ -162,7 +162,7 @@ class Sketchup::RenderingOptions < Sketchup::Entity
 
   # Class Methods
 
-  # The each_key method iterates through all of the rendering options keys.
+  # The {#each_key} method iterates through all of the rendering options keys.
   #
   # @example
   #   Sketchup.active_model.rendering_options.each_key { |key|
@@ -173,7 +173,7 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   #
   # @version SketchUp 6.0
   #
-  # @yield [key] Variable to hold each key as they are found.
+  # @yieldparam [String] key
   def self.each_key
   end
 
@@ -263,17 +263,13 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   #
   # @version SketchUp 6.0
   #
-  # @yield [key, value]
-  #
   # @yieldparam [String] key
-  #   The key of each pair found.
   #
   # @yieldparam [Object] value
-  #   The value of each pair found.
   def each
   end
 
-  # The each_key method iterates through all of the rendering options keys.
+  # The {#each_key} method iterates through all of the rendering options keys.
   #
   # @example
   #   Sketchup.active_model.rendering_options.each_key { |key|
@@ -284,7 +280,7 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   #
   # @version SketchUp 6.0
   #
-  # @yield [key] Variable to hold each key as they are found.
+  # @yieldparam [String] key
   def each_key
   end
 

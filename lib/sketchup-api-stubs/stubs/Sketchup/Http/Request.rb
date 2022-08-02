@@ -8,7 +8,7 @@ class Sketchup::Http::Request
 
   # Instance Methods
 
-  # Gets the http body that is going to be used when sending the request.
+  # Gets the HTTP body that is going to be used when sending the request.
   #
   # @example
   #   @request = Sketchup::Http::Request.new("http://localhost:8080")
@@ -23,7 +23,7 @@ class Sketchup::Http::Request
   def body
   end
 
-  # Sets the http body that is going to be used when sending the request.
+  # Sets the HTTP body that is going to be used when sending the request.
   #
   # @example
   #   @request = Sketchup::Http::Request.new("http://localhost:8080")
@@ -58,7 +58,7 @@ class Sketchup::Http::Request
   def cancel
   end
 
-  # Returns the http headers that are going to be used when sending the request.
+  # Returns the HTTP headers that are going to be used when sending the request.
   #
   # @example
   #   @request = Sketchup::Http::Request.new("http://localhost:8080")
@@ -74,7 +74,7 @@ class Sketchup::Http::Request
   def headers
   end
 
-  # Sets the http headers that are going to be used when sending the request.
+  # Sets the HTTP headers that are going to be used when sending the request.
   #
   # @example
   #   @request = Sketchup::Http::Request.new("http://localhost:8080")
@@ -93,12 +93,10 @@ class Sketchup::Http::Request
   def headers=(headers)
   end
 
-  # The new method is used to create a new Sketchup::Http::Request.
-  #
   # The default port is 80, to use a different port define it in the URL when
   # creating a new {Sketchup::Http::Request}.
   #
-  # The +method+ parameter accepts any custom http method or one of the
+  # The +method+ parameter accepts any custom HTTP method or one of the
   # following:
   # * +Sketchup::Http::GET+
   # * +Sketchup::Http::POST+
@@ -119,19 +117,16 @@ class Sketchup::Http::Request
   #   takes longer time.
   #
   # @param [String] url
-  #   The targetted URL.
   #
   # @param [String] method
-  #   Optionally, the request method to use, the
-  #   default is Sketchup::Http::GET
   #
-  # @return [Request]
+  # @return [Sketchup::Http::Request]
   #
   # @version SketchUp 2017
-  def initialize(url, method)
+  def initialize(url, method = Sketchup::Http::GET)
   end
 
-  # Returns the http method that is going to be used when sending the request.
+  # Returns the HTTP method that is going to be used when sending the request.
   #
   # @example
   #   @request = Sketchup::Http::Request.new("http://localhost:8080")
@@ -146,8 +141,8 @@ class Sketchup::Http::Request
   def method
   end
 
-  # Sets the http method that is going to be used when sending the request.
-  # The value can be any custom http method or one of the following:
+  # Sets the HTTP method that is going to be used when sending the request.
+  # The value can be any custom HTTP method or one of the following:
   # * +Sketchup::Http::GET+
   # * +Sketchup::Http::POST+
   # * +Sketchup::Http::PUT+
@@ -164,7 +159,7 @@ class Sketchup::Http::Request
   #   end
   #
   # @param [String] method
-  #   A string containing the http method name.
+  #   A string containing the HTTP method name.
   #
   # @return [Boolean]
   #
@@ -232,7 +227,7 @@ class Sketchup::Http::Request
   def set_upload_progress_callback
   end
 
-  # Starts the request and optionally add a callback block.
+  # Starts the request with optionally a response callback block.
   #
   # @example
   #   @request = Sketchup::Http::Request.new("http://localhost:8080")
@@ -245,14 +240,9 @@ class Sketchup::Http::Request
   #
   # @version SketchUp 2017
   #
-  # @yield A block that is invoked when the request has finished.
+  # @yieldparam [Sketchup::Http::Request] request
   #
-  # @yieldparam [Request] request
-  #   The request object.
-  #
-  # @yieldparam [Response] response
-  #   The response object, use this to read the
-  #   server response.
+  # @yieldparam [Sketchup::Http::Response] response
   def start
   end
 
@@ -268,7 +258,7 @@ class Sketchup::Http::Request
   #   @request.start
   #   puts "response.status: #{@request.status}"
   #
-  # @return [int]
+  # @return [Integer]
   #
   # @version SketchUp 2017
   def status

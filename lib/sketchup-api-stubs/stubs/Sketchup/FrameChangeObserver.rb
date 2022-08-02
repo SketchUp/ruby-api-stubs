@@ -95,8 +95,6 @@ class Sketchup::FrameChangeObserver
   # @param [Float] percent_done
   #   The percentage of transition between the two scene pages.
   #
-  # @return [void] Value can be anything, but is ignored by SketchUp.
-  #
   # @version SketchUp 6.0
   def frameChange(from_scene, to_scene, percent_done)
   end

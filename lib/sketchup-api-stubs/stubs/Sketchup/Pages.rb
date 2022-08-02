@@ -136,27 +136,25 @@ class Sketchup::Pages < Sketchup::Entity
   def add(name = nil, flags = PAGE_USE_ALL, index = self.size)
   end
 
-  # The add_matchphoto_page method is used to add a photomatch page to the
+  # The {#add_matchphoto_page} method is used to add a photomatch page to the
   # model. This is an advanced feature that was added to support internal
   # SketchUp work, so it is unlikely to be useful to you.
   #
   # @example
   #   pages = Sketchup.active_model.pages
-  #   page = pages.add_matchphoto_page "Test"
+  #   page = pages.add_matchphoto_page("/path/to/image.png")
   #
-  # @param image_name
-  #   String image name.
+  # @param [String] image_filename
+  #   The image file to use as the background.
   #
-  # @param [optional] camera
-  #   Camera object.
+  # @param [Sketchup::Camera] camera
   #
-  # @param [optional] page_name
-  #   String page name.
+  # @param [String] page_name
   #
-  # @return page - the new photomatch page.
+  # @return [Sketchup::Page]
   #
   # @version SketchUp 7.0
-  def add_matchphoto_page(image_name, camera, page_name)
+  def add_matchphoto_page(image_filename, camera = nil, page_name = nil)
   end
 
   # The add_observer method is used to add an observer to the Pages object.

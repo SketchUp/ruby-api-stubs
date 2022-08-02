@@ -53,7 +53,7 @@ class Sketchup::Http::Response
   #     puts "http status code: #{response.status_code}"
   #   end
   #
-  # @return [int]
+  # @return [Integer]
   #
   # @version SketchUp 2017
   def status_code

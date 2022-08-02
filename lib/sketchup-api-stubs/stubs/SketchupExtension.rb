@@ -204,7 +204,7 @@ class SketchupExtension
   #   The relative path to the script that loads your
   #   plugin.
   #
-  # @return [Sketchup::Extension] the new Extension object
+  # @return [SketchupExtension]
   #
   # @version SketchUp 6.0
   def initialize(title, path)

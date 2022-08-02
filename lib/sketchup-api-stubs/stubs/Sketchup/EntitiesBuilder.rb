@@ -24,8 +24,6 @@
 #
 # rdoc-image:../images/entities-builder-grid-example.png
 #
-# @api EntitiesBuilder
-#
 # @example Creating a triangulated grid
 #   model = Sketchup.active_model
 #   model.start_operation('Create Grid', true)
@@ -82,8 +80,6 @@ class Sketchup::EntitiesBuilder
 
   # Adds a {Sketchup::Edge} to the {#entities} collection.
   #
-  # @api EntitiesBuilder
-  #
   # @example
   #   model = Sketchup.active_model
   #   model.entities.build { |builder|
@@ -117,8 +113,6 @@ class Sketchup::EntitiesBuilder
 
   # Adds a continuous set of {Sketchup::Edge}'s to the {#entities} collection.
   #
-  # @api EntitiesBuilder
-  #
   # @example
   #   model = Sketchup.active_model
   #   model.entities.build { |builder|
@@ -150,8 +144,6 @@ class Sketchup::EntitiesBuilder
   end
 
   # Adds a {Sketchup::Face} to the {#entities} collection.
-  #
-  # @api EntitiesBuilder
   #
   # @example Adding a simple face
   #   model = Sketchup.active_model
@@ -210,8 +202,6 @@ class Sketchup::EntitiesBuilder
   # The {Sketchup::Entities} collection the {Sketchup::EntitiesBuilder} will add
   # the geometry to.
   #
-  # @api EntitiesBuilder
-  #
   # @example
   #   model = Sketchup.active_model
   #   model.entities.build { |builder|
@@ -234,7 +224,8 @@ class Sketchup::EntitiesBuilder
   # When this return +false+, calling any other method on the builder will raise
   # an error.
   #
-  # @api EntitiesBuilder
+  # @bug Prior to SketchUp 2022.1 this returned +0+ for success instead of +true+.
+  #   In Ruby +0+ evaluates as +true+ so conditional logic still worked.
   #
   # @example
   #   model = Sketchup.active_model
@@ -252,8 +243,6 @@ class Sketchup::EntitiesBuilder
   end
 
   # Finds an existing {Sketchup::Vertex} for the given position, otherwise returns +nil+.
-  #
-  # @api EntitiesBuilder
   #
   # @example
   #   model = Sketchup.active_model

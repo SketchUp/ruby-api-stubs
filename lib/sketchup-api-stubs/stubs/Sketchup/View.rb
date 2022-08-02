@@ -31,24 +31,16 @@ class Sketchup::View
   def add_observer(observer)
   end
 
-  # The animation= method is used to set an animation that is displayed for a
-  # view. See Animation for details on how to create an animation object.
+  # The {#animation=} method is used to set an animation that is displayed for a
+  # view. See {Sketchup::Animation} for details on how to create an animation object.
   #
   # @example
   #   animation = ViewSpinner.new
   #   model = Sketchup.active_model
   #   view = model.active_view
-  #   anim = view.animation=animation
-  #   if (anim)
-  #     UI.messagebox anim
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   anim = view.animation = animation
   #
   # @param [#nextFrame] animation
-  #   An Animation object.
-  #
-  # @return [#nextFrame] the newly set Animation object
   #
   # @version SketchUp 6.0
   def animation=(animation)
@@ -787,20 +779,22 @@ class Sketchup::View
   #   end
   #   Sketchup.active_model.select_tool(Example::MyTool.new)
   #
-  # @note To conserve resources on the user's machine, textures can be loaded
-  #   only when there is a Ruby tool on the tool stack. Make sure to release the
-  #   texture when it's no longer needed. Any textures not already released
-  #   when the last Ruby tool on the tool stack is removed will be automatically
-  #   released by SketchUp.
-  #
   # @note Avoid loading and releasing textures within the {Sketchup::Tool#draw}
   #   event as that is not efficient.
+  #
+  # @note SketchUp 2020.0-2022.0: To conserve resources on the user's machine,
+  #   textures can be loaded only when there is a Ruby tool on the tool stack.
+  #   Make sure to release the texture when it's no longer needed. Any textures
+  #   not already released when the last Ruby tool on the tool stack is removed
+  #   will be automatically released by SketchUp. As of SketchUp 2022.1 this
+  #   automatic cleanup was removed to allow Overlays to draw textures.
   #
   # @param [Sketchup::ImageRep] image_rep
   #
   # @raise [ArgumentError] if the provided {Sketchup::ImageRep} is not valid.
   #
   # @raise [RuntimeError] if a Ruby tool was not on the tool stack.
+  #   (Applies to SketchUp 2020.0-2022.0).
   #
   # @return [Integer] A resource ID referring to the image loaded.
   #

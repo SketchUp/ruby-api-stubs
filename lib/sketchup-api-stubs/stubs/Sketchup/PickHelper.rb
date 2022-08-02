@@ -69,11 +69,9 @@ class Sketchup::PickHelper
   def best_picked
   end
 
-  # Used to pick a set of entities from a model from a BoundingBox. The pick
+  # Used to pick a set of entities from a model from a {Geom::BoundingBox}. The pick
   # criteria can be for completely-contained or partially-contained entities,
   # similar to how the Selection tool works.
-  #
-  # transformation) if num_picked > 0 Sketchup.active_model.selection.add(ph.all_picked) end
   #
   # @example
   #   boundingbox = Geom::BoundingBox.new
@@ -85,20 +83,23 @@ class Sketchup::PickHelper
   #   transformation = Geom::Transformation.new(ORIGIN, Z_AXIS, angle)
   #
   #   num_picked = ph.boundingbox_pick(boundingbox, Sketchup::PickHelper::PICK_CROSSING,
+  #     transformation)
+  #   if num_picked > 0
+  #     Sketchup.active_model.selection.add(ph.all_picked)
+  #   end
   #
-  # @param bounding_box
-  #   BoundingBox object defining the volume to use for picking
+  # @param [Geom::BoundingBox] bounding_box
+  #   Bounding box defining the volume to use for picking.
   #
-  # @param pick_type
-  #   PICK_INSIDE to select entities completely contained or
-  #   PICK_CROSSING to select entities partially contained.
+  # @param [Integer] pick_type
+  #   {PICK_INSIDE} to select entities completely contained or
+  #   {PICK_CROSSING} to select entities partially contained.
   #
-  # @param [optional] transformation
-  #   Transformation that will be applied to the
-  #   volume defined by the BoundingBox that allows for a
-  #   rotation.
+  # @param [Geom::Transformation] transformation
+  #   Transformation that will be applied to the volume defined by the
+  #   +bounding_box+ that allows for a rotation.
   #
-  # @return The number of Entity objects picked
+  # @return [Integer] The number of entities picked
   #
   # @version SketchUp 2016
   def boundingbox_pick(bounding_box, pick_type, transformation = IDENTITY)
@@ -208,7 +209,7 @@ class Sketchup::PickHelper
   # @param [Integer] aperture
   #   aperture in pixels.
   #
-  # @return [PickHelper] self
+  # @return [Sketchup::PickHelper]
   #
   # @version SketchUp 6.0
   def init(x, y, aperture = 0)

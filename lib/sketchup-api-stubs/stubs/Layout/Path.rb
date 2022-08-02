@@ -175,8 +175,8 @@ class Layout::Path < Layout::Entity
   #
   # @overload initialize(start_point, end_point)
   #
-  #   @param [Geom::Point2D] start_point
-  #   @param [Geom::Point2D] end_point
+  #   @param [Geom::Point2d] start_point
+  #   @param [Geom::Point2d] end_point
   #   @return [Layout::Path] a straight path
   #
   #   @raise [ArgumentError] if the length between start point and end point is
@@ -184,10 +184,10 @@ class Layout::Path < Layout::Entity
   #
   # @overload initialize(start_point, control_point_1, control_point_2, end_point)
   #
-  #   @param [Geom::Point2D] start_point
-  #   @param [Geom::Point2D] control_point_1 The first bezier control point
-  #   @param [Geom::Point2D] control_point_2 The second bezier control point
-  #   @param [Geom::Point2D] end_point
+  #   @param [Geom::Point2d] start_point
+  #   @param [Geom::Point2d] control_point_1 The first bezier control point
+  #   @param [Geom::Point2d] control_point_2 The second bezier control point
+  #   @param [Geom::Point2d] end_point
   #   @return [Layout::Path] a bezier path
   #
   #   @raise [ArgumentError] if the length between start point and end point is

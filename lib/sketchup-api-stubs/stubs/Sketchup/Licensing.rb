@@ -37,7 +37,7 @@ module Sketchup::Licensing
   # @param [String] extension_id
   #   The Extension Warehouse UUID for the desired extension.
   #
-  # @return [ExtensionLicense] An object representing
+  # @return [Sketchup::Licensing::ExtensionLicense] An object representing
   #   licensing state for the extension. Do not store this object, retrieve
   #   it again when needed since licensing state may have changed.
   #

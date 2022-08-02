@@ -65,19 +65,18 @@ class Sketchup::OptionsManager
   def count
   end
 
-  # The each method is used to iterate through options providers.
+  # The {#each} method is used to iterate through options providers.
   #
   # @example
   #   model = Sketchup.active_model
   #   manager = model.options
   #   manager.each { |provider| puts provider.name }
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   #
-  # @yield [opsprovider] A variable that will hold each OptionsProvider object
-  #   as they are found.
+  # @yieldparam [Sketchup::OptionsProvider] provider
   def each
   end
 

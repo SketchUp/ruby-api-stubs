@@ -266,44 +266,43 @@ class Sketchup::InputPoint
   def instance_path
   end
 
-  # The pick method is used to get the input point at a specific screen
+  # The {#pick} method is used to get a input point at a specific screen
   # position.
-  #
-  # The first form just uses the screen position to compute the InputPoint. It
-  # is used when you don't want the InputPoint to be dependent on another
-  # InputPoint.
-  #
-  # The second form uses the screen position and another InputPoint. It will
-  # find additional inferences such as along one of the axis directions from the
-  # first point.
   #
   # @example
   #   view = Sketchup.active_model.active_view
   #   x = 100
   #   y = 100
-  #   inputpoint = view.inputpoint x, y
-  #   inputpoint2 = Sketchup::InputPoint.new
-  #   inputpoint.pick view, x, y
-  #   inputpoint.pick view, x, y, inputpoint2
+  #   inputpoint = view.inputpoint(x, y)
+  #   inputpoint2 = Sketchup::InputPoint.new(Geom::Point3d.new(100, 200, 300))
+  #   inputpoint.pick(view, x, y)
+  #   inputpoint.pick(view, x, y, inputpoint2)
   #
-  # @param view
-  #   The current view.
+  # @overload pick(view, x, y)
   #
-  # @param x
-  #   A x value.
+  #   The first form just uses the screen position to compute the InputPoint. It
+  #   is used when you don't want the InputPoint to be dependent on another
+  #   InputPoint.
+  #   @param [Sketchup::View] view
+  #   @param [Integer] x
+  #   @param [Integer] y
   #
-  # @param y
-  #   A y value.
+  # @overload pick(view, x, y, inputpoint)
   #
-  # @param [optional] inputpoint
-  #   A second input point used as a reference
-  #   for the pick.
+  #   The second form uses the screen position and another InputPoint. It will
+  #   find additional inferences such as along one of the axis directions from the
+  #   first point.
+  #   @param [Sketchup::View] view
+  #   @param [Integer] x
+  #   @param [Integer] y
+  #   @param [Sketchup::InputPoint] inputpoint
+  #     A second input point used as a reference for the pick.
   #
-  # @return status - true if a valid InputPoint was picked and it
+  # @return [Boolean] +true+ if a valid input point was picked and it
   #   is different than it was before.
   #
   # @version SketchUp 6.0
-  def pick(view, x, y, inputpoint)
+  def pick(*args)
   end
 
   # The position method is used to get the 3D point from the input point.

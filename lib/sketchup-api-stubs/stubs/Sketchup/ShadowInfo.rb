@@ -50,7 +50,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
 
   # Class Methods
 
-  # The each_key method iterates through all of the shadow information keys.
+  # The {#each_key} method iterates through all of the shadow information keys.
   #
   # @example
   #   shadowinfo.each_key { |key| puts key }
@@ -59,7 +59,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   #
   # @version SketchUp 6.0
   #
-  # @yield [key] Variable to hold each key as they are found.
+  # @yieldparam [String] key
   def self.each_key
   end
 
@@ -157,15 +157,13 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   #
   # @version SketchUp 6.0
   #
-  # @yield [key, value]
-  #
   # @yieldparam [String] key
   #
   # @yieldparam [Object] value
   def each
   end
 
-  # The each_key method iterates through all of the shadow information keys.
+  # The {#each_key} method iterates through all of the shadow information keys.
   #
   # @example
   #   shadowinfo.each_key { |key| puts key }
@@ -174,7 +172,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   #
   # @version SketchUp 6.0
   #
-  # @yield [key] Variable to hold each key as they are found.
+  # @yieldparam [String] key
   def each_key
   end
 
@@ -192,8 +190,6 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   # @see #each
   #
   # @version SketchUp 6.0
-  #
-  # @yield [key, value]
   #
   # @yieldparam [String] key
   #

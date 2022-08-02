@@ -66,43 +66,8 @@ class Sketchup::Entities
   def active_section_plane=(sec_plane)
   end
 
-  # The add_3d_text is used to create 3D text. It will be added as edges and
+  # The {#add_3d_text} method is used to create 3D text. It will be added as edges and
   # faces drawn at the origin.
-  #
-  # = 1.0, tolerance = 0.0, z = 0.0, is_filled = true, extrusion = 0.0)
-  #
-  #   @param [String] string
-  #     The text to create.
-  #
-  #   @param [Integer] alignment
-  #     Number that defines the alignment. There are constants
-  #     called TextAlignLeft, TextAlignRight, and
-  #     TextAlignCenter that can be passed.
-  #
-  #   @param [String] font
-  #     font name.
-  #
-  #   @param [Boolean] is_bold
-  #     true for bold.
-  #
-  #   @param [Boolean] is_italic
-  #     true for italic.
-  #
-  #   @param [Numeric] letter_height
-  #     Height of the text in inches.
-  #
-  #   @param [Numeric] tolerance
-  #     Tolerance of the curve creation. Defaults to
-  #     0.0, which creates the highest possible curve quality.
-  #
-  #   @param [Numeric] z
-  #     z position in inches.
-  #
-  #   @param [Boolean] is_filled
-  #     true for filled, which will put a face between the edges of the letters.
-  #
-  #   @param [Numeric] extrusion
-  #     Extrusion depth in inches.
   #
   # @example
   #   # Draw the word "test" at the origin of the model, aligned left, in
@@ -110,12 +75,45 @@ class Sketchup::Entities
   #   # with an extrusion size of 5".
   #   entities = Sketchup.active_model.entities
   #   success = entities.add_3d_text('test', TextAlignLeft, "Arial",
-  #     true, false, 1.0, 0.0, 0.5, true, 5.0)
+  #     true, false, 1.inch, 0.0, 0.5.inch, true, 5.0.inch)
+  #
+  # @param [String] string
+  #   The text to create.
+  #
+  # @param [Integer] alignment
+  #   Number that defines the alignment. There are constants
+  #   called TextAlignLeft, TextAlignRight, and
+  #   TextAlignCenter that can be passed.
+  #
+  # @param [String] font
+  #   font name.
+  #
+  # @param [Boolean] is_bold
+  #   true for bold.
+  #
+  # @param [Boolean] is_italic
+  #   true for italic.
+  #
+  # @param [Length] letter_height
+  #   Height of the text
+  #
+  # @param [Numeric] tolerance
+  #   Tolerance of the curve creation. Defaults to
+  #   0.0, which creates the highest possible curve quality.
+  #
+  # @param [Length] z
+  #   z position of the text
+  #
+  # @param [Boolean] is_filled
+  #   true for filled, which will put a face between the edges of the letters.
+  #
+  # @param [Length] extrusion
+  #   Extrusion depth
   #
   # @return [Boolean] true if successful
   #
   # @version SketchUp 6.0
-  def add_3d_text(string, alignment, font, is_bold = false, is_italic = false, letter_height)
+  def add_3d_text(string, alignment, font, is_bold = false, is_italic = false, letter_height = 1.0, tolerance = 0.0, z = 0.0, is_filled = true, extrusion = 0.0)
   end
 
   # The add_arc method is used to create an arc curve segment.
@@ -265,27 +263,23 @@ class Sketchup::Entities
 
   # The {#add_dimension_linear} method adds a linear dimension to the entities.
   #
-  # [instance_path, end_point], vector)
-  #
-  # vector)
-  #
   # @example
   #   entities = Sketchup.active_model.entities
   #   # From point to point
-  #   dim = entities.add_dimension_linear [50, 10, 0], [100, 10, 0], [0, 20, 0]
+  #   dim = entities.add_dimension_linear([50, 10, 0], [100, 10, 0], [0, 20, 0])
   #   # Between edge vertices
-  #   edge = entities.add_edges([50,50,0], [40,10,0])[0]
+  #   edge = entities.add_edges([50, 50, 0], [40, 10, 0])[0]
   #   v0 = edge.start
   #   v1 = edge.end
-  #   dim = entities.add_dimension_linear v0, v1, [0, 0, 20]
+  #   dim = entities.add_dimension_linear(v0, v1, [0, 0, 20])
   #   # From an edge's midpoint to a construction point
   #   p0 = edge.start.position
   #   p1 = edge.end.position
-  #   mp = Geom::Point3d.new((p0.x+p1.x)/2.0, (p0.y+p1.y)/2.0, (p0.z+p1.z)/2.0)
+  #   mp = Geom::Point3d.new((p0.x + p1.x) / 2.0, (p0.y + p1.y) / 2.0, (p0.z + p1.z) / 2.0)
   #   cp = entities.add_cpoint [50, 10, 0]
-  #   dim = entities.add_dimension_linear [edge, mp], cp, [20, 0, 0]
+  #   dim = entities.add_dimension_linear([edge, mp], cp, [20, 0, 0])
   #   # alternatively, the start params could be passed in separately
-  #   dim = entities.add_dimension_linear edge, mp, cp, [20, 0, 0]
+  #   dim = entities.add_dimension_linear(edge, mp, cp, [20, 0, 0])
   #
   # @example Instance path
   #   instance = Sketchup.active_model.active_entities.grep(Sketchup::ComponentInstance).first
@@ -294,7 +288,8 @@ class Sketchup::Entities
   #   start_point = edge.start.position
   #   end_point = edge.end.position
   #   vector = Geom::Vector3d.new(30, 30, 0)
-  #   Sketchup.active_model.entities.add_dimension_linear([instance_path, start_point],
+  #   Sketchup.active_model.entities.add_dimension_linear(
+  #     [instance_path, start_point], [instance_path, end_point], vector)
   #
   # @example Instance path as an array
   #   instance = Sketchup.active_model.active_entities.grep(Sketchup::ComponentInstance).first
@@ -303,7 +298,8 @@ class Sketchup::Entities
   #   start_point = edge.start.position
   #   end_point = edge.end.position
   #   vector = Geom::Vector3d.new(30, 30, 0)
-  #   Sketchup.active_model.entities.add_dimension_linear([path, start_point], [path, end_point],
+  #   Sketchup.active_model.entities.add_dimension_linear(
+  #     [path, start_point], [path, end_point], vector)
   #
   # @overload add_dimension_linear(start_pt_or_entity, end_pt_or_entity, offset_vector)
   #
@@ -334,13 +330,13 @@ class Sketchup::Entities
   # @overload add_dimension_linear(start_array, end_array, offset_vector)
   #
   #   @note Added in SketchUp 2019.
-  #   @param [Array(Array<Entity>, Geom::Point3d)] start_array
-  #     The {Array<Entity>} must contain one or more {Sketchup::ComponentInstance}'s
+  #   @param [Array(Array<Sketchup::Entity>, Geom::Point3d)] start_array
+  #     The {Array<Sketchup::Entity>} must contain one or more {Sketchup::ComponentInstance}'s
   #     and a leaf entity. The leaf entity can be a {Sketchup::Vertex},
   #     {Sketchup::ConstructionPoint}, {Sketchup::ConstructionLine}, or
   #     {Sketchup::Edge}. The {Geom::Point3d} is the point associated with the leaf entity.
-  #   @param [Array(Array<Entity>, Geom::Point3d)] end_array
-  #     The {Array<Entity>} must contain one or more {Sketchup::ComponentInstance}'s
+  #   @param [Array(Array<Sketchup::Entity>, Geom::Point3d)] end_array
+  #     The {Array<Sketchup::Entity>} must contain one or more {Sketchup::ComponentInstance}'s
   #     and a leaf entity. The leaf entity can be a {Sketchup::Vertex},
   #     {Sketchup::ConstructionPoint}, {Sketchup::ConstructionLine}, or
   #     {Sketchup::Edge}. The {Geom::Point3d} is the point associated with the leaf entity.
@@ -814,8 +810,6 @@ class Sketchup::Entities
   #
   # Refer to the documentation of {Sketchup::EntitiesBuilder} for more details.
   #
-  # @api EntitiesBuilder
-  #
   # @example
   #   model = Sketchup.active_model
   #   model.entities.build { |builder|
@@ -903,8 +897,11 @@ class Sketchup::Entities
   def each
   end
 
-  # The erase_entities method is used to erase one or more entities from the
+  # The {#erase_entities} method is used to erase one or more entities from the
   # model.
+  #
+  # @bug Prior to SketchUp 2022.1 this could crash SketchUp if you erased an
+  #   instance used by the active edit path.
   #
   # @example
   #   depth = 100
@@ -917,14 +914,15 @@ class Sketchup::Entities
   #   pts[2] = [width, depth, 0]
   #   pts[3] = [0, depth, 0]
   #
-  #   # Add the face to the entities in the model
-  #   face = entities.add_face pts
+  #   # Add the face to the entities in the model.
+  #   face = entities.add_face(pts)
   #
-  #   # I just happen to know that the second entity in the
-  #   # entities objects is an edge, so erase it.
-  #   UI.messagebox entities
-  #   entities.erase_entities entities[1]
-  #   UI.messagebox entities
+  #   p entities
+  #   entities.erase_entities(entities.grep(Sketchup::Edge).take(2))
+  #   p entities
+  #
+  # @note It's faster to use this method and erase in bulk than to iterate
+  #   individual drawing elements calling {Sketchup::Drawingelement#erase!}.
   #
   # @overload erase_entities(entities)
   #
@@ -933,6 +931,9 @@ class Sketchup::Entities
   # @overload erase_entities(*entities)
   #
   #   @param [Array<Sketchup::Entity>] entities
+  #
+  # @raise [ArgumentError] if the given entities contains instances or
+  #   definitions are used by {Sketchup::Model#active_path}.
   #
   # @return [nil]
   #

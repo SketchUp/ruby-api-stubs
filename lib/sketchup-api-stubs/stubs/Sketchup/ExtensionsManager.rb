@@ -62,7 +62,7 @@ class Sketchup::ExtensionsManager
   def count
   end
 
-  # The each method is used to iterate through extensions.
+  # The {#each} method is used to iterate through extensions.
   #
   # @example
   #   manager = Sketchup.extensions
@@ -73,8 +73,7 @@ class Sketchup::ExtensionsManager
   #
   # @version SketchUp 8.0 M2
   #
-  # @yield [extension] A variable that will hold each SketchupExtension object
-  #   as they are found.
+  # @yield [SketchupExtension] extension
   def each
   end
 

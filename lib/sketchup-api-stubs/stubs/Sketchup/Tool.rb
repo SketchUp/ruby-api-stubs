@@ -175,7 +175,7 @@ class Sketchup::Tool
   # instead, use the normal context menu found on all entities.
   #
   # If you do implement this method, the argument is a Menu. You should use the
-  # add_item method to build the context menu.
+  # {Sketchup::Menu#add_item} method to build the context menu.
   #
   # Your tool will use a standard context menu by default if you do not
   # implement this method. Implement this method if you want a context-click to
@@ -209,30 +209,27 @@ class Sketchup::Tool
   #    end
   #   end
   #
-  # @param menu
-  #   A Menu object.
+  # @overload getMenu(menu)
   #
-  # @param [optional] flags
-  #   A bit mask that tells the state of the
-  #   modifier keys and other mouse buttons at the time.
-  #   Added in SU2015.
+  #   @param [Sketchup::Menu] menu
   #
-  # @param [optional] x
-  #   The X coordinate on the screen where the
-  #   event occurred. Added in SU2015.
+  # @overload getMenu(menu, flags, x, y, view)
   #
-  # @param [optional] y
-  #   The Y coordinate on the screen where the
-  #   event occurred. Added in SU2015.
+  #   @version SketchUp 2015
+  #   @param [Sketchup::Menu] menu
+  #   @param [Integer] flags
+  #     A bit mask that tells the state of the modifier keys and other mouse
+  #     buttons at the time.
+  #   @param [Integer] x
+  #     The X coordinate on the screen where the event occurred.
+  #   @param [Integer] y
+  #     The Y coordinate on the screen where the event occurred.
+  #   @param [Sketchup::View] view
   #
-  # @param [optional] view
-  #   A View object where the method was invoked.
-  #   Added in SU2015.
-  #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
-  def getMenu(menu, flags, x, y, view)
+  def getMenu
   end
 
   # The {#onCancel} method is called by SketchUp to cancel the current operation

@@ -473,7 +473,7 @@ class Layout::SketchUpModel < Layout::Entity
   #
   # @raise [ArgumentError] if render_mode is not a valid render mode
   #
-  # @raise [LockedLayertError] if the {Layout::SketchUpModel} is on a locked
+  # @raise [LockedLayerError] if the {Layout::SketchUpModel} is on a locked
   #   {Layout::Layer}
   #
   # @raise [LockedEntityError] if the {Layout::SketchUpModel} is locked

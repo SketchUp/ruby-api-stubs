@@ -26,12 +26,12 @@ class Sketchup::LineStyles < Sketchup::Entity
   #
   # @overload [](index)
   #
-  #   @param [Index] index The index of the line style to retrieve.
+  #   @param [Integer] index The index of the line style to retrieve.
   #
   #   @raise [IndexError] If index is out of bounds.
   #
-  # @return [Sketchup::LineStyle, nil] The line style retrieved. Nil if the name
-  #   couldn't be retrived.
+  # @return [Sketchup::LineStyle, nil] The line style retrieved. +nil+ if the name
+  #   couldn't be retrieved.
   #
   # @version SketchUp 2019
   def [](arg)
@@ -51,12 +51,12 @@ class Sketchup::LineStyles < Sketchup::Entity
   #
   # @overload [](index)
   #
-  #   @param [Index] index The index of the line style to retrieve.
+  #   @param [Integer] index The index of the line style to retrieve.
   #
   #   @raise [IndexError] If index is out of bounds.
   #
-  # @return [Sketchup::LineStyle, nil] The line style retrieved. Nil if the name
-  #   couldn't be retrived.
+  # @return [Sketchup::LineStyle, nil] The line style retrieved. +nil+ if the name
+  #   couldn't be retrieved.
   #
   # @version SketchUp 2019
   def at(arg)
