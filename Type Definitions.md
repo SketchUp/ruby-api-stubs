@@ -39,3 +39,19 @@ Current Ruby API docs are often missing type into. Some times it's not valid YAR
 - We cannot run `steep check` on the stubs, because the method bodies are analyzed and will infer `nil` from all the empty stubs, which will fail the return value checks.
 
 - Unclear on how to make `sord` and `steep` use RBS definitions from different sources. If you run `steep` on an extension it needs to know the SketchUp definitions. How can this be loaded by `steep` (and `sord`) such that the definitions doesn't have to be copied and pasted around?
+  - https://github.com/ruby/rbs/issues/1066
+  - https://github.com/pocke/rbs_rails
+
+- The SketchUp's API numerous overloads is a challenge:
+  - Points and vectors can be represented by plain arrays.
+  - Lines can be in a number of mutations:
+    - Point + Vector
+    - Point + Point
+    ```
+    @param [Array(Geom::Point3d, Geom::Vector3d)] line
+    @param [Array(Geom::Point3d, Geom::Point3d)] line
+    ```
+    And both point and vector can be substituted by array.
+    The RBS format let us define an interface for this, but how to mix this with
+    automatic generation from YARD?
+    https://github.com/ruby/rbs/issues/1076
