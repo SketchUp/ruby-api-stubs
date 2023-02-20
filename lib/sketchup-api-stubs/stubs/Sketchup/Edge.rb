@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Edge class contains methods modifying and extracting information for
@@ -13,27 +13,17 @@ class Sketchup::Edge < Sketchup::Drawingelement
   # including the edge itself.
   #
   # @example
-  #   depth = 100
-  #   width = 100
   #   model = Sketchup.active_model
   #   entities = model.active_entities
-  #   pts = []
-  #   pts[0] = [0, 0, 0]
-  #   pts[1] = [width, 0, 0]
-  #   pts[2] = [width, depth, 0]
-  #   pts[3] = [0, depth, 0]
-  #   # Add the face to the entities in the model
-  #   face = entities.add_face pts
-  #   # I just happen to know that the second and third entities in the
-  #   # entities objects are edges.
-  #   entity1 = entities[1]
-  #   entity2 = entities[2]
-  #   edges = entity1.all_connected
-  #   if (edges)
-  #     UI.messagebox edges.to_s
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   points = [
+  #     Geom::Point3d.new(0, 0, 0),
+  #     Geom::Point3d.new(100, 0, 0),
+  #     Geom::Point3d.new(100, 100, 0),
+  #     Geom::Point3d.new(200, 100, 0)
+  #   ]
+  #   # Add the edges to the model
+  #   edges = entities.add_edges(points)
+  #   connected_entities = edges.first.all_connected
   #
   # @return [Array<Sketchup::Entity>] the edge and entities connected to that edge
   #
@@ -45,28 +35,19 @@ class Sketchup::Edge < Sketchup::Drawingelement
   # edges.
   #
   # @example
-  #   depth = 100
-  #   width = 100
   #   model = Sketchup.active_model
   #   entities = model.active_entities
-  #   pts = []
-  #   pts[0] = [0,0,0]
-  #   pts[1] = [width,0,0]
-  #   pts[2] = [width,depth,0]
-  #   pts[3] = [0,depth,0]
+  #   points = [
+  #     Geom::Point3d.new(0, 0, 0),
+  #     Geom::Point3d.new(100, 0, 0),
+  #     Geom::Point3d.new(100, 100, 0),
+  #     Geom::Point3d.new(0, 100, 0)
+  #   ]
   #   # Add the face to the entities in the model
-  #   face = entities.add_face pts
-  #   # I know that the second and third entity objects are edges
-  #   entity1 = entities[1]
-  #   entity2 = entities[2]
-  #   UI.messagebox entity1
-  #   UI.messagebox entity2
-  #   face = entity1.common_face entity2
-  #   if (face)
-  #     UI.messagebox face
-  #   else
-  #     UI.messagebox "Failure: No Common Face"
-  #   end
+  #   face = entities.add_face(points)
+  #   edge1 = face.edges[0]
+  #   edge2 = face.edges[1]
+  #   face = edge1.common_face(edge2)
   #
   # @param [Sketchup::Edge] edge2
   #   The face whose edge you are checking for commonality.
@@ -83,14 +64,9 @@ class Sketchup::Edge < Sketchup::Drawingelement
   # curve, then this method will return an ArcCurve object.
   #
   # @example
-  #   edge = Sketchup.active_model.entities.add_line([0,0,0],[100,100,0])
-  #   curve = edge.curve
-  #   if (curve)
-  #     # If it is a curve, display a pointer to the curve
-  #     UI.messagebox curve
-  #   else
-  #     UI.messagebox "Failure: Not a Curve"
-  #   end
+  #   entities = Sketchup.active_model.entities
+  #   edges = entities.add_curve([0, 0, 0], [100, 100, 0], [100, 200, 0])
+  #   curve = edges[0].curve
   #
   # @return [Sketchup::Curve, nil] returns a Curve object if it is a
   #   curve, nil if it is not a curve
@@ -102,21 +78,8 @@ class Sketchup::Edge < Sketchup::Drawingelement
   # The end method is used to retrieve the Vertex object at the end of the edge.
   #
   # @example
-  #   edge = Sketchup.active_model.entities.add_line([0,0,0],[100,100,0])
+  #   edge = Sketchup.active_model.entities.add_line([0, 0, 0], [100, 100, 0])
   #   vertex = edge.end
-  #   if (vertex)
-  #     # display a pointer to the Vertex
-  #     UI.messagebox vertex
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
-  #   point = vertex.position
-  #   # Let's get the Point3d of the vertex
-  #   if (point)
-  #     UI.messagebox point
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
   # @return [Sketchup::Vertex] a Vertex object if successful
   #
@@ -124,30 +87,15 @@ class Sketchup::Edge < Sketchup::Drawingelement
   def end
   end
 
-  # The explode_curve method is used to explode an edge as though it were an
-  # ArcCurve.
+  # The explode_curve method is used to explode the curve that the given edge
+  # is a part of.
   #
   # @example
-  #   depth = 100
-  #   width = 100
   #   model = Sketchup.active_model
   #   entities = model.active_entities
-  #   pts = []
-  #   pts[0] = [0, 0, 0]
-  #   pts[1] = [width, 0, 0]
-  #   pts[2] = [width, depth, 0]
-  #   pts[3] = [0, depth, 0]
-  #   # Add the face to the entities in the model
-  #   face = entities.add_face pts
-  #   # I just happen to know that the second entity in the
-  #   # entities objects is an edge.
-  #   entity1 = entities[1]
-  #   curve = entity1.explode_curve
-  #   if (curve)
-  #     UI.messagebox curve
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   edges = entities.add_curve([0, 0, 0], [100, 0, 0], [100, 100, 0])
+  #   edge = edges[0]
+  #   exploded_edge = edge.explode_curve
   #
   # @return [Sketchup::Edge] an exploded edge object if successful
   #
@@ -174,27 +122,17 @@ class Sketchup::Edge < Sketchup::Drawingelement
   # be filled in.
   #
   # @example
-  #   depth = 100
-  #   width = 100
   #   model = Sketchup.active_model
   #   entities = model.active_entities
-  #   pts = []
-  #   pts[0] = [0, 0, 0]
-  #   pts[1] = [width, 0, 0]
-  #   pts[2] = [width, depth, 0]
-  #   pts[3] = [0, depth, 0]
-  #   # Add the face to the entities in the model
-  #   face = entities.add_face pts
-  #   # I just happen to know that the second entity in the
-  #   # entities objects is an edge.
-  #   entity1 = entities[1]
-  #   # Getting zero.
-  #   number = entity1.find_faces
-  #   if (number)
-  #     UI.messagebox "I created " + number.to_s + " faces."
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   points = [
+  #     Geom::Point3d.new(0, 0, 0),
+  #     Geom::Point3d.new(100, 0, 0),
+  #     Geom::Point3d.new(100, 100, 0),
+  #     Geom::Point3d.new(0, 100, 0),
+  #     Geom::Point3d.new(0, 0, 0)
+  #   ]
+  #   edges = entities.add_curve(points)
+  #   number_of_faces_found = edges[0].find_faces
   #
   # @return [Integer] the number of faces found
   #
@@ -214,7 +152,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #
   # @example
   #   edge = Sketchup.active_model.entities.add_line([0, 0, 0], [100, 100, 0])
-  #   puts "#{edge.length} (#{edge.length.inspect})"
+  #   edge.length
   #
   # @overload length
   #
@@ -237,14 +175,8 @@ class Sketchup::Edge < Sketchup::Drawingelement
   # class for more information on lines.
   #
   # @example
-  #   edge = Sketchup.active_model.entities.add_line([0,0,0],[100,100,0])
-  #   # Returns a 3D ray
+  #   edge = Sketchup.active_model.entities.add_line([0,0,0], [100, 100, 0])
   #   line = edge.line
-  #   if (line)
-  #     UI.messagebox line
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
   # @return [Array(Geom::Point3d, Geom::Vector3d)] an array with a Point3d object
   #   and a Vector3d object.
@@ -257,23 +189,11 @@ class Sketchup::Edge < Sketchup::Drawingelement
   # of the edge.
   #
   # @example
-  #   edge = Sketchup.active_model.entities.add_line([0,0,0],[100,100,0])
+  #   edge = Sketchup.active_model.entities.add_line([0, 0, 0],[100, 100, 0])
   #   # Get the end vertex of an edge
   #   vertex = edge.end
   #   # Should find the starting vertex
-  #   othervertex = edge.other_vertex vertex
-  #   if (othervertex)
-  #     UI.messagebox othervertex
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
-  #   # The Point3d for the vertex
-  #   point = othervertex.position
-  #   if (point)
-  #     UI.messagebox point
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   other_vertex = edge.other_vertex(vertex)
   #
   # @param [Sketchup::Vertex] vertex1
   #   One of the Vertex objects associated with the edge.
@@ -295,12 +215,10 @@ class Sketchup::Edge < Sketchup::Drawingelement
   #   points[1] = [9, 0, 0]
   #   points[2] = [9, 9, 0]
   #   points[3] = [0, 9, 0]
-  #   # Add the face to the entities in the model
+  #   # Add the face to the entities in the model.
   #   face = entities.add_face(points)
   #   edge = face.edges[0]
-  #   if edge.reversed_in?(face)
-  #     face.reverse!
-  #   end
+  #   edge.reversed_in?(face)
   #
   # @param [Sketchup::Face] face
   #   The face that is bounded by the edge.
@@ -322,8 +240,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   # smooth transition. The edge will still be visible.
   #
   # @example
-  #   edge = Sketchup.active_model.entities.add_line([0,0,0], [100,100,0])
-  #   # Soft and Smooth are normally set in pairs.
+  #   edge = Sketchup.active_model.entities.add_line([0, 0, 0], [100, 100, 0])
   #   edge.soft = true
   #   edge.smooth = true
   #
@@ -348,10 +265,9 @@ class Sketchup::Edge < Sketchup::Drawingelement
   # smooth transition. The edge will still be visible.
   #
   # @example
-  #   edge = Sketchup.active_model.entities.add_line([0,0,0], [100,100,0])
-  #   # Soft and Smooth are normally set in pairs.
-  #   edge.smooth = !edge.smooth?
-  #   edge.soft = edge.smooth?
+  #   edge = Sketchup.active_model.entities.add_line([0, 0, 0], [100, 100, 0])
+  #   edge.smooth = true
+  #   edge.smooth?
   #
   # @return [Boolean]
   #
@@ -369,13 +285,12 @@ class Sketchup::Edge < Sketchup::Drawingelement
   # hidden.
   #
   # @example
-  #   edge = Sketchup.active_model.entities.add_line([0,0,0], [100,100,0])
-  #   # Soft and Smooth are normally set in pairs.
-  #   edge.soft = true
+  #   edge = Sketchup.active_model.entities.add_line([0, 0, 0], [100, 100, 0])
   #   edge.smooth = true
+  #   edge.soft = true
   #
   # @note The soft and smooth properties are normally set in pairs. You can
-  #   observer this when the Soften/Smooth Edges feature or holding down Ctrl
+  #   observe this when the Soften/Smooth Edges feature or holding down Ctrl
   #   when using the Eraser Tool.
   #
   # @param [Boolean] value
@@ -388,7 +303,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   def soft=(value)
   end
 
-  # The {#soft?} method is used to retrieve the current smooth setting for an
+  # The {#soft?} method is used to retrieve the current soft setting for an
   # edge.
   #
   # A soft edge will cause the connected faces to be treated as a surface. This
@@ -397,10 +312,9 @@ class Sketchup::Edge < Sketchup::Drawingelement
   # hidden.
   #
   # @example
-  #   edge = Sketchup.active_model.entities.add_line([0,0,0], [100,100,0])
-  #   # Soft and Smooth are normally set in pairs.
-  #   edge.soft = !edge.soft?
-  #   edge.smooth = edge.soft?
+  #   edge = Sketchup.active_model.entities.add_line([0, 0, 0], [100, 100, 0])
+  #   edge.soft = true
+  #   edge.soft?
   #
   # @return [Boolean]
   #
@@ -421,9 +335,8 @@ class Sketchup::Edge < Sketchup::Drawingelement
   # Returns the new Edge that was created as a result of splitting this one.
   #
   # @example
-  #   # Split a line in half.
-  #   edge = Sketchup.active_model.entities.add_line([0,0,0],[100,100,0])
-  #   new_edge = edge.split 0.5
+  #   edge = Sketchup.active_model.entities.add_line([0, 0, 0], [100, 100, 0])
+  #   new_edge = edge.split(0.5)
   #
   # @param [Geom::Point3d] position
   #   A Point3d object whose location is along the edge, or
@@ -437,25 +350,12 @@ class Sketchup::Edge < Sketchup::Drawingelement
   def split(position)
   end
 
-  # The end method is used to retrieve the Vertex object at the start of the
+  # The start method is used to retrieve the Vertex object at the start of the
   # edge.
   #
   # @example
-  #   edge = Sketchup.active_model.entities.add_line([0,0,0],[100,100,0])
+  #   edge = Sketchup.active_model.entities.add_line([0, 0, 0], [100, 100, 0])
   #   vertex = edge.start
-  #   if (vertex)
-  #     # display a pointer to the Vertex
-  #     UI.messagebox vertex
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
-  #   point = vertex.position
-  #   # Let's get the Point3d of the vertex
-  #   if (point)
-  #     UI.messagebox point
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
   # @return [Sketchup::Vertex] a Vertex object if successful
   #
@@ -467,16 +367,11 @@ class Sketchup::Edge < Sketchup::Drawingelement
   # Vertex.
   #
   # @example
-  #   edge = Sketchup.active_model.entities.add_line([0,0,0],[100,100,0])
+  #   edge = Sketchup.active_model.entities.add_line([0, 0, 0],[100, 100, 0])
   #   # Returns a vertex
   #   vertex = edge.start
   #   # Check to see if the edge is used by the Vertex.
-  #   status = edge.used_by? vertex
-  #   if (status)
-  #     UI.messagebox status
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   edge.used_by?(vertex)
   #
   # @param [Sketchup::Vertex, Sketchup::Face] element
   #   A Vertex or Face object.
@@ -490,7 +385,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   # The vertices method is used to retrieve the vertices on the edge.
   #
   # @example
-  #   edge = Sketchup.active_model.entities.add_line([0,0,0],[100,100,0])
+  #   edge = Sketchup.active_model.entities.add_line([0, 0, 0], [100, 100, 0])
   #   vertices = edge.vertices
   #
   # @return [Array<Sketchup::Vertex>] an array of Vertex objects

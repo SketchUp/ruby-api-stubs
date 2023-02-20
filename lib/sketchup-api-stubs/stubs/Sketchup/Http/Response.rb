@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # Http::Response objects allows you to get the response information from the
@@ -53,7 +53,7 @@ class Sketchup::Http::Response
   #     puts "http status code: #{response.status_code}"
   #   end
   #
-  # @return [int]
+  # @return [Integer]
   #
   # @version SketchUp 2017
   def status_code

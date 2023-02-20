@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A SketchUp Model entity. This is an instance of a SketchUp Model that is
@@ -473,7 +473,7 @@ class Layout::SketchUpModel < Layout::Entity
   #
   # @raise [ArgumentError] if render_mode is not a valid render mode
   #
-  # @raise [LockedLayertError] if the {Layout::SketchUpModel} is on a locked
+  # @raise [LockedLayerError] if the {Layout::SketchUpModel} is on a locked
   #   {Layout::Layer}
   #
   # @raise [LockedEntityError] if the {Layout::SketchUpModel} is locked

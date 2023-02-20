@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The AttributeDictionaries class is a collection of all of the
@@ -96,10 +96,8 @@ class Sketchup::AttributeDictionaries < Sketchup::Entity
   def delete(key_or_dict)
   end
 
-  # The each method is used to iterate through all of the attributes
+  # The {#each} method is used to iterate through all of the attributes
   # dictionaries.
-  #
-  # Throws an exception if there are no keys.
   #
   # @example
   #   model = Sketchup.active_model
@@ -111,7 +109,7 @@ class Sketchup::AttributeDictionaries < Sketchup::Entity
   #
   # @version SketchUp 6.0
   #
-  # @yield [dict] Each AttributeDictionary as it is found.
+  # @yieldparam [Sketchup::AttributeDictionary] dictionary
   def each
   end
 

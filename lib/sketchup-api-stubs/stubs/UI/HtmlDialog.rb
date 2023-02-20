@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Ruby HtmlDialog class allows you to create and interact with HTML dialog
@@ -77,20 +77,18 @@ class UI::HtmlDialog
   #   cleared. Re-attach them if you need to open the dialog again.
   #
   # @param [String] callback_name
-  #   The name of the callback method to be
-  #   invoked from the html dialog.
+  #   The name of the callback method to be invoked from the html dialog.
   #
-  # @return [Boolean] true if action added successfully, false
-  #   otherwise.
+  # @return [Boolean] +true+ if action added successfully, +false+ otherwise.
   #
   # @version SketchUp 2017
   #
-  # @yield [action_context, ...]
+  # @yield [action_context, *args]
   #
   # @yieldparam [Object] action_context
-  #   action_context  Currently unused.
+  #   Currently unused.
   #
-  # @yieldparam [Object] ...
+  # @yieldparam [Array<Object>] args
   #   The parameters sent from JavaScript.
   def add_action_callback(callback_name)
   end
@@ -311,7 +309,7 @@ class UI::HtmlDialog
   #   A hash containing the initial properties of
   #   the newly created dialog.
   #
-  # @return [HtmlDialog]
+  # @return [UI::HtmlDialog]
   #
   # @version SketchUp 2017
   def initialize(properties)

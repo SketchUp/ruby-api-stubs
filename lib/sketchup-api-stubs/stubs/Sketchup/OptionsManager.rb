@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The OptionsManager class manages various kinds of OptionsProviders on a
@@ -65,19 +65,18 @@ class Sketchup::OptionsManager
   def count
   end
 
-  # The each method is used to iterate through options providers.
+  # The {#each} method is used to iterate through options providers.
   #
   # @example
   #   model = Sketchup.active_model
   #   manager = model.options
   #   manager.each { |provider| puts provider.name }
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   #
-  # @yield [opsprovider] A variable that will hold each OptionsProvider object
-  #   as they are found.
+  # @yieldparam [Sketchup::OptionsProvider] provider
   def each
   end
 

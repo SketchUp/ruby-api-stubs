@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This observer interface is implemented to react to changes in camera
@@ -94,8 +94,6 @@ class Sketchup::FrameChangeObserver
   #
   # @param [Float] percent_done
   #   The percentage of transition between the two scene pages.
-  #
-  # @return [void] Value can be anything, but is ignored by SketchUp.
   #
   # @version SketchUp 6.0
   def frameChange(from_scene, to_scene, percent_done)

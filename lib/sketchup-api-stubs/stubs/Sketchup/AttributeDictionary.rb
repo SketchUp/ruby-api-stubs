@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The AttributeDictionary class allows you to attach arbitrary collections of
@@ -48,22 +48,17 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
   #
   # @example
   #   model = Sketchup.active_model
-  #   value = model.set_attribute "testdictionary", "test", 110
+  #   value = model.set_attribute("testdictionary", "test", 110)
   #   attrdicts = model.attribute_dictionaries
   #   attrdict = attrdicts["testdictionary"]
   #   value = attrdict["test2"] = 120
-  #   if (value)
-  #     UI.messagebox value
-  #   end
+  #   p value
   #
   # @param [String] key
   #   The valid key.
   #
-  # @param [Boolean, Fixnum, Float, Length, nil, String, Time, Array, Geom::Point3d, Geom::Vector3d] value
+  # @param [Boolean, Integer, Float, Length, nil, String, Time, Array, Geom::Point3d, Geom::Vector3d] value
   #   The value to be set.
-  #
-  # @return [Object, nil] the value that was set if successful, or false
-  #   if unsuccessful.
   #
   # @version SketchUp 6.0
   def []=(key, value)

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Sketchup::Entities} class is a collection of Entity objects, either in a
@@ -39,8 +39,10 @@ class Sketchup::Entities
   # section plane in the Entities object.
   #
   # @example
-  #   sp = Sketchup.active_model.entities.active_section_plane
-  #   puts "Active section plane is #{sp}" if !sp.nil?
+  #   entities = Sketchup.active_model.entities
+  #   section_plane = entities.add_section_plane([50, 50, 0], [1.0, 1.0, 0])
+  #   entities.active_section_plane = section_plane
+  #   section_plane = entities.active_section_plane
   #
   # @return [Sketchup::SectionPlane, nil] the active SectionPlane or nil if none is active.
   #
@@ -53,8 +55,8 @@ class Sketchup::Entities
   #
   # @example
   #   entities = Sketchup.active_model.entities
-  #   sp = entities.add_section_plane([50, 50, 0], [1.0, 1.0, 0])
-  #   entities.active_section_plane = sp
+  #   section_plane = entities.add_section_plane([50, 50, 0], [1.0, 1.0, 0])
+  #   entities.active_section_plane = section_plane
   #
   # @param [Sketchup::SectionPlane, nil] sec_plane
   #   the SectionPlane object to be set active. Pass nil to
@@ -66,43 +68,8 @@ class Sketchup::Entities
   def active_section_plane=(sec_plane)
   end
 
-  # The add_3d_text is used to create 3D text. It will be added as edges and
+  # The {#add_3d_text} method is used to create 3D text. It will be added as edges and
   # faces drawn at the origin.
-  #
-  # = 1.0, tolerance = 0.0, z = 0.0, is_filled = true, extrusion = 0.0)
-  #
-  #   @param [String] string
-  #     The text to create.
-  #
-  #   @param [Integer] alignment
-  #     Number that defines the alignment. There are constants
-  #     called TextAlignLeft, TextAlignRight, and
-  #     TextAlignCenter that can be passed.
-  #
-  #   @param [String] font
-  #     font name.
-  #
-  #   @param [Boolean] is_bold
-  #     true for bold.
-  #
-  #   @param [Boolean] is_italic
-  #     true for italic.
-  #
-  #   @param [Numeric] letter_height
-  #     Height of the text in inches.
-  #
-  #   @param [Numeric] tolerance
-  #     Tolerance of the curve creation. Defaults to
-  #     0.0, which creates the highest possible curve quality.
-  #
-  #   @param [Numeric] z
-  #     z position in inches.
-  #
-  #   @param [Boolean] is_filled
-  #     true for filled, which will put a face between the edges of the letters.
-  #
-  #   @param [Numeric] extrusion
-  #     Extrusion depth in inches.
   #
   # @example
   #   # Draw the word "test" at the origin of the model, aligned left, in
@@ -110,26 +77,57 @@ class Sketchup::Entities
   #   # with an extrusion size of 5".
   #   entities = Sketchup.active_model.entities
   #   success = entities.add_3d_text('test', TextAlignLeft, "Arial",
-  #     true, false, 1.0, 0.0, 0.5, true, 5.0)
+  #     true, false, 1.inch, 0.0, 0.5.inch, true, 5.0.inch)
+  #
+  # @param [String] string
+  #   The text to create.
+  #
+  # @param [Integer] alignment
+  #   Number that defines the alignment. There are constants
+  #   called TextAlignLeft, TextAlignRight, and
+  #   TextAlignCenter that can be passed.
+  #
+  # @param [String] font
+  #   font name.
+  #
+  # @param [Boolean] is_bold
+  #   true for bold.
+  #
+  # @param [Boolean] is_italic
+  #   true for italic.
+  #
+  # @param [Length] letter_height
+  #   Height of the text
+  #
+  # @param [Numeric] tolerance
+  #   Tolerance of the curve creation. Defaults to
+  #   0.0, which creates the highest possible curve quality.
+  #
+  # @param [Length] z
+  #   z position of the text
+  #
+  # @param [Boolean] is_filled
+  #   true for filled, which will put a face between the edges of the letters.
+  #
+  # @param [Length] extrusion
+  #   Extrusion depth
   #
   # @return [Boolean] true if successful
   #
   # @version SketchUp 6.0
-  def add_3d_text(string, alignment, font, is_bold = false, is_italic = false, letter_height)
+  def add_3d_text(string, alignment, font, is_bold = false, is_italic = false, letter_height = 1.0, tolerance = 0.0, z = 0.0, is_filled = true, extrusion = 0.0)
   end
 
   # The add_arc method is used to create an arc curve segment.
   #
   # @example
-  #   centerpoint = Geom::Point3d.new
-  #   # Create a circle perpendicular to the normal or Z axis
-  #   vector = Geom::Vector3d.new 0,0,1
-  #   vector2 = Geom::Vector3d.new 1,0,0
-  #   vector3 = vector.normalize!
   #   model = Sketchup.active_model
   #   entities = model.active_entities
-  #   edges = entities.add_arc centerpoint, vector2, vector3, 10, 15.degrees, 135.degrees
-  #   arccurve = edges.first.curve
+  #   center_point = Geom::Point3d.new
+  #   # Create an arc perpendicular to the normal or Z axis
+  #   normal = Geom::Vector3d.new(0, 0, 1)
+  #   xaxis = Geom::Vector3d.new(1, 0, 0)
+  #   edges = entities.add_arc(center_point, xaxis, normal, 10, 15.degrees, 135.degrees)
   #
   # @overload add_arc(center, xaxis, normal, radius, start_angle, end_angle)
   #
@@ -159,13 +157,12 @@ class Sketchup::Entities
   # The add_circle method is used to create a circle.
   #
   # @example
-  #   centerpoint = Geom::Point3d.new
-  #   # Create a circle perpendicular to the normal or Z axis
-  #   vector = Geom::Vector3d.new 0,0,1
-  #   vector2 = vector.normalize!
   #   model = Sketchup.active_model
   #   entities = model.active_entities
-  #   edges = entities.add_circle centerpoint, vector2, 10
+  #   center_point = Geom::Point3d.new
+  #   # Create a circle perpendicular to the provided vector.
+  #   normal = Z_AXIS
+  #   edges = entities.add_circle(center_point, vector, 10)
   #
   # @param [Geom::Point3d] center
   #   A Point3d object representing the center.
@@ -220,15 +217,9 @@ class Sketchup::Entities
   # The add_cpoint method is used to create a construction point.
   #
   # @example
-  #   model = Sketchup.active_model
-  #   entities = model.active_entities
-  #   point1 = Geom::Point3d.new(100,200,300)
-  #   constpoint = entities.add_cpoint point1
-  #   if (constpoint)
-  #     UI.messagebox constpoint
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   entities = Sketchup.active_model.active_entities
+  #   point1 = Geom::Point3d.new(100, 200, 300)
+  #   constpoint = entities.add_cpoint(point1)
   #
   # @param [Geom::Point3d] point
   #   A Point3d object.
@@ -247,7 +238,7 @@ class Sketchup::Entities
   #
   # @example
   #   entities = Sketchup.active_model.entities
-  #   curve = entities.add_curve [0,0,0], [0,10,0], [1,20,0]
+  #   curve = entities.add_curve([0, 0, 0], [0, 10, 0], [10, 20, 0])
   #
   # @overload add_curve(points)
   #
@@ -265,45 +256,52 @@ class Sketchup::Entities
 
   # The {#add_dimension_linear} method adds a linear dimension to the entities.
   #
-  # [instance_path, end_point], vector)
-  #
-  # vector)
-  #
   # @example
   #   entities = Sketchup.active_model.entities
   #   # From point to point
-  #   dim = entities.add_dimension_linear [50, 10, 0], [100, 10, 0], [0, 20, 0]
+  #   dim = entities.add_dimension_linear([0, 0, 0], [50, 0, 0], [0, 20, 0])
+  #
   #   # Between edge vertices
-  #   edge = entities.add_edges([50,50,0], [40,10,0])[0]
-  #   v0 = edge.start
-  #   v1 = edge.end
-  #   dim = entities.add_dimension_linear v0, v1, [0, 0, 20]
+  #   edge1 = entities.add_edges([70, 0, 0], [120, 0, 0])[0]
+  #   v0 = edge1.start
+  #   v1 = edge1.end
+  #   dim = entities.add_dimension_linear(v0, v1, [0, 20, 0])
+  #
   #   # From an edge's midpoint to a construction point
-  #   p0 = edge.start.position
-  #   p1 = edge.end.position
-  #   mp = Geom::Point3d.new((p0.x+p1.x)/2.0, (p0.y+p1.y)/2.0, (p0.z+p1.z)/2.0)
-  #   cp = entities.add_cpoint [50, 10, 0]
-  #   dim = entities.add_dimension_linear [edge, mp], cp, [20, 0, 0]
-  #   # alternatively, the start params could be passed in separately
-  #   dim = entities.add_dimension_linear edge, mp, cp, [20, 0, 0]
+  #   edge2 = entities.add_edges([150, 0, 0], [200, 0, 0])[0]
+  #   p0 = edge2.start.position
+  #   p1 = edge2.end.position
+  #   mp = Geom::Point3d.new((p0.x + p1.x) / 2.0, (p0.y + p1.y) / 2.0, (p0.z + p1.z) / 2.0)
+  #   cp = entities.add_cpoint([150, 40, 0])
+  #   dim = entities.add_dimension_linear([edge2, mp], cp, [20, 0, 0])
   #
   # @example Instance path
-  #   instance = Sketchup.active_model.active_entities.grep(Sketchup::ComponentInstance).first
+  #   entities = Sketchup.active_model.entities
+  #   group = entities.add_group
+  #   group.entities.add_face([0, 0, 0], [100, 0, 0], [100, 100, 0], [0, 100, 0])
+  #   instance = group.to_component
+  #   transformation = instance.transformation
   #   edge = instance.definition.entities.grep(Sketchup::Edge).first
   #   instance_path = Sketchup::InstancePath.new([instance, edge])
-  #   start_point = edge.start.position
-  #   end_point = edge.end.position
-  #   vector = Geom::Vector3d.new(30, 30, 0)
-  #   Sketchup.active_model.entities.add_dimension_linear([instance_path, start_point],
+  #   start_point = edge.start.position.transform(transformation)
+  #   end_point = edge.end.position.transform(transformation)
+  #   vector = Geom::Vector3d.new(0, 30, 0)
+  #   Sketchup.active_model.entities.add_dimension_linear(
+  #     [instance_path, start_point], [instance_path, end_point], vector)
   #
   # @example Instance path as an array
-  #   instance = Sketchup.active_model.active_entities.grep(Sketchup::ComponentInstance).first
+  #   entities = Sketchup.active_model.entities
+  #   group = entities.add_group
+  #   group.entities.add_face([0, 0, 0], [100, 0, 0], [100, 100, 0], [0, 100, 0])
+  #   instance = group.to_component
+  #   transformation = instance.transformation
   #   edge = instance.definition.entities.grep(Sketchup::Edge).first
   #   path = [instance, edge]
-  #   start_point = edge.start.position
-  #   end_point = edge.end.position
-  #   vector = Geom::Vector3d.new(30, 30, 0)
-  #   Sketchup.active_model.entities.add_dimension_linear([path, start_point], [path, end_point],
+  #   start_point = edge.start.position.transform(transformation)
+  #   end_point = edge.end.position.transform(transformation)
+  #   vector = Geom::Vector3d.new(0, 30, 0)
+  #   Sketchup.active_model.entities.add_dimension_linear(
+  #     [path, start_point], [path, end_point], vector)
   #
   # @overload add_dimension_linear(start_pt_or_entity, end_pt_or_entity, offset_vector)
   #
@@ -334,13 +332,13 @@ class Sketchup::Entities
   # @overload add_dimension_linear(start_array, end_array, offset_vector)
   #
   #   @note Added in SketchUp 2019.
-  #   @param [Array(Array<Entity>, Geom::Point3d)] start_array
-  #     The {Array<Entity>} must contain one or more {Sketchup::ComponentInstance}'s
+  #   @param [Array(Array<Sketchup::Entity>, Geom::Point3d)] start_array
+  #     The {Array<Sketchup::Entity>} must contain one or more {Sketchup::ComponentInstance}'s
   #     and a leaf entity. The leaf entity can be a {Sketchup::Vertex},
   #     {Sketchup::ConstructionPoint}, {Sketchup::ConstructionLine}, or
   #     {Sketchup::Edge}. The {Geom::Point3d} is the point associated with the leaf entity.
-  #   @param [Array(Array<Entity>, Geom::Point3d)] end_array
-  #     The {Array<Entity>} must contain one or more {Sketchup::ComponentInstance}'s
+  #   @param [Array(Array<Sketchup::Entity>, Geom::Point3d)] end_array
+  #     The {Array<Sketchup::Entity>} must contain one or more {Sketchup::ComponentInstance}'s
   #     and a leaf entity. The leaf entity can be a {Sketchup::Vertex},
   #     {Sketchup::ConstructionPoint}, {Sketchup::ConstructionLine}, or
   #     {Sketchup::Edge}. The {Geom::Point3d} is the point associated with the leaf entity.
@@ -360,11 +358,11 @@ class Sketchup::Entities
   # @example
   #   entities = Sketchup.active_model.entities
   #   # Create a circle
-  #   centerpoint = Geom::Point3d.new(10, 10, 0)
+  #   center_point = Geom::Point3d.new(10, 10, 0)
   #   vector = Geom::Vector3d.new(0, 0, 1)
-  #   edges = entities.add_circle centerpoint, vector, 10
+  #   edges = entities.add_circle(center_point, vector, 10)
   #   circle = edges[0].curve
-  #   dim = entities.add_dimension_radial circle, [30, 30, 0]
+  #   dim = entities.add_dimension_radial(circle, [30, 30, 0])
   #
   # @param [Sketchup::ArcCurve] arc_curve
   #   an ArcCurve object to which the dimension is to be
@@ -386,9 +384,10 @@ class Sketchup::Entities
   # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
-  #   point1 = Geom::Point3d.new(0,0,0)
-  #   point2 = Geom::Point3d.new(20,20,20)
-  #   edges = entities.add_edges point1, point2
+  #   point1 = Geom::Point3d.new(0, 0, 0)
+  #   point2 = Geom::Point3d.new(20, 20, 20)
+  #   point3 = Geom::Point3d.new(20, 40, 20)
+  #   edges = entities.add_edges(point1, point2, point3)
   #
   # @note If the points form a closed loop, the first and last vertex will not
   #   merge. If you intend to create a face from the edges, use {#add_face}
@@ -427,17 +426,15 @@ class Sketchup::Entities
   # circle.
   #
   # @example
-  #   depth = 100
-  #   width = 100
   #   model = Sketchup.active_model
   #   entities = model.active_entities
-  #   pts = []
-  #   pts[0] = [0, 0, 0]
-  #   pts[1] = [width, 0, 0]
-  #   pts[2] = [width, depth, 0]
-  #   pts[3] = [0, depth, 0]
+  #   points = []
+  #   points << [0, 0, 0]
+  #   points << [100, 0, 0]
+  #   points << [100, 100, 0]
+  #   points << [0, 100, 0]
   #   # Add the face to the entities in the model
-  #   face = entities.add_face(pts)
+  #   face = entities.add_face(points)
   #
   # @note A special case exists for any face created on the ground plane, in
   #   which case the vertex order is ignored and the face is always facing down.
@@ -483,18 +480,21 @@ class Sketchup::Entities
   #   pm = Geom::PolygonMesh.new
   #   pm.add_point([ 0, 0, 0]) # 1
   #   pm.add_point([10, 0, 0]) # 2
-  #   pm.add_point([10,10, 0]) # 3
-  #   pm.add_point([ 0,10, 0]) # 4
+  #   pm.add_point([10, 10, 0]) # 3
+  #   pm.add_point([0, 10, 0]) # 4
   #   pm.add_point([20, 0, 5]) # 5
-  #   pm.add_point([20,10, 5]) # 6
+  #   pm.add_point([20, 10, 5]) # 6
   #   pm.add_polygon(1, -2, 3, 4)
-  #   pm.add_polygon(2, 5,6, -3)
+  #   pm.add_polygon(2, 5, 6, -3)
   #
   #   # Create a new group that we will populate with the mesh.
   #   group = Sketchup.active_model.entities.add_group
-  #   material = Sketchup.active_model.materials.add('green')
+  #   material1 = Sketchup.active_model.materials.add('My Green Material')
+  #   material1.color = 'green'
+  #   material2 = Sketchup.active_model.materials.add('My Red Material')
+  #   material2.color = 'red'
   #   smooth_flags = Geom::PolygonMesh::NO_SMOOTH_OR_HIDE
-  #   group.entities.add_faces_from_mesh(pm, smooth_flags, material)
+  #   group.entities.add_faces_from_mesh(pm, smooth_flags, material1, material2)
   #
   # @param [Geom::PolygonMesh] polygon_mesh
   #
@@ -557,13 +557,9 @@ class Sketchup::Entities
   # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
-  #   point = Geom::Point3d.new 10,20,30
-  #   image = entities.add_image "Shapes.jpg", point, 300
-  #   if (image)
-  #     UI.messagebox image
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   point = Geom::Point3d.new(10, 20, 30)
+  #   image = entities.add_image(Sketchup.find_support_file('ColorWheel.png',
+  #     'Resources/../..'), point, 300)
   #
   # @param [String] path
   #   A path for the image file.
@@ -590,20 +586,14 @@ class Sketchup::Entities
   # entities.
   #
   # @example
-  #   point = Geom::Point3d.new 10,20,30
-  #   transform = Geom::Transformation.new point
   #   model = Sketchup.active_model
   #   entities = model.active_entities
-  #   path = Sketchup.find_support_file "Bed.skp",
-  #     "Components/Components Sampler/"
+  #   point = Geom::Point3d.new(10, 20, 30)
+  #   transform = Geom::Transformation.new(point)
+  #   path = Sketchup.find_support_file("Bed.skp", "Components/Components Sampler/")
   #   definitions = model.definitions
-  #   componentdefinition = definitions.load path
-  #   instance = entities.add_instance componentdefinition, transform
-  #   if (instance)
-  #     UI.messagebox instance
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   componentdefinition = definitions.load(path)
+  #   instance = entities.add_instance(componentdefinition, transform)
   #
   # @param [Sketchup::ComponentDefinition] definition
   #   A ComponentDefinition object.
@@ -628,14 +618,9 @@ class Sketchup::Entities
   # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
-  #   point1 = Geom::Point3d.new(0,0,0)
-  #   point2 = Geom::Point3d.new(20,20,20)
-  #   line = entities.add_line point1,point2
-  #   if (line)
-  #     UI.messagebox line
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   point1 = Geom::Point3d.new(0, 0, 0)
+  #   point2 = Geom::Point3d.new(20, 20, 20)
+  #   line = entities.add_line(point1, point2)
   #
   # @param [Geom::Point3d] point1
   #   Point3d object representing the edge's starting point.
@@ -661,10 +646,10 @@ class Sketchup::Entities
   # @example
   #   entities = Sketchup.active_model.entities
   #   center = Geom::Point3d.new
-  #   normal = Geom::Vector3d.new(0,0,1)
+  #   normal = Geom::Vector3d.new(0, 0, 1)
   #   radius = 100
   #   numsides = 6
-  #   edges = entities.add_ngon center, normal, radius, numsides
+  #   edges = entities.add_ngon(center, normal, radius, numsides)
   #
   # @param [Geom::Point3d] center
   #   A Point3d object representing the center of the polygon.
@@ -688,8 +673,17 @@ class Sketchup::Entities
   # The add_observer method is used to add an observer to the current object.
   #
   # @example
+  #   # This is an example of an observer that watches the entities collection.
+  #   # It writes to the console everytime new entities are added to the model.
+  #   class MyEntitiesObserver < Sketchup::EntitiesObserver
+  #     def onElementAdded(entities, entity)
+  #       puts "onElementAdded: #{entity} was added to the model."
+  #     end
+  #   end
+  #
+  #   # Attach the observer
   #   entities = Sketchup.active_model.entities
-  #   status = entities.add_observer observer
+  #   entities.add_observer(MyEntitiesObserver.new)
   #
   # @param [Object] observer
   #   An observer.
@@ -705,9 +699,9 @@ class Sketchup::Entities
   # @example
   #   # Create a section plane
   #   model = Sketchup.active_model
-  #   sp = model.entities.add_section_plane([50, 50, 0], [1.0, 1.0, 0])
+  #   section_plane = model.entities.add_section_plane([50, 50, 0], [1.0, 1.0, 0])
   #   # Activate it
-  #   sp.activate
+  #   section_plane.activate
   #   # Make sure section planes are visible
   #   model.rendering_options['DisplaySectionPlanes'] = true
   #
@@ -726,26 +720,33 @@ class Sketchup::Entities
   # The {#add_text} method adds a note or label text entity to the entities.
   #
   # @example
-  #   coordinates = [10, 10, 10]
   #   model = Sketchup.active_model
   #   entities = model.entities
-  #   point = Geom::Point3d.new coordinates
-  #   text = entities.add_text "This is a Test", point
+  #   point = Geom::Point3d.new(10, 10, 10)
+  #   text = entities.add_text("This is a Test", point)
   #
   # @example Instance path
-  #   instance = Sketchup.active_model.active_entities.grep(Sketchup::ComponentInstance).first
+  #   entities = Sketchup.active_model.entities
+  #   group = entities.add_group
+  #   group.entities.add_face([0, 0, 0], [100, 0, 0], [100, 100, 0], [0, 100, 0])
+  #   instance = group.to_component
+  #   transformation = instance.transformation
   #   edge = instance.definition.entities.grep(Sketchup::Edge).first
   #   instance_path = Sketchup::InstancePath.new([instance, edge])
-  #   point = edge.start.position
-  #   vector = Geom::Vector3d.new(30, 30, 0)
+  #   point = edge.start.position.transform(transformation)
+  #   vector = Geom::Vector3d.new(45, 45, 45)
   #   Sketchup.active_model.entities.add_text("mytext", [instance_path, point], vector)
   #
   # @example Instance path as an array
-  #   instance = Sketchup.active_model.active_entities.grep(Sketchup::ComponentInstance).first
+  #   entities = Sketchup.active_model.entities
+  #   group = entities.add_group
+  #   group.entities.add_face([0, 0, 0], [100, 0, 0], [100, 100, 0], [0, 100, 0])
+  #   instance = group.to_component
+  #   transformation = instance.transformation
   #   edge = instance.definition.entities.grep(Sketchup::Edge).first
   #   path = [instance, edge]
-  #   point = edge.start.position
-  #   vector = Geom::Vector3d.new(30, 30, 0)
+  #   point = edge.start.position.transform(transformation)
+  #   vector = Geom::Vector3d.new(45, 45, 45)
   #   Sketchup.active_model.entities.add_text("mytext", [path, point], vector)
   #
   # @overload add_text(text, point, vector)
@@ -814,14 +815,12 @@ class Sketchup::Entities
   #
   # Refer to the documentation of {Sketchup::EntitiesBuilder} for more details.
   #
-  # @api EntitiesBuilder
-  #
   # @example
   #   model = Sketchup.active_model
   #   model.entities.build { |builder|
   #     edge = builder.add_edge([0, 0, 0], [9, 0, 0])
   #     edge.material = 'red'
-  #     face = builder.add_face([[0, 0, 0], [9, 0, 0], [9, 9, 0], [0, 9, 0]])
+  #     face = builder.add_face([0, 0, 0], [9, 0, 0], [9, 9, 0], [0, 9, 0])
   #     face.material = 'maroon'
   #   }
   #
@@ -846,12 +845,7 @@ class Sketchup::Entities
   # entities.
   #
   # @example
-  #   coordinates = [10, 10, 10]
-  #   model = Sketchup.active_model
-  #   entities = model.entities
-  #   point = Geom::Point3d.new coordinates
-  #   text = entities.add_text "This is a Test", point
-  #   UI.messagebox "Clearing All"
+  #   entities = Sketchup.active_model.entities
   #   status = entities.clear!
   #
   # @return [Boolean] true if successful, false if unsuccessful
@@ -862,9 +856,7 @@ class Sketchup::Entities
 
   #
   # @example
-  #   model = Sketchup.active_model
-  #   entities = model.entities
-  #   entities.add_cpoint([10, 10, 10])
+  #   entities = Sketchup.active_model.entities
   #   number = entities.count
   #
   # @note Since SketchUp 2014 the count method is inherited from Ruby's
@@ -883,11 +875,8 @@ class Sketchup::Entities
   # of entities.
   #
   # @example
-  #   coordinates = [10, 10, 10]
   #   model = Sketchup.active_model
   #   entities = model.entities
-  #   point = Geom::Point3d.new coordinates
-  #   text = entities.add_text "This is a Test", point
   #   entities.each { | entity| puts entity }
   #
   # @note Don't remove content from this collection while iterating over it with
@@ -903,28 +892,28 @@ class Sketchup::Entities
   def each
   end
 
-  # The erase_entities method is used to erase one or more entities from the
+  # The {#erase_entities} method is used to erase one or more entities from the
   # model.
   #
+  # @bug Prior to SketchUp 2023.0 this could crash SketchUp if you erased an
+  #   instance used by the active edit path.
+  #
   # @example
-  #   depth = 100
-  #   width = 100
   #   model = Sketchup.active_model
   #   entities = model.active_entities
-  #   pts = []
-  #   pts[0] = [0, 0, 0]
-  #   pts[1] = [width, 0, 0]
-  #   pts[2] = [width, depth, 0]
-  #   pts[3] = [0, depth, 0]
+  #   points = []
+  #   points << [0, 0, 0]
+  #   points << [100, 0, 0]
+  #   points << [100, 100, 0]
+  #   points << [0, 100, 0]
   #
-  #   # Add the face to the entities in the model
-  #   face = entities.add_face pts
+  #   # Add the face to the entities in the model.
+  #   face = entities.add_face(pts)
+  #   faces = entities.grep(Sketchup::Face)
+  #   entities.erase_entities(faces)
   #
-  #   # I just happen to know that the second entity in the
-  #   # entities objects is an edge, so erase it.
-  #   UI.messagebox entities
-  #   entities.erase_entities entities[1]
-  #   UI.messagebox entities
+  # @note It's faster to use this method and erase in bulk than to iterate
+  #   individual drawing elements calling {Sketchup::Drawingelement#erase!}.
   #
   # @overload erase_entities(entities)
   #
@@ -933,6 +922,9 @@ class Sketchup::Entities
   # @overload erase_entities(*entities)
   #
   #   @param [Array<Sketchup::Entity>] entities
+  #
+  # @raise [ArgumentError] if the given entities contains instances or
+  #   definitions are used by {Sketchup::Model#active_path}.
   #
   # @return [nil]
   #
@@ -961,18 +953,19 @@ class Sketchup::Entities
   #
   # @example
   #   pm = Geom::PolygonMesh.new
-  #   pm.add_point([ 0, 0, 0]) # 1
-  #   pm.add_point([10, 0, 0]) # 2
-  #   pm.add_point([10,10, 0]) # 3
-  #   pm.add_point([ 0,10, 0]) # 4
-  #   pm.add_point([20, 0, 5]) # 5
-  #   pm.add_point([20,10, 5]) # 6
+  #   pm.add_point([  0,  0, 0]) # 1
+  #   pm.add_point([ 10,  0, 0]) # 2
+  #   pm.add_point([ 10, 10, 0]) # 3
+  #   pm.add_point([  0, 10, 0]) # 4
+  #   pm.add_point([ 20,  0, 5]) # 5
+  #   pm.add_point([ 20, 10, 5]) # 6
   #   pm.add_polygon(1, -2, 3, 4)
   #   pm.add_polygon(2, 5, 6, -3)
   #
   #   # Create a new group that we will populate with the mesh.
   #   group = Sketchup.active_model.entities.add_group
-  #   material = Sketchup.active_model.materials.add('red')
+  #   material = Sketchup.active_model.materials.add('My Red Material')
+  #   material.color = 'red'
   #   smooth_flags = Geom::PolygonMesh::HIDE_BASED_ON_INDEX
   #   group.entities.fill_from_mesh(pm, true, smooth_flags, material)
   #
@@ -1009,8 +1002,26 @@ class Sketchup::Entities
   # instance, or group object with a entities object.
   #
   # @example
-  #   entities.intersect_with recurse, transformation1, entities1,
-  #     transformation2, hidden, entities2
+  #   model = Sketchup.active_model
+  #   entities = model.active_entities
+  #
+  #   # Create a group to intersect with the model
+  #   group1 = entities.add_group
+  #   face1 = group1.entities.add_face([0, 0, 0], [100, 0, 0], [100, 100, 0], [0, 100, 0])
+  #   face1.pushpull(-40)
+  #
+  #   # Add geometry into the model
+  #   face2 = entities.add_face([50, 50, 0], [200, 50, 0], [200, 200, 0], [50, 200, 0])
+  #   face2.pushpull(-100)
+  #
+  #   entities1 = group1.entities
+  #   entities2 = entities.to_a
+  #
+  #   transformation1 = Geom::Transformation.new
+  #   transformation2 = group1.transformation
+  #
+  #   # Intersect the group and model geometry
+  #   entities.intersect_with(true, transformation1, entities1, transformation2, true, entities2)
   #
   # @param [Boolean] recurse
   #   true if you want this entities object to be recursed
@@ -1046,7 +1057,6 @@ class Sketchup::Entities
   # @example
   #   model = Sketchup.active_model
   #   entities = model.entities
-  #   entities.add_cpoint([10, 10, 10])
   #   number = entities.length
   #
   # @return [Integer]
@@ -1061,12 +1071,11 @@ class Sketchup::Entities
   # of entities.
   #
   # @example
-  #   coordinates = [10, 10, 10]
   #   model = Sketchup.active_model
   #   entities = model.entities
-  #   point = Geom::Point3d.new coordinates
-  #   text = entities.add_text "This is a Test", point
-  #   model = entities.model
+  #   group = entities.add_group
+  #   face = group.entities.add_face([0, 0, 0], [100, 0, 0], [100, 100, 0], [0, 100, 0])
+  #   model = group.entities.model
   #
   # @return [Sketchup::Model] the model that contains the collection of
   #   entities if successful.
@@ -1080,12 +1089,11 @@ class Sketchup::Entities
   # ComponentDefinition object.
   #
   # @example
-  #   coordinates = [10, 10, 10]
   #   model = Sketchup.active_model
   #   entities = model.entities
-  #   point = Geom::Point3d.new coordinates
-  #   text = entities.add_text "This is a Test", point
-  #   parent = entities.parent
+  #   group = entities.add_group
+  #   face = group.entities.add_face([0, 0, 0], [100, 0, 0], [100, 100, 0], [0, 100, 0])
+  #   model = group.entities.parent
   #
   # @return [Sketchup::ComponentDefinition, Sketchup::Model] the object that
   #   contains the collection of entities if successful
@@ -1098,8 +1106,22 @@ class Sketchup::Entities
   # object.
   #
   # @example
+  #   # This is an example of an observer that watches the entities collection.
+  #   # It writes to the console everytime new entities are added to the model.
+  #   class MyEntitiesObserver < Sketchup::EntitiesObserver
+  #     def onElementAdded(entities, entity)
+  #       puts "onElementAdded: #{entity} was added to the model."
+  #     end
+  #   end
+  #
+  #   # Attach the observer
   #   entities = Sketchup.active_model.entities
-  #   status = entities.remove_observer observer
+  #   my_observer = MyEntitiesObserver.new
+  #   entities.add_observer(my_observer)
+  #   # Add an entity to the model, and the observer will trigger.
+  #   entities.add_line([0,0,0], [100,0,0])
+  #   # Remove the oberserver and the observer will no longer trigger.
+  #   status = entities.remove_observer(my_observer)
   #
   # @param [Object] observer
   #   An observer.
@@ -1115,8 +1137,7 @@ class Sketchup::Entities
   # @example
   #   model = Sketchup.active_model
   #   entities = model.entities
-  #   entities.add_cpoint([10, 10, 10])
-  #   number = entities.size
+  #   entities.size
   #
   # @return [Integer]
   #
@@ -1130,10 +1151,16 @@ class Sketchup::Entities
   # sub-entities all at once.
   #
   # @example
-  #   # Raise vertices in selection by their distance to the origin.
   #   model = Sketchup.active_model
   #   entities = model.active_entities
-  #   with_vertices = entities.select { |entity| entity.respond_to?(:vertices) }
+  #
+  #   # Create a group with geometry to transform
+  #   group1 = entities.add_group
+  #   face1 = group1.entities.add_face([0, 0, 0], [100, 0, 0], [100, 100, 0], [0, 100, 0])
+  #   face1.pushpull(-40)
+  #
+  #   # Raise vertices in selection by their distance to the origin.
+  #   with_vertices = group1.entities.select { |entity| entity.respond_to?(:vertices) }
   #   vertices = with_vertices.flat_map(&:vertices).uniq
   #   lengths = vertices.map { |vertex| vertex.position.distance(ORIGIN) }
   #   vectors = lengths.map { |length| Geom::Vector3d.new(0, 0, length) }
@@ -1162,11 +1189,14 @@ class Sketchup::Entities
   #
   # @example
   #   entities = Sketchup.active_model.entities
-  #   entity1 = entities.add_line([0,0,0],[100,100,100])
-  #   entity2 = entities.add_line([0,0,0],[200,-10,-10])
+  #   # Add edges to the model at the origin.
+  #   edge1 = entities.add_line([0, 0, 0], [100, 100, 100])
+  #   edge2 = entities.add_line([0, 0, 0], [200, -10, -10])
   #
-  #   transformation = Geom::Transformation.new([100,0,0])
-  #   entities.transform_entities(transformation, [entity1, entity2])
+  #   # After the transformation, the edges will be moved 100 inches
+  #   # away from the origin, on the x axis.
+  #   transformation = Geom::Transformation.new([100, 0, 0])
+  #   entities.transform_entities(transformation, [edge1, edge2])
   #
   # @param [Geom::Transformation] transform
   #   The Transformation to apply.
@@ -1188,7 +1218,11 @@ class Sketchup::Entities
   #
   # @example
   #   model = Sketchup.active_model
-  #   edges = model.selection.grep(Sketchup::Edge)
+  #   entities = model.active_entities
+  #   edges = []
+  #   edges << entities.add_line([0, 0, 0], [100, 20, 0])
+  #   edges << entities.add_line([100, 20, 0], [130, 200, 50])
+  #   edges << entities.add_line([130, 200, 50], [130, 300, 50])
   #   curves = model.active_entities.weld(edges)
   #
   # @param [Array<Sketchup::Edge>] edges

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # Drawingelement is a base class for an item in the model that can be
@@ -97,9 +97,12 @@ class Sketchup::Drawingelement < Sketchup::Entity
   def casts_shadows?
   end
 
-  # The erase! method is used to erase an element from the model.
+  # The {#erase!} method is used to erase an element from the model.
   #
   # Erasing an Edge also erases all of the Face objects that use the Edge.
+  #
+  # @bug Prior to SketchUp 2023.0 this could crash SketchUp if you erased an
+  #   instance used by the active edit path.
   #
   # @example
   #   depth = 100
@@ -115,7 +118,14 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #   face = entities.add_face pts
   #   status = face.erase!
   #
-  # @return [Boolean] true if successful, false if unsuccessful
+  # @note When erasing multiple elements, it's faster to
+  #   use {Sketchup::Entities#erase_entities} and erase in bulk than to iterate
+  #   individual drawing elements calling {Sketchup::Drawingelement#erase!}.
+  #
+  # @raise [ArgumentError] if the drawing element is an instance used
+  #   by {Sketchup::Model#active_path}.
+  #
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def erase!

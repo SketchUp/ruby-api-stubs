@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # Provides access to the different line style objects in the model.
@@ -26,12 +26,12 @@ class Sketchup::LineStyles < Sketchup::Entity
   #
   # @overload [](index)
   #
-  #   @param [Index] index The index of the line style to retrieve.
+  #   @param [Integer] index The index of the line style to retrieve.
   #
   #   @raise [IndexError] If index is out of bounds.
   #
-  # @return [Sketchup::LineStyle, nil] The line style retrieved. Nil if the name
-  #   couldn't be retrived.
+  # @return [Sketchup::LineStyle, nil] The line style retrieved. +nil+ if the name
+  #   couldn't be retrieved.
   #
   # @version SketchUp 2019
   def [](arg)
@@ -51,12 +51,12 @@ class Sketchup::LineStyles < Sketchup::Entity
   #
   # @overload [](index)
   #
-  #   @param [Index] index The index of the line style to retrieve.
+  #   @param [Integer] index The index of the line style to retrieve.
   #
   #   @raise [IndexError] If index is out of bounds.
   #
-  # @return [Sketchup::LineStyle, nil] The line style retrieved. Nil if the name
-  #   couldn't be retrived.
+  # @return [Sketchup::LineStyle, nil] The line style retrieved. +nil+ if the name
+  #   couldn't be retrieved.
   #
   # @version SketchUp 2019
   def at(arg)
@@ -71,6 +71,8 @@ class Sketchup::LineStyles < Sketchup::Entity
   # @return [nil]
   #
   # @version SketchUp 2019
+  #
+  # @yieldparam [Sketchup::LineStyle] linestyle
   def each
   end
 

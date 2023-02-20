@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Sketchup module contains a number of important utility methods for use in
@@ -885,6 +885,33 @@ module Sketchup
   def self.require(path)
   end
 
+  # The {.size_viewport} method changes the pixel size of the viewport and SketchUp window.
+  # This can be useful for producing a consistent behavior in automatic testing,
+  # regardless of the display resolution.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   Sketchup.resize_viewport(model, 800, 600)
+  #
+  # @param [Sketchup::Model] model
+  #
+  # @param [Integer] width
+  #   Width in physical pixels
+  #
+  # @param [Integer] height
+  #   Height in physical pixels
+  #
+  # @return [Boolean] +true+ on success. +false+ if the window couldn't reach the desired size,
+  #   e.g. because it wouldn't fit the screen.
+  #
+  # @see Sketchup::View#vpwidth
+  #
+  # @see Sketchup::View#vpheight
+  #
+  # @version SketchUp 2023.0
+  def self.resize_viewport(model, width, height)
+  end
+
   # The save_thumbnail method is used to generate a thumbnail for any SKP file -
   # not necessarily the loaded model.
   #
@@ -1011,20 +1038,10 @@ module Sketchup
   # - 10533: display the Shadows Settings dialog box
   # - 10537: toggle the Views toolbar
   # - 10538: display the System Preferences dialog box (Display tab)
-  # - 10545: toggle Color ByLayer
+  # - 10545: toggle Shadows
   # - 10546: toggle Shadows toolbar
   # - 10551: toogle Large icons
   # - 10576: toggle Render Mode toolbar
-  # - 10596: set Render Mode to No Transparency (Preferences)
-  # - 10597: set Render Mode to Wire (Preferences)
-  # - 10598: set Render Mode to Transparency (Preferences)
-  # - 10599: set Render Mode to Surfaces Shading (Preferences)
-  # - 10600: set Render Mode to Texture (Preferences)
-  # - 10601: set Render Mode to No Texture (Preferences)
-  # - 10602: toggle Shadows
-  # - 10603: toggle Profiles
-  # - 10604: toggle Extension Lines
-  # - 10605: toggle Jitter edges
   # - 21019: hide Status bar and VCB
   # - 21020: show Status bar and VCB
   # - 21022: hide Status bar and VCB

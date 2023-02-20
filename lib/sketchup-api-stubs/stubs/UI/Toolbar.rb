@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Toolbar class contains methods to create and manipulate SketchUp
@@ -84,7 +84,7 @@ class UI::Toolbar
   def count
   end
 
-  # The each method is used to iterate through all of the commands
+  # The {#each} method is used to iterate through all of the commands
   # attached to a toolbar.
   #
   # @example
@@ -104,8 +104,9 @@ class UI::Toolbar
   #
   # @version SketchUp 8.0 M1
   #
-  # @yield [key, value] Variables that will hold each key and value as they are
-  #   found.
+  # @yieldparam [UI::Command, String] command
+  #   For separators a string +"|"+ is
+  #   yielded.
   def each
   end
 

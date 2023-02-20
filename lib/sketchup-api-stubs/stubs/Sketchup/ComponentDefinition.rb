@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Sketchup::ComponentDefinition} class is used to define the contents for
@@ -424,7 +424,13 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   def name
   end
 
-  # The name= method is used to set the name of the component definition.
+  # The {name=} method is used to set the name of the component definition.
+  #
+  # The name should be unique to the model, if it's not the name will automatically
+  # be made unique.
+  #
+  # @bug In SketchUp 2022.0 a bug might lead to an available name being incorrectly renamed. Or
+  #   a name that should be unavailable would be duplicated. This was fixed in SketchUp 2022.0.1.
   #
   # @example
   #   path = Sketchup.find_support_file "Bed.skp",
@@ -436,8 +442,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #
   # @param [String] name
   #
-  # @return [String] the name assigned to the component definition if
-  #   successful
+  # @return [String]
   #
   # @version SketchUp 6.0
   def name=(name)
@@ -614,6 +619,41 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #
   # @version SketchUp 2015
   def set_classification_value(path, value)
+  end
+
+  # The {#thumbnail_camera} method is used to retrieve a camera representing
+  # the thumbnail associated with the component definition.
+  #
+  # @example
+  #   # Get the thumbnail camera
+  #   componentdefinition = Sketchup.active_model.definitions[0]
+  #   thumbnail_camera = componentdefinition.thumbnail_camera
+  #
+  # @return [Sketchup::Camera] the camera associated with the thumbnail.
+  #
+  # @version SketchUp 2023.0
+  def thumbnail_camera
+  end
+
+  # The {#thumbnail_camera=} method is used to set the camera for the
+  # thumbnail associated with the component definition.
+  #
+  # @example
+  #   componentdefinition = Sketchup.active_model.definitions[0]
+  #   eye = Geom::Point3d.new(20, 5, 30)
+  #   target = Geom::Point3d.new(20, 60, 25)
+  #   up = Z_AXIS
+  #   camera = Sketchup::Camera.new(eye, target, up)
+  #   # Assign camera to the thumbnail's camera and refresh.
+  #   componentdefinition.thumbnail_camera = camera
+  #   componentdefinition.refresh_thumbnail
+  #
+  # @param [Sketchup::Camera] camera
+  #
+  # @raise [TypeError] if the passed argument is not of {#Sketchup::Camera} type.
+  #
+  # @version SketchUp 2023.0
+  def thumbnail_camera=(camera)
   end
 
 end
