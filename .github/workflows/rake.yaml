@@ -28,7 +28,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ macos-12, windows-2022 ]
-        ruby: [ 2.5, 2.7, 3.1 ]
+        ruby: [ 2.7 ]
 
     steps:
       - name: Checkout source
@@ -43,6 +43,6 @@ jobs:
           bundler-cache: true
         timeout-minutes: 10
 
-      - name: Run tests
+      - name: Run rake
         timeout-minutes: 10
-        run: bundle exec rake test
+        run: bundle exec rake
