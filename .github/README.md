@@ -1,6 +1,6 @@
 # SketchUp Ruby API Stubs
 
-[![Gem Version](https://badge.fury.io/rb/sketchup-api-stubs.svg)](https://badge.fury.io/rb/sketchup-api-stubs) ![Build status](https://github.com/thomthom/skippy/actions/workflows/rake.yaml/badge.svg?branch=main)
+[![Gem Version](https://badge.fury.io/rb/sketchup-api-stubs.svg)](https://badge.fury.io/rb/sketchup-api-stubs) ![Build status](https://github.com/sketchup/sketchup-yard-template/actions/workflows/rake.yaml/badge.svg?branch=main)
 
 Auto-generated stubs for the SketchUp Ruby API. Useful for IDE intellisense and auto-complete.
 
