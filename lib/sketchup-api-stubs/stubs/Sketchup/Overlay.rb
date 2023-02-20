@@ -251,7 +251,7 @@ class Sketchup::Overlay
   # @raise [ArgumentError] if +id+ or +name+ is an empty string
   #
   # @version SketchUp 2023.0
-  def initialize(id, name, description: = "")
+  def initialize(id, name, description: "")
   end
 
   # This is a user facing display name that will appear in the UI.
