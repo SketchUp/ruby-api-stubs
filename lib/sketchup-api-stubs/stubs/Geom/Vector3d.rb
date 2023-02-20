@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Vector3d class is used to represent vectors in a 3 dimensional space.
@@ -58,7 +58,7 @@ class Geom::Vector3d
   #   vector2 = Geom::Vector3d.new(0, 1, 0)
   #   dot = vector1 % vector2
   #
-  # @param [Geom::Vector] vector
+  # @param [Geom::Vector3d] vector
   #
   # @return [Float]
   #
@@ -291,7 +291,7 @@ class Geom::Vector3d
   #   vector2 = Geom::Vector3d.new(0, 1, 0)
   #   dot = vector1.dot(vector2)
   #
-  # @param [Geom::Vector] vector
+  # @param [Geom::Vector3d] vector
   #
   # @return [Float]
   #

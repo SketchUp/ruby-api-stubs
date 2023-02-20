@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # {UI::Notification} objects allows you to show native notifications in the
@@ -176,7 +176,7 @@ class UI::Notification
   # @param [String] title
   #   Sets the title of the button.
   #
-  # @param [Block] block
+  # @param [Proc] block
   #   Sets the action callback, this will be called when
   #   the user clicks on the dismiss button.
   #
@@ -222,7 +222,7 @@ class UI::Notification
   # @param [String] title
   #   Sets the title of the button.
   #
-  # @param [Block] block
+  # @param [Proc] block
   #   Sets the action callback, this will be called when
   #   the user clicks on the dismiss button.
   #

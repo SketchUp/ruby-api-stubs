@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A collection of Materials objects. Each model contains a Materials collection
@@ -166,8 +166,7 @@ class Sketchup::Materials < Sketchup::Entity
   #
   # @version SketchUp 6.0
   #
-  # @yield [Sketchup::Material] A variable that will hold each Material object as they
-  #   are found.
+  # @yieldparam [Sketchup::Material] material
   def each
   end
 

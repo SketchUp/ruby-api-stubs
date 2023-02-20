@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # References an auto-text definition. Some auto-text definitions are mandatory.
@@ -39,6 +39,9 @@ class Layout::AutoTextDefinition
   NUMBER_STYLE_LC_ROMAN = nil # Stub value.
   NUMBER_STYLE_UC_ALPHA = nil # Stub value.
   NUMBER_STYLE_UC_ROMAN = nil # Stub value.
+
+  SEQUENCE_TYPE_PER_DOCUMENT = nil # Stub value.
+  SEQUENCE_TYPE_PER_PAGE = nil # Stub value.
 
   TYPE_CUSTOM_TEXT = nil # Stub value.
   TYPE_DATE_CREATED = nil # Stub value.
@@ -551,6 +554,52 @@ class Layout::AutoTextDefinition
   #
   # @version LayOut 2022.0
   def sequence_format=(sequence_format)
+  end
+
+  # The {#sequence_type} method returns how the +Layout::AutoTextDefinition::TYPE_SEQUENCE+
+  # {Layout::AutoTextDefinition} operates over multiple pages in a document.
+  #
+  # The sequence type can be one of the following values:
+  # [+Layout::AutoTextDefinition::SEQUENCE_TYPE_PER_DOCUMENT+]
+  # [+Layout::AutoTextDefinition::SEQUENCE_TYPE_PER_PAGE+]
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   sequence_def =
+  #       doc.auto_text_definitions.add("Seq1", Layout::AutoTextDefinition::TYPE_SEQUENCE)
+  #   type = sequence_def.sequence_type
+  #
+  # @raise [ArgumentError] if the {Layout::AutoTextDefinition}'s type is not
+  #   +Layout::AutoTextDefinition::TYPE_SEQUENCE+.
+  #
+  # @return [Integer]
+  #
+  # @version LayOut 2023.0
+  def sequence_type
+  end
+
+  # The {#sequence_type=} method sets how the +Layout::AutoTextDefinition::TYPE_SEQUENCE+
+  # {Layout::AutoTextDefinition} operates over multiple pages in a document.
+  #
+  # The sequence type can be one of the following values:
+  # [+Layout::AutoTextDefinition::SEQUENCE_TYPE_PER_DOCUMENT+]
+  # [+Layout::AutoTextDefinition::SEQUENCE_TYPE_PER_PAGE+]
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   sequence_def =
+  #       doc.auto_text_definitions.add("Seq1", Layout::AutoTextDefinition::TYPE_SEQUENCE)
+  #   sequence_def.sequence_type = Layout::AutoTextDefinition::SEQUENCE_TYPE_PER_PAGE
+  #
+  # @param [Integer] sequence_type
+  #
+  # @raise [ArgumentError] if the {Layout::AutoTextDefinition}'s type is not
+  #   +Layout::AutoTextDefinition::TYPE_SEQUENCE+.
+  #
+  # @raise [ArgumentError] if sequence_type is not a valid sequence type
+  #
+  # @version LayOut 2023.0
+  def sequence_type=(sequence_type)
   end
 
   # The {#start_index} method returns the start index for

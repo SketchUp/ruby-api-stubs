@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The SketchupExtension class contains methods allowing you to create and
@@ -204,7 +204,7 @@ class SketchupExtension
   #   The relative path to the script that loads your
   #   plugin.
   #
-  # @return [Sketchup::Extension] the new Extension object
+  # @return [SketchupExtension]
   #
   # @version SketchUp 6.0
   def initialize(title, path)

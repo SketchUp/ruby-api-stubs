@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The RenderingOptions class contains method to extract the rendering
@@ -131,6 +131,7 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   ROPSetGroundTransparency = nil # Stub value.
   ROPSetHideConstructionGeometry = nil # Stub value.
   ROPSetHighlightColor = nil # Stub value.
+  ROPSetHorizonColor = nil # Stub value.
   ROPSetJitterEdges = nil # Stub value.
   ROPSetLineEndEdges = nil # Stub value.
   ROPSetLineEndWidth = nil # Stub value.
@@ -162,7 +163,7 @@ class Sketchup::RenderingOptions < Sketchup::Entity
 
   # Class Methods
 
-  # The each_key method iterates through all of the rendering options keys.
+  # The {#each_key} method iterates through all of the rendering options keys.
   #
   # @example
   #   Sketchup.active_model.rendering_options.each_key { |key|
@@ -173,7 +174,7 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   #
   # @version SketchUp 6.0
   #
-  # @yield [key] Variable to hold each key as they are found.
+  # @yieldparam [String] key
   def self.each_key
   end
 
@@ -263,17 +264,13 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   #
   # @version SketchUp 6.0
   #
-  # @yield [key, value]
-  #
   # @yieldparam [String] key
-  #   The key of each pair found.
   #
   # @yieldparam [Object] value
-  #   The value of each pair found.
   def each
   end
 
-  # The each_key method iterates through all of the rendering options keys.
+  # The {#each_key} method iterates through all of the rendering options keys.
   #
   # @example
   #   Sketchup.active_model.rendering_options.each_key { |key|
@@ -284,7 +281,7 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   #
   # @version SketchUp 6.0
   #
-  # @yield [key] Variable to hold each key as they are found.
+  # @yieldparam [String] key
   def each_key
   end
 

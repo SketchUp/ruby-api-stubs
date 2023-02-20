@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 
@@ -205,14 +205,6 @@
 
   # Instance Methods
 
-  # This function will add a separator to a given menu the first
-  # time it is called.  It is useful for adding a separator before
-  # the first plugin that is added to a given menu.
-  #
-  # @deprecated Avoid adding separators to top level menus. If you require
-  #   grouping use a sub-menu instead.
-  #
-  # @param [String] menu_name
   #
   # @version SketchUp 6.0
   def add_separator_to_menu(menu_name)

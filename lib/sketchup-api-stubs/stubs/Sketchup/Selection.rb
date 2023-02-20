@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A set of the currently selected entities. Use the Model.selection method
@@ -166,10 +166,10 @@ class Sketchup::Selection
   def count
   end
 
-  # The each method is used to iterate through all of the selected entities.
+  # The {#each} method is used to iterate through all of the selected entities.
   #
   # If you want to do something with all of the selected Entities, this is more
-  # efficient than using [].
+  # efficient than using {#[]}.
   #
   # @example
   #   selection.each { |entity| puts entity }
@@ -183,8 +183,7 @@ class Sketchup::Selection
   #
   # @version SketchUp 6.0
   #
-  # @yield [Sketchup::Entity] A variable that will hold each Entity object as they
-  #   are found.
+  # @yieldparam [Sketchup::Entity] entity
   def each
   end
 

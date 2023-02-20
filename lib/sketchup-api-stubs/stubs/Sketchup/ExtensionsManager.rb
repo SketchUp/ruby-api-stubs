@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The ExtensionsManager class provides a way of accessing the
@@ -62,19 +62,18 @@ class Sketchup::ExtensionsManager
   def count
   end
 
-  # The each method is used to iterate through extensions.
+  # The {#each} method is used to iterate through extensions.
   #
   # @example
   #   manager = Sketchup.extensions
   #   # Retrieves each extension
   #   manager.each { |extension| puts extension.name }
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 8.0 M2
   #
-  # @yield [extension] A variable that will hold each SketchupExtension object
-  #   as they are found.
+  # @yieldparam [SketchupExtension] extension
   def each
   end
 

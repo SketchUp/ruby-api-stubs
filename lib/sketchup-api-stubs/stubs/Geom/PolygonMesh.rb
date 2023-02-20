@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {#Geom::PolygonMesh} class contains methods to create polygon mesh
@@ -130,22 +130,8 @@ class Geom::PolygonMesh
   #     polygon_index = mesh.add_polygon([point1, point2, point3])
   #   @param [Array<Geom::Point3d>] point3d_array
   #
-  # @overload add_polygon(array)
-  #
-  #   Adds a polygon from an Array of 3-element Arrays.
-  #   @example
-  #     pts = [[0, 0, 0], [1, 0, 0], [1, 1, 0], [0.5, 2, 0], [0, 1, 0]]
-  #     mesh = Geom::PolygonMesh.new
-  #     polygon_index = mesh.add_polygon(pts)
-  #     Sketchup.active_model.entities.add_faces_from_mesh(mesh)
-  #   @param [Array<Array(3)>] array
-  #     An array of arrays of length 3, where the inner arrays are used as if
-  #     they were Point3d objects.
-  #
-  # @return [Integer] The index of the polygon in the mesh.
-  #
-  # @return [0] Invalid index. Returned if the method failed to create a
-  #   polygon.
+  # @return [Integer] The 1-based index of the polygon in the mesh. +0+
+  #   is returned if the method failed to create a polygon.
   #
   # @version SketchUp 6.0
   def add_polygon(*args)
@@ -362,7 +348,7 @@ class Geom::PolygonMesh
   # @example
   #   polygons = polygonmesh.polygons
   #
-  # @return [Array<Array<Integer>>, Array<nil>]
+  # @return [Array<Array<Integer>>]
   #
   # @version SketchUp 6.0
   def polygons

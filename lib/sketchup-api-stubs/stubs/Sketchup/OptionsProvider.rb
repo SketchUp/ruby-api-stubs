@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # An +OptionsProvider+ class provides various kinds of options on a
@@ -111,8 +111,6 @@ class Sketchup::OptionsProvider
   #
   # @version SketchUp 6.0
   #
-  # @yield [key, value]
-  #
   # @yieldparam [String] key
   #
   # @yieldparam [Object] value
@@ -127,8 +125,6 @@ class Sketchup::OptionsProvider
   # @return [nil]
   #
   # @version SketchUp 6.0
-  #
-  # @yield [key]
   #
   # @yieldparam [String] key
   def each_key
@@ -147,27 +143,23 @@ class Sketchup::OptionsProvider
   #
   # @version SketchUp 6.0
   #
-  # @yield [key, value]
-  #
   # @yieldparam [String] key
   #
   # @yieldparam [Object] value
   def each_pair
   end
 
-  # The each_value method is used to iterate through all of the attribute
+  # The {#each_value} method is used to iterate through all of the attribute
   # values.
-  #
-  # Throws an exception if there are no keys.
   #
   # @example
   #   provider.each_value { |value| puts value }
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 6.0
   #
-  # @yield [value] A variable that will hold each value as they are found.
+  # @yieldparam [Object] value
   def each_value
   end
 
@@ -208,16 +200,11 @@ class Sketchup::OptionsProvider
   def key?(name)
   end
 
-  # The keys method is used to retrieve an array with all of the attribute keys.
+  # The {#keys} method is used to retrieve an array with all of the attribute keys.
   #
   # @example
   #   keys = provider.keys
   #   key = keys[0]
-  #   if (key)
-  #     UI.messagebox key
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
   # @return keys - an array of keys within the options provider if
   #   successful

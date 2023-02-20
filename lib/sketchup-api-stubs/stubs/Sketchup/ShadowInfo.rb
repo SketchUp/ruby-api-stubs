@@ -1,20 +1,20 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
-# The ShadowInfo class contains method to extract the shadow information for a
-# model. The majority of the shadow information returned exists in the Model
-# Info > Location and Model Info > Shadows dialogs inside SketchUp.
+# The {Sketchup::ShadowInfo} class contains method to extract the shadow
+# information for a model. The majority of the shadow information returned
+# exists in the Model Info > Location and Model Info > Shadows dialogs inside
+# SketchUp.
 #
 # The following shadow information keys are maintained in SketchUp:
 #
-# - +City+ (in Model Info > Geo-location > Set Manual Location...) Note that 'City' is called
-# 'Location' in the UI
+# - +City+ (in Model Info > Geo-location > Set Manual Location...) Note that
+#   'City' is called 'Location' in the UI
 # - +Country+ (in Model Info > Geo-location > Set Manual Location...)
 # - +Dark+ (in Window > Shadows)
 # - +DayOfYear+
 # - +DaylightSavings+
-# - +DisplayNorth+ (in View > Toolbars > Solar North) Note that 'Toolbar' is called 'Tool Palettes'
-# on Mac
+# - +DisplayNorth+
 # - +DisplayOnAllFaces+ (in Window > Shadows)
 # - +DisplayOnGroundPlane+ (in Window > Shadows)
 # - +DisplayShadows+ (in Window > Shadows)
@@ -22,8 +22,7 @@
 # - +Latitude+ (in Model Info > Geo-location > Set Manual Location...)
 # - +Light+ (in Window > Shadows)
 # - +Longitude+ (in Model Info > Geo-location > Set Manual Location...)
-# - +NorthAngle+ (in View > Toolbars > Solar North) Note that 'Toolbar' is called 'Tool Palettes'
-# on Mac
+# - +NorthAngle+
 # - +ShadowTime+ (in Window > Shadows)
 # - +ShadowTime_time_t+ (ShadowTime in Epoch time)
 # - +SunDirection+ (Generated based on ShadowTime)
@@ -34,12 +33,12 @@
 # - +TZOffset+ (in Window > Shadows)
 # - +UseSunForAllShading+ (in Window > Shadows)
 #
-# You access the ShadowInfo object by calling Model.shadow_info:
+# You access the {Sketchup::ShadowInfo} object by calling {Sketchup::Model#shadow_info}:
 #
 # @example
 #   model = Sketchup.active_model
 #   shadowinfo = model.shadow_info
-#   UI.messagebox("My city is: " + shadowinfo["City"].to_s)
+#   puts "My city is: #{shadowinfo["City"]}"
 #
 # @version SketchUp 6.0
 class Sketchup::ShadowInfo < Sketchup::Entity
@@ -50,7 +49,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
 
   # Class Methods
 
-  # The each_key method iterates through all of the shadow information keys.
+  # The {#each_key} method iterates through all of the shadow information keys.
   #
   # @example
   #   shadowinfo.each_key { |key| puts key }
@@ -59,7 +58,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   #
   # @version SketchUp 6.0
   #
-  # @yield [key] Variable to hold each key as they are found.
+  # @yieldparam [String] key
   def self.each_key
   end
 
@@ -157,15 +156,13 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   #
   # @version SketchUp 6.0
   #
-  # @yield [key, value]
-  #
   # @yieldparam [String] key
   #
   # @yieldparam [Object] value
   def each
   end
 
-  # The each_key method iterates through all of the shadow information keys.
+  # The {#each_key} method iterates through all of the shadow information keys.
   #
   # @example
   #   shadowinfo.each_key { |key| puts key }
@@ -174,7 +171,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   #
   # @version SketchUp 6.0
   #
-  # @yield [key] Variable to hold each key as they are found.
+  # @yieldparam [String] key
   def each_key
   end
 
@@ -192,8 +189,6 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   # @see #each
   #
   # @version SketchUp 6.0
-  #
-  # @yield [key, value]
   #
   # @yieldparam [String] key
   #

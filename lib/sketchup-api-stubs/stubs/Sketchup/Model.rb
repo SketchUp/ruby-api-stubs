@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This is the interface to a SketchUp model. The model is the 3D drawing that
@@ -943,7 +943,8 @@ class Sketchup::Model
   def latlong_to_point(lnglat_array)
   end
 
-  # The {#layers method retrieves a collection of all Layers objects in the model.
+  # The {#layers} method retrieves a collection of all {Sketchup::Layers} objects
+  # in the model.
   #
   # @example
   #   model = Sketchup.active_model
@@ -1094,6 +1095,20 @@ class Sketchup::Model
   #
   # @version SketchUp 6.0
   def options
+  end
+
+  #
+  # @api Overlays
+  #
+  # @example
+  #   Sketchup.active_model.overlays.each { |overlay|
+  #     puts "#{overlay.name} (#{overlay.overlay_id}) Enabled: #{overlay.enabled?}"
+  #   }
+  #
+  # @return [Sketchup::OverlaysManager]
+  #
+  # @version SketchUp 2023.0
+  def overlays
   end
 
   # The {#pages} method retrieves a {Sketchup::Pages} object containing all of
@@ -1279,6 +1294,9 @@ class Sketchup::Model
   # @note A bug in SketchUp 2016 and older caused the +.skb+ backup file
   #   written during save to be empty. The +.skp+ file was however valid.
   #
+  # @note Starting with SketchUp 2021, SketchUp is using a the same file format across versions.
+  #   For instance, SketchUp 2021 can open a file made in SketchUp 2022.
+  #
   # @overload save
   #
   #   Save model to the path it is already associated with.
@@ -1335,24 +1353,7 @@ class Sketchup::Model
   #   The path of the file to save the model copy to.
   #
   # @param [Integer] version
-  #   Optional SketchUp file format to use.
-  #   If not provided, latest file format will be used.
-  #   Possible values are:
-  #   - Sketchup::Model::VERSION_3,
-  #   - Sketchup::Model::VERSION_4,
-  #   - Sketchup::Model::VERSION_5,
-  #   - Sketchup::Model::VERSION_6,
-  #   - Sketchup::Model::VERSION_7,
-  #   - Sketchup::Model::VERSION_8,
-  #   - Sketchup::Model::VERSION_2013,
-  #   - Sketchup::Model::VERSION_2014,
-  #   - Sketchup::Model::VERSION_2015,
-  #   - Sketchup::Model::VERSION_2016,
-  #   - Sketchup::Model::VERSION_2017,
-  #   - Sketchup::Model::VERSION_2018,
-  #   - Sketchup::Model::VERSION_2019,
-  #   - Sketchup::Model::VERSION_2020,
-  #   - Sketchup::Model::VERSION_2021
+  #   See {Sketchup::Model#save} for supported values.
   #
   # @return [Boolean] true if successful, false if unsuccessful
   #

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Sketchup::InstancePath} class represent the instance path to a given
@@ -74,7 +74,7 @@ class Sketchup::InstancePath
   #
   # @version SketchUp 2017
   #
-  # @yield [Sketchup::Entity] entity
+  # @yieldparam [Sketchup::Entity] entity
   def each
   end
 

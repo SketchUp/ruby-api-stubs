@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Sketchup::ComponentInstance} class is used to represent component
@@ -116,7 +116,7 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #     UI.messagebox "Failure"
   #   end
   #
-  # @return [Array<Sketchup:Entity>] An array of entity objects if successful, false if
+  # @return [Array<Sketchup::Entity>, false] An array of entity objects if successful, +false+ if
   #   unsuccessful
   #
   # @version SketchUp 6.0

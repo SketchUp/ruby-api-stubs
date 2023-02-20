@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A DefinitionList object holds a list of all of the ComponentDefinition
@@ -149,7 +149,7 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #
   # @version SketchUp 6.0
   #
-  # @yield [Sketchup::ComponentDefinition] definition
+  # @yieldparam [Sketchup::ComponentDefinition] definition
   def each
   end
 
@@ -203,12 +203,30 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #   if you tried to open a newer model instead of raising the expected
   #   +RuntimeError+.
   #
+  # @bug Prior to SketchUp 2023.0 this method silently failed to load a component if the model
+  #   already contained a different component associated with the same path.
+  #   Instead the existing component was returned.
+  #   Making arbitrary changes to the existing component would allow the new one to be loaded.
+  #
   # @example
   #   path = Sketchup.find_support_file("Bed.skp",
   #     "Components/Components Sampler/")
   #   model = Sketchup.active_model
   #   definitions = model.definitions
   #   definition = definitions.load(path)
+  #
+  # @example Workaround for loading from the same path twice
+  #   path = "some/location/on/your/computer.skp"
+  #   definition1 = Sketchup.active_model.definitions.load(path)
+  #
+  #   # Now open the external file and make some changes to it.
+  #
+  #   # HACK: Prior to version 2023.0 SketchUp wouldn't load components from the same path twice.
+  #   # Instead it silently returned the existing, outdated component.
+  #   # Making an arbitrary change to the existing component allows a new one to be loaded.
+  #   definition1.entities.add_cpoint(ORIGIN) if Sketchup.version.to_i < 23
+  #
+  #   definition2 = Sketchup.active_model.definitions.load(path)
   #
   # @overload load(path)
   #
@@ -362,6 +380,9 @@ class Sketchup::DefinitionList < Sketchup::Entity
   # definition list with the given component definition. This will remove all
   # instances of the definition.
   #
+  # @bug Prior to SketchUp 2023.0 this could crash SketchUp if you erased an
+  #   definition used by the active edit path.
+  #
   # @example
   #   model = Sketchup.active_model
   #   definitions = model.definitions
@@ -369,6 +390,8 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #   definitions.remove(definition)
   #
   # @param [Sketchup::ComponentDefinition] definition
+  #
+  # @raise [ArgumentError] if the given definition is used by {Sketchup::Model#active_path}.
   #
   # @return [Boolean]
   #

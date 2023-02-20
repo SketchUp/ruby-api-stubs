@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Classifications class is a container/manager for all classifications in
@@ -32,19 +32,18 @@ class Sketchup::Classifications
   def [](index_or_name)
   end
 
-  # The each method is used to iterate through loaded classification schemas.
+  # The {#each} method is used to iterate through loaded classification schemas.
   #
   # @example
   #   Sketchup.active_model.classifications.each { |schema|
   #     puts schema.name
   #   }
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 2015
   #
-  # @yield [schema] A variable that will hold each ClassificationSchema
-  #   object as they are found.
+  # @yieldparam [Sketchup::ClassificationSchema] schema
   def each
   end
 

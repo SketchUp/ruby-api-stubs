@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2022 Trimble Inc.
+# Copyright:: Copyright 2023 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # Transformations are a standard construct in the 3D world for representing
@@ -9,14 +9,14 @@
 #
 # Use of the transformation class requires a knowledge of geometrical
 # transformations in 3 dimensions which is covered extensively on
-# the Internet.
+# the internet.
 #
 # @version SketchUp 6.0
 class Geom::Transformation
 
   # Class Methods
 
-  # The axes method creates a transformation that goes from world coordinates
+  # The {.axes} method creates a transformation that goes from world coordinates
   # to an arbitrary coordinate system defined by an origin and three axis
   # vectors.
   #
@@ -49,11 +49,11 @@ class Geom::Transformation
   def self.axes(*args)
   end
 
-  # The interpolate method is used to create a new transformation that is the
+  # The {.interpolate} method is used to create a new transformation that is the
   # result of interpolating between two other transformations.
   #
-  # Parameter is a weight (between 0.0 and 1.0) that identifies whether to favor
-  # transformation1 or transformation2.
+  # Parameter is a weight (between `0.0` and `1.0`) that identifies whether to favor
+  # `transformation1` or `transformation2`.
   #
   # @example
   #   origin = Geom::Point3d.new(0, 0, 0)
@@ -79,7 +79,7 @@ class Geom::Transformation
   def self.interpolate(transform1, transform2, weight)
   end
 
-  # The rotation method is used to create a transformation that does rotation
+  # The {.rotation} method is used to create a transformation that does rotation
   # about an axis.
   #
   # The axis is defined by a point and a vector. The angle is given in radians.
@@ -103,7 +103,7 @@ class Geom::Transformation
   def self.rotation(point, vector, angle)
   end
 
-  # The scaling method is used to create a transformation that does scaling.
+  # The {.scaling} method is used to create a transformation that does scaling.
   #
   # @example
   #   point = Geom::Point3d.new(20, 30, 0)
@@ -149,7 +149,7 @@ class Geom::Transformation
   def self.scaling(*args)
   end
 
-  # The translation method is used to create a transformation that does
+  # The {.translation} method is used to create a transformation that does
   # translation.
   #
   # @example
@@ -198,18 +198,18 @@ class Geom::Transformation
   #
   # @overload *(point)
   #
-  #   @param [Array<Float, Float, Float>] point
-  #   @return [Array<Float, Float, Float>]
+  #   @param [Array(Float, Float, Float)] point
+  #   @return [Array(Float, Float, Float)]
   #
   # @overload *(plane)
   #
-  #   @param [Array<Geom::Point3d, Geom::Vector3d>] plane
-  #   @return [Array<Float, Float, Float, Float>] transformed plane
+  #   @param [Array(Geom::Point3d, Geom::Vector3d)] plane
+  #   @return [Array(Float, Float, Float, Float)] transformed plane
   #
   # @overload *(plane)
   #
-  #   @param [Array<Float, Float, Float, Float>] plane
-  #   @return [Array<Float, Float, Float, Float>] transformed plane
+  #   @param [Array(Float, Float, Float, Float)] plane
+  #   @return [Array(Float, Float, Float, Float)] transformed plane
   #
   # @version SketchUp 6.0
   def *(arg)
@@ -262,8 +262,6 @@ class Geom::Transformation
   def identity?
   end
 
-  # The new method is used to create a new transformation.
-  #
   # You can use this method or one of the more specific methods for creating
   # specific kinds of Transformations.
   #
@@ -273,7 +271,7 @@ class Geom::Transformation
   #
   # @overload initialize
   #
-  #   @return [Geom::Transformation] identity Transformation.
+  #   @return [Geom::Transformation] identity transformation.
   #
   # @overload initialize(point)
   #
@@ -288,7 +286,7 @@ class Geom::Transformation
   #
   # @overload initialize(transform)
   #
-  #   Creates a Transformation that is a copy of another Transformation. This is
+  #   Creates a transformation that is a copy of another transformation. This is
   #   equivalent to {#clone}.
   #   @param [Geom::Transformation] transform
   #   @return [Geom::Transformation]
