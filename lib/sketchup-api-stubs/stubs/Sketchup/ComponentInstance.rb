@@ -451,8 +451,10 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   end
 
   # The subtract method is used to compute the boolean difference of the two
-  # instances representing manifold solid volumes (this - arg).  If the specified
-  # objects (this and arg) do not represent manifold volumes, this method fails.
+  # instances representing manifold solid volumes (arg - this).  Both instances
+  # are deleted and replaced by the result of subtracting the first from the
+  # second instance.  If the specified objects (this and arg) do not represent
+  # manifold volumes, this method fails.
   #
   # @example
   #   entities = Sketchup.active_model.entities
@@ -526,9 +528,10 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   end
 
   # The trim method is used to compute the (non-destructive) boolean difference
-  # of the two instances representing manifold solid volumes (this - arg).  If
-  # the specified objects (this and arg) do not represent manifold volumes, this
-  # method fails.
+  # of the two instances representing manifold solid volumes (arg - this).  The
+  # argument is deleted and replaced by the result of subtracting the first from
+  # the second instance.  If the specified objects (this and arg) do not represent
+  # manifold volumes, this method fails.
   #
   # @example
   #   entities = Sketchup.active_model.entities
