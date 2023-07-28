@@ -11,16 +11,16 @@ Generate YARD docs:
 yard gems sketchup-api-stubs
 ```
 
-Add `sketchup-api-stubs/autoload/sketchup.rb` to the `require` config of your
+Add `sketchup-api-stubs` to the `require` config of your
 project's `.solargraph.yml` file.
 
 ```
 require_paths:
-- "C:/Program Files/SketchUp/SketchUp 2018/Tools"
+- "C:/Program Files/SketchUp/SketchUp 2019/Tools"
 - src
 
 require:
-- sketchup-api-stubs/autoload/sketchup.rb
+- sketchup-api-stubs
 ```
 
 Restart VSCode for config to take effect.
