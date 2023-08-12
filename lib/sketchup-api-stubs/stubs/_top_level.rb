@@ -205,6 +205,14 @@
 
   # Instance Methods
 
+  # @deprecated Avoid adding separators to top level menus. If you require
+  #   grouping use a sub-menu instead.
+  #
+  # This function will add a separator to a given menu the first
+  # time it is called.  It is useful for adding a separator before
+  # the first plugin that is added to a given menu.
+  #
+  # @param [String] menu_name
   #
   # @version SketchUp 6.0
   def add_separator_to_menu(menu_name)
@@ -269,20 +277,22 @@
   # This method will trap the exception and display an error dialog and
   # then prompt for the values again.
   #
+  # @param (see UI#inputbox)
+  #
   # @see UI.inputbox
   #
   # @version SketchUp 6.0
   def inputbox(*args)
   end
 
+  # @deprecated This adds the path given to +$LOAD_PATH+ which can affect
+  #   other extensions.
+  #
   # By default, SketchUp automatically loads (using require) all files with
   # the .rb extension in the plugins directory.  This function can be used
   # to automatically load all .rb files from a different directory also.  to
   # use this add a call like the following to a file in the plugins directory
   # <code>require_all "MyRubyScripts"</code>
-  #
-  # @deprecated This adds the path given to +$LOAD_PATH+ which can affect
-  #   other extensions.
   #
   # @param [String] dirname
   #
@@ -290,14 +300,12 @@
   def require_all(dirname)
   end
 
+  # @deprecated Use +SKETCHUP_CONSOLE.show+ instead.
+  #
   # This global method is called by the Ruby Console menu item. We call this
   # instead of directly calling <code>Sketchup.send_action("showRubyPanel:")</code>
   # so that other Ruby Console implementations can hijack this method.
   #
-  # @deprecated Use +SKETCHUP_CONSOLE.show+ instead.
-  #
   # @version SketchUp 6.0
   def show_ruby_panel
   end
-
-
