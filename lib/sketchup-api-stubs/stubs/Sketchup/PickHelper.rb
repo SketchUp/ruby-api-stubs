@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2023 Trimble Inc.
+# Copyright:: Copyright 2024 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Sketchup::PickHelper} class is used to pick entities that reside under
@@ -437,12 +437,14 @@ class Sketchup::PickHelper
   def transformation_at(index)
   end
 
-  # The view method is used to get the view associated with the PickHelper.
+  # The {#view} method is used to get the view associated with the {Sketchup::PickHelper}.
   #
   # @example
-  #   view = pickhelper.view
+  #   view = Sketchup.active_model.active_view
+  #   ph = view.pick_helper
+  #   ph.view
   #
-  # @return view - the associated view
+  # @return [Sketchup::View]
   #
   # @version SketchUp 6.0
   def view

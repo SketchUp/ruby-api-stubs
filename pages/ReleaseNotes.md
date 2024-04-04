@@ -19,7 +19,13 @@ Though our adoption rate to the latest version is quite high, it can take time a
 
 Here are the build numbers for recent SketchUp releases. Note that build numbers in languages besides English are larger for each release, so it is best to check for builds that are greater than or equal to the numbers here.
 
-- **SU2023.0** = 23.0.117 on Windows 64-bit, 23.0.118 on Mac 64-bit.
+- **SU2024.0** = 24.0.484 on Windows 64-bit, 24.0.483 on Mac 64-bit.
+- **SU2023.1.3** = 23.1.340 on Windows 64-bit, 23.1.341 on Mac 64-bit.
+- **SU2023.1.2** = 23.1.315 on Windows 64-bit, 23.1.314 on Mac 64-bit.
+- **SU2023.1.1** = 23.1.313 on Windows 64-bit, 23.1.312 on Mac 64-bit.
+- **SU2023.0.2** = 23.0.419 on Windows 64-bit, 23.0.418 on Mac 64-bit.
+- **SU2023.0.1** = 23.0.397 on Windows 64-bit, 23.0.398 on Mac 64-bit.
+- **SU2023.0** = 23.0.367 on Windows 64-bit, 23.0.366 on Mac 64-bit.
 - **SU2022.0.1** = 22.0.354 on Windows 64-bit, 22.0.353 on Mac 64-bit.
 - **SU2022.0** = 22.0.316 on Windows 64-bit, 22.0.315 on Mac 64-bit.
 - **SU2021.1.2** = 21.1.332 on Windows 64-bit, 21.1.331 on Mac 64-bit. (Contained no Ruby API changes)
@@ -67,11 +73,67 @@ Here are the build numbers for recent SketchUp releases. Note that build numbers
 
 - **SU6 M6** = 6.4.265 on Windows, 6.4.263 on Mac.
 
+# What's new in SketchUp 2024.0
+
+## Ruby API Additions and Improvements
+
+* Added support for export option `:page_range` for {Layout::Document#export}.
+* Added {Sketchup::View#graphics_engine}.
+* Added rendering options support for Ambient Occlusion:
+    * {Sketchup::RenderingOptions} keys added:
+        * `"AmbientOcclusion"`
+        * `"AmbientOcclusionDistance"`
+        * `"AmbientOcclusionIntensity"`
+    * {Sketchup::RenderingOptionsObserver} constants:
+        * `ROPSetAOEnabled`
+        * `ROPSetAODistance`
+        * `ROPSetAOIntensity`
+* {Sketchup::RenderingOptions#[]=} will now raise an `ArgumentError` if the given value cannot be set
+  for the given key. This is a breaking change since earlier versions of the API would not indicate any
+  failures for such erroneous calls.
+
+## Ruby API Bug Fixes
+
+* Fixed issue on Mac where {UI.create_cursor} would provide an incorrect hotspot
+* Fixed regression in {Sketchup.resize_viewport} introduced in SketchUp 2023.1 on Windows.
+* Fixed {Layout::Entity#move_to_layer} when moving an entity from a nonshared layer.
+* Changed {Sketchup::Model#close} to set focus to the next open model window on macOS.
+* Fixed regression from SketchUp 2023.1 with the Ruby Console on Windows where new-line
+  character was incorrectly added to the end of `print` calls.
+
+# What's new in SketchUp 2023.1
+
+## Ruby API Additions and Improvements
+* Added method {Layout::Document#render_mode_override}
+* Added method {Layout::Document#render_mode_override=}
+* Added constant {Layout::SketchUpModel::NO_OVERRIDE}
+* Added method {Layout::SketchUpModel#output_entities}
+* Added method {Layout::PageInfo#image_display_resolution}
+* Added method {Layout::PageInfo#image_display_resolution=}
+* Added method {Layout::PageInfo#image_output_resolution}
+* Added method {Layout::PageInfo#image_output_resolution=}
+* `output_resolution:` is no longer a supported value in the export options dictionary. Instead, use {Layout::PageInfo#output_resolution=} and {Layout::PageInfo#image_output_resolution=}.
+* Added method {Sketchup::ArcCurve#circular?}
+
+# What's new in SketchUp 2023.0.2
+
+## Ruby API Bug Fixes
+
+* Fixed issues with {Sketchup::Entities.erase_entities} incorrectly throwing
+  and `ArgumentError` claiming an instance was open for editing.
+
+# What's new in SketchUp 2023.0.1
+
+## Ruby API Bug Fixes
+
+* Fixed issues with {UI.inputbox} and {UI.messagebox} not being modal.
+* Fixed issue where new Ruby toolbars might not show up by default.
+
 # What's new in SketchUp 2023.0
 
 ## Overlays
 
-Overlays are a new SketchUp API capability which allows developers to persist extension behaviors while you are using other tools. Effectively, extensions can now continue to analyze, visualize, and create information in the modeling window as you continue evolving a SketchUp model using other native tools and extensions. Previously, extension developers were limited to drawing information to the modeling window only when their extension had a tool active.
+Overlays are a new SketchUp API capability which allows developers to persist extension behaviors while you are using other tools. Effectively, extensions can now continue to analyze, visualize, and create information in the modeling window as you continue evolving a SketchUp model using other native tools and extensions. Previously, extension developers were limited to drawing information to the modeling window only when their extension had a tool active .
 
 ## Update OpenSSL to 1.1.1o
 

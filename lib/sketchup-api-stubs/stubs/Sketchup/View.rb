@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2023 Trimble Inc.
+# Copyright:: Copyright 2024 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This class contains methods to manipulate the current point of view of the
@@ -625,6 +625,24 @@ class Sketchup::View
   #
   # @version SketchUp 6.0
   def field_of_view=(fov)
+  end
+
+  # The {#graphics_engine} method is used query the type of the graphics engine that's currently
+  # used by this view.
+  #
+  # @example
+  #   engine = Sketchup.active_model.active_view.graphics_engine
+  #   if engine == :graphics_engine_classic
+  #     puts 'Classic graphics engine'
+  #   elsif engine == :graphics_engine_2024
+  #     puts 'New graphics engine'
+  #   end
+  #
+  # @return [Symbol] Type of the graphics engine.
+  #   +:graphics_engine_classic+ or +:graphics_engine_2024+
+  #
+  # @version SketchUp 2024.0
+  def graphics_engine
   end
 
   # The guess_target method is used to guess at what the user is looking at when

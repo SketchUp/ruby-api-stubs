@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2023 Trimble Inc.
+# Copyright:: Copyright 2024 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Sketchup::Entities} class is a collection of Entity objects, either in a
@@ -897,6 +897,9 @@ class Sketchup::Entities
   #
   # @bug Prior to SketchUp 2023.0 this could crash SketchUp if you erased an
   #   instance used by the active edit path.
+  #
+  # @bug SketchUp 2023.0 and SketchUp 2023.0.1 could incorrectly raise an
+  #   `ArgumentError` when there was an open editing path.
   #
   # @example
   #   model = Sketchup.active_model

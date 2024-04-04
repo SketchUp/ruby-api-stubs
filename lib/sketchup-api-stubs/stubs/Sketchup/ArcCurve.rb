@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2023 Trimble Inc.
+# Copyright:: Copyright 2024 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # An ArcCurve is a Curve that makes up part of a circle. This is the
@@ -51,6 +51,23 @@ class Sketchup::ArcCurve < Sketchup::Curve
   #
   # @version SketchUp 6.0
   def center
+  end
+
+  # Checks if the ArcCurve is a circle.
+  #
+  # @example
+  #   entities = Sketchup.active_model.entities
+  #   center_point = Geom::Point3d.new(0, 0, 0)
+  #   normal_vector = Geom::Vector3d.new(0, 0, 1)
+  #   radius = 10
+  #   edges = entities.add_circle(center_point, normal_vector, radius)
+  #   curve = edges[0].curve
+  #   is_circular = curve.circular?
+  #
+  # @return [Boolean]
+  #
+  # @version SketchUp 2023.1
+  def circular?
   end
 
   # The {#end_angle} method is used to retrieve the angle of the end of the arc

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2023 Trimble Inc.
+# Copyright:: Copyright 2024 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The UI module contains a number of methods for creating simple UI elements
@@ -52,23 +52,43 @@ module UI
   def self.beep
   end
 
-  # The create_cursor method is used to create a cursor from an image file at
+  # The {.create_cursor} method is used to create a cursor from an image file at
   # the specified location. This must be called from within a custom
-  # Tool. See the Tool class for a complete example.
+  # tool. See the {Sketchup::Tool} documentation for a complete example.
   #
-  # Since SketchUp 2016 it is possible to provide vector images for the cursors.
-  # SVG format for Windows and PDF format for OS X.
+  # The size of the cursor images should be 32x32 pixels.
+  #
+  # The coordinates for the cursor's hotspot is based from it's top left corner.
+  # For example, a value of (hot_x, hot_y) = (5, 10) would identify the hotpoint
+  # of the cursor at 6 pixels from the left edge of your cursor image and 11
+  # pixels from the top edge of your cursor image.
+  #
+  # @bug On macOS raster cursors are always displayed at 24x24.
+  #
+  # @bug In SketchUp 2023.1 on Mac provided an incorrect hotspot location. The hotspot was scaled by
+  #   a factor of 32.0/24.0. If a hotspot position was greater than 24, the cursor would not display.
   #
   # @example
-  #   cursor_id = nil
-  #   cursor_path = Sketchup.find_support_file("Pointer.png", "Plugins/")
-  #   if cursor_path
-  #     cursor_id = UI.create_cursor(cursor_path, 0, 0)
+  #   class ExampleTool
+  #     def initialize
+  #       @cursor_id = nil
+  #       # Load vector cursor format depending on platform.
+  #       ext = Sketchup.platform == :platform_win ? 'svg' : 'pdf'
+  #       cursor_path = File.join(__dir__, "cursor.#{ext}")
+  #       @cursor_id = UI.create_cursor(cursor_path, 4, 6)
+  #     end
+  #
+  #     def onSetCursor
+  #       UI.set_cursor(@cursor_id)
+  #     end
   #   end
   #
-  #   def onSetCursor
-  #     UI.set_cursor(cursor_id)
-  #   end
+  # @note Since SketchUp 2016 it is possible to provide vector images for the cursors.
+  #   SVG format for Windows and PDF format for macOS. This is the recommended format
+  #   to use since it will scale well with different DPI scaling.
+  #
+  # @note Because the image is never released, avoid creating new cursors for the same image for any
+  #   given tool. Cache it and reuse it.
   #
   # @param [String] path
   #   File path to an image.
@@ -80,15 +100,27 @@ module UI
   # @param [Integer] hot_y
   #   A y coordinate that is the "hotpoint" for the cursor
   #   computed from the top edge of the of your cursor image.
-  #   For example, a value of (hot_x, hot_y) = (5,10) would
-  #   identify the hotpoint of the cursor at 5 pixels from
-  #   the left edge of your cursor image and 10 pixels from
-  #   the top edge of your cursor image.
   #
-  # @return [Integer] ID associated with the cursor
+  # @return [Integer] Id associated with the cursor.
+  #   Use this with {UI.set_cursor} in {Sketchup::Tool#onSetCursor}.
+  #
+  # @see UI.set_cursor
+  #
+  # @see Sketchup::Tool#onSetCursor
   #
   # @version SketchUp 6.0
   def self.create_cursor(path, hot_x, hot_y)
+  end
+
+  # Returns the plain text available on the clipboard, if there is any.
+  #
+  # @example
+  #   text = UI.get_clipboard_data
+  #
+  # @return [String, nil]
+  #
+  # @version SketchUp 2023.1
+  def self.get_clipboard_data
   end
 
   # Creates a dialog box for inputting user information. The dialog box contains
@@ -166,8 +198,11 @@ module UI
   # is the first step toward adding your own custom items to the bottom
   # of SketchUp's menus.
   #
-  # Valid menu names are: "File", "Edit", "View", "Camera", "Draw", "Tools",
-  # "Window", "Extensions", "Help" and "Developer".
+  # Valid menu names are: +'File'+, +'Edit'+, +'View'+, +'Camera'+, +'Draw'+,
+  # +'Tools'+, +'Window'+, +'Extensions'+, +'Help'+ and +'Developer'+.
+  #
+  # @bug In versions prior to SketchUp 2018 this would crash if you passed an
+  #   empty string.
   #
   # @example
   #   tool_menu = UI.menu("Tools")
@@ -175,19 +210,18 @@ module UI
   #     UI.messagebox("Cheese activated.")
   #   }
   #
-  # @note The "Extensions" menu was named "Plugins" prior to SketchUp 2015.
-  #   For backward compatibility "Plugins" still works.
+  # @note The +'Extensions'+ menu was named +'Plugins'+ prior to SketchUp 2015.
+  #   For backward compatibility +'Plugins'+ still works.
   #
-  # @note In versions prior to SketchUp 2018 this would crash if you passed an
-  #   empty string.
+  # @note +'Developer'+ menu was added with SketchUp 2021.1.
   #
-  # @param menu_name
-  #   The name of an existing top level menu.
+  # @param [String] menu_name
+  #   The name of a supported menu.
   #
   # @return [Sketchup::Menu]
   #
   # @version SketchUp 6.0
-  def self.menu(menu_name = "Plugins")
+  def self.menu(menu_name = "Extensions")
   end
 
   # Creates a dialog box containing static text with a series of buttons for
@@ -478,6 +512,17 @@ module UI
   #
   # @version SketchUp 2015
   def self.select_directory(options = {})
+  end
+
+  # Copies plain text to the clipboard.
+  #
+  # @example
+  #   UI.set_clipboard_data('Hello World')
+  #
+  # @return [Boolean]
+  #
+  # @version SketchUp 2023.1
+  def self.set_clipboard_data(data)
   end
 
   # The {.set_cursor} method is used to change the cursor to a new cursor with a
