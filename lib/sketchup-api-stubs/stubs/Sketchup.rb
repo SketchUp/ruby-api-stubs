@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2023 Trimble Inc.
+# Copyright:: Copyright 2024 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Sketchup module contains a number of important utility methods for use in
@@ -651,8 +651,9 @@ module Sketchup
   #
   #   @version SketchUp 2021.0
   #   @param [String] filename  The model file to open.
-  #   @return [Integer, false]  status code if opening the file succeeded,
-  #     +false+ otherwise.
+  #   @param [Boolean] with_status
+  #   @return [Integer, false]  status code if opening with +with_status+ set to +true+,
+  #     otherwise +true+ or +false+.
   #
   # @version SketchUp 6.0
   def self.open_file(*args)
@@ -885,13 +886,29 @@ module Sketchup
   def self.require(path)
   end
 
-  # The {.size_viewport} method changes the pixel size of the viewport and SketchUp window.
+  # The {.resize_viewport} method changes the pixel size of the viewport and SketchUp window.
   # This can be useful for producing a consistent behavior in automatic testing,
   # regardless of the display resolution.
+  #
+  # @bug In SketchUp 2023.1 this method didn't behave correctly on Windows. No known workarounds.
   #
   # @example
   #   model = Sketchup.active_model
   #   Sketchup.resize_viewport(model, 800, 600)
+  #
+  # @note In SketchUp 2024.0 and later this method doesn't behave correctly in all cases on Windows.
+  #   The passed values are internally converted to logical pixels, rounded and converted back to
+  #   physical pixels. This means certain sizes, such as 1000 px at 150% scaling, cannot be
+  #   accurately set.
+  #
+  #   As a workaround in you can use sizes that are evenly divisible with common scale factors,
+  #   if you depend on pixel perfect sizes.
+  #
+  #     # Changes by 1 px  :(
+  #     ((1000/1.5).round * 1.5).round # => 1001
+  #     # Survives the round-trip :)
+  #     ((1500/1.5).round * 1.5).round # => 1500
+  #     ((1500/1.25).round * 1.25).round # => 1500
   #
   # @param [Sketchup::Model] model
   #

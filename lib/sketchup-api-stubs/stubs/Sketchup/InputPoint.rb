@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2023 Trimble Inc.
+# Copyright:: Copyright 2024 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Sketchup::InputPoint} class is used to pick 3d points and/or entities

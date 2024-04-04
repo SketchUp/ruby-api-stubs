@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2023 Trimble Inc.
+# Copyright:: Copyright 2024 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A {Layout::TableCell} is a single cell from a table that contains data.

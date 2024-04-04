@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2023 Trimble Inc.
+# Copyright:: Copyright 2024 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The RenderingOptions class contains method to extract the rendering
@@ -85,6 +85,11 @@
 # - +ROPDrawHiddenGeometry+
 # - +ROPDrawHiddenObjects+
 #
+# Added in SketchUp 2024.0:
+# - +AmbientOcclusion+
+# - +AmbientOcclusionDistance+
+# - +AmbientOcclusionIntensity+
+#
 # @version SketchUp 6.0
 class Sketchup::RenderingOptions < Sketchup::Entity
 
@@ -100,6 +105,9 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   ROPDrawHiddenObjects = nil # Stub value.
   ROPEditComponent = nil # Stub value.
   ROPSectionDisplayTurnedOff = nil # Stub value.
+  ROPSetAODistance = nil # Stub value.
+  ROPSetAOEnabled = nil # Stub value.
+  ROPSetAOIntensity = nil # Stub value.
   ROPSetBackgroundColor = nil # Stub value.
   ROPSetConstructionColor = nil # Stub value.
   ROPSetDepthQueEdges = nil # Stub value.
@@ -216,6 +224,10 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   #
   # @param [Object] value
   #   The value to be set.
+  #
+  # @raise [ArgumentError] If the given key is invalid, the key's value is not settable,
+  #   or the given value is invalid. SketchUp versions earlier than 2024.0 will not raise
+  #   this error.
   #
   # @return [Object] the value that was set
   #

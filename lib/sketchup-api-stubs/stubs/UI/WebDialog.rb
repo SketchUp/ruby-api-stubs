@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2023 Trimble Inc.
+# Copyright:: Copyright 2024 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Ruby WebDialog class allows you to create and interact with DHTML dialog
@@ -177,22 +177,6 @@ class UI::WebDialog
 
   # The +new+ method is used to create a new webdialog.
   #
-  # 250, left = 0, top = 0, resizable = true)
-  #   @param [String] dialog_title   The title to be displayed in the webdialog.
-  #   @param [Boolean] scrollable    true if you want to allow scrollbars, false
-  #                                  if you do not want to allow scrollbars.
-  #   @param [String, nil] pref_key  The registry entry where the location and
-  #                                  size of the dialog will be saved.
-  #                                  If preferences_key is not included, the
-  #                                  location and size will not be stored.
-  #   @param [Integer] width         The width of the webdialog.
-  #   @param [Integer] height        The height of the webdialog.
-  #   @param [Integer] left          The number of pixels from the left.
-  #   @param [Integer] top           The number of pixels from the top.
-  #   @param [Integer] resizable     true if you want the webdialog to be resizable,
-  #                                  false if not.
-  #   @return [UI::WebDialog]
-  #
   # @example
   #   dlg = UI::WebDialog.new("Show sketchup.com", true,
   #     "ShowSketchupDotCom", 739, 641, 150, 150, true);
@@ -207,8 +191,22 @@ class UI::WebDialog
   #   user's OS. On Mac, Safari is embedded, while on the PC whatever version of
   #   Internet Explorer is installed will be embedded.
   #
-  # @overload initialize(dialog_title = "", scrollable = true, pref_key = nil, width = 250, height =
+  # @overload initialize(dialog_title = "", scrollable = true, pref_key = nil, width = 250, height = 250, left = 0, top = 0, resizable = true)
   #
+  #   @param [String] dialog_title   The title to be displayed in the webdialog.
+  #   @param [Boolean] scrollable    true if you want to allow scrollbars, false
+  #                                  if you do not want to allow scrollbars.
+  #   @param [String, nil] pref_key  The registry entry where the location and
+  #                                  size of the dialog will be saved.
+  #                                  If preferences_key is not included, the
+  #                                  location and size will not be stored.
+  #   @param [Integer] width         The width of the webdialog.
+  #   @param [Integer] height        The height of the webdialog.
+  #   @param [Integer] left          The number of pixels from the left.
+  #   @param [Integer] top           The number of pixels from the top.
+  #   @param [Integer] resizable     true if you want the webdialog to be resizable,
+  #                                  false if not.
+  #   @return [UI::WebDialog]
   #
   # @overload initialize(properties)
   #

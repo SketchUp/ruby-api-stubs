@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2023 Trimble Inc.
+# Copyright:: Copyright 2024 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This is the base class for all SketchUp entities. Entities are basically
@@ -252,29 +252,17 @@ class Sketchup::Entity
   def get_attribute(dict_name, key, default_value = nil)
   end
 
-  # The to_s method is used to retrieve the string representation of the entity.
+  # The {#inspect} method is used to retrieve the string representation of the entity.
   #
   # @example
-  #   depth = 100
-  #   width = 100
   #   model = Sketchup.active_model
   #   entities = model.active_entities
-  #   pts = []
-  #   pts[0] = [0, 0, 0]
-  #   pts[1] = [width, 0, 0]
-  #   pts[2] = [width, depth, 0]
-  #   pts[3] = [0, depth, 0]
+  #   edge = entities.add_line(Geom::Point3d.new(0, 0, 0), Geom::Point3d.new(9, 9, 9))
+  #   string = edge.inspect
   #
-  #   # Add the face to the entities in the model
-  #   face = entities.add_face pts
+  # @return [String]
   #
-  #   # I just happen to know that the second and third entities in the
-  #   # entities objects are edges.
-  #   entity1 = entities[1]
-  #   st = entity1.to_s
-  #
-  # @return [String] the string representation of the entity if
-  #   successful
+  # @see #to_s
   #
   # @version SketchUp 6.0
   def inspect
@@ -457,29 +445,15 @@ class Sketchup::Entity
   def set_attribute(dict_name, key, value)
   end
 
-  # The to_s method is used to retrieve the string representation of the entity.
+  # The {#to_s} method is used to retrieve the string representation of the entity.
   #
   # @example
-  #   depth = 100
-  #   width = 100
   #   model = Sketchup.active_model
   #   entities = model.active_entities
-  #   pts = []
-  #   pts[0] = [0, 0, 0]
-  #   pts[1] = [width, 0, 0]
-  #   pts[2] = [width, depth, 0]
-  #   pts[3] = [0, depth, 0]
+  #   edge = entities.add_line(Geom::Point3d.new(0, 0, 0), Geom::Point3d.new(9, 9, 9))
+  #   string = edge.to_s
   #
-  #   # Add the face to the entities in the model
-  #   face = entities.add_face pts
-  #
-  #   # I just happen to know that the second and third entities in the
-  #   # entities objects are edges.
-  #   entity1 = entities[1]
-  #   st = entity1.to_s
-  #
-  # @return [String] the string representation of the entity if
-  #   successful
+  # @return [String]
   #
   # @version SketchUp 6.0
   def to_s

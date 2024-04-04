@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2023 Trimble Inc.
+# Copyright:: Copyright 2024 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This is the interface to a SketchUp model. The model is the 3D drawing that
@@ -394,7 +394,7 @@ class Sketchup::Model
   def classifications
   end
 
-  # The close method is used to close this model. On Mac OS, only the active
+  # The {#close} method is used to close this model. On Mac OS, only the active
   # model can be closed. On Windows, since there can be only one document open,
   # this method will perform a File/New operation.
   #
@@ -403,10 +403,14 @@ class Sketchup::Model
   #   model = Sketchup.active_model
   #   model.close
   #
+  # @note As of SketchUp 2024.0 this method will ensure the next model window
+  #   gets focus if there is one. Before that `Sketchup.active_model` might
+  #   return `nil` after calling this method even though more models where open.
+  #
   # @param [Boolean] ignore_changes
-  #   If true, model changes will be
+  #   If `true`, model changes will be
   #   ignored and save prompts will be suppressed.
-  #   If false, changes will not be ignored and save
+  #   If `false`, changes will not be ignored and save
   #   prompts will be displayed normally.
   #
   # @return [nil]

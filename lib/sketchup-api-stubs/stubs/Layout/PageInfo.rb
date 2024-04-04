@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2023 Trimble Inc.
+# Copyright:: Copyright 2024 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This is the interface to a {Layout::Document}'s paper space information. The
@@ -138,6 +138,78 @@ class Layout::PageInfo
   #
   # @version LayOut 2018
   def height=(height)
+  end
+
+  # The {#image_display_resolution} method returns the on screen image quality.
+  #
+  # The resolution can be one of the following values:
+  # [+Layout::PageInfo::RESOLUTION_LOW+]
+  # [+Layout::PageInfo::RESOLUTION_MEDIUM+]
+  # [+Layout::PageInfo::RESOLUTION_HIGH+]
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   image_quality = doc.page_info.image_display_resolution
+  #
+  # @return [Integer]
+  #
+  # @version LayOut 2023.1
+  def image_display_resolution
+  end
+
+  # The {#image_display_resolution=} method sets the on screen image quality.
+  #
+  # The resolution can be one of the following values:
+  # [+Layout::PageInfo::RESOLUTION_LOW+]
+  # [+Layout::PageInfo::RESOLUTION_MEDIUM+]
+  # [+Layout::PageInfo::RESOLUTION_HIGH+]
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   doc.page_info.image_display_resolution = Layout::PageInfo::RESOLUTION_LOW
+  #
+  # @param [Integer] resolution
+  #
+  # @raise [ArgumentError] if resolution is not a valid resolution value
+  #
+  # @version LayOut 2023.1
+  def image_display_resolution=(resolution)
+  end
+
+  # The {#image_output_resolution} method returns the output image quality.
+  #
+  # The resolution can be one of the following values:
+  # [+Layout::PageInfo::RESOLUTION_LOW+]
+  # [+Layout::PageInfo::RESOLUTION_MEDIUM+]
+  # [+Layout::PageInfo::RESOLUTION_HIGH+]
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   image_quality = doc.page_info.image_output_resolution
+  #
+  # @return [Integer]
+  #
+  # @version LayOut 2023.1
+  def image_output_resolution
+  end
+
+  # The {#image_output_resolution=} method sets the output image quality.
+  #
+  # The resolution can be one of the following values:
+  # [+Layout::PageInfo::RESOLUTION_LOW+]
+  # [+Layout::PageInfo::RESOLUTION_MEDIUM+]
+  # [+Layout::PageInfo::RESOLUTION_HIGH+]
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   doc.page_info.image_output_resolution = Layout::PageInfo::RESOLUTION_HIGH
+  #
+  # @param [Integer] resolution
+  #
+  # @raise [ArgumentError] if resolution is not a valid resolution value
+  #
+  # @version LayOut 2023.1
+  def image_output_resolution=(resolution)
   end
 
   # The {#left_margin} method returns the paper's left margin in document units.

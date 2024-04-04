@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2023 Trimble Inc.
+# Copyright:: Copyright 2024 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Command class is the preferred class for adding tools to the menus and
@@ -34,36 +34,6 @@
 #
 # @version SketchUp 6.0
 class UI::Command
-
-  # Class Methods
-
-  # The new method is used to create a new command.
-  #
-  # @example
-  #   UI.menu("Draw").add_separator
-  #
-  #   # Adds a Test submenu to the Draw menu where the Tester menu item appears
-  #   testmenu = UI.menu("Draw").add_submenu("Test")
-  #
-  #   # This menu item simply displays Hello World on the screen when clicked.
-  #   cmd = UI::Command.new("Tester") { UI.messagebox("Hello World") }
-  #   testmenu.add_item cmd
-  #
-  # @note Prior to SketchUp 2019 it was not possible to sub-class {UI::Command}
-  #   due to a bug in how SketchUp initialized the class.
-  #
-  # @param [String] menutext
-  #   The text that will appear for this command's menu item
-  #   if it appears on a menu.
-  #
-  # @return [UI::Command] the new Command object
-  #
-  # @version SketchUp 6.0
-  #
-  # @yield Code that executes the command when the menu item or
-  #   toolbar item is selected.
-  def self.new(menutext)
-  end
 
   # Instance Methods
 
@@ -117,6 +87,34 @@ class UI::Command
   #
   # @version SketchUp 2022.0
   def get_validation_proc
+  end
+
+  # The new method is used to create a new command.
+  #
+  # @example
+  #   UI.menu("Draw").add_separator
+  #
+  #   # Adds a Test submenu to the Draw menu where the Tester menu item appears
+  #   testmenu = UI.menu("Draw").add_submenu("Test")
+  #
+  #   # This menu item simply displays Hello World on the screen when clicked.
+  #   cmd = UI::Command.new("Tester") { UI.messagebox("Hello World") }
+  #   testmenu.add_item cmd
+  #
+  # @note Prior to SketchUp 2019 it was not possible to sub-class {UI::Command}
+  #   due to a bug in how SketchUp initialized the class.
+  #
+  # @param [String] menutext
+  #   The text that will appear for this command's menu item
+  #   if it appears on a menu.
+  #
+  # @return [UI::Command] the new Command object
+  #
+  # @version SketchUp 6.0
+  #
+  # @yield Code that executes the command when the menu item or
+  #   toolbar item is selected.
+  def initialize(menutext)
   end
 
   # The large_icon method returns the icon file for the command's
