@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2023 Trimble Inc.
+# Copyright:: Copyright 2024 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # An entity is an object shown on a page of a LayOut document.
@@ -174,6 +174,9 @@ class Layout::Entity
   # cases, passing in an array of {Layout::Page}s is not necessary. The
   # {Layout::Entity} must belong to the same {Layout::Document} as the the
   # {Layout::Layer} and the {Layout::Page}s.
+  #
+  # @bug In LayOut versions prior to LayOut 2024.0 this method would fail to move
+  #   entities from non-shared layers.
   #
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")

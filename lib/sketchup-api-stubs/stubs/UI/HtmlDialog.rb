@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2023 Trimble Inc.
+# Copyright:: Copyright 2024 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Ruby HtmlDialog class allows you to create and interact with HTML dialog
@@ -21,6 +21,8 @@
 #
 # HtmlDialog uses the following versions of CEF (Chromium Embedded Framework):
 #
+# [SketchUp 2024.0]
+#   CEF 112
 # [SketchUp 2021.1]
 #   CEF 88
 # [SketchUp 2019.0]
@@ -29,6 +31,10 @@
 #   CEF 56
 # [SketchUp 2017.0]
 #   CEF 52
+#
+# @note The window size is not guaranteed to be pixel perfect in all SketchUp
+#   versions and operating systems. Prefer responsive designs that can take
+#   up some fluctuations in size.
 #
 # @version SketchUp 2017
 class UI::HtmlDialog
@@ -228,6 +234,11 @@ class UI::HtmlDialog
   # @bug SketchUp 2022.0 fixed a bug on Mac where size and position of the
   #   HtmlDialog were not persisted when SketchUp was closed without first
   #   closing the HtmlDialog window.
+  #
+  # @bug SketchUp 2023.0 introduced a bug where the position given in {#initialize}
+  #   is set relative to the SketchUp main window. If you rely on the position to be
+  #   absolute to the screen then you can use {#set_position} after creating the
+  #   dialog.
   #
   # @example With options Hash
   #   dialog = UI::HtmlDialog.new(

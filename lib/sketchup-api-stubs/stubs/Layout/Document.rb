@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2023 Trimble Inc.
+# Copyright:: Copyright 2024 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This is the interface to a LayOut document. A {Layout::Document} is the 2D
@@ -164,7 +164,15 @@ class Layout::Document
   #   # first page of a {Layout::Document} is index 0.
   #   options = { start_page: 1,
   #               end_page: 3,
-  #               output_resolution: Layout::PageInfo::RESOLUTION_HIGH,
+  #               compress_images: TRUE,
+  #               compress_quality: 0.75 }
+  #
+  #   status = doc.export("c:/my_export.pdf", options)
+  #
+  #   # Export pages one and three through five. Note that page_range starts at
+  #   # index 1.
+  #   # `page_range` support added in LayOut 2024.0.
+  #   options = { page_range: "1,3-5",
   #               compress_images: TRUE,
   #               compress_quality: 0.75 }
   #
@@ -174,13 +182,22 @@ class Layout::Document
   #   doc = Layout::Document.open("c:/path/to/document.layout")
   #
   #   # Export png files on macOS, with default settings.
-  #   status = doc.export('/Users/username/Desktop/pngs/page.png')
+  #   status = doc.export("/Users/<username>/Desktop/pngs/page.png")
   #
   #   # Export pages one through three at 300 dpi as JPGs.
   #   options = { start_page: 1,
   #               end_page: 3,
   #               dpi: 300 }
   #   status = doc.export('c:/page.jpg', options)
+  #
+  #   # Export pages one and three through five. Note that page_range starts at
+  #   # index 1.
+  #   # `page_range` support added in LayOut 2024.0.
+  #   options = { page_range: "1,3-5",
+  #               compress_images: TRUE,
+  #               compress_quality: 0.75 }
+  #
+  #   status = doc.export("c:/my_export.png", options)
   #
   # @param [String] file_path
   #   The file or image set to create. The directory
@@ -396,6 +413,41 @@ class Layout::Document
   #
   # @version LayOut 2018
   def remove_entity(entity)
+  end
+
+  # The {#render_mode_override} method returns the override setting for output render modes
+  # of {Layout::SketchUpModel}s in the {Layout::Document}.
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   render_mode = doc.render_mode_override
+  #
+  # @return [Integer]
+  #
+  # @version LayOut 2023.1
+  def render_mode_override
+  end
+
+  # The {#render_mode_override=} method sets the override setting for output render modes
+  # of {Layout::SketchUpModel}s in the {Layout::Document}. Setting this to +NO_OVERRIDE+
+  # will prevent overriding the individual {Layout::SketchUpModel} render mode setting during
+  # export. This override will only affect raster rendered {Layout::SketchUpModel}s, if a
+  # viewport is set to vector or hybrid, it will retain that render mode as its output render
+  # mode.
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   doc.render_mode_override = Layout::SketchUpModel::VECTOR_RENDER
+  #
+  # @param [Integer] render_mode
+  #   +NO_OVERRIDE+, +VECTOR_RENDER+, or +HYBRID_RENDER+
+  #
+  # @raise [ArgumentError] if render_mode is not a valid render mode
+  #
+  # @raise [ArgumentError] if render_mode is +RASTER_RENDER+
+  #
+  # @version LayOut 2023.1
+  def render_mode_override=(render_mode)
   end
 
   # The {#save} method saves the {Layout::Document} to a file at the given path.

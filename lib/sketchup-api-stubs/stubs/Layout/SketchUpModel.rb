@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2023 Trimble Inc.
+# Copyright:: Copyright 2024 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A SketchUp Model entity. This is an instance of a SketchUp Model that is
@@ -32,6 +32,8 @@ class Layout::SketchUpModel < Layout::Entity
   ISO_VIEW = nil # Stub value.
 
   LEFT_VIEW = nil # Stub value.
+
+  NO_OVERRIDE = nil # Stub value.
 
   RASTER_RENDER = nil # Stub value.
 
@@ -350,6 +352,26 @@ class Layout::SketchUpModel < Layout::Entity
   #
   # @version LayOut 2018
   def model_to_paper_point(model_point)
+  end
+
+  # The {#output_entities} method returns the {Layout::Group} that represents the
+  # {Layout::SketchUpModel} in its exported form. The {Layout::Group} will contain a {Layout::Image}
+  # for raster and hybrid-rendered models, and will contain a {Layout::Group} of LayOut entities for
+  # vector and hybrid-rendered models. This takes into account the output resolution set in the
+  # document's {Layout::PageInfo}, and the render mode override set on the document.
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   bounds = Geom::Bounds2d.new(1, 1, 3, 3)
+  #   model = Layout::SketchUpModel.new("C:/Path/to/model.skp", bounds)
+  #   doc.add_entity(model, doc.layers.first, doc.pages.first)
+  #   doc.render_mode_override = Layout::SketchUpModel::HYBRID_RENDER
+  #   entities = model.output_entities
+  #
+  # @return [Layout::Entity]
+  #
+  # @version LayOut 2023.1
+  def output_entities
   end
 
   # The {#perspective=} method sets whether the {Layout::SketchUpModel}'s view
