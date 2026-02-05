@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Sketchup::InputPoint} class is used to pick 3d points and/or entities
@@ -271,30 +271,56 @@ class Sketchup::InputPoint
   #
   # @example
   #   view = Sketchup.active_model.active_view
-  #   x = 100
-  #   y = 100
+  #   x = 100 # Screen coordinate
+  #   y = 200 # Screen coordinate
   #   inputpoint = view.inputpoint(x, y)
-  #   inputpoint2 = Sketchup::InputPoint.new(Geom::Point3d.new(100, 200, 300))
+  #   inputpoint2 = Sketchup::InputPoint.new(Geom::Point3d.new(100, 250, 300))
   #   inputpoint.pick(view, x, y)
   #   inputpoint.pick(view, x, y, inputpoint2)
   #
   # @overload pick(view, x, y)
   #
+  #   @note Signature for versions prior to SketchUp 2025.0
+  #   @version SketchUp 6.0
   #   The first form just uses the screen position to compute the InputPoint. It
   #   is used when you don't want the InputPoint to be dependent on another
   #   InputPoint.
   #   @param [Sketchup::View] view
-  #   @param [Integer] x
-  #   @param [Integer] y
+  #   @param [Integer] x Screen coordinate in physical pixels.
+  #   @param [Integer] y Screen coordinate in physical pixels.
   #
   # @overload pick(view, x, y, inputpoint)
   #
+  #   @note Signature for versions prior to SketchUp 2025.0
+  #   @version SketchUp 6.0
   #   The second form uses the screen position and another InputPoint. It will
   #   find additional inferences such as along one of the axis directions from the
   #   first point.
   #   @param [Sketchup::View] view
-  #   @param [Integer] x
-  #   @param [Integer] y
+  #   @param [Integer] x Screen coordinate in physical pixels.
+  #   @param [Integer] y Screen coordinate in physical pixels.
+  #   @param [Sketchup::InputPoint] inputpoint
+  #     A second input point used as a reference for the pick.
+  #
+  # @overload pick(view, x, y)
+  #
+  #   @version SketchUp 2025.0
+  #   The first form just uses the screen position to compute the InputPoint. It
+  #   is used when you don't want the InputPoint to be dependent on another
+  #   InputPoint.
+  #   @param [Sketchup::View] view
+  #   @param [Float] x Screen coordinate in logical pixels.
+  #   @param [Float] y Screen coordinate in logical pixels.
+  #
+  # @overload pick(view, x, y, inputpoint)
+  #
+  #   @version SketchUp 2025.0
+  #   The second form uses the screen position and another InputPoint. It will
+  #   find additional inferences such as along one of the axis directions from the
+  #   first point.
+  #   @param [Sketchup::View] view
+  #   @param [Float] x Screen coordinate in logical pixels.
+  #   @param [Float] y Screen coordinate in logical pixels.
   #   @param [Sketchup::InputPoint] inputpoint
   #     A second input point used as a reference for the pick.
   #

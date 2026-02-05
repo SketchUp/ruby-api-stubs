@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Sketchup::PickHelper} class is used to pick entities that reside under
@@ -137,28 +137,33 @@ class Sketchup::PickHelper
   def depth_at(index)
   end
 
-  # The do_pick method is used to perform the initial pick. This method is
+  # The {#do_pick} method is used to perform the initial pick. This method is
   # generally called before any other methods in the PickHelper class.
   #
-  # Returns the number of entities picked. The x and y values are the screen
-  # coordinates of the point at which would want to do a pick.
-  #
   # @example
-  #   ph = view.pick_helpernum = ph.do_pick(x, y)
+  #   ph = view.pick_helper
+  #   num = ph.do_pick(x, y)
+  #   entity = ph.best_picked
   #
-  # @param x
-  #   X screen coordinate for the pick.
+  # @overload do_pick(x, y, aperture = 0)
   #
-  # @param y
-  #   Y screen coordinate for the pick.
+  #   @note Signature for versions prior to SketchUp 2025.0
+  #   @version SketchUp 6.0
+  #   @param [Integer] x  Screen coordinate in physical pixels.
+  #   @param [Integer] y  Screen coordinate in physical pixels.
+  #   @param [Integer] aperture  The size of the aperture in physical pixels.
+  #   @return [Integer] Number of entities picked.
   #
-  # @param aperture
-  #   The size of the pick-aperture.
+  # @overload do_pick(x, y, aperture = 0.0)
   #
-  # @return Integer - The number of Entity objects picked
+  #   @version SketchUp 2025.0
+  #   @param [Float] x  Screen coordinate in logical pixels.
+  #   @param [Float] y  Screen coordinate in logical pixels.
+  #   @param [Float] aperture  The size of the aperture in logical pixels.
+  #   @return [Integer] Number of entities picked.
   #
   # @version SketchUp 6.0
-  def do_pick(x, y, aperture = 0)
+  def do_pick(*args)
   end
 
   # The element_at method is used to retrieve a specific entity in the list of
@@ -190,8 +195,6 @@ class Sketchup::PickHelper
   # You do not normally need to call this method, but you can use this if you
   # want to call {#test_point} or {#pick_segment} on a lot of points.
   #
-  # If the optional aperture is given, it is given in pixels.
-  #
   # @example
   #   ph = view.pick_helper
   #   ph.init(x, y, 5)
@@ -200,19 +203,27 @@ class Sketchup::PickHelper
   #     ph.test_point(point)
   #   }
   #
-  # @param [Integer] x
-  #   X screen coordinate for the pick.
+  # @overload init(x, y, aperture = 0)
   #
-  # @param [Integer] y
-  #   Y screen coordinate for the pick.
+  #   @note Signature for versions prior to SketchUp 2025.0
+  #   @version SketchUp 6.0
+  #   @param [Integer] x  Screen coordinate in physical pixels.
+  #   @param [Integer] y  Screen coordinate in physical pixels.
+  #   @param [Integer] aperture  The size of the aperture in physical pixels.
+  #     This is the width and height of the square picking aperture.
   #
-  # @param [Integer] aperture
-  #   aperture in pixels.
+  # @overload init(x, y, aperture = 0.0)
+  #
+  #   @version SketchUp 2025.0
+  #   @param [Integer] x  Screen coordinate in logical pixels.
+  #   @param [Integer] y  Screen coordinate in logical pixels.
+  #   @param [Integer] aperture  The size of the aperture in logical pixels.
+  #     This is the width and height of the square picking aperture.
   #
   # @return [Sketchup::PickHelper]
   #
   # @version SketchUp 6.0
-  def init(x, y, aperture = 0)
+  def init(*args)
   end
 
   # The leaf_at method retrieves the deepest thing in a pick path.
@@ -305,7 +316,7 @@ class Sketchup::PickHelper
   #
   #   @param [Array<Geom::Point3d>] points  A series of points in the polyline as
   #                        a list of parameters or an array containing Point3d
-  #                        objects.
+  #                        objects. Model coordinates.
   #   @param [Integer] x   screen mouse position in pixels.
   #   @param [Integer] y   (required if x given) screen mouse position
   #                        in pixels.
@@ -343,13 +354,17 @@ class Sketchup::PickHelper
   #   ph.do_pick(x, y)
   #   entity = ph.picked_element
   #
-  # @param index
+  # @overload picked_element()
   #
-  # @return element - a drawing element that is not an edge or face
-  #   if successful
+  #
+  # @overload picked_element(index)
+  #
+  #   @param [Integer] index
+  #
+  # @return [Sketchup::Drawingelement, nil] a drawing element that is not an edge or face
   #
   # @version SketchUp 6.0
-  def picked_element(index)
+  def picked_element(*args)
   end
 
   # The picked_face method is used to retrieve the best face picked.
@@ -387,16 +402,18 @@ class Sketchup::PickHelper
   #   This is more efficient if you want to test a lot of points using the same
   #   screen point. But you *must* have called the {#init} method first for this
   #   to work.
-  #   @param [Geom::Point3d] point
+  #   @param [Geom::Point3d] point Model coordinate.
   #
   # @overload test_point(point, x, y, aperture = 0)
   #
-  #   @param [Geom::Point3d] point
-  #   @param [Integer] x
-  #   @param [Integer] y
-  #   @param [Integer] aperture
+  #   @param [Geom::Point3d] point   Model coordinate.
+  #   @param [Integer] x             X screen coordinate for the pick.
+  #   @param [Integer] y             Y screen coordinate for the pick.
+  #   @param [Integer] aperture      aperture in pixels.
   #
   # @return [Boolean]
+  #
+  # @see #init
   #
   # @version SketchUp 6.0
   def test_point(*args)
@@ -453,25 +470,29 @@ class Sketchup::PickHelper
   # Used to pick a set of entities from a model based on a screen coordinate
   # rectangular area defined by two points. The pick criteria can be for
   # completely-contained or partially-contained entities, similar to how
-  # the Selection tool works. The z value of the points passed in are ignored.
+  # the Selection tool works. The +z+ value of the points passed in are ignored.
   #
   # @example
   #   ph = Sketchup.active_model.active_view.pick_helper
   #   start_point = Geom::Point3d.new(100, 100, 0)
   #   end_point = Geom::Point3d.new(500, 500, 0)
   #   num_picked = ph.window_pick(start_point, end_point, Sketchup::PickHelper::PICK_CROSSING)
+  #   picked_entities = ph.all_picked
   #
-  # @param start_point
+  # @note Prior to SketchUp 2025.0 this method expected physical screen coordinates.
+  #   As of SketchUp 2025.0 they are expected to be logical screen coordinates.
+  #
+  # @param [Geom::Point3d] start_point
   #   First screen coordinate point.
   #
-  # @param end_point
+  # @param [Geom::Point3d] end_point
   #   Second screen coordinate point.
   #
-  # @param pick_type
-  #   PICK_INSIDE to select entities completely contained or
-  #   PICK_CROSSING to select entities partially contained.
+  # @param [Integer] pick_type
+  #   {PICK_INSIDE} to select entities completely contained or
+  #   {PICK_CROSSING} to select entities partially contained.
   #
-  # @return The number of Entity objects picked
+  # @return [Integer] The number of {Sketchup::Drawingelement} objects picked.
   #
   # @version SketchUp 2016
   def window_pick(start_point, end_point, pick_type)

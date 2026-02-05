@@ -1,11 +1,11 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
-# A set of the currently selected entities. Use the Model.selection method
-# to get a Selection object.  Note that the order of entities
+# A set of the currently selected drawing elements. Use the Model.selection method
+# to get a Selection object.  Note that the order of drawing elements
 # (<code>selection[0]</code>, <code>selection[1]</code> and so on) in the set
 # is in no particular order and should not be assumed to be in the same order
-# as the user selected the entities.
+# as the user selected the drawing elements.
 #
 # @example
 #   # Get a handle to the selection set.
@@ -21,8 +21,8 @@ class Sketchup::Selection
 
   # Instance Methods
 
-  # The {#[]} method is used to retrieve an {Sketchup::Entity} from the selection
-  # by index. Index 0 is the first entity in the selection.
+  # The {#[]} method is used to retrieve a {Sketchup::Drawingelement} from the selection
+  # by index. Index 0 is the first Drawingelement in the selection.
   #
   # This method is not very efficient. If you need to look at every entity in
   # the selection, consider using {#each} instead of using this method
@@ -36,9 +36,9 @@ class Sketchup::Selection
   #   p selection[0]
   #
   # @param [Integer] index
-  #   The index of the Entity object to retrieve.
+  #   The index of the Drawingelement object to retrieve.
   #
-  # @return [Sketchup::Entity, nil]
+  # @return [Sketchup::Drawingelement, nil]
   #
   # @see #at
   #
@@ -46,36 +46,32 @@ class Sketchup::Selection
   def [](index)
   end
 
-  # The add method is used to add entities to the selection.  Entities that are
+  # The {#add} method is used to add Drawingelement to the selection. Drawingelements that are
   # added to the Selection are visually indicated by the selection bounding box.
   #
-  # You can pass it individual Entities or an Array of Entities:
-  # Note that the add, remove, and toggle methods are all aliases for one
-  # another. So if you call remove on an entity that is not selected, it will
-  # be toggled to be selected, not removed! Be cautious when writing your code to
-  # not make the assumption about the currently selected state of a given entity.
+  # You can pass it individual Drawingelements or an Array of Drawingelements.
   #
   # @example
-  #   # Add by listing the entities...
+  #   # Add by listing the Drawingelements...
   #   ss.add(e1, e2, e3)
   #
-  #   # ...or add by passing an Array of entities.
+  #   # ...or add by passing an Array of Drawingelements.
   #   ss.add([e1, e2, e3])
   #
   # @example
-  #   entities = model.active_entities
-  #   entity = entities[0]
-  #   status = selection.add entity
+  #   model = Sketchup.active_model
+  #   edge = model.active_entities.add_line([0, 0, 0], [9, 9, 9])
+  #   model.selection.add(edge)
   #
-  # @overload add(entities)
+  # @overload add(drawing_elements)
   #
-  #   @param [Array<Sketchup::Entity>] entities
+  #   @param [Array<Sketchup::Drawingelement>] drawing_elements
   #
-  # @overload add(*entities)
+  # @overload add(*drawing_elements)
   #
-  #   @param [Array<Sketchup::Entity>] entities
+  #   @param [Array<Sketchup::Drawingelement>] drawing_elements
   #
-  # @return [Integer] the number of Entity objects added
+  # @return [Integer] the number of Drawingelement objects added
   #
   # @version SketchUp 6.0
   def add(*args)
@@ -106,9 +102,9 @@ class Sketchup::Selection
   #   p selection.at(0)
   #
   # @param [Integer] index
-  #   The index of the Entity object to retrieve.
+  #   The index of the Drawingelement object to retrieve.
   #
-  # @return [Sketchup::Entity, nil]
+  # @return [Sketchup::Drawingelement, nil]
   #
   # @see #[]
   #
@@ -130,7 +126,7 @@ class Sketchup::Selection
   def clear
   end
 
-  # The {contains?} method is and alias of {#include?}.
+  # The {#contains?} method is and alias of {#include?}.
   #
   # @example
   #   model = Sketchup.active_model
@@ -139,14 +135,14 @@ class Sketchup::Selection
   #   selection.add(entity)
   #   p selection.contains?(entity)
   #
-  # @param [Sketchup::Entity] entity
+  # @param [Sketchup::Drawingelement] drawing_element
   #
   # @return [Boolean]
   #
   # @see #include?
   #
   # @version SketchUp 6.0
-  def contains?(entity)
+  def contains?(drawing_element)
   end
 
   #
@@ -166,13 +162,13 @@ class Sketchup::Selection
   def count
   end
 
-  # The {#each} method is used to iterate through all of the selected entities.
+  # The {#each} method is used to iterate through all of the selected Drawingelements.
   #
-  # If you want to do something with all of the selected Entities, this is more
+  # If you want to do something with all of the selected Drawingelements, this is more
   # efficient than using {#[]}.
   #
   # @example
-  #   selection.each { |entity| puts entity }
+  #   selection.each { |drawing_element| puts drawing_element }
   #
   # @note Don't remove content from this collection while iterating over it with
   #   {#each}. This would change the size of the collection and cause elemnts to
@@ -183,15 +179,15 @@ class Sketchup::Selection
   #
   # @version SketchUp 6.0
   #
-  # @yieldparam [Sketchup::Entity] entity
+  # @yieldparam [Sketchup::Drawingelement] drawing_element
   def each
   end
 
-  # The empty? method is used to determine if there are entities in the
+  # The {#empty?} method is used to determine if there are drawing elements in the
   # selection.
   #
   # @example
-  #   status = selection.add entity
+  #   status = selection.add drawing_element
   #   status = selection.empty
   #
   # @return [Boolean]
@@ -200,23 +196,23 @@ class Sketchup::Selection
   def empty?
   end
 
-  # The first method is used to retrieve the first selected entity
+  # The {#first} method is used to retrieve the first selected Drawingelement
   #
   # Returns nil if nothing is selected. This method is useful when you know that
-  # only a single entity is selected, or you are only interested in the first
-  # selected entity.
+  # only a single Drawingelement is selected, or you are only interested in the first
+  # selected Drawingelement.
   #
   # @example
-  #   status = selection.add entity
-  #   entity = selection.first
+  #   status = selection.add drawing_element
+  #   drawing_element = selection.first
   #
-  # @return [Sketchup::Entity] the first selected Entity object if successful
+  # @return [Sketchup::Drawingelement] the first selected Drawingelement object if successful
   #
   # @version SketchUp 6.0
   def first
   end
 
-  # The {include?} method is used to determine if a given {Sketchup::Entity} is
+  # The {#include?} method is used to determine if a given {Sketchup::Drawingelement} is
   # in the selection.
   #
   # @example
@@ -226,14 +222,14 @@ class Sketchup::Selection
   #   selection.add(entity)
   #   p selection.include?(entity)
   #
-  # @param [Sketchup::Entity] entity
+  # @param [Sketchup::Drawingelement] drawing_element
   #
   # @return [Boolean]
   #
   # @see #contains?
   #
   # @version SketchUp 6.0
-  def include?(entity)
+  def include?(drawing_element)
   end
 
   # The {#invert} method is used to invert the selection.
@@ -257,11 +253,11 @@ class Sketchup::Selection
   def invert
   end
 
-  # The is_curve? method is used to determine if the selection contains all
+  # The {#is_curve?} method is used to determine if the selection contains all
   # edges that belong to a single curve.
   #
   # @example
-  #   selection.add entity
+  #   selection.add drawing_element
   #   status = selection.is_curve?
   #
   # @return [Boolean]
@@ -270,11 +266,11 @@ class Sketchup::Selection
   def is_curve?
   end
 
-  # The is_surface? method is used to determine if the selection contains only
+  # The {#is_surface?} method is used to determine if the selection contains only
   # all of the faces that are part of a single curved surface.
   #
   # @example
-  #   selection.add entity
+  #   selection.add drawing_element
   #   status = selection.is_surface
   #
   # @return [Boolean]
@@ -283,7 +279,7 @@ class Sketchup::Selection
   def is_surface?
   end
 
-  # The {#length} method is used to retrieve the number of selected entities.
+  # The {#length} method is used to retrieve the number of selected drawing elements.
   #
   # @example
   #   selection = Sketchup.active_model.selection
@@ -299,7 +295,7 @@ class Sketchup::Selection
   def length
   end
 
-  # The model method retrieves the model for the selection.
+  # The {#model} method retrieves the model for the selection.
   #
   # @example
   #   model = selection.model
@@ -325,35 +321,33 @@ class Sketchup::Selection
   def nitems
   end
 
-  # The remove method is used to remove entities from the selection.
-  #
-  # You can pass it individual Entities or an Array of Entities:
-  # Note that the add, remove, and toggle methods are all aliases for one
-  # another. So if you call remove on an entity that is not selected, it will
-  # be toggled to be selected, not removed! Be cautious when writing your code to
-  # not make the assumption about the currently selected state of a given entity.
+  # The {#remove} method is used to remove Drawingelements from the selection.
+  # You can pass it individual Drawingelements or an Array of Drawingelements.
   #
   # @example
-  #   # Remove by listing the entities...
+  #   # Remove by listing the Drawingelements...
   #   ss.remove(e1, e2, e3)
   #
-  #   # ...or remove by passing an Array of entities.
+  #   # ...or remove by passing an Array of Drawingelements.
   #   ss.remove([e1, e2, e3])
   #
   # @example
-  #   entities = model.active_entities
-  #   entity = entities[0]
-  #   status = selection.add entity
+  #   model = Sketchup.active_model
+  #   face = model.active_entities.add_line([0, 0, 0], [9, 0, 0], [9, 9, 0], [0, 9, 0])
+  #   edges = face.all_connected
+  #   model.selection.add(edges)
   #
-  # @overload remove(entities)
+  #   model.selection.remove(edges.first)
   #
-  #   @param [Array<Sketchup::Entity>] entities
+  # @overload remove(drawing_elements)
   #
-  # @overload remove(*entities)
+  #   @param [Array<Sketchup::Drawingelement>] drawing_elements
   #
-  #   @param [Array<Sketchup::Entity>] entities
+  # @overload remove(*drawing_elements)
   #
-  # @return [Integer] the number of Entity objects removed
+  #   @param [Array<Sketchup::Drawingelement>] drawing_elements
+  #
+  # @return [Integer] the number of Drawingelement objects removed
   #
   # @version SketchUp 6.0
   def remove(*args)
@@ -375,25 +369,25 @@ class Sketchup::Selection
   def remove_observer(observer)
   end
 
-  # The shift method is used to remove the first entity from the selection and
+  # The {#shift} method is used to remove the first Drawingelement from the selection and
   # returns it.
   #
   # @example
-  #   status = selection.add entity
+  #   status = selection.add drawing_element
   #   UI.messagebox "Ready to remove item from selection set"
-  #   entity = selection.shift
+  #   drawing_element = selection.shift
   #
-  # @return [Sketchup::Entity] the first Entity object in the selection set
+  # @return [Sketchup::Drawingelement] the first Drawingelement object in the selection set
   #   if successful
   #
   # @version SketchUp 6.0
   def shift
   end
 
-  # The single_object? method is used to determine if the selection contains a
+  # The {#single_object?} method is used to determine if the selection contains a
   # single object.
   #
-  # It can either be a single Entity or a group of Entities for which is_curve?
+  # It can either be a single DrawingElement or a group of DrawingElements for which is_curve?
   # or is_surface? will return true.
   #
   # @example
@@ -419,37 +413,36 @@ class Sketchup::Selection
   def size
   end
 
-  # The toggle method is used to change whether an entity is part of the
-  # selection. Entities that are not already selected
-  # are added. Entities that are already selected are removed.
+  # The {#toggle} method is used to change whether a Drawingelement is part of the
+  # selection. Drawingelements that are not already selected
+  # are added. Drawingelements that are already selected are removed.
   #
-  # You can pass it individual Entities or an Array of Entities:
-  # Note that the add, remove, and toggle methods are all aliases for one
-  # another. So if you call remove on an entity that is not selected, it will
-  # be toggled to be selected, not removed! Be cautious when writing your code to
-  # not make the assumption about the currently selected state of a given entity.
+  # You can pass it individual Drawingelements or an Array of Drawingelements.
   #
   # @example
-  #   # Toggle by listing the entities...
+  #   # Toggle by listing the Drawingelements...
   #   ss.toggle(e1, e2, e3)
   #
-  #   # ...or toggle by passing an Array of entities.
+  #   # ...or toggle by passing an Array of Drawingelements.
   #   ss.toggle([e1, e2, e3])
   #
   # @example
-  #   entities = model.active_entities
-  #   entity = entities[0]
-  #   status = selection.add entity
+  #   model = Sketchup.active_model
+  #   face = model.active_entities.add_line([0, 0, 0], [9, 0, 0], [9, 9, 0], [0, 9, 0])
+  #   edges = face.all_connected
+  #   model.selection.add(edges)
   #
-  # @overload toggle(entities)
+  #   model.selection.toggle(edges.first)
   #
-  #   @param [Array<Sketchup::Entity>] entities
+  # @overload toggle(drawings_elements)
   #
-  # @overload toggle(*entities)
+  #   @param [Array<Sketchup::Drawingelement>] drawing_elements
   #
-  #   @param [Array<Sketchup::Entity>] entities
+  # @overload toggle(*drawing_elements)
   #
-  # @return [Integer] the number of Entity objects changed
+  #   @param [Array<Sketchup::Drawingelement>] drawing_elements
+  #
+  # @return [Integer] the number of Drawingelement objects changed
   #
   # @version SketchUp 6.0
   def toggle(*args)

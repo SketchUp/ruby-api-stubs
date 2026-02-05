@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Classifications class is a container/manager for all classifications in
@@ -77,7 +77,7 @@ class Sketchup::Classifications
   #
   # @example
   #   c = Sketchup.active_model.classifications
-  #   file = Sketchup.find_support_file('IFC 4.skc', 'Classifications')
+  #   file = Sketchup.find_support_file('IFC4.skc', 'Classifications')
   #   status = c.load_schema(file) if !file.nil?
   #
   # @param file

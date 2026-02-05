@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Sketchup::ShadowInfo} class contains method to extract the shadow
@@ -93,19 +93,23 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   # The set value []= method is used to set the value in the array of shadow
   # info options.
   #
+  # For numeric properties like "Dark", "Light", "Latitude", and "Longitude",
+  # this method is flexible and accepts any +Numeric+ value (+Integer+ or +Float+).
+  #
   # @example
   #   model = Sketchup.active_model
   #   shadowinfo = model.shadow_info
-  #   value = shadowinfo["City"]
-  #   UI.messagebox value
-  #   value = shadowinfo["City"]="Denver, CO"
-  #   UI.messagebox value
+  #   shadowinfo["City"]="Denver, CO"
   #
   # @param [String] key
   #   The key of the shadowinfo value to set.
   #
   # @param [Object] value
   #   The value to be set.
+  #
+  # @raise A KeyError is raised if the key is invalid or read-only.
+  #
+  # @raise [TypeError] if the value is not the correct type for the key.
   #
   # @return [Object] the value that was set if successful, or false
   #   if unsuccessful.

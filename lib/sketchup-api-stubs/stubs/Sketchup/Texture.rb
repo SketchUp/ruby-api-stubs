@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Texture class contains methods for obtaining information about textures
@@ -23,16 +23,11 @@ class Sketchup::Texture < Sketchup::Entity
   #     # Returns nil if not successful, path if successful
   #     m.texture = "c:\\Materials\\Carpet.jpg"
   #   rescue
-  #     UI.messagebox $!.message
+  #     puts $!.message
   #   end
   #   texture = m.texture
   #   # Returns a color object
   #   color = texture.average_color
-  #   if (color)
-  #     UI.messagebox color
-  #   else
-  #     UI.messagebox "Failure: No average color"
-  #   end
   #
   # @return [Sketchup::Color, nil] a color object (if successful), nil if
   #   unsuccessful.
@@ -41,8 +36,15 @@ class Sketchup::Texture < Sketchup::Entity
   def average_color
   end
 
-  # The {#filename} method retrieves the entire path, including the file, for a
-  # texture object.
+  # The {#filename} method retrieves the full path, if available, for a texture object.
+  #
+  # Textures for materials shipping with SketchUp might only have a filename,
+  # since the path would be invalid on the end user's machine. Textures
+  # dynamically created from ImageRep objects may have an empty path unless
+  # saved with {Sketchup::ImageRep#save_file} or until the texture is saved with
+  # {Sketchup::Texture#write}.
+  #
+  # If you need only the filename of the texture use +filename = File.basename(texture.filename)+.
   #
   # @example
   #   model = Sketchup.active_model
@@ -79,11 +81,6 @@ class Sketchup::Texture < Sketchup::Entity
   #
   # @example
   #   imageheight = texture.image_height
-  #   if (imageheight)
-  #     UI.messagebox imageheight
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
   # @return [Integer] the height, in pixels, of the texture
   #   pattern
@@ -113,11 +110,6 @@ class Sketchup::Texture < Sketchup::Entity
   #
   # @example
   #   imagewidth = texture.image_width
-  #   if (imagewidth)
-  #     UI.messagebox imagewidth
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
   # @return [Integer] the width, in pixels, of the texture
   #   pattern
@@ -134,18 +126,13 @@ class Sketchup::Texture < Sketchup::Entity
   #   imagewidth = texture.width
   #
   #   if (imagewidth)
-  #     UI.messagebox imagewidth
+  #     puts imagewidth
   #   else
-  #     UI.messagebox "Failure"
+  #     puts "Failure"
   #   end
   #
   #   # Using two values which will not preserve ratio
   #   width_height = texture.size = [10,100]
-  #   if (width_height)
-  #     UI.messagebox width_height
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
   # @param [Integer, Array(Integer, Integer)] size
   #   The size, in inches, of the texture. This number will
@@ -168,11 +155,6 @@ class Sketchup::Texture < Sketchup::Entity
   #
   # @example
   #   status = texture.valid?
-  #   if (status)
-  #     UI.messagebox status
-  #   else
-  #     UI.messagebox status
-  #   end
   #
   # @return [Boolean]
   #

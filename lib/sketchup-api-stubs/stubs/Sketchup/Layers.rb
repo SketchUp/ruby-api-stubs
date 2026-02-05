@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Layers collection allows you to see and manage all of the layers in a
@@ -62,8 +62,6 @@ class Sketchup::Layers < Sketchup::Entity
   alias_method :add_layer, :add
 
   # The {#add_folder} method adds or moves a layer folder.
-  #
-  # @api TagFolder
   #
   # @example
   #   manager = Sketchup.active_model.layers
@@ -143,8 +141,6 @@ class Sketchup::Layers < Sketchup::Entity
   # The {#count_folders} method counts the number of folders which are direct
   # children of the layer manager.
   #
-  # @api TagFolder
-  #
   # @example
   #   manager = Sketchup.active_model.layers
   #   folder = manager.add_folder('Doors')
@@ -157,8 +153,6 @@ class Sketchup::Layers < Sketchup::Entity
   end
 
   # The {#count_layers} method retrieves the number of layers not in a folder.
-  #
-  # @api TagFolder
   #
   # @example
   #   layers = Sketchup.active_model.layers
@@ -199,8 +193,6 @@ class Sketchup::Layers < Sketchup::Entity
   # The {#each_folder} method is used to iterate through the folders that are
   # direct children to the layer manager.
   #
-  # @api TagFolder
-  #
   # @example
   #   manager = Sketchup.active_model.layers
   #   folder = manager.add_folder('Doors')
@@ -220,8 +212,6 @@ class Sketchup::Layers < Sketchup::Entity
   # The {#each_layer} method is used to iterate through the layers that are not
   # inside a layer folder.
   #
-  # @api TagFolder
-  #
   # @example
   #   model = Sketchup.active_model
   #   layers = model.layers
@@ -237,8 +227,6 @@ class Sketchup::Layers < Sketchup::Entity
   end
 
   # The {#folders} method returns the folders of the layer manager.
-  #
-  # @api TagFolder
   #
   # @example
   #   manager = Sketchup.active_model.layers
@@ -256,8 +244,6 @@ class Sketchup::Layers < Sketchup::Entity
   end
 
   # The {#layers} method retrieves the layers not in a folder.
-  #
-  # @api TagFolder
   #
   # @example
   #   manager = Sketchup.active_model.layers
@@ -300,8 +286,6 @@ class Sketchup::Layers < Sketchup::Entity
 
   # The {#purge_unused_folders} method is used to remove all layer folder with
   # no children.
-  #
-  # @api TagFolder
   #
   # @example
   #   manager = Sketchup.active_model.layers
@@ -352,8 +336,6 @@ class Sketchup::Layers < Sketchup::Entity
 
   # The {#remove_folder} method removes the folder from the model. All children are
   # preserved, but moved up one level.
-  #
-  # @api TagFolder
   #
   # @example
   #   manager = Sketchup.active_model.layers

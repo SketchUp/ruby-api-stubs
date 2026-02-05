@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # References an auto-text definition. Some auto-text definitions are mandatory.
@@ -451,8 +451,8 @@ class Layout::AutoTextDefinition
   # [+Layout::AutoTextDefinition::NUMBER_STYLE_LC_ROMAN+]
   #
   # @deprecated LayOut 2022.0 This method is deprecated in favor of the more generic {#number_style}
-  #   method that also works on +Layout::AutoTextDefintion::TYPE_PAGE_COUNT+ and
-  #   +Layout::AutoTextDefintion::TYPE_SEQUENCE+ {Layout::AutoTextDefinition}s.
+  #   method that also works on +Layout::AutoTextDefinition::TYPE_PAGE_COUNT+ and
+  #   +Layout::AutoTextDefinition::TYPE_SEQUENCE+ {Layout::AutoTextDefinition}s.
   #
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")
@@ -460,7 +460,9 @@ class Layout::AutoTextDefinition
   #     Layout::AutoTextDefinition::TYPE_PAGE_NUMBER) number_style = page_number_def.number_style
   #
   # @raise [ArgumentError] if the {Layout::AutoTextDefinition}'s type is not
-  #   +Layout::AutoTextDefinition::TYPE_PAGE_NUMBER+.
+  #   +Layout::AutoTextDefinition::TYPE_PAGE_NUMBER+,
+  #   +Layout::AutoTextDefinition::TYPE_PAGE_COUNT+, or
+  #   +Layout::AutoTextDefinition::TYPE_SEQUENCE+.
   #
   # @return [Integer]
   #
@@ -480,8 +482,8 @@ class Layout::AutoTextDefinition
   # [+Layout::AutoTextDefinition::NUMBER_STYLE_LC_ROMAN+]
   #
   # @deprecated LayOut 2022.0 This method is deprecated in favor of the more generic {#number_style=}
-  #   method that also works on +Layout::AutoTextDefintion::TYPE_PAGE_COUNT+ and
-  #   +Layout::AutoTextDefintion::TYPE_SEQUENCE+ {Layout::AutoTextDefinition}s.
+  #   method that also works on +Layout::AutoTextDefinition::TYPE_PAGE_COUNT+ and
+  #   +Layout::AutoTextDefinition::TYPE_SEQUENCE+ {Layout::AutoTextDefinition}s.
   #
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")
@@ -492,7 +494,9 @@ class Layout::AutoTextDefinition
   # @param [Integer] number_style
   #
   # @raise [ArgumentError] if the {Layout::AutoTextDefinition}'s type is not
-  #   +Layout::AutoTextDefinition::TYPE_PAGE_NUMBER+.
+  #   +Layout::AutoTextDefinition::TYPE_PAGE_NUMBER+,
+  #   +Layout::AutoTextDefinition::TYPE_PAGE_COUNT+, or
+  #   +Layout::AutoTextDefinition::TYPE_SEQUENCE+.
   #
   # @raise [ArgumentError] if +number_style+ is not a valid page numbering style
   #

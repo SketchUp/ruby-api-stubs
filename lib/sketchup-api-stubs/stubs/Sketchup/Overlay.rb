@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # An Overlay provides contextual model information directly in the viewport.
@@ -12,8 +12,6 @@
 #
 # It is also not allowed to perform model changes from overlay events. Doing
 # so will result in a +RuntimeError+ being thrown.
-#
-# @api Overlays
 #
 # @example
 #   class ExampleOverlay < Sketchup::Overlay
@@ -64,8 +62,6 @@ class Sketchup::Overlay
 
   # This is a short user facing description of the overlay that will appear in the UI.
   #
-  # @api Overlays
-  #
   # @example
   #   Sketchup.active_model.overlays.each { |overlay|
   #     puts "#{overlay.name}: #{overlay.description}"
@@ -80,8 +76,6 @@ class Sketchup::Overlay
   # Sets a short user facing description of the overlay that will appear in the UI.
   # Set this before adding to the {Sketchup::OverlaysManager}.
   #
-  # @api Overlays
-  #
   # @example
   #   Sketchup.active_model.overlays.each { |overlay|
   #     puts "#{overlay.name}: #{overlay.description}"
@@ -95,8 +89,6 @@ class Sketchup::Overlay
 
   #
   # @abstract It is called whenever the view updates.
-  #
-  # @api Overlays
   #
   # @example
   #   class ExampleOverlay < Sketchup::Overlay
@@ -144,8 +136,6 @@ class Sketchup::Overlay
   end
 
   #
-  # @api Overlays
-  #
   # @note In most cases, extensions doesn't need to expose any new UI for
   #   enabling them. This can be done from the Overlays panel. However, in some
   #   cases the extension might have additional UI related to the overlays and
@@ -160,8 +150,6 @@ class Sketchup::Overlay
   def enabled=(enabled)
   end
 
-  #
-  # @api Overlays
   #
   # @example
   #   Sketchup.active_model.overlays.each { |overlay|
@@ -188,8 +176,6 @@ class Sketchup::Overlay
   # @abstract The method should be implementing sub-classes ensure what is drawn
   #   in 3D space doesn't appear clipped. If the overlay only draws in 2D this
   #   isn't needed.
-  #
-  # @api Overlays
   #
   # @example
   #   class ExampleOverlay < Sketchup::Overlay
@@ -221,8 +207,6 @@ class Sketchup::Overlay
   def getExtents
   end
 
-  #
-  # @api Overlays
   #
   # @example
   #   class ExampleOverlay < Sketchup::Overlay
@@ -256,8 +240,6 @@ class Sketchup::Overlay
 
   # This is a user facing display name that will appear in the UI.
   #
-  # @api Overlays
-  #
   # @example
   #   Sketchup.active_model.overlays.each { |overlay|
   #     puts "#{overlay.name} (#{overlay.overlay_id}) Enabled: #{overlay.enabled?}"
@@ -274,8 +256,6 @@ class Sketchup::Overlay
   #
   # @abstract It can be used by implementing sub-classes to react to
   #   mouse movement in the viewport.
-  #
-  # @api Overlays
   #
   # @example
   #   class ExampleOverlay < Sketchup::Overlay
@@ -315,8 +295,6 @@ class Sketchup::Overlay
   # @abstract It can be used by implementing sub-classes to react to
   #   mouse movement in the viewport.
   #
-  # @api Overlays
-  #
   # @example
   #   class ExampleOverlay < Sketchup::Overlay
   #
@@ -342,8 +320,6 @@ class Sketchup::Overlay
   # @abstract It can be used by implementing sub-classes to react to
   #   mouse movement in the viewport.
   #
-  # @api Overlays
-  #
   # @example
   #   class ExampleOverlay < Sketchup::Overlay
   #
@@ -360,24 +336,29 @@ class Sketchup::Overlay
   #
   #   end
   #
-  # @param [Integer] flags
-  #   A bit mask that tells the state of the modifier
-  #   keys and other mouse buttons at the time.
+  # @overload onMouseMove(flags, x, y, view)
   #
-  # @param [Integer] x
-  #   The X coordinate on the screen where the event occurred.
+  #   @note Signature for versions prior to SketchUp 2025.0
+  #   @version SketchUp 2023.0
+  #   @param [Integer] flags A bit mask that tells the state of the modifier
+  #                          keys and other mouse buttons at the time.
+  #   @param [Integer] x  Screen coordinate in physical pixels.
+  #   @param [Integer] y  Screen coordinate in physical pixels.
+  #   @param [Sketchup::View] view
   #
-  # @param [Integer] y
-  #   The Y coordinate on the screen where the event occurred.
+  # @overload onMouseMove(flags, x, y, view)
   #
-  # @param [Sketchup::View] view
+  #   @version SketchUp 2025.0
+  #   @param [Integer] flags  A bit mask that tells the state of the modifier
+  #                           keys and other mouse buttons at the time.
+  #   @param [Float] x  Screen coordinate in logical pixels.
+  #   @param [Float] y  Screen coordinate in logical pixels.
+  #   @param [Sketchup::View] view
   #
   # @version SketchUp 2023.0
-  def onMouseMove(flags, x, y, view)
+  def onMouseMove
   end
 
-  #
-  # @api Overlays
   #
   # @example Implementing
   #   class ExampleOverlay < Sketchup::Overlay
@@ -402,8 +383,6 @@ class Sketchup::Overlay
   # Describes the source associated with the overlay. This is automatically inferred
   # when the overlay instance is initialized.
   #
-  # @api Overlays
-  #
   # @example
   #   Sketchup.active_model.overlays.each { |overlay|
   #     puts "#{overlay.name} (Extension: #{overlay.source})"
@@ -418,8 +397,6 @@ class Sketchup::Overlay
   #
   # @abstract It can be used by implementing sub-classes to react when the overlay
   #   becomes active, for instance when the user turns it on.
-  #
-  # @api Overlays
   #
   # @example
   #   class ExampleOverlay < Sketchup::Overlay
@@ -442,8 +419,6 @@ class Sketchup::Overlay
   # @abstract It can be used by implementing sub-classes to react when the overlay
   #   becomes inactive, for instance when the user turns it off.
   #
-  # @api Overlays
-  #
   # @example
   #   class ExampleOverlay < Sketchup::Overlay
   #
@@ -463,8 +438,6 @@ class Sketchup::Overlay
 
   # Indicates whether the overlay is valid. An overlay becomes invalid after
   # being removed from the model and cannot be reused.
-  #
-  # @api Overlays
   #
   # @example
   #   class ExampleOverlay < Sketchup::Overlay

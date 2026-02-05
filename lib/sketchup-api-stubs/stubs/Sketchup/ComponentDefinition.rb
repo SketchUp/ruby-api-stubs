@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Sketchup::ComponentDefinition} class is used to define the contents for
@@ -37,7 +37,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #   c2=Sketchup.find_support_file "Fence.skp",
   #     "Components/Components Sampler/"
   #   if c1 <=> c2
-  #     UI.messagebox("c1 sorts before c2")
+  #     puts "c1 sorts before c2"
   #   end
   #
   # @param [Sketchup::ComponentDefinition] compdef2
@@ -58,9 +58,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #     "Components/Components Sampler/"
   #   c2=Sketchup.find_support_file "Fence.skp",
   #     "Components/Components Sampler/"
-  #   if c1 == c2
-  #     UI.messagebox("These definitions are the same.")
-  #   end
+  #   c1 == c2
   #
   # @param [Sketchup::ComponentDefinition] compdef2
   #   The second component definition in the comparison.
@@ -258,8 +256,15 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   def guid
   end
 
-  # The hidden method is used to determine if this component definition should
-  # be hidden on the component browser.
+  # The {#hidden?} method is used to determine if this component definition is
+  # hidden in the component browser.
+  #
+  # This is based on how its instances are placed
+  # in the model hierarchy. For more details, see
+  # {this article}[https://developer.sketchup.com/article-hiddensubcomponents].
+  #
+  # In addition, component definitions used by Groups and Images are always hidden
+  # in the Component Browser. See {#group?} and {#image?}.
   #
   # @example
   #   componentdefinition = Sketchup.active_model.definitions[0]
@@ -277,12 +282,6 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   # @example
   #   componentdefinition = Sketchup.active_model.definitions[0]
   #   status = componentdefinition.image?
-  #   if (status)
-  #     UI.messagebox "Component definition defines an image"
-  #   else
-  #     UI.messagebox status.to_s
-  #     UI.messagebox "Component definition does not define an image"
-  #   end
   #
   # @return [Boolean]
   #
@@ -406,6 +405,21 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #
   # @version SketchUp 2021.0
   def live_component?
+  end
+
+  # The {#load_time} method gets the load time of the component definition. For an internal
+  # component definition, this is the time that it was created. For an external component
+  # definition, this is the time that it was added to the model.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   definition = model.definitions.first
+  #   definition.load_time
+  #
+  # @return [Time]
+  #
+  # @version SketchUp 2025.0
+  def load_time
   end
 
   # The name method retrieves the name of the component definition.
@@ -542,7 +556,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #     See {Sketchup::Model#save} for supported values.
   #   @version SketchUp 2022.0
   #
-  # @return [Boolean] true if successful
+  # @return [Boolean] true if successful, false otherwise
   def save_as(*args)
   end
 

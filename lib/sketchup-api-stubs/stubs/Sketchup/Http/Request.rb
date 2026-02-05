@@ -1,7 +1,7 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
-# Http::Request objects allows you to send HTTP request to HTTP servers.
+# {Sketchup::Http::Request} objects allows you to send HTTP request to HTTP servers.
 #
 # @version SketchUp 2017
 class Sketchup::Http::Request
@@ -52,6 +52,8 @@ class Sketchup::Http::Request
   #
   #   @request.cancel
   #
+  # @note Do not {#cancel} the request in the response callback.
+  #
   # @return [true]
   #
   # @version SketchUp 2017
@@ -93,17 +95,17 @@ class Sketchup::Http::Request
   def headers=(headers)
   end
 
-  # The default port is 80, to use a different port define it in the URL when
+  # The default port is +80+, to use a different port define it in the URL when
   # creating a new {Sketchup::Http::Request}.
   #
-  # The +method+ parameter accepts any custom HTTP method or one of the
+  # The {#method} parameter accepts any custom HTTP method or one of the
   # following:
-  # * +Sketchup::Http::GET+
-  # * +Sketchup::Http::POST+
-  # * +Sketchup::Http::PUT+
-  # * +Sketchup::Http::DELETE+
-  # * +Sketchup::Http::HEAD+
-  # * +Sketchup::Http::OPTIONS+
+  # - {Sketchup::Http::GET}
+  # - {Sketchup::Http::POST}
+  # - {Sketchup::Http::PUT}
+  # - {Sketchup::Http::DELETE}
+  # - {Sketchup::Http::HEAD}
+  # - {Sketchup::Http::OPTIONS}
   #
   # @example
   #   @request = Sketchup::Http::Request.new("http://localhost:8080", Sketchup::Http::GET)
@@ -115,6 +117,8 @@ class Sketchup::Http::Request
   # @note If no reference is kept to the {Sketchup::Http::Request}, it can be garbage collected,
   #   making the download silently fail. This is especially noticeable for larger downloads that
   #   takes longer time.
+  #
+  # @note Do not {#cancel} the request in the response callback.
   #
   # @param [String] url
   #
@@ -142,13 +146,14 @@ class Sketchup::Http::Request
   end
 
   # Sets the HTTP method that is going to be used when sending the request.
+  #
   # The value can be any custom HTTP method or one of the following:
-  # * +Sketchup::Http::GET+
-  # * +Sketchup::Http::POST+
-  # * +Sketchup::Http::PUT+
-  # * +Sketchup::Http::DELETE+
-  # * +Sketchup::Http::HEAD+
-  # * +Sketchup::Http::OPTIONS+
+  # - {Sketchup::Http::GET}
+  # - {Sketchup::Http::POST}
+  # - {Sketchup::Http::PUT}
+  # - {Sketchup::Http::DELETE}
+  # - {Sketchup::Http::HEAD}
+  # - {Sketchup::Http::OPTIONS}
   #
   # @example
   #   @request = Sketchup::Http::Request.new("http://localhost:8080")
@@ -184,7 +189,7 @@ class Sketchup::Http::Request
   #
   #   @request.start
   #
-  # @note +total+ is -1 if the server doesn't specify a file size in the response header.
+  # @note +total+ is +-1+ if the server doesn't specify a file size in the response header.
   #
   # @return [Boolean]
   #
@@ -235,6 +240,8 @@ class Sketchup::Http::Request
   #   @request.start do |request, response|
   #     puts "body: #{response.body}"
   #   end
+  #
+  # @note Do not {#cancel} the request in the response callback.
   #
   # @return [Boolean]
   #

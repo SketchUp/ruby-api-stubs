@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # SketchUp's drawing axes consist of three colored lines (red, green, blue),
@@ -29,18 +29,18 @@ class Sketchup::Axes < Sketchup::Entity
   def axes
   end
 
-  # The origin method returns the origin of the axes.
+  # The {#origin} method returns the origin of the axes.
   #
   # @example
   #   point = Sketchup.active_model.axes.origin
   #
-  # @return Point3d - the origin for the axes.
+  # @return [Geom::Point3d]
   #
   # @version SketchUp 2016
   def origin
   end
 
-  # The set method allows the axes to be manipulated. The axes must always be
+  # The {#set} method allows the axes to be manipulated. The axes must always be
   # orthogonal, otherwise an error is thrown.
   #
   # @example
@@ -60,7 +60,7 @@ class Sketchup::Axes < Sketchup::Entity
   # @param zaxis
   #   Vector3d - The z axis to set.
   #
-  # @return Axes - the axes object being set.
+  # @return [Sketchup::Axes] - the axes object being set.
   #
   # @version SketchUp 2016
   def set(origin, xaxis, yaxis, zaxis)
@@ -90,7 +90,7 @@ class Sketchup::Axes < Sketchup::Entity
   def to_a
   end
 
-  # The transformation method returns the transformation of the axes. This is
+  # The {#transformation} method returns the transformation of the axes. This is
   # useful when creating tools that respect the model's drawing axes.
   #
   # @example
@@ -107,40 +107,40 @@ class Sketchup::Axes < Sketchup::Entity
   #   points.each { |point| point.transform!(tr) }
   #   Sketchup.active_model.active_entities.add_face(points)
   #
-  # @return Transformation - the transformation for the axes.
+  # @return [Geom::Transformation] - the transformation for the axes.
   #
   # @version SketchUp 2016
   def transformation
   end
 
-  # The xaxis method returns the x axis of the axes.
+  # The {#xaxis} method returns the x axis of the axes.
   #
   # @example
   #   vector = Sketchup.active_model.axes.xaxis
   #
-  # @return Vector3d - the x axis for the axes.
+  # @return [Geom::Vector3d] - the x axis for the axes.
   #
   # @version SketchUp 2016
   def xaxis
   end
 
-  # The yaxis method returns the y axis of the axes.
+  # The {#yaxis} method returns the y axis of the axes.
   #
   # @example
   #   vector = Sketchup.active_model.axes.yaxis
   #
-  # @return Vector3d - the y axis for the axes.
+  # @return [Geom::Vector3d] - the y axis for the axes.
   #
   # @version SketchUp 2016
   def yaxis
   end
 
-  # The zaxis method returns the z axis of the axes.
+  # The {#zaxis} method returns the z axis of the axes.
   #
   # @example
   #   vector = Sketchup.active_model.axes.zaxis
   #
-  # @return Vector3d - the z axis for the axes.
+  # @return [Geom::Vector3d] - the z axis for the axes.
   #
   # @version SketchUp 2016
   def zaxis

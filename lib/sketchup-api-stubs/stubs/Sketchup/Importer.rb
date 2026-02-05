@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Importer interface lets you build your own importers for SketchUp. To
@@ -52,7 +52,7 @@
 #     # to import. This is where you do the real work of opening and
 #     # processing the file.
 #     def load_file(file_path, status)
-#       UI.messagebox(file_path)
+#       # This where you do your import logic.
 #
 #       return Sketchup::Importer::ImportSuccess
 #     end

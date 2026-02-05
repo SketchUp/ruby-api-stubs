@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The AttributeDictionaries class is a collection of all of the
@@ -33,14 +33,9 @@ class Sketchup::AttributeDictionaries < Sketchup::Entity
   #
   # @example
   #   model = Sketchup.active_model
+  #   value = model.set_attribute("my_dictionary", "test", 110)
   #   attrdicts = model.attribute_dictionaries
-  #   # Iterates through all dictionaries and prints to screen.
   #   dict = attrdicts['my_dictionary']
-  #   if dict
-  #     UI.messagebox("Found: " + dict.to_s)
-  #   else
-  #     UI.messagebox("No dictionary found.")
-  #   end
   #
   # @param [String] key
   #   The name of the attribute dictionary.

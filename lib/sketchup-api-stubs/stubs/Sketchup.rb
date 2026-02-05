@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Sketchup module contains a number of important utility methods for use in
@@ -22,10 +22,10 @@
 #   # Now that we have our handles, we can start pulling objects and making
 #   # method calls that are useful.
 #   first_entity = entities[0]
-#   UI.messagebox("First thing in your model is a " + first_entity.typename)
+#   puts "First thing in your model is a #{first_entity.typename}"
 #
 #   number_materials = materials.length
-#   UI.messagebox("Your model has " + number_materials.to_s + " materials.")
+#   puts "Your model has #{number_materials} materials."
 #
 #   new_edge = entities.add_line( [0,0,0], [500,500,0])
 #
@@ -43,7 +43,7 @@ module Sketchup
   # @example
   #   model = Sketchup.active_model
   #   if !model
-  #     UI.messagebox("Failure")
+  #     puts "Failure"
   #   else
   #     # code acting on the model
   #   end
@@ -221,12 +221,12 @@ module Sketchup
   #   help_file = Sketchup.find_support_file("help.html", "Plugins/")
   #   if help_file
   #     # Print out the help_file full path
-  #     UI.messagebox(help_file)
+  #     puts help_file
   #
   #     # Open the help_file in a web browser
   #     UI.openURL("file://" + help_file)
   #   else
-  #     UI.messagebox("Failure")
+  #     puts "Failure"
   #   end
   #
   # @param [String] filename
@@ -388,7 +388,7 @@ module Sketchup
   #
   # @example
   #   number = 3.m * 4.m * 5.m # This will result in 60m3 in inches.
-  #   formatted_volume = Sketchup.format_area(number)
+  #   formatted_volume = Sketchup.format_volume(number)
   #
   # @param [Numeric] number
   #   A number to be formatted.
@@ -514,9 +514,9 @@ module Sketchup
   #   begin
   #     Sketchup.install_from_archive(path)
   #   rescue Interrupt => error
-  #     UI.messagebox("User said 'no': " + error)
+  #     puts "User said 'no': #{error}"
   #   rescue Exception => error
-  #     UI.messagebox("Error during unzip: " + error)
+  #     puts "Error during unzip: #{error}"
   #   end
   #
   # @param [String] filepath
@@ -577,7 +577,7 @@ module Sketchup
   #
   # @example
   #   if Sketchup.is_pro?
-  #     UI.messagebox("You are running SU Pro.")
+  #     puts "You are running SU Pro."
   #   end
   #
   # @note In SketchUp Make this method will return +true+ during the Pro trial
@@ -604,12 +604,16 @@ module Sketchup
   def self.is_valid_filename?(filename)
   end
 
-  # The load method is used to include encrypted and nonencrypted ruby files.
+  # The {.load} method is used to load Ruby files.
+  # Unlike Ruby's own +load+ method it also supports SketchUp's encrypted .rbe files.
   #
-  # You do not need to include the file extension on the path. This method will
+  # You do not need to include the file extension in the path. This method will
   # look for .rb first (unencrypted) and then .rbe (encrypted) and finally .rbs
   # (the deprecated scrambled format) files.
   # See the "Distributing your Plugin" article for details.
+  #
+  # @bug Unlike Ruby's +load+ method, this method currently can't load the same file twice.
+  #   Instead works similar to Ruby's `require` method.
   #
   # @example
   #   sfile = "application_loader" # file extension not required
@@ -652,6 +656,19 @@ module Sketchup
   #   @version SketchUp 2021.0
   #   @param [String] filename  The model file to open.
   #   @param [Boolean] with_status
+  #   @return [Integer, false]  status code if opening with +with_status+ set to +true+,
+  #     otherwise +true+ or +false+.
+  #
+  # @overload open_file(filename, with_status: true, show_version_warning_dialog: true)
+  #
+  #   Starting with SketchUp 2026.0 SketchUp we added control over displaying the
+  #   messages about version compatibility.
+  #
+  #   @version SketchUp 2026.0
+  #   @param [String] filename  The model file to open.
+  #   @param [Boolean] with_status
+  #   @param [Boolean] show_version_warning_dialog by default set to true and will display the dialog
+  #     box
   #   @return [Integer, false]  status code if opening with +with_status+ set to +true+,
   #     otherwise +true+ or +false+.
   #
@@ -768,12 +785,17 @@ module Sketchup
   def self.quit
   end
 
-  # The read_default method is used to retrieve the string associated with a
+  # The {.read_default} method is used to retrieve the string associated with a
   # value within the specified sub-section section of a .INI file or registry
   # (within the Software > SketchUp > SketchUp [Version] section).
   #
   # @example
   #   result = Sketchup.read_default("section", "variable", "default")
+  #
+  # @note Be aware that the method is not capable of handling Length objects. You
+  #   can convert the value to a Float before writing and convert back to Length when
+  #   reading the value. Don't store the value as a String as this rounds the value and formats it
+  #   in a way that can't be read if the system setting for decimal separator changes.
   #
   # @param [String] section
   #   A section in an .INI or registry.
@@ -802,8 +824,8 @@ module Sketchup
   def self.redo
   end
 
-  # The register_extension method is used to register an extension with
-  # SketchUp's extension manager (in SketchUp preferences).
+  # The {.register_extension} method is used to register an extension with
+  # SketchUp's Extension Manager.
   #
   # @example
   #   utilities_extension = SketchupExtension.new("Utilities Tools",
@@ -862,10 +884,10 @@ module Sketchup
   def self.remove_observer(observer)
   end
 
-  # The require method is used to include encrypted and nonencrypted ruby files.
-  # This is an alias of the Sketchup.load method.
+  # The {.require} method is used to load Ruby files once.
+  # Unlike Ruby's own +require+ method it also supports SketchUp's encrypted .rbe files.
   #
-  # You do not need to include the file extension on the path. This method will
+  # You do not need to include the file extension in the path. This method will
   # look for .rbe first (encrypted) and then .rbs (the deprecated scrambled
   # format) and finally .rb (unencrypted) files. The loading order was changed
   # in SketchUp 2016 when the new .rbe encryption was introduced. Prior to
@@ -892,9 +914,13 @@ module Sketchup
   #
   # @bug In SketchUp 2023.1 this method didn't behave correctly on Windows. No known workarounds.
   #
-  # @example
+  # @example Physical pixels
   #   model = Sketchup.active_model
   #   Sketchup.resize_viewport(model, 800, 600)
+  #
+  # @example Logical pixels
+  #   model = Sketchup.active_model
+  #   Sketchup.resize_viewport(model, 800, 600, logical_pixels: true)
   #
   # @note In SketchUp 2024.0 and later this method doesn't behave correctly in all cases on Windows.
   #   The passed values are internally converted to logical pixels, rounded and converted back to
@@ -910,13 +936,19 @@ module Sketchup
   #     ((1500/1.5).round * 1.5).round # => 1500
   #     ((1500/1.25).round * 1.25).round # => 1500
   #
-  # @param [Sketchup::Model] model
+  # @overload resize_viewport(model, width, height)
   #
-  # @param [Integer] width
-  #   Width in physical pixels
+  #   @param [Sketchup::Model] model
+  #   @param [Integer] width Width in physical pixels
+  #   @param [Integer] height Height in physical pixels
   #
-  # @param [Integer] height
-  #   Height in physical pixels
+  # @overload resize_viewport(model, width, height, logical_pixels: false)
+  #
+  #   @version SketchUp 2025.0
+  #   @param [Sketchup::Model] model
+  #   @param [Integer] width
+  #   @param [Integer] height
+  #   @param [Boolean] logical_pixels Set to true to set size using logical pixels.
   #
   # @return [Boolean] +true+ on success. +false+ if the window couldn't reach the desired size,
   #   e.g. because it wouldn't fit the screen.
@@ -925,8 +957,10 @@ module Sketchup
   #
   # @see Sketchup::View#vpheight
   #
+  # @see UI.scale_factor
+  #
   # @version SketchUp 2023.0
-  def self.resize_viewport(model, width, height)
+  def self.resize_viewport(*args)
   end
 
   # The save_thumbnail method is used to generate a thumbnail for any SKP file -
@@ -1059,7 +1093,7 @@ module Sketchup
   # - 10546: toggle Shadows toolbar
   # - 10551: toogle Large icons
   # - 10576: toggle Render Mode toolbar
-  # - 21019: hide Status bar and VCB
+  # - 21019: select the Eraser tool
   # - 21020: show Status bar and VCB
   # - 21022: hide Status bar and VCB
   # - 21023: place 3d text box
@@ -1179,9 +1213,9 @@ module Sketchup
   # If no arguments are passed, the status bar content is cleared. Valid
   # positions are:
   #
-  # - +SB_PROMPT+ - the text will appear at the left-side of the status bar
-  # - +SB_VCB_LABEL+ - the text will appear in place of the VCB label
-  # - +SB_VCB_VALUE+ - the text will appear in the VCB
+  # - {SB_PROMPT} - the text will appear at the left-side of the status bar
+  # - {SB_VCB_LABEL} - the text will appear in place of the VCB label
+  # - {SB_VCB_VALUE} - the text will appear in the VCB
   #
   # @example
   #   result = Sketchup.set_status_text("This is a Test", SB_VCB_VALUE)
@@ -1328,11 +1362,6 @@ module Sketchup
   #
   # @example
   #   version = Sketchup.version
-  #   if (version)
-  #     UI.messagebox version
-  #   else
-  #     return
-  #   end
   #
   # @return [String] the decimal form of the version
   #
@@ -1364,16 +1393,22 @@ module Sketchup
   # @return [Integer] the whole number form of the version
   #
   # @version SketchUp 6.0
-  def self.version_number(*args)
+  def self.version_number
   end
 
-  # The write_default method is used to set the string associated with a
+  # The {.write_default} method is used to set the string associated with a
   # variable within the specified sub-section of a .plist file on the Mac
   # or the registry on Windows
   # (within the Software > SketchUp > SketchUp [Version] section).
   #
   # @example
   #   result = Sketchup.write_default("section", "key", "my_value")
+  #
+  # @note Be aware that the method is not capable of handling Length objects.
+  #   You can convert the value to a Float before writing and convert back to Length
+  #   when reading the value. Don't store the value as a String as this rounds the
+  #   value and formats it in a way that can't be read if the system setting for
+  #   decimal separator changes.
   #
   # @param [String] section
   #   A section in a .plist file (Mac) or the registry

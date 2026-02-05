@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The AttributeDictionary class allows you to attach arbitrary collections of
@@ -185,6 +185,20 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
   def each_pair
   end
 
+  # The {#empty?} method is used to check if the attribute dictionary is empty.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   attribute_dictionary = model.attribute_dictionary("example", true)
+  #   attribute_dictionary["attribute_one"] = "1"
+  #   attribute_dictionary.empty? # Returns false
+  #
+  # @return [Boolean] true if the attribute dictionary is empty, false otherwise
+  #
+  # @version SketchUp 2025.0
+  def empty?
+  end
+
   # The keys method is used to retrieve an array with all of the attribute keys.
   #
   # @example
@@ -231,8 +245,7 @@ class Sketchup::AttributeDictionary < Sketchup::Entity
   #   attrdict["attr_one"] = "one"
   #   attrdict["attr_two"] = "two"
   #
-  #   # Show the name.
-  #   UI.messagebox attrdict.name
+  #   puts attrdict.name
   #
   # @return [String] the name of the attribute dictionary if
   #   successful

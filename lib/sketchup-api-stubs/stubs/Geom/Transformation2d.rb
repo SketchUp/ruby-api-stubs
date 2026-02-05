@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 #
@@ -29,9 +29,9 @@ class Geom::Transformation2d
   # The {.scaling} method is used to create a transformation that does scaling.
   #
   # @example
-  #   point = Geom::Point3d.new(20, 30, 0)
+  #   point = Geom::Point2d.new(20, 30)
   #   scale = 10
-  #   tr = Geom::Transformation2d.scaling(point, scale)
+  #   transformation = Geom::Transformation2d.scaling(point, scale)
   #
   # @overload scaling(scale)
   #
@@ -70,7 +70,7 @@ class Geom::Transformation2d
   #
   # @example
   #   vector = Geom::Vector2d.new(0, 1)
-  #   tr = Geom::Transformation2d.translation(vector)
+  #   transformation = Geom::Transformation2d.translation(vector)
   #
   # @overload translation(vector)
   #
@@ -93,9 +93,9 @@ class Geom::Transformation2d
   # @example
   #   point1 = Geom::Point2d.new(5, 10)
   #   point2 = Geom::Point2d.new(2, 2)
-  #   tr = Geom::Transformation2d.new(point1)
-  #   # Returns Point2d(7, 12)
-  #   point3 = tr * point2
+  #   transformation = Geom::Transformation2d.translation(point1)
+  #   # The result is a Point2d(7, 12)
+  #   new_point = transformation * point2
   #
   # @overload *(point)
   #
@@ -114,8 +114,8 @@ class Geom::Transformation2d
   #
   # @overload *(point)
   #
-  #   @param [Array<Float, Float>] point
-  #   @return [Array<Float, Float>]
+  #   @param [Array(Float, Float)] point
+  #   @return [Array(Float, Float)]
   #
   # @version LayOut 2019
   def *(arg)
@@ -125,8 +125,10 @@ class Geom::Transformation2d
   # This checks whether the values of the transformations are the same.
   #
   # @example
-  #   tr = Geom::Transformation2d.new({1.0, 0.0, 0.0, 1.0, 1.0, 1.0})
-  #   tr == tr.clone
+  #   transformation1 = Geom::Transformation2d.new([1.0, 0.0, 0.0, 1.0, 1.0, 1.0])
+  #   transformation2 = Geom::Transformation2d.translation([1, 1])
+  #   # Returns true
+  #   transformation1 == transformation2
   #
   # @param [Geom::Transformation2d] other
   #
@@ -139,8 +141,8 @@ class Geom::Transformation2d
   # The {#clone} method creates a copy of the {Geom::Transformation2d}.
   #
   # @example
-  #   tr1 = Geom::Transformation2d.new
-  #   tr2 = tr1.clone
+  #   transformation = Geom::Transformation2d.new
+  #   new_transformation = transformation.clone
   #
   # @return [Geom::Transformation2d]
   #
@@ -152,18 +154,18 @@ class Geom::Transformation2d
   # {IDENTITY_2D} transform.
   #
   # @example
-  #   array = {1.0, 0.0, 0.0, 1.0, 1.0, 0.0}
-  #   tr = Geom::Transformation2d.new(array)
-  #   # Returns false.
-  #   status = tr.identity?
+  #   array = [1.0, 0.0, 0.0, 1.0, 1.0, 0.0]
+  #   transformation = Geom::Transformation2d.new(array)
+  #   # Returns false
+  #   status = transformation.identity?
   #
   # @example
-  #   tr = Geom::Transformation2d.new
-  #   # Returns true.
-  #   status = tr.identity?
+  #   transformation = Geom::Transformation2d.new
+  #   # Returns true
+  #   status = transformation.identity?
   #
   # @example
-  #   # Returns true.
+  #   # Returns true
   #   status = IDENTITY_2D.identity?
   #
   # @return [Boolean] +true+ if the transform is the identity
@@ -177,7 +179,9 @@ class Geom::Transformation2d
   # of {Geom::Transformation2d}.
   #
   # @example
-  #   tr = Geom::Transformation2d.new({1.0, 0.0, 0.0, 1.0, 1.0, 1.0})
+  #   transformation1 = Geom::Transformation2d.new
+  #
+  #   transformation2 = Geom::Transformation2d.new([1.0, 0.0, 0.0, 1.0, 1.0, 1.0])
   #
   # @overload initialize
   #
@@ -203,8 +207,8 @@ class Geom::Transformation2d
   #
   # @example
   #   point = Geom::Point2d.new(5, 10)
-  #   tr1 = Geom::Transformation2d.new(point)
-  #   tr2 = tr1.inverse
+  #   transformation = Geom::Transformation2d.translation(point)
+  #   new_transformation = transformation.inverse
   #
   # @return [Geom::Transformation2d]
   #
@@ -216,8 +220,8 @@ class Geom::Transformation2d
   #
   # @example
   #   point = Geom::Point2d.new(5, 10)
-  #   tr = Geom::Transformation2d.new(point)
-  #   tr.invert!
+  #   transformation = Geom::Transformation2d.translation(point)
+  #   transformation.invert!
   #
   # @return [Geom::Transformation2d]
   #
@@ -229,9 +233,9 @@ class Geom::Transformation2d
   # The argument is anything that can be converted into a {Geom::Transformation2d}.
   #
   # @example
-  #   tr1 = Geom::Transformation2d.new
-  #   array = {2.0, 0.0, 0.0, 2.0, 0.0, 0.0}
-  #   tr1.set!(array)
+  #   transformation = Geom::Transformation2d.new
+  #   matrix = [2.0, 0.0, 0.0, 2.0, 0.0, 0.0]
+  #   transformation.set!(matrix)
   #
   # @overload set!(transformation)
   #
@@ -251,8 +255,8 @@ class Geom::Transformation2d
   # define the Transformation2d.
   #
   # @example
-  #   tr = Geom::Transformation2d.new
-  #   tr.to_a.each_slice(2) {|a| p a}
+  #   transformation = Geom::Transformation2d.new
+  #   transformation.to_a.each_slice(2) {|a| p a}
   #
   # @return [Array<Float>] an array of 6 elements
   #

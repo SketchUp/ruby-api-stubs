@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Text class contains method to manipulate a Text entity object.
@@ -11,8 +11,12 @@ class Sketchup::Text < Sketchup::Drawingelement
   # The arrow_type method retrieves the current arrow type used for the leader
   # text.
   #
-  # Valid arrow types are 0 for none, 2 for dot, 3 for closed arrow, 4 for open
-  # arrow.
+  # Valid arrow types are:
+  # - {Sketchup::Dimension::ARROW_NONE} (Deprecated: {DimensionArrowNone})
+  # - {Sketchup::Dimension::ARROW_SLASH} (Deprecated: {DimensionArrowSlash})
+  # - {Sketchup::Dimension::ARROW_DOT} (Deprecated: {DimensionArrowDot})
+  # - {Sketchup::Dimension::ARROW_CLOSED} (Deprecated: {DimensionArrowClosed})
+  # - {Sketchup::Dimension::ARROW_OPEN} (Deprecated: {DimensionArrowOpen})
   #
   # @example
   #   type = text.arrow_type=0
@@ -26,8 +30,12 @@ class Sketchup::Text < Sketchup::Drawingelement
 
   # The arrow_type= method sets the arrow type used for leader text.
   #
-  # Valid arrow types are 0 for none, 2 for dot, 3 for closed arrow, 4 for open
-  # arrow.
+  # Valid arrow types are:
+  # - {Sketchup::Dimension::ARROW_NONE} (Deprecated: {DimensionArrowNone})
+  # - {Sketchup::Dimension::ARROW_SLASH} (Deprecated: {DimensionArrowSlash})
+  # - {Sketchup::Dimension::ARROW_DOT} (Deprecated: {DimensionArrowDot})
+  # - {Sketchup::Dimension::ARROW_CLOSED} (Deprecated: {DimensionArrowClosed})
+  # - {Sketchup::Dimension::ARROW_OPEN} (Deprecated: {DimensionArrowOpen})
   #
   # @example
   #   arrow = text.arrow_type=type
@@ -110,7 +118,12 @@ class Sketchup::Text < Sketchup::Drawingelement
   def has_leader?
   end
 
-  # The leader_type method retrieves the currently set leader type.
+  # The {#leader_type} method retrieves the currently set leader type.
+  #
+  # Valid leaders types are:
+  # - {ALeaderNone}
+  # - {ALeaderView}
+  # - {ALeaderModel}
   #
   # @example
   #   leader = text.leader_type
@@ -122,16 +135,24 @@ class Sketchup::Text < Sketchup::Drawingelement
   def leader_type
   end
 
-  # The leader_type = method sets the leader type.
+  # The {#leader_type=} method sets the leader type.
   #
-  # Valid leader types are 0 for none, 1 for View-based, and 2 for Pushpin
+  # Valid leaders types are:
+  # - {ALeaderNone}
+  # - {ALeaderView}
+  # - {ALeaderModel}
   #
   # @example
   #   leader = text.leader_type=1
   #
+  # @note {ALeaderNone} cannot be set. It is only used internally as a default value.
+  #   Trying to set it will raise a warning.
+  #
   # @param [Integer] type
   #   A numerical value representing the leader type to be
   #   set.
+  #
+  # @raise [RangeError] if the value is other than (ALeaderView, or ALeaderModel).
   #
   # @return [Integer] a numerical value representing the leader type
   #   you just set.

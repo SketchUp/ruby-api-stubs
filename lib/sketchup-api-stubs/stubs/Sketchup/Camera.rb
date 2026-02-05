@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Camera class contains methods for creating and manipulating a camera.
@@ -66,7 +66,7 @@ class Sketchup::Camera
   # @example
   #   Sketchup.active_model.active_view.camera.center_2d
   #
-  # @return [Geom::Point3d] ]
+  # @return [Geom::Point3d]
   #
   # @version SketchUp 2015
   def center_2d
@@ -312,8 +312,8 @@ class Sketchup::Camera
   def initialize(*args)
   end
 
-  # The {#is_2d?} method indicates if the camera two-point perspective or match photo
-  # mode.
+  # The {#is_2d?} method indicates whether the camera mode is two-point perspective or match photo
+  # mode, as opposed to a normal perspective or parallel projection camera.
   #
   # @example
   #   Sketchup.active_model.active_view.camera.is_2d?
@@ -365,7 +365,7 @@ class Sketchup::Camera
   # @example
   #   Sketchup.active_model.active_view.camera.scale_2d
   #
-  # @return float
+  # @return [Float]
   #
   # @version SketchUp 2015
   def scale_2d
@@ -388,7 +388,7 @@ class Sketchup::Camera
   # @param [Geom::Point3d] target
   #   See {#target}.
   #
-  # @param [Geom::Point3d] up
+  # @param [Geom::Vector3d] up
   #   See {#up}.
   #
   # @return [Sketchup::Camera]
@@ -432,7 +432,7 @@ class Sketchup::Camera
   #   camera = Sketchup::Camera.new
   #   xaxis = camera.xaxis
   #
-  # @return [Geom::Vector3d] ]
+  # @return [Geom::Vector3d]
   #
   # @version SketchUp 6.0
   def xaxis
@@ -449,7 +449,7 @@ class Sketchup::Camera
   #   # 0.0, 1.0, 0.0
   #   yaxis = camera.yaxis
   #
-  # @return [Geom::Vector3d] ]
+  # @return [Geom::Vector3d]
   #
   # @version SketchUp 6.0
   def yaxis
@@ -462,14 +462,9 @@ class Sketchup::Camera
   # @example
   #   camera = Sketchup::Camera.new
   #   # 0.0, 1.0, 0.0
-  #   v = camera.zaxis
-  #   if (v)
-  #     UI.messagebox v.to_s
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   vector = camera.zaxis
   #
-  # @return vector - a Vector3d object if successful
+  # @return [Geom::Vector3d]
   #
   # @version SketchUp 6.0
   def zaxis

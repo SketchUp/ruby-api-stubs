@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # Faces in SketchUp are flat, 2-sided polygons with 3 or more sides.
@@ -162,7 +162,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #     puts "#{pt.to_s} is outside the face"
   #   end
   #
-  #   # Check a point that should be outside inside the face.
+  #   # Check a point that should be inside the face.
   #   pt = Geom::Point3d.new(1, 1, 0)
   #   result = face.classify_point(pt)
   #   if result == Sketchup::Face::PointInside
@@ -225,6 +225,27 @@ class Sketchup::Face < Sketchup::Drawingelement
   #
   # @version SketchUp 2021.1
   def clear_texture_projection(frontside)
+  end
+
+  # The {#coplanar_with?} method is used determine whether a face is coplanar with `other_face`.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   entities = model.active_entities
+  #
+  #   # Add the faces to the entities in the model
+  #   face = entities.add_face([0, 0, 0], [4, 0, 0], [4, 5, 0])
+  #   other_face = entities.add_face([5, 0, 0], [9, 0, 0], [9, 6, 0])
+  #
+  #   face.coplanar_with?(other_face)
+  #
+  # @param [Sketchup::Face] other_face
+  #   The face to compare with.
+  #
+  # @return [Boolean]
+  #
+  # @version SketchUp 2025.0
+  def coplanar_with?(other_face)
   end
 
   # The edges method is used to get an array of edges that bound the face.
@@ -337,12 +358,12 @@ class Sketchup::Face < Sketchup::Drawingelement
   # The get_glued_instances method returns an Array any ComponentInstances
   # that are glued to the face.
   #
-  # ComponentInstance objects that are currently glued to the face.
-  #
   # @example
   #   # Create a series of points that define a new face.
   #   model = Sketchup.active_model
   #   entities = model.active_entities
+  #
+  #   # Create a rectangle face
   #   pts = []
   #   pts[0] = [0, 0, 0]
   #   pts[1] = [9, 0, 0]
@@ -351,9 +372,27 @@ class Sketchup::Face < Sketchup::Drawingelement
   #
   #   # Add the face to the entities in the model
   #   face = entities.add_face(pts)
+  #
+  #   # Create a component definition with 3D geometry
+  #   component_definition = model.definitions.add("ComponentExample")
+  #   component_entities = component_definition.entities
+  #
+  #   comp_face = component_entities.add_face([0, 0, 0], [2, 0, 0], [2, 2, 0], [0, 2, 0])
+  #   comp_face.pushpull(2)
+  #
+  #   # Place the component instance on the face
+  #   component_instance = entities.add_instance(component_definition, Geom::Transformation.new([3,
+  #   3, 0]))
+  #
+  #   # Enable gluing behavior and glue component to face
+  #   component_definition.behavior.is2d = true
+  #   component_instance.glued_to = face
+  #
+  #   # Get all component instances glued to the face
   #   glued_array = face.get_glued_instances
   #
   # @return [Array<Sketchup::ComponentInstance, Sketchup::Group, Sketchup::Image>] An array of
+  #   ComponentInstance objects that are currently glued to the face.
   #
   # @version SketchUp 7.0 M1
   def get_glued_instances
@@ -372,25 +411,37 @@ class Sketchup::Face < Sketchup::Drawingelement
   #   pts[0] = [0, 0, 1]
   #   pts[1] = [10, 0, 1]
   #   pts[2] = [10, 10, 1]
+  #   pts[3] = [0, 10, 1]
   #   face = entities.add_face(pts)
   #
-  #   # Export an image to use as a texture
-  #   path = Sketchup.temp_dir
-  #   full_name = File.join(path, "temp_image.jpg")
-  #   model.active_view.write_image(full_name, 500, 500, false, 0.0)
+  #   view = model.active_view
+  #   screenshot_path = File.join(Dir.tmpdir,"screenshot.png")
+  #   view.write_image(screenshot_path)
   #
-  #   # Create a material and assign the texture to it
   #   material = materials.add("Test Material")
-  #   material.texture = full_name
+  #   material.texture = screenshot_path
   #
   #   # Assign the new material to our face we created
   #   face.material = material
   #
   #   # Set the projection of the applied material
-  #   face.set_texture_projection(face.normal, true)
+  #   mapping = [
+  #     Geom::Point3d.new(0, 0, 0), # Model coordinate
+  #     Geom::Point3d.new(0, 0, 0), # UV coordinate
+  #     Geom::Point3d.new(10, 0, 0), # Model coordinate
+  #     Geom::Point3d.new(1, 0, 0), # UV coordinate
+  #     Geom::Point3d.new(0, 10, 0), # Model coordinate
+  #     Geom::Point3d.new(0, 1, 0) # UV coordinate
+  #   ]
+  #
+  #   direction = Geom::Vector3d.new(0, 0, 1) # Adjust direction vector
+  #
+  #   on_front = true
+  #   face.position_material(material, mapping, on_front, direction)
   #
   #   # Get the projection of the applied material
   #   vector = face.get_texture_projection(true)
+  #   puts "Texture projection vector : #{vector.inspect}"
   #
   # @param [Boolean] frontside
   #   +true+ for front side, +false+ for back side.
@@ -410,19 +461,32 @@ class Sketchup::Face < Sketchup::Drawingelement
   # face.
   #
   # @example
-  #   depth = 100
-  #   width = 100
   #   model = Sketchup.active_model
-  #   entities = model.active_entities
-  #   pts = []
-  #   pts[0] = [0, 0, 0]
-  #   pts[1] = [width, 0, 0]
-  #   pts[2] = [width, depth, 0]
-  #   pts[3] = [0, depth, 0]
+  #   entities= model.active_entities
   #
-  #   # Add the face to the entities in the model
-  #   face = entities.add_face(pts)
-  #   loops = face.loops
+  #   # Define points for the outer loop
+  #   outer_points = []
+  #   outer_points << Geom::Point3d.new(0, 0, 0)
+  #   outer_points << Geom::Point3d.new(100, 0, 0)
+  #   outer_points << Geom::Point3d.new(100, 100, 0)
+  #   outer_points << Geom::Point3d.new(0, 100, 0)
+  #
+  #   # Create the outer face
+  #   outer_face = entities.add_face(outer_points)
+  #
+  #   # Define points for the inner loop (hole)
+  #   inner_points = []
+  #   inner_points << Geom::Point3d.new(25, 25, 0)
+  #   inner_points << Geom::Point3d.new(75, 25, 0)
+  #   inner_points << Geom::Point3d.new(75, 75, 0)
+  #   inner_points << Geom::Point3d.new(25, 75, 0)
+  #
+  #   # Create the inner face and erase it to create a second loop
+  #   inner_face = entities.add_face(inner_points)
+  #   inner_face.erase!
+  #
+  #   # Get all loops of the outer face
+  #   loops = outer_face.loops
   #
   # @return [Array<Sketchup::Loop>] an array of Loop objects if successful
   #
@@ -644,6 +708,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   # @overload position_material(material, points, on_front)
   #
   #   This variant positions a material on the face's plane without projection.
+  #   @version SketchUp 6.0
   #
   #   @param [Sketchup::Material] material
   #
@@ -658,7 +723,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #
   # @overload position_material(material, points, on_front, projection)
   #
-  #   @version SketchUp 2021.1
+  #   @version SketchUp 6.0
   #
   #   This variant positions a material on the face's plane with projection.
   #
@@ -691,8 +756,6 @@ class Sketchup::Face < Sketchup::Drawingelement
   # @see #get_texture_projection
   #
   # @see #clear_texture_projection
-  #
-  # @version SketchUp 6.0
   def position_material(*args)
   end
 
@@ -794,9 +857,15 @@ class Sketchup::Face < Sketchup::Drawingelement
   # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
+  #
+  #   # Filter the entities to get only the faces
   #   faces = entities.grep(Sketchup::Face).select { |face|
+  #     # Select faces that have manually positioned textures
+  #     # Check both in front face (true) and the back face (false)
   #     face.texture_positioned?(true) || face.texture_positioned?(false)
   #   }
+  #
+  #   # 'faces' will contain all faces with manually positioned textures
   #
   # @param [Boolean] front
   #   +true+ Checks the front side of the face, +false+

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This observer interface is implemented to react to layers events.
@@ -92,8 +92,6 @@ class Sketchup::LayersObserver
   # The {#onLayerFolderAdded} method is called when a layer folder is added
   # to a model.
   #
-  # @api TagFolder
-  #
   # @example
   #   class MyLayersObserver < Sketchup::LayersObserver
   #     def onLayerFolderAdded(layers, layer_folder)
@@ -117,8 +115,6 @@ class Sketchup::LayersObserver
 
   # The {#onLayerFolderChanged} method is called when a layer folder changes
   # one of its properties.
-  #
-  # @api TagFolder
   #
   # @example
   #   class MyLayersObserver < Sketchup::LayersObserver
@@ -145,8 +141,6 @@ class Sketchup::LayersObserver
 
   # The {#onLayerFolderRemoved} method is called when a layer folder is removed
   # from a model.
-  #
-  # @api TagFolder
   #
   # @example
   #   class MyLayersObserver < Sketchup::LayersObserver
@@ -195,8 +189,6 @@ class Sketchup::LayersObserver
 
   # The {#onParentFolderChanged} method is called when a layer changes parent
   # folder.
-  #
-  # @api TagFolder
   #
   # @example
   #   class MyLayersObserver < Sketchup::LayersObserver

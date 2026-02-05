@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # Bounding boxes are three-dimensional boxes (eight corners), aligned with the
@@ -141,7 +141,7 @@ class Geom::BoundingBox
   #   boundingbox.add([100, 200, -400], [200, 400, 100])
   #   # This will return Point3d(100, 200, -400).
   #   boundingbox.corner(0)
-  #   # This will return Point3d(100, 200, -400).
+  #   # This will return Point3d(100, 400, 100).
   #   boundingbox.corner(6)
   #
   # @param [Integer] corner_index

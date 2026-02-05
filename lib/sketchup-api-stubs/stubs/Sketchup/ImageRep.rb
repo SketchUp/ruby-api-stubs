@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # References an image representation object.
@@ -203,7 +203,7 @@ class Sketchup::ImageRep
   #
   # @note The encoding of the pixel_data {String} parameter should be ASCII-8BIT.
   #   Any other encoding could corrupt the binary data. Using
-  #   `Array#pack("C*")` gives correct encoding.
+  #   +Array#pack("C*")+ gives correct encoding.
   #
   # @param [Integer] width
   #   The width of the pixel data. Must be greater than 0.

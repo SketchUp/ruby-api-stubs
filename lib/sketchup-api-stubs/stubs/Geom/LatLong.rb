@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The LatLong class contains various methods for creating and manipulating
@@ -12,13 +12,13 @@ class Geom::LatLong
   # The new method creates a LatLong object.
   #
   # @example
-  #   ll = [40.01700, 105.28300]
-  #   latlong = Geom::LatLong.new(ll)
-  #   if (latlong)
-  #     UI.messagebox(latlong)
-  #   else
-  #     UI.messagebox("Failure")
-  #   end
+  #   # No arguments, creates a latlong with (0, 0)
+  #   latlong1 = Geom::LatLong.new
+  #
+  #   latlong2 = Geom::LatLong.new(40.01700, 105.28300)
+  #
+  #   array = [40.01700, 105.28300]
+  #   latlong3 = Geom::LatLong.new(array)
   #
   # @overload initialize
   #
@@ -36,8 +36,8 @@ class Geom::LatLong
   #
   # @overload initialize(lat, long)
   #
-  #   @param [Numeric] lat
-  #   @param [Numeric] long
+  #   @param [Numeric] latitude
+  #   @param [Numeric] longitude
   #   @return [Geom::LatLong]
   #
   # @version SketchUp 6.0
@@ -47,14 +47,9 @@ class Geom::LatLong
   # The Latitude method retrieves the latitude coordinate from a LatLong object.
   #
   # @example
-  #   ll = [40.01700, 105.28300]
-  #   latlong = Geom::LatLong.new(ll)
+  #   latlong = Geom::LatLong.new(40.01700, 105.28300)
+  #   # The result is 40.01700
   #   latitude = latlong.latitude
-  #   if (latitude)
-  #     UI.messagebox(latitude)
-  #   else
-  #     UI.messagebox("Failure")
-  #   end
   #
   # @return [Float] a latitude coordinate value
   #
@@ -66,14 +61,9 @@ class Geom::LatLong
   # object.
   #
   # @example
-  #   ll = [40.01700, 105.28300]
-  #   latlong = Geom::LatLong.new(ll)
+  #   latlong = Geom::LatLong.new(40.01700, 105.28300)
+  #   # The result is 105.28300
   #   longitude = latlong.longitude
-  #   if (longitude)
-  #     UI.messagebox(longitude)
-  #   else
-  #     UI.messagebox("Failure")
-  #   end
   #
   # @return [Float] a latitude coordinate value
   #
@@ -84,7 +74,7 @@ class Geom::LatLong
   # The {#to_a} method converts a LatLong object to an array of two values.
   #
   # @example
-  #   latlong = Geom::LatLong.new([40.01700, 105.28300])
+  #   latlong = Geom::LatLong.new(40.01700, 105.28300)
   #   array = latlong.to_a
   #
   # @return [Array(Float, Float)] an array of latitude and longitude
@@ -108,14 +98,9 @@ class Geom::LatLong
   # The to_utm method converts a LatLong object to a UTM object.
   #
   # @example
-  #   ll = [40.01700, 105.28300]
-  #   latlong = Geom::LatLong.new(ll)
+  #   latlong = Geom::LatLong.new(40.01700, 105.28300)
+  #   # The result is UTM(48 T 524150.82056 4429682.40743)
   #   utm = latlong.to_utm
-  #   if (utm)
-  #     UI.messagebox(utm)
-  #   else
-  #     UI.messagebox("Failure")
-  #   end
   #
   # @return [Geom::UTM]
   #

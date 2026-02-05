@@ -1,18 +1,26 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This class contains methods to manipulate the current point of view of the
-# model. The drawing methods here (draw_line, draw_polyline, etc) are meant to
-# be invoked within a tool's Tool.draw method. Calling them outside Tool.draw
-# will have no effect.
+# model. The drawing methods here ({#draw_line}, {#draw_polyline}, etc) are
+# meant to be invoked within a tool's {Sketchup::Tool#draw} method. Calling
+# them outside {Sketchup::Tool#draw} will have no effect.
 #
-# You access the View by calling the Model.active_view method.
+# You access the {Sketchup::View} by calling the {Sketchup::Model#active_view}
+# method.
 #
 # @example
 #   view = Sketchup.active_model.active_view
 #
 # @version SketchUp 6.0
 class Sketchup::View
+
+  # Constants
+
+  CORNER_BOTTOM_LEFT = nil # Stub value.
+  CORNER_BOTTOM_RIGHT = nil # Stub value.
+  CORNER_TOP_LEFT = nil # Stub value.
+  CORNER_TOP_RIGHT = nil # Stub value.
 
   # Instance Methods
 
@@ -95,45 +103,95 @@ class Sketchup::View
   def camera=(arg)
   end
 
-  # The center method is used to retrieve the coordinates of the center of the
-  # view in pixels. It is returned as an array of 2 values for x and y.
+  # The {#center} method is used to retrieve the coordinates of the center of the
+  # view in pixels.
   #
   # @example
   #   model = Sketchup.active_model
   #   view = model.active_view
-  #   c = view.center
+  #   center = view.center
   #
-  # @return [Geom::Point3d] the center of the view
+  # @overload center()
   #
-  # @version SketchUp 6.0
+  #   @note Signature for versions prior to SketchUp 2025.0
+  #   @version SketchUp 6.0
+  #   @return [Array(Integer, Integer)] Physical pixels.
+  #
+  # @overload center()
+  #
+  #   @version SketchUp 2025.0
+  #   @return [Array(Float, Float)] Logical pixels.
   def center
   end
 
-  # The corner method is used to retrieve the coordinates of one of the corners
-  # of the view. The argument is an index between 0 and 3 that identifies which
+  # The {#corner} method is used to retrieve the coordinates of one of the corners
+  # of the view. The argument is an index between +0+ and +3+ that identifies which
   # corner you want. This method returns an array with two integers which are
-  # the coordinates of the corner of the view in the view space. If the view
-  # uses a Camera with a fixed aspect ratio, then the corners are the corners of
-  # the viewing are of the camera which might be different than the actual
-  # corners of the view itself.
+  # the coordinates of the corner of the view in the view space.
   #
-  # The index numbers are as follows:
-  #  - 0: top left,
-  #  - 1: top right,
-  #  - 2: bottom left,
-  #  - 3: bottom right.
+  # The indices are as follows:
+  # - 0: {CORNER_TOP_LEFT}
+  # - 1: {CORNER_TOP_RIGHT}
+  # - 2: {CORNER_BOTTOM_LEFT}
+  # - 3: {CORNER_BOTTOM_RIGHT}
+  #
+  # @example New preferred style using constants
+  #   # From SketchUp 2025.0:
+  #   point = Sketchup.active_model.active_view.corner(Sketchup::View::CORNER_BOTTOM_LEFT)
+  #
+  # @example Old style using hard coded indices
+  #   # For SketchUp 2024.0 and older: (Works with newer versions too)
+  #   point = Sketchup.active_model.active_view.corner(2)
+  #
+  # @note If the view uses a {Sketchup::Camera} with a fixed aspect ratio, then the
+  #   corners are the corners of the viewing are of the camera which might be different
+  #   than the actual corners of the view itself.
+  #
+  # @overload corner(index)
+  #
+  #   @note Signature for versions prior to SketchUp 2025.0
+  #   @version SketchUp 6.0
+  #   @param [Integer] index
+  #     A value between (or including) +0+ and +3+ identifying the
+  #     corner whose coordinate you want to retrieve.
+  #   @return [Array(Integer, Integer)] a 2D array +[x, y]+ representing the screen point in physical
+  #     pixels.
+  #
+  # @overload corner(index)
+  #
+  #   @version SketchUp 2025.0
+  #   @param [Integer] index
+  #     A value between (or including) +0+ and +3+ identifying the
+  #     corner whose coordinate you want to retrieve.
+  #   @return [Array(Float, Float)] a 2D array +[x, y]+ representing the screen point in logical
+  #     pixels.
+  def corner(arg)
+  end
+
+  # The {#device_height} method is used to retrieve the height of the viewport for the
+  # view in physical pixels.
   #
   # @example
-  #   point = view.corner index
+  #   model = Sketchup.active_model
+  #   view = model.active_view
+  #   height = view.device_height
   #
-  # @param [Integer] index
-  #   A value between (or including) 0 and 3 identifying the
-  #   corner whose coordinate you want to retrieve.
+  # @return [Integer] the height of the viewport in physical pixels.
   #
-  # @return [Array(Integer, Integer)] a 2d array [w,h] representing the screen point
+  # @version SketchUp 2025.0
+  def device_height
+  end
+
+  # The {#device_width} method is used to retrieve the width of the viewport for the
+  # view in physical pixels.
   #
-  # @version SketchUp 6.0
-  def corner(index)
+  # @example
+  #   width = view.device_width
+  #
+  # @return [Integer] the width of the viewport in physical pixels.
+  #
+  # @version SketchUp 2025.0
+  def device_width
   end
 
   # The {#draw} method is used to do basic drawing. This method can only be
@@ -275,6 +333,7 @@ class Sketchup::View
   # The second parameter is an {Array} of {Geom::Point3d} objects (or several
   # individual {Geom::Point3d} objects). These {Geom::Point3d} objects are in
   # screen space, not 3D space.
+  #
   # The X value corresponds to the number of pixels from the left edge of the
   # drawing area. The Y value corresponds to the number of pixels down from
   # the top of the drawing area. The Z value is not used.
@@ -284,9 +343,15 @@ class Sketchup::View
   #     Geom::Point3d.new(0, 0, 0),
   #     Geom::Point3d.new(8, 0, 0),
   #     Geom::Point3d.new(8, 4, 0),
-  #     Geom::Point3d.new(0, 4, 0)
+  #     Geom::Point3d.new(0, 4, 0),
   #   ]
   #   view.draw2d(GL_LINE_STRIP, points)
+  #
+  # @note Prior to SketchUp 2025.0 this method accepted the +points+ as physical
+  #   screen coordinates. As of SketchUp 2025.0 the +points+ are expected to be
+  #   in logical screen coordinates. Older versions need to apply the scaling
+  #   factor from {UI.scale_factor} to the points before passing them to this
+  #   method.
   #
   # @overload draw2d(openglenum, points)
   #
@@ -394,23 +459,31 @@ class Sketchup::View
   def draw_lines(*args)
   end
 
-  # This method is used to draw points.
-  #
-  # This method is usually invoked within the draw method of a tool.
+  # This method is used to draw points in model space.
   #
   # @example
-  #   point3 = Geom::Point3d.new 0,0,0
-  #   # returns a view
-  #   status = view.draw_points(point3, 10, 1, "red")
+  #   point = Geom::Point3d.new(0, 0, 0)
+  #   view.draw_points(point, 10, 1, "red")
+  #
+  # @note Prior to SketchUp 2025.0 this method accepted the +size+ as physical
+  #   pixels. As of SketchUp 2025.0 the +points+ are expected to be in logical pixels.
+  #   Older versions need to apply the scaling factor from {UI.scale_factor} to the
+  #   size before passing them to this method.
   #
   # @param [Array<Geom::Point3d>] points
+  #   Model coordinates.
   #
   # @param [Integer] size
   #   Size of the point in pixels.
   #
   # @param [Integer] style
-  #   1 = open square, 2 = filled square, 3 = "+", 4 = "X", 5 = "*",
-  #   6 = open triangle, 7 = filled triangle.
+  #   - +1+ = open square
+  #   - +2+ = filled square
+  #   - +3+ = plus shape "+"
+  #   - +4+ = cross shape "X"
+  #   - +5+ = star shape "*"
+  #   - +6+ = open triangle
+  #   - +7+ = filled triangle
   #
   # @param [Sketchup::Color] color
   #
@@ -490,7 +563,15 @@ class Sketchup::View
   #     end
   #   end
   #
-  # @example Cross Platform Font Size
+  # @example Cross Platform Font Size in SketchUp 2025.0 and newer
+  #   class ExampleTool
+  #     def draw(view)
+  #       draw_text(view, [100, 200, 0], "Hello Pixel World", pixel_size: 20)
+  #       draw_text(view, [100, 250, 0], "Hello Point World", point_size: 20)
+  #     end
+  #   end
+  #
+  # @example Cross Platform Font Size in SketchUp 2024.0 and older
   #   class ExampleTool
   #     IS_WIN = Sketchup.platform == :platform_win
   #
@@ -523,7 +604,8 @@ class Sketchup::View
   #
   # @note The font size is platform dependent. On Windows the method expects
   #   points, where on Mac it's pixels. See "Cross Platform Font Size" example
-  #   for details.
+  #   for details. As of SketchUp 2025.0 you can use the +:pixel_size+ or
+  #   +:point_size+ options to specify the size in pixels or points respectively.
   #
   # @overload draw_text(point, text)
   #
@@ -541,7 +623,13 @@ class Sketchup::View
   #       named arguments of options.
   #   @option options [String] :font  The name of the font to use. If it does not
   #       exist on the system, a default font will be used instead.
-  #   @option options [Integer] :size  The size of the font in points
+  #   @option options [Integer] :size  <b>Legacy</b>: The size of the font in
+  #       system-dependent units. On Windows this is in points, on Mac it's in
+  #       pixels.
+  #   @option options [Integer] :pixel_size <b>Added SketchUp 2025.0</b>: The
+  #       size of the font in pixels.
+  #   @option options [Integer] :point_size <b>Added SketchUp 2025.0</b>: The
+  #       size of the font in points.
   #   @option options [Boolean] :bold  Controls the Bold property of the font.
   #   @option options [Boolean] :italic  Controls the Italic property of the font.
   #   @option options [Sketchup::Color] :color  The color to draw the text with.
@@ -554,7 +642,12 @@ class Sketchup::View
   #       some fonts on Mac might not align as expected due to the system
   #       reporting incorrect font metrics.
   #
+  #   @raise [ArgumentError] if combining usage of +:size+, +:pixel_size+ or
+  #     +:point_size+ options.
+  #
   # @return [Sketchup::View]
+  #
+  # @see #text_bounds
   #
   # @version SketchUp 6.0
   def draw_text(*args)
@@ -648,11 +741,15 @@ class Sketchup::View
   # The guess_target method is used to guess at what the user is looking at when
   # you have a perspective view.
   #
-  # This method is useful when writing a viewing tool. See also camera.rb which
-  # is part of the film and stage ruby scripts.
-  #
   # @example
   #   target = view.guess_target
+  #
+  # @overload guess_target
+  #
+  #
+  # @overload guess_target(screen_point)
+  #
+  #   @param [Geom::Point3d] screen_point
   #
   # @return [Geom::Point3d] a Point3d object representing the point in the
   #   model that the user is likely interested in.
@@ -675,28 +772,77 @@ class Sketchup::View
   def inference_locked?
   end
 
-  # The inputpoint method is used to retrieve an input point.
+  # The {#inputpoint} method is used to retrieve an {Sketchup::InputPoint}.
   #
   # This will normally be used inside one of the mouse event handling methods in
-  # a tool. Usually, it is preferable to create the InputPoint first and then
-  # use the pick method on it.
+  # a tool. Usually, it is preferable to create the {Sketchup::InputPoint} first
+  # and then use the pick method on it.
   #
   # @example
-  #   inputpoint = view.inputpoint x, y, inputpoint1
+  #   class ExampleTool
+  #     def onMouseMove(flags, x, y, view)
+  #       inputpoint = view.inputpoint(x, y)
+  #       instance_path = ip.instance_path
+  #     end
+  #   end
   #
-  # @param [Numeric] x
-  #   A x value.
+  # @example Inference from another input point
+  #   class ExampleTool
   #
-  # @param [Numeric] y
-  #   A y value.
+  #     def onLButtonUp(flags, x, y, view)
+  #       @picked_input = view.inputpoint(x, y)
+  #     end
   #
-  # @param [Sketchup::InputPoint] inputpoint1
-  #   An InputPoint object.
+  #     def onMouseMove(flags, x, y, view)
+  #       # Note: It is preferrable to initialize input points using
+  #       # Sketchup::InputPoint.new in `initialize` and reuse them doing the
+  #       # picking using the `pick` method.
+  #       if @inputpoint
+  #         @inputpoint = view.inputpoint(x, y, @picked_input)
+  #       else
+  #         @inputpoint = view.inputpoint(x, y)
+  #       end
+  #     end
+  #
+  #    def draw(view)
+  #      if @inputpoint
+  #        @inputpoint.draw(view) if @inputpoint.display?
+  #      else
+  #        @picked_input.draw(view) if @picked_input.display?
+  #      end
+  #    end
+  #   end
+  #
+  # @overload inputpoint(x, y)
+  #
+  #   @note Signature for versions prior to SketchUp 2025.0
+  #   @version SketchUp 6.0
+  #   @param [Integer] x Screen coordinate in physical pixels.
+  #   @param [Integer] y Screen coordinate in physical pixels.
+  #
+  # @overload inputpoint(x, y, inputpoint1)
+  #
+  #   @note Signature for versions prior to SketchUp 2025.0
+  #   @version SketchUp 6.0
+  #   @param [Integer] x Screen coordinate in physical pixels.
+  #   @param [Integer] y Screen coordinate in physical pixels.
+  #   @param [Sketchup::InputPoint] inputpoint1
+  #
+  # @overload inputpoint(x, y)
+  #
+  #   @version SketchUp 2025.0
+  #   @param [Float] x Screen coordinate in logical pixels.
+  #   @param [Float] y Screen coordinate in logical pixels.
+  #
+  # @overload inputpoint(x, y, inputpoint1)
+  #
+  #   @version SketchUp 2025.0
+  #   @param [Float] x Screen coordinate in logical pixels.
+  #   @param [Float] y Screen coordinate in logical pixels.
+  #   @param [Sketchup::InputPoint] inputpoint1
   #
   # @return [Sketchup::InputPoint]
-  #
-  # @version SketchUp 6.0
-  def inputpoint(x, y, inputpoint1)
+  def inputpoint(*args)
   end
 
   # The invalidate method is used mark the view as in need of a redraw.
@@ -720,6 +866,13 @@ class Sketchup::View
   #
   # @example
   #   time = view.last_refresh_time
+  #
+  # @overload last_refresh_time
+  #
+  #
+  # @overload last_refresh_time(full)
+  #
+  #   @param [Boolean] full
   #
   # @return [Float] time in milliseconds
   #
@@ -764,10 +917,14 @@ class Sketchup::View
   # @note As of SU2017 this will automatically scale the line width by the same
   #   factor as {UI.scale_factor}.
   #
-  # @param [Integer] width
+  # @note As of Sketchup 2026.0 positive values will be clamped to a minimum of 1.0.
+  #
+  # @param [Numeric] width
   #   The width in pixels.
   #
-  # @return [Integer]
+  # @raise [ArgumentError] if the width is negative.
+  #
+  # @return [Numeric]
   #
   # @version SketchUp 6.0
   def line_width=(width)
@@ -852,8 +1009,7 @@ class Sketchup::View
   #   @param [Sketchup::InputPoint] inputpoint2
   #   @example
   #     # Lock inference to X axis.
-  #     # The points can be anywhere; only the vector between them affects
-  #     # the result.
+  #     # The points define a line in space, and the inference is locked to this line.
   #     view.lock_inference(
   #       Sketchup::InputPoint.new(ORIGIN),
   #       Sketchup::InputPoint.new(Geom::Point3d.new(1, 0, 0))
@@ -876,10 +1032,7 @@ class Sketchup::View
   def model
   end
 
-  # The pick_helper method is used to retrieve a pick helper for the view. See
-  # the PickHelper class for information on pick helpers.
-  #
-  # This call returns an initialized PickHelper.
+  # The {#pick_helper} method is used to retrieve a pick helper for the view.
   #
   # @example
   #   model = Sketchup.active_model
@@ -888,41 +1041,75 @@ class Sketchup::View
   #
   # @overload pick_helper
   #
-  #   @return [Sketchup::PickHelper] a PickHelper object
+  #   @return [Sketchup::PickHelper]
   #
   # @overload pick_helper(x, y, aperture = 0)
   #
-  #   @param [Integer] x
-  #   @param [Integer] y
-  #   @param [Integer] aperture
-  #   @return [Sketchup::PickHelper] a PickHelper object
+  #   @note Signature for versions prior to SketchUp 2025.0
+  #   @version SketchUp 6.0
+  #   @param [Integer] x Screen coordinate in physical pixels.
+  #   @param [Integer] y Screen coordinate in physical pixels.
+  #   @param [Integer] aperture The size of the aperture in physical pixels.
+  #   @return [Sketchup::PickHelper]
+  #
+  # @overload pick_helper(x, y, aperture = 0.0)
+  #
+  #   @version SketchUp 2025.0
+  #   @param [Float] x Screen coordinate in logical pixels.
+  #   @param [Float] y Screen coordinate in logical pixels.
+  #   @param [Float] aperture The size of the aperture in logical pixels.
+  #   @return [Sketchup::PickHelper]
+  #
+  # @see Sketchup::PickHelper
   #
   # @version SketchUp 6.0
   def pick_helper(*args)
   end
 
-  # The pickray method is used to retrieve a ray passing through a given screen
+  # The {#pickray} method is used to retrieve a ray passing through a given screen
   # position in the viewing direction.
   #
   # @example
-  #   ray = view.pickray x, y
+  #   ray = view.pickray(x, y)
+  #   result = model.raytest(ray)
   #
   # @overload pickray(screen_point)
   #
+  #   @note Signature for versions prior to SketchUp 2025.0
+  #   @version SketchUp 6.0
   #   @param [Array(Integer, Integer)] screen_point
+  #     Screen coordinates in physical pixels.
   #   @return [Array(Geom::Point3d, Geom::Vector3d)] a ray
   #
   # @overload pickray(x, y)
   #
-  #   @param [Integer] x
-  #   @param [Integer] y
+  #   @note Signature for versions prior to SketchUp 2025.0
+  #   @version SketchUp 6.0
+  #   @param [Integer] x Screen coordinate in physical pixels.
+  #   @param [Integer] y Screen coordinate in physical pixels.
   #   @return [Array(Geom::Point3d, Geom::Vector3d)] a ray
+  #
+  # @overload pickray(screen_point)
+  #
+  #   @version SketchUp 2025.0
+  #   @param [Array(Float, Float)] screen_point
+  #     Screen coordinates in logical pixels.
+  #   @return [Array(Geom::Point3d, Geom::Vector3d)] a ray
+  #
+  # @overload pickray(x, y)
+  #
+  #   @version SketchUp 2025.0
+  #   @param [Float] x Screen coordinate in logical pixels.
+  #   @param [Float] y Screen coordinate in logical pixels.
+  #   @return [Array(Geom::Point3d, Geom::Vector3d)] a ray
+  #
+  # @see Sketchup::Model#raytest
   #
   # @version SketchUp 6.0
   def pickray(*args)
   end
 
-  # The pixels_to_model method is used to compute a model size from a pixel size
+  # The {#pixels_to_model} method is used to compute a model size from a pixel size
   # at a given point.
   #
   # This method is useful for deciding how big to draw something based on a
@@ -935,10 +1122,10 @@ class Sketchup::View
   #   factor as {UI.scale_factor}.
   #
   # @param [Numeric] pixels
-  #   The pixel size.
+  #   Logical pixels since SketchUp 2017.
   #
   # @param [Geom::Point3d] point
-  #   A Point3d object where the size will be calculated from.
+  #   A model point where the size will be calculated from.
   #
   # @return [Float] the model size
   #
@@ -1016,23 +1203,37 @@ class Sketchup::View
   def remove_observer(observer)
   end
 
-  # The screen_coords method is used to retrieve the screen coordinates of the
+  # The {#screen_coords} method is used to retrieve the screen coordinates of the
   # given point on the screen.
   #
-  # The x and y values returned correspond to the x and y screen coordinates.
-  # Ignore the z values.  If the referenced point is not in the current
-  # viewport,  the x and/or y value may be negative.
+  # The +x+ and +y+ values returned correspond to the +x+ and +y+ screen coordinates.
+  # Ignore the +z+ values.  If the referenced point is not in the current
+  # viewport, the +x+ and/or +y+ value may be negative.
   #
   # @example
+  #   view = Sketchup.active_model.active_view
   #   point = view.screen_coords(ORIGIN)
   #
-  # @param [Geom::Point3d] point3d
-  #   A Point3d object.
+  # @note Prior to SketchUp 2025.0 this method returned the points as physical
+  #   screen coordinates. As of SketchUp 2025.0 the points are returned in
+  #   logical screen coordinates.
   #
-  # @return [Geom::Point3d] A Point3d containing the screen position
+  # @overload screen_coords(model_point)
+  #
+  #   @note Signature for versions prior to SketchUp 2025.0
+  #   @version SketchUp 6.0
+  #   @param [Geom::Point3d] model_point Model coordinate.
+  #
+  # @overload screen_coords(model_point)
+  #
+  #   @version SketchUp 2025.0
+  #   @param [Geom::Point3d] model_point Model coordinate.
+  #
+  # @return [Geom::Point3d] Screen coordinate in pixels (physical prior to SketchUp 2025.0, logical
+  #   from 2025.0).
   #
   # @version SketchUp 6.0
-  def screen_coords(point3d)
+  def screen_coords(model_point)
   end
 
   # Set the drawing color for the view based on the direction of a line that you
@@ -1089,10 +1290,10 @@ class Sketchup::View
   #   class ExampleTool
   #     TEXT_OPTIONS = {
   #       :font => "Arial",
-  #       :size => 20,
+  #       :pixel_size => 20, # Use :size for SketchUp 2024.0 and older.
   #       :bold => true,
   #       :align => TextAlignRight,
-  #       :align => TextVerticalAlignBaseline
+  #       :vertical_align => TextVerticalAlignBaseline
   #     }
   #
   #     # Since `draw` is called frequently it can be useful to pre-compute and
@@ -1132,7 +1333,15 @@ class Sketchup::View
   # @option options [String] :font The name of the font to use. If it does not
   #   exist on the system, a default font will be used instead.
   #
-  # @option options [Integer] :size The size of the font in points
+  # @option options [Integer] :size <b>Legacy</b>: The size of the font in
+  #   system-dependent units. On Windows this is in points, on Mac it's in
+  #   pixels.
+  #
+  # @option options [Integer] :pixel_size <b>Added SketchUp 2025.0</b>: The
+  #   size of the font in pixels.
+  #
+  # @option options [Integer] :point_size <b>Added SketchUp 2025.0</b>: The
+  #   size of the font in points.
   #
   # @option options [Boolean] :bold Controls the Bold property of the font.
   #
@@ -1157,6 +1366,9 @@ class Sketchup::View
   #   The text can be customized by providing a hash or
   #   named arguments of options.
   #
+  # @raise [ArgumentError] if combining usage of +:size+, +:pixel_size+ or
+  #   +:point_size+ options.
+  #
   # @return [Geom::Bounds2d]
   #
   # @see #draw_text
@@ -1180,7 +1392,7 @@ class Sketchup::View
   def tooltip=(string)
   end
 
-  # The vpheight method is used to retrieve the height of the viewport for the
+  # The {#vpheight} method is used to retrieve the height of the viewport for the
   # view.
   #
   # @example
@@ -1188,19 +1400,46 @@ class Sketchup::View
   #   view = model.active_view
   #   height = view.vpheight
   #
-  # @return [Integer] the height of the viewport in physical pixels.
+  # @note Prior to SketchUp 2025.0 this method returned the size as physical
+  #   screen coordinates. As of SketchUp 2025.0 the size are returned in
+  #   logical screen coordinates.
+  #
+  # @overload vpheight
+  #
+  #   @note Signature for versions prior to SketchUp 2025.0
+  #   @version SketchUp 6.0
+  #   @return [Integer] the height of the viewport in physical pixels.
+  #
+  # @overload vpheight
+  #
+  #   @version SketchUp 2025.0
+  #   @return [Float] the height of the viewport in logical pixels.
   #
   # @version SketchUp 6.0
   def vpheight
   end
 
-  # The vpwidth method is used to retrieve the width of the viewport for the
+  # The {#vpwidth} method is used to retrieve the width of the viewport for the
   # view.
   #
   # @example
+  #   view = Sketchup.active_model.active_view
   #   width = view.vpwidth
   #
-  # @return [Integer] the width of the viewport in physical pixels.
+  # @note Prior to SketchUp 2025.0 this method returned the size as physical
+  #   screen coordinates. As of SketchUp 2025.0 the size are returned in
+  #   logical screen coordinates.
+  #
+  # @overload vpwidth
+  #
+  #   @note Signature for versions prior to SketchUp 2025.0
+  #   @version SketchUp 6.0
+  #   @return [Integer] the width of the viewport in physical pixels.
+  #
+  # @overload vpwidth
+  #
+  #   @version SketchUp 2025.0
+  #   @return [Float] the width of the viewport in logical pixels.
   #
   # @version SketchUp 6.0
   def vpwidth
@@ -1208,11 +1447,12 @@ class Sketchup::View
 
   # The {#write_image} method is used to write the current view to an image file.
   #
-  # Supported file types are `.png`, `.jpg`, `.jpeg`, `gif`, `.bmp`, `.tif`.
-  # For other file formats  available from the GUI in File > Export > 2D
-  # Graphics, .e.g `.pdf`, use {Sketchup::Model#export}.
+  # Supported file types are +.png+, +.jpg+, +.jpeg+, +gif+, +.bmp+, +.tif+.
+  # For other file formats  available from the GUI in +File > Export > 2D Graphics+,
+  # .e.g +.pdf+, use {Sketchup::Model#export}.
   #
-  # compression = 1.0)
+  # @overload write_image(filename, width = view.vpwidth, height = view.vpheight, antialias = false, compression = 1.0)
+  #
   #   @note Prefer the overload with option hash instead of this variant. This
   #     overload is not updated with new options.
   #
@@ -1233,9 +1473,6 @@ class Sketchup::View
   #   @param [Boolean] antialias
   #   @param [Float] compression
   #     Compression factor for JPEG images, between +0.0+ and +1.0+.
-  #
-  # @overload write_image(filename, width = view.vpwidth, height = view.vpheight, antialias = false,
-  #
   #
   # @overload write_image(options)
   #

@@ -1,10 +1,10 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The SketchupExtension class contains methods allowing you to create and
 # manipulate SketchUp extensions. Extensions are Ruby scripts that can be
 # loaded and unloaded using the Extension manager (Extensions panel of the
-# Preferences dialog box). Generally you should register your ruby scripts as
+# Extension Manager dialog box). Generally you should register your ruby scripts as
 # an extension to give SketchUp users the ability to disable it through the
 # user interface.
 #
@@ -40,11 +40,11 @@ class SketchupExtension
 
   # Loads the extension, meaning the underlying ruby script is immediately
   # interpreted. This is the equivalent of checking the extension's checkbox
-  # in the Preferences > Extensions list.
+  # in the Extension Manager.
   #
   # @example
   #   # This will register the extension, a necessary step for it to appear
-  #   # in SketchUp's Preferences > Extensions list
+  #   # in SketchUp's Extension Manager > Extensions list
   #   ext_c = SketchupExtension.new('Stair Tools C', 'StairTools/core.rb')
   #   Sketchup.register_extension(ext_c, false)
   #
@@ -214,9 +214,9 @@ class SketchupExtension
   #
   # @example
   #   ext = SketchupExtension.new('Stair Tools', 'StairTools/core.rb')
-  #   UI.messagebox("load_on_start? is false: #{ext.load_on_start?.to_s}")
+  #   puts "load_on_start? is false: #{ext.load_on_start?.to_s}"
   #   Sketchup.register_extension(ext, true)
-  #   UI.messagebox("load_on_start? is now true: #{ext.load_on_start?.to_s}")
+  #   puts "load_on_start? is now true: #{ext.load_on_start?.to_s}"
   #
   # @return [Boolean]
   #
@@ -229,9 +229,9 @@ class SketchupExtension
   #
   # @example
   #   ext = SketchupExtension.new('Stair Tools', 'StairTools/core.rb')
-  #   UI.messagebox("loaded? is false: #{ext.loaded?.to_s}")
+  #   puts "loaded? is false: #{ext.loaded?.to_s}"
   #   Sketchup.register_extension(ext, true)
-  #   UI.messagebox("loaded? is now true: #{ext.loaded?.to_s}")
+  #   puts "loaded? is now true: #{ext.loaded?.to_s}"
   #
   # @return [Boolean]
   #
@@ -277,9 +277,9 @@ class SketchupExtension
   #
   # @example
   #   ext = SketchupExtension.new('Stair Tools', 'StairTools/core.rb')
-  #   UI.messagebox("My registered? is false: #{ext.registered?.to_s}")
+  #   puts "My registered? is false: #{ext.registered?.to_s}"
   #   Sketchup.register_extension(ext, true)
-  #   UI.messagebox("Now registered? is now true: #{ext.registered?.to_s}")
+  #   puts "Now registered? is now true: #{ext.registered?.to_s}"
   #
   # @return [Boolean]
   #
@@ -288,7 +288,7 @@ class SketchupExtension
   end
 
   # Unloads the extension. This is the equivalent of unchecking the extension's
-  # checkbox in the Preferences > Extensions list.
+  # checkbox in the Extension Manager > Extensions list.
   #
   # Note that technically the extension is not "unloaded" in the sense that it
   # stops running during the current SketchUp session, but the next time the

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Command class is the preferred class for adding tools to the menus and
@@ -124,8 +124,11 @@ class UI::Command
   #   toolbar = UI::Toolbar.new "Test"
   #   # This command displays Hello World on the screen when clicked
   #   cmd = UI::Command.new("Test") { UI.messagebox("Hello World") }
-  #   cmd.small_icon = "ToolPencilSmall.png"
-  #   cmd.large_icon = "ToolPencilLarge.png"
+  #   # Use __dir__ to set the icon paths relative to the current file's directory
+  #   # __dir__ returns the directory of the file where it is called
+  #   # File.join is used to construct file paths in a platform-independent way
+  #   cmd.small_icon = File.join(__dir__, "icons", "ToolPencilSmall.png")
+  #   cmd.large_icon = File.join(__dir__, "icons", "ToolPencilLarge.png")
   #   toolbar = toolbar.add_item cmd
   #   toolbar.show
   #   puts cmd.large_icon
@@ -149,8 +152,11 @@ class UI::Command
   #   toolbar = UI::Toolbar.new "Test"
   #   # This command displays Hello World on the screen when clicked
   #   cmd = UI::Command.new("Test") { UI.messagebox("Hello World") }
-  #   cmd.small_icon = "ToolPencilSmall.png"
-  #   cmd.large_icon = "ToolPencilLarge.png"
+  #   # Use __dir__ to set the icon paths relative to the current file's directory
+  #   # __dir__ returns the directory of the file where it is called
+  #   # File.join is used to construct file paths in a platform-independent way
+  #   cmd.small_icon = File.join(__dir__, "icons", "ToolPencilSmall.png")
+  #   cmd.large_icon = File.join(__dir__, "icons", "ToolPencilLarge.png")
   #   toolbar = toolbar.add_item cmd
   #   toolbar.show
   #
@@ -260,8 +266,11 @@ class UI::Command
   #   toolbar = UI::Toolbar.new "Test"
   #   # This toolbar command displays Hello World on the screen when clicked.
   #   cmd = UI::Command.new("Tester") { UI.messagebox("Hello World") }
-  #   cmd.small_icon = "ToolPencilSmall.png"
-  #   cmd.large_icon = "ToolPencilLarge.png"
+  #   # Use __dir__ to set the icon paths relative to the current file's directory
+  #   # __dir__ returns the directory of the file where it is called
+  #   # File.join is used to construct file paths in a platform-independent way
+  #   cmd.small_icon = File.join(__dir__, "icons", "ToolPencilSmall.png")
+  #   cmd.large_icon = File.join(__dir__, "icons", "ToolPencilLarge.png")
   #   toolbar = toolbar.add_item cmd
   #   toolbar.show
   #   puts cmd.small_icon
@@ -285,8 +294,11 @@ class UI::Command
   #   toolbar = UI::Toolbar.new "Test"
   #   # This toolbar command displays Hello World on the screen when clicked.
   #   cmd = UI::Command.new("Tester") { UI.messagebox("Hello World") }
-  #   cmd.small_icon = "ToolPencilSmall.png"
-  #   cmd.large_icon = "ToolPencilLarge.png"
+  #   # Use __dir__ to set the icon paths relative to the current file's directory
+  #   # __dir__ returns the directory of the file where it is called
+  #   # File.join is used to construct file paths in a platform-independent way
+  #   cmd.small_icon = File.join(__dir__, "icons", "ToolPencilSmall.png")
+  #   cmd.large_icon = File.join(__dir__, "icons", "ToolPencilLarge.png")
   #   toolbar = toolbar.add_item cmd
   #   toolbar.show
   #

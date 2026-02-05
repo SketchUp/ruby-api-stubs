@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Edge class contains methods modifying and extracting information for
@@ -324,7 +324,7 @@ class Sketchup::Edge < Sketchup::Drawingelement
   def soft?
   end
 
-  # The split method is used to  to split an edge into two or more distinct
+  # The {#split} method is used to split an edge into two or more distinct
   # edges. If a Point3d is given, it must be a point that is on the Edge.
   #
   # If a Float is given, it is a number between 0 and 1 that gives the

@@ -1,9 +1,15 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Style class contains methods for modifying information about a specific
 # style. Styles are a collection of display settings that tell SketchUp how to
 # draw the model.
+#
+# In SketchUp, there are two important style objects in a model:
+# The {Sketchup::Styles#selected_style} is the style currently selected in the Styles Browser.
+# The {Sketchup::Styles#active_style} is a temporary copy of the selected style that allows
+# editing without committing changes. Changes to the active style are not saved unless you call
+# {Sketchup::Styles#update_selected_style}.
 #
 # @example
 #   styles = Sketchup.active_model.styles
@@ -64,6 +70,19 @@ class Sketchup::Style < Sketchup::Entity
   #
   # @version SketchUp 6.0
   def name=(name)
+  end
+
+  # The {#path} method gets the file path the {Sketchup::Style} was loaded from.
+  #
+  # @example
+  #   styles = Sketchup.active_model.styles
+  #   style = styles.first
+  #   name = style.path
+  #
+  # @return [String] path The file path the style was loaded from.
+  #
+  # @version SketchUp 2025.0
+  def path
   end
 
 end

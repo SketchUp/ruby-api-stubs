@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Geom::Vector2d} class represents vectors in a 2 dimensional space.
@@ -10,19 +10,23 @@ class Geom::Vector2d
 
   # Instance Methods
 
-  # The {#%} method returns the dot product between two {Geom::Vector2d}. This is
-  # an alias of the dot method.
+  # The {#%} method is used to compute the dot product between two vectors.
+  #
+  # This is an alias of the {#dot} method.
   #
   # @example
-  #   vector = Geom::Vector2d.new(0, 2)
-  #   vector2 = Geom::Vector2d.new(1, 0)
-  #   d2 = vector % vector2
+  #   vector1 = Geom::Vector2d.new(4, 5)
+  #   vector2 = Geom::Vector2d.new(7, 1)
+  #   # The result is 33
+  #   dot = vector1 % vector2
   #
-  # @param [Geom::Vector2d] vector
+  # @param [Geom::Vector2d, Array(Float, Float)] vector
   #
-  # @return The dot product of the vectors
+  # @return [Float]
   #
-  # @version LayOut 2018
+  # @see #dot
+  #
+  # @version SketchUp 6.0
   def %(vector)
   end
 
@@ -30,13 +34,16 @@ class Geom::Vector2d
   # is an alias of the cross method.
   #
   # @example
-  #   vector = Geom::Vector2d.new(1, 0)
-  #   vector2 = Geom::Vector2d.new(0, 1)
-  #   cross = vector * vector
+  #   vector1 = Geom::Vector2d.new(2, 5)
+  #   vector2 = Geom::Vector2d.new(5, 1)
+  #   # The result is -23
+  #   cross = vector1 * vector2
   #
-  # @param [Geom::Vector2d] vector
+  # @param [Geom::Vector2d, Array(Float, Float)] vector
   #
-  # @return [Geom::Vector2d]
+  # @return [Float]
+  #
+  # @see #cross
   #
   # @version LayOut 2018
   def *(vector)
@@ -45,11 +52,11 @@ class Geom::Vector2d
   # The {#+} method adds a {Geom::Vector2d} to this one.
   #
   # @example
-  #   vector = Geom::Vector2d.new(0, 2)
+  #   vector1 = Geom::Vector2d.new(0, 2)
   #   vector2 = Geom::Vector2d.new(1, 0)
-  #   new_vector = vector + vector2
+  #   new_vector = vector1 + vector2
   #
-  # @param [Geom::Vector2d] vector
+  # @param [Geom::Vector2d, Array(Float, Float)] vector
   #
   # @return [Geom::Vector2d]
   #
@@ -60,11 +67,11 @@ class Geom::Vector2d
   # The {#-} method subtracts a {Geom::Vector2d} from this one.
   #
   # @example
-  #   vector = Geom::Vector2d.new(0, 2)
+  #   vector1 = Geom::Vector2d.new(0, 2)
   #   vector2 = Geom::Vector2d.new(1, 0)
-  #   new_vector = vector - vector2
+  #   new_vector = vector1 - vector2
   #
-  # @param [Geom::Vector2d] vector
+  # @param [Geom::Vector2d, Array(Float, Float)] vector
   #
   # @return [Geom::Vector2d]
   #
@@ -76,12 +83,12 @@ class Geom::Vector2d
   # tolerance.
   #
   # @example
-  #   vector = Geom::Vector2d.new(1, 0)
-  #   vector2 = Geom::Vector2d.new(0,1)
+  #   vector1 = Geom::Vector2d.new(1, 0)
+  #   vector2 = Geom::Vector2d.new(0, 1)
   #   # Returns false
-  #   status = vector == vector2
+  #   status = vector1 == vector2
   #
-  # @param [Geom::Vector2d] vector
+  # @param [Geom::Vector2d, Array(Float, Float)] vector
   #
   # @return [Boolean]
   #
@@ -94,13 +101,13 @@ class Geom::Vector2d
   #
   # @example
   #   vector = Geom::Vector2d.new(1, 2)
-  #   # retrieves the y value of 2
+  #   # Retrieves the y value of 2
   #   yvalue = vector[1]
   #
   # @param [Integer] index
   #   The index into an array of two coordinates.
   #
-  # @return [Numeric] The value for the x or y coordinate.
+  # @return [Float] The value for the x or y coordinate.
   #
   # @version LayOut 2018
   def [](index)
@@ -110,17 +117,17 @@ class Geom::Vector2d
   # specific index of the value.
   #
   # @example
-  #   point = Geom::Vector2d.new(1,2)
-  #   point[1] = 4
+  #   vector = Geom::Vector2d.new(1, 2)
+  #   vector[1] = 4
   #
-  # @param [Numeric] index
+  # @param [Integer] index
   #   The index for a specific x or y value in the
   #   {Geom::Vector2d} to set
   #
-  # @param [Numeric] value
+  # @param [Float] value
   #   The value to set for x or y
   #
-  # @return [Numeric] The new x or y value if successful
+  # @return [Float] The new x or y value if successful
   #
   # @version LayOut 2018
   def []=(index, value)
@@ -130,14 +137,14 @@ class Geom::Vector2d
   # the {Geom::Vector2d} and another {Geom::Vector2d}.
   #
   # @example
-  #   vector = Geom::Vector2d.new(1, 0)
+  #   vector1 = Geom::Vector2d.new(1, 0)
   #   vector2 = Geom::Vector2d.new(-1, 0)
-  #   # returns PI
-  #   angle = vector.angle_between(vector2)
+  #   # Returns PI
+  #   angle = vector1.angle_between(vector2)
   #
-  # @param [Geom::Vector2d] vector
+  # @param [Geom::Vector2d, Array(Float, Float)] vector
   #
-  # @return [Numeric] The angle (in radians)
+  # @return [Float] The angle (in radians)
   #
   # @version LayOut 2018
   def angle_between(vector)
@@ -148,7 +155,7 @@ class Geom::Vector2d
   #
   # @example
   #   vector = Geom::Vector2d.new(1, 0)
-  #   vector2 = vector.clone
+  #   new_vector = vector.clone
   #
   # @return [Geom::Vector2d]
   #
@@ -156,35 +163,43 @@ class Geom::Vector2d
   def clone
   end
 
-  # The {#*} method returns the cross product between two {Geom::Vector2d}. This
-  # is an alias of the cross method.
+  # The {#cross} method returns the cross product between two {Geom::Vector2d}s.
+  #
+  # The cross product, also called the vector product, is an operation on two
+  # vectors. The cross product of two vectors produces a third vector which is
+  # perpendicular to the plane in which the first two lie.
   #
   # @example
-  #   vector = Geom::Vector2d.new(1, 0)
-  #   vector2 = Geom::Vector2d.new(0, 1)
-  #   cross = vector * vector
+  #   vector1 = Geom::Vector2d.new(3, 3)
+  #   vector2 = Geom::Vector2d.new(2, 5)
+  #   # The result is 9
+  #   cross = vector1.cross(vector2)
   #
-  # @param [Geom::Vector2d] vector
+  # @param [Geom::Vector2d, Array(Float, Float)] vector
   #
-  # @return [Geom::Vector2d]
+  # @return [Float]
+  #
+  # @see #*
   #
   # @version LayOut 2018
   def cross(vector)
   end
 
-  # The {#%} method returns the dot product between two {Geom::Vector2d}. This is
-  # an alias of the dot method.
+  # The {#dot} method is used to compute the dot product between two vectors.
   #
   # @example
-  #   vector = Geom::Vector2d.new(0, 2)
-  #   vector2 = Geom::Vector2d.new(1, 0)
-  #   d2 = vector % vector2
+  #   vector1 = Geom::Vector2d.new(4, 1)
+  #   # The result is 14
+  #   vector2 = Geom::Vector2d.new(3, 2)
+  #   dot = vector1.dot(vector2)
   #
-  # @param [Geom::Vector2d] vector
+  # @param [Geom::Vector2d, Array(Float, Float)] vector
   #
-  # @return The dot product of the vectors
+  # @return [Float]
   #
-  # @version LayOut 2018
+  # @see #%
+  #
+  # @version SketchUp 6.0
   def dot(vector)
   end
 
@@ -192,7 +207,9 @@ class Geom::Vector2d
   #
   # @example
   #   # A vector that runs along the X axis.
-  #   vector = Geom::Vector2d.new(1, 0)
+  #   vector1 = Geom::Vector2d.new(1, 0)
+  #
+  #   vector2 = Geom::Vector2d.new([5, 6])
   #
   # @overload initialize
   #
@@ -200,13 +217,13 @@ class Geom::Vector2d
   #
   # @overload initialize(x, y)
   #
-  #   @param [Numeric] x The length in the x direction
-  #   @param [Numeric] y The length in the y direction
+  #   @param [Float] x The length in the x direction
+  #   @param [Float] y The length in the y direction
   #   @return [Geom::Vector2d]
   #
   # @overload initialize(vector)
   #
-  #   @param [Geom::Vector2d, Array(Numeric, Numeric)] vector
+  #   @param [Geom::Vector2d, Array(Float, Float)] vector
   #   @return [Geom::Vector2d]
   #
   # @version LayOut 2018
@@ -216,8 +233,8 @@ class Geom::Vector2d
   # The {#inspect} method formats the {Geom::Vector2d} as a string.
   #
   # @example
-  #   point = Geom::Point2d.new(1, 2)
-  #   string = point.inspect
+  #   vector = Geom::Vector2d.new(1, 2)
+  #   string = vector.inspect
   #
   # @return [String] the string representation of the {Geom::Vector2d}
   #
@@ -229,8 +246,8 @@ class Geom::Vector2d
   #
   # @example
   #   vector = Geom::Vector2d.new(0, 4)
-  #   # returns 4
-  #   l = vector.length
+  #   # The result is 4
+  #   length = vector.length
   #
   # @return [Length] The length of the {Geom::Vector2d}
   #
@@ -243,13 +260,12 @@ class Geom::Vector2d
   #
   # @example
   #   vector = Geom::Vector2d.new(0, 4)
-  #   l = vector.length
   #   vector.length = 2
   #
-  # @param [Numeric] length
+  # @param [Float] length
   #   The new length for the {Geom::Vector2d}
   #
-  # @return [Numeric] The new length
+  # @return [Length] The new length
   #
   # @version LayOut 2018
   def length=(length)
@@ -260,8 +276,8 @@ class Geom::Vector2d
   #
   # @example
   #   vector = Geom::Vector2d.new(0, 4)
-  #   # returns a new Vector2d(0, 1)
-  #   vector2 = vector.normalize
+  #   # The result is a Vector2d(0, 1)
+  #   new_vector = vector.normalize
   #
   # @return [Geom::Vector2d]
   #
@@ -270,27 +286,27 @@ class Geom::Vector2d
   end
 
   # The {#normalize!} method converts a {Geom::Vector2d} vector into a unit
-  # vector. Another way to do this is vector.length = 1
+  # vector. Another way to do this is +vector.length = 1.0+
   #
   # @example
   #   vector = Geom::Vector2d.new(0, 4)
-  #   # modifies vector to be the Vector2d(0, 1)
+  #   # Modifies vector to be the Vector2d(0, 1)
   #   vector.normalize!
   #
   # @version LayOut 2018
   def normalize!
   end
 
-  # The {#parallel?} method determines if the {Geom::Vector2d} is parallel to
-  # another {Geom::Vector2d} to within tolerance.
+  # The {#parallel?} method determines if two {Geom::Vector2d}s are parallel within a
+  # tolerance. Two vectors are parallel if there exists a scalar multiple between them.
   #
   # @example
-  #   vector = Geom::Vector2d.new(0, 1)
-  #   vector2 = Geom::Vector2d.new(1, 2)
-  #   # returns true
-  #   status = vector.parallel?(vector2)
+  #   vector1 = Geom::Vector2d.new(0, 1)
+  #   vector2 = Geom::Vector2d.new(0, -9)
+  #   # Returns true
+  #   status = vector1.parallel?(vector2)
   #
-  # @param [Geom::Vector2d] vector
+  # @param [Geom::Vector2d, Array(Float, Float)] vector
   #
   # @return [Boolean]
   #
@@ -298,16 +314,17 @@ class Geom::Vector2d
   def parallel?(vector)
   end
 
-  # The {#perpendicular?} method determines if the {Geom::Vector2d} is
-  # perpendicular to another {Geom::Vector2d} to within tolerance.
+  # The {#perpendicular?} method determines if two {Geom::Vector2d}s are
+  # perpendicular within a tolerance. Two vectors are considered
+  # perpendicular if their dot product is zero.
   #
   # @example
-  #   vector = Geom::Vector2d.new(0, 1)
-  #   vector2 = Geom::Vector2d.new(1, 2)
-  #   # returns false
-  #   status = vector.perpendicular?(vector2)
+  #   vector1 = Geom::Vector2d.new(0, 5)
+  #   vector2 = Geom::Vector2d.new(1, 0)
+  #   # Returns true
+  #   status = vector1.perpendicular?(vector2)
   #
-  # @param [Geom::Vector2d] vector
+  # @param [Geom::Vector2d, Array(Float, Float)] vector
   #
   # @return [Boolean]
   #
@@ -320,8 +337,8 @@ class Geom::Vector2d
   #
   # @example
   #   vector = Geom::Vector2d.new(1, 2)
-  #   # returns the Vector2d(-1, -2)
-  #   vector2 = vector.reverse
+  #   # The result is a Vector2d(-1, -2)
+  #   new_vector = vector.reverse
   #
   # @return [Geom::Vector2d]
   #
@@ -333,7 +350,7 @@ class Geom::Vector2d
   #
   # @example
   #   vector = Geom::Vector2d.new(1, 2)
-  #   # modifies vector to be the Vector2d(-1, -2)
+  #   # Modifies vector to be the Vector2d(-1, -2)
   #   vector.reverse!
   #
   # @version LayOut 2018
@@ -344,12 +361,17 @@ class Geom::Vector2d
   # to and in the same direction as another {Geom::Vector2d} within tolerance.
   #
   # @example
-  #   vector = Geom::Vector2d.new(0, 1)
+  #   vector1 = Geom::Vector2d.new(0, 1)
   #   vector2 = Geom::Vector2d.new(1, 2)
-  #   # returns true
-  #   status = vector.sime_direction?(vector2)
+  #   # Returns false
+  #   status = vector1.same_direction?(vector2)
   #
-  # @param [Geom::Vector2d] vector
+  # @example
+  #   vector = Geom::Vector2d.new(0, 2)
+  #   # Returns true
+  #   status = vector.same_direction?([0, 4])
+  #
+  # @param [Geom::Vector2d, Array(Float, Float)] vector
   #
   # @return [Boolean]
   #
@@ -365,13 +387,13 @@ class Geom::Vector2d
   #
   # @overload set!(vector)
   #
-  #   @param [Geom::Vector2d, Array(Numeric, Numeric)] vector
+  #   @param [Geom::Vector2d, Array(Float, Float)] vector
   #   @return [Geom::Vector2d]
   #
   # @overload set!(x, y)
   #
-  #   @param [Numeric] x
-  #   @param [Numeric] y
+  #   @param [Float] x
+  #   @param [Float] y
   #   @return [Geom::Vector2d]
   #
   # @version LayOut 2018
@@ -382,9 +404,10 @@ class Geom::Vector2d
   # Array.
   #
   # @example
-  #   a = vector.to_a
+  #   vector = Geom::Vector2d.new(1, 2)
+  #   array = vector.to_a
   #
-  # @return [Array(Numeric, Numeric)]
+  # @return [Array(Float, Float)]
   #
   # @version LayOut 2018
   def to_a
@@ -393,8 +416,8 @@ class Geom::Vector2d
   # The {#to_s} method returns a string representation of the {Geom::Vector2d}.
   #
   # @example
-  #   point = Geom::Vector2d.new(1, 2)
-  #   str = point.to_s
+  #   vector = Geom::Vector2d.new(1, 2)
+  #   string = vector.to_s
   #
   # @return [String] the string representation of the {Geom::Vector2d}
   #
@@ -406,10 +429,11 @@ class Geom::Vector2d
   # vector. The original vector is unchanged by this method.
   #
   # @example
-  #   vector = Geom::Vector2d.new(4, 5)
-  #   transformation = Geom::Transformation2d.new([1, 0, 0, 1, 2, 3])
-  #   # vector2 will be (6, 8)
-  #   vector2 = vector.transform(transformation)
+  #   vector = Geom::Vector2d.new(3, 2)
+  #   point = Geom::Point2d.new(0, 1)
+  #   transformation = Geom::Transformation2d.scaling(point, 2)
+  #   # The result is a Vector2d(6, 4)
+  #   new_vector = vector.transform(transformation)
   #
   # @param [Geom::Transformation2d] transform
   #   A transformation object to apply to the vector.
@@ -425,8 +449,9 @@ class Geom::Vector2d
   #
   # @example
   #   vector = Geom::Vector2d.new(4, 5)
-  #   transformation = Geom::Transformation2d.new([1, 0, 0, 1, 2, 3])
-  #   # vector will be (6, 8)
+  #   point = Geom::Point2d.new(8, 9)
+  #   transformation = Geom::Transformation2d.scaling(point, 3)
+  #   # The result is a Vector2d(12, 15)
   #   vector.transform!(transformation)
   #
   # @param [Geom::Transformation2d] transform
@@ -443,8 +468,8 @@ class Geom::Vector2d
   #
   # @example
   #   vector = Geom::Vector2d.new(1, 0)
-  #   # returns true
-  #   status = vector.unit_vector
+  #   # Returns true
+  #   status = vector.unit_vector?
   #
   # @return [Boolean]
   #
@@ -457,7 +482,7 @@ class Geom::Vector2d
   #
   # @example
   #   vector = Geom::Vector2d.new(0, 4)
-  #   status = vector.valid
+  #   status = vector.valid?
   #
   # @return [Boolean]
   #
@@ -471,7 +496,7 @@ class Geom::Vector2d
   #   vector = Geom::Vector2d.new(1, 2)
   #   x = vector.x
   #
-  # @return [Numeric]
+  # @return [Float]
   #
   # @version LayOut 2018
   def x
@@ -483,10 +508,10 @@ class Geom::Vector2d
   #   vector = Geom::Vector2d.new(1, 2)
   #   vector.x = 7
   #
-  # @param [Numeric] x
+  # @param [Float] x
   #   The desired x value of the {Geom::Vector2d}
   #
-  # @return [Numeric] The new x value of the {Geom::Vector2d}
+  # @return [Float] The new x value of the {Geom::Vector2d}
   #
   # @version LayOut 2018
   def x=(x)
@@ -498,7 +523,7 @@ class Geom::Vector2d
   #   vector = Geom::Vector2d.new(1, 2)
   #   y = vector.y
   #
-  # @return [Numeric]
+  # @return [Float]
   #
   # @version LayOut 2018
   def y
@@ -510,10 +535,10 @@ class Geom::Vector2d
   #   vector = Geom::Vector2d.new(1, 2)
   #   vector.y = 7
   #
-  # @param [Numeric] y
+  # @param [Float] y
   #   The desired y value of the {Geom::Vector2d}
   #
-  # @return [Numeric] The new y value of the {Geom::Vector2d}
+  # @return [Float] The new y value of the {Geom::Vector2d}
   #
   # @version LayOut 2018
   def y=(y)

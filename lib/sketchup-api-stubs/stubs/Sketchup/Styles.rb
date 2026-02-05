@@ -1,8 +1,15 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Styles class contains methods for manipulating a collection of styles in
 # a model. Typically, you will access this via the active_model:
+#
+# There are two objects of this class that play important roles: the {#selected_style} and the
+# {#active_style}.
+#
+# The latter is a temporary copy made from the {#selected_style} that allows the user to edit
+# the style without committing to save anything. To save the changes, one should use
+# {#update_selected_style}.
 #
 # @example
 #   styles = Sketchup.active_model.styles
@@ -71,21 +78,33 @@ class Sketchup::Styles < Sketchup::Entity
   # The {#add_style} method is used to create and load a style from the given
   # file.
   #
-  # @example
+  # @example For SketchUp 2025.0 and older
   #   filename = File.expand_path('./MyStyle.style')
   #   styles = Sketchup.active_model.styles
   #   status = styles.add_style(filename, true)
   #
-  # @param [String] filename
+  # @example For SketchUp 2026.0 and newer
+  #   filename = File.expand_path('./MyStyle.style')
+  #   styles = Sketchup.active_model.styles
+  #   style = styles.add_style(filename, true)
   #
-  # @param [Boolean] select
-  #   +true+ if you want to set the style to be the
-  #   active style.
+  # @overload add_style(filename, select)
   #
-  # @return [Boolean]
+  #   @note Signature for versions prior to SketchUp 2026.0.
+  #   @version SketchUp 6.0
+  #   @param [String] filename The file path to the style file.
+  #   @param [Boolean] select +true+ if you want to set the style to be the active style.
+  #   @return [Boolean]
   #
-  # @version SketchUp 6.0
-  def add_style(filename, select)
+  # @overload add_style(filename, select = false)
+  #
+  #   @version SketchUp 2026.0
+  #   @param [String] filename The file path to the style file.
+  #   @param [Boolean] select +true+ if you want to set the style to be the active style.
+  #
+  # @return [Sketchup::Style, nil] The newly created style or +nil+ if the the style could not be
+  #   added.
+  def add_style(*args)
   end
 
   #
@@ -151,10 +170,30 @@ class Sketchup::Styles < Sketchup::Entity
   #   styles = Sketchup.active_model.styles
   #   styles.purge_unused
   #
-  # @return [true]
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def purge_unused
+  end
+
+  # The {#remove_style} method is used to remove a {Sketchup::Style} from the {Sketchup::Styles}.
+  #
+  # @example
+  #   filename = File.expand_path('./MyStyle.style')
+  #   styles = Sketchup.active_model.styles
+  #   status = styles.add_style(filename, true)
+  #   styles.remove(styles.first)
+  #
+  # @param [Sketchup::Style] style
+  #
+  # @raise [ArgumentError] If the style is not found in the Styles collection.
+  #
+  # @raise [ArgumentError] If the styles contains only one style.
+  #
+  # @return [nil]
+  #
+  # @version SketchUp 2026.0
+  def remove_style(style)
   end
 
   # The {#selected_style} method is used to retrieve the style currently
@@ -172,13 +211,20 @@ class Sketchup::Styles < Sketchup::Entity
 
   # The {#selected_style=} method is used to set the currently selected style.
   #
+  # @bug Prior to SketchUp 2025.0 setting the {#selected_style=} to the {#active_style} would chrash
+  #   SketchUp.
+  #
   # @example
   #   styles = Sketchup.active_model.styles
-  #   styles.selected_style = styles.last
+  #   filename = File.expand_path('./MyStyle.style')
+  #   styles.add_style(filename, true)
+  #   styles.selected_style = styles['[MyStyle]']
   #
   # @param [Sketchup::Style] style
   #
-  # @return [false]
+  # @raise [ArgumentError] If \p style is the {#active_style}.
+  #
+  # @return [nil]
   #
   # @version SketchUp 6.0
   def selected_style=(style)
@@ -206,7 +252,7 @@ class Sketchup::Styles < Sketchup::Entity
   #   styles = Sketchup.active_model.styles
   #   styles.update_selected_style
   #
-  # @return [true]
+  # @return [nil]
   #
   # @see #selected_style
   #

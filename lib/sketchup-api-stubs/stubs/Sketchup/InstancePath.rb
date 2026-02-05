@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Sketchup::InstancePath} class represent the instance path to a given
@@ -152,7 +152,8 @@ class Sketchup::InstancePath
   #
   # @raise [TypeError] if the instance path refer to deleted entities.
   #
-  # @return [Sketchup::Entity]
+  # @return [Sketchup::Entity, nil] Nil if the last item of the instance path is a group or
+  #   component, otherwise {Sketchup::Entity}.
   #
   # @version SketchUp 2017
   def leaf
@@ -212,7 +213,7 @@ class Sketchup::InstancePath
   #
   # @raise [TypeError] if the instance path refer to deleted entities.
   #
-  # @return [Sketchup::Group, Sketchup::ComponentInstance, nil]
+  # @return [Sketchup::Group, Sketchup::ComponentInstance, Sketchup::Image, nil]
   #
   # @version SketchUp 2017
   def root

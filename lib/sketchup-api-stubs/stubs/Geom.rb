@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Geom module defines a number of Module methods that let you perform
@@ -73,12 +73,12 @@ module Geom
   #   @param [Geom::Point3d] point1
   #   @param [Geom::Point3d] point2
   #   @param [Geom::Point3d] point3
-  #   @return [Array(Geom::Point3d, Geom::Vector3d)] A plane
+  #   @return [Array(Float, Float, Float, Float)] A plane
   #
   # @overload fit_plane_to_points(points)
   #
   #   @param [Array<Geom::Point3d>] points
-  #   @return [Array(Geom::Point3d, Geom::Vector3d)] A plane
+  #   @return [Array(Float, Float, Float, Float)] A plane
   #
   # @version SketchUp 6.0
   def self.fit_plane_to_points(*args)
@@ -125,7 +125,7 @@ module Geom
   #
   # @param [Array(Geom::Point3d, Geom::Vector3d)] line
   #
-  # @param [Array(Geom::Point3d, Geom::Point3d)] plane
+  # @param [Array(Geom::Point3d, Geom::Vector3d)] plane
   #
   # @return [Geom::Point3d, nil] A Point3d object. Returns +nil+ if they do not
   #   intersect.
@@ -149,11 +149,11 @@ module Geom
   #   # This will return a line [Point3d(10, 20, 0), Vector3d(0, 0, 1)].
   #   line = Geom.intersect_plane_plane(plane1, plane2)
   #
-  # @param [Array(Geom::Point3d, Geom::Point3d)] plane1
+  # @param [Array(Geom::Point3d, Geom::Vector3d)] plane1
   #   The first plane to
   #   intersect
   #
-  # @param [Array(Geom::Point3d, Geom::Point3d)] plane2
+  # @param [Array(Geom::Point3d, Geom::Vector3d)] plane2
   #   The second plane to
   #   intersect
   #

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The +Sketchup::Licensing+ module contains methods for
@@ -25,7 +25,14 @@ module Sketchup::Licensing
 
   # Class Methods
 
-  # Acquires a license for a given extension.
+  # Gets a license for a given extension.
+  #
+  # Starting in SketchUp 2025.0, this method automatically tries to fetch a license from Extension
+  # Warehouse if the extension doesn't have a license on the current device. This only works if the
+  # user is signed in. In earlier SketchUp versions, the user has to go to Extension Manager, expand
+  # the extension in question and press Update License if the license is missing.
+  # (For performance reasons this automatic fetching is skipped during SU startup. Make sure to do a
+  # license check when the user interacts with the extension).
   #
   # @example
   #   ext_id = "4e215280-dd23-40c4-babb-b8a8dd29d5ee"
@@ -38,7 +45,7 @@ module Sketchup::Licensing
   #   The Extension Warehouse UUID for the desired extension.
   #
   # @return [Sketchup::Licensing::ExtensionLicense] An object representing
-  #   licensing state for the extension. Do not store this object, retrieve
+  #   licensing state for the extension. Do not store this object; retrieve
   #   it again when needed since licensing state may have changed.
   #
   # @version SketchUp 2015

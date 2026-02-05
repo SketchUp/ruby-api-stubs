@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The DimensionLinear class represents linear dimensions.
@@ -18,12 +18,12 @@ class Sketchup::DimensionLinear < Sketchup::Dimension
 
   # Instance Methods
 
-  # The aligned_text_position method returns the text position for dimensions
+  # The {#aligned_text_position} method returns the text position for dimensions
   # with aligned text (i.e. has_aligned_text? returns true).
   # Valid values are class constants:
-  # - DimensionLinear::ALIGNED_TEXT_ABOVE
-  # - DimensionLinear::ALIGNED_TEXT_CENTER
-  # - DimensionLinear::ALIGNED_TEXT_OUTSIDE
+  # - {Sketchup::DimensionLinear::ALIGNED_TEXT_ABOVE}
+  # - {Sketchup::DimensionLinear::ALIGNED_TEXT_CENTER}
+  # - {Sketchup::DimensionLinear::ALIGNED_TEXT_OUTSIDE}
   #
   # @example
   #   pos = dim.aligned_text_position
@@ -41,12 +41,12 @@ class Sketchup::DimensionLinear < Sketchup::Dimension
   def aligned_text_position
   end
 
-  # The aligned_text_position= method is used to set the text position for
+  # The {#aligned_text_position=} method is used to set the text position for
   # dimensions with aligned text (i.e. has_aligned_text? returns true).
   # Valid values are class constants:
-  # - DimensionLinear::ALIGNED_TEXT_ABOVE
-  # - DimensionLinear::ALIGNED_TEXT_CENTER
-  # - DimensionLinear::ALIGNED_TEXT_OUTSIDE
+  # - {Sketchup::DimensionLinear::ALIGNED_TEXT_ABOVE}
+  # - {Sketchup::DimensionLinear::ALIGNED_TEXT_CENTER}
+  # - {Sketchup::DimensionLinear::ALIGNED_TEXT_OUTSIDE}
   #
   # @example
   #   dim.aligned_text_position = Sketchup::DimensionLinear::ALIGNED_TEXT_CENTER
@@ -263,11 +263,11 @@ class Sketchup::DimensionLinear < Sketchup::Dimension
   def start_attached_to=(path)
   end
 
-  # The text_position method returns the position of the text along the dimension
+  # The {#text_position} method returns the position of the text along the dimension
   # line. Valid values are class constants:
-  # - DimensionLinear::TEXT_OUTSIDE_START
-  # - DimensionLinear::TEXT_CENTERED
-  # - DimensionLinear::TEXT_OUTSIDE_END
+  # - {Sketchup::DimensionLinear::TEXT_OUTSIDE_START}
+  # - {Sketchup::DimensionLinear::TEXT_CENTERED}
+  # - {Sketchup::DimensionLinear::TEXT_OUTSIDE_END}
   #
   # @example
   #   pos = dim.text_position
@@ -285,11 +285,11 @@ class Sketchup::DimensionLinear < Sketchup::Dimension
   def text_position
   end
 
-  # The text_position= method is used to set the position of the text along the
+  # The {#text_position=} method is used to set the position of the text along the
   # dimension line. Valid values are class constants:
-  # - DimensionLinear::TEXT_OUTSIDE_START
-  # - DimensionLinear::TEXT_CENTERED
-  # - DimensionLinear::TEXT_OUTSIDE_END
+  # - {Sketchup::DimensionLinear::TEXT_OUTSIDE_START}
+  # - {Sketchup::DimensionLinear::TEXT_CENTERED}
+  # - {Sketchup::DimensionLinear::TEXT_OUTSIDE_END}
   #
   # @example
   #   dim.text_position = Sketchup::DimensionLinear::TEXT_CENTERED

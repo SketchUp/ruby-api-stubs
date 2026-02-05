@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The set class represents a collection of unique objects. This class is useful
@@ -201,7 +201,6 @@ class Sketchup::Set
   #   set.insert('Hello')
   #   set.insert('World')
   #   my_array = set.to_a
-  #   UI.messagebox my_array
   #
   # @return array - The Array of the entities in the Set.
   #

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # Because length units are used so often in SketchUp, a special class has been
@@ -8,6 +8,8 @@
 # Internally, all lengths in SketchUp are stored in inches. The Length class
 # stores values in inches as well. A number of methods have been added to the
 # Ruby Numeric class to do units conversions.
+# {Find more info about units and lengths in this
+# article}[https://developer.sketchup.com/article-lengthsandunits].
 #
 # The setting for the Length Format and Length Unit can be retrieved from the
 # {Sketchup::Model#options} by querying the +"UnitsOptions"+
@@ -55,6 +57,12 @@
 #
 # @note Prior to SketchUp 2015, +Length+ used to be derived from +Float+. This
 #   is no longer the case.
+#
+# @note When serializing a Length object to a string to save for later use, e.g.
+#   in a config file, first convert them to Float objects. The string representation
+#   of a Length is rounded and uses the local decimal separator which can lead to
+#   data loss and portability issues. The string representation is intended for
+#   humans, not computers.
 #
 # @version SketchUp 6.0
 class Length < Float

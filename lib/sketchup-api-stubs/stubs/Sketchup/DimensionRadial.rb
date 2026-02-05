@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The DimensionRadial class represents radius and diameter dimensions on
@@ -37,7 +37,7 @@ class Sketchup::DimensionRadial < Sketchup::Dimension
   def arc_curve=(arc_curve)
   end
 
-  # The leader_break_point method returns the break point on the leader where the
+  # The {#leader_break_point} method returns the break point on the leader where the
   # dimension text is attached.
   #
   # @example
@@ -50,7 +50,7 @@ class Sketchup::DimensionRadial < Sketchup::Dimension
   def leader_break_point
   end
 
-  # The leader_break_point= method is used to set the break point on the leader
+  # The {#leader_break_point=} method is used to set the break point on the leader
   # where the dimension text is attached.
   #
   # @example

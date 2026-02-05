@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Geom::Point2d} class allows you to work with a point in 2D space.
@@ -10,14 +10,14 @@
 #
 # @example
 #   # No arguments, creates a point at the origin [0, 0]
-#   pt1 = Geom::Point2d.new
+#   point1 = Geom::Point2d.new
 #
 #   # Creates a point at x of 1, y of 2.
-#   pt2 = Geom::Point2d.new(1, 2)
+#   point2 = Geom::Point2d.new(1, 2)
 #
 #   # You can also create a point directly by simply assigning the x, and y
 #   # values to a variable as an array:
-#   pt3 = [1, 2]
+#   point3 = [1, 2]
 #
 # @version LayOut 2018
 class Geom::Point2d
@@ -28,10 +28,16 @@ class Geom::Point2d
   # {Geom::Point2d}, or to set the values of the {Geom::Point2d} by adding a
   # {Geom::Vector2d} to the {Geom::Point2d}.
   #
-  # @example
-  #   pt = [1, 1]
-  #   # the result is a Point2d(2, 3)
-  #   pt2 = pt + [1, 2]
+  # @example Translate Point2d with Vector2d
+  #   point = Geom::Point2d.new(1, 1)
+  #   vector = Geom::Vector2d.new(1, 2)
+  #   # The result is a Point2d(2, 3)
+  #   new_point = point + vector
+  #
+  # @example Translate Point2d with vector in Array form
+  #   point = Geom::Point2d.new(1, 1)
+  #   # The result is a Point2d(2, 3)
+  #   new_point = point + [1, 2]
   #
   # @param [Geom::Vector2d, Array(Numeric, Numeric)] vector
   #
@@ -44,23 +50,37 @@ class Geom::Point2d
   # The {#-} operator is a simple way to subtract from the current x and y values
   # of the {Geom::Point2d}.
   #
-  # @example
-  #   vec = Geom::Vector2d.new(1, 2)
-  #   # result is a Point2d(3, 0)
-  #   pt = [4, 2] - vec
-  #   # result is a Vector2d(1, 2)
-  #   vec2 = [4, 2] - pt
+  # @example Translate Point2d by vector in Array form
+  #   point = Geom::Point2d.new(4, 2)
+  #   # The result is a Vector2d(3, 0)
+  #   vector = point - [1, 2]
   #
-  # @overload -(vector)
+  # @example Calculate the Vector2d between two Point2d
+  #   point1 = Geom::Point2d.new(4, 2)
+  #   point2 = Geom::Point2d.new(1, 2)
+  #   # The result is a Vector2d(3, 0)
+  #   vector = point1 - point2
   #
-  #   @param [Geom::Vector2d, Array(Numeric, Numeric)] vector
-  #   @return [Geom::Point2d]
+  # @example Translate Point2d with Vector2d
+  #   point = Geom::Point2d.new(4, 2)
+  #   vector = Geom::Vector2d.new(3, 0)
+  #   # The result is a Point2d(1, 2)
+  #   new_point = point - vector
   #
-  # @overload -(point)
+  # @overload -(array2d)
+  #
+  #   @param [Array(Numeric, Numeric)] array2d
+  #   @return [Geom::Vector2d]
+  #
+  # @overload -(point2d)
   #
   #   @param [Geom::Point2d] point2d
-  #   @return [Geom::Vector2d] a vector indicating the difference between the two
-  #       points
+  #   @return [Geom::Vector2d]
+  #
+  # @overload -(vector2d)
+  #
+  #   @param [Geom::Vector2d] vector2d
+  #   @return [Geom::Point2d]
   #
   # @version LayOut 2018
   def -(arg)
@@ -72,6 +92,7 @@ class Geom::Point2d
   # @example
   #   point1 = Geom::Point2d.new(1, 1)
   #   point2 = Geom::Point2d.new(0, 1)
+  #   # Return false
   #   status = point1 == point2
   #
   # @param [Geom::Point2d, Array(Numeric, Numeric)] point
@@ -88,7 +109,7 @@ class Geom::Point2d
   # @example
   #   point = Geom::Point2d.new(1, 2)
   #
-  #   # returns the y value of 2
+  #   # Returns the y value of 2
   #   yvalue = point[1]
   #
   # @param [Integer] index
@@ -126,7 +147,7 @@ class Geom::Point2d
   #
   # @example
   #   point = Geom::Point2d.new(1, 2)
-  #   newpoint = point.clone
+  #   new_point = point.clone
   #
   # @return [Geom::Point2d] the cloned {Geom::Point2d} object
   #
@@ -140,7 +161,7 @@ class Geom::Point2d
   # @example
   #   point1 = Geom::Point2d.new(1, 1)
   #   point2 = Geom::Point2d.new(1, 4)
-  #   # result is a value of 3
+  #   # The result is 3
   #   distance = point1.distance(point2)
   #
   # @param [Geom::Point2d, Array(Numeric, Numeric)] point
@@ -155,14 +176,14 @@ class Geom::Point2d
   #
   # @example
   #   # No arguments, creates a point at the origin [0, 0]
-  #   pt1 = Geom::Point2d.new
+  #   point1 = Geom::Point2d.new
   #
   #   # Creates a point at x of 1 and y of 2.
-  #   pt2 = Geom::Point2d.new(1, 2)
+  #   point2 = Geom::Point2d.new(1, 2)
   #
   #   # You can also create a point directly by simply assigning the x and y
   #   # values to a variable as an array:
-  #   pt3 = [1, 2]
+  #   point3 = [1, 2]
   #
   # @overload initialize
   #
@@ -201,8 +222,8 @@ class Geom::Point2d
   # @example
   #   point = Geom::Point2d.new
   #   vector = Geom::Vector2d.new(0, 2)
-  #   # result is a Point2d(0, 1)
-  #   point2 = point1.offset(vector, 1)
+  #   # The result is a Point2d(0, 1)
+  #   new_point = point.offset(vector, 1)
   #
   # @overload offset(vector)
   #
@@ -226,8 +247,8 @@ class Geom::Point2d
   # @example
   #   point = Geom::Point2d.new
   #   vector = Geom::Vector2d.new(0, 2)
-  #   # result is a Point2d(0, 1)
-  #   point1.offset!(vector, 1)
+  #   # The result is a Point2d(0, 1)
+  #   point.offset!(vector, 1)
   #
   # @overload offset!(vector)
   #
@@ -270,6 +291,8 @@ class Geom::Point2d
   # @example
   #   point = Geom::Point2d.new(1, 2)
   #   array = point.to_a
+  #   # The result is [1, 2]
+  #   p array
   #
   # @return [Array(Numeric, Numeric)] an array of two numbers representing x, y
   #   of the {Geom::Point2d}
@@ -282,7 +305,7 @@ class Geom::Point2d
   #
   # @example
   #   point = Geom::Point2d.new(1, 2)
-  #   str = point.to_s
+  #   string = point.to_s
   #
   # @return [String]
   #
@@ -296,8 +319,8 @@ class Geom::Point2d
   # @example
   #   point = Geom::Point2d.new(4, 5)
   #   transformation = Geom::Transformation2d.new([1, 0, 0, 1, 2, 3])
-  #   # pt will be (6, 8)
-  #   pt = point.transform(transformation)
+  #   # The result is a Point2d(6, 8)
+  #   transformed_point = point.transform(transformation)
   #
   # @param [Geom::Transformation2d] transform
   #   A Transformation object to apply to the point.
@@ -314,7 +337,7 @@ class Geom::Point2d
   # @example
   #   point = Geom::Point2d.new(4, 5)
   #   transformation = Geom::Transformation2d.new([1, 0, 0, 1, 2, 3])
-  #   # point will be (6, 8)
+  #   # The result is a Point2d(6, 8)
   #   point.transform!(transformation)
   #
   # @param [Geom::Transformation2d] transform
@@ -329,13 +352,13 @@ class Geom::Point2d
   # The {#vector_to} method returns the vector between points.
   #
   # @example
-  #   pt1 = Geom::Point2d.new(1, 1)
-  #   pt2 = Geom::Point2d.new(3, 1)
+  #   point1 = Geom::Point2d.new(1, 1)
+  #   point2 = Geom::Point2d.new(3, 1)
   #
-  #   # result is a Vector2d(2, 0)
-  #   vec = pt1.vector_to(pt2) # is equivalent to (pt2 - pt1)
+  #   # The result is a Vector2d(2, 0)
+  #   vector = point1.vector_to(point2) # is equivalent to (point2 - point1)
   #
-  # @param [Geom::Point2d] point
+  # @param [Geom::Point2d, Array(Numeric, Numeric)] point
   #
   # @return [Geom::Vector2d]
   #

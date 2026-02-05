@@ -2,15 +2,25 @@
 
 # Extension Requirements
 
-SketchUp extensions are distributed as RBZ files. These are the specifications for creating a valid RBZ file that can be used by SketchUp or shared on the Extension Warehouse.
+These are the requirements for publishing an extension to Extension Warehouse, but we recommend you follow these wherever you may publish your extension. Ignoring these requirements comes with the risk of your extension malfunctioning or causing other extensions to malfunction.
 
 ## The Basics
 
 ### File Structure
 
-An RBZ file is a normal ZIP archive with the .rbz file extension. To create one, you can use the ZIP archive tool of your choice, including right clicking the target files and sending them to a ZIP archive, and then rename the file. You may need to change a system setting to display the file extension to be able to change it.
+SketchUp extensions are distributed as RBZ files. An RBZ file is a normal ZIP archive with the .rbz file extension. To create one, you can use the ZIP archive tool of your choice, including right clicking the target files and sending them to a ZIP archive, and then rename the file. You may need to change a system setting to display the file extension to be able to change it.
 
-The RBZ archive must contain exactly two items, a root RB file and a support folder by the same name (excluding the .rb extension). The root RB file contains the extension metadata. The support folder contains the main code.
+The RBZ archive must contain exactly two items, a root RB file and a support folder by the same name (excluding the .rb extension). The root RB file contains the extension metadata, such as name and author. The support folder contains the rest of the extension.
+
+*File Structure*
+
+```
+nn_cuber_maker.rbz
+├── nn_cuber_maker.rb (root RB file)
+└── nn_cuber_maker    (support folder containing everything else)
+    ├── main.rb
+    └── some_other_support_file.rb
+```
 
 *Root RB file*
 
@@ -19,11 +29,11 @@ The RBZ archive must contain exactly two items, a root RB file and a support fol
 
 module NameyNamesson
   module CubeMaker
-    EXTENSION = SketchupExtension.new("NN Cube Maker", "nn_cube_maker/main.rb")
+    EXTENSION = SketchupExtension.new("NN Cube Maker", "nn_cube_maker/main")
     EXTENSION.creator     = "Namey Namesson"
     EXTENSION.description = "Make cubes in just a few clicks."
     EXTENSION.version     = "1.0.0"
-    EXTENSION.copyright   = "2023 Name Namesson"
+    EXTENSION.copyright   = "2025 Name Namesson"
     Sketchup.register_extension(EXTENSION, true)
   end
 end
@@ -55,6 +65,33 @@ module NameyNamesson
 end
 ```
 
+### Requiring Files
+
+When requiring Ruby files within your extension, prefer the `Sketchup.require` method over Ruby's own `require` or `require_relative`.
+By default Extension Warehouse encrypts extensions, converting `.rb` files into `.rbe` files.
+By omitting the file extension, `Sketchup.require` will look for both `.rb`, `.rbe` and `.rbs` files.
+
+Hardcoding the `.rb` extension while also encrypting the extension leads to a load error.
+
+```ruby
+# Bad
+require "nn_cube_maker/some_other_file.rb"
+require_relative "some_other_file.rb"
+
+# Good
+Sketchup.require "nn_cube_maker/some_other_file"
+```
+
+The same applies to the path when creating the extension object.
+
+```ruby
+# Bad
+SketchupExtension.new("NN Cube Maker", "nn_cube_maker/main.rb")
+
+# Good
+SketchupExtension.new("NN Cube Maker", "nn_cube_maker/main")
+```
+
 ### Undo Stack
 
 When your extension makes several low level draw calls, join them together as one entry to the undo stack using the `start_operation` and `commit_operation` methods. If the user activates it as a single high level action, let them also undo it in a single step.
@@ -77,15 +114,42 @@ def draw_cube
 end
 ```
 
+## Functioning as Advertised
+
+Extensions will be rejected from Extension Warehouse if they malfunction or cannot be used.
+
 ### Global Variables
 
 Since SketchUp extensions run in a shared environment, global variables risk clashing between extensions and are not permitted. Instead use instance variables or class variables.
+
+### Printing to the Console
+
+Printing to the Ruby console can be useful for debugging. But if everyone does it, the console gets cluttered and you can't easily see what information comes from your extension and what comes from some other extension.
+
+Remove or disable `puts`, `print` and `p` before publishing your extension.
+
+```ruby
+# Bad
+puts "testing testing"
+
+# Good
+# (Not using puts)
+
+# Also good
+DEBUG_MODE = false
+puts "testing testing" if DEBUG_MODE
+```
 
 ### Dependency to Another Extension
 
 Ideally, avoid your extension depending on another extension. Prefer duplicating any shared logic between your extensions over publishing a "library extension", to make installation easier for end users. If your extension does require another extension to work, make sure to clearly state this in its documentation and also show an error message if the dependency is missing.
 
 ## The Nitty Gritty Stuff
+
+### Encryption
+
+Do not use the SketchUp Extension Signature Portal to encrypt an extension before submitting it to Extension Warehouse.
+Extension Warehouse by default applies this encryption after your extension is submitted.
 
 ### Monkey Patching the SketchUp Ruby API
 
@@ -112,6 +176,12 @@ These recommendations make it harder but not impossible to crack the extension. 
 ### And More…
 
 This is not a complete list of everything an extension can be denied for. See the below links for more details and use your good judgment when developing.
+
+## RuboCop
+
+[RuboCop-SketchUp](https://github.com/SketchUp/rubocop-sketchup) is a static code analyser helping you find issues with your code and conform to these requirements.
+
+RuboCop-SketchUp is used by the Extension Warehouse review team but you can use it yourself before submitting, to find issues earlier and save time.
 
 ## Further Reading
 

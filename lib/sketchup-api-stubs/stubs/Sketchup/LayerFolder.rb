@@ -1,9 +1,7 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # Allows layers to be organized in folders. Folders may have duplicate names.
-#
-# @api TagFolder
 #
 # @note As of SketchUp 2020 "Layers" were renamed to "Tags" in the UI.
 #   The API retains the use of "Layer" for compatibility and is synonymous with
@@ -20,8 +18,6 @@ class Sketchup::LayerFolder < Sketchup::Entity
 
   # The {#<=>} method is used to compare two layer folders based on their names.
   # This enables the Ruby +Array#sort+ method to sort SketchUp layer folders.
-  #
-  # @api TagFolder
   #
   # @example
   #   model = Sketchup.active_model
@@ -45,13 +41,11 @@ class Sketchup::LayerFolder < Sketchup::Entity
 
   # The {#==} method is used to determine if two layer folders are the same.
   #
-  # @api TagFolder
-  #
   # @example
   #   model = Sketchup.active_model
   #   layers = model.layers
-  #   folder1 = layers.add('Folder1')
-  #   folder2 = layers.add('Folder2')
+  #   folder1 = layers.add_folder('Folder1')
+  #   folder2 = layers.add_folder('Folder2')
   #   equal = folder1 == folder2
   #
   # @param [Object] other
@@ -63,8 +57,6 @@ class Sketchup::LayerFolder < Sketchup::Entity
   end
 
   # The {#add_folder} method adds or moves a layer folder.
-  #
-  # @api TagFolder
   #
   # @example
   #   manager = Sketchup.active_model.layers
@@ -95,8 +87,6 @@ class Sketchup::LayerFolder < Sketchup::Entity
 
   # The {#add_layer} method adds a layer to a folder.
   #
-  # @api TagFolder
-  #
   # @example
   #   manager = Sketchup.active_model.layers
   #   layer = manager.add_layer('Inner Doors')
@@ -119,8 +109,6 @@ class Sketchup::LayerFolder < Sketchup::Entity
   # The {#count_folders} method retrieves the number of child folders in the
   # folder.
   #
-  # @api TagFolder
-  #
   # @example
   #   layers = Sketchup.active_model.layers
   #   folder1 = layers.add_folder('Hello')
@@ -134,8 +122,6 @@ class Sketchup::LayerFolder < Sketchup::Entity
   end
 
   # The {#count_layers} method retrieves the number of layers in the folder.
-  #
-  # @api TagFolder
   #
   # @example
   #   layers = Sketchup.active_model.layers
@@ -159,8 +145,6 @@ class Sketchup::LayerFolder < Sketchup::Entity
   # The {#each_folder} method is used to iterate through the folders that are
   # direct children to the folder.
   #
-  # @api TagFolder
-  #
   # @example
   #   model = Sketchup.active_model
   #   layers = model.layers
@@ -178,8 +162,6 @@ class Sketchup::LayerFolder < Sketchup::Entity
 
   # The {#each_layer} method is used to iterate through the layers that are
   # direct children to the folder.
-  #
-  # @api TagFolder
   #
   # @example
   #   model = Sketchup.active_model
@@ -200,8 +182,6 @@ class Sketchup::LayerFolder < Sketchup::Entity
 
   # The {#folder} method is used to return the parent layer folder of a layer
   # folder.
-  #
-  # @api TagFolder
   #
   # @example
   #   model = Sketchup.active_model
@@ -224,8 +204,6 @@ class Sketchup::LayerFolder < Sketchup::Entity
   #
   # This will trigger +onLayerFolderRemoved+ followed by +onLayerFolderAdded+.
   #
-  # @api TagFolder
-  #
   # @example
   #   model = Sketchup.active_model
   #   layers = model.layers
@@ -244,8 +222,6 @@ class Sketchup::LayerFolder < Sketchup::Entity
 
   # The {#folders} returns the direct child-folders of the folder.
   #
-  # @api TagFolder
-  #
   # @example
   #   manager = Sketchup.active_model.layers
   #   folder1 = manager.add_folder('Doors')
@@ -259,8 +235,6 @@ class Sketchup::LayerFolder < Sketchup::Entity
   end
 
   # The {#layers} method retrieves the child layers of a folder.
-  #
-  # @api TagFolder
   #
   # @example
   #   manager = Sketchup.active_model.layers
@@ -278,8 +252,6 @@ class Sketchup::LayerFolder < Sketchup::Entity
 
   # The {#name} method gets the name of the folder.
   #
-  # @api TagFolder
-  #
   # @example
   #   manager = Sketchup.active_model.layers
   #   folder = manager.add_folder('Doors')
@@ -293,8 +265,6 @@ class Sketchup::LayerFolder < Sketchup::Entity
   alias_method :display_name, :name
 
   # The {#name=} method sets the name of the folder.
-  #
-  # @api TagFolder
   #
   # @example
   #   manager = Sketchup.active_model.layers
@@ -311,8 +281,6 @@ class Sketchup::LayerFolder < Sketchup::Entity
 
   # The {#remove_folder} method removes the folder from the model. All children
   # are preserved, but move up one level.
-  #
-  # @api TagFolder
   #
   # @example
   #   manager = Sketchup.active_model.layers
@@ -333,8 +301,6 @@ class Sketchup::LayerFolder < Sketchup::Entity
   # The {#remove_layer} method removes a layer from a folder. The layer will be
   # parent to the layer manager.
   #
-  # @api TagFolder
-  #
   # @example
   #   manager = Sketchup.active_model.layers
   #   layer = manager.add_layer('Inner Doors')
@@ -353,8 +319,6 @@ class Sketchup::LayerFolder < Sketchup::Entity
 
   # The {#visible=} method is used to set if the layer folder is visible.
   #
-  # @api TagFolder
-  #
   # @example
   #   model = Sketchup.active_model
   #   layers = model.layers
@@ -368,8 +332,6 @@ class Sketchup::LayerFolder < Sketchup::Entity
   end
 
   # The {#visible?} method is used to determine if the layer folder is visible.
-  #
-  # @api TagFolder
   #
   # @example
   #   model = Sketchup.active_model
@@ -385,8 +347,6 @@ class Sketchup::LayerFolder < Sketchup::Entity
 
   # The {#visible_on_new_pages=} method is used to set if the layer folder is by
   # default visible on new pages.
-  #
-  # @api TagFolder
   #
   # @example
   #   model = Sketchup.active_model
@@ -404,8 +364,6 @@ class Sketchup::LayerFolder < Sketchup::Entity
 
   # The {#visible_on_new_pages?} method is used to determine if the layer folder
   # is by default visible on new pages.
-  #
-  # @api TagFolder
   #
   # @example
   #   model = Sketchup.active_model

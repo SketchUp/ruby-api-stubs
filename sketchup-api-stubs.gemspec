@@ -1,7 +1,7 @@
 # coding: utf-8
 Gem::Specification.new do |spec|
   spec.name          = 'sketchup-api-stubs'
-  spec.version       = '0.7.10'
+  spec.version       = '0.7.11'
   spec.authors       = ['Trimble Inc, SketchUp Team']
 
   spec.summary       = %q{SketchUp Ruby API stubs.}
@@ -21,5 +21,4 @@ Gem::Specification.new do |spec|
   ])
   # spec.require_paths = ['Sketchup']
 
-  spec.add_development_dependency 'bundler', '>= 1.15.0', '< 3.0'
 end
