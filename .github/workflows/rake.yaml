@@ -27,8 +27,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ macos-12, windows-2022 ]
-        ruby: [ 2.7 ]
+        os: [ macos-latest, windows-latest ]
+        ruby: [ 3.2 ]
 
     steps:
       - name: Checkout source
