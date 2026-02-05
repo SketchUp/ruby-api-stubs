@@ -68,7 +68,7 @@ end
 ### Requiring Files
 
 When requiring Ruby files within your extension, prefer the `Sketchup.require` method over Ruby's own `require` or `require_relative`.
-By default Extension Warehouse encrypts extensions, convering `.rb` files into `.rbe` files.
+By default Extension Warehouse encrypts extensions, converting `.rb` files into `.rbe` files.
 By omitting the file extension, `Sketchup.require` will look for both `.rb`, `.rbe` and `.rbs` files.
 
 Hardcoding the `.rb` extension while also encrypting the extension leads to a load error.
@@ -116,7 +116,7 @@ end
 
 ## Functioning as Advertised
 
-Extensioins will be rejected from Extension Warehouse if they malfunction or cannot be used.
+Extensions will be rejected from Extension Warehouse if they malfunction or cannot be used.
 
 ### Global Variables
 
@@ -179,7 +179,7 @@ This is not a complete list of everything an extension can be denied for. See th
 
 ## RuboCop
 
-[RuboCop-SetchUp](https://github.com/SketchUp/rubocop-sketchup) is a static code analyser helping you find issues with your code and comform to these requirements.
+[RuboCop-SketchUp](https://github.com/SketchUp/rubocop-sketchup) is a static code analyser helping you find issues with your code and conform to these requirements.
 
 RuboCop-SketchUp is used by the Extension Warehouse review team but you can use it yourself before submitting, to find issues earlier and save time.
 

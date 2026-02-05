@@ -19,7 +19,8 @@ Though our adoption rate to the latest version is quite high, it can take time a
 
 Here are the build numbers for recent SketchUp releases. Note that build numbers in languages besides English are larger for each release, so it is best to check for builds that are greater than or equal to the numbers here.
 
-- **SU2026.0** = BUILD_NUMBER_WIN on Windows 64-bit, BUILD_NUMBER_MAC on Mac 64-bit.
+- **SU2026.1** = BUILD_NUMBER_WIN on Windows 64-bit, BUILD_NUMBER_MAC on Mac 64-bit.
+- **SU2026.0** = 26.0.429 on Windows 64-bit, 26.0.428 on Mac 64-bit.
 
 - **SU2025.0.3** = 25.0.660 on Windows 64-bit, 25.0.659 on Mac 64-bit.
 - **SU2025.0.2** = 25.0.634 on Windows 64-bit, 25.0.633 on Mac 64-bit.
@@ -83,16 +84,35 @@ Here are the build numbers for recent SketchUp releases. Note that build numbers
 
 - **SU6 M6** = 6.4.265 on Windows, 6.4.263 on Mac.
 
+# What's new in SketchUp 2026.1
+
+## Breaking changes
+
+## Ruby API Additions and Improvements
+
+* Added {UI.show_extension_warehouse} which opens the Extension Warehouse home when called without arguments, or navigates directly to a specific extension when given its extension identifier (UUID). 
+* Modified {Sketchup::ShadowInfo#[]=} to be stricter and provide better error feedback. It will now raise a `KeyError` for invalid or read-only keys, and a `TypeError` for values of an incorrect type.
+* Added built-in JavaScript callbacks `sketchup.launchEW(id)` and `sketchup.installRBZ(url)` for HtmlDialog. `launchEW` with a UUID string opens that extension's page. `installRBZ` downloads and installs the `.rbz` at the given URL.
+* Added {UI::HtmlDialog#hide} to hide dialogs without closing them, preserving their state.
+
+## Ruby API Bug Fixes
+
+* Fixed a regression in {Sketchup::Tool#onKeyDown} introduced in SketchUp 2026.0 (Windows) where the event didn't trigger when Return/Enter was pressed.
+* Fixed silent failures when passing non-invertible transformations (e.g. zero-scale transforms). The following methods now correctly raise an `ArgumentError`:
+  * {Sketchup::ComponentInstance#transform!}
+  * {Sketchup::Group#transform!}
+  * {Sketchup::Image#transform!}
+  * {Sketchup::Image#transformation=}
+  * {Sketchup::Entities#transform_entities}
+  * {Sketchup::Entities#add_instance}
+* Fixed {Layout::Entity#transform!} to raise an `ArgumentError` when given a non-invertible {Geom::Transformation2d}.
 
 # What's new in SketchUp 2026.0
 
 ## Breaking changes
 * Modifying the properties {Sketchup::Axes}, {Sketchup::Camera}, {Sketchup::RenderingOptions}, and {Sketchup::ShadowInfo} of a {Sketchup::Page} is now an undoable operation. Scene changes are expected to be called between {Sketchup::Model#start_operation} and {Sketchup::Model#commit_operation} to not flood the undo stack.
 Extensions that don't follow this requirement will be rejected for updates or publication to the Extension Warehouse.
-* Additional error checking is performed regarding non-invertible transforms (typically this means the matrix has zero scale on
-  one or more axes). Calling {Geom::Transformation#inverse} or
-  {Geom::Transformation#invert!} with a non-invertible transform will raise an `ArgumentError`. In addition, calling {Sketchup::ComponentInstance#transformation=},
-  {Sketchup::ComponentInstance#move!}, {Sketchup::Group#transformation=}, or {Sketchup::Group#move!} with a non-invertible transform as an argument will also raise an `ArgumentError`.
+* Additional error checking is performed regarding non-invertible transforms (typically this means the matrix has zero scale on one or more axes). Calling {Geom::Transformation#inverse} or {Geom::Transformation#invert!} with a non-invertible transform will raise an `ArgumentError`. In addition, calling {Sketchup::ComponentInstance#transformation=}, or {Sketchup::Group#transformation=} with a non-invertible transform  as an argument will also raise an `ArgumentError`.
 
 
 ## Ruby API Additions and Improvements
@@ -233,7 +253,7 @@ The version of OpenSSL in Ruby was updated to 3.3.1.
     * {Sketchup::View::CORNER_BOTTOM_LEFT}
     * {Sketchup::View::CORNER_BOTTOM_RIGHT}
 * Upgraded CEF (used by {UI::HtmlDialog}) to version 128.
-* Fixed issue of {Sketchup::Styles#selected_style=} for case where trying to set the the {Sketchup::Styles#selected_style=} to the {Sketchup::Styles#active_style}. 
+* Fixed issue of {Sketchup::Styles#selected_style=} for case where trying to set the the {Sketchup::Styles#selected_style=} to the {Sketchup::Styles#active_style}.
 
 ### Breaking Changes - Per Monitor DPI support
 

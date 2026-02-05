@@ -386,12 +386,17 @@ class Layout::Entity
   #   transform = Geom::Transformation2d.new([1.0, 0.0, 0.0, 1.0, 1.0, 1.0])
   #   entity = entities.first.transform!(transform)
   #
+  # @note Since LayOut 2026.1, passing a non-invertible transformation raises
+  #   an `ArgumentError`.
+  #
   # @param [Geom::Transformation2d] transformation
   #
   # @raise [LockedLayerError] if the {Layout::Entity} is on a locked
   #   {Layout::Layer}
   #
   # @raise [LockedEntityError] if the {Layout::Entity} is locked
+  #
+  # @raise [ArgumentError] if the transformation matrix is not invertible
   #
   # @version LayOut 2018
   def transform!(transformation)

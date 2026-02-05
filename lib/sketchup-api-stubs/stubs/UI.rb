@@ -621,6 +621,27 @@ module UI
   def self.show_extension_manager
   end
 
+  # Show the Extension Warehouse dialog inside SketchUp. If an extension UUID is provided
+  # the dialog navigates directly to that extension's page. If no UUID is provided it opens
+  # the Extension Warehouse home page.
+  #
+  # @example
+  #   # Open EW home
+  #   UI.show_extension_warehouse
+  #
+  # @example
+  #   # Open a specific extension by UUID (taken from the EW URL)
+  #   UI.show_extension_warehouse("a97d22f8-5968-4f43-bcf9-4f322fa7a8cb")
+  #
+  # @param [String, nil] extension_id
+  #   Optional Extension Warehouse UUID. If nil or omitted the EW home page is shown.
+  #
+  # @return [nil]
+  #
+  # @version SketchUp 2026.1
+  def self.show_extension_warehouse(extension_id = nil)
+  end
+
   # The {.show_inspector} method is used to display the inspector with the given
   # name. You can get the list of valid inspectors with UI.inspector_names.
   #

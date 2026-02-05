@@ -145,7 +145,7 @@ class Sketchup::Text < Sketchup::Drawingelement
   # @example
   #   leader = text.leader_type=1
   #
-  # @note {ALeaderModel} cannot be set. It is only used internally as a default value.
+  # @note {ALeaderNone} cannot be set. It is only used internally as a default value.
   #   Trying to set it will raise a warning.
   #
   # @param [Integer] type

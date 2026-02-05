@@ -978,6 +978,8 @@ class Sketchup::Model
   #   A 2-element array containing first the longitude then
   #   the latitude.
   #
+  # @return [Geom::Point3d] A Point3d in model coordinates.
+  #
   # @return [Geom::Point3d] a point3d object if successful, false if
   #   unsuccessful.
   #
@@ -1223,6 +1225,8 @@ class Sketchup::Model
   #
   # @param [Geom::Point3d] point
   #   A Point3d object.
+  #
+  # @return [Geom::Point3d] Point3d[longitude_deg, latitude_deg, altitude_m]
   #
   # @return [Geom::Point3d, Geom::LatLong] a LatLong or Point3d object. See
   #   details for information.

@@ -302,6 +302,10 @@ class Sketchup::Tool
   # V6: There is a bug on Windows where the typematic effect does
   # not work. Typematic effects work fine on a Mac.
   #
+  # @bug SketchUp 2026.0 (Windows) introduced a regression in {Sketchup::Tool#onKeyDown}
+  #   where the event didn't trigger when Return/Enter was pressed. This was fixed
+  #   in SketchUp 2026.1.
+  #
   # @example
   #   def onKeyDown(key, repeat, flags, view)
   #     puts "onKeyDown: key = #{key}"
@@ -834,6 +838,9 @@ class Sketchup::Tool
   # The {#onReturn} method is called by SketchUp when the user hit the Return key
   # to complete an operation in the tool. This method will rarely need to be
   # implemented.
+  #
+  # @bug SketchUp 2025.0 (Windows) introduced a regression where the event didn't
+  #   trigger when Return/Enter was pressed. This was fixed in SketchUp 2026.0.
   #
   # @example
   #   def onReturn(view)

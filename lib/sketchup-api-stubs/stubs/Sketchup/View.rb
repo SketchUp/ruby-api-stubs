@@ -1223,13 +1223,14 @@ class Sketchup::View
   #   @note Signature for versions prior to SketchUp 2025.0
   #   @version SketchUp 6.0
   #   @param [Geom::Point3d] model_point Model coordinate.
-  #   @return [Geom::Point3d] Screen coordinate in physical pixels.
   #
   # @overload screen_coords(model_point)
   #
   #   @version SketchUp 2025.0
   #   @param [Geom::Point3d] model_point Model coordinate.
-  #   @return [Geom::Point3d] Screen coordinate in logical pixels.
+  #
+  # @return [Geom::Point3d] Screen coordinate in pixels (physical prior to SketchUp 2025.0, logical
+  #   from 2025.0).
   #
   # @version SketchUp 6.0
   def screen_coords(model_point)

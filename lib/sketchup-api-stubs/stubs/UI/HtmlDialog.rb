@@ -34,6 +34,28 @@
 # [SketchUp 2017.0]
 #   CEF 52
 #
+# Starting with SketchUp 2026.1, HtmlDialog exposes a small set of built-in callbacks (mirroring
+# the legacy +skp:+ protocol used by {UI::WebDialog}).
+#
+# * +sketchup.launchEW(id)+  – Opens the Extension Warehouse dialog and show a specified
+#   extension's page.
+# * +sketchup.installRBZ(url)+ – Downloads and installs a Ruby extension
+#   from the given +.rbz+ URL. (User will be prompted just like using the
+#   Extension Manager.)
+#
+# @example
+#   html = <<-HTML
+#     <button onclick="sketchup.launchEW('b5825acd-ba7c-4544-b255-e9935ddfd63b')">
+#       Open Advanced Camera Tools in EW
+#     </button>
+#     <button onclick="sketchup.installRBZ('https://example.com/my_extension.rbz')">
+#       Install My Extension
+#     </button>
+#   HTML
+#   dlg = UI::HtmlDialog.new(dialog_title: 'EW Example')
+#   dlg.set_html(html)
+#   dlg.show
+#
 # @note The window size is not guaranteed to be pixel perfect in all SketchUp
 #   versions and operating systems. Prefer responsive designs that can take
 #   up some fluctuations in size.
@@ -222,6 +244,24 @@ class UI::HtmlDialog
   #
   # @version SketchUp 2021.1
   def get_size
+  end
+
+  # The {#hide} method is used to hide a dialog box without closing it.
+  # This preserves the dialog's state and allows it to be shown again later
+  # without recreating the dialog.
+  #
+  # @example
+  #   dialog.hide
+  #
+  # @note Modal dialogs cannot be hidden. Attempting to hide a modal dialog
+  #   will raise an ArgumentError.
+  #
+  # @raise [ArgumentError] if the dialog is modal
+  #
+  # @return [nil]
+  #
+  # @version SketchUp 2026.1
+  def hide
   end
 
   # The new method is used to create a new HtmlDialog.
