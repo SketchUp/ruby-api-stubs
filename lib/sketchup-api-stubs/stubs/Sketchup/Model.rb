@@ -235,7 +235,7 @@ class Sketchup::Model
   #
   # @return [Array<Sketchup::SectionPlane>]
   #
-  # @version Sketchup 2026.0
+  # @version SketchUp 2026.0
   def active_section_planes
   end
 
