@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Ruby WebDialog class allows you to create and interact with DHTML dialog
@@ -9,7 +9,7 @@
 # than inside a dialog in SketchUp.
 #
 # See this blog post for a detailed, step-by-step example:
-# http://sketchupapi.blogspot.com/2008/02/sharing-data-between-sketchup-ruby-and.html
+# https://sketchupapi.blogspot.com/2008/02/sharing-data-between-sketchup-ruby-and.html
 #
 # Under Windows the IE render mode is different in webdialogs than from what
 # you see in the normal browser. It will by default pick an older render mode
@@ -29,7 +29,7 @@
 # would like to direct the user to install that extension.
 #
 # For example, to launch an extension's page whose URL is:
-# http://extensions.sketchup.com/en/content/advanced-camera-tools
+# https://extensions.sketchup.com/en/content/advanced-camera-tools
 # The link would be:
 #
 # @deprecated Please use {UI::HtmlDialog} that was introduced in
@@ -180,7 +180,7 @@ class UI::WebDialog
   # @example
   #   dlg = UI::WebDialog.new("Show sketchup.com", true,
   #     "ShowSketchupDotCom", 739, 641, 150, 150, true);
-  #   dlg.set_url "http://www.sketchup.com"
+  #   dlg.set_url "https://www.sketchup.com"
   #   dlg.show
   #
   # @note Since SU2017 the position and size of the dialog is DPI aware - it will
@@ -385,7 +385,7 @@ class UI::WebDialog
   # method.
   #
   # @example
-  #   data = dialog.post_url("http://www.mydomain.com/formchecker.cgi",data)
+  #   data = dialog.post_url("https://www.mydomain.com/formchecker.cgi",data)
   #
   # @param [String] url
   #   The url to send the data.
@@ -482,6 +482,9 @@ class UI::WebDialog
   # @example
   #   dialog.set_on_close{ UI.messagebox("Closing the webDialog") }
   #
+  # @note {UI::WebDialog#close} method should not be called from the {UI::WebDialog#set_on_close}
+  #   callback. That would make it trigger itself recursively.
+  #
   # @return [nil]
   #
   # @version SketchUp 6.0
@@ -535,7 +538,7 @@ class UI::WebDialog
   # specific URL. This method allows you to load web sites in a webdialog.
   #
   # @example
-  #   dialog.set_url "http://www.sketchup.com"
+  #   dialog.set_url "https://www.sketchup.com"
   #
   # @param [String] url
   #   The URL for a specific web site.

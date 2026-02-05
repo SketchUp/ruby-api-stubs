@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This observer interface is implemented to react to changes in camera
@@ -75,7 +75,7 @@ class Sketchup::FrameChangeObserver
   #       if percent_done == 0.0
   #         puts "Animating to scene '#{to_scene.name}':"
   #       else
-  #         puts format("% 7.2f %",percent_done*100)
+  #         puts format("% 7.2f %%",percent_done*100)
   #       end
   #     end
   #   end

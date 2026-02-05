@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # An entity is an object shown on a page of a LayOut document.
@@ -34,6 +34,28 @@ class Layout::Entity
   def ==(other)
   end
 
+  # The {#attribute_dictionary} method returns a copy of the entity's attribute dictionary with the
+  # given name.
+  #
+  # no attribute dictionary
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   entity = doc.pages.first.entities.first
+  #   entity.set_attribute("jane_doe_doc_maker", "made_by_doc_maker", true)
+  #   attributes = entity.attribute_dictionary("jane_doe_doc_maker")
+  #   # Adding to this Layout::Dictionary does not apply to the entity's attribute dictionary, use
+  #   #Layout::Entity#set_attribute.
+  #   attributes.merge!(doc_id: 42)
+  #
+  # @param [String] name
+  #
+  # @return [Layout::Dictionary, nil] A copy of the entity's attribute dictionary, or nil if there is
+  #
+  # @version LayOut 2026.0
+  def attribute_dictionary(name)
+  end
+
   # The {#bounds} method returns the 2D rectangular bounds of the {Layout::Entity}.
   #
   # @example
@@ -45,6 +67,35 @@ class Layout::Entity
   #
   # @version LayOut 2018
   def bounds
+  end
+
+  # The {#delete_attribute} method is used to delete an attribute from an entity.
+  #
+  # @overload delete_attribute(dictionary_name)
+  #
+  #   @param [String] dictionary_name The name of an attribute dictionary.
+  #   @return [Boolean]
+  #
+  #   @example
+  #     doc = Layout::Document.open("C:/path/to/document.layout")
+  #     entity = doc.pages.first.entities.first
+  #     entity.set_attribute("jane_doe_doc_maker", "made_by_doc_maker", true)
+  #     entity.delete_attribute("jane_doe_doc_maker")
+  #
+  # @overload delete_attribute(dictionary_name, key)
+  #
+  #   @param [String] dictionary_name The name of an attribute dictionary.
+  #   @param [String] key An attribute key.
+  #   @return [Boolean]
+  #
+  #   @example
+  #     doc = Layout::Document.open("C:/path/to/document.layout")
+  #     entity = doc.pages.first.entities.first
+  #     entity.set_attribute("jane_doe_doc_maker", "made_by_doc_maker", true)
+  #     entity.delete_attribute("jane_doe_doc_maker", "made_by_doc_maker")
+  #
+  # @version LayOut 2026.0
+  def delete_attribute(*args)
   end
 
   # The {#document} method returns the {Layout::Document} that the
@@ -74,6 +125,38 @@ class Layout::Entity
   #
   # @version LayOut 2018
   def drawing_bounds
+  end
+
+  # The {#get_attribute} method is used to retrieve the value of an attribute in
+  # the entity's attribute dictionary.
+  #
+  # If the third parameter, +default_value+, is not passed and there is no
+  # attribute that matches the given name, it returns +nil+.
+  #
+  # If +default_value+ is provided and there is no matching attribute it returns
+  # the given value. It does not create an attribute with that name though.
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   entity = doc.pages.first.entities.first
+  #   # Read an attribute value from the entity. In this case this will return the
+  #   # default value provided: 42.
+  #   entity.get_attribute("jane_doe_doc_maker", "doc_id", 42)
+  #
+  # @param [String] name
+  #   The name of an attribute dictionary.
+  #
+  # @param [String] key
+  #   An attribute key.
+  #
+  # @param [String, Boolean, Integer, Float, Hash, Layout::Dictionary, nil] default_value
+  #   A default
+  #   value to return if no attribute is found.
+  #
+  # @return [String, Boolean, Integer, Float, Layout::Dictionary, nil] the retrieved value.
+  #
+  # @version LayOut 2026.0
+  def get_attribute(name, key, default_value = nil)
   end
 
   # The {#group} method returns the {Layout::Group} the {Layout::Entity} belongs
@@ -145,9 +228,12 @@ class Layout::Entity
   #
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")
-  #   entities = doc.pages.first.entities
-  #   new_group = Layout::Group.new
-  #   entities.first.move_to_group(new_group)
+  #   # We consider that there are two rectangle objects in the entities.
+  #   entities = doc.layers.first.layer_instance(doc.pages.first).entities
+  #   # We move the first rectangle to a new group.
+  #   group = Layout::Group.new([entities.first])
+  #   # We move the second rectangle to the same group.
+  #   entities[1].first.move_to_group(new_group)
   #
   # @param [Layout::Group] group
   #
@@ -244,6 +330,23 @@ class Layout::Entity
   #
   # @version LayOut 2018
   def page
+  end
+
+  # The {#set_attribute} method adds an attribute to the entity's attribute dictionary.
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   entity = doc.pages.first.entities.first
+  #   entity.set_attribute("jane_doe_doc_maker", "doc_id", 42)
+  #
+  # @param [String] name
+  #   The name of an attribute dictionary.
+  #   @param [String] key An attribute key.
+  #   @param [String, Boolean, Integer, Float, Hash, Layout::Dictionary, nil] value The value for the
+  #     attribute.
+  #
+  # @version LayOut 2026.0
+  def set_attribute(name, key, value)
   end
 
   # The {#style} method returns the {Layout::Style} of the {Layout::Entity}. If

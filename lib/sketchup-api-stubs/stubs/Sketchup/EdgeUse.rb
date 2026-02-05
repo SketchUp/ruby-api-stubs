@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The EdgeUse class defines how an Edge is used in the definition of a Face.
@@ -23,7 +23,7 @@ class Sketchup::EdgeUse < Sketchup::Entity
   #   edgeuse = edgeuses[0]
   #   edge = edgeuse.edge
   #
-  # @return edge - an Edge object used by this edge use
+  # @return [Sketchup::Edge] an Edge object used by this edge use
   #
   # @version SketchUp 6.0
   def edge
@@ -45,7 +45,7 @@ class Sketchup::EdgeUse < Sketchup::Entity
   #   edgeuse = edgeuses[0]
   #   vector3d = edgeuse.end_vertex_normal
   #
-  # @return vector3d - a vector3d object if successful.
+  # @return [Geom::Vector3d] a vector3d object if successful.
   #
   # @version SketchUp 6.0
   def end_vertex_normal
@@ -66,7 +66,7 @@ class Sketchup::EdgeUse < Sketchup::Entity
   #   edgeuse = edgeuses[0]
   #   face = edgeuse.face
   #
-  # @return face - a Face object used by this edge use
+  # @return [Sketchup::Face] a Face object used by this edge use
   #
   # @version SketchUp 6.0
   def face
@@ -87,7 +87,7 @@ class Sketchup::EdgeUse < Sketchup::Entity
   #   edgeuse = edgeuses[0]
   #   loop = edgeuse.loop
   #
-  # @return loop - a Loop object that contains this edge use.
+  # @return [Sketchup::Loop] a Loop object that contains this edge use.
   #
   # @version SketchUp 6.0
   def loop
@@ -108,7 +108,7 @@ class Sketchup::EdgeUse < Sketchup::Entity
   #   edgeuse = edgeuses[0]
   #   next_edgeuse = edgeuse.next
   #
-  # @return edgeuse - the next EdgeUse object in a loop
+  # @return [Sketchup::EdgeUse] the next EdgeUse object in a loop
   #
   # @version SketchUp 6.0
   def next
@@ -136,7 +136,7 @@ class Sketchup::EdgeUse < Sketchup::Entity
   #   edgeuse = edgeuses[1]
   #   partners = edgeuse.partners
   #
-  # @return array - an array of partner Edge Use objects.
+  # @return [Array<Sketchup::EdgeUse>] an array of partner Edge Use objects.
   #
   # @version SketchUp 6.0
   def partners
@@ -157,7 +157,7 @@ class Sketchup::EdgeUse < Sketchup::Entity
   #   edgeuse = edgeuses[0]
   #   previous_edgeuse = edgeuse.previous
   #
-  # @return edgeuse - the previous Edge Use object in the loop
+  # @return [Sketchup::EdgeUse] the previous Edge Use object in the loop
   #
   # @version SketchUp 6.0
   def previous
@@ -180,7 +180,7 @@ class Sketchup::EdgeUse < Sketchup::Entity
   #   edgeuse = edgeuses[0]
   #   reversed = edgeuse.reversed?
   #
-  # @return [Boolean] boolean - true if reversed, false if not reversed.
+  # @return [Boolean] true if reversed, false if not reversed.
   #
   # @version SketchUp 6.0
   def reversed?
@@ -202,7 +202,7 @@ class Sketchup::EdgeUse < Sketchup::Entity
   #   edgeuse = edgeuses[0]
   #   vector3d = edgeuse.start_vertex_normal
   #
-  # @return vector3d - a vector3d object if successful.
+  # @return [Geom::Vector3d] a vector3d object if successful.
   #
   # @version SketchUp 6.0
   def start_vertex_normal

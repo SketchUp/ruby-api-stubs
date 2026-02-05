@@ -1,11 +1,20 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # {UI::Notification} objects allows you to show native notifications in the
 # desktop. Notifications can have a message, icon and accept and/or dismiss
 # buttons with callback blocks.
 #
+# Supported icon formats include: .bmp, .png, .jpg.
+# Vector icons are supported as .svg on Windows and .pdf on Mac.
+# Recommended icon size is 48x48 pixels. Icons larger than these sizes will be automatically
+# downscaled to fit within the limits.
+#
+# @bug Prior to SketchUp 2026.0 oversized icons are cropped on Windows.
+#
 # @example
+#   sketchup_extension = Sketchup.extensions[extension_id]
+#   Sketchup.register_extension(sketchup_extension, true)
 #   # For consistency, the accept (yes) and the dismiss (no) buttons
 #   # are always displayed in the same order.
 #   message = "A new version of pizza is available. Install now?"
@@ -107,6 +116,7 @@ class UI::Notification
   #   @notification.show
   #
   # @note In order to insert line breaks into the message you need to use +\\r\\n+.
+  #   From SketchUp 2019 and onwards +\\n+ also works on both Mac and Windows.
   #
   # @param [SketchupExtension] sketchup_extension
   #   {SketchupExtension} instance used to identify
@@ -150,6 +160,7 @@ class UI::Notification
   #   @notification.show
   #
   # @note In order to insert line breaks into the message you need to use +\\r\\n+.
+  #   From SketchUp 2019 and onwards +\\n+ also works on both Mac and Windows.
   #
   # @param [String] message
   #   String providing the new message.
@@ -163,7 +174,7 @@ class UI::Notification
   # Shows a button in the notification with the given title and callback block,
   # both arguments are required.
   #
-  # @bug Prior to SketchUp 2019 both the accept and dismiss buttons were
+  # @bug Prior to SketchUp 2019 both the Accept and Dismiss buttons were
   #   displayed, even if only one had been implemented.
   #
   # @example
@@ -178,7 +189,7 @@ class UI::Notification
   #
   # @param [Proc] block
   #   Sets the action callback, this will be called when
-  #   the user clicks on the dismiss button.
+  #   the user clicks on the accept button.
   #
   # @raise [RuntimeError] When calling on_accept when the notification has
   #   already been shown.

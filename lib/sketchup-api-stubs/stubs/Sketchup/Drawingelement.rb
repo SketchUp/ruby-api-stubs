@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # Drawingelement is a base class for an item in the model that can be
@@ -60,7 +60,6 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #
   #   # Make the face not cast shadows.
   #   status = face.casts_shadows = false
-  #   UI.messagebox status.to_s
   #
   # @param [Boolean] casts
   #   true if you want the Drawingelement object to cast
@@ -89,7 +88,6 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #   # Add the face to the entities in the model
   #   face = entities.add_face pts
   #   status = face.casts_shadows?
-  #   UI.messagebox status.to_s
   #
   # @return [Boolean]
   #
@@ -176,7 +174,6 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #   # Add the face to the entities in the model
   #   face = entities.add_face pts
   #   status = face.hidden?
-  #   UI.messagebox "hidden? " + status.to_s
   #
   # @return [Boolean]
   #
@@ -281,8 +278,8 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #     # Returns nil if not successful, path if successful.
   #     # Should return a texture object.
   #     m.texture = "c:\\My Textures\\Carpet.jpg"
-  #   rescue
-  #     UI.messagebox $!.message
+  #   rescue => exception
+  #     puts exception.message
   #   end
   #   # You will see the material applied when you reverse the box's faces
   #   material = face.material = m
@@ -315,7 +312,6 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #
   #   # Make the face not receive shadows.
   #   status = face.receives_shadows = false
-  #   UI.messagebox status.to_s
   #
   # @param [Boolean] receive
   #   true if you want the Drawingelement object to
@@ -343,7 +339,6 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #   # Add the face to the entities in the model
   #   face = entities.add_face pts
   #   status = face.receives_shadows?
-  #   UI.messagebox status.to_s
   #
   # @return [Boolean]
   #
@@ -351,7 +346,7 @@ class Sketchup::Drawingelement < Sketchup::Entity
   def receives_shadows?
   end
 
-  # The visible= method is used to set the visible status for an element. This
+  # The {#visible=} method is used to set the visible status for an element. This
   # method performs an opposite function to the hidden= method.
   #
   # @example
@@ -370,16 +365,16 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #   status = face.visible = false
   #
   # @param [Boolean] visibility
-  #   true if you want to hide the element, false if not
-  #
-  # @return [Boolean] true if the element has been hidden, false if
-  #   the element has not been hidden.
+  #   true if you want to make the element visible, false if not
   #
   # @version SketchUp 6.0
   def visible=(visibility)
   end
 
-  # The visible? method is used to get the visible status for an element.
+  # The {#visible?} method checks if a Drawingelement object is not explicitly hidden (i.e. its
+  # hidden property is false). However, this method's return value alone does not guarantee that the
+  # element is visible in the model view. Its tag or parent elements can also be hidden. Some element
+  # types can also be hidden by rendering options (Styles).
   #
   # @example
   #   depth = 100
@@ -398,6 +393,8 @@ class Sketchup::Drawingelement < Sketchup::Entity
   #   UI.messagebox "Is the face visible? " + face.visible?.to_s
   #
   # @return [Boolean]
+  #
+  # @see Sketchup::Model#drawing_element_visible?
   #
   # @version SketchUp 6.0
   def visible?

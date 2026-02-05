@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Sketchup::Entities} class is a collection of Entity objects, either in a
@@ -520,8 +520,7 @@ class Sketchup::Entities
   def add_faces_from_mesh(polygon_mesh, smooth_flags = Geom::PolygonMesh::AUTO_SOFTEN|Geom::PolygonMesh::SMOOTH_SOFT_EDGES, f_material = nil, b_material = nil)
   end
 
-  # The add_group method is used to create an empty group or a group with
-  # entities.
+  # The {#add_group} method is used to create a new group.
   #
   # @example
   #   model = Sketchup.active_model
@@ -582,8 +581,8 @@ class Sketchup::Entities
   def add_image(path, point, width, height = 0.0)
   end
 
-  # The add_instance method adds a component instance to the collection of
-  # entities.
+  # The {#add_instance} method adds a group or component instance to the collection of
+  # entities using an existent definition.
   #
   # @example
   #   model = Sketchup.active_model
@@ -694,7 +693,9 @@ class Sketchup::Entities
   def add_observer(observer)
   end
 
-  # The add_section_plane method adds a section plane object to the entities.
+  # Adds a section plane object to the entities.
+  #
+  # Refer to the {Geom} module for information on how planes are represented.
   #
   # @example
   #   # Create a section plane
@@ -705,16 +706,53 @@ class Sketchup::Entities
   #   # Make sure section planes are visible
   #   model.rendering_options['DisplaySectionPlanes'] = true
   #
-  # @param plane
-  #   the geometric plane where the SectionPlane object is to
-  #   be created. Refer to the Geom module for information on
-  #   how planes are represented.
+  # @overload add_section_plane(point, vector)
   #
-  # @return [Sketchup::SectionPlane, nil] the created SectionPlane object if
-  #   successful, nil on failure.
+  #   @param [Geom::Point3d] point
+  #   @param [Geom::Vector3d] vector
+  #
+  # @overload add_section_plane(plane)
+  #
+  #   @param [Array(Geom::Point3d), Geom::Vector3d]] plane
+  #
+  # @overload add_section_plane(plane)
+  #
+  #   @param [Array(Integer, Integer, Integer, Integer)] plane
+  #     Plane coefficents.
+  #
+  # @return [Sketchup::SectionPlane, nil]
   #
   # @version SketchUp 2014
-  def add_section_plane(plane)
+  def add_section_plane(*args)
+  end
+
+  # The {#add_snap} method is used to create a new {Sketchup::Snap}.
+  #
+  # @example
+  #   entities = Sketchup.active_model.entities
+  #   snap = entities.add_snap(ORIGIN, X_AXIS)
+  #
+  # @overload add_snap(position, direction)
+  #
+  #   With a position and a direction vector provided, but no up vector, SketchUp tries
+  #   to keep the Snap upright.
+  #   @param [Geom::Point3d] position
+  #   @param [Geom::Vector3d] direction
+  #
+  # @overload add_snap(position, direction, up)
+  #
+  #   @param [Geom::Point3d] position
+  #   @param [Geom::Vector3d] direction
+  #   @param [Geom::Vector3d] up
+  #
+  # @raise ArgumentError if +direction+ and +up+ are parallel.
+  #
+  # @return [Sketchup::Snap]
+  #
+  # @see Sketchup::Snap
+  #
+  # @version SketchUp 2025.0
+  def add_snap(*args)
   end
 
   # The {#add_text} method adds a note or label text entity to the entities.
@@ -825,9 +863,9 @@ class Sketchup::Entities
   #   }
   #
   # @note While using {Sketchup::Entities#build} it is important to not
-  #   add or remove vertices by other means of the builder. Also don't modify the
-  #   position of the vertices in the {Sketchup::Entities} container geometry is
-  #   added to. Doing so can break the vertex-cache that de-duplicates the vertices.
+  #   add or remove vertices by other means than the builder. Also don't modify the
+  #   position of the vertices in the {Sketchup::Entities} collection. Doing so can break the
+  #   vertex-cache that de-duplicates the vertices.
   #
   # @return [nil]
   #
@@ -1001,8 +1039,10 @@ class Sketchup::Entities
   def fill_from_mesh(polygon_mesh, weld_vertices = true, smooth_flags = Geom::PolygonMesh::AUTO_SOFTEN|Geom::PolygonMesh::SMOOTH_SOFT_EDGES, f_material = nil, b_material = nil)
   end
 
-  # The intersect_with method is used to intersect an entities, component
-  # instance, or group object with a entities object.
+  # The {#intersect_with} method is used to intersect a Sketchup::Entities, Sketchup::Component,
+  # or Sketchup::Group object with a entities object.
+  #
+  # empty if no intersection(s) were found.
   #
   # @example
   #   model = Sketchup.active_model
@@ -1048,7 +1088,7 @@ class Sketchup::Entities
   # @param [Sketchup::Entity, Array<Sketchup::Entity>] entities2
   #   A single entity, or an array of entities.
   #
-  # @return [nil]
+  # @return [Array<Sketchup::Edge>] The intersecting edges created. This array may be
   #
   # @version SketchUp 6.0
   def intersect_with(recurse, transform1, entities1, transform2, hidden, entities2)

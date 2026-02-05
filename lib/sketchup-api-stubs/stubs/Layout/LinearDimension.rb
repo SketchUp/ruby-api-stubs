@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # References a linear dimension entity. A {Layout::LinearDimension} is composed
@@ -21,6 +21,10 @@
 class Layout::LinearDimension < Layout::Entity
 
   # Constants
+
+  DIMENSION_LINE_ALIGNED = nil # Stub value.
+  DIMENSION_LINE_HORIZONTAL = nil # Stub value.
+  DIMENSION_LINE_VERTICAL = nil # Stub value.
 
   LEADER_LINE_TYPE_BEZIER = nil # Stub value.
   LEADER_LINE_TYPE_HIDDEN = nil # Stub value.
@@ -302,18 +306,33 @@ class Layout::LinearDimension < Layout::Entity
   #   height = 1.0
   #   dim = Layout::LinearDimension.new(start_point, end_point, height)
   #
-  # @param [Geom::Point2d] start_point
+  # @overload initialize(start_point, end_point, height)
   #
-  # @param [Geom::Point2d] end_point
+  #   @version LayOut 2018
+  #   @param [Geom::Point2d] start_point
+  #   @param [Geom::Point2d] end_point
+  #   @param [Numeric] height Distance from the start and end points to the
+  #     dimension line
   #
-  # @param [Numeric] height
-  #   Distance from the start and end points to the
-  #   dimension line
+  # @overload initialize(start_point, end_point, height, alignment)
+  #
+  #   @version LayOut 2026.0
+  #   @param [Geom::Point2d] start_point
+  #   @param [Geom::Point2d] end_point
+  #   @param [Numeric] height Distance from the start and end points to the
+  #     dimension line
+  #   @param [Integer] alignment The alignment type for the dimension line
+  #
+  #   alignment can be one of the following:
+  #   [+Layout::LinearDimension::DIMENSION_LINE_ALIGNED+]
+  #   [+Layout::LinearDimension::DIMENSION_LINE_VERTICAL+]
+  #   [+Layout::LinearDimension::DIMENSION_LINE_HORIZONTAL+]
+  #
+  #   @raise [RangeError] if alignment is not a valid alignment type
+  #   @raise [ArgumentError] if a dimension couldn't be created with the provided arguments
   #
   # @return [Layout::LinearDimension]
-  #
-  # @version LayOut 2018
-  def initialize(start_point, end_point, height)
+  def initialize(*args)
   end
 
   # The {#leader_line_type} method returns the type of leader line the
@@ -366,6 +385,34 @@ class Layout::LinearDimension < Layout::Entity
   #
   # @version LayOut 2018
   def leader_line_type=(type)
+  end
+
+  # The {#leader_line_visible?} method returns whether the leader line is currently visible.
+  #
+  # @example
+  #   start_point = Geom::Point2d.new(1, 1)
+  #   end_point = Geom::Point2d.new(1, 1.2)
+  #   height = 1.0
+  #   dim = Layout::LinearDimension.new(start_point, end_point, height)
+  #   dim.leader_line_type = Layout::LinearDimension::LEADER_LINE_TYPE_TWO_SEGMENT
+  #   # Will be false since the text is not automatically positioned away from the dimension line
+  #   visible = dim.leader_line_visible?
+  #
+  #   # Position the text away from the dimension line.
+  #   text_pos = Geom::Point2d.new(1, 1.5)
+  #   anchor_type = Layout::FormattedText::ANCHOR_TYPE_TOP_LEFT
+  #   dim.text = Layout::FormattedText.new("<>", text_pos, anchor_type)
+  #   # Will be true since the text is positioned away from the dimension line
+  #   visible = dim.leader_line_visible?
+  #
+  #   dim.leader_line_type = Layout::LinearDimension::LEADER_LINE_TYPE_HIDDEN
+  #   # Will be false, even though the text is positioned away from the dimension line
+  #   visible = dim.leader_line_visible?
+  #
+  # @return [Boolean]
+  #
+  # @version LayOut 2026.0
+  def leader_line_visible?
   end
 
   # The {#scale} method returns the scale being used for the

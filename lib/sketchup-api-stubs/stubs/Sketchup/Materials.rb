@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A collection of Materials objects. Each model contains a Materials collection
@@ -162,7 +162,7 @@ class Sketchup::Materials < Sketchup::Entity
   #   be skipped as the indices change. Instead copy the current collection to an
   #   array using +to_a+ and then use +each+ on the array, when removing content.
   #
-  # @return [nil]
+  # @return [Sketchup::Materials]
   #
   # @version SketchUp 6.0
   #
@@ -193,9 +193,18 @@ class Sketchup::Materials < Sketchup::Entity
   # If a matching material exist in the model it will be returned instead.
   #
   # @example
-  #   # Load a material from the shipped SketchUp library. (SketchUp 2016)
-  #   filename = 'Materials/Brick, Cladding and Siding/Cinder Block.skm'
-  #   path = Sketchup.find_support_file(filename)
+  #   # Load a material from the shipped SketchUp library.
+  #   materials_template = Sketchup.find_support_file('Materials/MaterialTemplate.skp')
+  #   if materials_template && File.exist?(materials_template)
+  #     # Newer SketchUp versions.
+  #     materials_path = File.dirname(materials_template)
+  #     files = Dir.glob(File.join(materials_path, '**', '*.skm'))
+  #     path = files.first
+  #   else
+  #     # Older SketchUp versions.
+  #     filename = 'Materials/Brick, Cladding and Siding/Cinder Block.skm'
+  #     path = Sketchup.find_support_file(filename)
+  #   end
   #   materials = Sketchup.active_model.materials
   #   material = materials.load(path)
   #
@@ -224,24 +233,28 @@ class Sketchup::Materials < Sketchup::Entity
 
   # Remove a given material.
   #
-  # NOTE: On SketchUp versions prior to 2014 there is a bug in this method that
-  # could potentially lead to file corruption. If you call Materials.remove on a
-  # material that is painted onto any entity in the active model (e.g. faces,
-  # edges, groups, ...), then calling this method will not successfully unpaint
-  # the entity and remove the material from the model.
-  # You must first unpaint all of the entities that respond to .material
-  # and .back_material before calling Materials.remove.
+  # @bug On SketchUp versions prior to 2014 there is a bug in this method that
+  #   could potentially lead to file corruption. If you call {#remove} on a
+  #   material that is painted onto any entity in the active model (e.g. faces,
+  #   edges, groups, ...), then calling this method will not successfully unpaint
+  #   the entity and remove the material from the model.
+  #   You must first unpaint all of the entities that respond to +.material+
+  #   and +.back_material+ before calling {#remove}.
   #
-  # @example
-  #   if entity.respond_to?(:material) do
-  #     if entity.material.equal?(material_to_remove) do
-  #       entity.material = nil
+  # @example Logic for removing a given material of an entity:
+  #   # @param [Sketchup::Entity] entity
+  #   # @param [Sketchup::Material] material_to_remove
+  #   def remove_material(entity, material_to_remove)
+  #     if entity.respond_to?(:material) do
+  #       if entity.material.equal?(material_to_remove) do
+  #         entity.material = nil
+  #       end
   #     end
-  #   end
-  #   # for entities that have a back material
-  #   if entity.respond_to?(:back_material) do
-  #     if entity.back_material.equal?(material_to_remove) do
-  #       entity.back_material = nil
+  #     # for entities that have a back material
+  #     if entity.respond_to?(:back_material) do
+  #       if entity.back_material.equal?(material_to_remove) do
+  #         entity.back_material = nil
+  #       end
   #     end
   #   end
   #

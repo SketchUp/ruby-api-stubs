@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A group is a special type of {Layout::Entity} that does not belong to a
@@ -92,7 +92,7 @@ class Layout::Group < Layout::Entity
   def remove_scale_factor(resize_behavior)
   end
 
-  # The {#scale_factor} method returns the the scale factor associated with the
+  # The {#scale_factor} method returns the scale factor associated with the
   # {Layout::Group}.
   #
   # @example
@@ -166,7 +166,7 @@ class Layout::Group < Layout::Entity
   def scale_units
   end
 
-  # The {#scale_units=} method sets the the units format for the scale of the
+  # The {#scale_units=} method sets the units format for the scale of the
   # {Layout::Group}.
   #
   # The units format can be any of the following values:
@@ -197,7 +197,7 @@ class Layout::Group < Layout::Entity
   def scale_units=(units_format)
   end
 
-  # The {#set_scale_factor} method sets the the scale factor for the
+  # The {#set_scale_factor} method sets the scale factor for the
   # {Layout::Group}.
   #
   # The units format can be any of the following values:

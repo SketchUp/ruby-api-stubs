@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Toolbar class contains methods to create and manipulate SketchUp
@@ -113,12 +113,29 @@ class UI::Toolbar
   # The get_last_state method is used to determine if the toolbar was hidden or
   # visible in the previous session of SketchUp.
   #
-  # Valid states are 1 for visible, 0 for hidden, -1 for before never shown.
+  # Valid states are {TB_VISIBLE} (1) for visible, {TB_HIDDEN} (0) for hidden,
+  # {TB_NEVER_SHOWN} (-1) for before never shown.
   #
   # @example
   #   state = toolbar.get_last_state
+  #   case state
+  #   when TB_VISIBLE
+  #     puts "Toolbar was visible in the last session."
+  #   when TB_HIDDEN
+  #     puts "Toolbar was hidden in the last session."
+  #   when TB_NEVER_SHOWN
+  #     puts "Toolbar was never shown in the last session."
+  #   else
+  #     puts "Unknown toolbar state: #{state}"
+  #   end
   #
-  # @return [Boolean] the last state of the toolbar (see comments)
+  # @return [Integer] the last state of the toolbar (see constants above)
+  #
+  # @see TB_VISIBLE
+  #
+  # @see TB_HIDDEN
+  #
+  # @see TB_NEVER_SHOWN
   #
   # @version SketchUp 6.0
   def get_last_state

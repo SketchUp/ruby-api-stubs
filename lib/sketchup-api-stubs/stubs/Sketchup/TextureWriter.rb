@@ -1,12 +1,12 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The TextureWriter class is used primarily for writing the textures used in a
 # SketchUp model out to files as part of an export for use in another
 # application. These methods are usually invoked in this order:
 #
-#   - 1. load - load one or more textures from a model into the TextureWriter.
-#   - 2. write_all or write - write the texture(s) to file.
+# 1. {#load} - load one or more textures from a model into the TextureWriter.
+# 2. {#write_all} or {#write} - write the texture(s) to file.
 #
 # @example
 #   # This code snippet sets up a texture writer and some variables that are
@@ -159,9 +159,9 @@ class Sketchup::TextureWriter
   # This method will return one of the following status messages. (These are
   # constants that are defined by the API.)
   #
-  #   - 0 = FILE_WRITE_OK
-  #   - 1 = FILE_WRITE_FAILED_INVALID_TIFF
-  #   - 2 = FILE_WRITE_FAILED_UNKNOWN
+  # - 0 = {FILE_WRITE_OK}
+  # - 1 = {FILE_WRITE_FAILED_INVALID_TYPE}
+  # - 2 = {FILE_WRITE_FAILED_UNKNOWN}
   #
   # @example
   #   tw.load(texturable_entities[0])
@@ -211,9 +211,9 @@ class Sketchup::TextureWriter
   # The write_all method is used to write all of the textures within the texture
   # writer to files. It will return one of three status numbers:
   #
-  #   - 0 = FILE_WRITE_OK
-  #   - 1 = FILE_WRITE_FAILED_INVALID_TIFF
-  #   - 2 = FILE_WRITE_FAILED_UNKNOWN
+  # - 0 = {FILE_WRITE_OK}
+  # - 1 = {FILE_WRITE_FAILED_INVALID_TYPE}
+  # - 2 = {FILE_WRITE_FAILED_UNKNOWN}
   #
   # @example
   #   tw.load(texturable_entities[0]

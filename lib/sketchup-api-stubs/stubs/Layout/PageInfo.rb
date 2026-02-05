@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This is the interface to a {Layout::Document}'s paper space information. The
@@ -24,8 +24,7 @@ class Layout::PageInfo
 
   # Instance Methods
 
-  # The {bottom_margin} method returns the paper's bottom margin in document
-  # units.
+  # The {bottom_margin} method returns the paper's bottom margin in inches.
   #
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")
@@ -37,7 +36,7 @@ class Layout::PageInfo
   def bottom_margin
   end
 
-  # The {#bottom_margin=} method sets the paper's bottom margin in document units.
+  # The {#bottom_margin=} method sets the paper's bottom margin in inches.
   #
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")
@@ -114,7 +113,7 @@ class Layout::PageInfo
   def display_resolution=(resolution)
   end
 
-  # The {#height} method returns the paper height in document units.
+  # The {#height} method returns the paper height in inches.
   #
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")
@@ -126,7 +125,7 @@ class Layout::PageInfo
   def height
   end
 
-  # The {#height=} method sets the paper height in document units.
+  # The {#height=} method sets the paper height in inches.
   #
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")
@@ -212,7 +211,7 @@ class Layout::PageInfo
   def image_output_resolution=(resolution)
   end
 
-  # The {#left_margin} method returns the paper's left margin in document units.
+  # The {#left_margin} method returns the paper's left margin in inches.
   #
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")
@@ -224,7 +223,7 @@ class Layout::PageInfo
   def left_margin
   end
 
-  # The {#left_margin=} method sets the paper's left margin in document units.
+  # The {#left_margin=} method sets the paper's left margin in inches.
   #
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")
@@ -352,7 +351,7 @@ class Layout::PageInfo
   def print_paper_color?
   end
 
-  # The {#right_margin} method returns the paper's right margin in document units.
+  # The {#right_margin} method returns the paper's right margin in inches.
   #
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")
@@ -364,7 +363,7 @@ class Layout::PageInfo
   def right_margin
   end
 
-  # The {#right_margin=} sets the paper's right margin in document units.
+  # The {#right_margin=} sets the paper's right margin in inches.
   #
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")
@@ -403,7 +402,7 @@ class Layout::PageInfo
   def show_margins?
   end
 
-  # The {#top_margin} method returns the paper's top margin in document units.
+  # The {#top_margin} method returns the paper's top margin in inches.
   #
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")
@@ -415,7 +414,7 @@ class Layout::PageInfo
   def top_margin
   end
 
-  # The {#top_margin} method sets the paper's top margin in document units.
+  # The {#top_margin} method sets the paper's top margin in inches.
   #
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")
@@ -430,7 +429,7 @@ class Layout::PageInfo
   def top_margin=(margin)
   end
 
-  # The {#width} method returns the paper width in document units.
+  # The {#width} method returns the paper width in inches.
   #
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")
@@ -442,7 +441,7 @@ class Layout::PageInfo
   def width
   end
 
-  # The {#width=} method sets the paper width in document units.
+  # The {#width=} method sets the paper width in inches.
   #
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")

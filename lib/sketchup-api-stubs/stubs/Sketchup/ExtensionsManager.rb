@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The ExtensionsManager class provides a way of accessing the
@@ -21,7 +21,7 @@ class Sketchup::ExtensionsManager
   #
   # @example
   #   manager = Sketchup.extensions
-  #   extension = manager[1]
+  #   extension = manager[0]
   #   if (extension)
   #     puts extension.name
   #   else
@@ -34,7 +34,7 @@ class Sketchup::ExtensionsManager
   #   # You can also get extensions by ID.
   #   my_extension = manager['2475A758-6503-46D5-AC5E-16AEA0A3162A']
   #
-  # @note Index starts at 1.
+  # @note Index starts at 0.
   #
   # @param [Integer, String] index_or_name
   #   The index, name or ID of the SketchupExtension object.
@@ -83,9 +83,6 @@ class Sketchup::ExtensionsManager
   # @example
   #   manager = Sketchup.extensions
   #   keys = manager.keys
-  #   for key in keys
-  #     UI.messagebox('The next extension is named: ' + key)
-  #   end
   #
   # @return keys - Array of string keys
   #

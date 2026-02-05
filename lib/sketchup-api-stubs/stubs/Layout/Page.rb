@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # Class for a single page in a LayOut document.
@@ -23,6 +23,56 @@ class Layout::Page
   #
   # @version LayOut 2018
   def ==(other)
+  end
+
+  # The {#attribute_dictionary} method returns a copy of the page's attribute dictionary with the
+  # given name.
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   page = doc.pages.first
+  #   page.set_attribute("jane_doe_doc_maker", "made_by_doc_maker", true)
+  #   attributes = page.attribute_dictionary("jane_doe_doc_maker")
+  #   # Adding to this Layout::Dictionary does not apply to the page's attribute dictionary, use
+  #   # Layout::Page#set_attribute.
+  #   attributes.merge!(doc_id: 42)
+  #
+  # @param [String] name
+  #
+  # @return [Layout::Dictionary, nil] A copy of the page's attribute dictionary, or nil if there is
+  #   no attribute dictionary
+  #
+  # @version LayOut 2026.0
+  def attribute_dictionary(name)
+  end
+
+  # The {#delete_attribute} method is used to delete an attribute from a page.
+  #
+  # @overload delete_attribute(dictionary_name)
+  #
+  #   @param [String] dictionary_name The name of an attribute dictionary.
+  #   @return [Boolean]
+  #
+  #   @example
+  #     doc = Layout::Document.open("C:/path/to/document.layout")
+  #     page = doc.pages.first
+  #     page.set_attribute("jane_doe_doc_maker", "made_by_doc_maker", true)
+  #     page.delete_attribute("jane_doe_doc_maker")
+  #
+  # @overload delete_attribute(dictionary_name, key)
+  #
+  #   @param [String] dictionary_name The name of an attribute dictionary.
+  #   @param [String] key An attribute key.
+  #   @return [Boolean]
+  #
+  #   @example
+  #     doc = Layout::Document.open("C:/path/to/document.layout")
+  #     page = doc.pages.first
+  #     page.set_attribute("jane_doe_doc_maker", "made_by_doc_maker", true)
+  #     page.delete_attribute("jane_doe_doc_maker", "made_by_doc_maker")
+  #
+  # @version LayOut 2026.0
+  def delete_attribute(*args)
   end
 
   # The {#document} method returns the {Layout::Document} that the {Layout::Page}
@@ -53,6 +103,38 @@ class Layout::Page
   #
   # @version LayOut 2018
   def entities
+  end
+
+  # The {#get_attribute} method is used to retrieve the value of an attribute in
+  # the page's attribute dictionary.
+  #
+  # If the third parameter, +default_value+, is not passed and there is no
+  # attribute that matches the given name, it returns +nil+.
+  #
+  # If +default_value+ is provided and there is no matching attribute it returns
+  # the given value. It does not create an attribute with that name though.
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   page = doc.pages.first
+  #   # Read an attribute value from the page. In this case this will return the
+  #   # default value provided: 42.
+  #   page.get_attribute("jane_doe_doc_maker", "doc_id", 42)
+  #
+  # @param [String] name
+  #   The name of an attribute dictionary.
+  #
+  # @param [String] key
+  #   An attribute key.
+  #
+  # @param [String, Boolean, Integer, Float, Hash, Layout::Dictionary, nil] default_value
+  #   A default
+  #   value to return if no attribute is found.
+  #
+  # @return [String, Boolean, Integer, Float, Layout::Dictionary, nil] the retrieved value.
+  #
+  # @version LayOut 2026.0
+  def get_attribute(name, key, default_value = nil)
   end
 
   # The {#in_presentation=} method sets whether the {Layout::Page} is included in
@@ -154,6 +236,23 @@ class Layout::Page
   #
   # @version LayOut 2018
   def nonshared_entities
+  end
+
+  # The {#set_attribute} method adds an attribute to the page's attribute dictionary.
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   page = doc.pages.first
+  #   page.set_attribute("jane_doe_doc_maker", "doc_id", 42)
+  #
+  # @param [String] name
+  #   The name of an attribute dictionary.
+  #   @param [String] key An attribute key.
+  #   @param [String, Boolean, Integer, Float, Hash, Layout::Dictionary, nil] value The value for the
+  #     attribute.
+  #
+  # @version LayOut 2026.0
+  def set_attribute(name, key, value)
   end
 
   # The {#set_layer_visibility} method sets whether a {Layout::Layer} is visible

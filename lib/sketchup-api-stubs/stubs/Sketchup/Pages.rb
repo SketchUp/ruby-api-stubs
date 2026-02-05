@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Pages class contains methods for manipulating a collection of Pages
@@ -16,16 +16,6 @@ class Sketchup::Pages < Sketchup::Entity
   # Includes
 
   include Enumerable
-
-  # Constants
-
-  ImageEmbedded = nil # Stub value.
-  ImageEmbeddedAndLinked = nil # Stub value.
-  ImageLinked = nil # Stub value.
-
-  UnitsNormalizedX = nil # Stub value.
-  UnitsNormalizedY = nil # Stub value.
-  UnitsPixels = nil # Stub value.
 
   # Class Methods
 
@@ -82,11 +72,6 @@ class Sketchup::Pages < Sketchup::Entity
   #   status = pages.add "Page 1"
   #   status = pages.add "Page 2"
   #   page = pages["Page 2"]
-  #   if (page)
-  #     UI.messagebox page
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
   # @param index_or_name
   #   The index or the string name of the specific page.
@@ -103,6 +88,8 @@ class Sketchup::Pages < Sketchup::Entity
   # new Pages. If a name is given, then a new Page with that name is
   # added.
   #
+  # If the name is already used by another page, a unique name is created.
+  #
   # If the flags parameter is given, it controls which properties are saved with
   # the Page. See the {Page#update} method for a description of the flags that
   # can be set.
@@ -110,16 +97,13 @@ class Sketchup::Pages < Sketchup::Entity
   # If index is given, it specifies the position in the page list that the new
   # page is added.  Otherwise the new page is added to the end.
   #
+  # @bug Prior to SketchUp 2026.0 this method didn't make the name unique.
+  #
   # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   status = pages.add "Page 1"
   #   status = pages.add "Page 2"
-  #   if (status)
-  #     UI.messagebox status
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
   # @param [String] name
   #   The name of the specific page.
@@ -270,6 +254,31 @@ class Sketchup::Pages < Sketchup::Entity
   def remove_observer(observer)
   end
 
+  # The {#reorder} method is used to reorder an existing {Sketchup::Page} object inside collection.
+  #
+  # +new_index+ specifies the new position of the page. It should be a value
+  # between +0+ and the max index of the {Sketchup::Pages} collection.
+  # Negative indices can be used to specify an index from the end of the list.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   pages = model.pages
+  #   pages.reorder(model.pages[0], 2)
+  #
+  # @param [Sketchup::Page] page
+  #   The page to be reordered.
+  #
+  # @param [Integer] new_index
+  #   Index of where to replace the page.
+  #
+  # @raise [IndexError] if the given +new_index+ is out of range.
+  #
+  # @return nil
+  #
+  # @version SketchUp 2025.0
+  def reorder(page, new_index)
+  end
+
   # The selected_page method is used to retrieve the currently selected page.
   #
   # @example
@@ -356,6 +365,24 @@ class Sketchup::Pages < Sketchup::Entity
   #
   # @version SketchUp 6.0
   def slideshow_time
+  end
+
+  # The {#unique_name} method is used to generate a unique name for the page based on a base_name
+  # string. For example, a base name of "Joe" might return "Joe 2" if "Joe" already exists.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   pages = model.pages
+  #   page = pages.add('Joe')
+  #   page.unique_name('Joe')
+  #
+  # @param [String] base_name
+  #   The base name to use for the unique name.
+  #
+  # @return [String] The unique name.
+  #
+  # @version SketchUp 2026.0
+  def unique_name(base_name)
   end
 
 end

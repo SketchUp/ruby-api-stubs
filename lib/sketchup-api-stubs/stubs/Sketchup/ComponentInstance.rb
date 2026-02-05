@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Sketchup::ComponentInstance} class is used to represent component
@@ -109,12 +109,8 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #
   # @example
   #   # Assuming 'instance' is a ComponentInstance object
-  #   array = instance.explode
-  #   if array
-  #     UI.messagebox "Exploded the component instance"
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   instance = Sketchup.active_model.active_entities.grep(Sketchup::ComponentInstance).first
+  #   entities = instance.explode
   #
   # @return [Array<Sketchup::Entity>, false] An array of entity objects if successful, +false+ if
   #   unsuccessful
@@ -519,13 +515,19 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   new_transformation = Geom::Transformation.new([100,0,0])
   #   componentinstance.transformation = new_transformation
   #
+  # @note As of SketchUp 2026, this will raise an error if the
+  #   {Geom::Transformation} is not invertible. Prior to 2026 this would silently set the
+  #   transformation possibly causing rendering or editing problems.
+  #
   # @param [Geom::Transformation] transformation
+  #
+  # @raise ArgumentError if the {Geom::Transformation} is not invertible (as of Sketchup 2026)
   #
   # @version SketchUp 6.0
   def transformation=(transformation)
   end
 
-  # The trim method is used to compute the (non-destructive) boolean difference
+  # The {#trim} method is used to compute the (non-destructive) boolean difference
   # of the two instances representing manifold solid volumes (this - arg).  If
   # the specified objects (this and arg) do not represent manifold volumes, this
   # method fails.
@@ -535,6 +537,11 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   instance1 = entities[0]
   #   instance2 = entities[1]
   #   result = instance1.trim(instance2)
+  #
+  # @note Trimming object instance2 using instance1 results in a new trimmed version of instance2.
+  #   If the trim is successful the original instance2 is erased and a newly trimmed
+  #   version is created. This new version, derived from the trimming operation,
+  #   will possess a new GUID and will be returned.
   #
   # @note This method is not available in SketchUp Make.
   #

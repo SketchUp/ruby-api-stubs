@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # References a collection of style attributes that determine the visual
@@ -101,6 +101,9 @@ class Layout::Style
   STROKE_PATTERN_PHANTOM = nil # Stub value.
   STROKE_PATTERN_SHORT_DASH = nil # Stub value.
   STROKE_PATTERN_SOLID = nil # Stub value.
+
+  STRIKETHROUGH_NONE = nil # Stub value.
+  STRIKETHROUGH_SINGLE = nil # Stub value.
 
   SUPER_SCRIPT = nil # Stub value.
 
@@ -1469,6 +1472,49 @@ class Layout::Style
   #
   # @version LayOut 2018
   def text_italic=(italic)
+  end
+
+  # The {#text_strikethrough} method returns the text strike through type, or +nil+ if the
+  # {Layout::Style} does not have a value for that setting.
+  #
+  # The strikethrough type can be one of the following values:
+  # [+Layout::Style::STRIKETHROUGH_NONE+]
+  # [+Layout::Style::STRIKETHROUGH_SINGLE+]
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   page = doc.pages.first
+  #   entity = page.entities.first
+  #   style = entity.style
+  #   strikethrough_type = style.text_strikethrough
+  #
+  # @return [Integer, nil]
+  #
+  # @version LayOut 2026.0
+  def text_strikethrough
+  end
+
+  # The {#text_strikethrough=} method sets the text strike through type.
+  #
+  # The strikethrough type can be one of the following values:
+  # [+Layout::Style::STRIKETHROUGH_NONE+]
+  # [+Layout::Style::STRIKETHROUGH_SINGLE+]
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   page = doc.pages.first
+  #   entity = page.entities.first
+  #   style = entity.style
+  #   style.text_strikethrough = Layout::Style::STRIKETHROUGH_SINGLE
+  #   # Set the style to apply changes
+  #   entity.style = style
+  #
+  # @param [Integer] strikethrough_type
+  #
+  # @raise [ArgumentError] if strikethrough_type is not a valid strike through type
+  #
+  # @version LayOut 2026.0
+  def text_strikethrough=(strikethrough_type)
   end
 
   # The {#text_underline} method returns the text underline type, or +nil+ if the

@@ -1,8 +1,21 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The OptionsManager class manages various kinds of OptionsProviders on a
 # Model.
+#
+# To get the OptionsProvider key list, run the following code in the ruby console:
+#
+# @example
+#   options_manager = Sketchup.active_model.options
+#   options_manager.keys.each { |provider_name|
+#     options_provider = options_manager[provider_name]
+#     puts provider_name
+#     options_provider.each { |key, value|
+#       puts "  #{key} - #{value}"
+#     }
+#     puts
+#   }
 #
 # @version SketchUp 6.0
 class Sketchup::OptionsManager
@@ -25,11 +38,6 @@ class Sketchup::OptionsManager
   #   model = Sketchup.active_model
   #   manager = model.options
   #   provider = manager[0]
-  #   if (provider)
-  #     UI.messagebox provider.name
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
   # @overload [](index)
   #
@@ -86,11 +94,6 @@ class Sketchup::OptionsManager
   #   model = Sketchup.active_model
   #   manager = model.options
   #   optionproviderarray = manager.keys
-  #   if (optionproviderarray)
-  #     UI.messagebox optionproviderarray
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
   # @return keys - Array of string keys
   #

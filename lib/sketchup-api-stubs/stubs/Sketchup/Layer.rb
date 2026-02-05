@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Layer class contains methods modifying and extracting information for a
@@ -83,7 +83,7 @@ class Sketchup::Layer < Sketchup::Entity
   def color
   end
 
-  # The {#color=} method is used to set the name of a layer.
+  # The {#color=} method is used to set the color of a layer.
   #
   # @example
   #   model = Sketchup.active_model
@@ -98,12 +98,17 @@ class Sketchup::Layer < Sketchup::Entity
   end
 
   # The {#display_name} method is used to retrieve the display name of the layer.
+  # This is the name shown to the user in the Sketchup UI.
   #
   # @example
   #   model = Sketchup.active_model
   #   layers = model.layers
   #   new_layer = layers.add ("test layer")
   #   name = new_layer.display_name
+  #
+  # @note The display name and internal name of layers should share the same value except for the
+  #   Layer0. From version 2020.0 onwards the display name of Layer0 is "Untagged" and it is
+  #   localized.
   #
   # @return [String]
   #
@@ -114,8 +119,6 @@ class Sketchup::Layer < Sketchup::Entity
   end
 
   # The {#folder} method is used to return the parent layer folder of a layer.
-  #
-  # @api TagFolder
   #
   # @example
   #   model = Sketchup.active_model
@@ -136,8 +139,6 @@ class Sketchup::Layer < Sketchup::Entity
   #
   # This will trigger +onParentFolderChanged+ in normal cases and
   # +onLayerChanged+ during undo/redo.
-  #
-  # @api TagFolder
   #
   # @example
   #   model = Sketchup.active_model
@@ -180,7 +181,8 @@ class Sketchup::Layer < Sketchup::Entity
   def line_style=(line_style)
   end
 
-  # The {#name} method is used to retrieve the name of the layer.
+  # The {#name} method return the internal name of the layer which is handled by the model.
+  # Its use is for scripting and internal references.
   #
   # @example
   #   model = Sketchup.active_model
@@ -188,7 +190,11 @@ class Sketchup::Layer < Sketchup::Entity
   #   new_layer = layers.add "test layer"
   #   name = new_layer.name
   #
-  # @return [String]
+  # @note The internal layer and display name of layers should share the same value except for the
+  #   Layer0. From version 2020.0 onwards the display name of Layer0 is "Untagged" and it is
+  #   localized.
+  #
+  # @return [String] representing the name of the layer
   #
   # @see #display_name
   #

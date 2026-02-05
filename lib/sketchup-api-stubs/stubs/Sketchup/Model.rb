@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This is the interface to a SketchUp model. The model is the 3D drawing that
@@ -6,13 +6,6 @@
 # API interactions. The Sketchup.active_model method gives you a handle to the
 # current model, and from there you can use the model-level methods to start
 # getting information and making changes.
-#
-# Constants:
-# Product Family
-# - Model::ProTrial
-# - Model::ProLicensed
-# - Model::MakeTrial
-# - Model::MakeTrialExpired
 #
 # @bug Prior to SketchUp 2019.0 this class would yield +TypeError+ for all
 #   method calls if +#singleton_class+ was called on the model object.
@@ -32,10 +25,10 @@
 #   # Now that we have our handles, we can start pulling objects and making
 #   # method calls that are useful.
 #   first_entity = entities[0]
-#   UI.messagebox("First thing in your model is a #{first_entity.typename}")
+#   puts "First thing in your model is a #{first_entity.typename}"
 #
 #   number_materials = materials.length
-#   UI.messagebox("Your model has #{number_materials} materials.")
+#   puts "Your model has #{number_materials} materials."
 #
 #   new_edge = entities.add_line([0,0,0], [500,500,0])
 #
@@ -178,9 +171,9 @@ class Sketchup::Model
   #   on the given path. A definition cannot be edited if any of its instances
   #   are locked.
   #
-  # @note Since changing the active entities in SketchUp also changes what
-  #   coordinate system is used, entities can't be modified in the same operation
-  #   as the active entities changes. The API handles this automatically by
+  # @note When changing the active entities in SketchUp, the coordinate system
+  #   also changes. Therefore, entities cannot be modified in the same operation
+  #   as the active entities change. The API handles this automatically by
   #   starting and committing transparent operations as needed.
   #
   #   If the API user tries to do this:
@@ -226,6 +219,24 @@ class Sketchup::Model
   #
   # @version SketchUp 2020.0
   def active_path=(instance_path)
+  end
+
+  # The {#active_section_planes} method returns all of the active section planes in the model.
+  #
+  # @example SketchUp 2025 and newer
+  #   model = Sketchup.active_model
+  #   section_planes = model.active_section_planes
+  #
+  # @example SketchUp 2024 and older
+  #   # In older SketchUp versions, you can achieve the same result with:
+  #   model = Sketchup.active_model
+  #   entities_collections = [Sketchup.active_model.entities] + model.definitions.map(&:entities)
+  #   section_planes = entities_collections.map(&:active_section_plane).compact
+  #
+  # @return [Array<Sketchup::SectionPlane>]
+  #
+  # @version Sketchup 2026.0
+  def active_section_planes
   end
 
   # The {#active_view} method returns the active View object for this model.
@@ -498,6 +509,9 @@ class Sketchup::Model
   # The {#drawing_element_visible?} method reports whether the given drawing
   # element in an instance path is visible given the current model options.
   #
+  # @bug Prior to version 2026.0 the method throws an exception when the last
+  #   element in the instance path is a {Sketchup::Group} or {Sketchup::ComponentInstance}.
+  #
   # @example Traversing every visible entity in the model
   #   module Example
   #
@@ -575,6 +589,19 @@ class Sketchup::Model
   def entities
   end
 
+  # The {#environments} method is used to retrieve the {Sketchup::Environments} object for
+  # this model.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   environments = model.environments
+  #
+  # @return [Sketchup::Environments]
+  #
+  # @version SketchUp 2025.0
+  def environments
+  end
+
   # The export method is used to export a given file format. It knows which
   # format to export based on the file extension you place on the file name.
   # For example, a filename of "thing.obj" will export an OBJ file, whereas
@@ -588,9 +615,14 @@ class Sketchup::Model
   # * SketchUp Pro 2015+ added IFC export capability.
   # * SketchUp Pro 2016+ added PDF export capability.
   # * SketchUp Pro 2018+ added options for all 3D exporters.
+  # * SketchUp 2024+ added glb and usdz exporters.
+  # * SketchUp 2026+ the IFC exporter has been replaced with a new implementation
+  #   that provides specific export options.
   #
   # See the {file:pages/exporter_options.md Exporter Options} file for information
   # on creating a valid hash for the various exporters.
+  #
+  # @bug IFC export on ARM macs isn't working for SketchUp 2022-2025.
   #
   # @example General use
   #   model = Sketchup.active_model
@@ -621,10 +653,11 @@ class Sketchup::Model
   #
   # @example IFC Example
   #   model = Sketchup.active_model
-  #   # If no IFC types are passed in, then no geometry will be exported.
-  #   options_hash = { :hidden_geometry => true,
-  #                    :ifc_mapped_items => true,
-  #                    :ifc_types => ['IfcBuilding', 'IfcDoor']}
+  #   options_hash = { :ifc_version => "IFC 4",
+  #                    :standard_ifc_hierarchy => true,
+  #                    :selectionset_only => false,
+  #                    :hidden_geometry => true,
+  #                    :tessellated_geometry => true }
   #   status = model.export('c:/my_export.ifc', options_hash)
   #
   # @overload export(path, show_summary = false)
@@ -720,8 +753,9 @@ class Sketchup::Model
   #   @param [Array<Integer>] ids_or_array Pass either a series of ids or a
   #     single array containing persistent ids.
   #
-  #   @return [Array<Sketchup::Entity, nil>] Returns an array with
-  #     {Sketchup::Entity} objects for each id found and nil otherwise.
+  #   @return [Sketchup::Entity, Array<Sketchup::Entity>, nil] Returns an {Sketchup::Entity} if a
+  #     single PID was given or an array of {Sketchup::Entity} objects for each id found or nil if
+  #     nothing was found.
   #
   # @overload find_entity_by_persistent_id(ids_or_array, **scope)
   #
@@ -730,23 +764,24 @@ class Sketchup::Model
   #     single array containing persistent ids.
   #   @param [Hash<Symbol, Boolean>] scope Limit the scope of the search to the
   #     given scope categories.
-  #   @option [Boolean] scope :entities Search entities parent to
+  #   @option scope [Boolean] :entities Search entities parent to
   #     {Sketchup::Entities}.
-  #   @option [Boolean] scope :layers Search {Sketchup::Layers} for
+  #   @option scope [Boolean] :layers Search {Sketchup::Layers} for
   #     {Sketchup::Layer} entities.
-  #   @option [Boolean] scope :layer_folders Search {Sketchup::Layers} for
+  #   @option scope [Boolean] :layer_folders Search {Sketchup::Layers} for
   #     {Sketchup::LayerFolder} entities.
-  #   @option [Boolean] scope :materials Search {Sketchup::Materials} for
+  #   @option scope [Boolean] :materials Search {Sketchup::Materials} for
   #     {Sketchup::Material} entities.
-  #   @option [Boolean] scope :pages Search {Sketchup::Pages} for
+  #   @option scope [Boolean] :pages Search {Sketchup::Pages} for
   #     {Sketchup::Page} entities.
-  #   @option [Boolean] scope :styles Search {Sketchup::Styles} for
+  #   @option scope [Boolean] :styles Search {Sketchup::Styles} for
   #     {Sketchup::Style} entities.
-  #   @option [Boolean] scope :definitions Search {Sketchup::DefinitionList} for
+  #   @option scope [Boolean] :definitions Search {Sketchup::DefinitionList} for
   #     {Sketchup::ComponentDefinition} entities.
   #
-  #   @return [Array<Sketchup::Entity, nil>] Returns an array with
-  #     {Sketchup::Entity} objects for each id found and nil otherwise.
+  #   @return [Sketchup::Entity, Array<Sketchup::Entity>, nil] Returns an {Sketchup::Entity} if a
+  #     single PID was given or an array of {Sketchup::Entity} objects for each id found if multiple
+  #     PIDs were given or nil if nothing was found.
   #
   # @version SketchUp 2017
   def find_entity_by_persistent_id(*args)
@@ -755,11 +790,8 @@ class Sketchup::Model
   # This methods determines if the model is georeferenced.
   #
   # @example
-  #   if model.georeferenced?
-  #     UI.messagebox('This model is georeferenced.')
-  #   else
-  #     UI.messagebox('This model is NOT georeferenced.')
-  #   end
+  #   model = Sketchup.active_model
+  #   model.georeferenced?
   #
   # @return [Boolean]
   #
@@ -812,7 +844,16 @@ class Sketchup::Model
 
   # Returns a value which indicates the product family of the installed SketchUp
   # application.
-  # As of SketchUp 2013, the return values are:
+  #
+  # The constants for possible return values since SketchUp 2016:
+  #
+  # - {Sketchup::Model::ProTrial}
+  # - {Sketchup::Model::ProLicensed}
+  # - {Sketchup::Model::MakeTrial}
+  # - {Sketchup::Model::Make}
+  #
+  # In earlier SketchUp versions there were no defined constants and additional
+  # values could be returned. As of SketchUp 2013, the return values were:
   # - +0+ = Unknown
   # - +1+ = Pro Trial
   # - +2+ = Pro
@@ -821,9 +862,6 @@ class Sketchup::Model
   # - +5+ = Make Expired
   # - +6+ = Make
   # - +7+ = Pro License Unavailable
-  #
-  # The Model class defines some of these values as constants as of SketchUp
-  # 2016.
   #
   # @example
   #   model = Sketchup.active_model
@@ -1102,8 +1140,6 @@ class Sketchup::Model
   end
 
   #
-  # @api Overlays
-  #
   # @example
   #   Sketchup.active_model.overlays.each { |overlay|
   #     puts "#{overlay.name} (#{overlay.overlay_id}) Enabled: #{overlay.enabled?}"
@@ -1146,6 +1182,10 @@ class Sketchup::Model
   # The place_component method places a new component in the Model using the
   # component placement tool.
   #
+  # @bug Before SketchUp 2026.0, attempting to place an empty component
+  #   would crash SketchUp. This function will now raise an ArgumentError
+  #   when called with an empty component definition.
+  #
   # @example
   #   model.place_component componentdefinition, repeat
   #
@@ -1156,6 +1196,10 @@ class Sketchup::Model
   # @param [Boolean] repeat
   #   If set to true, stay in the component
   #   placement tool and place multiple components.
+  #
+  # @raise [ArgumentError] if the component cannot not be placed
+  #   (for example, if it is an empty component definition).
+  #   Added in SketchUp 2026.0.
   #
   # @return [Sketchup::Model, nil] The model object on success or Nil
   #
@@ -1205,30 +1249,25 @@ class Sketchup::Model
   def point_to_utm(point)
   end
 
-  # The raytest method is used to cast a ray (line) through the model and return
+  # The {#raytest} method is used to cast a ray (line) through the model and return
   # the first thing that the ray hits.
   #
   # A ray is a two element array containing a point and a vector
-  # [Geom::Point3d(), Geom::Vector3d()]. The point defines the start point of
+  # +[Geom::Point3d, Geom::Vector3d]+. The point defines the start point of
   # the ray and the vector defines the direction. If direction can not be
-  # normalized (e.g. direction = [0, 0, 0]), direction is taken as a point the
+  # normalized (e.g. +direction = [0, 0, 0]+), direction is taken as a point the
   # ray intersects.
   #
-  # first value is a Point3d where the item that the ray passed through exists. The second element is
-  # the instance path array of the entity that the ray hit. For example, if the ray hits a face that
-  # is contained by a component instance the instance path would be [Component1]. If the ray hit a
-  #   face that is contained by a component instance, which
-  #   is contained by another component instance and so on,
-  #   the instance path would be [Component1, Component2,
-  #   Component3...].
+  # @example Using a pickray from the view
+  #   model = Sketchup.active_model
+  #   ray = model.active_view.pickray(200, 400) # Screen coordinates
+  #   item = model.raytest(ray)
   #
-  # @example
+  # @example Using an arbitrary ray
   #   model = Sketchup.active_model
   #   ray = [Geom::Point3d.new(1, 2, 3), Geom::Vector3d.new(4, 5, 6)]
   #   item = model.raytest(ray, false) # Consider hidden geometry when
   #                                    # computing intersections.
-  #
-  # @note The parameter wysiwyg_flag was added in SU8 M1.
   #
   # @param [Array(Geom::Point3d, Geom::Vector3d)] ray
   #   A two element array containing a point and a vector.
@@ -1240,7 +1279,15 @@ class Sketchup::Model
   #   defaults to true (WYSIWYG) - i.e. hidden geometry is
   #   not intersected against.
   #
-  # @return [Array(Geom::Point3d, Array<Sketchup::Drawingelement>), nil] an array of two values. The
+  # @return [Array(Geom::Point3d, Array<Sketchup::Drawingelement>), nil] The first value is
+  #   a {Geom::Point3d} where the item that the ray passed through exists. The second element is
+  #   the instance path array of the entity that the ray hit. For example, if the ray hits a face
+  #   that is contained by a component instance the instance path would be [Component1].
+  #   If the ray hit a face that is contained by a component instance, which is contained by
+  #   another component instance and so on, the instance path would be [Component1, Component2,
+  #   Component3...].
+  #
+  # @see Sketchup::View#pickray
   #
   # @version SketchUp 6.0
   def raytest(ray, wysiwyg_flag = true)
@@ -1321,23 +1368,25 @@ class Sketchup::Model
   #   @param [String] path
   #   @param [Integer] version
   #     Possible values are:
-  #     - Sketchup::Model::VERSION_3,
-  #     - Sketchup::Model::VERSION_4,
-  #     - Sketchup::Model::VERSION_5,
-  #     - Sketchup::Model::VERSION_6,
-  #     - Sketchup::Model::VERSION_7,
-  #     - Sketchup::Model::VERSION_8,
-  #     - Sketchup::Model::VERSION_2013,
-  #     - Sketchup::Model::VERSION_2014,
-  #     - Sketchup::Model::VERSION_2015,
-  #     - Sketchup::Model::VERSION_2016,
-  #     - Sketchup::Model::VERSION_2017,
-  #     - Sketchup::Model::VERSION_2018,
-  #     - Sketchup::Model::VERSION_2019,
-  #     - Sketchup::Model::VERSION_2020,
-  #     - Sketchup::Model::VERSION_2021
+  #     - {Sketchup::Model::VERSION_3}
+  #     - {Sketchup::Model::VERSION_4}
+  #     - {Sketchup::Model::VERSION_5}
+  #     - {Sketchup::Model::VERSION_6}
+  #     - {Sketchup::Model::VERSION_7}
+  #     - {Sketchup::Model::VERSION_8}
+  #     - {Sketchup::Model::VERSION_2013}
+  #     - {Sketchup::Model::VERSION_2014}
+  #     - {Sketchup::Model::VERSION_2015}
+  #     - {Sketchup::Model::VERSION_2016}
+  #     - {Sketchup::Model::VERSION_2017}
+  #     - {Sketchup::Model::VERSION_2018}
+  #     - {Sketchup::Model::VERSION_2019}
+  #     - {Sketchup::Model::VERSION_2020}
+  #     - {Sketchup::Model::VERSION_2021}
   #
   # @return [Boolean] +true+ if successful, +false+ if unsuccessful
+  #
+  # @see #save_copy
   def save(*args)
   end
 
@@ -1353,16 +1402,25 @@ class Sketchup::Model
   #   path = File.join(ENV['Home'], 'Desktop', 'mysketchupcopy_v8.skp')
   #   status = model.save_copy(path, Sketchup::Model::VERSION_8)
   #
-  # @param [String] path
-  #   The path of the file to save the model copy to.
+  # @overload save_copy(path)
   #
-  # @param [Integer] version
-  #   See {Sketchup::Model#save} for supported values.
+  #   @param [String] path
+  #    The path of the file to save the model copy to.
+  #
+  # @overload save_copy(path, version)
+  #
+  #   @param [String] path
+  #    The path of the file to save the model copy to.
+  #
+  #   @param [Integer] version
+  #    See {Sketchup::Model#save} for supported values.
   #
   # @return [Boolean] true if successful, false if unsuccessful
   #
+  # @see #save
+  #
   # @version SketchUp 2014
-  def save_copy(path, version)
+  def save_copy(*args)
   end
 
   # The save_thumbnail method is used to save a thumbnail image to a file.
@@ -1383,22 +1441,23 @@ class Sketchup::Model
   def save_thumbnail(filename)
   end
 
-  # This method is used to select a SketchUp Tool object s the active tool. You
-  # must implement the SketchUp Tool interface to create a tool prior to calling
-  # this method.
+  # The {#select_tool} method is used to select a SketchUp Tool object as the active tool.
+  # To activate the native Select tool, pass nil as the argument.
   #
-  # The select tool is activated if you pass nil to the select_tool method. You
-  # must implement the SketchUp Tool interface to create a tool, prior to calling
-  # this method, and then instance the tool implementation and pass the object to
-  # this method. If you attempt to set the select_tool to nil in the initialize
-  # method of a tool you have written, it will be ignored.
+  # Before calling this method, you need to implement the SketchUp Tool interface
+  # and create a tool object. Then, pass the tool object to this method to activate it.
+  #
+  # the native Select tool.
   #
   # @example
   #   model = Sketchup.active_model
   #   tool = model.select_tool(nil)
   #
+  # @note If you call select_tool from within the initialize method of a custom tool, the call will
+  #   be ignored.
+  #
   # @param [Object] tool
-  #   The Tool object you want to select.
+  #   A tool instance object to activate, or nil to activate
   #
   # @return [Sketchup::Model] The Model object.
   #
@@ -1586,7 +1645,7 @@ class Sketchup::Model
   def tags=(tags)
   end
 
-  # The tile method retrieves the name of the model. If the model is saved on
+  # The {#title} method retrieves the name of the model. If the model is saved on
   # disk, returns the file name without extension. Otherwise returns an empty
   # string.
   #
@@ -1641,11 +1700,6 @@ class Sketchup::Model
   #   # This is a silly example since the active model is generally going to
   #   # be valid, but it illustrates the idea.
   #   model = Sketchup.active_model
-  #   if model.valid?
-  #     UI.messagebox('This model is valid.')
-  #   else
-  #     UI.messagebox('This model is NOT valid.')
-  #   end
   #
   # @return [Boolean]
   #

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Sketchup::ShadowInfo} class contains method to extract the shadow
@@ -96,10 +96,7 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   # @example
   #   model = Sketchup.active_model
   #   shadowinfo = model.shadow_info
-  #   value = shadowinfo["City"]
-  #   UI.messagebox value
-  #   value = shadowinfo["City"]="Denver, CO"
-  #   UI.messagebox value
+  #   shadowinfo["City"]="Denver, CO"
   #
   # @param [String] key
   #   The key of the shadowinfo value to set.

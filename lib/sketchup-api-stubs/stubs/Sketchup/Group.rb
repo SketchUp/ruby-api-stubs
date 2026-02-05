@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A Group class contains methods for manipulating groups of entities.
@@ -113,11 +113,6 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   face = entities2.add_face pts
   #   group.description = "This is a Group with a 2d Face"
   #   description = group.description
-  #   if (description)
-  #     UI.messagebox description
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
   # @param [String] description
   #   A string description.
@@ -150,11 +145,6 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   # Add a face to within the group
   #   face = entities2.add_face pts
   #   entities = group.entities
-  #   if (entities)
-  #     UI.messagebox entities
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
   # @return [Sketchup::Entities] an Entities object if successful
   #
@@ -188,11 +178,6 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   group.entities.add_line([0,0,0],[100,100,100])
   #
   #   array = group.explode
-  #   if array
-  #     UI.messagebox "Exploded the group"
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
   # @return [Array<Sketchup::Drawingelement>] An array of entity objects if successful, false if
   #   unsuccessful.
@@ -346,7 +331,6 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   # Add the group to the entities in the model
   #   group = entities.add_group
   #   status = group.locked?
-  #   UI.messagebox status
   #
   # @return [Boolean]
   #
@@ -449,7 +433,7 @@ class Sketchup::Group < Sketchup::Drawingelement
   def name
   end
 
-  # The name= method is used to set the description for the group.
+  # The {#name=} method is used to set the name for the group.
   #
   # @example
   #   # Add a group to the model.
@@ -632,13 +616,8 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   # Add a face to within the group
   #   face = entities2.add_face pts
   #   UI.messagebox "Group before Move"
-  #   group = group.transform! t
-  #   if (group)
-  #     UI.messagebox "Group after move"
-  #     UI.messagebox group
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   group.transform! t
+  #   puts "Group after move\r\n" + group.to_s
   #
   # @param [Geom::Transformation] transform
   #   A Transformation object.
@@ -676,13 +655,19 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   new_transformation = Geom::Transformation.new([100,0,0])
   #   group.transformation = new_transformation
   #
+  # @note As of SketchUp 2026, this will raise an error if the
+  #   {Geom::Transformation} is not invertible. Prior to 2026 this would silently set the
+  #   transformation possibly causing rendering or editing problems.
+  #
   # @param [Geom::Transformation] transformation
+  #
+  # @raise ArgumentError if the {Geom::Transformation} is not invertible (as of Sketchup 2026)
   #
   # @version SketchUp 6.0
   def transformation=(transformation)
   end
 
-  # The trim method is used to compute the (non-destructive) boolean difference
+  # The {#trim} method is used to compute the (non-destructive) boolean difference
   # of the two groups representing manifold solid volumes (this - arg).  If
   # the specified objects (this and arg) do not represent manifold volumes, this
   # method fails.
@@ -692,6 +677,11 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   group1 = entities[0]
   #   group2 = entities[1]
   #   result = group1.trim(group2)
+  #
+  # @note Trimming object group2 using group1 results in a new trimmed version of group2.
+  #   If the trim is successful the original group2 is erased and a newly trimmed
+  #   version is created. This new version, derived from the trimming operation,
+  #   will possess a new GUID and will be returned.
   #
   # @note This method is not available in SketchUp Make.
   #

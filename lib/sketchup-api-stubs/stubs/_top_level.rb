@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 
@@ -146,6 +146,7 @@
   PAGE_NO_CAMERA = nil # Stub value.
   PAGE_USE_ALL = nil # Stub value.
   PAGE_USE_CAMERA = nil # Stub value.
+  PAGE_USE_ENVIRONMENT = nil # Stub value.
   PAGE_USE_HIDDEN = nil # Stub value.
   PAGE_USE_HIDDEN_GEOMETRY = nil # Stub value.
   PAGE_USE_HIDDEN_OBJECTS = nil # Stub value.
@@ -178,23 +179,22 @@
   TextVerticalAlignCapHeight = nil # Stub value.
   TextVerticalAlignCenter = nil # Stub value.
 
+  VK_ALT = nil # Stub value.
+  VK_COMMAND = nil # Stub value.
+  VK_CONTROL = nil # Stub value.
   VK_DELETE = nil # Stub value.
   VK_DOWN = nil # Stub value.
   VK_END = nil # Stub value.
   VK_HOME = nil # Stub value.
   VK_INSERT = nil # Stub value.
   VK_LEFT = nil # Stub value.
+  VK_MENU = nil # Stub value.
   VK_NEXT = nil # Stub value.
   VK_PRIOR = nil # Stub value.
   VK_RIGHT = nil # Stub value.
+  VK_SHIFT = nil # Stub value.
   VK_SPACE = nil # Stub value.
   VK_UP = nil # Stub value.
-
-  VK_ALT = nil # Stub value.
-  VK_COMMAND = nil # Stub value.
-  VK_CONTROL = nil # Stub value.
-  VK_MENU = nil # Stub value.
-  VK_SHIFT = nil # Stub value.
 
   X_AXIS_2D = nil # Stub value.
   Y_AXIS_2D = nil # Stub value.

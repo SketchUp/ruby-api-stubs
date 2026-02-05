@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The ConstructionLine class contains methods for modifying construction
@@ -20,11 +20,6 @@ class Sketchup::ConstructionLine < Sketchup::Drawingelement
   #   point2 = Geom::Point3d.new(20,20,20)
   #   constline = entities.add_cline(point1, point2)
   #   vector = constline.direction
-  #   if (vector)
-  #     UI.messagebox(vector)
-  #   else
-  #     UI.messagebox("Failure")
-  #   end
   #
   # @return vector - a Vector3d object if successful
   #
@@ -83,12 +78,12 @@ class Sketchup::ConstructionLine < Sketchup::Drawingelement
   # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
-  #   point1 = Geom::Point3d.new(0,0,0)
-  #   point2 = Geom::Point3d.new(20,20,20)
-  #   point3 = Geom::Point3d.new(10,10,10)
+  #   point1 = Geom::Point3d.new(0, 0, 0)
+  #   point2 = Geom::Point3d.new(20, 20, 20)
+  #   point3 = Geom::Point3d.new(10, 10, 10)
   #   constline = entities.add_cline(point1, point2)
-  #   UI.messagebox(constline.end)
-  #   # Will display point2
+  #   constline.end = point3
+  #   # Will shorten the line to [10, 10, 10]
   #
   # @overload end=(point)
   #
@@ -225,7 +220,7 @@ class Sketchup::ConstructionLine < Sketchup::Drawingelement
   #   constline = entities.add_cline(point1, point2)
   #   puts constline.stipple
   #
-  # @return [String]
+  # @return [Integer]
   #
   # @version SketchUp 6.0
   def stipple

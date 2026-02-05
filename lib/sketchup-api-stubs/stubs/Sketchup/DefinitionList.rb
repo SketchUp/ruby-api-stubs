@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A DefinitionList object holds a list of all of the ComponentDefinition
@@ -145,7 +145,7 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #   be skipped as the indices change. Instead copy the current collection to an
   #   array using +to_a+ and then use +each+ on the array, when removing content.
   #
-  # @return [nil]
+  # @return [Sketchup::ComponentDefinition]
   #
   # @version SketchUp 6.0
   #
@@ -233,7 +233,7 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #   @param [String] path
   #     The path where the component definition file is located.
   #
-  # @overload load(path, allow_newer: true)
+  # @overload load(path, allow_newer: false)
   #
   #   Starting with SketchUp 2021.0 SketchUp attempts to load newer SketchUp
   #   models. If a newer model is loaded some information might have been skipped
@@ -268,13 +268,7 @@ class Sketchup::DefinitionList < Sketchup::Entity
   #
   # This method throws an exception if an url string is not
   # given, or an error occurs during retrieval from URL and a
-  # +load_handler+ was not given. Optional second parameter +load_handler+ can be
-  # used to pass in a Ruby object that responds to the following methods:
-  #
-  # - +cancelled?+
-  # - +onPercentChange(percent)+
-  # - +onSuccess()+
-  # - +onFailure(message_string)+
+  # {Sketchup::LoadHandler load_handler} was not given.
   #
   # @bug Calling this method from an {UI::HtmlDialog}'s action callback on macOS will cause the
   #   SketchUp application to become unresponsive or crash. To work around this, defer the call

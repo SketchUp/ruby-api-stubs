@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # Tool is the interface that you implement to create a SketchUp tool.
@@ -27,12 +27,12 @@
 # The following table contains several constants you can use when check for
 # certain key presses inside the keyboard handling callbacks:
 #
-# - +CONSTRAIN_MODIFIER_KEY+ = Shift Key
-# - +CONSTRAIN_MODIFIER_MASK+ = Shift Key
-# - +COPY_MODIFIER_KEY+ = Alt/Option on Mac, Ctrl on PC
-# - +COPY_MODIFIER_MASK+ = Alt/Option on Mac, Ctrl on PC
-# - +ALT_MODIFIER_KEY+ = Command on Mac, Alt on PC
-# - +ALT_MODIFIER_MASK+ = Command on Mac, Alt on PC
+# - {CONSTRAIN_MODIFIER_KEY} = Shift Key
+# - {CONSTRAIN_MODIFIER_MASK} = Shift Key
+# - {COPY_MODIFIER_KEY} = Alt/Option on Mac, Ctrl on PC
+# - {COPY_MODIFIER_MASK} = Alt/Option on Mac, Ctrl on PC
+# - {ALT_MODIFIER_KEY} = Command on Mac, Alt on PC
+# - {ALT_MODIFIER_MASK} = Command on Mac, Alt on PC
 #
 # @abstract Implement the methods described in this class to create a tool.
 #   You can not sub-class this class because it is not defined by the API.
@@ -130,10 +130,6 @@ class Sketchup::Tool
   # the tool is drawing gets clipped to the extents of the rest of the
   # model.
   #
-  # This must return a {Geom::BoundingBox}. In a typical implementation, you
-  # will create a new {Geom::BoundingBox}, add points to set the extents of the
-  # drawing that the tool will do and then return it.
-  #
   # @example
   #   def getExtents
   #     bb = Sketchup.active_model.bounds
@@ -181,11 +177,6 @@ class Sketchup::Tool
   # implement this method. Implement this method if you want a context-click to
   # display something other than this default context menu.
   #
-  # In SketchUp 2015 the flags, x, y and view parameters were added. They are
-  # needed if you need to pick the entities under the mouse position. The new
-  # parameters are optional, but if you need to use one you must include them
-  # all.
-  #
   # @example
   #   if Sketchup.version.to_i < 15
   #     # Compatible with SketchUp 2014 and older:
@@ -209,21 +200,36 @@ class Sketchup::Tool
   #    end
   #   end
   #
+  # @note In SketchUp 2015 the flags, x, y and view parameters were added. They are
+  #   needed if you need to pick the entities under the mouse position. The new
+  #   parameters are optional, but if you need to use one you must include them
+  #   all.
+  #
   # @overload getMenu(menu)
   #
   #   @param [Sketchup::Menu] menu
   #
   # @overload getMenu(menu, flags, x, y, view)
   #
+  #   @note Signature for versions prior to SketchUp 2025.0
   #   @version SketchUp 2015
   #   @param [Sketchup::Menu] menu
   #   @param [Integer] flags
   #     A bit mask that tells the state of the modifier keys and other mouse
   #     buttons at the time.
-  #   @param [Integer] x
-  #     The X coordinate on the screen where the event occurred.
-  #   @param [Integer] y
-  #     The Y coordinate on the screen where the event occurred.
+  #   @param [Integer] x  Screen coordinate in physical pixels.
+  #   @param [Integer] y  Screen coordinate in physical pixels.
+  #   @param [Sketchup::View] view
+  #
+  # @overload getMenu(menu, flags, x, y, view)
+  #
+  #   @version SketchUp 2025.0
+  #   @param [Sketchup::Menu] menu
+  #   @param [Integer] flags
+  #     A bit mask that tells the state of the modifier keys and other mouse
+  #     buttons at the time.
+  #   @param [Float] x  Screen coordinate in logical pixels.
+  #   @param [Float] y  Screen coordinate in logical pixels.
   #   @param [Sketchup::View] view
   #
   # @return [nil]
@@ -276,22 +282,22 @@ class Sketchup::Tool
   # "virtual keys" defined as constants you can use.  Their use is cross
   # platform. They are:
   #
-  # - +VK_ALT+
-  # - +VK_COMMAND+
-  # - +VK_CONTROL+
-  # - +VK_DELETE+
-  # - +VK_DOWN+
-  # - +VK_END+
-  # - +VK_HOME+
-  # - +VK_INSERT+
-  # - +VK_LEFT+
-  # - +VK_MENU+
-  # - +VK_NEXT+
-  # - +VK_PRIOR+
-  # - +VK_RIGHT+
-  # - +VK_SHIFT+
-  # - +VK_SPACE+
-  # - +VK_UP+
+  # - {VK_ALT}
+  # - {VK_COMMAND}
+  # - {VK_CONTROL}
+  # - {VK_DELETE}
+  # - {VK_DOWN}
+  # - {VK_END}
+  # - {VK_HOME}
+  # - {VK_INSERT}
+  # - {VK_LEFT}
+  # - {VK_MENU}
+  # - {VK_NEXT}
+  # - {VK_PRIOR}
+  # - {VK_RIGHT}
+  # - {VK_SHIFT}
+  # - {VK_SPACE}
+  # - {VK_UP}
   #
   # V6: There is a bug on Windows where the typematic effect does
   # not work. Typematic effects work fine on a Mac.
@@ -368,20 +374,27 @@ class Sketchup::Tool
   #     puts "                       view = #{view}"
   #   end
   #
-  # @param [Integer] flags
-  #   A bit mask that tells the state of the modifier
-  #   keys and other mouse buttons at the time.
+  # @overload onLButtonDoubleClick(flags, x, y, view)
   #
-  # @param [Integer] x
-  #   The X coordinate on the screen where the event occurred.
+  #   @note Signature for versions prior to SketchUp 2025.0
+  #   @version SketchUp 6.0
+  #   @param [Integer] flags  A bit mask that tells the state of the modifier
+  #                           keys and other mouse buttons at the time.
+  #   @param [Integer] x  Screen coordinate in physical pixels.
+  #   @param [Integer] y  Screen coordinate in physical pixels.
+  #   @param [Sketchup::View] view
   #
-  # @param [Integer] y
-  #   The Y coordinate on the screen where the event occurred.
+  # @overload onLButtonDoubleClick(flags, x, y, view)
   #
-  # @param [Sketchup::View] view
+  #   @version SketchUp 2025.0
+  #   @param [Integer] flags  A bit mask that tells the state of the modifier
+  #                           keys and other mouse buttons at the time.
+  #   @param [Float] x  Screen coordinate in logical pixels.
+  #   @param [Float] y  Screen coordinate in logical pixels.
+  #   @param [Sketchup::View] view
   #
   # @version SketchUp 6.0
-  def onLButtonDoubleClick(flags, x, y, view)
+  def onLButtonDoubleClick
   end
 
   # The {#onLButtonDown} method is called by SketchUp when the left mouse button
@@ -395,20 +408,27 @@ class Sketchup::Tool
   #     puts "                view = #{view}"
   #   end
   #
-  # @param [Integer] flags
-  #   A bit mask that tells the state of the modifier
-  #   keys and other mouse buttons at the time.
+  # @overload onLButtonDown(flags, x, y, view)
   #
-  # @param [Integer] x
-  #   The X coordinate on the screen where the event occurred.
+  #   @note Signature for versions prior to SketchUp 2025.0
+  #   @version SketchUp 6.0
+  #   @param [Integer] flags  A bit mask that tells the state of the modifier
+  #                           keys and other mouse buttons at the time.
+  #   @param [Integer] x  Screen coordinate in physical pixels.
+  #   @param [Integer] y  Screen coordinate in physical pixels.
+  #   @param [Sketchup::View] view
   #
-  # @param [Integer] y
-  #   The Y coordinate on the screen where the event occurred.
+  # @overload onLButtonDown(flags, x, y, view)
   #
-  # @param [Sketchup::View] view
+  #   @version SketchUp 2025.0
+  #   @param [Integer] flags  A bit mask that tells the state of the modifier
+  #                           keys and other mouse buttons at the time.
+  #   @param [Float] x  Screen coordinate in logical pixels.
+  #   @param [Float] y  Screen coordinate in logical pixels.
+  #   @param [Sketchup::View] view
   #
   # @version SketchUp 6.0
-  def onLButtonDown(flags, x, y, view)
+  def onLButtonDown
   end
 
   # The {#onLButtonUp} method is called by SketchUp when the left mouse button is
@@ -422,20 +442,27 @@ class Sketchup::Tool
   #     puts "              view = #{view}"
   #   end
   #
-  # @param [Integer] flags
-  #   A bit mask that tells the state of the modifier
-  #   keys and other mouse buttons at the time.
+  # @overload onLButtonUp(flags, x, y, view)
   #
-  # @param [Integer] x
-  #   The X coordinate on the screen where the event occurred.
+  #   @note Signature for versions prior to SketchUp 2025.0
+  #   @version SketchUp 6.0
+  #   @param [Integer] flags  A bit mask that tells the state of the modifier
+  #                           keys and other mouse buttons at the time.
+  #   @param [Integer] x  Screen coordinate in physical pixels.
+  #   @param [Integer] y  Screen coordinate in physical pixels.
+  #   @param [Sketchup::View] view
   #
-  # @param [Integer] y
-  #   The Y coordinate on the screen where the event occurred.
+  # @overload onLButtonUp(flags, x, y, view)
   #
-  # @param [Sketchup::View] view
+  #   @version SketchUp 2025.0
+  #   @param [Integer] flags  A bit mask that tells the state of the modifier
+  #                           keys and other mouse buttons at the time.
+  #   @param [Float] x  Screen coordinate in logical pixels.
+  #   @param [Float] y  Screen coordinate in logical pixels.
+  #   @param [Sketchup::View] view
   #
   # @version SketchUp 6.0
-  def onLButtonUp(flags, x, y, view)
+  def onLButtonUp
   end
 
   # The {#onMButtonDoubleClick} method is called by SketchUp when the middle
@@ -457,20 +484,27 @@ class Sketchup::Tool
   #   for now in the hopes of fixing the implementation, but you won't have any
   #   luck trying to use it in SU7 and earlier.
   #
-  # @param [Integer] flags
-  #   A bit mask that tells the state of the modifier
-  #   keys and other mouse buttons at the time.
+  # @overload onMButtonDoubleClick(flags, x, y, view)
   #
-  # @param [Integer] x
-  #   The X coordinate on the screen where the event occurred.
+  #   @note Signature for versions prior to SketchUp 2025.0
+  #   @version SketchUp 6.0
+  #   @param [Integer] flags A bit mask that tells the state of the modifier
+  #                           keys and other mouse buttons at the time.
+  #   @param [Integer] x Screen coordinate in physical pixels.
+  #   @param [Integer] y Screen coordinate in physical pixels.
+  #   @param [Sketchup::View] view
   #
-  # @param [Integer] y
-  #   The Y coordinate on the screen where the event occurred.
+  # @overload onMButtonDoubleClick(flags, x, y, view)
   #
-  # @param [Sketchup::View] view
+  #   @version SketchUp 2025.0
+  #   @param [Integer] flags  A bit mask that tells the state of the modifier
+  #                           keys and other mouse buttons at the time.
+  #   @param [Float] x  Screen coordinate in logical pixels.
+  #   @param [Float] y  Screen coordinate in logical pixels.
+  #   @param [Sketchup::View] view
   #
   # @version SketchUp 6.0
-  def onMButtonDoubleClick(flags, x, y, view)
+  def onMButtonDoubleClick
   end
 
   # The {#onMButtonDown} method is called by SketchUp when the middle mouse
@@ -488,20 +522,27 @@ class Sketchup::Tool
   #     puts "                 view = #{view}"
   #   end
   #
-  # @param [Integer] flags
-  #   A bit mask that tells the state of the modifier
-  #   keys and other mouse buttons at the time.
+  # @overload onMButtonDown(flags, x, y, view)
   #
-  # @param [Integer] x
-  #   The X coordinate on the screen where the event occurred.
+  #   @note Signature for versions prior to SketchUp 2025.0
+  #   @version SketchUp 6.0
+  #   @param [Integer] flags  A bit mask that tells the state of the modifier
+  #                           keys and other mouse buttons at the time.
+  #   @param [Integer] x  Screen coordinate in physical pixels.
+  #   @param [Integer] y  Screen coordinate in physical pixels.
+  #   @param [Sketchup::View] view
   #
-  # @param [Integer] y
-  #   The Y coordinate on the screen where the event occurred.
+  # @overload onMButtonDown(flags, x, y, view)
   #
-  # @param [Sketchup::View] view
+  #   @version SketchUp 2025.0
+  #   @param [Integer] flags  A bit mask that tells the state of the modifier
+  #                           keys and other mouse buttons at the time.
+  #   @param [Float] x  Screen coordinate in logical pixels.
+  #   @param [Float] y  Screen coordinate in logical pixels.
+  #   @param [Sketchup::View] view
   #
   # @version SketchUp 6.0
-  def onMButtonDown(flags, x, y, view)
+  def onMButtonDown
   end
 
   # The {#onMButtonUp} method is called by SketchUp when the middle mouse button
@@ -520,20 +561,27 @@ class Sketchup::Tool
   #     puts "               view = #{view}"
   #   end
   #
-  # @param [Integer] flags
-  #   A bit mask that tells the state of the modifier
-  #   keys and other mouse buttons at the time.
+  # @overload onMButtonUp(flags, x, y, view)
   #
-  # @param [Integer] x
-  #   The X coordinate on the screen where the event occurred.
+  #   @note Signature for versions prior to SketchUp 2025.0
+  #   @version SketchUp 6.0
+  #   @param [Integer] flags  A bit mask that tells the state of the modifier
+  #                           keys and other mouse buttons at the time.
+  #   @param [Integer] x  Screen coordinate in physical pixels.
+  #   @param [Integer] y  Screen coordinate in physical pixels.
+  #   @param [Sketchup::View] view
   #
-  # @param [Integer] y
-  #   The Y coordinate on the screen where the event occurred.
+  # @overload onMButtonUp(flags, x, y, view)
   #
-  # @param [Sketchup::View] view
+  #   @version SketchUp 2025.0
+  #   @param [Integer] flags  A bit mask that tells the state of the modifier
+  #                           keys and other mouse buttons at the time.
+  #   @param [Float] x  Screen coordinate in logical pixels.
+  #   @param [Float] y  Screen coordinate in logical pixels.
+  #   @param [Sketchup::View] view
   #
   # @version SketchUp 6.0
-  def onMButtonUp(flags, x, y, view)
+  def onMButtonUp
   end
 
   # The {#onMouseEnter} method is called by SketchUp when the mouse enters the
@@ -578,20 +626,27 @@ class Sketchup::Tool
   #     puts "               view = #{view}"
   #   end
   #
-  # @param [Integer] flags
-  #   A bit mask that tells the state of the modifier
-  #   keys and other mouse buttons at the time.
+  # @overload onMouseMove(flags, x, y, view)
   #
-  # @param [Integer] x
-  #   The X coordinate on the screen where the event occurred.
+  #   @note Signature for versions prior to SketchUp 2025.0
+  #   @version SketchUp 6.0
+  #   @param [Integer] flags  A bit mask that tells the state of the modifier
+  #                           keys and other mouse buttons at the time.
+  #   @param [Integer] x  Screen coordinate in physical pixels.
+  #   @param [Integer] y  Screen coordinate in physical pixels.
+  #   @param [Sketchup::View] view
   #
-  # @param [Integer] y
-  #   The Y coordinate on the screen where the event occurred.
+  # @overload onMouseMove(flags, x, y, view)
   #
-  # @param [Sketchup::View] view
+  #   @version SketchUp 2025.0
+  #   @param [Integer] flags  A bit mask that tells the state of the modifier
+  #                           keys and other mouse buttons at the time.
+  #   @param [Float] x  Screen coordinate in logical pixels.
+  #   @param [Float] y  Screen coordinate in logical pixels.
+  #   @param [Sketchup::View] view
   #
   # @version SketchUp 6.0
-  def onMouseMove(flags, x, y, view)
+  def onMouseMove
   end
 
   # The {#onMouseWheel} method is called by SketchUp when the mouse scroll wheel
@@ -642,27 +697,34 @@ class Sketchup::Tool
   #
   #   Sketchup.active_model.select_tool(ExampleTool.new)
   #
-  # @param [Integer] flags
-  #   A bit mask that tells the state of the modifier
-  #   keys and other mouse buttons at the time.
+  # @overload onMouseWheel(flags, delta, x, y, view)
   #
-  # @param [Integer] delta
-  #   Either +1+ or +-1+ depending on which direction the
-  #   mouse wheel scrolled.
+  #   @note Signature for versions prior to SketchUp 2025.0
+  #   @version SketchUp 2019.2
+  #   @param [Integer] flags  A bit mask that tells the state of the modifier
+  #                           keys and other mouse buttons at the time.
+  #   @param [Integer] delta  Either +1+ or +-1+ depending on which direction the
+  #                           mouse wheel scrolled.
+  #   @param [Integer] x  Screen coordinate in physical pixels.
+  #   @param [Integer] y  Screen coordinate in physical pixels.
+  #   @param [Sketchup::View] view
   #
-  # @param [Float] x
-  #   The X coordinate on the screen where the event occurred.
+  # @overload onMouseWheel(flags, delta, x, y, view)
   #
-  # @param [Float] y
-  #   The Y coordinate on the screen where the event occurred.
-  #
-  # @param [Sketchup::View] view
+  #   @version SketchUp 2025.0
+  #   @param [Integer] flags  A bit mask that tells the state of the modifier
+  #                           keys and other mouse buttons at the time.
+  #   @param [Integer] delta  Either +1+ or +-1+ depending on which direction the
+  #                           mouse wheel scrolled.
+  #   @param [Float] x  Screen coordinate in logical pixels.
+  #   @param [Float] y  Screen coordinate in logical pixels.
+  #   @param [Sketchup::View] view
   #
   # @return [Boolean] Return +true+ to prevent SketchUp from performing default
   #   zoom action.
   #
   # @version SketchUp 2019.2
-  def onMouseWheel(flags, delta, x, y, view)
+  def onMouseWheel
   end
 
   # The {#onRButtonDoubleClick} is called by SketchUp when the user double clicks
@@ -676,20 +738,27 @@ class Sketchup::Tool
   #     puts "                       view = #{view}"
   #   end
   #
-  # @param [Integer] flags
-  #   A bit mask that tells the state of the modifier
-  #   keys and other mouse buttons at the time.
+  # @overload onRButtonDoubleClick(flags, x, y, view)
   #
-  # @param [Integer] x
-  #   The X coordinate on the screen where the event occurred.
+  #   @note Signature for versions prior to SketchUp 2025.0
+  #   @version SketchUp 6.0
+  #   @param [Integer] flags  A bit mask that tells the state of the modifier
+  #                           keys and other mouse buttons at the time.
+  #   @param [Integer] x  Screen coordinate in physical pixels.
+  #   @param [Integer] y  Screen coordinate in physical pixels.
+  #   @param [Sketchup::View] view
   #
-  # @param [Integer] y
-  #   The Y coordinate on the screen where the event occurred.
+  # @overload onRButtonDoubleClick(flags, x, y, view)
   #
-  # @param [Sketchup::View] view
+  #   @version SketchUp 2025.0
+  #   @param [Integer] flags  A bit mask that tells the state of the modifier
+  #                           keys and other mouse buttons at the time.
+  #   @param [Float] x  Screen coordinate in logical pixels.
+  #   @param [Float] y  Screen coordinate in logical pixels.
+  #   @param [Sketchup::View] view
   #
   # @version SketchUp 6.0
-  def onRButtonDoubleClick(flags, x, y, view)
+  def onRButtonDoubleClick
   end
 
   # The {#onRButtonDown} method is called by SketchUp when the user presses
@@ -705,20 +774,27 @@ class Sketchup::Tool
   #     puts "                view = #{view}"
   #   end
   #
-  # @param [Integer] flags
-  #   A bit mask that tells the state of the modifier
-  #   keys and other mouse buttons at the time.
+  # @overload onRButtonDown(flags, x, y, view)
   #
-  # @param [Integer] x
-  #   The X coordinate on the screen where the event occurred.
+  #   @note Signature for versions prior to SketchUp 2025.0
+  #   @version SketchUp 6.0
+  #   @param [Integer] flags  A bit mask that tells the state of the modifier
+  #                           keys and other mouse buttons at the time.
+  #   @param [Integer] x  Screen coordinate in physical pixels.
+  #   @param [Integer] y  Screen coordinate in physical pixels.
+  #   @param [Sketchup::View] view
   #
-  # @param [Integer] y
-  #   The Y coordinate on the screen where the event occurred.
+  # @overload onRButtonDown(flags, x, y, view)
   #
-  # @param [Sketchup::View] view
+  #   @version SketchUp 2025.0
+  #   @param [Integer] flags  A bit mask that tells the state of the modifier
+  #                           keys and other mouse buttons at the time.
+  #   @param [Float] x  Screen coordinate in logical pixels.
+  #   @param [Float] y  Screen coordinate in logical pixels.
+  #   @param [Sketchup::View] view
   #
   # @version SketchUp 6.0
-  def onRButtonDown(flags, x, y, view)
+  def onRButtonDown
   end
 
   # The {#onRButtonUp} method is called by SketchUp when the user releases the
@@ -732,20 +808,27 @@ class Sketchup::Tool
   #     puts "              view = #{view}"
   #   end
   #
-  # @param [Integer] flags
-  #   A bit mask that tells the state of the modifier
-  #   keys and other mouse buttons at the time.
+  # @overload onRButtonUp(flags, x, y, view)
   #
-  # @param [Integer] x
-  #   The X coordinate on the screen where the event occurred.
+  #   @note Signature for versions prior to SketchUp 2025.0
+  #   @version SketchUp 6.0
+  #   @param [Integer] flags  A bit mask that tells the state of the modifier
+  #                           keys and other mouse buttons at the time.
+  #   @param [Integer] x  Screen coordinate in physical pixels.
+  #   @param [Integer] y  Screen coordinate in physical pixels.
+  #   @param [Sketchup::View] view
   #
-  # @param [Integer] y
-  #   The Y coordinate on the screen where the event occurred.
+  # @overload onRButtonUp(flags, x, y, view)
   #
-  # @param [Sketchup::View] view
+  #   @version SketchUp 2025.0
+  #   @param [Integer] flags  A bit mask that tells the state of the modifier
+  #                           keys and other mouse buttons at the time.
+  #   @param [Float] x  Screen coordinate in logical pixels.
+  #   @param [Float] y  Screen coordinate in logical pixels.
+  #   @param [Sketchup::View] view
   #
   # @version SketchUp 6.0
-  def onRButtonUp(flags, x, y, view)
+  def onRButtonUp
   end
 
   # The {#onReturn} method is called by SketchUp when the user hit the Return key

@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Dimension class provides base functionality for classes DimensionLinear
@@ -38,13 +38,14 @@ class Sketchup::Dimension < Sketchup::Drawingelement
   def add_observer(observer)
   end
 
-  # The arrow_type method retrieves the current arrow type of the dimension.
-  # Valid arrow types are class constants:
-  # - +Dimension::ARROW_NONE,+
-  # - +Dimension::ARROW_SLASH+
-  # - +Dimension::ARROW_DOT+
-  # - +Dimension::ARROW_CLOSED+
-  # - +Dimension::ARROW_OPEN+
+  # The {#arrow_type} method retrieves the current arrow type of the dimension.
+  #
+  # Valid arrow types are:
+  # - {Sketchup::Dimension::ARROW_NONE}
+  # - {Sketchup::Dimension::ARROW_SLASH}
+  # - {Sketchup::Dimension::ARROW_DOT}
+  # - {Sketchup::Dimension::ARROW_CLOSED}
+  # - {Sketchup::Dimension::ARROW_OPEN}
   #
   # @example
   #   type = dim.arrow_type
@@ -58,13 +59,14 @@ class Sketchup::Dimension < Sketchup::Drawingelement
   def arrow_type
   end
 
-  # The arrow_type= method sets the arrow type of the dimension.
-  # Valid arrow types are class constants:
-  # - +Dimension::ARROW_NONE,+
-  # - +Dimension::ARROW_SLASH+
-  # - +Dimension::ARROW_DOT+
-  # - +Dimension::ARROW_CLOSED+
-  # - +Dimension::ARROW_OPEN+
+  # The {#arrow_type=} method sets the arrow type of the dimension.
+  #
+  # Valid arrow types are:
+  # - {Sketchup::Dimension::ARROW_NONE}
+  # - {Sketchup::Dimension::ARROW_SLASH}
+  # - {Sketchup::Dimension::ARROW_DOT}
+  # - {Sketchup::Dimension::ARROW_CLOSED}
+  # - {Sketchup::Dimension::ARROW_OPEN}
   #
   # @example
   #   dim.arrow_type = Sketchup::Dimension::ARROW_CLOSED

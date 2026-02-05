@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Behavior class is used to control the "behavior" of components, which
@@ -52,26 +52,20 @@ class Sketchup::Behavior < Sketchup::Entity
   #   definitions = model.definitions
   #   path = Sketchup.find_support_file "Bed.skp",
   #     "Components/Components Sampler/"
-  #
-  #   begin
-  #     definition = definitions.load path
-  #   rescue
-  #     UI.messagebox $!.message
-  #   end
-  #
+  #   definition = definitions.load path
   #   behavior = definition.behavior
   #   b = behavior.always_face_camera?
   #   if (b)
-  #     UI.messagebox b
+  #     puts "Component faces camera"
   #   else
-  #     UI.messagebox "Always Face Camera is equal to false"
+  #     puts "Component does not face camera"
   #   end
   #   status = behavior.always_face_camera = true
   #   b = behavior.always_face_camera?
   #   if (b)
-  #     UI.messagebox b
+  #     puts "Alwas Face Camera is equal to true"
   #   else
-  #     UI.messagebox "Failure"
+  #     puts "Failure"
   #   end
   #
   # @return [Boolean] behavior - true if the component is set to always face
@@ -236,8 +230,8 @@ class Sketchup::Behavior < Sketchup::Entity
   #     "Components/Components Sampler/"
   #   begin
   #     definition = definitions.load path
-  #   rescue
-  #     UI.messagebox $!.message
+  #   rescue => exception
+  #     puts exception.message
   #   end
   #
   # @return [Boolean] status - true if the component's is to be cast from the

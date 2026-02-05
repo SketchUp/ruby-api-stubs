@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This is the base class for all SketchUp entities. Entities are basically
@@ -26,7 +26,7 @@
 #     end
 #   }
 #
-#   UI.messagebox("There are " + face_count.to_s + " faces selected.")
+#   "There are #{face_count} faces selected."
 #
 # @version SketchUp 6.0
 class Sketchup::Entity
@@ -297,7 +297,7 @@ class Sketchup::Entity
 
   # The parent method is used to retrieve the parent of the entity.
   #
-  # The parent will be a ComponentDefinition, a Group, or a Model, whatever
+  # The parent will be a ComponentDefinition, a Group, a Model, or whatever
   # the entity is contained within.
   #
   # @example

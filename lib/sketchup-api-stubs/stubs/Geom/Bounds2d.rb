@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The bounds2d class represents an axis aligned bounding box represented by
@@ -14,7 +14,10 @@ class Geom::Bounds2d
   # checks whether the point values are the same
   #
   # @example
-  #   entity.bounds == entity.untransformed_bounds
+  #   bounds1 = Geom::Bounds2d.new(0.0, 0.0, 5.0, 5.0)
+  #   bounds2 = Geom::Bounds2d.new([0, 0], [5, 5])
+  #   # Return true
+  #   bounds1 == bounds2
   #
   # @param [Geom::Bounds2d] other
   #
@@ -27,10 +30,10 @@ class Geom::Bounds2d
   # The {#height} method returns the height of the {Geom::Bounds2d}.
   #
   # @example
-  #   bounds = Geom::Bounds2d.new(0.0, 0.0, 1.0, 1.0)
+  #   bounds = Geom::Bounds2d.new(5.0, 5.0, 1.0, 7.0)
   #   height = bounds.height
   #
-  # @return [Geom::Point2d]
+  # @return [Float]
   #
   # @version LayOut 2018
   def height
@@ -39,7 +42,11 @@ class Geom::Bounds2d
   # The {#initialize} method creates a new {Geom::Bounds2d}.
   #
   # @example
-  #   bounds = Geom::Bounds2d.new(0.0, 0.0, 1.0, 1.0)
+  #   bounds1 = Geom::Bounds2d.new(0.0, 0.0, 1.0, 1.0)
+  #
+  #   upper_left = Geom::Point2d.new(1, 1)   # is equivalent to upper_left = [1, 1]
+  #   lower_right = Geom::Point2d.new(3, 3)   # is equivalent to lower_right = [3, 3]
+  #   bounds2 = Geom::Bounds2d.new(upper_left, lower_right)
   #
   # @overload initialize(other_bounds)
   #
@@ -80,8 +87,9 @@ class Geom::Bounds2d
   # corner of the {Geom::Bounds2d}.
   #
   # @example
-  #   bounds = Geom::Bounds2d.new(0.0, 0.0, 1.0, 1.0)
-  #   l_r = bounds.lower_right
+  #   bounds = Geom::Bounds2d.new(2.0, 2.0, 1.0, 1.0)
+  #   # The result is a Point2d(3, 3)
+  #   lower_right = bounds.lower_right
   #
   # @return [Geom::Point2d]
   #
@@ -89,8 +97,9 @@ class Geom::Bounds2d
   def lower_right
   end
 
-  # The {#set!} method sets the {Geom::Bounds2d} to match another one.
-  # The argument is anything that can be converted into a {Geom::Bounds2d}.
+  # The {#set!} method is used to update the dimensions and position of a {Geom::Bounds2d} object so
+  # that it matches the specified bounds. The argument is anything that can be converted into a
+  # {Geom::Bounds2d}.
   #
   # @example
   #   bounds = Geom::Bounds2d.new(3.0, 3.0, 5.0, 5.0)
@@ -131,11 +140,11 @@ class Geom::Bounds2d
   def set!(*args)
   end
 
-  # The {#to_a} method returns an array which contains the {Geom::Point2d} that
+  # The {#to_a} method returns an array which contains the {Geom::Point2d}s that
   # define the {Geom::Bounds2d}.
   #
   # @example
-  #   bounds = Geom::Bounds2d.new
+  #   bounds = Geom::Bounds2d.new(2.0, 2.0, 5.0, 5.0)
   #   bounds.to_a.each { |point| p point.to_s }
   #
   # @return [Array(Geom::Point2d, Geom::Point2d)]
@@ -148,8 +157,9 @@ class Geom::Bounds2d
   # of the {Geom::Bounds2d}.
   #
   # @example
-  #   bounds = Geom::Bounds2d.new(0.0, 0.0, 1.0, 1.0)
-  #   u_l = bounds.upper_left
+  #   bounds = Geom::Bounds2d.new(2.0, 2.0, 1.0, 1.0)
+  #   # The result is a Point2d(2, 2)
+  #   upper_left = bounds.upper_left
   #
   # @return [Geom::Point2d]
   #
@@ -160,10 +170,10 @@ class Geom::Bounds2d
   # The {#width} method returns the width of the {Geom::Bounds2d}.
   #
   # @example
-  #   bounds = Geom::Bounds2d.new(0.0, 0.0, 1.0, 1.0)
+  #   bounds = Geom::Bounds2d.new(5.0, 5.0, 7.0, 1.0)
   #   width = bounds.width
   #
-  # @return [Geom::Point2d]
+  # @return [Float]
   #
   # @version LayOut 2018
   def width

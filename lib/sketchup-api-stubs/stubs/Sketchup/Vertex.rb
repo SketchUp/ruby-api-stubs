@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A Vertex. A Vertex represents the end of an Edge or a point inside a Face.
@@ -12,17 +12,15 @@ class Sketchup::Vertex < Sketchup::Entity
   # vertex and another vertex
   #
   # @example
-  #   edge = entities[0]
+  #   model = Sketchup.active_model
+  #   entities = model.active_entities
+  #   edge = entities.add_line([0, 0, 0], [20, 20, 20], [40, 40, 40])
+  #
   #   # returns array of vertices that make up the line
-  #   verticies = edge.vertices
-  #   vertex1 = verticies[0]
-  #   vertex2 = verticies[1]
-  #   edge = vertex1.common_edge vertex2
-  #   if (edge)
-  #     UI.messagebox edge
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   vertices = edge.vertices
+  #   vertex1 = vertices[0]
+  #   vertex2 = vertices[1]
+  #   edge = vertex1.common_edge(vertex2)
   #
   # @param [Sketchup::Vertex] vertex2
   #   A Vertex object.
@@ -39,23 +37,26 @@ class Sketchup::Vertex < Sketchup::Entity
   # interior of a Curve.
   #
   # @example
-  #   edge = entities[0]
-  #   # returns array of vertices that make up the line
-  #   verticies = edge.vertices
-  #   vertex1 = verticies[0]
+  #   centerpoint = Geom::Point3d.new
+  #   # Create a circle perpendicular to the normal or Z axis
+  #   vector = Geom::Vector3d.new(0, 0, 1)
+  #   vector2 = vector.normalize!
+  #   model = Sketchup.active_model
+  #   entities = model.entities
+  #   edgearray = entities.add_circle(ORIGIN, Z_AXIS, 10)
+  #   edge = edgearray[0]
+  #   curve = edge.curve
+  #   vertices = curve.vertices
+  #   # returns array of vertices that make up the circle
+  #   vertices = edge.vertices
+  #   vertex1 = vertices[0]
   #   status = vertex1.curve_interior?
-  #   if (status)
-  #     UI.messagebox status
-  #   else
-  #     #returns nil if vertex is not on interior of a Curve
-  #     UI.messagebox "Failure"
-  #   end
   #
   # @note This method doesn't actually return a boolean as the question mark
   #   post-fix would normally indicate. But the result still evaluates to
   #   truthy or falsy.
   #
-  # @return [Boolean]
+  # @return [Sketchup::ArcCurve, nil]
   #
   # @version SketchUp 6.0
   def curve_interior?

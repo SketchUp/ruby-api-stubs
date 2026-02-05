@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The UI module contains a number of methods for creating simple UI elements
@@ -56,11 +56,12 @@ module UI
   # the specified location. This must be called from within a custom
   # tool. See the {Sketchup::Tool} documentation for a complete example.
   #
-  # The size of the cursor images should be 32x32 pixels.
+  # The size of the cursor images should be 32x32 pixels. Any size different
+  # from that will be scaled using the shrink-to-fit policy.
   #
-  # The coordinates for the cursor's hotspot is based from it's top left corner.
+  # The coordinates for the cursor's hotspot are based from it's top left corner, starting at (0, 0).
   # For example, a value of (hot_x, hot_y) = (5, 10) would identify the hotpoint
-  # of the cursor at 6 pixels from the left edge of your cursor image and 11
+  # of the cursor at 5 pixels from the left edge of your cursor image and 10
   # pixels from the top edge of your cursor image.
   #
   # @bug On macOS raster cursors are always displayed at 24x24.
@@ -94,12 +95,15 @@ module UI
   #   File path to an image.
   #
   # @param [Integer] hot_x
-  #   An x coordinate that is the "hotpoint" for the cursor
-  #   computed from the left edge of your cursor image.
+  #   The x-coordinate of the "hotpoint" of the cursor, computed from the left edge of your cursor
+  #   image.
   #
   # @param [Integer] hot_y
-  #   A y coordinate that is the "hotpoint" for the cursor
-  #   computed from the top edge of the of your cursor image.
+  #   The y-coordinate of the "hotpoint" of the cursor, computed from the top edge of your cursor
+  #   image.
+  #
+  # @raise [RangeError] if @param hot_x or @param hot_y are negative or larger than the max value of
+  #   an Integer.
   #
   # @return [Integer] Id associated with the cursor.
   #   Use this with {UI.set_cursor} in {Sketchup::Tool#onSetCursor}.
@@ -143,6 +147,10 @@ module UI
   #   defaults = ["Enter name", "", "Male"]
   #   list = ["", "", "Male|Female"]
   #   input = UI.inputbox(prompts, defaults, list, "Tell me about yourself.")
+  #
+  # @note The method intelligently handles various types for default values and lists, automatically
+  #   attempting to convert provided inputs to match the type of the default value. This ensures
+  #   consistency in data types throughout the operation.
   #
   # @overload inputbox(prompts, defaults, title)
   #
@@ -252,7 +260,7 @@ module UI
   # @example
   #   result = UI.messagebox('Do you like cheese?', MB_YESNO)
   #   if result == IDYES
-  #     UI.messagebox('SketchUp likes cheese too!')
+  #     puts 'SketchUp likes cheese too!'
   #   end
   #
   # @param [String] message
@@ -291,8 +299,16 @@ module UI
   #   not perform URL encoding and the API user is expected to provide a valid
   #   URL.
   #
-  # @example
-  #   status = UI.openURL("http://www.sketchup.com")
+  # @example Open plain(non-encoded) URL
+  #   status = UI.openURL("https://www.sketchup.com")
+  #
+  # @example Open encoded URL
+  #   status = UI.openURL("https://example.com/api?query=test&test=test")
+  #
+  # @example Open a local URL
+  #   # To open a local file one must add file:/// in front of the path of the file to make it an
+  #   # URL.
+  #   status = UI.openURL("file:///path/to/the/file/file.skp")
   #
   # @param [String] url
   #
@@ -450,7 +466,20 @@ module UI
   # Returns the scaling factor SketchUp uses on high DPI monitors. Useful for
   # things like {Sketchup::View#draw2d}.
   #
-  # @example
+  # @example Per Monitor DPI
+  #   # Scale a set of points representing 2d screen points to account for high
+  #   # DPI monitors.
+  #   points2d = [
+  #     Geom::Point3d.new(0, 0, 0),
+  #     Geom::Point3d.new(8, 0, 0),
+  #     Geom::Point3d.new(8, 4, 0),
+  #     Geom::Point3d.new(0, 4, 0),
+  #   ]
+  #   scale = UI.scale_factor(Sketchup.active_model.active_view)
+  #   tr = Geom::Transformation.scaling(UI.scale_factor)
+  #   points2d.each { |point| point.transform!(tr) }
+  #
+  # @example Deprecated legacy API
   #   # Scale a set of points representing 2d screen points to account for high
   #   # DPI monitors.
   #   points2d = [
@@ -460,15 +489,28 @@ module UI
   #     Geom::Point3d.new(0, 4, 0)
   #   ]
   #   tr = Geom::Transformation.scaling(UI.scale_factor)
-  #   points2d.each { |point| point.transform!(tr)
+  #   points2d.each { |point| point.transform!(tr) }
   #
   # @note SU2017M0 will automatically scale up line width and text size, but will
   #   not scale up the points provided to {Sketchup::View#draw2d}.
   #
+  # @overload scale_factor
+  #
+  #   @version SketchUp 2017
+  #   @deprecated Use the overload that takes a {Sketchup::View} instead.
+  #   This returns a scale factor determined when SketchUp starts from the
+  #   monitor it started on. It does not change for the duration of the
+  #   application session.
+  #
+  # @overload scale_factor(view)
+  #
+  #   @version SketchUp 2025.0
+  #   @param [Sketchup::View] view
+  #
   # @return [Float]
   #
   # @version SketchUp 2017
-  def self.scale_factor
+  def self.scale_factor(*args)
   end
 
   # The {.select_directory} method is used to display the OS dialog for selecting

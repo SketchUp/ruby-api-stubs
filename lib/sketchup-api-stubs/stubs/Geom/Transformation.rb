@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # Transformations are a standard construct in the 3D world for representing
@@ -24,7 +24,7 @@ class Geom::Transformation
   #   # Creates a transformation that "flips" the axes from XYZ to XZY. Something
   #   # one often need for importers/exporters when dealing with applications
   #   # that threat Y as "up".
-  #   tr = Geom::Transformation.axes(ORIGIN, X_AXIS, Z_AXIS, Y_AXIS.reverse)
+  #   transformation = Geom::Transformation.axes(ORIGIN, X_AXIS, Z_AXIS, Y_AXIS.reverse)
   #
   # @overload axes(origin, xaxis, yaxis, zaxis)
   #
@@ -52,31 +52,31 @@ class Geom::Transformation
   # The {.interpolate} method is used to create a new transformation that is the
   # result of interpolating between two other transformations.
   #
-  # Parameter is a weight (between `0.0` and `1.0`) that identifies whether to favor
-  # `transformation1` or `transformation2`.
+  # Parameter weight is a value (between 0.0 and 1.0) that represents the percentage given to
+  # `transformation1` and `transformation2`.
   #
   # @example
   #   origin = Geom::Point3d.new(0, 0, 0)
-  #   x = Geom::Vector3d.new(0, 1, 0)
-  #   y = Geom::Vector3d.new(1, 0, 0)
-  #   z = Geom::Vector3d.new(0, 0, 1)
+  #   xaxis = Geom::Vector3d.new(0, 1, 0)
+  #   yaxis = Geom::Vector3d.new(1, 0, 0)
+  #   zaxis = Geom::Vector3d.new(0, 0, 1)
   #   point = Geom::Point3d.new(10, 20, 30)
-  #   t1 = Geom::Transformation.new(point)
-  #   t2 = Geom::Transformation.axes(origin, x, y, z)
-  #   # This produce a transformation that is a mix of 75% t1 and 25% t2.
-  #   t3 = Geom::Transformation.interpolate(t1, t2, 0.25)
+  #   transformation1 = Geom::Transformation.new(point)
+  #   transformation2 = Geom::Transformation.axes(origin, xaxis, yaxis, zaxis)
+  #   # This produce a transformation that is a mix of 75% transformation1 and 25% transformation2.
+  #   new_transformation = Geom::Transformation.interpolate(transformation1, transformation2, 0.25)
   #
-  # @param [Geom::Transformation] transform1
+  # @param [Geom::Transformation] transformation1
   #
-  # @param [Geom::Transformation] transform2
+  # @param [Geom::Transformation] transformation2
   #
   # @param [Float] weight
-  #   A value between 0.0 and 1.0 (see comments).
+  #   A value between 0.0 and 1.0.
   #
   # @return [Geom::Transformation]
   #
   # @version SketchUp 6.0
-  def self.interpolate(transform1, transform2, weight)
+  def self.interpolate(transformation1, transformation2, weight)
   end
 
   # The {.rotation} method is used to create a transformation that does rotation
@@ -108,7 +108,7 @@ class Geom::Transformation
   # @example
   #   point = Geom::Point3d.new(20, 30, 0)
   #   scale = 10
-  #   tr = Geom::Transformation.scaling(point, scale)
+  #   transformation = Geom::Transformation.scaling(point, scale)
   #
   # @overload scaling(scale)
   #
@@ -154,7 +154,7 @@ class Geom::Transformation
   #
   # @example
   #   vector = Geom::Vector3d.new(0, 1, 0)
-  #   tr = Geom::Transformation.translation(vector)
+  #   transformation = Geom::Transformation.translation(vector)
   #
   # @overload translation(vector)
   #
@@ -177,9 +177,9 @@ class Geom::Transformation
   # @example
   #   point1 = Geom::Point3d.new(10, 20, 30)
   #   point2 = Geom::Point3d.new(2, 2, 2)
-  #   tr = Geom::Transformation.new(point1)
-  #   # Returns Point3d(12, 22, 32)
-  #   point3 = tr * point2
+  #   transformation = Geom::Transformation.new(point1)
+  #   # The result is a Point3d(12, 22, 32)
+  #   new_point = transformation * point2
   #
   # @overload *(point)
   #
@@ -219,8 +219,8 @@ class Geom::Transformation
   #
   # @example
   #   point = Geom::Point3d.new(10, 20, 30)
-  #   tr1 = Geom::Transformation.new(point)
-  #   tr2 = tr1.clone
+  #   transformation = Geom::Transformation.new(point)
+  #   new_transformation = transformation.clone
   #
   # @return [Geom::Transformation]
   #
@@ -233,22 +233,22 @@ class Geom::Transformation
   #
   # @example
   #   point = Geom::Point3d.new(10, 20, 30)
-  #   tr = Geom::Transformation.new(point)
-  #   # Returns false.
-  #   status = tr.identity?
+  #   transformation = Geom::Transformation.new(point)
+  #   # Returns false
+  #   status = transformation.identity?
   #
   # @example
-  #   tr = Geom::Transformation.new(ORIGIN)
-  #   # Returns false.
-  #   status = tr.identity?
+  #   transformation = Geom::Transformation.new(ORIGIN)
+  #   # Returns true
+  #   status = transformation.identity?
   #
   # @example
-  #   tr = Geom::Transformation.new
-  #   # Returns true.
-  #   status = tr.identity?
+  #   transformation = Geom::Transformation.new
+  #   # Returns true
+  #   status = transformation.identity?
   #
   # @example
-  #   # Returns true.
+  #   # Returns true
   #   status = IDENTITY.identity?
   #
   # @note As of SketchUp 2018, this now looks at the data to determine if the
@@ -267,7 +267,18 @@ class Geom::Transformation
   #
   # @example
   #   point = Geom::Point3d.new(10, 20, 30)
-  #   tr = Geom::Transformation.new(point)
+  #   transformation = Geom::Transformation.new(point)
+  #
+  # @example
+  #   origin = Geom::Point3d.new(10, 10, 10)
+  #   zaxis = Geom::Vector3d.new(1, 2, 3)
+  #   transformation = Geom::Transformation.new(origin, zaxis)
+  #
+  # @example
+  #   origin = Geom::Point3d.new(1, 1, 1)
+  #   axis = Geom::Vector3d.new(1, 0, 0)
+  #   angle = 45.degrees # Return 45 degrees in radians.
+  #   transformation = Geom::Transformation.new(origin, axis, angle)
   #
   # @overload initialize
   #
@@ -306,8 +317,8 @@ class Geom::Transformation
   #
   # @overload initialize(origin, zaxis)
   #
-  #   Creates a Transformation where origin is the new origin, and zaxis is the
-  #   z axis. The x and y axes are determined using an arbitrary axis rule.
+  #   Creates a Transformation where origin is the new origin, and z axis is the
+  #   new z axis. The x and y axes are determined using an arbitrary axis rule.
   #   @param [Geom::Point3d] origin
   #   @param [Geom::Vector3d] zaxis
   #   @return [Geom::Transformation]
@@ -345,8 +356,14 @@ class Geom::Transformation
   #
   # @example
   #   point = Geom::Point3d.new(10, 20, 30)
-  #   tr1 = Geom::Transformation.new(point)
-  #   tr2 = tr1.inverse
+  #   transformation = Geom::Transformation.new(point)
+  #   new_transformation = transformation.inverse
+  #
+  # @note As of SketchUp 2026, this will raise an error if the
+  #   {Geom::Transformation} is not invertible. Prior to 2026 this would silently attempt
+  #   to invert the transformation possibly returning in an invalid transformation.
+  #
+  # @raise ArgumentError if the {Geom::Transformation} is not invertible (as of Sketchup 2026)
   #
   # @return [Geom::Transformation]
   #
@@ -358,8 +375,14 @@ class Geom::Transformation
   #
   # @example
   #   point = Geom::Point3d.new(10, 20, 30)
-  #   tr = Geom::Transformation.new(point)
-  #   tr.invert!
+  #   transformation = Geom::Transformation.new(point)
+  #   new_transformation = transformation.invert!
+  #
+  # @note As of SketchUp 2026, this will raise an error if the
+  #   {Geom::Transformation} is not invertible. Prior to 2026 this would silently attempt
+  #   to invert the transformation possibly creating in an invalid transformation.
+  #
+  # @raise ArgumentError if the {Geom::Transformation} is not invertible (as of Sketchup 2026)
   #
   # @return [Geom::Transformation]
   #
@@ -370,9 +393,9 @@ class Geom::Transformation
   # The {#origin} method retrieves the origin of a rigid transformation.
   #
   # @example
-  #   point1 = Geom::Point3d.new(10, 20, 30)
-  #   tr = Geom::Transformation.new(point1)
-  #   point2 = tr.origin
+  #   point = Geom::Point3d.new(10, 20, 30)
+  #   transformation = Geom::Transformation.new(point)
+  #   new_point = transformation.origin
   #
   # @return [Geom::Point3d] the origin of the transformation.
   #
@@ -386,9 +409,9 @@ class Geom::Transformation
   #
   # @example
   #   point1 = Geom::Point3d.new(10, 20, 30)
-  #   tr1 = Geom::Transformation.new(point)
+  #   transformation = Geom::Transformation.new(point1)
   #   point2 = Geom::Point3d.new(60, 40, 70)
-  #   tr1.set!(point2)
+  #   transformation.set!(point2)
   #
   # @overload set!(transformation)
   #
@@ -424,9 +447,10 @@ class Geom::Transformation
   #
   # @example
   #   point = Geom::Point3d.new(10, 20, 30)
-  #   tr = Geom::Transformation.new(point)
+  #   transformation = Geom::Transformation.new(point)
   #   # This splits the 16 items into a string of 4x4 elements for easier reading.
-  #   str4x4 = tr.to_a.each_slice(4).inject { |str, row| "#{str}\r\n#{row}" }
+  #   matrix = transformation.to_a.each_slice(4).inject { |str, row|"#{str}\r\n#{row}"}
+  #   puts matrix
   #
   # @return [Array<Float>]
   #
@@ -438,8 +462,8 @@ class Geom::Transformation
   #
   # @example
   #   point = Geom::Point3d.new(10, 20, 30)
-  #   tr = Geom::Transformation.new(point)
-  #   x = tr.xaxis
+  #   transformation = Geom::Transformation.new(point)
+  #   x = transformation.xaxis
   #
   # @return [Geom::Vector3d]
   #
@@ -451,8 +475,8 @@ class Geom::Transformation
   #
   # @example
   #   point = Geom::Point3d.new(10, 20, 30)
-  #   tr = Geom::Transformation.new(point)
-  #   x = tr.yaxis
+  #   transformation = Geom::Transformation.new(point)
+  #   y = transformation.yaxis
   #
   # @return [Geom::Vector3d]
   #
@@ -464,8 +488,8 @@ class Geom::Transformation
   #
   # @example
   #   point = Geom::Point3d.new(10, 20, 30)
-  #   tr = Geom::Transformation.new(point)
-  #   x = tr.zaxis
+  #   transformation = Geom::Transformation.new(point)
+  #   z = transformation.zaxis
   #
   # @return [Geom::Vector3d]
   #

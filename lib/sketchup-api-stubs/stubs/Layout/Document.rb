@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This is the interface to a LayOut document. A {Layout::Document} is the 2D
@@ -129,8 +129,31 @@ class Layout::Document
   #
   # @raise [ArgumentError] if entity already belongs to a {Layout::Document}
   #
+  # @return [Layout::Entity] The {Layout::Entity} that was added to the {Layout::Document}.
+  #
   # @version LayOut 2018
   def add_entity(*args)
+  end
+
+  # The {#attribute_dictionary} method returns a copy of the document's attribute dictionary with the
+  # given name.
+  #
+  # is no attribute dictionary
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   doc.set_attribute("jane_doe_doc_maker", "made_by_doc_maker", true)
+  #   attributes = doc.attribute_dictionary("jane_doe_doc_maker")
+  #   # Adding to this Layout::Dictionary does not apply to the document's attribute dictionary, use
+  #   #Layout::Document#set_attribute.
+  #   attributes.merge!(doc_id: 42)
+  #
+  # @param [String] name
+  #
+  # @return [Layout::Dictionary, nil] A copy of the document's attribute dictionary, or nil if there
+  #
+  # @version LayOut 2026.0
+  def attribute_dictionary(name)
   end
 
   # The {#auto_text_definitions} method returns an array of
@@ -146,6 +169,33 @@ class Layout::Document
   def auto_text_definitions
   end
 
+  # The {#delete_attribute} method is used to delete an attribute from a document.
+  #
+  # @overload delete_attribute(dictionary_name)
+  #
+  #   @param [String] dictionary_name The name of an attribute dictionary.
+  #   @return [Boolean]
+  #
+  #   @example
+  #     doc = Layout::Document.open("C:/path/to/document.layout")
+  #     doc.set_attribute("jane_doe_doc_maker", "made_by_doc_maker", true)
+  #     doc.delete_attribute("jane_doe_doc_maker")
+  #
+  # @overload delete_attribute(dictionary_name, key)
+  #
+  #   @param [String] dictionary_name The name of an attribute dictionary.
+  #   @param [String] key An attribute key.
+  #   @return [Boolean]
+  #
+  #   @example
+  #     doc = Layout::Document.open("C:/path/to/document.layout")
+  #     doc.set_attribute("jane_doe_doc_maker", "made_by_doc_maker", true)
+  #     doc.delete_attribute("jane_doe_doc_maker", "made_by_doc_maker")
+  #
+  # @version LayOut 2026.0
+  def delete_attribute(*args)
+  end
+
   # The {#export} method exports the {Layout::Document} to a given file format.
   # It knows which format to export based on the file extension you place on the
   # file name. For example, a filename of "thing.pdf" will export a PDF file,
@@ -157,47 +207,64 @@ class Layout::Document
   #   doc = Layout::Document.open("c:/path/to/document.layout")
   #
   #   # Export pdf file on a PC, with default settings.
-  #   status = doc.export("c:/my_export.pdf")
+  #   doc.export("c:/my_export.pdf")
   #
   #   # Export pages one through three at high quality, compressing jpeg images
   #   # at 0.75 compression quality (valid range is 0.0 - 1.0). Note that the
   #   # first page of a {Layout::Document} is index 0.
   #   options = { start_page: 1,
   #               end_page: 3,
-  #               compress_images: TRUE,
+  #               compress_images: true,
   #               compress_quality: 0.75 }
   #
-  #   status = doc.export("c:/my_export.pdf", options)
+  #   doc.export("c:/my_export.pdf", options)
   #
   #   # Export pages one and three through five. Note that page_range starts at
   #   # index 1.
   #   # `page_range` support added in LayOut 2024.0.
   #   options = { page_range: "1,3-5",
-  #               compress_images: TRUE,
+  #               compress_images: true,
   #               compress_quality: 0.75 }
   #
-  #   status = doc.export("c:/my_export.pdf", options)
+  #   doc.export("c:/my_export.pdf", options)
   #
   # @example Image Set Export Examples
   #   doc = Layout::Document.open("c:/path/to/document.layout")
   #
   #   # Export png files on macOS, with default settings.
-  #   status = doc.export("/Users/<username>/Desktop/pngs/page.png")
+  #   doc.export("/Users/<username>/Desktop/pngs/page.png")
   #
   #   # Export pages one through three at 300 dpi as JPGs.
   #   options = { start_page: 1,
   #               end_page: 3,
   #               dpi: 300 }
-  #   status = doc.export('c:/page.jpg', options)
+  #   doc.export('c:/page.jpg', options)
   #
   #   # Export pages one and three through five. Note that page_range starts at
   #   # index 1.
   #   # `page_range` support added in LayOut 2024.0.
   #   options = { page_range: "1,3-5",
-  #               compress_images: TRUE,
+  #               compress_images: true,
   #               compress_quality: 0.75 }
   #
-  #   status = doc.export("c:/my_export.png", options)
+  #   doc.export("c:/my_export.png", options)
+  #
+  # @option options [Integer] :start_page The first page to export.
+  #
+  # @option options [Integer] :end_page The last page to export.
+  #
+  # @option options [String] :page_range A string specifying the range of pages to export. The
+  #   format can include individual page numbers and ranges of pages, separated by commas (e.g.,
+  #   "1,3-5"). This was added in LayOut 2024.0
+  #
+  # @option options [Boolean] :compress_images Whether to compress images in the document. This is
+  #   valid only for image compression for PDF exports.
+  #
+  # @option options [Float] :compress_quality The compression quality for JPEG images. This is
+  #   valid only for the quality of the compression of images for PDF exports.
+  #
+  # @option options [Integer] :dpi The resolution in dots per inch for the exported images. This
+  #   option is only valid for image exports.
   #
   # @param [String] file_path
   #   The file or image set to create. The directory
@@ -216,6 +283,37 @@ class Layout::Document
   #
   # @version LayOut 2020.1
   def export(file_path, options = nil)
+  end
+
+  # The {#get_attribute} method is used to retrieve the value of an attribute in
+  # the document's attribute dictionary.
+  #
+  # If the third parameter, +default_value+, is not passed and there is no
+  # attribute that matches the given name, it returns +nil+.
+  #
+  # If +default_value+ is provided and there is no matching attribute it returns
+  # the given value. It does not create an attribute with that name though.
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   # Read an attribute value from the document. In this case this will return the
+  #   # default value provided: 42.
+  #   doc.get_attribute("jane_doe_doc_maker", "doc_id", 42)
+  #
+  # @param [String] name
+  #   The name of an attribute dictionary.
+  #
+  # @param [String] key
+  #   An attribute key.
+  #
+  # @param [String, Boolean, Integer, Float, Hash, Layout::Dictionary, nil] default_value
+  #   A default
+  #   value to return if no attribute is found.
+  #
+  # @return [String, Boolean, Integer, Float, Layout::Dictionary, nil] the retrieved value.
+  #
+  # @version LayOut 2026.0
+  def get_attribute(name, key, default_value = nil)
   end
 
   # The {#grid} method returns the {Layout::Grid} for a {Layout::Document}.
@@ -484,6 +582,22 @@ class Layout::Document
   #
   # @version LayOut 2018
   def save(*args)
+  end
+
+  # The {#set_attribute} method adds an attribute to the document's attribute dictionary.
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   doc.set_attribute "jane_doe_doc_maker", "doc_id", 42
+  #
+  # @param [String] name
+  #   The name of an attribute dictionary.
+  #   @param [String] key An attribute key.
+  #   @param [String, Boolean, Integer, Float, Hash, Layout::Dictionary, nil] value The value for the
+  #     attribute.
+  #
+  # @version LayOut 2026.0
+  def set_attribute(name, key, value)
   end
 
   # The {#shared_entities} method returns the {Layout::Entities}

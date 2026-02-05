@@ -19,7 +19,16 @@ Though our adoption rate to the latest version is quite high, it can take time a
 
 Here are the build numbers for recent SketchUp releases. Note that build numbers in languages besides English are larger for each release, so it is best to check for builds that are greater than or equal to the numbers here.
 
+- **SU2026.0** = BUILD_NUMBER_WIN on Windows 64-bit, BUILD_NUMBER_MAC on Mac 64-bit.
+
+- **SU2025.0.3** = 25.0.660 on Windows 64-bit, 25.0.659 on Mac 64-bit.
+- **SU2025.0.2** = 25.0.634 on Windows 64-bit, 25.0.633 on Mac 64-bit.
+- **SU2025.0** = 25.0.571 on Windows 64-bit, 25.0.570 on Mac 64-bit.
+
+- **SU2024.0.2** = 24.0.594 on Windows 64-bit, 24.0.595 on Mac 64-bit.
+- **SU2024.0.1** = 24.0.553 on Windows 64-bit, 24.0.554 on Mac 64-bit.
 - **SU2024.0** = 24.0.484 on Windows 64-bit, 24.0.483 on Mac 64-bit.
+
 - **SU2023.1.3** = 23.1.340 on Windows 64-bit, 23.1.341 on Mac 64-bit.
 - **SU2023.1.2** = 23.1.315 on Windows 64-bit, 23.1.314 on Mac 64-bit.
 - **SU2023.1.1** = 23.1.313 on Windows 64-bit, 23.1.312 on Mac 64-bit.
@@ -28,6 +37,7 @@ Here are the build numbers for recent SketchUp releases. Note that build numbers
 - **SU2023.0** = 23.0.367 on Windows 64-bit, 23.0.366 on Mac 64-bit.
 - **SU2022.0.1** = 22.0.354 on Windows 64-bit, 22.0.353 on Mac 64-bit.
 - **SU2022.0** = 22.0.316 on Windows 64-bit, 22.0.315 on Mac 64-bit.
+
 - **SU2021.1.2** = 21.1.332 on Windows 64-bit, 21.1.331 on Mac 64-bit. (Contained no Ruby API changes)
 - **SU2021.1.1** = 21.1.299 on Windows 64-bit, 21.1.298 on Mac 64-bit.
 - **SU2021.1** = 21.1.279 on Windows 64-bit, 21.1.278 on Mac 64-bit.
@@ -73,7 +83,220 @@ Here are the build numbers for recent SketchUp releases. Note that build numbers
 
 - **SU6 M6** = 6.4.265 on Windows, 6.4.263 on Mac.
 
+
+# What's new in SketchUp 2026.0
+
+## Breaking changes
+* Modifying the properties {Sketchup::Axes}, {Sketchup::Camera}, {Sketchup::RenderingOptions}, and {Sketchup::ShadowInfo} of a {Sketchup::Page} is now an undoable operation. Scene changes are expected to be called between {Sketchup::Model#start_operation} and {Sketchup::Model#commit_operation} to not flood the undo stack.
+Extensions that don't follow this requirement will be rejected for updates or publication to the Extension Warehouse.
+* Additional error checking is performed regarding non-invertible transforms (typically this means the matrix has zero scale on
+  one or more axes). Calling {Geom::Transformation#inverse} or
+  {Geom::Transformation#invert!} with a non-invertible transform will raise an `ArgumentError`. In addition, calling {Sketchup::ComponentInstance#transformation=},
+  {Sketchup::ComponentInstance#move!}, {Sketchup::Group#transformation=}, or {Sketchup::Group#move!} with a non-invertible transform as an argument will also raise an `ArgumentError`.
+
+
+## Ruby API Additions and Improvements
+
+* Added {Sketchup::Model#active_section_planes}.
+* Added {Sketchup::Page#active_section_planes}.
+* Added {Sketchup::Styles#remove_style}.
+* Added a new optional parameter for {Layout::LinearDimension#initialize} to specify the dimension line's alignment on creation. Alignment can be
+  specified using one of the following constants:
+    * {Layout::LinearDimension::DIMENSION_LINE_ALIGNED}
+    * {Layout::LinearDimension::DIMENSION_LINE_VERTICAL}
+    * {Layout::LinearDimension::DIMENSION_LINE_HORIZONTAL}
+* Added {Layout::LinearDimension#leader_line_visible?}.
+* Added {Layout::Style#text_strikethrough}.
+* Added {Layout::Style#text_strikethrough=}.
+* Added constants for the valid values for {Layout::Style#text_strikethrough=}
+    * {Layout::Style::STRIKETHROUGH_NONE}
+    * {Layout::Style::STRIKETHROUGH_SINGLE}
+* Modified {Sketchup::Styles#add_style} to return the added style.
+* Added `:show_version_warning_dialog` optional argument to {Sketchup.open_file} to control whether the version compatibility dialog can appear.
+* Added {Sketchup::Pages#unique_name}.
+* Modified {Sketchup::Pages#add} so that when adding a new {Sketchup::Page}, if the specified name is already taken, it automatically modifies the name to ensure it is unique.
+* Modified {Sketchup::Page#name=} so that if the given name is already used by another {Sketchup::Page}, it automatically adjusts the name to make it unique.
+* Fixed {Sketchup::ComponentDefinition#save_as} and {Sketchup::ComponentDefinition#save_copy} to return false when saving did not work.
+* Modified {Sketchup::Model#export} to use a new IFC exporter which comes with the following option changes:
+    * new supported options: `:ifc_version`, `:standard_ifc_hierarchy`, `:selectionset_only`, `:tessellated_geometry`.
+    * options no longer supported: `:doublesided_faces`, `:ifc_mapped_items`, `:ifc_types`.
+* Added {Sketchup::Environments#add} overload that accepts just the file path. Environment name will be derived from the file being imported.
+* Added {Layout::Entity#set_attribute}.
+* Added {Layout::Entity#get_attribute} .
+* Added {Layout::Entity#delete_attribute}.
+* Added {Layout::Entity#attribute_dictionary}.
+* Added {Layout::Document#set_attribute}.
+* Added {Layout::Document#get_attribute}.
+* Added {Layout::Document#delete_attribute}.
+* Added {Layout::Document#attribute_dictionary}.
+* Added {Layout::Page#set_attribute}.
+* Added {Layout::Page#get_attribute}.
+* Added {Layout::Page#delete_attribute}.
+* Added {Layout::Page#attribute_dictionary}.
+* Added {Layout::Dictionary}.
+* Added rendering options support for Ambient Occlusion:
+    * {Sketchup::RenderingOptions} keys added:
+        * `"AmbientOcclusionColor"`
+        * `"AmbientOcclusionMultiplier"`
+    * {Sketchup::RenderingOptionsObserver} constants:
+        * {Sketchup::RenderingOptions::ROPSetAOColor}
+        * {Sketchup::RenderingOptions::ROPSetAOMultiplier}
+
+## Ruby API Bug Fixes
+
+* Fixed a crash in {Sketchup::Model#place_component} when placing an empty component.
+* Fixed SketchUp 2021.1 regression in {Sketchup::Model#drawing_element_visible?} throwing an exception when the last element of an instance path was a
+  {Sketchup::Group} or {Sketchup::ComponentInstance}.
+* Fixed an undo crash when using {Sketchup::Classifications#load_schema} and {Sketchup::ComponentDefinition#add_classification} in the same operation.
+* Fixed a bug that involves using a {Geom::Transformation} that is not invertible. Now calling {Geom::Transformation#inverse} or
+  {Geom::Transformation#invert!} with a non-invertible transform will raise an `ArgumentError`. In addition, calling {Sketchup::ComponentInstance#transformation=} or
+  {Sketchup::Group#transformation=} with a non-invertible transform as an argument will also raise an `ArgumentError`.
+* Fixed a crash in {Layout::SketchUpModel} when attempting to render a model containing an environment when that viewport was not yet added to a {Layout::Document}.
+* Fixed a crash when setting line width with {Sketchup::View#line_width=} to 0.0 with the new graphics engine. Negative values will raise an `ArgumentError` and positive values will be clamped to a minimum of 1.0.
+
+# What's new in SketchUp 2025.0.3
+
+## Ruby API Bug Fixes
+
+* Fixed crash using the LayOut Ruby API to add entities to a LayOut document.
+
+# What's new in SketchUp 2025.0.2
+
+## Update OpenSSL to 3.4.1
+
+The version of OpenSSL in Ruby was updated to 3.4.1.
+
+## Ruby API Additions and Improvements
+* Added {Sketchup::Material#normal_enabled=}.
+* Added {Sketchup::Material#ao_enabled=}.
+
+## Ruby API Bug Fixes
+* Fixed {Sketchup::Environments#current=} to allow unsetting the current environment.
+
+# What's new in SketchUp 2025.0
+
+## Update OpenSSL to 3.3.1
+
+The version of OpenSSL in Ruby was updated to 3.3.1.
+
+## Ruby API Additions and Improvements
+
+* Made {Sketchup::Licensing.get_extension_license} automatically try to fetch a license from Extension Warehouse if needed.
+* Added support for Snaps:
+    * {Sketchup::Snap}
+    * {Sketchup::Entities#add_snap}
+* Added support for PBR materials:
+    * {Sketchup::Material#ao_enabled?}
+    * {Sketchup::Material#ao_strength}
+    * {Sketchup::Material#ao_strength=}
+    * {Sketchup::Material#ao_texture}
+    * {Sketchup::Material#ao_texture=}
+    * {Sketchup::Material#metallic_factor}
+    * {Sketchup::Material#metallic_factor=}
+    * {Sketchup::Material#metallic_texture}
+    * {Sketchup::Material#metallic_texture=}
+    * {Sketchup::Material#metalness_enabled=}
+    * {Sketchup::Material#metalness_enabled?}
+    * {Sketchup::Material#normal_enabled?}
+    * {Sketchup::Material#normal_scale}
+    * {Sketchup::Material#normal_scale=}
+    * {Sketchup::Material#normal_style}
+    * {Sketchup::Material#normal_style=}
+    * {Sketchup::Material#normal_texture}
+    * {Sketchup::Material#normal_texture=}
+    * {Sketchup::Material#roughness_enabled=}
+    * {Sketchup::Material#roughness_enabled?}
+    * {Sketchup::Material#roughness_factor}
+    * {Sketchup::Material#roughness_factor=}
+    * {Sketchup::Material#roughness_texture}
+    * {Sketchup::Material#roughness_texture=}
+    * {Sketchup::Material#workflow}
+* Added {Sketchup::Pages#reorder}.
+* Added {Sketchup::Style#path}.
+* Added {Sketchup::Face#coplanar_with?}.
+* Added {Sketchup::AttributeDictionary#empty?}.
+* Added {Sketchup::ComponentDefinition#load_time}.
+* Added support for environment lighting (IBL):
+    * {Sketchup::Environment}
+    * {Sketchup::Environments}
+    * {Sketchup::EnvironmentsObserver}
+    * {Sketchup::Model#environments}
+    * {Sketchup::Page#use_environment?}
+    * {Sketchup::Page#use_environment=}
+    * {Sketchup::Page#environment}
+    * {Sketchup::Page#environment=}
+* Added `:pixel_size` and `:point_size` options to {Sketchup::View#draw_text}
+  and {Sketchup::View#text_bounds} for consistent font size across platforms.
+* Added constants for the valid values for {Sketchup::View#corner}:
+    * {Sketchup::View::CORNER_TOP_LEFT}
+    * {Sketchup::View::CORNER_TOP_RIGHT}
+    * {Sketchup::View::CORNER_BOTTOM_LEFT}
+    * {Sketchup::View::CORNER_BOTTOM_RIGHT}
+* Upgraded CEF (used by {UI::HtmlDialog}) to version 128.
+* Fixed issue of {Sketchup::Styles#selected_style=} for case where trying to set the the {Sketchup::Styles#selected_style=} to the {Sketchup::Styles#active_style}. 
+
+### Breaking Changes - Per Monitor DPI support
+
+SketchUp 2025.0 introduced support for different DPI per monitor on Windows.
+
+Related to this we have made changes to the Ruby API such that all screen
+coordinates are now in logical pixels. These changes are applied across Windows
+and macOS. Note that in this release only the Windows build will update the application
+DPI scaling factor to match the monitor the window is on.
+
+`Integer` arguments and return values for screen coordinates that are in pixels
+have been changed to be logical pixels. This means that the values are now scaled
+by `UI.scale_factor(view)`.
+
+The old `UI.scale_factor` will return `1.0` as a compatibility shim.
+
+These changes should require no or minimal changes to extensions. We also
+expect that many extensions that were never made DPI aware to now behave better
+with different DPI settings.
+
+* Added {Sketchup::View#device_width} returning physical pixels.
+* Added {Sketchup::View#device_height} returning physical pixels.
+* Added {Sketchup::ViewObserver#onScaleFactorChange}
+* Added optional option to {Sketchup.resize_viewport}:
+    `Sketchup.resize_viewport(model, width, height, logical_pixels: false)`
+* Added overload to {UI.scale_factor}: `UI::scale_factor(view)`
+* Changed {UI.scale_factor} always return `1.0` as a compatibility shim. This
+    should ensure that existing extensions that took `UI.scale_factor` into account
+    continue to work without modifications.
+* Changed {Sketchup::View#center} to return logical pixels.
+* Changed {Sketchup::View#corner} to return logical pixels.
+* Changed {Sketchup::View#draw2d} to use logical pixels.
+* Changed {Sketchup::View#inputpoint} to use logical pixels.
+* Changed {Sketchup::View#pick_helper} to use logical pixels.
+* Changed {Sketchup::View#pickray} to use logical pixels.
+* Changed {Sketchup::View#screen_coords} to return logical pixels.
+* Changed {Sketchup::View#vpwidth} to return logical pixels.
+* Changed {Sketchup::View#vpheight} to return logical pixels.
+* Changed {Sketchup::PickHelper#do_pick} to use logical pixels.
+* Changed {Sketchup::PickHelper#init} to use logical pixels.
+* Changed {Sketchup::PickHelper#window_pick} to use logical pixels.
+* Changed {Sketchup::InputPoint#pick} to use logical pixels.
+* Changed {Sketchup::Tool} mouse events to use logical pixels.
+* Changed {Sketchup::Overlay} mouse events to use logical pixels.
+
+## Ruby API Bug Fixes
+
+* Fixed SketchUp 2024 regression in {Sketchup::View#draw2d} with {GL_POINTS} that draw the points in model space instead of view space.
+* Fixed SketchUp 2023-2024 regression in {Sketchup::Face#area} reporting incorrect value when there are glued components on the outer loop.
+
+# What's new in SketchUp 2024.0.2
+
+## Update OpenSSL to 3.2.2
+
+The version of OpenSSL in Ruby was updated to 3.2.2.
+
+# What's new in SketchUp 2024.0.1
+
+No Ruby API changes.
+
 # What's new in SketchUp 2024.0
+
+## Upgrade Ruby to 3.2.2
 
 ## Ruby API Additions and Improvements
 
@@ -85,9 +308,9 @@ Here are the build numbers for recent SketchUp releases. Note that build numbers
         * `"AmbientOcclusionDistance"`
         * `"AmbientOcclusionIntensity"`
     * {Sketchup::RenderingOptionsObserver} constants:
-        * `ROPSetAOEnabled`
-        * `ROPSetAODistance`
-        * `ROPSetAOIntensity`
+        * {Sketchup::RenderingOptions::ROPSetAOEnabled}
+        * {Sketchup::RenderingOptions::ROPSetAODistance}
+        * {Sketchup::RenderingOptions::ROPSetAOIntensity}
 * {Sketchup::RenderingOptions#[]=} will now raise an `ArgumentError` if the given value cannot be set
   for the given key. This is a breaking change since earlier versions of the API would not indicate any
   failures for such erroneous calls.
@@ -174,6 +397,7 @@ The version of OpenSSL in Ruby was updated to 1.1.1o.
 ## Ruby API Bug Fixes
 
 * In SketchUp 2022.0 a bug might lead to an available component definition name being incorrectly renamed. Or a name that should be unavailable would be duplicated. This was fixed in SketchUp 2022.0.1.
+* Fixed a bug where {Sketchup::Tool#onKeyDown} and {Sketchup::Tool#onKeyUp} events were being incorrectly sent to a Ruby tool when the input focus was inside an {UI.inputbox}.
 
 # What's new in SketchUp 2022.0
 
@@ -465,6 +689,8 @@ For more details refer to the C API documentation.
 * Updated Ruby from 2.5.1 to 2.5.5 to address a logic bug in Ruby
 * Fixed possible crash in {Sketchup::Entities#clear!}
 * Fixed a bug in .skm serialisation where arrays in material attributes were not written out to file
+* It is no longer possible to assign {Sketchup::Image} materials to entities.
+* {Sketchup::ViewObserver#onViewChanged} now triggers when the viewport changes size.
 
 # What's new in SketchUp 2019.1
 
@@ -629,6 +855,20 @@ SketchUp core added a feature called Advanced Attributes. This adds some new att
 * Fixed a crash in {UI.create_cursor} that would happen if the length was less than 4 characters.
 * Fixed a rare crash in {Sketchup::MaterialsObserver}.
 
+# What's new in SketchUp 2017 M2
+
+### Fixes/Improvements General
+
+* (Mac) Fixed issue where SKM files lost attribute dictionaries when saved from
+  "In Model" to local library.
+
+### Ruby API
+
+* Fixed an issue with HtmlDialogs where SketchUp would crash when the
+  dialog was closed before all callbacks were processed.
+* Fixed an issue where extensions with multiple periods in filenames would
+  not load.
+
 # What's new in SketchUp 2017 M0
 
 ## Ruby 2.2
@@ -706,11 +946,59 @@ Visual Studio 2015 SP1 (targeting Windows 7). On MacOs we are using XCode 7.2.1
 * {UI.show_model_info} no longer opens a Model Info page for `"Extensions"` as
   that page is now replaced by the Extension Manager dialog.
 
+# What's new in SketchUp 2016 M1
+
+## API Additions
+
+### New Module For Access To Regional Settings
+* Added {Sketchup::RegionalSettings} module
+    * Added {Sketchup::RegionalSettings.decimal_separator} method
+    * Added {Sketchup::RegionalSettings.list_separator} method
+
+## Bug Fixes
+
+### Extensions
+* Fixed issue where the {Sketchup.register_extension} method's `load_on_start` parameter was not being honored on extensions that were manually placed within the Plugins folder.
+* Fixed issue where extensions installed in the `"Plugins"` directory were not respecting the extension's `load_on_start` property.
+* Fixed issue where extensions fail to load / gave errors on launch if you have certain non-English characters in your Ruby path (which can occur if your Windows user name has certain non-English characters). If you’re still seeing an error with the **Trimble Connect** extension, please {https://help.sketchup.com/en/extension-warehouse/managing-extensions update that extension} in the Extension Warehouse.
+* Fixed issue where the **Trimble Connect** Extension fails to load due to an invalid byte sequence error. Users will need to update to SketchUp 2016 M1 and update the Trimble Connect Extension to version 1.1.1 (via the **Extension Warehouse**) to see this change.
+* (Win) Fixed issue where the unchecking an extension within the **Extensions** panel of the **Preferences** dialog caused the list to scroll back to the top of the list.
+* Fixed issue where unchecking an extension within the **Extensions** panel of the **Preferences** dialog did not change the appearance of the checkbox.
+* Fixed issue where the **Extensions Policy** panel of the **Preferences** dialog incorrectly stated a user was under the "Identified Extensions Only" policy.
+* Updated dialog content for extensions that were installed but not loaded. The dialog now clearly states that the user must load the extension in order to use it.
+* Fixed issue where an extra dialog appeared on startup when loading an uncertified extension that was previously certified.
+* (Mac) Fixed issue where the "Uncertified Extension detected" dialog did not appear when installing an extension through the **Extensions** panel of the **Preferences** dialog.
+* Prevent the unsigned extension dialog from appearing unless the number of unsigned and loaded extensions has changed.
+
+### Exporters
+* (Mac) Fixed issue where exporter progress dialog had the incorrect title of "Import progress".
+
+### Importers
+* (Mac) Fixed issue where custom image importers were not being honored.
+
+### LanguageHandler
+* Fixed issue where the {LanguageHandler} class treated all double slashes (`//`) as comments.
+
+### Ruby
+* (Win) Fixed issue where third party DLLs in Windows system folders could override the Ruby standard library DLLs.
+* Fixed issue where {Sketchup.require}/{Sketchup.load load} fails to indicate a load failure.
+* For {Sketchup.require}/{Sketchup.load load}, modified the Ruby file loading priority to be **`.rbe`**, **`.rbs`** then **`.rb`**.
+
+### Startup Cycle
+* On startup, modified load policy for these files from the SketchUp binary path `"Tools"` subdirectory: **`extensions.rb`**, **`langhandler.rb`** and **`sketchup.rb`**
+    - The the above 3 files in this directory are now digitally signed.
+    - **Only these 3 files** will be loaded by SketchUp during the startup cycle.
+    - On startup, users will be prompted if any of the above 3 files have been modified since being digitally signed.
+
+### UI
+* (Win) {UI.preferences_pages} will now include `"Extensions Policy"`
+* (Win) {UI.show_preferences UI.show_preferences("Extensions Policy")} will now open the correct property page.
+
 # What's new in SketchUp 2016 M0
 
 ## A new LayOut API
 
-We’re proud to announce our first step towards an extension ecosystem for LayOut. Using this new API developers can now open, create, modify, save, and export .layout files. Practically, this means that other applications can import or export the .layout file format using the C API. (This includes creating a .layout file from SketchUp). We have several sample scripts for developers to try out at release. Check out the API documentation in the [Developer Center](http://extensions.sketchup.com/developer_center/layout_c_api/layout/index.html) for more information.
+We’re proud to announce our first step towards an extension ecosystem for LayOut. Using this new API developers can now open, create, modify, save, and export .layout files. Practically, this means that other applications can import or export the .layout file format using the C API. (This includes creating a .layout file from SketchUp). We have several sample scripts for developers to try out at release. Check out the API documentation in the [Developer Center](https://extensions.sketchup.com/developers/layout_c_api/layout/index.html) for more information.
 
 ## Digitally Signing Extensions - Extensions Loading Policy
 
@@ -722,17 +1010,17 @@ SketchUp 2016 M0 installs in "Unrestricted" mode by default.
 
 To digitally sign your extension, simply upload your .rbz package to our new Digital Signature and Encryption page and we will sign it and return it to you. Visit the new [Extension Digital Signature page](https://extensions.sketchup.com/en/developer_center/extension_signature).
 
-You will need to sign your extension each time you make code changes and want to re-release it. You will need to be a registered Developer on the Extension Warehouse to be able to sign or encrypt extensions. [Apply here!](http://http://extensions.sketchup.com/en/developer)
+You will need to sign your extension each time you make code changes and want to re-release it. You will need to be a registered Developer on the Extension Warehouse to be able to sign or encrypt extensions. [Apply here!](https://extensions.sketchup.com/application)
 
 ## Ruby Encryption 2.0
 
-Goodbye .rbs and Hello .rbe! We have added a new encryption that you can use to help protect your extension Intellectual Property (IP). SketchUp 2016 can read both .rbe and .rbs filetypes. This should help make sure that we maintain backwards compatibility for authors who need some time to re-encrypt their extensions. To use our new encryption, simply upload an unencrypted version of your .rbz package to our new Digital Signature and Encryption page and we will encrypt it and return it to you. Visit the new [Extension Digital Signature page](https://extensions.sketchup.com/en/developer_center/extension_signature) page here for more information.
+Goodbye .rbs and Hello .rbe! We have added a new encryption that you can use to help protect your extension Intellectual Property (IP). SketchUp 2016 can read both .rbe and .rbs filetypes. This should help make sure that we maintain backwards compatibility for authors who need some time to re-encrypt their extensions. To use our new encryption, simply upload an unencrypted version of your .rbz package to our new Digital Signature and Encryption page and we will encrypt it and return it to you. Visit the new [Extension Digital Signature page](https://extensions.sketchup.com/extension/sign) page here for more information.
 
 You will need to be a registered Developer on the Extension Warehouse to be able to sign or encrypt extensions. [Apply here!](http://extensions.sketchup.com/en/developer)
 
 ## Developer Center
 
-Between the new Extension Digital Signature Page, the new LayOut C API and a whole lot of future ideas and potential, we have decided to create a new central location to organize our developer resources, API documentation, etc. Visit (and bookmark!): [https://extensions.sketchup.com/en/developer_center](https://extensions.sketchup.com/en/developer_center)
+Between the new Extension Digital Signature Page, the new LayOut C API and a whole lot of future ideas and potential, we have decided to create a new central location to organize our developer resources, API documentation, etc. Visit (and bookmark!): [https://extensions.sketchup.com/en/developer_center](https://developer.sketchup.com/)
 
 ## Observer Upgrades
 

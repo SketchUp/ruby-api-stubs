@@ -1,31 +1,71 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
-# The Page class contains methods to extract information and modify the
-# properties of an individual page.
+# The Page class contains methods to extract information and modify the properties of
+# an individual page.
 #
 # Note that inside the SketchUp user interface pages are called "Scenes".
+#
+# Since SketchUp 2026.0, modifying the {Sketchup::Axes}, {Sketchup::Camera},
+# {Sketchup::RenderingOptions}, and {Sketchup::ShadowInfo} properties of a page is an undoable
+# operation and should be wrapped between {Sketchup::Model#start_operation} and
+# {Sketchup::Model#commit_operation}.
+# Example:
+#    model = Sketchup.active_model
+#    pages = model.pages
+#    origin = Geom::Point3d.new(10, 0, 0)
+#
+#    model.start_operation("Set Page Properties")
+#    page = pages.add("My Page")
+#    page.axes.set(origin, Y_AXIS, X_AXIS, Z_AXIS)
+#    page.camera.fov = 56.78
+#    page.shadow_info["City"] = "Brasov, Romania"
+#    page.rendering_options["BackgroundColor"] = "Pink"
+#    model.commit_operation
 #
 # @version SketchUp 6.0
 class Sketchup::Page < Sketchup::Entity
 
   # Instance Methods
 
-  # The axes method returns the drawing axes for the page.
+  # The {#active_section_planes} method is used to retrieve the active section
+  # plane for the {Sketchup::Page}.
   #
   # @example
-  #   page = Sketchup.active_model.pages.add("Example Page")
+  #   model = Sketchup.active_model
+  #   pages = model.pages
+  #   page = pages.add('My Page')
+  #   page.active_section_planes
+  #
+  # @return [Array<Sketchup::SectionPlane>, nil] Returns +nil+ if the page does
+  #   not use section planes.
+  #
+  # @version SketchUp 2026.0
+  def active_section_planes
+  end
+
+  # The axes method returns the drawing axes for the page.
+  #
+  # Since SketchUp 2026.0, modifying the axes of a scene is an undoable operation.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   page = model.pages.add("Example Page")
   #   xaxis = Geom::Vector3d.new(3, 5, 0)
   #   yaxis = xaxis * Z_AXIS
   #   page.axes.set([10,0,0], xaxis, yaxis, Z_AXIS)
+  #   page.update(PAGE_USE_ALL)
+  #   page.axes
   #
-  # @return Axes - the axes for the page.
+  # @return [Sketchup::Axes]
   #
   # @version SketchUp 2016
   def axes
   end
 
-  # The camera method retrieves the camera for a particular page.
+  # The {#camera} method retrieves the camera for a particular page.
+  #
+  # Since SketchUp 2026.0, modifying the camera properties of a scene is an undoable operation.
   #
   # @example
   #   model = Sketchup.active_model
@@ -33,8 +73,7 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   camera = page.camera
   #
-  # @return camera - a Camera object if successful, nil if the page
-  #   does not save camera information
+  # @return [Sketchup::Camera]
   #
   # @version SketchUp 6.0
   def camera
@@ -114,6 +153,40 @@ class Sketchup::Page < Sketchup::Entity
   def description=(description)
   end
 
+  # The {#environment} method is used to retrieve the {Sketchup::Environment}
+  # for the scene.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   pages = model.pages
+  #   page = pages.add('My Page')
+  #   page.environment
+  #
+  # @return [Sketchup::Environment]
+  #
+  # @version SketchUp 2025.0
+  def environment
+  end
+
+  # The {#environment=} method is used to set the {Sketchup::Environment}
+  # for the scene.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   pages = model.pages
+  #   page = pages.add('My Page')
+  #   path = 'path/to/environment.hdr'
+  #   environment = model.environments.add('My Environment', path)
+  #   page.environment = environment
+  #
+  # @param [Sketchup::Environment] environment
+  #
+  # @return [Sketchup::Environment]
+  #
+  # @version SketchUp 2025.0
+  def environment=(environment)
+  end
+
   # The {#get_drawingelement_visibility} method is used to get the visibility
   # of a drawing element on a particular page.
   #
@@ -125,6 +198,19 @@ class Sketchup::Page < Sketchup::Entity
   #   pages = model.pages
   #   page = pages.add("My Page")
   #   result = page.get_drawingelement_visibility(constpoint)
+  #
+  # @example
+  #   # SketchUp 2020.1 is required
+  #   def element_visible_in_page?(element, page)
+  #     case element
+  #     when Sketchup::ComponentInstance, Sketchup::Group
+  #       return unless page.use_hidden_objects?
+  #     else
+  #       return unless page.use_hidden_geometry?
+  #       return unless element.parent == Sketchup.active_model
+  #     end
+  #     page.get_drawingelement_visibility(element)
+  #   end
   #
   # @param [Sketchup::Drawingelement] element
   #
@@ -142,8 +228,8 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   entities = page.hidden_entities
   #
-  # @return entities - an Entities object containing hidden
-  #   entities on the page.
+  # @return [Array<Sketchup::Drawingelement>] an array of drawing elements that are
+  #   *hidden* on the page.
   #
   # @version SketchUp 6.0
   def hidden_entities
@@ -248,7 +334,10 @@ class Sketchup::Page < Sketchup::Entity
   def name
   end
 
-  # The name= method sets the name for a page's tab.
+  # The {#name=} method sets the name for a page's tab. If the name is already used by another page,
+  # a unique name is created.
+  #
+  # @bug Prior to SketchUp 2026.0 this method did not make the name unique.
   #
   # @example
   #   model = Sketchup.active_model
@@ -268,13 +357,20 @@ class Sketchup::Page < Sketchup::Entity
   # The rendering_options method retrieves a RenderingOptions object for the
   # page.
   #
+  # Since SketchUp 2026.0, modifying rendering_options of a scene is an undoable operation.
+  #
   # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
-  #   page = pages.add "My Page"
+  #   page = pages.add("My Page")
   #   renderingoptions = page.rendering_options
   #
-  # @return renderingoptions - a RenderingOptions object
+  # @note Most rendering options of a scene are also present in {Sketchup::Style} and are governed by
+  #   the selected style. Those options should not be changed from the scene.
+  #   The ones not related to {Sketchup::Style} like fog (+DisplayFog+,
+  #   +FogColor+) are safe to be changed from the scene.
+  #
+  # @return [Sketchup::RenderingOptions]
   #
   # @version SketchUp 6.0
   def rendering_options
@@ -331,7 +427,9 @@ class Sketchup::Page < Sketchup::Entity
   def set_visibility(arg1, arg2)
   end
 
-  # The shadow_info method retrieves the ShadowInfo object for the page.
+  # The {#shadow_info} method retrieves the ShadowInfo object for the page.
+  #
+  # Since SketchUp 2026.0, modifying shadow_info of a scene is an undoable operation.
   #
   # @example
   #   model = Sketchup.active_model
@@ -339,8 +437,11 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   shadowinfo = page.shadow_info
   #
-  # @return shadowinfo - a ShadowInfo object if successful, nil if
-  #   the page does not save shadow information
+  # @note While certain shadow settings, such as those available in the Shadows panel, can be
+  #   controlled on a per-page basis, global settings like north
+  #   angle, latitude, and longitude are managed at the model level and are not page-specific.
+  #
+  # @return [Sketchup::ShadowInfo]
   #
   # @version SketchUp 6.0
   def shadow_info
@@ -410,6 +511,7 @@ class Sketchup::Page < Sketchup::Entity
   #   PAGE_USE_LAYER_VISIBILITY  # Visible Layers
   #   PAGE_USE_SECTION_PLANES    # Active Section Planes
   #   PAGE_USE_ALL               # All possible scene properties
+  #   PAGE_USE_ENVIRONMENT       # Environment settings
   #
   # @example
   #   model = Sketchup.active_model
@@ -501,6 +603,46 @@ class Sketchup::Page < Sketchup::Entity
   #
   # @version SketchUp 6.0
   def use_camera?
+  end
+
+  # The {#use_environment=} method is used to set if the {Sketchup::Environment}
+  # settings are used in the scene.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   pages = model.pages
+  #   page = pages.add('My Page')
+  #   page.use_environment?
+  #   # => true
+  #   page.use_environment = false
+  #   page.use_environment?
+  #   # => false
+  #
+  # @param [Boolean] use_environment
+  #
+  # @return [Boolean]
+  #
+  # @version SketchUp 2025.0
+  def use_environment=(use_environment)
+  end
+
+  # The {#use_environment?} method is used to determine if the {Sketchup::Environment}
+  # settings are used in the scene.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   pages = model.pages
+  #   page = pages.add('My Page')
+  #   page.use_environment?
+  #   # => true
+  #   page.use_environment = false
+  #   page.use_environment?
+  #   # => false
+  #
+  # @return [Boolean]
+  #
+  # @version SketchUp 2025.0
+  def use_environment?
   end
 
   # The use_hidden= method sets the page's hidden property.

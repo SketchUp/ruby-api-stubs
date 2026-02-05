@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The {Sketchup::Animation} interface is implemented to create animations
@@ -6,24 +6,47 @@
 # {Sketchup::View}. To make your own, build a Ruby class that contains the
 # methods described below:
 #
-#   # This is an example of a simple animation that floats the camera up to
-#   # a z position of 200". The only required method for an animation is
-#   # nextFrame. It is called whenever you need to show the next frame of
-#   # the animation. If nextFrame returns false, the animation will stop.
-#   class FloatUpAnimation
+#   # This example demonstrates a simple animation with implementation of
+#   # the optional callback method stop, which is invoked
+#   # by SketchUp during specific animation events.
+#   class SimpleFloatAnimation
+#     def initialize
+#       @speed = 1.0           # Camera movement speed
+#       puts "Animation initialized"
+#     end
+#
+#     # Required method - called for each animation frame
 #     def nextFrame(view)
+#       # Move camera upward
 #       new_eye = view.camera.eye
-#       new_eye.z = new_eye.z + 1.0
+#       new_eye.z = new_eye.z + @speed
 #       view.camera.set(new_eye, view.camera.target, view.camera.up)
 #       view.show_frame
+#
+#       # Continue animation until reaching maximum height
 #       return new_eye.z < 500.0
 #     end
-#   end
 #
-#   # This adds an item to the Camera menu to activate our custom animation.
-#   UI.menu("Camera").add_item("Run Float Up Animation") {
-#     Sketchup.active_model.active_view.animation = FloatUpAnimation.new
-#   }
+#     # Optional callback - called by SketchUp when animation is stopped
+#     # Note: This method is called automatically by SketchUp and cannot
+#     # be called directly to stop an animation
+#     def stop
+#       puts "Animation was stopped by SketchUp"
+#       # Cleanup code when animation ends
+#     end
+#    end
+#
+#    # Add menu item to start the animation
+#    UI.menu("Camera").add_item("Start Animation") {
+#      animation = SimpleFloatAnimation.new
+#      Sketchup.active_model.active_view.animation = animation
+#    }
+#
+#    # To stop the animation programmatically:
+#    UI.menu("Camera").add_item("Stop Animation") {
+#      # Setting animation to nil will trigger the stop method in our animation class
+#      Sketchup.active_model.active_view.animation = nil
+#    }
 #
 # {Sketchup::Animation} objects are activated by using the
 # {Sketchup::View#animation=} method on a {Sketchup::View}
@@ -31,6 +54,35 @@
 # so:
 #
 #   Sketchup.active_model.active_view.animation = nil
+#
+#
+# ==Managing Multiple Animations:
+#
+# While only one animation object can be active on a {Sketchup::View} at any
+# given time, you can create a composite animation class to manage multiple
+# animations simultaneously. This approach allows you to animate different
+# elements, such as objects and the camera, within a single animation framework.
+#
+# Example:  Combining Animations
+#
+#   class CombinedAnimation
+#     def initialize(object_animation, camera_animation)
+#       @object_animation = object_animation
+#       @camera_animation = camera_animation
+#     end
+#
+#     def nextFrame(view)
+#       @object_animation.nextFrame(view)
+#       @camera_animation.nextFrame(view)
+#       true
+#     end
+#   end
+#
+#   # Usage
+#   object_animation = RotateAnimation.new
+#   camera_animation = RotateCamera.new(0.01)
+#   combined_animation = CombinedAnimation.new(object_animation, camera_animation)
+#   Sketchup.active_model.active_view.animation = combined_animation
 #
 # @abstract Implement the methods described in this class to create a an
 #   animation. You can not sub-class this class because it is not defined by
@@ -131,7 +183,7 @@ class Sketchup::Animation
   #     end
   #   end
   #
-  # @note Do not call {#Sketchup::View#animation=} from this method. This will
+  # @note Do not call {Sketchup::View#animation=} from this method. This will
   #   cause a recursive loop and crash SketchUp 2017 and earlier versions.
   #   As of SketchUp 2018 this will raise a +RunTimeError+.
   #

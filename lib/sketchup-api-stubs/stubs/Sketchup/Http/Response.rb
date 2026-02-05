@@ -1,18 +1,20 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
-# Http::Response objects allows you to get the response information from the
-# server, you can only receive the Http::Response if you have attached a
-# callback block when calling start from the Http::Request object.
+# {Sketchup::Http::Response} objects allows you to get the response information from the
+# server, you can only receive the {Sketchup::Http::Response} if you have attached a
+# callback block when calling start from the {Sketchup::Http::Request} object.
+#
+# @note Do not {Sketchup::Http::Request#cancel} the request in the response callback.
 #
 # @version SketchUp 2017
 class Sketchup::Http::Response
 
   # Instance Methods
 
-  # Gets the http body that was received from the server as a string encoded
-  # using the charset provided in the Content-Type of the server response, if
-  # no charset is specified, ASCII-8BIT will be used.
+  # Gets the HTTP body that was received from the server as a string encoded
+  # using the charset provided in the +"Content-Type"+ header of the server response,
+  # if no charset is specified, +Encoding::ASCII_8BIT+ will be used.
   #
   # @example
   #   @request = Sketchup::Http::Request.new("http://localhost:8080")
@@ -27,7 +29,7 @@ class Sketchup::Http::Response
   def body
   end
 
-  # Returns the http headers that were sent by the server.
+  # Returns the HTTP headers that were sent by the server.
   #
   # @example
   #   @request = Sketchup::Http::Request.new("http://localhost:8080")
@@ -50,7 +52,7 @@ class Sketchup::Http::Response
   #   @request = Sketchup::Http::Request.new("http://localhost:8080")
   #
   #   @request.start do |request, response|
-  #     puts "http status code: #{response.status_code}"
+  #     puts "HTTP status code: #{response.status_code}"
   #   end
   #
   # @return [Integer]

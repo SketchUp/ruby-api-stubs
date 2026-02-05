@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # An Image object represents a raster image placed in the Model.
@@ -97,11 +97,6 @@ class Sketchup::Image < Sketchup::Drawingelement
   #   entities = model.active_entities
   #   image = entities.add_image path, pt, 300
   #   height = image.height
-  #   if (height)
-  #     UI.messagebox height
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
   # @return height - the height of the model if successful
   #
@@ -121,11 +116,6 @@ class Sketchup::Image < Sketchup::Drawingelement
   #   image = entities.add_image path, pt, 300
   #   UI.messagebox "Before adjustment"
   #   height = image.height = 400
-  #   if (height)
-  #     UI.messagebox height
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
   # @param height
   #   The height, in inches, to set the image.
@@ -166,11 +156,6 @@ class Sketchup::Image < Sketchup::Drawingelement
   #   entities = model.active_entities
   #   image = entities.add_image path, pt, 300
   #   vector = image.normal
-  #   if (vector)
-  #     UI.messagebox vector
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
   # @return vector - a Vector3d object if successful
   #
@@ -188,11 +173,7 @@ class Sketchup::Image < Sketchup::Drawingelement
   #   entities = model.active_entities
   #   image = entities.add_image path, pt, 300
   #   origin = image.origin
-  #   if (origin)
-  #     UI.messagebox origin
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   puts origin.inspect
   #
   # @return point - a Point3d object containing the origin location
   #   if successful
@@ -201,7 +182,7 @@ class Sketchup::Image < Sketchup::Drawingelement
   def origin
   end
 
-  # The origin= method is used to set the 3D point as the origin of the image.
+  # The {#origin=} method is used to set the 3D point as the origin of the image.
   #
   # @example
   #   model = Sketchup.active_model
@@ -212,11 +193,7 @@ class Sketchup::Image < Sketchup::Drawingelement
   #   image = entities.add_image path, pt, 300
   #   UI.messagebox "Before Move"
   #   origin = image.origin=pt2
-  #   if (origin)
-  #     UI.messagebox origin
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
+  #   puts origin.inspect
   #
   # @param point
   #   A Point3d object with the new origin.
@@ -237,11 +214,6 @@ class Sketchup::Image < Sketchup::Drawingelement
   #   entities = model.active_entities
   #   image = entities.add_image path, pt, 300
   #   path = image.path
-  #   if (path)
-  #     UI.messagebox path
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
   # @return path - the path for the image file if successful
   #
@@ -259,11 +231,6 @@ class Sketchup::Image < Sketchup::Drawingelement
   #   entities = model.active_entities
   #   image = entities.add_image path, pt, 300
   #   pixelheight = image.pixelheight
-  #   if (pixelheight)
-  #     UI.messagebox pixelheight
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
   # @return height - the height of the image in pixels if
   #   successful
@@ -282,11 +249,6 @@ class Sketchup::Image < Sketchup::Drawingelement
   #   entities = model.active_entities
   #   image = entities.add_image path, pt, 300
   #   pixelwidth = image.pixelwidth
-  #   if (pixelwidth)
-  #     UI.messagebox pixelwidth
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
   # @return width - the width of the image in pixels if successful
   #
@@ -304,11 +266,6 @@ class Sketchup::Image < Sketchup::Drawingelement
   #   image = entities.add_image path, pt, 300
   #   UI.messagebox "Before Resize"
   #   size = image.size= 500,500
-  #   if (size)
-  #     UI.messagebox size
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
   # @param width
   #   The width of the image.
@@ -335,11 +292,6 @@ class Sketchup::Image < Sketchup::Drawingelement
   #   image = entities.add_image path, pt, 300
   #   UI.messagebox "Before Move"
   #   image = image.transform! t
-  #   if (image)
-  #     UI.messagebox image
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
   # @param transform
   #   A Transformation object.
@@ -404,11 +356,6 @@ class Sketchup::Image < Sketchup::Drawingelement
   #   entities = model.active_entities
   #   image = entities.add_image path, pt, 300
   #   width = image.width
-  #   if (width)
-  #     UI.messagebox width
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
   # @return width - the width of the image if successful
   #
@@ -428,11 +375,6 @@ class Sketchup::Image < Sketchup::Drawingelement
   #   image = entities.add_image path, pt, 300
   #   UI.messagebox "Before adjustment"
   #   width = image.width=400
-  #   if (width)
-  #     UI.messagebox width
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
   # @param width
   #   The width, in inches, to set the image.
@@ -453,11 +395,6 @@ class Sketchup::Image < Sketchup::Drawingelement
   #   entities = model.active_entities
   #   image = entities.add_image path, pt, 300
   #   zrotation = image.zrotation
-  #   if (zrotation)
-  #     UI.messagebox zrotation
-  #   else
-  #     UI.messagebox "Failure"
-  #   end
   #
   # @return vector - a Vector3d object if successful
   #

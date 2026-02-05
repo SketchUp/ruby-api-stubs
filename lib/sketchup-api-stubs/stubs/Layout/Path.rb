@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # A path entity represents a continuous, multi-segment polyline or bezier
@@ -27,8 +27,8 @@ class Layout::Path < Layout::Entity
   # @example
   #   center = Geom::Point2d.new(5, 5)
   #   radius = 2.0
-  #   start_angle = 180.0
-  #   end_angle = 360.0
+  #   start_angle = 3.14159
+  #   end_angle = 6.28319
   #   arc = Layout::Path.new_arc(center, radius, start_angle, end_angle)
   #
   # @param [Geom::Point2d] center_point
@@ -36,8 +36,10 @@ class Layout::Path < Layout::Entity
   # @param [Float] radius
   #
   # @param [Float] start_angle
+  #   in radians
   #
   # @param [Float] end_angle
+  #   in radians
   #
   # @raise [ArgumentError] if radius is less than or equal to zero
   #

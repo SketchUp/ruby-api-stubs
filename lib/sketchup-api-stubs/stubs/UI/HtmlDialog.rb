@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The Ruby HtmlDialog class allows you to create and interact with HTML dialog
@@ -21,6 +21,8 @@
 #
 # HtmlDialog uses the following versions of CEF (Chromium Embedded Framework):
 #
+# [SketchUp 2025.0]
+#   CEF 128
 # [SketchUp 2024.0]
 #   CEF 112
 # [SketchUp 2021.1]
@@ -68,6 +70,7 @@ class UI::HtmlDialog
   #   dialog.add_action_callback("say") { |action_context, param1, param2|
   #     puts "JavaScript said #{param1} and #{param2}"
   #   }
+  #   dialog.show # should be called directly after binding callbacks
   #
   # @example JavaScript
   #   sketchup.say('Hello World', 42);
@@ -79,8 +82,32 @@ class UI::HtmlDialog
   #     }
   #   });
   #
+  # @example A complete example containing both Ruby and JavaScript
+  #   html = <<-HTML
+  #     <h1>Hello World</h1>
+  #     <p><button onclick="sketchup.say('Hello World', 42)">Say Hello</button></p>
+  #     <p><button onclick="sketchup.say('Hello World', 66, { onCompleted: function() {
+  #     console.log('Ruby side done.'); } })">Say Hello with Callback</button></p>
+  #   HTML
+  #
+  #   options = {
+  #     :dialog_title => "Example Dialog",
+  #     :preferences_key => "example.htmldialog",
+  #     :style => UI::HtmlDialog::STYLE_DIALOG
+  #   }
+  #
+  #   dialog = UI::HtmlDialog.new(options)
+  #   dialog.set_html(html)
+  #   dialog.center
+  #
+  #   dialog.add_action_callback("say") { |action_context, param1, param2|
+  #     puts "JavaScript said #{param1} and #{param2}"
+  #   }
+  #
+  #   dialog.show # should be called directly after binding callbacks
+  #
   # @note When an HtmlDialog is closed, all callbacks to that instance are
-  #   cleared. Re-attach them if you need to open the dialog again.
+  #   cleared. Attach or re-attach them before you show the dialog.
   #
   # @param [String] callback_name
   #   The name of the callback method to be invoked from the html dialog.
@@ -257,7 +284,7 @@ class UI::HtmlDialog
   #     :max_height => 1000,
   #     :style => UI::HtmlDialog::STYLE_DIALOG
   #   })
-  #   dialog.set_url("http://www.sketchup.com")
+  #   dialog.set_url("https://www.sketchup.com")
   #   dialog.show
   #
   # @example With keyword style argument
@@ -335,6 +362,8 @@ class UI::HtmlDialog
   #
   # @return [Boolean]
   #
+  # @see #set_on_closed
+  #
   # @version SketchUp 2017
   #
   # @yieldreturn [Boolean] Return a boolean to indicate if the dialogs should
@@ -394,12 +423,18 @@ class UI::HtmlDialog
 
   # The {#set_on_closed} method is used to attach a block that will be
   # executed when a dialog is already in the process of closing, do any last
-  # minute operations within this block such as saving the current state.
+  # minute operations within this block such as releasing resources or performing cleanup tasks.
   #
   # @example
-  #   dialog.set_on_closed { save_selection }
+  #   dialog.set_on_closed do
+  #     File.delete('temp_file.txt') if File.exist?('temp_file.txt')
+  #   end
+  #
+  # @note For saving state before window closes use {#set_can_close} instead.
   #
   # @return [Boolean]
+  #
+  # @see #set_can_close
   #
   # @version SketchUp 2017
   def set_on_closed

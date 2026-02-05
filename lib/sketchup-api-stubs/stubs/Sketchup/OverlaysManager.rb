@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # An overlay added to a model is invalidated once it's removed from the model.
@@ -9,8 +9,6 @@
 # them.
 #
 # A model can not have multiple overlays with the same id.
-#
-# @api Overlays
 #
 # @example
 #   Sketchup.active_model.overlays.each { |overlay|
@@ -30,8 +28,6 @@ class Sketchup::OverlaysManager
   # Instance Methods
 
   #
-  # @api Overlays
-  #
   # @example
   #   overlay = Sketchup.active_model.overlays[0]
   #
@@ -42,8 +38,6 @@ class Sketchup::OverlaysManager
   end
   alias_method :at, :[]
 
-  #
-  # @api Overlays
   #
   # @example
   #   class ExampleOverlay < Sketchup::Overlay
@@ -64,8 +58,6 @@ class Sketchup::OverlaysManager
   end
 
   #
-  # @api Overlays
-  #
   # @example
   #   Sketchup.active_model.overlays.each { |overlay|
   #     puts "#{overlay.name} (#{overlay.overlay_id}) Enabled: #{overlay.enabled?}"
@@ -79,8 +71,6 @@ class Sketchup::OverlaysManager
   def each
   end
 
-  #
-  # @api Overlays
   #
   # @example
   #   class ExampleOverlay < Sketchup::Overlay
@@ -100,8 +90,6 @@ class Sketchup::OverlaysManager
   def remove(service)
   end
 
-  #
-  # @api Overlays
   #
   # @example
   #   num_overlays = Sketchup.active_model.overlays.size

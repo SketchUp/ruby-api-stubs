@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # This observer interface is implemented to react to model events.
@@ -168,21 +168,36 @@ class Sketchup::ModelObserver
   def onExplode(model)
   end
 
-  # The {#onPidChanged} method is invoked when a persistent id in the model
-  # changes. For example when entities are grouped.
+  # The {#onPidChanged} method is invoked when a {Sketchup::Entity#persistent_id persistent id} of
+  # an entity changes within the model.
   #
   # @example
-  #   def onPidChanged(model, old_pid, new_pid)
-  #     puts "onPidChanged: #{model}, #{old_pid} => #{new_pid}"
+  #   class PidObserver < Sketchup::ModelObserver
+  #     def onPidChanged(model, old_pid, new_pid)
+  #       entity = model.find_entity_by_persistent_id(new_pid)
+  #       puts "Entity with new PID #{new_pid}: #{entity}"
+  #     end
   #   end
+  #
+  #   model = Sketchup.active_model
+  #   model.add_observer(PidObserver.new)
+  #
+  # @note This callback is useful for tracking changes to entities that result in new PIDs, such as
+  #   grouping or other modifications that result in new entities.
   #
   # @param [Sketchup::Model] model
   #
   # @param [Integer] old_pid
+  #   The old persistent ID of the entity.
   #
   # @param [Integer] new_pid
+  #   The new persistent ID of the entity.
   #
   # @return [nil]
+  #
+  # @see Sketchup::Model#find_entity_by_persistent_id
+  #
+  # @see Sketchup::Entity#persistent_id
   #
   # @version SketchUp 2017
   def onPidChanged(model, old_pid, new_pid)

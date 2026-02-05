@@ -1,4 +1,4 @@
-# Copyright:: Copyright 2024 Trimble Inc.
+# Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
 # The RenderingOptions class contains method to extract the rendering
@@ -25,6 +25,9 @@
 # - +EdgeColorMode+
 # - +EdgeDisplayMode+
 # - +EdgeType+
+#   - Accepted values (Integer):
+#     - 0: Standard edges
+#     - 1: Sketchy edges
 # - +ExtendLines+
 # - +FaceBackColor+
 # - +FaceFrontColor+
@@ -90,6 +93,10 @@
 # - +AmbientOcclusionDistance+
 # - +AmbientOcclusionIntensity+
 #
+# Added in SketchUp 2026.0:
+# - +AmbientOcclusionColor+
+# - +AmbientOcclusionMultiplier+
+#
 # @version SketchUp 6.0
 class Sketchup::RenderingOptions < Sketchup::Entity
 
@@ -105,9 +112,12 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   ROPDrawHiddenObjects = nil # Stub value.
   ROPEditComponent = nil # Stub value.
   ROPSectionDisplayTurnedOff = nil # Stub value.
+  ROPSetAOColor = nil # Stub value.
+  ROPSetAOColorEnabled = nil # Stub value.
   ROPSetAODistance = nil # Stub value.
   ROPSetAOEnabled = nil # Stub value.
   ROPSetAOIntensity = nil # Stub value.
+  ROPSetAOMultiplier = nil # Stub value.
   ROPSetBackgroundColor = nil # Stub value.
   ROPSetConstructionColor = nil # Stub value.
   ROPSetDepthQueEdges = nil # Stub value.
@@ -138,6 +148,7 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   ROPSetGroundColor = nil # Stub value.
   ROPSetGroundTransparency = nil # Stub value.
   ROPSetHideConstructionGeometry = nil # Stub value.
+  ROPSetHideSpaces = nil # Stub value.
   ROPSetHighlightColor = nil # Stub value.
   ROPSetHorizonColor = nil # Stub value.
   ROPSetJitterEdges = nil # Stub value.
@@ -148,6 +159,7 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   ROPSetLockedColor = nil # Stub value.
   ROPSetMaterialTransparency = nil # Stub value.
   ROPSetModelTransparency = nil # Stub value.
+  ROPSetModelingGrid = nil # Stub value.
   ROPSetPhotomatchBackgroundOpacity = nil # Stub value.
   ROPSetPhotomatchDrawBackground = nil # Stub value.
   ROPSetPhotomatchDrawOverlay = nil # Stub value.
