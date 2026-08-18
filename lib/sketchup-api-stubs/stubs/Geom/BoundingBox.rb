@@ -31,17 +31,6 @@
 # @version SketchUp 6.0
 class Geom::BoundingBox
 
-  # Constants
-
-  CORNER_LEFT_BACK_BOTTOM = nil # Stub value.
-  CORNER_LEFT_BACK_TOP = nil # Stub value.
-  CORNER_LEFT_FRONT_BOTTOM = nil # Stub value.
-  CORNER_LEFT_FRONT_TOP = nil # Stub value.
-  CORNER_RIGHT_BACK_BOTTOM = nil # Stub value.
-  CORNER_RIGHT_BACK_TOP = nil # Stub value.
-  CORNER_RIGHT_FRONT_BOTTOM = nil # Stub value.
-  CORNER_RIGHT_FRONT_TOP = nil # Stub value.
-
   # Instance Methods
 
   # The add method is used to add a point, vertex, or other bounding boxes to the
@@ -131,32 +120,23 @@ class Geom::BoundingBox
   def contains?(point_or_bb)
   end
 
-  # The {#corner} method is used to retrieve a point object at a specified corner
+  # The corner method is used to retrieve a point object at a specified corner
   # of the bounding box.
   #
   # There are 8 corners to a bounding box, identified by the numbers 0 through 7.
   # Points are returned in the currently set units (inches, by default). These
   # are which index refers to which corner:
-  # - 0: {CORNER_LEFT_FRONT_BOTTOM}
-  # - 1: {CORNER_RIGHT_FRONT_BOTTOM}
-  # - 2: {CORNER_LEFT_BACK_BOTTOM}
-  # - 3: {CORNER_RIGHT_BACK_BOTTOM}
-  # - 4: {CORNER_LEFT_FRONT_TOP}
-  # - 5: {CORNER_RIGHT_FRONT_TOP}
-  # - 6: {CORNER_LEFT_BACK_TOP}
-  # - 7: {CORNER_RIGHT_BACK_TOP}
   #
-  # @example New preferred style using constants
-  #   # From SketchUp 2026.2 onwards:
-  #   boundingbox = Geom::BoundingBox.new
-  #   boundingbox.add([100, 200, -400], [200, 400, 100])
-  #   # This will return Point3d(100, 200, -400).
-  #   boundingbox.corner(Geom::BoundingBox::CORNER_LEFT_FRONT_BOTTOM)
-  #   # This will return Point3d(100, 400, 100).
-  #   boundingbox.corner(Geom::BoundingBox::CORNER_LEFT_BACK_TOP)
+  #   - 0 = [0, 0, 0] (left front bottom)
+  #   - 1 = [1, 0, 0] (right front bottom)
+  #   - 2 = [0, 1, 0] (left back bottom)
+  #   - 3 = [1, 1, 0] (right back bottom)
+  #   - 4 = [0, 0, 1] (left front top)
+  #   - 5 = [1, 0, 1] (right front top)
+  #   - 6 = [0, 1, 1] (left back top)
+  #   - 7 = [1, 1, 1] (right back top)
   #
-  # @example Old style using magic numbers
-  #   # For SketchUp 2026.1 and older: (Works with newer versions too)
+  # @example
   #   boundingbox = Geom::BoundingBox.new
   #   boundingbox.add([100, 200, -400], [200, 400, 100])
   #   # This will return Point3d(100, 200, -400).
@@ -242,10 +222,6 @@ class Geom::BoundingBox
   #
   # @example
   #   boundingbox = Geom::BoundingBox.new
-  #
-  # @note An empty bounding box will return undefined non-zero values
-  #   from methods like {#min}, {#max}, {#corner}, and
-  #   {#center}. Always check {#empty?} or {#valid?} before relying on the returned values.
   #
   # @return [Geom::BoundingBox] a BoundingBox object if successful
   #

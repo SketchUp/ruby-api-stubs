@@ -8,9 +8,9 @@
 #
 # The following shadow information keys are maintained in SketchUp:
 #
-# - +City+ (in Model Info > Geolocate > Set Manual Location...) Note that
+# - +City+ (in Model Info > Geo-location > Set Manual Location...) Note that
 #   'City' is called 'Location' in the UI
-# - +Country+ (in Model Info > Geolocate > Set Manual Location...)
+# - +Country+ (in Model Info > Geo-location > Set Manual Location...)
 # - +Dark+ (in Window > Shadows)
 # - +DayOfYear+
 # - +DaylightSavings+
@@ -19,9 +19,9 @@
 # - +DisplayOnGroundPlane+ (in Window > Shadows)
 # - +DisplayShadows+ (in Window > Shadows)
 # - +EdgesCastShadows+ (in Window > Shadows)
-# - +Latitude+ (in Model Info > Geolocate > Set Manual Location...)
+# - +Latitude+ (in Model Info > Geo-location > Set Manual Location...)
 # - +Light+ (in Window > Shadows)
-# - +Longitude+ (in Model Info > Geolocate > Set Manual Location...)
+# - +Longitude+ (in Model Info > Geo-location > Set Manual Location...)
 # - +NorthAngle+
 # - +ShadowTime+ (in Window > Shadows)
 # - +ShadowTime_time_t+ (ShadowTime in Epoch time)

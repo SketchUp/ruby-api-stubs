@@ -131,10 +131,7 @@ class UI::WebDialog
   # dialog.
   #
   # @example
-  #   require "json"
-  #
-  #   text = "Hello world"
-  #   js_command = "document.getElementById('id').textContent = #{text.to_json}"
+  #   js_command = "document.getElementById('id').innerHTML = '<b>Hi!</b>'"
   #   dialog.execute_script(js_command)
   #
   # @param [String] script

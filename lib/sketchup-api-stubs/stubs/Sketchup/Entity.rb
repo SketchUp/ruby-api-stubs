@@ -26,7 +26,7 @@
 #     end
 #   }
 #
-#   puts "There are #{face_count} faces selected."
+#   "There are #{face_count} faces selected."
 #
 # @version SketchUp 6.0
 class Sketchup::Entity
@@ -331,8 +331,6 @@ class Sketchup::Entity
   #
   # The persistent id persistent between sessions.
   #
-  # [Sketchup 2025.0]
-  #   - {Sketchup::Environment}
   # [SketchUp 2020.1]
   #   - {Sketchup::ComponentDefinition}
   #   - {Sketchup::Material}
@@ -431,11 +429,6 @@ class Sketchup::Entity
   #   # entities objects are edges.
   #   entity1 = entities[1]
   #   status = entity1.set_attribute "testdictionary", "test", 115
-  #
-  # @note {Geom::Point3d} or {Geom::Vector3d} array values stored as vertex
-  #   attributes are automatically transformed when the vertex is moved.
-  #   In case you want to preserve the coordinates, you can transform them
-  #   to an array.
   #
   # @param [String] dict_name
   #   The name of an attribute dictionary.

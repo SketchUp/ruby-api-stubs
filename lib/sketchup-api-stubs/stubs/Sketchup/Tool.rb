@@ -24,19 +24,14 @@
 #   my_tool = MyTool.new
 #   Sketchup.active_model.select_tool(my_tool)
 #
-# The following table contains several constants you can use when checking for
-# modifier key presses and releases inside the keyboard handling callbacks:
+# The following table contains several constants you can use when check for
+# certain key presses inside the keyboard handling callbacks:
 #
 # - {CONSTRAIN_MODIFIER_KEY} = Shift Key
-# - {COPY_MODIFIER_KEY} = Alt/Option on Mac, Ctrl on PC
-# - {ALT_MODIFIER_KEY} = Command on Mac, Alt on PC
-#
-# The following table contains several constants you can use when checking for
-# modifier keys that are active inside keyboard and mouse handling callbacks.
-# These values are available via the flags parameter of the callbacks:
-#
 # - {CONSTRAIN_MODIFIER_MASK} = Shift Key
+# - {COPY_MODIFIER_KEY} = Alt/Option on Mac, Ctrl on PC
 # - {COPY_MODIFIER_MASK} = Alt/Option on Mac, Ctrl on PC
+# - {ALT_MODIFIER_KEY} = Command on Mac, Alt on PC
 # - {ALT_MODIFIER_MASK} = Command on Mac, Alt on PC
 #
 # @abstract Implement the methods described in this class to create a tool.
@@ -311,19 +306,12 @@ class Sketchup::Tool
   #   where the event didn't trigger when Return/Enter was pressed. This was fixed
   #   in SketchUp 2026.1.
   #
-  # @bug Prior versions of SketchUp (Windows) had a bug in {Sketchup::Tool#onKeyDown}
-  #   where the flags parameter contained incorrect modifier keys. This was fixed
-  #   in SketchUp 2027.0
-  #
   # @example
   #   def onKeyDown(key, repeat, flags, view)
   #     puts "onKeyDown: key = #{key}"
   #     puts "        repeat = #{repeat}"
   #     puts "         flags = #{flags}"
   #     puts "          view = #{view}"
-  #     puts "     Copy flag = #{flags & COPY_MODIFIER_MASK == COPY_MODIFIER_MASK}"
-  #     puts "Constrain flag = #{flags & CONSTRAIN_MODIFIER_MASK == CONSTRAIN_MODIFIER_MASK}"
-  #     puts "      Alt flag = #{flags & ALT_MODIFIER_MASK == ALT_MODIFIER_MASK}"
   #   end
   #
   # @param [Integer] key
@@ -350,19 +338,12 @@ class Sketchup::Tool
   # The {#onKeyUp} method is called by SketchUp when the user releases a key on
   # the keyboard.
   #
-  # @bug Prior versions of SketchUp (Windows) had a bug in {Sketchup::Tool#onKeyUp}
-  #   where the flags parameter contained incorrect modifier keys. This was fixed
-  #   in SketchUp 2027.0
-  #
   # @example
   #   def onKeyUp(key, repeat, flags, view)
-  #     puts "onKeyUp:   key = #{key}"
-  #     puts "        repeat = #{repeat}"
-  #     puts "         flags = #{flags}"
-  #     puts "          view = #{view}"
-  #     puts "     Copy flag = #{flags & COPY_MODIFIER_MASK == COPY_MODIFIER_MASK}"
-  #     puts "Constrain flag = #{flags & CONSTRAIN_MODIFIER_MASK == CONSTRAIN_MODIFIER_MASK}"
-  #     puts "      Alt flag = #{flags & ALT_MODIFIER_MASK == ALT_MODIFIER_MASK}"
+  #     puts "onKeyUp: key = #{key}"
+  #     puts "      repeat = #{repeat}"
+  #     puts "       flags = #{flags}"
+  #     puts "        view = #{view}"
   #   end
   #
   # @param [Integer] key
@@ -395,7 +376,6 @@ class Sketchup::Tool
   #     puts "                          x = #{x}"
   #     puts "                          y = #{y}"
   #     puts "                       view = #{view}"
-  #     puts "                   Alt flag = #{flags & ALT_MODIFIER_MASK == ALT_MODIFIER_MASK}"
   #   end
   #
   # @overload onLButtonDoubleClick(flags, x, y, view)
@@ -430,9 +410,6 @@ class Sketchup::Tool
   #     puts "                   x = #{x}"
   #     puts "                   y = #{y}"
   #     puts "                view = #{view}"
-  #     puts "           Copy flag = #{flags & COPY_MODIFIER_MASK == COPY_MODIFIER_MASK}"
-  #     puts "      Constrain flag = #{flags & CONSTRAIN_MODIFIER_MASK == CONSTRAIN_MODIFIER_MASK}"
-  #     puts "            Alt flag = #{flags & ALT_MODIFIER_MASK == ALT_MODIFIER_MASK}"
   #   end
   #
   # @overload onLButtonDown(flags, x, y, view)
@@ -467,9 +444,6 @@ class Sketchup::Tool
   #     puts "                 x = #{x}"
   #     puts "                 y = #{y}"
   #     puts "              view = #{view}"
-  #     puts "         Copy flag = #{flags & COPY_MODIFIER_MASK == COPY_MODIFIER_MASK}"
-  #     puts "    Constrain flag = #{flags & CONSTRAIN_MODIFIER_MASK == CONSTRAIN_MODIFIER_MASK}"
-  #     puts "          Alt flag = #{flags & ALT_MODIFIER_MASK == ALT_MODIFIER_MASK}"
   #   end
   #
   # @overload onLButtonUp(flags, x, y, view)
@@ -550,9 +524,6 @@ class Sketchup::Tool
   #     puts "                    x = #{x}"
   #     puts "                    y = #{y}"
   #     puts "                 view = #{view}"
-  #     puts "            Copy flag = #{flags & COPY_MODIFIER_MASK == COPY_MODIFIER_MASK}"
-  #     puts "       Constrain flag = #{flags & CONSTRAIN_MODIFIER_MASK == CONSTRAIN_MODIFIER_MASK}"
-  #     puts "             Alt flag = #{flags & ALT_MODIFIER_MASK == ALT_MODIFIER_MASK}"
   #   end
   #
   # @overload onMButtonDown(flags, x, y, view)
@@ -592,9 +563,6 @@ class Sketchup::Tool
   #     puts "                  x = #{x}"
   #     puts "                  y = #{y}"
   #     puts "               view = #{view}"
-  #     puts "          Copy flag = #{flags & COPY_MODIFIER_MASK == COPY_MODIFIER_MASK}"
-  #     puts "     Constrain flag = #{flags & CONSTRAIN_MODIFIER_MASK == CONSTRAIN_MODIFIER_MASK}"
-  #     puts "           Alt flag = #{flags & ALT_MODIFIER_MASK == ALT_MODIFIER_MASK}"
   #   end
   #
   # @overload onMButtonUp(flags, x, y, view)
@@ -660,9 +628,6 @@ class Sketchup::Tool
   #     puts "                  x = #{x}"
   #     puts "                  y = #{y}"
   #     puts "               view = #{view}"
-  #     puts "          Copy flag = #{flags & COPY_MODIFIER_MASK == COPY_MODIFIER_MASK}"
-  #     puts "     Constrain flag = #{flags & CONSTRAIN_MODIFIER_MASK == CONSTRAIN_MODIFIER_MASK}"
-  #     puts "           Alt flag = #{flags & ALT_MODIFIER_MASK == ALT_MODIFIER_MASK}"
   #   end
   #
   # @overload onMouseMove(flags, x, y, view)
@@ -811,9 +776,6 @@ class Sketchup::Tool
   #     puts "                   x = #{x}"
   #     puts "                   y = #{y}"
   #     puts "                view = #{view}"
-  #     puts "           Copy flag = #{flags & COPY_MODIFIER_MASK == COPY_MODIFIER_MASK}"
-  #     puts "      Constrain flag = #{flags & CONSTRAIN_MODIFIER_MASK == CONSTRAIN_MODIFIER_MASK}"
-  #     puts "            Alt flag = #{flags & ALT_MODIFIER_MASK == ALT_MODIFIER_MASK}"
   #   end
   #
   # @overload onRButtonDown(flags, x, y, view)
@@ -848,9 +810,6 @@ class Sketchup::Tool
   #     puts "                 x = #{x}"
   #     puts "                 y = #{y}"
   #     puts "              view = #{view}"
-  #     puts "         Copy flag = #{flags & COPY_MODIFIER_MASK == COPY_MODIFIER_MASK}"
-  #     puts "    Constrain flag = #{flags & CONSTRAIN_MODIFIER_MASK == CONSTRAIN_MODIFIER_MASK}"
-  #     puts "          Alt flag = #{flags & ALT_MODIFIER_MASK == ALT_MODIFIER_MASK}"
   #   end
   #
   # @overload onRButtonUp(flags, x, y, view)

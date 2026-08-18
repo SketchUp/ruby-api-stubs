@@ -64,12 +64,6 @@ class Sketchup::ToolsObserver
   # override the {#onActiveToolChanged} method to receive tool change
   # notifications.
   #
-  # @bug Prior to SketchUp 2026.2 the tool name was incorrect for the following tools:
-  #   - CommentTool (Was 'ommentTool')
-  #   - FlipTool (Was 'lipTool' on Windows and '8FlipTool' on Mac)
-  #   - IglooTool (Was 'glooTool' on Windows and '9IglooTool' on Mac)
-  #   - LassoSelectionTool (Was 'assoSelectionTool' on Windows and '18LassoSelectionTool' on Mac)
-  #
   # @example
   #   def onActiveToolChanged(tools, tool_name, tool_id)
   #     tool_name = fix_mac_tool_name(tool_name)
@@ -92,8 +86,6 @@ class Sketchup::ToolsObserver
   #       tool_name = "ComponentCSTool"
   #     elsif tool_name == "PullTool"
   #       tool_name = "PushPullTool"
-  #     elsif tool_name == "ommentTool"
-  #       tool_name = "CommentTool"
   #     end
   #     return tool_name
   #   end
@@ -123,27 +115,22 @@ class Sketchup::ToolsObserver
   def onActiveToolChanged(tools, tool_name, tool_id)
   end
 
-  # The {#onToolStateChanged} method is invoked when a tool reports a state
-  # transition.
+  # The {#onToolStateChanged} method is called each time the user performs an
+  # action with a tool. The actual state that is returned is an internal number
+  # that varies tool to tool. If you want to watch existing tools for every
+  # interaction, you will need to experiment with the tool state to determine
+  # which states you care about. There is little consistency tool to tool.
   #
   # @example
   #   def onToolStateChanged(tools, tool_name, tool_id, tool_state)
   #     puts "onToolStateChanged: #{tool_name}:#{tool_state}"
   #   end
   #
-  # @note Behavior changed in SketchUp 2016. Tool state changes are queued and
-  #   may be delivered after the tool operation has completed. Multiple state
-  #   changes can be coalesced and some tools may never trigger this callback.
-  #   The +tool_state+ value is an internal integer that is not standardized
-  #   across tools and often remains 0. Do not rely on specific numeric values.
-  #   Prefer {#onActiveToolChanged} for reliable notifications of active tool
-  #   changes, or tool-specific observers when available.
-  #
-  # @note In SketchUp 6 and SketchUp 7, tool names on the Mac had their first
-  #   few characters truncated. For instance, on Windows a tool name was
-  #   +"CameraOrbit"+, while on the Mac it came across as +"raOrbit"+.
-  #   This bug was fixed in SketchUp 8.0. Use +tool_id+ if you need a stable
-  #   identifier.
+  # @note In SketchUp 6 and SketchUp 7, tool names on the Mac have their first
+  #   few characters truncated. For instance, on Windows, a tool is
+  #   +"CameraOrbit".+ On the Mac, is comes across as +"raOrbit"+.  Therefore,
+  #   use the tool_id to keep track of which tool you need to watch for, or use
+  #   logic that corrects for the error. This bug was fixed in SketchUp 8.0.
   #
   # @param [Sketchup::Tools] tools
   #   A Tools object.
@@ -157,8 +144,8 @@ class Sketchup::ToolsObserver
   #   21074.
   #
   # @param [Integer] tool_state
-  #   A tool-specific state code. Not standardized
-  #   and often 0 in modern releases.
+  #   A number identifying the state the tool just
+  #   entered.
   #
   # @return [nil]
   #

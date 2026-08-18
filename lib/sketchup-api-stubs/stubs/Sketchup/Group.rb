@@ -54,23 +54,6 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   group = Sketchup.active_model.entities.add_group
   #   definition = group.definition
   #
-  #   # When editing {Sketchup::Entities} through {#definition}, you need to make the group
-  #   # unique first if working with multiple instances sharing the same definition so you do
-  #   # not affect all the groups.
-  #   entities = Sketchup.active_model.entities
-  #
-  #   group1 = entities.add_group
-  #   group2 = entities.add_instance(group1.definition, IDENTITY)
-  #
-  #   # Make the first group unique so that we don't also affect
-  #   # the second group with the first group.
-  #   group1.make_unique
-  #   group1.definition.entities.add_cpoint(ORIGIN)
-  #
-  # @note When editing {Sketchup::Entities} through {#definition} beware that all
-  #   instances sharing the same definition will be affected by the changes. To only
-  #   affect the current group instance, call {#make_unique} before accessing its {#definition}.
-  #
   # @return [Sketchup::ComponentDefinition] a ComponentDefinition object if
   #   successful
   #
@@ -162,12 +145,6 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   # Add a face to within the group
   #   face = entities2.add_face pts
   #   entities = group.entities
-  #
-  # @note Editing the returned {Sketchup::Entities} will automatically make the
-  #   group unique, similarly to when you open it for editing in the GUI. This
-  #   differs from the behavior when editing {Sketchup::Entities} through
-  #   {#definition}, which does not make the group unique when edited. For said
-  #   method you need to call {#make_unique} first.
   #
   # @return [Sketchup::Entities] an Entities object if successful
   #
@@ -273,35 +250,6 @@ class Sketchup::Group < Sketchup::Drawingelement
   #
   # @version SketchUp 2014
   def guid
-  end
-
-  # Retrieves the hatch pattern assigned to the group.
-  #
-  # @example
-  #   group = Sketchup.active_model.entities[0]
-  #   puts group.hatch_pattern.name
-  #
-  # @return [Sketchup::HatchPattern]
-  #
-  # @version SketchUp 2027.0
-  def hatch_pattern
-  end
-
-  # Assigns a hatch pattern to the group.
-  #
-  # @example
-  #   model = Sketchup.active_model
-  #   hatch_patterns = model.hatch_patterns
-  #   group = model.entities[0]
-  #   group.hatch_pattern = hatch_patterns['Pattern1']
-  #
-  # @param [Sketchup::HatchPattern, nil] pattern
-  #   the pattern to assign, or +nil+ to clear the assignment.
-  #
-  # @raise [ArgumentError] if the pattern does not belong to the group's model.
-  #
-  # @version SketchUp 2027.0
-  def hatch_pattern=(pattern)
   end
 
   # The intersect method is used to compute the boolean intersection of two
@@ -415,9 +363,6 @@ class Sketchup::Group < Sketchup::Drawingelement
 
   # The manifold? method is used to determine if a group is manifold.
   #
-  # @deprecated Use {Sketchup::ComponentDefinition#manifold?} instead. This method
-  #   checks the definition, not the group instance.
-  #
   # @example
   #   entities = Sketchup.active_model.entities
   #   definition = Sketchup.active_model.definitions[0]
@@ -426,8 +371,6 @@ class Sketchup::Group < Sketchup::Drawingelement
   #   status = group.manifold?
   #
   # @return [Boolean]
-  #
-  # @see Sketchup::ComponentDefinition#manifold?
   #
   # @version SketchUp 8.0
   def manifold?
@@ -581,56 +524,32 @@ class Sketchup::Group < Sketchup::Drawingelement
   def show_differences(group, verbose)
   end
 
-  # The {#split} method performs a boolean "split" (map overlay) between this
-  # group (the receiver) and another manifold solid (group or component
-  # instance). The operation partitions the combined volumes into:
-  #
-  # - Difference2: (other - self)
-  # - Difference1: (self - other)
-  # - Intersection: (self ∩ other)
-  #
-  # The originals (self and other) are ERASED and replaced by three newly created
-  # groups representing these volumes.
+  # The split method is used to compute the boolean split (map overlay) of the
+  # two groups representing manifold solid volumes (this ^ arg). If the
+  # specified objects (this and arg) do not represent manifold volumes,
+  # this method fails.
   #
   # @example
-  #   model = Sketchup.active_model
-  #   g1 = model.entities.add_group
-  #   g1.entities.add_face([0,0,0],[100,0,0],[100,100,0],[0,100,0]).pushpull(50)
-  #   g2 = model.entities.add_group
-  #   g2.entities.add_face([50,-25,0],[150,-25,0],[150,75,0],[50,75,0]).pushpull(50)
-  #   diff2, diff1, inter = g1.split(g2) # Order: Difference2, Difference1, Intersection
-  #   puts inter.name # "Intersection"
+  #   entities = Sketchup.active_model.entities
+  #   group1 = entities[0]
+  #   group2 = entities[1]
+  #   result = group1.split(group2)
   #
-  # @note Both operands must be manifold solids (see {#manifold?}). Non‑manifold
-  #   geometry returns +nil+.
+  # @note This method is not available in SketchUp Make.
   #
-  #   The returned groups are new; original group(s)/instance are deleted.
+  # @param [Sketchup::Group, Sketchup::ComponentInstance] group
+  #   The group to split this group with.
   #
-  #   All result groups are assigned to the Untagged tag; original tags are not kept.
-  #
-  #   Materials / attributes are not fully preserved (see ComponentInstance#split notes).
-  #
-  #   Intersection can be empty if there is no volumetric overlap (only
-  #   touching or full containment without new partition).
-  #
-  #   Not available in SketchUp Make.
-  #
-  # @param [Sketchup::Group, Sketchup::ComponentInstance] other
-  #   The other solid to split with.
-  #
-  # @return [Array(Sketchup::Group, Sketchup::Group, Sketchup::Group), nil] Returns [Difference2, Difference1, Intersection] on success, or +nil+ if
-  #   either operand is not a manifold solid or the operation fails.
-  #
-  # @see #union
-  #
-  # @see #intersect
-  #
-  # @see #subtract
-  #
-  # @see #trim
+  # @return [Array(Sketchup::Group, Sketchup::Group, Sketchup::Group), nil] A vector (array) of the three resultant groups
+  #   If the two objects (this and arg) represent manifold
+  #   solids and the operation succeeds otherwise nil is
+  #   returned. The 3 groups are as follows:
+  #   The intersection of volume 1 & volume 2,
+  #   the difference of volume 1 minus volume 2,
+  #   and the reverse difference of volume 2 minus volume 1.
   #
   # @version SketchUp 8.0
-  def split(other)
+  def split(group)
   end
 
   # The subtract method is used to compute the boolean difference of the two

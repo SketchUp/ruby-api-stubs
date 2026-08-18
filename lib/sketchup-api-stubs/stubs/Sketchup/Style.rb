@@ -46,22 +46,6 @@ class Sketchup::Style < Sketchup::Entity
   def description=(description)
   end
 
-  # The {#duplicate} method creates a copy of the style with all its properties.
-  #
-  # The duplicated style will have a unique name based on the original style's name.
-  #
-  # @example
-  #   styles = Sketchup.active_model.styles
-  #   original = styles.selected_style
-  #   duplicate = original.duplicate
-  #   puts duplicate.name
-  #
-  # @return [Sketchup::Style] the newly created style
-  #
-  # @version SketchUp 2026.2
-  def duplicate
-  end
-
   # The {#name} method gets the name for a {Sketchup::Style}.
   #
   # @example

@@ -358,15 +358,11 @@ class Sketchup::DefinitionList < Sketchup::Entity
   def load_from_url(*args)
   end
 
-  # The {#purge_unused} method is used to remove the unused component definitions.
+  # The purge_unused method is used to remove the unused component definitions.
   #
   # @example
   #   definitions = Sketchup.active_model.definitions
   #   definitions.purge_unused
-  #
-  # @note Silently purging can cause data loss.
-  #   The user may have deleted the last instance but intend to place new ones later.
-  #   Don't purge without the user's knowledge and approval.
   #
   # @return [Sketchup::DefinitionList]
   #

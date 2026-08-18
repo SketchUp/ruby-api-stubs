@@ -31,7 +31,7 @@ class Sketchup::Curve < Sketchup::Entity
   #   curve = edge.curve
   #   number = curve.count_edges
   #
-  # @return [Integer]
+  # @return num_edges - the number of edges in the curve
   #
   # @version SketchUp 6.0
   def count_edges
@@ -52,13 +52,10 @@ class Sketchup::Curve < Sketchup::Entity
   #   curve = edge.curve
   #   curve.each_edge {|edge| puts "Edge {edge.entityID}: {edge.length}" }
   #
-  # @return [nil]
+  # @return edge - a variable that will hold each Edge object as
+  #   they are found.
   #
   # @version SketchUp 6.0
-  #
-  # @yield [edge] Each edge associated with this curve.
-  #
-  # @yieldparam [Sketchup::Edge] edge
   def each_edge
   end
 
@@ -77,7 +74,7 @@ class Sketchup::Curve < Sketchup::Entity
   #   curve = edge.curve
   #   edges = curve.edges
   #
-  # @return [Array<Sketchup::Edge>]
+  # @return edges - an array of Edge objects if successful
   #
   # @version SketchUp 6.0
   def edges
@@ -97,7 +94,7 @@ class Sketchup::Curve < Sketchup::Entity
   #   curve = edge.curve
   #   firstedge = curve.first_edge
   #
-  # @return [Sketchup::Edge]
+  # @return edge - the first Edge object in the curve if successful
   #
   # @version SketchUp 6.0
   def first_edge
@@ -112,7 +109,8 @@ class Sketchup::Curve < Sketchup::Entity
   #   ents.each { |e| curve = e.curve if e.is_a? Sketchup::Edge }
   #   is_poly = curve.is_polygon?
   #
-  # @return [Boolean]
+  # @return [Boolean] True if this edge was originally created by the polygon
+  #   tool, otherwise false.
   #
   # @version SketchUp 7.1 M1
   def is_polygon?
@@ -132,7 +130,7 @@ class Sketchup::Curve < Sketchup::Entity
   #   curve = edge.curve
   #   lastedge = curve.last_edge
   #
-  # @return [Sketchup::Edge]
+  # @return edge - the last Edge object in the curve if successful
   #
   # @version SketchUp 6.0
   def last_edge
@@ -194,7 +192,7 @@ class Sketchup::Curve < Sketchup::Entity
   #   curve = edge.curve
   #   vertices = curve.vertices
   #
-  # @return [Array<Sketchup::Vertex>] - a collection of the vertices
+  # @return vertices - a collection of the vertices
   #
   # @version SketchUp 6.0
   def vertices

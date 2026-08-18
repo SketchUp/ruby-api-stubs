@@ -10,14 +10,12 @@
 #
 # A line can be represented as either an Array of a point and a
 # vector, or as an Array of two points.
-#
 #   line1 = [Geom::Point3d.new(0, 0, 0), Geom::Vector3d.new(0, 0, 1)]
 #   line2 = [Geom::Point3d.new(0, 0, 0), Geom::Point3d.new(0, 0, 100)]
 #
 # A plane can be represented as either an Array
 # of a point and a vector, or as an Array of 4 numbers that give the
 # coefficients of a plane equation.
-#
 #   plane1 = [Geom::Point3d.new(0, 0, 0), Geom::Vector3d.new(0, 0, 1)]
 #   plane2 = [0, 0, 1, 0]
 #

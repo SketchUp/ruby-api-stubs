@@ -19,11 +19,7 @@ Though our adoption rate to the latest version is quite high, it can take time a
 
 Here are the build numbers for recent SketchUp releases. Note that build numbers in languages besides English are larger for each release, so it is best to check for builds that are greater than or equal to the numbers here.
 
-- **SU2027.1** = BUILD_NUMBER on Windows and Mac 64-bit.
-- **SU2027.0** = BUILD_NUMBER on Windows and Mac 64-bit.
-- **SU2026.2** = 26.2.243 on Windows 64-bit, 26.2.242 on Mac 64-bit.
-- **SU2026.1.2** = 26.1.252 on Windows 64-bit, 26.1.253 on Mac 64-bit.
-- **SU2026.1.1** = 26.1.189 on Windows 64-bit, 26.1.188 on Mac 64-bit.
+- **SU2026.1** = BUILD_NUMBER_WIN on Windows 64-bit, BUILD_NUMBER_MAC on Mac 64-bit.
 - **SU2026.0** = 26.0.429 on Windows 64-bit, 26.0.428 on Mac 64-bit.
 
 - **SU2025.0.3** = 25.0.660 on Windows 64-bit, 25.0.659 on Mac 64-bit.
@@ -88,163 +84,13 @@ Here are the build numbers for recent SketchUp releases. Note that build numbers
 
 - **SU6 M6** = 6.4.265 on Windows, 6.4.263 on Mac.
 
-# What's new in SketchUp 2027.1
-
-## Ruby API Bug Fixes
-
-* Fixed a bug where {Sketchup::Entities#add_text} accepted an instance path that did not start within the drawing context being added to, creating a leader that rendered in the wrong position outside of the group or component edit context. Such a path now raises an `ArgumentError`.
-
-# What's new in SketchUp 2027.0
-
-## Ruby API Additions and Improvements
-
-* Added {Sketchup::Entities#add_copy} for copying a set of entities into an entities collection.
-* Added {Sketchup::AppObserver#onCloseModel}, deprecated {Sketchup::ModelObserver#onDeleteModel} and {Sketchup::ModelObserver#onEraseAll}.
-* Deprecated {UI.refresh_toolbars}. Toolbar state now refreshes automatically on both platforms.
-* Added {Layout::Table.size_to_fit}.
-* Callbacks registered with {UI::HtmlDialog#add_action_callback} can now return arrays or hashes which will be passed to the `onComplete` callback in JavaScript.
-* Added `ifc_types_filter`, `entity_names_filter`, `guids_filter` and `filter_mode` options to {Sketchup::Model#import} for ifc importer.
-* Added the Procedures API for creating procedural components:
-    * Added {Sketchup::Procedure}, the abstract base class extensions subclass to implement a procedure, and {Sketchup.register_procedure} to register an instance of it.
-    * Added {Sketchup::ComponentDefinition#attach_procedure}.
-    * Added {Sketchup::ComponentDefinition#procedural?}.
-    * Added {Sketchup::ComponentDefinition#control_entities}.
-    * Added {Sketchup::ComponentDefinition#get_procedure_parameters} and {Sketchup::ComponentDefinition#set_procedure_parameters}.
-    * Added {Sketchup::ComponentDefinition#run_procedures}.
-    * Added {Sketchup::ComponentDefinition#make_non_procedural}.
-    * Added the `Sketchup::PROCEDURE_ID_*` constants for attaching native procedures.
-* Added hatch patterns:
-    * Added {Sketchup::Model#hatch_patterns}.
-    * Added {Sketchup::HatchPatterns#size}.
-    * Added {Sketchup::HatchPatterns#length}.
-    * Added {Sketchup::HatchPatterns#each}.
-    * Added {Sketchup::HatchPatterns#[]}.
-    * Added {Sketchup::HatchPatterns#add}.
-    * Added {Sketchup::HatchPatterns#remove}.
-    * Added {Sketchup::HatchPatterns#purge_unused}.
-    * Added {Sketchup::HatchPatterns#selected_hatch_pattern}.
-    * Added {Sketchup::HatchPatterns#selected_hatch_pattern=}.
-    * Added {Sketchup::HatchPattern#name}.
-    * Added {Sketchup::HatchPattern#name=}.
-    * Added {Sketchup::HatchPattern#uv_scale}.
-    * Added {Sketchup::HatchPattern#set_uv_scale}.
-    * Added {Sketchup::HatchPattern#fill_color}.
-    * Added {Sketchup::HatchPattern#fill_color=}.
-    * Added {Sketchup::HatchPattern#rotation_angle}.
-    * Added {Sketchup::HatchPattern#rotation_angle=}.
-    * Added {Sketchup::HatchPattern#fill_texture_image}.
-    * Added {Sketchup::HatchPattern#fill_texture_file_name}.
-    * Added {Sketchup::HatchPattern#set_fill_texture_image_and_file_name}.
-    * Added {Sketchup::HatchPattern#clear_fill_texture}.
-    * Added {Sketchup::HatchPattern#fill_pattern_file_name}.
-    * Added {Sketchup::HatchPattern#set_fill_pattern_from_file}.
-    * Added {Sketchup::HatchPattern#save_fill_pattern_to_file}.
-    * Added {Sketchup::HatchPattern#clear_fill_pattern}.
-    * Added {Sketchup::HatchPattern#thumbnail_image}.
-    * Added {Sketchup::HatchPattern#write}.
-    * Added {Sketchup::Group#hatch_pattern}.
-    * Added {Sketchup::Group#hatch_pattern=}.
-    * Added {Sketchup::SectionPlane#hatch_pattern}.
-    * Added {Sketchup::SectionPlane#hatch_pattern=}.
-    * Added {Sketchup::ComponentInstance#hatch_pattern}.
-    * Added {Sketchup::ComponentInstance#hatch_pattern=}.
-    * Added {Sketchup::RenderingOptions#hatch_pattern}.
-    * Added {Sketchup::RenderingOptions#hatch_pattern=}.
-    * Added {Sketchup::HatchPatternData} for the default section fill style, with:
-        * {Sketchup::HatchPatternData#fill_color} and {Sketchup::HatchPatternData#fill_color=}.
-        * {Sketchup::HatchPatternData#uv_scale} and {Sketchup::HatchPatternData#set_uv_scale}.
-        * {Sketchup::HatchPatternData#rotation_angle} and {Sketchup::HatchPatternData#rotation_angle=}.
-        * {Sketchup::HatchPatternData#fill_texture_image}.
-        * {Sketchup::HatchPatternData#fill_texture_file_name}.
-        * {Sketchup::HatchPatternData#set_fill_texture_image_and_file_name}.
-        * {Sketchup::HatchPatternData#clear_fill_texture}.
-        * {Sketchup::HatchPatternData#fill_pattern_file_name}.
-        * {Sketchup::HatchPatternData#set_fill_pattern_from_file}.
-        * {Sketchup::HatchPatternData#save_fill_pattern_to_file}.
-        * {Sketchup::HatchPatternData#clear_fill_pattern}.
-* Added the Coordinate Reference System (CRS) API for mapping a model into a projection coordinate system:
-    * Added {Sketchup::Model#crs_location}.
-    * Added {Sketchup::Model#crs_location=}.
-    * Added {Sketchup::CRSLocation}:
-        * Added {Sketchup::CRSLocation#name}.
-        * Added {Sketchup::CRSLocation#name=}.
-        * Added {Sketchup::CRSLocation#description}.
-        * Added {Sketchup::CRSLocation#description=}.
-        * Added {Sketchup::CRSLocation#eastings}.
-        * Added {Sketchup::CRSLocation#eastings=}.
-        * Added {Sketchup::CRSLocation#northings}.
-        * Added {Sketchup::CRSLocation#northings=}.
-        * Added {Sketchup::CRSLocation#height}.
-        * Added {Sketchup::CRSLocation#height=}.
-        * Added {Sketchup::CRSLocation#scale}.
-        * Added {Sketchup::CRSLocation#scale=}.
-        * Added {Sketchup::CRSLocation#x_axis}.
-        * Added {Sketchup::CRSLocation#x_axis=}.
-        * Added {Sketchup::CRSLocation#geodetic_datum}.
-        * Added {Sketchup::CRSLocation#geodetic_datum=}.
-        * Added {Sketchup::CRSLocation#map_projection}.
-        * Added {Sketchup::CRSLocation#map_projection=}.
-        * Added {Sketchup::CRSLocation#map_unit}.
-        * Added {Sketchup::CRSLocation#map_unit=}.
-        * Added {Sketchup::CRSLocation#map_zone}.
-        * Added {Sketchup::CRSLocation#map_zone=}.
-        * Added {Sketchup::CRSLocation#vertical_datum}.
-        * Added {Sketchup::CRSLocation#vertical_datum=}.
-        * Added {Sketchup::CRSLocation#tgl_id}.
-        * Added {Sketchup::CRSLocation#tgl_id=}.
-        * Added {Sketchup::CRSLocation#calibration_file_name}.
-        * Added {Sketchup::CRSLocation#calibration_file_name=}.
-        * Added the `Sketchup::CRSLocation::METERS`, `Sketchup::CRSLocation::FEET` and `Sketchup::CRSLocation::US_SURVEY_FEET` scale constants.
-    * Added {Sketchup::CRSMapUnit}:
-        * Added {Sketchup::CRSMapUnit#name}.
-        * Added {Sketchup::CRSMapUnit#conversion}.
-        * Added the `Sketchup::CRSMapUnit::METERS`, `Sketchup::CRSMapUnit::FEET` and `Sketchup::CRSMapUnit::US_SURVEY_FEET` map unit constants.
-
-## Ruby API Bug Fixes
-
-* Fixed a bug where the {Sketchup::Tool#onKeyDown} and {Sketchup::Tool#onKeyUp} flags parameter contained incorrect modifier keys.
-* Fixed a bug where duplicated calls to {Sketchup::Entities.add_face} with an array of edges (or a curve) would abort an open operation and return `nil`.
-* Fixed a bug where {Sketchup::Entities#add_circle} and {Sketchup::Entities#add_arc} with zero radius could create invalid geometry. These methods now return an empty array for zero radius.
-* Fixed a bug where the {UI::HtmlDialog#set_can_close} block was not re-invoked on subsequent close attempts after it had returned `false` once.
-* Fixed a bug where the {Sketchup::ComponentDefinition#save_copy} method did not retain the original guid of the component definition.
-* Fixed a bug where {Sketchup::InstancePath#valid?} returned `true` for a leaf-only path pointing at a nested {Sketchup::Vertex}, while an equivalent path to a nested {Sketchup::Edge} or {Sketchup::Face} correctly returned `false`. A leaf-only path to any nested entity is now consistently reported as invalid.
-
-# What's new in SketchUp 2026.2
-
-## Ruby API Additions and Improvements
-
-* Added {Sketchup::Material#duplicate}
-* Added {Sketchup::Style#duplicate}
-* Added {Sketchup::ComponentDefinition#manifold?} to allow checking if a definition is a manifold solid without needing to create or refer to an instance. Consequently, {Sketchup::ComponentInstance#manifold?} and {Sketchup::Group#manifold?} are now deprecated in favor of checking the definition directly.
-* Added constants for {Geom::BoundingBox#corner}.
-* Added {Sketchup::InstancePath#clear}.
-* Added {Sketchup::InstancePath#copy}.
-* Added {Sketchup::InstancePath#clone}.
-* Added {Sketchup::InstancePath#leaf=}.
-* Added {Sketchup::InstancePath#push}.
-* Added {Sketchup::InstancePath#pop}.
-* Added {Sketchup::Text#font} to get font properties (name, size, bold, italic) as a Hash.
-* Added {Sketchup::Text#font=} to set font properties via a Hash with optional keys.
-* Added {Sketchup.mdi?}.
-* Added `preserve_origin` and `tags_handling` options to {Sketchup::Model#import} for ifc importer.
-* Deprecated {Sketchup.send_action}. This method is no longer being actively maintained due to its asynchronous nature and fragility.
-* Added {Layout::Group#clip_mask}.
-* Added {Layout::Group#clip_mask=}.
-
-## Ruby API Bug Fixes
-
-* Made {Sketchup.load} and {Sketchup.require} pass through Ruby Exceptions similarly to Ruby's own `load` and `require`, instead of rescuing them.
-* Made {Sketchup.load} and {Sketchup.require} raise a `LoadError` when the file cannot be found, similarly to Ruby's own `load` and `require`.
-* Improved consistency of {Sketchup::Tools.active_tool_name} and the tool name passed to {Sketchup::ToolsObserver#onActiveToolChanged}. Affecting the following tools `CommentTool`, `FlipTool`, `IglooTool` and `LassoSelectionTool`.
-* Fixed a bug where {Sketchup::Entities#add_dimension_linear} could move the construction point if it was supplied as part of an instance path.
-* Fixed a bug where {Sketchup::DimensionLinear#end_attached_to=} could move the construction point in the instance path.
-* Fixed a bug where {Sketchup::DimensionLinear#start_attached_to=} could move the construction point in the instance path.
-
 # What's new in SketchUp 2026.1
 
+## Breaking changes
+
 ## Ruby API Additions and Improvements
 
-* Added {UI.show_extension_warehouse} which opens the Extension Warehouse home when called without arguments, or navigates directly to a specific extension when given its extension identifier (UUID).
+* Added {UI.show_extension_warehouse} which opens the Extension Warehouse home when called without arguments, or navigates directly to a specific extension when given its extension identifier (UUID). 
 * Modified {Sketchup::ShadowInfo#[]=} to be stricter and provide better error feedback. It will now raise a `KeyError` for invalid or read-only keys, and a `TypeError` for values of an incorrect type.
 * Added built-in JavaScript callbacks `sketchup.launchEW(id)` and `sketchup.installRBZ(url)` for HtmlDialog. `launchEW` with a UUID string opens that extension's page. `installRBZ` downloads and installs the `.rbz` at the given URL.
 * Added {UI::HtmlDialog#hide} to hide dialogs without closing them, preserving their state.
@@ -253,12 +99,12 @@ Here are the build numbers for recent SketchUp releases. Note that build numbers
 
 * Fixed a regression in {Sketchup::Tool#onKeyDown} introduced in SketchUp 2026.0 (Windows) where the event didn't trigger when Return/Enter was pressed.
 * Fixed silent failures when passing non-invertible transformations (e.g. zero-scale transforms). The following methods now correctly raise an `ArgumentError`:
-    * {Sketchup::ComponentInstance#transform!}
-    * {Sketchup::Group#transform!}
-    * {Sketchup::Image#transform!}
-    * {Sketchup::Image#transformation=}
-    * {Sketchup::Entities#transform_entities}
-    * {Sketchup::Entities#add_instance}
+  * {Sketchup::ComponentInstance#transform!}
+  * {Sketchup::Group#transform!}
+  * {Sketchup::Image#transform!}
+  * {Sketchup::Image#transformation=}
+  * {Sketchup::Entities#transform_entities}
+  * {Sketchup::Entities#add_instance}
 * Fixed {Layout::Entity#transform!} to raise an `ArgumentError` when given a non-invertible {Geom::Transformation2d}.
 
 # What's new in SketchUp 2026.0
@@ -315,7 +161,6 @@ Extensions that don't follow this requirement will be rejected for updates or pu
     * {Sketchup::RenderingOptionsObserver} constants:
         * {Sketchup::RenderingOptions::ROPSetAOColor}
         * {Sketchup::RenderingOptions::ROPSetAOMultiplier}
-* Upgraded CEF (used by {UI::HtmlDialog}) to version 137.
 
 ## Ruby API Bug Fixes
 
@@ -565,7 +410,7 @@ The version of OpenSSL in Ruby was updated to 1.1.1o.
     * {Sketchup::DefinitionList#remove}
 * Fixed return value of {Sketchup::EntitiesBuilder#valid?} to correctly return
   `true` instead of `0` for success.
-* Fixed a bug where calling {Sketchup::Entity#parent} on a top level {Sketchup::LayerFolder} returned an incorrect type.
+* Fixed a bug where calling {Sketchup::LayerFolder#parent} on a top level tag folder returned an incorrect type.
 
 # What's new in SketchUp 2022.0.1
 

@@ -197,7 +197,7 @@ class Sketchup::Material < Sketchup::Entity
   #   material.ao_texture = 'path/to/ao_texture.png'
   #   material.ao_strength = 1.0
   #
-  # @param [Float] strength
+  # @param [Float] strenght
   #   A value between +0.0+ and +1.0+.
   #
   # @see #ao_enabled?
@@ -207,7 +207,7 @@ class Sketchup::Material < Sketchup::Entity
   # @see #ao_texture=
   #
   # @version SketchUp 2025.0
-  def ao_strength=(strength)
+  def ao_strength=(strenght)
   end
 
   #
@@ -266,7 +266,7 @@ class Sketchup::Material < Sketchup::Entity
   # color of the texture.
   #
   # @example
-  #   material = Sketchup.active_model.materials.add('Example')
+  #   materials = Sketchup.active_model.materials.add('Example')
   #   material.color = 'red'
   #   color = material.color
   #
@@ -397,252 +397,6 @@ class Sketchup::Material < Sketchup::Entity
   #
   # @version SketchUp 6.0
   def display_name
-  end
-
-  # The {#duplicate} method creates a copy of the material with all its properties.
-  #
-  # The duplicated material will have a unique name based on the original material's name.
-  #
-  # @example
-  #   materials = Sketchup.active_model.materials
-  #   original = materials.add('Joe')
-  #   original.color = 'red'
-  #   duplicate = original.duplicate
-  #   puts duplicate.name  # Outputs: "Joe1"
-  #   puts duplicate.color # Outputs: Color(255, 0, 0, 255)
-  #
-  # @raise [RuntimeError] if the material is used by a layer or image.
-  #
-  # @return [Sketchup::Material] the newly created material
-  #
-  # @version SketchUp 2026.2
-  def duplicate
-  end
-
-  #
-  # @api EmissiveMaterials
-  #
-  # @example
-  #   material = Sketchup.active_model.materials.add("PBR Material")
-  #   material.emissive_color
-  #   # > #<Sketchup::Color>
-  #
-  # @return [Sketchup::Color]
-  #
-  # @see #emissive_enabled?
-  #
-  # @see #emissive_enabled=
-  #
-  # @see #emissive_texture
-  #
-  # @see #emissive_texture=
-  #
-  # @see #emissive_factor
-  #
-  # @see #emissive_factor=
-  #
-  # @version SketchUp 2027.0
-  def emissive_color
-  end
-
-  #
-  # @api EmissiveMaterials
-  #
-  # @example
-  #   material = Sketchup.active_model.materials.add("PBR Material")
-  #   material.emissive_color = Sketchup::Color.new(255, 128, 0)
-  #
-  # @param [Sketchup::Color, String, Array(Numeric, Numeric, Numeric), Integer] color
-  #
-  # @see #emissive_enabled?
-  #
-  # @see #emissive_enabled=
-  #
-  # @see #emissive_texture
-  #
-  # @see #emissive_texture=
-  #
-  # @see #emissive_factor
-  #
-  # @see #emissive_factor=
-  #
-  # @version SketchUp 2027.0
-  def emissive_color=(color)
-  end
-
-  #
-  # @api EmissiveMaterials
-  #
-  # @example
-  #   material = Sketchup.active_model.materials.add("PBR Material")
-  #   material.emissive_enabled = true
-  #
-  # @param [Boolean] enabled
-  #
-  # @see #emissive_enabled?
-  #
-  # @see #emissive_texture
-  #
-  # @see #emissive_texture=
-  #
-  # @see #emissive_color
-  #
-  # @see #emissive_color=
-  #
-  # @see #emissive_factor
-  #
-  # @see #emissive_factor=
-  #
-  # @version SketchUp 2027.0
-  def emissive_enabled=(enabled)
-  end
-
-  #
-  # @api EmissiveMaterials
-  #
-  # @example
-  #   material = Sketchup.active_model.materials.add("Material")
-  #   material.emissive_enabled?
-  #   # > false
-  #
-  # @return [Boolean]
-  #
-  # @see #emissive_enabled=
-  #
-  # @see #emissive_texture
-  #
-  # @see #emissive_texture=
-  #
-  # @see #emissive_color
-  #
-  # @see #emissive_color=
-  #
-  # @see #emissive_factor
-  #
-  # @see #emissive_factor=
-  #
-  # @version SketchUp 2027.0
-  def emissive_enabled?
-  end
-
-  #
-  # @api EmissiveMaterials
-  #
-  # @example
-  #   material = Sketchup.active_model.materials.add("PBR Material")
-  #   material.emissive_factor
-  #   # > 1.0
-  #
-  # @return [Float] A value of +0.0+ or greater. Values greater than +1.0+
-  #   produce HDR (overbright) emissive output.
-  #
-  # @see #emissive_enabled?
-  #
-  # @see #emissive_enabled=
-  #
-  # @see #emissive_texture
-  #
-  # @see #emissive_texture=
-  #
-  # @see #emissive_color
-  #
-  # @see #emissive_color=
-  #
-  # @version SketchUp 2027.0
-  def emissive_factor
-  end
-
-  #
-  # @api EmissiveMaterials
-  #
-  # @example
-  #   material = Sketchup.active_model.materials.add("PBR Material")
-  #   material.emissive_factor = 0.5
-  #
-  # @param [Float] factor
-  #   A value of +0.0+ or greater. Values greater than
-  #   +1.0+ produce HDR (overbright) emissive output.
-  #
-  # @see #emissive_enabled?
-  #
-  # @see #emissive_enabled=
-  #
-  # @see #emissive_texture
-  #
-  # @see #emissive_texture=
-  #
-  # @see #emissive_color
-  #
-  # @see #emissive_color=
-  #
-  # @version SketchUp 2027.0
-  def emissive_factor=(factor)
-  end
-
-  #
-  # @api EmissiveMaterials
-  #
-  # @example
-  #   material = Sketchup.active_model.materials.add("PBR Material")
-  #   material.emissive_texture = 'path/to/emissive_texture.png'
-  #   material.emissive_texture
-  #   # > #<Sketchup::Texture>
-  #
-  # @return [Sketchup::Texture, nil]
-  #
-  # @see #emissive_enabled?
-  #
-  # @see #emissive_enabled=
-  #
-  # @see #emissive_color
-  #
-  # @see #emissive_color=
-  #
-  # @see #emissive_factor
-  #
-  # @see #emissive_factor=
-  #
-  # @version SketchUp 2027.0
-  def emissive_texture
-  end
-
-  #
-  # @api EmissiveMaterials
-  #
-  # @example
-  #   material = Sketchup.active_model.materials.add("PBR Material")
-  #   material.texture = 'path/to/texture.png'
-  #   material.emissive_texture = 'path/to/emissive_texture.png'
-  #
-  # @overload emissive_texture=(image_path)
-  #
-  #   @param [String] image_path
-  #
-  # @overload emissive_texture=(image_rep)
-  #
-  #   @param [Sketchup::ImageRep] image_rep
-  #
-  # @overload emissive_texture=(texture)
-  #
-  #   Copies another texture to this texture.
-  #   @param [Sketchup::Texture] texture
-  #
-  # @raise [ArgumentError] if the image data of the texture is invalid or corrupt.
-  #
-  # @see #emissive_enabled?
-  #
-  # @see #emissive_enabled=
-  #
-  # @see #emissive_color
-  #
-  # @see #emissive_color=
-  #
-  # @see #emissive_factor
-  #
-  # @see #emissive_factor=
-  #
-  # @version SketchUp 2027.0
-  def emissive_texture=(texture)
   end
 
   # The {#materialType} method retrieves the type of the material.

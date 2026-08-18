@@ -119,10 +119,10 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   ROPSetAOIntensity = nil # Stub value.
   ROPSetAOMultiplier = nil # Stub value.
   ROPSetBackgroundColor = nil # Stub value.
-  ROPSetColorByClassificationSchema = nil # Stub value.
   ROPSetConstructionColor = nil # Stub value.
   ROPSetDepthQueEdges = nil # Stub value.
   ROPSetDepthQueWidth = nil # Stub value.
+  ROPSetDisplayColorByLayer = nil # Stub value.
   ROPSetDisplayDims = nil # Stub value.
   ROPSetDisplayFog = nil # Stub value.
   ROPSetDisplayInstanceAxes = nil # Stub value.
@@ -155,7 +155,6 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   ROPSetLineEndEdges = nil # Stub value.
   ROPSetLineEndWidth = nil # Stub value.
   ROPSetLineExtension = nil # Stub value.
-  ROPSetLineStyleByClassificationSchema = nil # Stub value.
   ROPSetLineStyleEdges = nil # Stub value.
   ROPSetLockedColor = nil # Stub value.
   ROPSetMaterialTransparency = nil # Stub value.
@@ -175,8 +174,6 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   ROPSetSectionDefaultCutColor = nil # Stub value.
   ROPSetSectionDefaultFillColor = nil # Stub value.
   ROPSetSectionDisplayMode = nil # Stub value.
-  ROPSetSectionFillByClassificationSchema = nil # Stub value.
-  ROPSetSectionFillByEnabled = nil # Stub value.
   ROPSetSectionInactiveColor = nil # Stub value.
   ROPSetSkyColor = nil # Stub value.
   ROPSetTexture = nil # Stub value.
@@ -325,35 +322,6 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   #
   # @version SketchUp 6.0
   def each_pair
-  end
-
-  # Retrieves the hatch pattern assigned to the component instance.
-  #
-  # @example
-  #   instance = Sketchup.active_model.entities[0]
-  #   puts instance.hatch_pattern.name
-  #
-  # @return [Sketchup::HatchPattern]
-  #
-  # @version SketchUp 2027.0
-  def hatch_pattern
-  end
-
-  # Assigns a hatch pattern to the component instance.
-  #
-  # @example
-  #   model = Sketchup.active_model
-  #   hatch_patterns = model.hatch_patterns
-  #   instance = model.entities[0]
-  #   instance.hatch_pattern = hatch_patterns['Pattern1']
-  #
-  # @param [Sketchup::HatchPattern, nil] pattern
-  #   the pattern to assign, or +nil+ to clear the assignment.
-  #
-  # @raise [ArgumentError] if the pattern does not belong to the component instance's model.
-  #
-  # @version SketchUp 2027.0
-  def hatch_pattern=(pattern)
   end
 
   # The keys method returns an array with all of the attribute keys.

@@ -1,16 +1,6 @@
 # Copyright:: Copyright 2026 Trimble Inc.
 # License:: The MIT License (MIT)
 
-# {Geom::Transformation2d} represents 2D affine transforms used by LayOut.
-# The internal representation is a 2x3 matrix +[m11, m12, m21, m22, tx, ty]+.
-# Use {.translation}, {.rotation}, and {.scaling} to construct common transforms,
-# or pass a 6-element Array to {.new} or {#set!} for a custom matrix.
-#
-# @see Geom::Point2d
-#
-# @see Geom::Vector2d
-#
-# @see IDENTITY_2D
 #
 # @version LayOut 2018
 class Geom::Transformation2d

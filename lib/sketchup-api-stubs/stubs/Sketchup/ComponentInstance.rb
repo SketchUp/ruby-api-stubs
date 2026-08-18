@@ -194,35 +194,6 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   def guid
   end
 
-  # Retrieves the hatch pattern assigned to the component instance.
-  #
-  # @example
-  #   instance = Sketchup.active_model.entities[0]
-  #   puts instance.hatch_pattern.name
-  #
-  # @return [Sketchup::HatchPattern]
-  #
-  # @version SketchUp 2027.0
-  def hatch_pattern
-  end
-
-  # Assigns a hatch pattern to the component instance.
-  #
-  # @example
-  #   model = Sketchup.active_model
-  #   hatch_patterns = model.hatch_patterns
-  #   instance = model.entities[0]
-  #   instance.hatch_pattern = hatch_patterns['Pattern1']
-  #
-  # @param [Sketchup::HatchPattern, nil] pattern
-  #   the pattern to assign, or +nil+ to clear the assignment.
-  #
-  # @raise [ArgumentError] if the pattern does not belong to the component instance's model.
-  #
-  # @version SketchUp 2027.0
-  def hatch_pattern=(pattern)
-  end
-
   # The intersect method is used to compute the boolean intersection of two
   # instances representing manifold solid volumes (this - arg).  If the specified
   # objects (this and arg) do not represent manifold volumes, this method fails.
@@ -305,9 +276,6 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
 
   # The manifold? method is used to determine if an instance is manifold.
   #
-  # @deprecated Use {Sketchup::ComponentDefinition#manifold?} instead. This method
-  #   checks the definition, not the instance.
-  #
   # @example
   #   entities = Sketchup.active_model.entities
   #   definition = Sketchup.active_model.definitions[0]
@@ -316,8 +284,6 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   #   status = componentinstance.manifold?
   #
   # @return [Boolean]
-  #
-  # @see Sketchup::ComponentDefinition#manifold?
   #
   # @version SketchUp 8.0
   def manifold?
@@ -454,65 +420,30 @@ class Sketchup::ComponentInstance < Sketchup::Drawingelement
   def show_differences(instance, verbose)
   end
 
-  # The {#split} method performs a boolean "split" (map overlay) between this
-  # component instance (the receiver) and another manifold solid (group or
-  # component instance). The operation partitions the combined volumes into:
+  # The split method is used to compute the boolean split (map overlay)of the two
+  # instances representing manifold solid volumes (this - arg).  If the specified
+  # objects (this and arg) do not represent manifold volumes, this method fails.
   #
-  # - Difference2: (other - self)
-  # - Difference1: (self - other)
-  # - Intersection: (self ∩ other)
-  #
-  # The originals (self and other) are ERASED and replaced by three newly created
-  # groups representing these volumes.
+  # resultant groups if the two objects (this and arg) represent manifold solids and the operation
+  # succeeds otherwise nil is returned. The 3 groups are as follows: The intersection of volume 1 &
+  # volume 2, the difference of volume 1 minus volume 2, and the reverse difference of volume 2 minus
+  # volume 1.
   #
   # @example
-  #   model = Sketchup.active_model
-  #   g1 = model.entities.add_group
-  #   g1.entities.add_face([0, 0, 0], [100, 0, 0], [100, 100, 0], [0, 100, 0]).pushpull(50)
-  #   g2 = model.entities.add_group
-  #   g2.entities.add_face([50, -25, 0], [150, -25, 0], [150, 75, 0], [50, 75, 0]).pushpull(50)
-  #   diff2, diff1, inter = g1.to_component.split(g2) # Order: Difference2, Difference1, Intersection
-  #   puts [diff2.name, diff1.name, inter.name] # => ["Difference2","Difference1","Intersection"]
+  #   entities = Sketchup.active_model.entities
+  #   instance1 = entities[0]
+  #   instance2 = entities[1]
+  #   result = instance1.split(instance2)
   #
-  # @note Both operands must be manifold solids (see {#manifold?}). Non‑manifold
-  #   geometry returns +nil+.
+  # @note This method is not available in SketchUp Make.
   #
-  # @note The returned groups are always new objects; any prior references to the
-  #   original receiver or argument are invalid after this call.
+  # @param [Sketchup::ComponentInstance, nil] instance
+  #   The instance to split this instance with.
   #
-  # @note All three result groups are placed on Layer0, regardless of original
-  #   layer assignments.
-  #
-  # @note Materials and attribute dictionaries are not fully preserved. Faces
-  #   with default materials may inherit what was previously a container
-  #   material; new faces get the default material.
-  #
-  # @note The Intersection group can be empty (contain no geometry) when volumes
-  #   only touch or one lies entirely within the other without producing new
-  #   partitioning geometry.
-  #
-  # @note Undo will restore pre‑split objects but object references you held
-  #   beforehand become stale; reacquire them if needed.
-  #
-  # @note Not available in SketchUp Make.
-  #
-  # @param [Sketchup::ComponentInstance, Sketchup::Group] other
-  #   The other solid to split with.
-  #
-  # @return [Array(Sketchup::Group, Sketchup::Group, Sketchup::Group), nil] Returns an Array of three new groups [Difference2, Difference1, Intersection]
-  #   on success, or +nil+ if either operand is not a manifold solid or the
-  #   operation fails.
-  #
-  # @see #union
-  #
-  # @see #intersect
-  #
-  # @see #subtract
-  #
-  # @see #trim
+  # @return [Array(Sketchup::Group, Sketchup::Group, Sketchup::Group)] A vector (array) of the three
   #
   # @version SketchUp 8.0
-  def split(other)
+  def split(instance)
   end
 
   # The subtract method is used to compute the boolean difference of the two

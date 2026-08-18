@@ -84,7 +84,7 @@ class Layout::Path < Layout::Entity
   # or +nil+ if path is not an arc.
   #
   # @example
-  #   center, radius, start_angle, end_angle = path.arc
+  #   start_angle, radius, start, end = path.arc
   #
   # @return [Array(Geom::Point2d, Float, Float, Float), nil] The center point,
   #   radius, start angle, and end angle

@@ -19,22 +19,24 @@ class Layout::ReferenceEntity < Layout::Entity
 
   # Instance Methods
 
-  # The {#clip_mask} method returns the clip mask entity for the
-  # {Layout::ReferenceEntity}, or +nil+ if it does not have one.
+  # The {#clip_mask} method returns the clip mask of the {Layout::ReferenceEntity}, or
+  # +nil+ if it does not have a clip mask.
   #
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")
   #   reference_entity = doc.pages.first.entities.first
   #   clip_mask = image.clip_mask
   #
-  # @return [Layout::Ellipse, Layout::Path, Layout::Rectangle, nil]
+  # @return [Layout::Entity] The clip mask can be a {Layout::Path},
+  #   {Layout::Rectangle}, or {Layout::Ellipse}.
   #
   # @version LayOut 2023.0
   def clip_mask
   end
 
-  # The {#clip_mask=} method sets the clip mask of the {Layout::ReferenceEntity}.
-  # +clip_mask+ must not currently exist in a {Layout::Document} or {Layout::Group}.
+  # The {#clip_mask=} method sets the clip mask of the {Layout::ReferenceEntity}. clip_mask
+  # can be a {Layout::Rectangle}, {Layout::Ellipse}, or {Layout::Path}, or +nil+,
+  # and it must not currently exist in a {Layout::Document}, or {Layout::Group}.
   #
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")
@@ -45,15 +47,15 @@ class Layout::ReferenceEntity < Layout::Entity
   #   clip_mask = Layout::Rectangle.new(bounds)
   #   reference_entity.clip_mask = clip_mask
   #
-  # @param [Layout::Ellipse, Layout::Path, Layout::Rectangle, nil] clip_mask
+  # @param [Layout::Entity, nil] clip_mask
+  #   The clip mask can be a {Layout::Path},
+  #   {Layout::Rectangle}, {Layout::Ellipse}, or +nil+.
   #
   # @raise [ArgumentError] if clip mask is already in a {Layout::Document} or
   #   {Layout::Group}
   #
   # @raise [ArgumentError] if clip mask is not a {Layout::Path},
   #   {Layout::Rectangle}, or {Layout::Ellipse}
-  #
-  # @raise [ArgumentError] if clip_mask and reference entity bounds do not overlap
   #
   # @raise [LockedLayerError] if the {Layout::ReferenceEntity} is on a locked {Layout::Layer}
   #

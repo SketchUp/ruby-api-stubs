@@ -395,7 +395,7 @@ class Layout::Style
   def end_arrow_type=(arrow_type)
   end
 
-  # The {#fill_color} method returns the solid fill color, or +nil+ if the
+  # The {#fill_color} method returns the solid file color, or +nil+ if the
   # {Layout::Style} does not have a value for that setting.
   #
   # @example

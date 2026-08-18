@@ -18,21 +18,23 @@ class Layout::Image < Layout::Entity
 
   # Instance Methods
 
-  # The {#clip_mask} method returns the clip mask entity for the
-  # {Layout::Image}, or +nil+ if it does not have one.
+  # The {#clip_mask} method returns the clip mask of the {Layout::Image}, or
+  # +nil+ if it does not have a clip mask.
   #
   # @example
   #   image = Layout::Image.new("my_image.png", [[1, 1], [3, 3]])
   #   clip_mask = image.clip_mask
   #
-  # @return [Layout::Ellipse, Layout::Path, Layout::Rectangle, nil]
+  # @return [Layout::Entity] The clip mask can be a {Layout::Path},
+  #   {Layout::Rectangle}, or {Layout::Ellipse}.
   #
   # @version LayOut 2018
   def clip_mask
   end
 
-  # The {#clip_mask=} method sets the clip mask of the {Layout::Image}.
-  # +clip_mask+ must not currently exist in a {Layout::Document} or {Layout::Group}.
+  # The {#clip_mask=} method sets the clip mask of the {Layout::Image}. clip_mask
+  # can be a {Layout::Rectangle}, {Layout::Ellipse}, or {Layout::Path}, or +nil+,
+  # and it must not currently exist in a {Layout::Document}, or {Layout::Group}.
   #
   # @example
   #   image = Layout::Image.new("my_image.png", [[1, 1], [3, 3]])
@@ -44,15 +46,15 @@ class Layout::Image < Layout::Entity
   #
   # @note +clip_mask+ may be +nil+ as of LayOut 2020.1.
   #
-  # @param [Layout::Ellipse, Layout::Path, Layout::Rectangle, nil] clip_mask
+  # @param [Layout::Entity, nil] clip_mask
+  #   The clip mask can be a {Layout::Path},
+  #   {Layout::Rectangle}, {Layout::Ellipse}, or +nil+.
   #
   # @raise [ArgumentError] if clip mask is already in a {Layout::Document} or
   #   {Layout::Group}
   #
   # @raise [ArgumentError] if clip mask is not a {Layout::Path},
   #   {Layout::Rectangle}, or {Layout::Ellipse}
-  #
-  # @raise [ArgumentError] if clip_mask and image bounds do not overlap
   #
   # @raise [LockedLayerError] if the {Layout::Image} is on a locked {Layout::Layer}
   #

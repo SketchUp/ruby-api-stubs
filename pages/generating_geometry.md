@@ -90,7 +90,7 @@ module Example
     row_points.times { |x|
       col_points.times { |y|
         point = Geom::Point3d.new(x * 10, y * 10, 0)
-        indicies << mesh.add_point(point)
+        indicies << mesh.add_point(point) 
       }
     }
 
@@ -125,7 +125,7 @@ module Example
 end
 ```
 
-The downside of this approach is that there is less control per-entity generated. Materials are added by {Sketchup::Entities#fill_from_mesh} to the whole mesh. Only limited control over per-edge properties such as {Sketchup::Edge#soft?}, {Sketchup::Edge#smooth?} and {Sketchup::Drawingelement#hidden?} is offered. This comes a problem for importers of formats that support per-face materials.
+The downside of this approach is that there is less control per-entity generated. Materials are added by {Sketchup::Entities#fill_from_mesh} to the whole mesh. Only limited control over per-edge properties such as {Sketchup::Edge#soft?}, {Sketchup::Edge#smooth?} and {Sketchup::Edge#hidden?} is offered. This comes a problem for importers of formats that support per-face materials.
 
 ## {Sketchup::EntitiesBuilder}
 

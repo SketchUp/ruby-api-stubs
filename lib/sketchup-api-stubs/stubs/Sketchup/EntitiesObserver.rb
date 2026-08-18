@@ -20,6 +20,11 @@
 #   # Attach the observer
 #   Sketchup.active_model.entities.add_observer(MyEntitiesObserver.new)
 #
+# @note The methods of this observer fire in such a way that making changes
+#   to the model while inside of them is dangerous. If you experience sudden
+#   crashes, it could be because of this observer. A potential workaround is to
+#   use a {Sketchup::ToolsObserver} to watch what the user is doing instead.
+#
 # @version SketchUp 6.0
 class Sketchup::EntitiesObserver
 

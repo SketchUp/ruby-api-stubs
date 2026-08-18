@@ -6,10 +6,6 @@
 #
 # There are numerous tutorials on 3D vectors available on the internet.
 #
-# @note Compatibility: Many API methods that accept a Geom::Vector3d also
-#   accept a 3-element {Array} of {Numeric} values +[x, y, z]+. Arrays are implicitly
-#   converted where appropriate. See Array and Geom::Point3d.
-#
 # @version SketchUp 6.0
 class Geom::Vector3d
 

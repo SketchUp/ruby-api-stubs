@@ -385,7 +385,7 @@ class Sketchup::Image < Sketchup::Drawingelement
   def width=(width)
   end
 
-  # The {#zrotation} method is used to get the angle that the image is rotated
+  # The zrotation method is used to get the angle that the image is rotated
   # about the normal vector from an arbitrary X axis.
   #
   # @example
@@ -396,7 +396,7 @@ class Sketchup::Image < Sketchup::Drawingelement
   #   image = entities.add_image path, pt, 300
   #   zrotation = image.zrotation
   #
-  # @return [Float] - the angle of rotation in radians
+  # @return vector - a Vector3d object if successful
   #
   # @version SketchUp 6.0
   def zrotation

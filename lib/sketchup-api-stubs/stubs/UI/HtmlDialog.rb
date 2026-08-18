@@ -21,8 +21,6 @@
 #
 # HtmlDialog uses the following versions of CEF (Chromium Embedded Framework):
 #
-# [SketchUp 2026.0]
-#   CEF 137
 # [SketchUp 2025.0]
 #   CEF 128
 # [SketchUp 2024.0]
@@ -130,29 +128,8 @@ class UI::HtmlDialog
   #
   #   dialog.show # should be called directly after binding callbacks
   #
-  # @example Handling JavaScript integers exceeding the 32-bit range
-  #   dialog = UI::HtmlDialog.new({})
-  #   html = '<button onclick="sketchup.process_ids(42, 3000000000)">Click</button>'
-  #
-  #   dialog.set_html(html)
-  #
-  #   dialog.add_action_callback("process_ids") { |action_context, small_id, large_id|
-  #     puts "Small ID: #{small_id}"                # => Integer (fits in 32-bit)
-  #     puts "Large ID (Float): #{large_id}"        # => Float   (exceeds 32-bit, arrives as Float)
-  #
-  #     # To guarantee you are working with an Integer:
-  #     puts "Large ID (Integer): #{large_id.to_i}" # => Integer
-  #   }
-  #
-  #   dialog.show
-  #
   # @note When an HtmlDialog is closed, all callbacks to that instance are
   #   cleared. Attach or re-attach them before you show the dialog.
-  #
-  # @note JavaScript integers larger than 2147483647 (2^31 - 1) are stored
-  #   by the underlying V8 engine as 64-bit floats, causing them to be received
-  #   by Ruby as a +Float+ instead of an +Integer+. Small whole numbers within the
-  #   32-bit range will arrive as an +Integer+.
   #
   # @param [String] callback_name
   #   The name of the callback method to be invoked from the html dialog.
@@ -216,10 +193,7 @@ class UI::HtmlDialog
   # html dialog asynchronously.
   #
   # @example
-  #   require "json"
-  #
-  #   text = "Hello world"
-  #   js_command = "document.getElementById('id').textContent = #{text.to_json}"
+  #   js_command = "document.getElementById('id').innerHTML = '<b>Hi!</b>'"
   #   dialog.execute_script(js_command)
   #
   # @param [String] script
@@ -422,10 +396,6 @@ class UI::HtmlDialog
   # The {#set_can_close} method is used to attach a block that is executed just
   # before closing, this block has to return a boolean, if the block returns
   # false the close will be canceled.
-  #
-  # @bug SketchUp 2026.2 introduced a bug where the block was not re-invoked on
-  #   subsequent close attempts once it had returned +false+ — the cancelled
-  #   result was cached.
   #
   # @example
   #   dialog.set_can_close { false }

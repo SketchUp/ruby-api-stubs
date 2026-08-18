@@ -57,63 +57,6 @@ class Sketchup::InstancePath
   def [](index)
   end
 
-  # Clears the instance path.
-  #
-  # This sets it to an empty state. After calling this, {#valid?} will return
-  # +false+ and {#empty?} will return +true+.
-  #
-  # @example
-  #   model = Sketchup.active_model
-  #   group = model.entities.add_group
-  #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
-  #   path = Sketchup::InstancePath.new([group, edge])
-  #   path.clear
-  #
-  # @raise [TypeError] if the instance path refer to deleted entities.
-  #
-  # @return [Sketchup::InstancePath] self
-  #
-  # @version SketchUp 2026.2
-  def clear
-  end
-
-  # Returns a new instance path with the same elements.
-  #
-  # @example
-  #   model = Sketchup.active_model
-  #   group = model.entities.add_group
-  #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
-  #   path1 = Sketchup::InstancePath.new([group, edge])
-  #   path2 = path1.clone
-  #
-  # @raise [TypeError] if the instance path refer to deleted entities.
-  #
-  # @return [Sketchup::InstancePath]
-  #
-  # @version SketchUp 2026.2
-  def clone
-  end
-
-  # Copies all elements from another instance path into this one.
-  #
-  # @example
-  #   model = Sketchup.active_model
-  #   group = model.entities.add_group
-  #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
-  #   path1 = Sketchup::InstancePath.new([group, edge])
-  #   path2 = Sketchup::InstancePath.new([])
-  #   path2.copy(path1)
-  #
-  # @param [Sketchup::InstancePath] other
-  #
-  # @raise [TypeError] if the given instance path refer to deleted entities.
-  #
-  # @return [Sketchup::InstancePath] self
-  #
-  # @version SketchUp 2026.2
-  def copy(other)
-  end
-
   # The yielded entities will start with the root and end with the leaf.
   #
   # @example
@@ -216,25 +159,6 @@ class Sketchup::InstancePath
   def leaf
   end
 
-  # Sets the leaf entity of the instance path.
-  #
-  # @example
-  #   model = Sketchup.active_model
-  #   group = model.entities.add_group
-  #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
-  #   path = Sketchup::InstancePath.new([group])
-  #   path.leaf = edge
-  #
-  # @param [Sketchup::Entity, nil] entity
-  #
-  # @raise [TypeError] if the instance path refer to deleted entities.
-  #
-  # @raise [TypeError] if the given entity is deleted.
-  #
-  # @version SketchUp 2026.2
-  def leaf=(entity)
-  end
-
   # {#length} is an alias of {#size}.
   #
   # @example
@@ -274,74 +198,6 @@ class Sketchup::InstancePath
   #
   # @version SketchUp 2017
   def persistent_id_path
-  end
-
-  # Removes items from the end in-place.
-  #
-  # This treats the path as a flat list and removes items from the end,
-  # whether they are instances or a leaf.
-  #
-  # @example
-  #   model = Sketchup.active_model
-  #   group = model.entities.add_group
-  #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
-  #   path = Sketchup::InstancePath.new([group, edge])
-  #   removed = path.pop # Returns edge
-  #
-  # @note If +num+ is +0+, no elements are removed. If +num+ is greater than the
-  #   path length, all elements are removed.
-  #
-  # @overload pop
-  #
-  #   @return [Sketchup::Entity, nil] the removed element or +nil+ if the path is empty.
-  #
-  # @overload pop(num)
-  #
-  #   @param [Integer] num the number of items to remove from the end.
-  #   @return [Array<Sketchup::Entity>] the removed elements.
-  #
-  # @raise [TypeError] if the instance path refer to deleted entities.
-  #
-  # @raise [TypeError] if the given +num+ is not an integer.
-  #
-  # @raise [ArgumentError] if +num+ is less than 0.
-  #
-  # @see #push
-  #
-  # @version SketchUp 2026.2
-  def pop(*args)
-  end
-
-  # Appends the given entity to the path in-place.
-  #
-  # This treats the path as a flat list and appends the entity to the end. The
-  # entity can be an instance (group, component instance, image) or a leaf entity.
-  #
-  # @example
-  #   model = Sketchup.active_model
-  #   group = model.entities.add_group
-  #   edge = group.entities.add_line([10, 10, 10], [20, 20, 20])
-  #   path = Sketchup::InstancePath.new([group])
-  #   path.push(edge) # path is now [group, edge]
-  #
-  # @note This method modifies the path in-place. Use {#clone} if you want
-  #   to keep the original path unchanged.
-  #
-  # @param [Sketchup::Entity] entity
-  #
-  # @raise [TypeError] if the instance path refer to deleted entities.
-  #
-  # @raise [TypeError] if the given entity is not a Sketchup::Entity.
-  #
-  # @raise [ArgumentError] if the resulting path would be invalid (e.g. adding
-  #   an element after a leaf).
-  #
-  # @return [Sketchup::InstancePath] self
-  #
-  # @see #pop
-  #
-  # @version SketchUp 2026.2
-  def push(entity)
   end
 
   # The root of an instance path is the element located closest to the model

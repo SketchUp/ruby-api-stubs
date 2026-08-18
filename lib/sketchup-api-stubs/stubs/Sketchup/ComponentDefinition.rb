@@ -32,12 +32,13 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   # sorting. The comparison is done based on the component name.
   #
   # @example
-  #   definitions = Sketchup.active_model.definitions
-  #   # Sort the definitions by name using the <=> operator.
-  #   sorted_list = definitions.sort { |a, b| a <=> b }
-  #   # This is the same as using sort_by:
-  #   sorted_list = definitions.sort_by(&:name)
-  #   sorted_list.each { |definition| puts definition.name }
+  #   c1=Sketchup.find_support_file "Bed.skp",
+  #     "Components/Components Sampler/"
+  #   c2=Sketchup.find_support_file "Fence.skp",
+  #     "Components/Components Sampler/"
+  #   if c1 <=> c2
+  #     puts "c1 sorts before c2"
+  #   end
   #
   # @param [Sketchup::ComponentDefinition] compdef2
   #   The second component definition in the comparison.
@@ -105,62 +106,6 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   def add_observer(observer)
   end
 
-  # Attaches a procedure to this component definition, making it a procedural component if the
-  # procedure is valid for the component's input geometry. Any previous procedure attached to this
-  # definition will be replaced and its output geometry will be regenerated.
-  #
-  # @api Procedures
-  #
-  # @example
-  #   definition = Sketchup.active_model.definitions[0]
-  #   my_proc = MyModule::MyProcedure.new
-  #   Sketchup.register_procedure(my_proc)
-  #   definition.attach_procedure(my_proc, { count: 5, spacing: 10.0 })
-  #
-  # @example Attaching a native procedure by ID
-  #   definition = Sketchup.active_model.definitions[0]
-  #   definition.attach_procedure(Sketchup::PROCEDURE_ID_FOLLOW_ME, {})
-  #
-  # @overload attach_procedure(procedure, parameters)
-  #
-  #   @param [Sketchup::Procedure] procedure  Procedure to be attached.
-  #   @param [Hash{Symbol => Integer, Float, String, Boolean}] parameters
-  #     A hash of parameter identifier symbols/strings to values. Pass in an empty hash if the
-  #     procedure does not need any parameters. The parameter identifiers (hash keys) must match
-  #     those declared in the procedure's {Sketchup::Procedure#declare_params_and_ui} method.
-  #
-  # @overload attach_procedure(procedure_id, parameters)
-  #
-  #   @param [String] procedure_id  The ID of a registered procedure. Use one of the
-  #     +Sketchup::PROCEDURE_ID_*+ constants to target a native procedure (for example
-  #     {Sketchup::PROCEDURE_ID_FOLLOW_ME}).
-  #   @param [Hash{Symbol => Integer, Float, String, Boolean}] parameters
-  #
-  # @raise [TypeError] If this is a group or image definition.
-  #
-  # @raise [TypeError] If parameters is not a Hash.
-  #
-  # @raise [TypeError] If a parameter value has an unsupported type.
-  #
-  # @raise [TypeError] If the first argument is neither a {Sketchup::Procedure} nor a String.
-  #
-  # @raise [ArgumentError] If a String procedure ID is given but no procedure with that ID is
-  #   registered.
-  #
-  # @raise [ArgumentError] If the procedure cannot be attached to this definition most likely due to
-  #   input geometry being invalid for the procedure.
-  #
-  # @return [nil]
-  #
-  # @see Sketchup::Procedure#declare_params_and_ui
-  #
-  # @see file:pages/native_procedures.md
-  #   Native Procedure Parameters
-  #
-  # @version SketchUp 2027.0
-  def attach_procedure(procedure, parameters)
-  end
-
   # The behavior method is used to retrieve the Behavior object associated with
   # a component definition.
   #
@@ -176,22 +121,6 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #
   # @version SketchUp 6.0
   def behavior
-  end
-
-  # For a Procedural Component, retrieves a collection of control (input) elements.
-  #
-  # @api Procedures
-  #
-  # @example
-  #   definition = Sketchup.active_model.definitions[0]
-  #   entities = definition.control_entities if definition.procedural?
-  #
-  # @raise [TypeError] if this definition is not procedural.
-  #
-  # @return [Sketchup::Entities]
-  #
-  # @version SketchUp 2027.0
-  def control_entities
   end
 
   # The count_instances method is used to count the number of unique component
@@ -265,11 +194,7 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   end
 
   # The entities method retrieves a collection of all the entities in the
-  # component definition.
-  #
-  # SketchUp 2027.0 and later: For a Procedural Component, this will return the output entities.
-  # Extension code should not directly modify these entities as they are managed by the procedure.
-  # Use {#control_entities} to access the control (input) entities of a Procedural Component.
+  # component definition
   #
   # @example
   #   componentdefinition = Sketchup.active_model.definitions[0]
@@ -298,29 +223,6 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #
   # @version SketchUp 2015
   def get_classification_value(path)
-  end
-
-  # Returns the parameters of the procedure attached to this procedural component definition.
-  #
-  # @api Procedures
-  #
-  # @example
-  #   definition = Sketchup.active_model.definitions[0]
-  #   # Assuming the definition is procedural and has a procedure attached
-  #   parameters = definition.get_procedure_parameters
-  #   # => { count: 5, spacing: 10.0 }
-  #
-  # @raise [TypeError] If this definition is not procedural.
-  #
-  # @return [Hash{Symbol => Integer, Float, String, Boolean}] A hash of parameter identifier symbols to their current values. Returns an empty hash if the
-  #   procedure declares no parameters or is not registered in the current session.
-  #
-  # @see Sketchup::ComponentDefinition#set_procedure_parameters
-  #
-  # @see Sketchup::Procedure#declare_params_and_ui
-  #
-  # @version SketchUp 2027.0
-  def get_procedure_parameters
   end
 
   # The group? method is used to determine if this component definition is used
@@ -520,58 +422,6 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   def load_time
   end
 
-  # Makes this procedural component definition a regular, non-procedural definition. The procedure
-  # is detached and the definition keeps either the procedural output geometry or the control
-  # (input) geometry, as specified by +retained_geometry+.
-  #
-  # If +:keep_output+ is requested but the procedural output is empty (for example because the
-  # procedure errored), the control (input) geometry is retained instead.
-  #
-  # @api Procedures
-  #
-  # @example Detach a component whose procedure's extension is not installed
-  #   definition = Sketchup.active_model.definitions[0]
-  #   definition.make_non_procedural(:keep_output) if definition.procedural?
-  #
-  # @example Keep the control (input) geometry
-  #   definition.make_non_procedural(:keep_input)
-  #
-  # @param [Symbol] retained_geometry
-  #   Either +:keep_output+ to keep the procedural output geometry,
-  #   or +:keep_input+ to keep the control (input) geometry.
-  #
-  # @raise [TypeError] If this definition is not procedural.
-  #
-  # @raise [TypeError] If +retained_geometry+ is not a Symbol.
-  #
-  # @raise [ArgumentError] If +retained_geometry+ is not +:keep_output+ or +:keep_input+.
-  #
-  # @return [nil]
-  #
-  # @see Sketchup::ComponentDefinition#attach_procedure
-  #
-  # @version SketchUp 2027.0
-  def make_non_procedural(retained_geometry)
-  end
-
-  # The manifold? method is used to determine if a component definition is manifold.
-  #
-  # A manifold definition is one where all edges are shared by exactly two faces,
-  # and there are no holes or singularities. This allows checking if a definition
-  # represents a closed solid without needing to create an instance.
-  #
-  # @example
-  #   definition = Sketchup.active_model.definitions.add("Box")
-  #   face = definition.entities.add_face([0,0,0], [10,0,0], [10,10,0], [0,10,0])
-  #   face.pushpull(-10)
-  #   status = definition.manifold?
-  #
-  # @return [Boolean]
-  #
-  # @version SketchUp 2026.2
-  def manifold?
-  end
-
   # The name method retrieves the name of the component definition.
   #
   # @example
@@ -625,20 +475,6 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #
   # @version SketchUp 6.0
   def path
-  end
-
-  # Returns whether this component definition is procedural.
-  #
-  # @api Procedures
-  #
-  # @example
-  #   definition = Sketchup.active_model.definitions[0]
-  #   is_procedural = definition.procedural?
-  #
-  # @return [Boolean]
-  #
-  # @version SketchUp 2027.0
-  def procedural?
   end
 
   # The refresh_thumbnail method is used to force SketchUp to regenerate the
@@ -695,41 +531,12 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   def remove_observer(observer)
   end
 
-  # Runs the procedures attached to this procedural component definition, regenerating
-  # its output geometry.
-  #
-  # By default, procedures run only if the component has been marked as modified (its
-  # control geometry changed or its procedures/parameters were updated). Pass +:force+
-  # to run the procedures unconditionally.
-  #
-  # @api Procedures
-  #
-  # @example
-  #   definition = Sketchup.active_model.definitions[0]
-  #   definition.run_procedures           # run only if needed
-  #   definition.run_procedures(:force)   # always run
-  #
-  # @param [Symbol] mode
-  #   Either +:if_modified+ (default) or +:force+.
-  #
-  # @raise [TypeError] If this definition is not procedural.
-  #
-  # @raise [ArgumentError] If +mode+ is not +:if_modified+ or +:force+.
-  #
-  # @return nil
-  #
-  # @version SketchUp 2027.0
-  def run_procedures(mode)
-  end
-
   # The {#save_as} method is used to save your definition as a SketchUp file at the
   # specified file destination.
   #
   # Use this method when the user has chosen a path. If you want to "silently" save
   # out the definition, without changing the path it is associated with, use
   # {#save_copy} instead.
-  #
-  # @bug Prior to SketchUp 2027.0, saving a copy changed the definition {#guid}.
   #
   # @example
   #   my_definition = Sketchup.active_model.definitions[0]
@@ -826,32 +633,6 @@ class Sketchup::ComponentDefinition < Sketchup::Drawingelement
   #
   # @version SketchUp 2015
   def set_classification_value(path, value)
-  end
-
-  # Sets the parameters for the procedure attached to this procedural component definition.
-  # The component's output geometry will be regenerated with the new parameters.
-  #
-  # @api Procedures
-  #
-  # @example
-  #   definition = Sketchup.active_model.definitions[0]
-  #   # Assuming the definition is procedural and has a procedure attached
-  #   definition.set_procedure_parameters(count: 5, spacing: 10.0)
-  #
-  # @param [Hash{Symbol => Integer, Float, String, Boolean}] parameters
-  #   A hash of parameter identifier strings to values. The parameter identifiers (hash keys) must
-  #   match those declared in the procedure's {Sketchup::Procedure#declare_params_and_ui} method.
-  #
-  # @raise [TypeError] If this definition is not procedural.
-  #
-  # @raise [ArgumentError] If the parameters are invalid for the attached procedure.
-  #
-  # @see Sketchup::Procedure#declare_params_and_ui
-  #
-  # @see Sketchup::ComponentDefinition#attach_procedure
-  #
-  # @version SketchUp 2027.0
-  def set_procedure_parameters(parameters)
   end
 
   # The {#thumbnail_camera} method is used to retrieve a camera representing

@@ -46,7 +46,7 @@ class Sketchup::ArcCurve < Sketchup::Curve
   #   arccurve = edge.curve
   #   point = arccurve.center
   #
-  # @return [Geom::Point3d] - a Point3d at the center of the arc if
+  # @return point - a Point3d at the center of the arc if
   #   successful
   #
   # @version SketchUp 6.0
@@ -70,9 +70,8 @@ class Sketchup::ArcCurve < Sketchup::Curve
   def circular?
   end
 
-  # The {#end_angle} method is used to retrieve the angle (in radians) of the
-  # end of the arc, measured from the X axis of the coordinate system for this
-  # curve.
+  # The {#end_angle} method is used to retrieve the angle of the end of the arc
+  # measured from the X axis in radians.
   #
   # @example
   #   # Create a 1/2 circle, normal to the Z axis
@@ -89,8 +88,6 @@ class Sketchup::ArcCurve < Sketchup::Curve
   #   the end angle value.
   #
   # @return [Float]
-  #
-  # @see #xaxis
   #
   # @version SketchUp 6.0
   def end_angle
@@ -111,7 +108,7 @@ class Sketchup::ArcCurve < Sketchup::Curve
   #   arccurve = edge.curve
   #   v = arccurve.normal
   #
-  # @return [Geom::Vector3d]
+  # @return vector - a Vector3d object if successful
   #
   # @version SketchUp 6.0
   def normal
@@ -133,7 +130,7 @@ class Sketchup::ArcCurve < Sketchup::Curve
   #   arccurve = edge.curve
   #   plane = arccurve.plane
   #
-  # @return [Float, Float, Float, Float]
+  # @return plane - the plane of the arc if successful
   #
   # @version SketchUp 6.0
   def plane
@@ -153,15 +150,14 @@ class Sketchup::ArcCurve < Sketchup::Curve
   #   arccurve = edge.curve
   #   radius = arccurve.radius
   #
-  # @return [Float]
+  # @return radius - the radius of the arc if successful
   #
   # @version SketchUp 6.0
   def radius
   end
 
-  # The {#start_angle} method is used to retrieve the angle (in radians) of the
-  # start of the arc, measured from the X axis of the coordinate system for this
-  # curve.
+  # The start_angle method is used to retrieve the angle of the start of the
+  # arc, measured from the X axis in radians.
   #
   # @example
   #   # Create a 1/4 circle, radius of 5, normal to the Z axis
@@ -177,9 +173,7 @@ class Sketchup::ArcCurve < Sketchup::Curve
   #   arccurve = edge.curve
   #   start_angle = arccurve.start_angle
   #
-  # @return [Float] the angle of the start of the arc.
-  #
-  # @see #xaxis
+  # @return angle - the angle of the start of the arc if successful
   #
   # @version SketchUp 6.0
   def start_angle
@@ -201,7 +195,7 @@ class Sketchup::ArcCurve < Sketchup::Curve
   #   arccurve = edge.curve
   #   v = arccurve.xaxis
   #
-  # @return [Geom::Vector3d]
+  # @return vector - a Vector3d object if successful
   #
   # @version SketchUp 6.0
   def xaxis
@@ -223,7 +217,7 @@ class Sketchup::ArcCurve < Sketchup::Curve
   #   arccurve = edge.curve
   #   v = arccurve.yaxis
   #
-  # @return [Geom::Vector3d]
+  # @return vector - a Vector3d object if successful
   #
   # @version SketchUp 6.0
   def yaxis
