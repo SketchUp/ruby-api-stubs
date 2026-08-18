@@ -31,7 +31,7 @@ class Sketchup::Curve < Sketchup::Entity
   #   curve = edge.curve
   #   number = curve.count_edges
   #
-  # @return num_edges - the number of edges in the curve
+  # @return [Integer]
   #
   # @version SketchUp 6.0
   def count_edges
@@ -52,10 +52,13 @@ class Sketchup::Curve < Sketchup::Entity
   #   curve = edge.curve
   #   curve.each_edge {|edge| puts "Edge {edge.entityID}: {edge.length}" }
   #
-  # @return edge - a variable that will hold each Edge object as
-  #   they are found.
+  # @return [nil]
   #
   # @version SketchUp 6.0
+  #
+  # @yield [edge] Each edge associated with this curve.
+  #
+  # @yieldparam [Sketchup::Edge] edge
   def each_edge
   end
 
@@ -74,7 +77,7 @@ class Sketchup::Curve < Sketchup::Entity
   #   curve = edge.curve
   #   edges = curve.edges
   #
-  # @return edges - an array of Edge objects if successful
+  # @return [Array<Sketchup::Edge>]
   #
   # @version SketchUp 6.0
   def edges
@@ -94,7 +97,7 @@ class Sketchup::Curve < Sketchup::Entity
   #   curve = edge.curve
   #   firstedge = curve.first_edge
   #
-  # @return edge - the first Edge object in the curve if successful
+  # @return [Sketchup::Edge]
   #
   # @version SketchUp 6.0
   def first_edge
@@ -109,8 +112,7 @@ class Sketchup::Curve < Sketchup::Entity
   #   ents.each { |e| curve = e.curve if e.is_a? Sketchup::Edge }
   #   is_poly = curve.is_polygon?
   #
-  # @return [Boolean] True if this edge was originally created by the polygon
-  #   tool, otherwise false.
+  # @return [Boolean]
   #
   # @version SketchUp 7.1 M1
   def is_polygon?
@@ -130,7 +132,7 @@ class Sketchup::Curve < Sketchup::Entity
   #   curve = edge.curve
   #   lastedge = curve.last_edge
   #
-  # @return edge - the last Edge object in the curve if successful
+  # @return [Sketchup::Edge]
   #
   # @version SketchUp 6.0
   def last_edge
@@ -192,7 +194,7 @@ class Sketchup::Curve < Sketchup::Entity
   #   curve = edge.curve
   #   vertices = curve.vertices
   #
-  # @return vertices - a collection of the vertices
+  # @return [Array<Sketchup::Vertex>] - a collection of the vertices
   #
   # @version SketchUp 6.0
   def vertices

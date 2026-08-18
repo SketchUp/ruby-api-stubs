@@ -64,6 +64,36 @@ class Sketchup::SectionPlane < Sketchup::Drawingelement
   def get_plane
   end
 
+  # Retrieves the hatch pattern assigned to the section plane.
+  #
+  # @example
+  #   entities = Sketchup.active_model.entities
+  #   section_plane = entities.grep(Sketchup::SectionPlane).first
+  #   puts section_plane.hatch_pattern.name
+  #
+  # @return [Sketchup::HatchPattern]
+  #
+  # @version SketchUp 2027.0
+  def hatch_pattern
+  end
+
+  # Assigns a hatch pattern to the section plane.
+  #
+  # @example
+  #   hatch_patterns = Sketchup.active_model.hatch_patterns
+  #   entities = Sketchup.active_model.entities
+  #   section_plane = entities.grep(Sketchup::SectionPlane).first
+  #   section_plane.hatch_pattern = hatch_patterns['Pattern1']
+  #
+  # @param [Sketchup::HatchPattern, nil] pattern
+  #   the pattern to assign, or +nil+ to clear the assignment.
+  #
+  # @raise [ArgumentError] if the pattern does not belong to the section plane's model.
+  #
+  # @version SketchUp 2027.0
+  def hatch_pattern=(pattern)
+  end
+
   # The {#name} method is used to retrieve the name of the section plane.
   #
   # @example

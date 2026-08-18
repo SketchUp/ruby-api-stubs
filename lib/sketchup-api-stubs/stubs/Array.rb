@@ -28,6 +28,10 @@
 #   transformation = Geom::Transformation.new(array)
 #   entities.transform_entities(transformation, construction_point)
 #
+# @note When a translational {Geom::Transformation} is expected, a
+#   3-element Array [dx, dy, dz] may be passed and will be interpreted as
+#   a translation vector. See {Geom::Transformation}.
+#
 # @version SketchUp 6.0
 class Array
 

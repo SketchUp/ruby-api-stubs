@@ -11,6 +11,11 @@
 # transformations in 3 dimensions which is covered extensively on
 # the internet.
 #
+# @note Translation convenience: In contexts expecting a pure translation,
+#   you can pass a {Geom::Point3d}, {Geom::Vector3d}, or a 3-element
+#   Array [dx, dy, dz] and it will be converted to a translation
+#   {Geom::Transformation}. For full matrices, pass a 16-element Array.
+#
 # @version SketchUp 6.0
 class Geom::Transformation
 

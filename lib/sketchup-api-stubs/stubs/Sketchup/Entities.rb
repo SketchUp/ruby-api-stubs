@@ -137,7 +137,9 @@ class Sketchup::Entities
   #   @param [Numeric]        radius      The radius of the arc.
   #   @param [Numeric]        start_angle Start angle for the arc, in radians.
   #   @param [Numeric]        end_angle   End angle for the arc, in radians.
+  #
   #   @return [Array<Sketchup::Edge>]     an array of Edge objects that define the arc.
+  #     Returns an empty array if +radius+ is +0+.
   #
   # @overload add_arc(center, xaxis, normal, radius, start_angle, end_angle, num_segments)
   #
@@ -148,7 +150,9 @@ class Sketchup::Entities
   #   @param [Numeric]        start_angle  Start angle for the arc, in radians.
   #   @param [Numeric]        end_angle    End angle for the arc, in radians.
   #   @param [Integer]        num_segments How many segments to draw.
+  #
   #   @return [Array<Sketchup::Edge>]      an array of Edge objects that define the arc.
+  #     Returns an empty array if +radius+ is +0+.
   #
   # @version SketchUp 6.0
   def add_arc(*args)
@@ -162,7 +166,7 @@ class Sketchup::Entities
   #   center_point = Geom::Point3d.new
   #   # Create a circle perpendicular to the provided vector.
   #   normal = Z_AXIS
-  #   edges = entities.add_circle(center_point, vector, 10)
+  #   edges = entities.add_circle(center_point, normal, 10)
   #
   # @param [Geom::Point3d] center
   #   A Point3d object representing the center.
@@ -176,7 +180,8 @@ class Sketchup::Entities
   # @param [Integer] numsegs
   #   The number of segments.
   #
-  # @return [Array<Sketchup::Edge>] an Array object containing edges if successful
+  # @return [Array<Sketchup::Edge>] an Array object containing edges if successful.
+  #   Returns an empty array if +radius+ is +0+.
   #
   # @version SketchUp 6.0
   def add_circle(center, normal, radius, numsegs = 24)
@@ -212,6 +217,48 @@ class Sketchup::Entities
   #
   # @version SketchUp 6.0
   def add_cline(*args)
+  end
+
+  # The {#add_copy} method copies a set of drawing elements into this {Sketchup::Entities}
+  # collection.
+  #
+  # Source elements' geometric coordinates from within their parent components are preserved, and
+  # they are applied to the copies in this component's local coordinate frame. The transformation
+  # is also interpreted to be in the local coordinates of this (target) component.
+  #
+  # The drawing elements being copied may already belong to this collection or to a different one,
+  # but they must all share the same parent, and belong to the same model as this collection.
+  # Dependent geometry needed to reproduce the originals (e.g. the edges bounding a copied face)
+  # are copied automatically and included in the result.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   entities = model.active_entities
+  #   face = entities.add_face([0, 0, 0], [9, 0, 0], [9, 9, 0], [0, 9, 0])
+  #   transformation = Geom::Transformation.new([20, 0, 0])
+  #   copies = entities.add_copy(face, transform: transformation)
+  #
+  # @param [Array<Sketchup::Drawingelement>, Sketchup::Drawingelement, Sketchup::Selection] entities
+  #   The drawing elements to copy.
+  #
+  # @param [Geom::Transformation] transform
+  #   A transformation applied to the copies within the local axes of this component.
+  #
+  # @raise [TypeError] if any of the given entities is not a {Sketchup::Drawingelement}.
+  #
+  # @raise [ArgumentError] if the entities do not share a common parent.
+  #
+  # @raise [ArgumentError] if the entities do not belong to the same model as this collection.
+  #
+  # @raise [ArgumentError] if the transformation is not invertible.
+  #
+  # @raise [ArgumentError] if the copy would create a recursive component definition.
+  #
+  # @return [Array<Sketchup::Drawingelement>] the copied drawing elements. If the elements are
+  #   split by intersecting geometry, more elements can be returned than were originally passed in.
+  #
+  # @version SketchUp 2027.0
+  def add_copy(entities, transform: IDENTITY)
   end
 
   # The add_cpoint method is used to create a construction point.
@@ -255,6 +302,9 @@ class Sketchup::Entities
   end
 
   # The {#add_dimension_linear} method adds a linear dimension to the entities.
+  #
+  # @bug Prior to SketchUp 2026.2 could move the {Sketchup::ConstructionPoint}
+  #   if passing an {Sketchup::InstancePath} containing a construction point.
   #
   # @example
   #   entities = Sketchup.active_model.entities
@@ -359,8 +409,8 @@ class Sketchup::Entities
   #   entities = Sketchup.active_model.entities
   #   # Create a circle
   #   center_point = Geom::Point3d.new(10, 10, 0)
-  #   vector = Geom::Vector3d.new(0, 0, 1)
-  #   edges = entities.add_circle(center_point, vector, 10)
+  #   normal = Geom::Vector3d.new(0, 0, 1)
+  #   edges = entities.add_circle(center_point, normal, 10)
   #   circle = edges[0].curve
   #   dim = entities.add_dimension_radial(circle, [30, 30, 0])
   #
@@ -425,6 +475,14 @@ class Sketchup::Entities
   # For the last form that takes a Curve, the curve must be closed - like a
   # circle.
   #
+  # open operation if:
+  #   - The edges do not form a closed loop
+  #   - The edges are not planar
+  #   In these cases use +$!+ to check for an error message if the face creation fails.
+  #
+  # @bug Prior to SketchUp 2027.0 calls to {#add_face} with an array of edges would silently fail
+  #   and abort any open operation if an existing face was found.
+  #
   # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
@@ -438,6 +496,8 @@ class Sketchup::Entities
   #
   # @note A special case exists for any face created on the ground plane, in
   #   which case the vertex order is ignored and the face is always facing down.
+  #
+  # @note When using the edge array or curve overload this method will return +nil+ and abort any
   #
   # @overload add_face(entities)
   #
@@ -755,6 +815,42 @@ class Sketchup::Entities
   def add_snap(*args)
   end
 
+  # The {#add_space} method is used to create a new {Sketchup::Space}.
+  #
+  # @api SpaceEntities
+  #
+  # @example
+  #   entities = Sketchup.active_model.active_entities
+  #   points = [
+  #     Geom::Point3d.new(0.5.m, 0.5.m, 0),
+  #     Geom::Point3d.new(8.5.m, 0.5.m, 0),
+  #     Geom::Point3d.new(8.5.m, 5.5.m, 0),
+  #     Geom::Point3d.new(0.5.m, 5.5.m, 0),
+  #   ]
+  #   orientation_point = Geom::Point3d.new(1.0m, 1.0m, 1.0m)
+  #   height = 2.1.m
+  #   space = entities.add_space("Floor 1", points, orientation_point, height)
+  #
+  # @param [String] name
+  #
+  # @param [Array<Geom::Point3d>] points
+  #
+  # @param [Geom::Point3d] orientation_point
+  #
+  # @param [Length] height
+  #
+  # @raise ArgumentError if +points+ has less than 3 points.
+  #
+  # @return [Sketchup::Space]
+  #
+  # @see Sketchup::Space
+  #
+  # @todo Review documentation.
+  #
+  # @version SketchUp 2025.0
+  def add_space(name, points, orientation_point, height)
+  end
+
   # The {#add_text} method adds a note or label text entity to the entities.
   #
   # @example
@@ -803,6 +899,10 @@ class Sketchup::Entities
   #   @param [String] text The text to add.
   #   @param [Array<Sketchup::InstancePath, Geom::Point3d>] instance_path_and_pt
   #     The array containing a {Sketchup::InstancePath} and a {Geom::Point3d}.
+  #   @note The instance path is relative to the {Sketchup::Entities} being added
+  #     to, so it must start within that drawing context. A path that starts
+  #     higher up the hierarchy, such as one that also names the group or
+  #     component instance owning these entities, raises an +ArgumentError+.
   #   @param [Geom::Vector3d] vector The vector representing an arrow leader.
   #
   # @overload add_text(text, instance_array_and_pt, vector)
@@ -838,6 +938,31 @@ class Sketchup::Entities
   #
   # @version SketchUp 6.0
   def at(entity_index)
+  end
+
+  # The {#bounds} method is used to retrieve the {Geom::BoundingBox} bounding
+  # the collection of entities.
+  #
+  # For a Procedural Component, {Sketchup::ComponentDefinition#entities} and
+  # {Sketchup::ComponentDefinition#control_entities} have different bounds.
+  # For non-procedural components this has the same effect as
+  # {Sketchup::ComponentDefinition#bounds}.
+  #
+  # @example
+  #   definition = Sketchup.active_model.definitions.first
+  #   bounds = definition.entities.bounds
+  #
+  # @example Get separate bounds for control and output entities of a procedural component
+  #   definition = Sketchup.active_model.definitions.first
+  #   if definition.procedural?
+  #     control_bounds = definition.control_entities.bounds
+  #     output_bounds = definition.entities.bounds
+  #   end
+  #
+  # @return [Geom::BoundingBox]
+  #
+  # @version SketchUp 2027.0
+  def bounds
   end
 
   # Creates an {Sketchup::EntitiesBuilder} that can be used to generate bulk
@@ -1039,56 +1164,120 @@ class Sketchup::Entities
   def fill_from_mesh(polygon_mesh, weld_vertices = true, smooth_flags = Geom::PolygonMesh::AUTO_SOFTEN|Geom::PolygonMesh::SMOOTH_SOFT_EDGES, f_material = nil, b_material = nil)
   end
 
-  # The {#intersect_with} method is used to intersect a Sketchup::Entities, Sketchup::Component,
-  # or Sketchup::Group object with a entities object.
+  # The {#intersect_with} method computes the intersections between two sets of
+  # entities in different 3D contexts and creates the resulting intersection
+  # edges in a third context.
   #
-  # empty if no intersection(s) were found.
+  # This powerful method operates on three distinct sets of entities:
+  #
+  # 1. The Receiver (+self+): The {Sketchup::Entities} collection the
+  #    method is called on.
+  #
+  # 2. The Cutting Entities (+entities2+): The entities that intersect
+  #    with the receiver.
+  #
+  # 3. The Result Container (+entities1+): The {Sketchup::Entities} collection
+  #    where the new intersection edges are placed.
+  #
+  # The transformations +transform1+ and +transform2+ are used to relate these
+  # three different contexts to each other, allowing for intersections to be
+  # calculated between objects anywhere in the model hierarchy. The intersection
+  # calculation occurs in a common coordinate space, and the transformations
+  # are used to bring the geometry into that space.
   #
   # @example
+  #   # --- Setup ---
   #   model = Sketchup.active_model
-  #   entities = model.active_entities
+  #   entities = model.entities
+  #   model.start_operation('Intersect Example', true)
   #
-  #   # Create a group to intersect with the model
-  #   group1 = entities.add_group
-  #   face1 = group1.entities.add_face([0, 0, 0], [100, 0, 0], [100, 100, 0], [0, 100, 0])
-  #   face1.pushpull(-40)
+  #   # Clear any existing geometry to prevent conflicts
+  #   entities.clear!
   #
-  #   # Add geometry into the model
-  #   face2 = entities.add_face([50, 50, 0], [200, 50, 0], [200, 200, 0], [50, 200, 0])
-  #   face2.pushpull(-100)
+  #   # Create a "cutter" group - a cube shifted in space
+  #   cutter_group = entities.add_group
+  #   cutter_face = cutter_group.entities.add_face(
+  #     [0, 0, 0], [100, 0, 0], [100, 100, 0], [0, 100, 0]
+  #   )
+  #   cutter_face.pushpull(-50)
+  #   # Move the cutter cube to create an interesting intersection
+  #   cutter_group.transform!(Geom::Transformation.new([25, 25, 25]))
   #
-  #   entities1 = group1.entities
-  #   entities2 = entities.to_a
+  #   # Create a "mesh" group - a larger box that overlaps the cutter
+  #   mesh_group = entities.add_group
+  #   mesh_face = mesh_group.entities.add_face(
+  #     [0, 0, 0], [200, 0, 0], [200, 200, 0], [0, 200, 0]
+  #   )
+  #   mesh_face.pushpull(-100)
+  #   # Move the mesh_group so it partially overlaps the cutter_group
+  #   mesh_group.transform!(Geom::Transformation.new([50, 50, 0]))
   #
-  #   transformation1 = Geom::Transformation.new
-  #   transformation2 = group1.transformation
+  #   # Create an empty group to hold the intersection results
+  #   result_group = entities.add_group
   #
-  #   # Intersect the group and model geometry
-  #   entities.intersect_with(true, transformation1, entities1, transformation2, true, entities2)
+  #   # --- Intersection ---
+  #   # Define transformations to relate the three groups. We use the
+  #   # cutter_group's coordinate space as the common ground.
+  #
+  #   # Transformation from the mesh_group's space to the cutter_group's space.
+  #   tr_mesh_to_cutter = cutter_group.transformation.inverse * mesh_group.transformation
+  #
+  #   # Transformation from the result_group's space to the cutter_group's space.
+  #   tr_result_to_cutter = cutter_group.transformation.inverse * result_group.transformation
+  #
+  #   # Perform the intersection
+  #   intersecting_edges = mesh_group.entities.intersect_with(
+  #     false,                          # recurse
+  #     tr_mesh_to_cutter,              # transform1 for the receiver (mesh_group)
+  #     result_group.entities,          # entities1 (result container)
+  #     tr_result_to_cutter,            # transform2 for the result container
+  #     true,                           # hidden
+  #     cutter_group.entities.to_a      # entities2 (cutting entities)
+  #   )
+  #
+  #   # Verify the results
+  #   puts "Intersection created #{intersecting_edges.length} edges"
+  #
+  #   # Change the color of the result edges to make them visible
+  #   if intersecting_edges.length > 0
+  #   result_group.material = Sketchup::Color.new(255, 0, 0) # Red
+  #   end
+  #
+  #   model.commit_operation
+  #
+  #   # Zoom to see the entire model
+  #   model.active_view.zoom_extents
   #
   # @param [Boolean] recurse
-  #   true if you want this entities object to be recursed
-  #   (intersection lines will be put inside of groups and
-  #   components within this entities object).
+  #   If `true`, the intersection will recurse through any nested
+  #   Groups or Components within the **receiver** (`self`).
   #
   # @param [Geom::Transformation] transform1
-  #   The transformation for this entities object.
+  #   The transformation applied to the **receiver** entities (`self`)
+  #   to position them in the common coordinate space where the
+  #   intersection will be calculated.
   #
   # @param [Sketchup::Entities] entities1
-  #   The entities object where you want the intersection
-  #   lines to appear.
+  #   The **result** entities collection. This is the drawing context
+  #   where the new intersection edges will be created.
   #
   # @param [Geom::Transformation] transform2
-  #   The transformation for entities1.
+  #   The transformation applied to the **result** entities collection
+  #   (`entities1`) to correctly position it relative to the
+  #   intersection calculation space.
   #
   # @param [Boolean] hidden
-  #   true if you want hidden geometry in this entities
-  #   object to be used in the intersection.
+  #   If +true+, hidden geometry in the **receiver** entities will be
+  #   considered for the intersection. This parameter only affects hidden
+  #   geometry in the receiver, not in the cutting entities.
   #
   # @param [Sketchup::Entity, Array<Sketchup::Entity>] entities2
-  #   A single entity, or an array of entities.
+  #   The **cutting** entities. These are the entities that will be
+  #   intersected with the receiver. This can be a single entity or an
+  #   array of entities.
   #
   # @return [Array<Sketchup::Edge>] The intersecting edges created. This array may be
+  #   empty if no intersection(s) were found.
   #
   # @version SketchUp 6.0
   def intersect_with(recurse, transform1, entities1, transform2, hidden, entities2)

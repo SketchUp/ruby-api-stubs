@@ -32,6 +32,12 @@
 # @version SketchUp 6.0
 module Sketchup
 
+  # Constants
+
+  PROCEDURE_ID_COPY_ALONG = nil # Stub value.
+  PROCEDURE_ID_FOLLOW_ME = nil # Stub value.
+  PROCEDURE_ID_SOLID_TOOLS = nil # Stub value.
+
   # Class Methods
 
   # The active_model method returns the currently active SketchUp model. On the
@@ -612,6 +618,10 @@ module Sketchup
   # (the deprecated scrambled format) files.
   # See the "Distributing your Plugin" article for details.
   #
+  # Starting with SketchUp 2026.2 this method lets through Ruby Exception consistently
+  # to Ruby's +load+ method. Earlier versions rescued the Exception and printed an
+  # error message directly to the Ruby Console.
+  #
   # @bug Unlike Ruby's +load+ method, this method currently can't load the same file twice.
   #   Instead works similar to Ruby's `require` method.
   #
@@ -623,11 +633,25 @@ module Sketchup
   #   The path, including the filename, to the file you want
   #   to require.
   #
+  # @raise [LoadError] Starting in SketchUp 2026.2 if the file can't be found,
+  #   consistentely to Ruby's +load+ method.
+  #   Earlier versions printed an error message directly to the Ruby console.
+  #
   # @return [Boolean] True if the file is included. False if the
   #   file is not included.
   #
   # @version SketchUp 6.0
   def self.load(path)
+  end
+
+  # Can be used to determine if SketchUp is running as MDI or SDI.
+  #
+  # @api MDI
+  #
+  # @return [Boolean]
+  #
+  # @version SketchUp 2026.2
+  def self.mdi?
   end
 
   # The {.open_file} method is used to open a SketchUp model.
@@ -869,6 +893,26 @@ module Sketchup
   def self.register_importer(importer)
   end
 
+  # Registers a custom procedure with SketchUp.
+  #
+  # Each procedure instance may only be registered once. Attempting to register
+  # the same instance a second time will return +false+.
+  #
+  # @api Procedures
+  #
+  # @example
+  #   my_proc = MyModule::MyProcedure.new
+  #   Sketchup.register_procedure(my_proc)
+  #
+  # @param [Sketchup::Procedure] procedure
+  #   The procedure to register.
+  #
+  # @return [Boolean] +true+ if successful, +false+ if unsuccessful
+  #
+  # @version SketchUp 2027.0
+  def self.register_procedure(procedure)
+  end
+
   # The remove_observer method is used to remove an observer from the current
   # object.
   #
@@ -893,6 +937,10 @@ module Sketchup
   # in SketchUp 2016 when the new .rbe encryption was introduced. Prior to
   # SketchUp 2016 the loading order was first .rb then .rbs.
   #
+  # Starting with SketchUp 2026.2 this method lets through Ruby Exception consistently
+  # to Ruby's +require+ method. Earlier versions rescued the Exception and printed an
+  # error message directly to the Ruby Console.
+  #
   # @example
   #   sfile = "application_loader" # file extension not required
   #   status = Sketchup::require(sfile)
@@ -900,6 +948,10 @@ module Sketchup
   # @param [String] path
   #   The path, including the filename, to the file you want
   #   to require.
+  #
+  # @raise [LoadError] starting in SketchUp 2026.2 if the file can't be found,
+  #   consistentely to Ruby's +require+ method.
+  #   Earlier versions printed an error message directly to the Ruby console.
   #
   # @return [Boolean] True if the file is included. False if the
   #   file is not included.
@@ -1178,6 +1230,10 @@ module Sketchup
   # - 21525: select the FollowMe tool
   # - 21542: display the Insert Image Window
   # - 21560 and up: causes a runtime Error
+  #
+  # @deprecated This method is deprecated and is not being maintained. If you
+  #   rely on this method, please log a request in our {Issue
+  #   Tracker}[https://github.com/SketchUp/api-issue-tracker/issues].
   #
   # @example
   #   result = Sketchup.send_action("selectArcTool:")

@@ -16,20 +16,42 @@
 #   desired methods, and add an instance of the observer to the
 #   application class.
 #
-# @example
-#   # This is an example of an observer that watches the application for
-#   # new models and shows a messagebox.
+# @example Complete example with class definition and observer attachment
+#   # Define an observer class that watches for application-level events.
+#   # This is particularly useful for attaching model-specific observers
+#   # to ensure all open models are monitored.
 #   class MyAppObserver < Sketchup::AppObserver
-#     def onNewModel(model)
-#       puts "onNewModel: #{model}"
 #
-#       # Here is where one might attach other observers to the new model.
-#       model.selection.add_observer(MySelectionObserver.new)
+#     def onNewModel(model)
+#       puts "New model created: #{model}"
+#       # Attach observers to the new model here
+#       # model.selection.add_observer(MySelectionObserver.new)
+#     end
+#
+#     def onOpenModel(model)
+#       puts "Model opened: #{model}"
+#       # Attach observers to the opened model here
+#     end
+#
+#     def onActivateModel(model)
+#       puts "Model activated: #{model}"
+#       # Called when switching between models (Mac supports multiple documents)
+#     end
+#
+#     def onQuit
+#       puts "SketchUp is quitting"
+#       # Save state or clean up before application exits
+#     end
+#
+#     # Return true to receive onNewModel/onOpenModel for startup models
+#     def expectsStartupModelNotifications
+#       return true
 #     end
 #   end
 #
-#   # Attach the observer
+#   # Create and attach the observer instance
 #   Sketchup.add_observer(MyAppObserver.new)
+#   puts "AppObserver attached successfully"
 #
 # @version SketchUp 6.0
 class Sketchup::AppObserver
@@ -43,9 +65,19 @@ class Sketchup::AppObserver
   # auto-restored models on Mac OS X.
   #
   # @example
-  #   def expectsStartupModelNotifications
-  #     return true
+  #   class MyStartupObserver < Sketchup::AppObserver
+  #     def onNewModel(model)
+  #       puts "New model: #{model}"
+  #     end
+  #     def onOpenModel(model)
+  #       puts "Opened model: #{model}"
+  #     end
+  #     def expectsStartupModelNotifications
+  #       true  # Return true to receive startup notifications
+  #     end
   #   end
+  #   Sketchup.add_observer(MyStartupObserver.new)
+  #   # Restart SketchUp to see startup model notifications
   #
   # @note Prior to SketchUp 2014, {#onNewModel} and {#onOpenModel} were
   #   not being called for the startup models. This issue is now fixed but
@@ -68,9 +100,13 @@ class Sketchup::AppObserver
   # simultaneously.
   #
   # @example
-  #   def onActivateModel(model)
-  #     puts "onActivateModel: #{model}"
+  #   class MyActivateObserver < Sketchup::AppObserver
+  #     def onActivateModel(model)
+  #       puts "Model activated: #{model}"
+  #       puts "Title: #{model.title}"
+  #     end
   #   end
+  #   Sketchup.add_observer(MyActivateObserver.new)
   #
   # @param [Sketchup::Model] model
   #   The newly-activated model object.
@@ -81,13 +117,45 @@ class Sketchup::AppObserver
   def onActivateModel(model)
   end
 
+  # The {#onCloseModel} method is called just before a model is closed, while
+  # the model is still valid. This is useful for cleaning up resources or
+  # saving state before the model becomes unavailable.
+  #
+  # @api MDI
+  #
+  # @example
+  #   class MyCloseObserver < Sketchup::AppObserver
+  #     def onCloseModel(model)
+  #       puts "Model closing: #{model}"
+  #       puts "Title: #{model.title}"
+  #       puts "Entities: #{model.entities.count}"
+  #       # Model is still valid here - you can query its properties
+  #     end
+  #   end
+  #   Sketchup.add_observer(MyCloseObserver.new)
+  #   # Then close the model window
+  #
+  # @param [Sketchup::Model] model
+  #   The model being closed.
+  #
+  # @return [nil]
+  #
+  # @version SketchUp 2027.0
+  def onCloseModel(model)
+  end
+
   # The {#onExtensionsLoaded} method is called when SketchUp has finished loading
   # all extensions when the application starts.
   #
   # @example
-  #   def onExtensionsLoaded
-  #     puts "onExtensionsLoaded"
+  #   class MyExtensionsObserver < Sketchup::AppObserver
+  #     def onExtensionsLoaded
+  #       puts "All extensions have been loaded!"
+  #       puts "Total extensions: #{Sketchup.extensions.count}"
+  #     end
   #   end
+  #   Sketchup.add_observer(MyExtensionsObserver.new)
+  #   # This already fired at startup. Restart SketchUp to see it again.
   #
   # @version SketchUp 2022.0
   def onExtensionsLoaded
@@ -97,9 +165,16 @@ class Sketchup::AppObserver
   # model.
   #
   # @example
-  #   def onNewModel(model)
-  #     puts "onNewModel: #{model}"
+  #   class MyNewModelObserver < Sketchup::AppObserver
+  #     def onNewModel(model)
+  #       puts "New model created: #{model}"
+  #     end
+  #     def expectsStartupModelNotifications
+  #       true  # Receive notifications for startup models
+  #     end
   #   end
+  #   Sketchup.add_observer(MyNewModelObserver.new)
+  #   # Then create a new model: File > New
   #
   # @param [Sketchup::Model] model
   #   The active model object.
@@ -114,9 +189,17 @@ class Sketchup::AppObserver
   # model.
   #
   # @example
-  #   def onOpenModel(model)
-  #     puts "onOpenModel: #{model}"
+  #   class MyOpenModelObserver < Sketchup::AppObserver
+  #     def onOpenModel(model)
+  #       puts "Model opened: #{model}"
+  #       puts "Path: #{model.path}"
+  #     end
+  #     def expectsStartupModelNotifications
+  #       true  # Receive notifications for startup models
+  #     end
   #   end
+  #   Sketchup.add_observer(MyOpenModelObserver.new)
+  #   # Then open a model: File > Open
   #
   # @note If a skp file is loaded via the command line or double-clicking on
   #   a skp in explorer (which is also is the command line) then this
@@ -137,9 +220,12 @@ class Sketchup::AppObserver
   # need to clean up anything or store your application state upon close.
   #
   # @example
-  #   def onQuit()
-  #     puts "onQuit"
+  #   class MyQuitObserver < Sketchup::AppObserver
+  #     def onQuit
+  #       puts "SketchUp is closing!"
+  #     end
   #   end
+  #   Sketchup.add_observer(MyQuitObserver.new)
   #
   # @return [nil]
   #
@@ -153,9 +239,13 @@ class Sketchup::AppObserver
   # or cache your extension state.
   #
   # @example
-  #   def onUnloadExtension(extension_name)
-  #     puts "onUnloadExtension: #{extension_name}"
+  #   class MyUnloadObserver < Sketchup::AppObserver
+  #     def onUnloadExtension(extension_name)
+  #       puts "Extension unloaded: #{extension_name}"
+  #     end
   #   end
+  #   Sketchup.add_observer(MyUnloadObserver.new)
+  #   # Then: Window > Extension Manager > Disable an extension
   #
   # @param [String] extension_name
   #   The name of the extension just unloaded.

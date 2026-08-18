@@ -97,14 +97,14 @@ SketchupExtension.new("NN Cube Maker", "nn_cube_maker/main")
 When your extension makes several low level draw calls, join them together as one entry to the undo stack using the `start_operation` and `commit_operation` methods. If the user activates it as a single high level action, let them also undo it in a single step.
 
 ```ruby
-# bad - creates multiple undo steps
+# Bad - creates multiple undo steps
 def draw_cube
   model = Sketchup.active_model
   face = model.entities.add_face([0, 0, 0], [10, 0, 0], [10, 10, 0], [0, 10, 0])
   face.pushpull(10)
 end
 
-# good - creates one undo step
+# Good - creates one undo step
 def draw_cube
   model = Sketchup.active_model
   model.start_operation("Draw Cube", true)
@@ -114,9 +114,27 @@ def draw_cube
 end
 ```
 
-## Functioning as Advertised
+Also wrap changes to attributes to give the model change a meaningful name in the undo stack, even if you just change a single attribute.
+
+```ruby
+# Bad - displays with generic name "Properties" in the undo stack
+color = Sketchup::Color.new("white")
+Sketchup.active_model.set_attribute("renderer_extension", "sun_color", color)
+
+# Good - tells the user what changed
+color = Sketchup::Color.new("white")
+Sketchup.active_model.start_operation("Set Sun Color", true)
+Sketchup.active_model.set_attribute("renderer_extension", "sun_color", color)
+Sketchup.active_model.commit_operation
+```
+
+### Functioning as Advertised
 
 Extensions will be rejected from Extension Warehouse if they malfunction or cannot be used.
+
+### Safe
+
+Extensions must be safe to install and use. For a starting point in SketchUp extension safety, see [this article](https://developer.sketchup.com/article-security-best-practises).
 
 ### Global Variables
 
@@ -144,7 +162,27 @@ puts "testing testing" if DEBUG_MODE
 
 Ideally, avoid your extension depending on another extension. Prefer duplicating any shared logic between your extensions over publishing a "library extension", to make installation easier for end users. If your extension does require another extension to work, make sure to clearly state this in its documentation and also show an error message if the dependency is missing.
 
+### Matching Title and Version Number
+
+When submitting to Extension Warehouse, please make sure the title and version of the submission form matches that of the `SketchupExtension` in the RBZ.
+
 ## The Nitty Gritty Stuff
+
+### Data Loss
+
+Extensions are not allowed to cause data loss. This includes silently removing or overwriting the user's data.
+
+For instance, do not silently save over the open model as the user may have made destructive changes they don't intend to save.
+Always ask before saving. Also don't purge unused components or other model assets without asking.
+
+### Eval
+
+`eval` is vulnerable to code injection attacks and should not be used.
+
+### Third Party Updates
+
+SketchUp and Extension Warehouse has infrastructure for extension updates.
+Adding functionality that downloads and installs updates is not allowed as it bypasses the review.
 
 ### Encryption
 
@@ -161,11 +199,15 @@ Installing Gems does not work well in SketchUp. It freezes up the program during
 
 ### $LOAD_PATH
 
-Don't modify the '$LOAD_PATH'. Doing so may cause other extensions to load the wrong files. Instead include your extension support folder in the path whenever you load a file.
+Don't modify the `$LOAD_PATH`. Doing so may cause other extensions to load the wrong files. Instead include your extension support folder in the path whenever you load a file.
+
+### Environment Variables 
+
+Don't modify `ENV`. Doing so can cause other extensions to malfunction.
 
 ### Exit
 
-'exit' and 'exit!' should not be used to stop the Ruby execution, as all Ruby extensions run in a shared interpreter. Instead use 'return', 'next', break' or 'raise' to stop the execution of your own code.
+`exit` and `exit!` should not be used to stop the Ruby execution, as all Ruby extensions run in a shared interpreter. Instead use `return`, `next`, `break` or `raise` to stop the execution of your own code.
 
 ### Unsafe License Checks
 
@@ -173,7 +215,11 @@ Ruby is a very dynamic language where any method can be overridden at runtime. I
 
 These recommendations make it harder but not impossible to crack the extension. For better security, you can compile your logic and use a Ruby C Extension to integrate it with SketchUp, or run it on a server using HTTP requests.
 
-### And More…
+### WebDialog
+
+`WebDialog` was deprecated in 2017. Use `HtmlDialog` instead, which has better security, works consistently across platforms, and is actively maintained.
+
+## And More…
 
 This is not a complete list of everything an extension can be denied for. See the below links for more details and use your good judgment when developing.
 

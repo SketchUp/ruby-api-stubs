@@ -61,24 +61,21 @@ class Layout::SketchUpModel < Layout::Entity
   end
 
   # The {#clip_mask} method returns the clip mask entity for the
-  # {Layout::SketchUpModel}, or +nil+ if it does not have one. clip_mask can be a
-  # {Layout::Rectangle}, {Layout::Ellipse}, or {Layout::Path}.
+  # {Layout::SketchUpModel}, or +nil+ if it does not have one.
   #
   # @example
   #   bounds = Geom::Bounds2d.new(1, 1, 3, 3)
   #   model = Layout::SketchUpModel.new("C:/Path/to/model.skp", bounds)
   #   clip_mask = model.clip_mask
   #
-  # @return [Layout::Entity]
+  # @return [Layout::Ellipse, Layout::Path, Layout::Rectangle, nil]
   #
   # @version LayOut 2018
   def clip_mask
   end
 
   # The {#clip_mask=} method sets a clip mask for the {Layout::SketchUpModel}.
-  # clip_mask can be a {Layout::Rectangle}, {Layout::Ellipse}, or {Layout::Path},
-  # or +nil+, and it must not currently exist in a {Layout::Document},
-  # or {Layout::Group}.
+  # +clip_mask+ must not currently exist in a {Layout::Document} or {Layout::Group}.
   #
   # @example
   #   bounds = Geom::Bounds2d.new(1, 1, 3, 3)
@@ -88,15 +85,15 @@ class Layout::SketchUpModel < Layout::Entity
   #
   # @note +clip_mask+ may be +nil+ as of LayOut 2020.1.
   #
-  # @param [Layout::Entity, nil] clip_mask
-  #   The clip mask can be a {Layout::Path},
-  #   {Layout::Rectangle}, {Layout::Ellipse}, or +nil+.
+  # @param [Layout::Ellipse, Layout::Path, Layout::Rectangle, nil] clip_mask
   #
   # @raise [ArgumentError] if clip_mask is already in a {Layout::Document} or
   #   {Layout::Group}
   #
   # @raise [ArgumentError] if clip_mask is not a {Layout::Rectangle},
   #   {Layout::Ellipse}, or {Layout::Path}
+  #
+  # @raise [ArgumentError] if clip_mask and model bounds do not overlap
   #
   # @raise [LockedLayerError] if the {Layout::SketchUpModel} is on a locked
   #   {Layout::Layer}

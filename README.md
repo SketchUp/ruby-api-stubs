@@ -4,11 +4,11 @@
 
 The SketchUp Ruby API allows you to interact with SketchUp models and the SketchUp application. It is available from within SketchUp, it cannot be used by itself.
 
-  All interactions with the SketchUp Ruby API must be performed from the main thread to avoid unexpected behavior and application instability.
-
 Get started with the [Ruby API Overview](_index.html).
 
 Visit our [SketchUp Developer Center](https://developer.sketchup.com) for more information and resources on SketchUp's APIs.
+
+*Note:* All interactions with the SketchUp Ruby API must be performed from the main thread to avoid unexpected behavior and application instability.
 
 ## LayOut API
 

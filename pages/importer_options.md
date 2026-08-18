@@ -30,6 +30,16 @@ The option `merge_coplaner_faces` was a typo in SketchUp 2018. This option will 
 - `preserve_origin` - Boolean to indicate whether to preserve drawing origin.
 
 ## Industry Foundation Classes (IFC)
+### Options for SketchUp 2027+
+- `preserve_origin` - Boolean to indicate whether to preserve drawing origin.
+- `tags_handling` - Specifies how tags are handled.
+	- values: `"use_ifc_classes"`, `"use_ifc_layers"`, `"do_not_create_tags"`
+- `ifc_types_filter` - Array of IFC types to import. Case-insensitive.
+- `entity_names_filter` - Array of substrings to match against entity names. Case-sensitive.
+- `guids_filter` - Array of GUIDs to import.
+- `filter_mode` - Determines how multiple filters are combined. Case-insensitive.
+	- values: `"and"`, `"or"`. Default: `"and"`.
+### Options for older SketchUp versions
 - No options are supported for this type on import.
 
 ## Google Earth (KMZ)

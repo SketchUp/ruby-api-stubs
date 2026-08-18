@@ -10,7 +10,6 @@
 # - <code>"PrintOptions"</code>
 # - <code>"PageOptions"</code>
 # - <code>"SlideshowOptions"</code>
-# - <code>"NamedOptions"</code>
 #
 # Each of these has a list of specific options that the user can set. See the
 # {Sketchup::OptionsManager} and {Sketchup::OptionsProvider} classes for more

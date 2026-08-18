@@ -92,7 +92,7 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   time = page.delay_time
   #
-  # @return time - the number of seconds of delay
+  # @return [Float] the number of seconds of delay.
   #
   # @version SketchUp 6.0
   def delay_time
@@ -111,10 +111,8 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   time = page.delay_time = 10
   #
-  # @param seconds
+  # @param [Float] seconds
   #   The number of seconds to set as the delay time.
-  #
-  # @return time - the number of seconds of delay
   #
   # @version SketchUp 6.0
   def delay_time=(seconds)
@@ -129,7 +127,7 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   description = page.description
   #
-  # @return description - a textual description for the page.
+  # @return [String] a textual description for the page.
   #
   # @version SketchUp 6.0
   def description
@@ -144,10 +142,8 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   description = page.description = "This is my first page"
   #
-  # @param description
+  # @param [String] description
   #   A string description for the page.
-  #
-  # @return description - the new string description for the page
   #
   # @version SketchUp 6.0
   def description=(description)
@@ -180,8 +176,6 @@ class Sketchup::Page < Sketchup::Entity
   #   page.environment = environment
   #
   # @param [Sketchup::Environment] environment
-  #
-  # @return [Sketchup::Environment]
   #
   # @version SketchUp 2025.0
   def environment=(environment)
@@ -220,16 +214,35 @@ class Sketchup::Page < Sketchup::Entity
   def get_drawingelement_visibility(element)
   end
 
-  # The hidden_entities method retrieves all hidden entities within a page.
+  # Returns the drawing elements whose visibility is overridden by this page.
+  #
+  # Only top-level Drawingelements are controlled by scene visibility. For nested
+  # content, only ComponentInstance, Group and Image instances are affected.
   #
   # @example
   #   model = Sketchup.active_model
-  #   pages = model.pages
-  #   page = pages.add "My Page"
-  #   entities = page.hidden_entities
+  #   page  = model.pages.add("My Page")
+  #   hidden = page.hidden_entities
+  #   if hidden
+  #     puts "Hidden on page: #{hidden.size}"
+  #   else
+  #     puts "Page does not store hidden-entity visibility."
+  #   end
   #
-  # @return [Array<Sketchup::Drawingelement>] an array of drawing elements that are
-  #   *hidden* on the page.
+  # @note Behavior depends on which hidden-visibility flags are used:
+  #   - SketchUp 2020.1 and later:
+  #     - If page.use_hidden_geometry? && page.use_hidden_objects? => returns all
+  #       top-level drawing elements hidden by the page.
+  #     - If page.use_hidden_geometry? && !page.use_hidden_objects? => returns
+  #       only non-instance drawing elements (not ComponentInstance or Group)
+  #       hidden by the page.
+  #     - If !page.use_hidden_geometry? && page.use_hidden_objects? => returns
+  #       only ComponentInstance, Group and Image instances hidden by the page.
+  #     - If both are +false+ => returns +nil+.
+  #   - SketchUp 2019 and earlier:
+  #     - Returns an array when page.use_hidden? is +true+, otherwise +nil+.
+  #
+  # @return [Array<Sketchup::Drawingelement>, nil] Returns +nil+ when the page does not store hidden-entity visibility.
   #
   # @version SketchUp 6.0
   def hidden_entities
@@ -245,8 +258,6 @@ class Sketchup::Page < Sketchup::Entity
   #   }
   #
   # @param [Boolean] include
-  #
-  # @return [Sketchup::Page]
   #
   # @version SketchUp 2018
   def include_in_animation=(include)
@@ -273,7 +284,7 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   label = page.label
   #
-  # @return label - a string label for the page tab
+  # @return [String] label for the page tab.
   #
   # @version SketchUp 6.0
   def label
@@ -305,8 +316,10 @@ class Sketchup::Page < Sketchup::Entity
   #   layers = page.layers
   #
   # @example Test layer visibility
-  #   def visible_in_scene?(layer, scene)
-  #     scene.layers.include?(layer) == hidden_by_default?(layer)
+  #   def layer_visible_in_page?(layer, page)
+  #     return layer.visible? if page.parent.selected_page == page
+  #     return nil unless page.use_hidden_layers?
+  #     page.layers.include?(layer) == hidden_by_default?(layer)
   #   end
   #
   #   def hidden_by_default?(layer)
@@ -328,7 +341,7 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   name = page.name
   #
-  # @return label - a string name for the page tab
+  # @return [String] name for the page tab.
   #
   # @version SketchUp 6.0
   def name
@@ -345,10 +358,8 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   name = page.name = "Page Name"
   #
-  # @param name
+  # @param [String] name
   #   The name of the page to be set.
-  #
-  # @return name - the name that you have set
   #
   # @version SketchUp 6.0
   def name=(name)
@@ -371,6 +382,10 @@ class Sketchup::Page < Sketchup::Entity
   #   +FogColor+) are safe to be changed from the scene.
   #
   # @return [Sketchup::RenderingOptions]
+  #
+  # @see #use_rendering_options?
+  #
+  # @see #use_style?
   #
   # @version SketchUp 6.0
   def rendering_options
@@ -455,7 +470,11 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   style = page.style
   #
-  # @return style - the Style object if successful
+  # @return [Sketchup::Style] the Style object if successful
+  #
+  # @see #use_style?
+  #
+  # @see #use_rendering_options?
   #
   # @version SketchUp 6.0
   def style
@@ -471,7 +490,7 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   time = page.transition_time
   #
-  # @return transitiontime - the amount of time it takes to
+  # @return [Float] the amount of time it takes to
   #   transition to this page during a slideshow or animation
   #   export.
   #
@@ -487,10 +506,8 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   time = page.transition_time=20
   #
-  # @param trans_time
+  # @param [Float] trans_time
   #   The transition time in seconds.
-  #
-  # @return transitiontime - the new transition time
   #
   # @version SketchUp 6.0
   def transition_time=(trans_time)
@@ -541,15 +558,12 @@ class Sketchup::Page < Sketchup::Entity
   #   # Set use_axes to false
   #   status = page.use_axes=false
   #
-  # @param pagesettings
+  # @param [Boolean] setting
   #   true if you want your page to save this property, false
   #   if you do not want your page to save this property.
   #
-  # @return status - true if you are saving the property, false if
-  #   you are not saving the property.
-  #
   # @version SketchUp 6.0
-  def use_axes=(pagesettings)
+  def use_axes=(setting)
   end
 
   # The use_axes? method determines whether you are storing the axes property
@@ -561,7 +575,7 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   status = page.use_axes?
   #
-  # @return [Boolean] status - true if you are storing the this property with
+  # @return [Boolean] true if you are storing the this property with
   #   the page, false if you are not storing this property
   #   with the page.
   #
@@ -577,12 +591,9 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   status = page.use_camera = true
   #
-  # @param setting
+  # @param [Boolean] setting
   #   true if you want your page to save this property, false
   #   if you do not want your page to save this property.
-  #
-  # @return status - true if you are saving the property, false if
-  #   you are not saving the property.
   #
   # @version SketchUp 6.0
   def use_camera=(setting)
@@ -597,7 +608,7 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   status = page.use_camera?
   #
-  # @return [Boolean] status - true if you are storing the this property with
+  # @return [Boolean] true if you are storing the this property with
   #   the page, false if you are not storing this property
   #   with the page.
   #
@@ -619,8 +630,6 @@ class Sketchup::Page < Sketchup::Entity
   #   # => false
   #
   # @param [Boolean] use_environment
-  #
-  # @return [Boolean]
   #
   # @version SketchUp 2025.0
   def use_environment=(use_environment)
@@ -656,12 +665,9 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   status = page.use_hidden = false
   #
-  # @param setting
+  # @param [Boolean] setting
   #   true if you want your page to save this property, false
   #   if you do not want your page to save this property.
-  #
-  # @return status - true if you are saving the property, false if
-  #   you are not saving the property.
   #
   # @see #use_hidden_geometry=
   #
@@ -683,7 +689,7 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add("My Page")
   #   status = page.use_hidden?
   #
-  # @return [Boolean] status - true if you are storing the this property with
+  # @return [Boolean] true if you are storing the this property with
   #   the page, false if you are not storing this property
   #   with the page.
   #
@@ -734,12 +740,9 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   status = page.use_hidden_layers = false
   #
-  # @param setting
+  # @param [Boolean] setting
   #   true if you want your page to save this property, false
   #   if you do not want your page to save this property.
-  #
-  # @return status - true if you are saving the property, false if
-  #   you are not saving the property.
   #
   # @version SketchUp 6.0
   def use_hidden_layers=(setting)
@@ -754,7 +757,7 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   status = page.use_hidden_layers?
   #
-  # @return [Boolean] status - true if you are storing the this property with
+  # @return [Boolean] true if you are storing the this property with
   #   the page, false if you are not storing this property
   #   with the page.
   #
@@ -792,28 +795,79 @@ class Sketchup::Page < Sketchup::Entity
   def use_hidden_objects?
   end
 
-  # The use_rendering_optoins= method sets the page's display
-  # settings property.
+  # The {#use_point_cloud_data=} method is used to set whether the point cloud
+  # visibility is saved with the page.
+  #
+  # @api PointCloudData
+  #
+  # @api Internal
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   pages = model.pages
+  #   page = pages.add('My Page')
+  #   page.use_point_cloud_data?
+  #   # => true
+  #   page.use_point_cloud_data = false
+  #   page.use_point_cloud_data?
+  #   # => false
+  #
+  # @param [Boolean] use_point_cloud_data
+  #   `true` if you want your page to save point cloud visibility,
+  #   `false` if you do not want your page to save this property.
+  #
+  # @version SketchUp 2026.2
+  def use_point_cloud_data=(use_point_cloud_data)
+  end
+
+  # The {#use_point_cloud_data?} method is used to determine if the point cloud
+  # visibility is saved with the page.
+  #
+  # @api PointCloudData
+  #
+  # @api Internal
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   pages = model.pages
+  #   page = pages.add('My Page')
+  #   page.use_point_cloud_data?
+  #   # => true
+  #   page.use_point_cloud_data = false
+  #   page.use_point_cloud_data?
+  #   # => false
+  #
+  # @return [Boolean]
+  #
+  # @version SketchUp 2026.2
+  def use_point_cloud_data?
+  end
+
+  # The use_rendering_options= method sets whether the page saves its own
+  # unique rendering options. In the UI, this corresponds to the "Style and Fog"
+  # checkbox in the Scenes panel.
   #
   # @example
   #   model = Sketchup.active_model
   #   pages = model.pages
   #   page = pages.add "My Page"
-  #   status = page.use_rendering_options = false
+  #   # This will uncheck the "Style and Fog" property for the page.
+  #   page.use_rendering_options = false
   #
-  # @param setting
-  #   true if you want your page to save this property, false
-  #   if you do not want your page to save this property.
+  # @note Setting this property will also affect the value of {#use_style?}.
+  #   Setting it to `false` will also cause {#use_style?} to become `false`.
   #
-  # @return status - true if you are saving the property, false
-  #   if you are not saving the property.
+  # @param [Boolean] use_options
+  #   `true` to have the page save Style and Fog
+  #   properties, `false` otherwise.
   #
   # @version SketchUp 6.0
-  def use_rendering_options=(setting)
+  def use_rendering_options=(use_options)
   end
 
-  # The use_rendering_options? method determines whether you are storing the
-  # rendering options property with the page.
+  # The use_rendering_options? method determines if the page saves its own
+  # unique rendering options. In the UI, this corresponds to the "Style and Fog"
+  # checkbox in the Scenes panel.
   #
   # @example
   #   model = Sketchup.active_model
@@ -821,9 +875,11 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   status = page.use_rendering_options?
   #
-  # @return [Boolean] status - true if you are storing the this property with
-  #   the page, false if you are not storing this property
-  #   with the page.
+  # @note This method is linked to {#use_style?}. They both check the same
+  #   property and will always return the same value. This is because a
+  #   {Sketchup::Style} is the object that contains rendering options.
+  #
+  # @return [Boolean] true if the page saves Style and Fog properties.
   #
   # @version SketchUp 6.0
   def use_rendering_options?
@@ -838,12 +894,9 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   status = page.use_section_planes=false
   #
-  # @param setting
+  # @param [Boolean] setting
   #   true if you want your page to save this property, false
   #   if you do not want your page to save this property.
-  #
-  # @return status - true if you are saving the property, false if
-  #   you are not saving the property.
   #
   # @version SketchUp 6.0
   def use_section_planes=(setting)
@@ -858,7 +911,7 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   status = page.use_section_planes?
   #
-  # @return [Boolean] status - true if you are storing the this property with
+  # @return [Boolean] true if you are storing the this property with
   #   the page, false if you are not storing this property
   #   with the page.
   #
@@ -874,12 +927,9 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   status = page.use_shadow_info=false
   #
-  # @param setting
+  # @param [Boolean] setting
   #   true if you want your page to save this property, false
   #   if you do not want your page to save this property.
-  #
-  # @return status - true if you are saving the property, false if
-  #   you are not saving the property.
   #
   # @version SketchUp 6.0
   def use_shadow_info=(setting)
@@ -894,7 +944,7 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   status = page.use_shadow_info?
   #
-  # @return [Boolean] status - true if you are storing the this property with
+  # @return [Boolean] true if you are storing the this property with
   #   the page, false if you are not storing this property
   #   with the page.
   #
@@ -909,18 +959,26 @@ class Sketchup::Page < Sketchup::Entity
   #   pages = model.pages
   #   page = pages.add "My Page"
   #   style = model.styles[0]
+  #   # This assigns the style AND sets page.use_rendering_options? to true.
   #   page.use_style = style
   #
-  # @param style
+  # @note This method is inconsistent with other setters in the API as it does
+  #   not accept a boolean. To enable style properties for a page, you must
+  #   assign a {Sketchup::Style} object.
+  #
+  # @note Assigning a style to a page will automatically set
+  #   {#use_rendering_options?} to `true`.
+  #
+  # @param [Sketchup::Style] style
   #   The Style object to use.
   #
-  # @return nil
+  # @return The assigned {Sketchup::Style} object.
   #
   # @version SketchUp 6.0
   def use_style=(style)
   end
 
-  # The use_style? method determines whether storing a style with the page.
+  # The use_style? method determines if the page saves style properties.
   #
   # @example
   #   model = Sketchup.active_model
@@ -928,9 +986,11 @@ class Sketchup::Page < Sketchup::Entity
   #   page = pages.add "My Page"
   #   use_style = page.use_style?
   #
-  # @return [Boolean] status - true if you are storing the this property with
-  #   the page, false if you are not storing this property
-  #   with the page.
+  # @note This method is linked to {#use_rendering_options?}. They both check the
+  #   same property and will always return the same value. This is because a
+  #   {Sketchup::Style} is the object that contains rendering options.
+  #
+  # @return [Boolean] true if the page saves Style and Fog properties.
   #
   # @version SketchUp 6.0
   def use_style?
