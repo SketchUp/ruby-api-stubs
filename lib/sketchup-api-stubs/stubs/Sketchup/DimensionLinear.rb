@@ -35,7 +35,7 @@ class Sketchup::DimensionLinear < Sketchup::Dimension
   #     puts 'Text is outside'
   #   end
   #
-  # @return an integer specifying the text position
+  # @return [Integer]
   #
   # @version SketchUp 2014
   def aligned_text_position
@@ -51,8 +51,8 @@ class Sketchup::DimensionLinear < Sketchup::Dimension
   # @example
   #   dim.aligned_text_position = Sketchup::DimensionLinear::ALIGNED_TEXT_CENTER
   #
-  # @param pos
-  #   an integer specifying the text position
+  # @param [Integer] pos
+  #
   #
   # @return the text position that was set.
   #
@@ -60,7 +60,7 @@ class Sketchup::DimensionLinear < Sketchup::Dimension
   def aligned_text_position=(pos)
   end
 
-  # The end method returns the point or entity the dimension is referencing at
+  # The end method returns the point and optional entity the dimension is referencing at
   # its end.
   #
   # @example
@@ -71,7 +71,8 @@ class Sketchup::DimensionLinear < Sketchup::Dimension
   #     puts "Attached entity: #{arr[0]}, at point #{arr[1]}"
   #   end
   #
-  # @return Array - An array of size 2:
+  # @return [Array(Sketchup::Entity, Geom::Point3d), Array(nil, Geom::Point3d)] - An
+  #   array of size 2:
   #   - Entity being referenced or nil if not associated.
   #   - Point3d that contains the referenced location.
   #
@@ -126,6 +127,9 @@ class Sketchup::DimensionLinear < Sketchup::Dimension
   # The {#end_attached_to=} method will attach the ending point to the
   # {Sketchup::InstancePath} and {Geom::Point3d}.
   #
+  # @bug Prior to SketchUp 2026.2 could move the {Sketchup::ConstructionPoint} contained
+  #   in the instance path.
+  #
   # @example
   #   # Assuming you have a valid dimension selected that is attached to a
   #   # component instance
@@ -156,7 +160,7 @@ class Sketchup::DimensionLinear < Sketchup::Dimension
   #   vec = dim.offset_vector
   #   puts "Offset vector is #{vec.to_s}"
   #
-  # @return offset vector as a Vector3d
+  # @return [Geom::Vector3d]
   #
   # @version SketchUp 2014
   def offset_vector
@@ -175,7 +179,7 @@ class Sketchup::DimensionLinear < Sketchup::Dimension
   def offset_vector=(offset_vector)
   end
 
-  # The start method returns the point or entity the dimension is referencing at
+  # The start method returns the point and optional entity the dimension is referencing at
   # its start.
   #
   # @example
@@ -186,7 +190,8 @@ class Sketchup::DimensionLinear < Sketchup::Dimension
   #     puts "Attached entity: #{arr[0]}, at point #{arr[1]}"
   #   end
   #
-  # @return Array - An array of size 2:
+  # @return [Array(Sketchup::Entity, Geom::Point3d), Array(nil, Geom::Point3d)] - An
+  #   array of size 2:
   #   - Entity being referenced or nil if not associated.
   #   - Point3d that contains the referenced location.
   #
@@ -241,6 +246,9 @@ class Sketchup::DimensionLinear < Sketchup::Dimension
   # The {#start_attached_to=} method will attach the starting point to the
   # {Sketchup::InstancePath} and {Geom::Point3d}.
   #
+  # @bug Prior to SketchUp 2026.2 could move the {Sketchup::ConstructionPoint} contained
+  #   in the instance path.
+  #
   # @example
   #   # Assuming you have a valid dimension selected that is attached to a
   #   # component instance
@@ -279,7 +287,7 @@ class Sketchup::DimensionLinear < Sketchup::Dimension
   #     puts 'Text position is Outside end'
   #   end
   #
-  # @return an integer specifying the text position
+  # @return [Integer]
   #
   # @version SketchUp 2014
   def text_position
@@ -294,8 +302,8 @@ class Sketchup::DimensionLinear < Sketchup::Dimension
   # @example
   #   dim.text_position = Sketchup::DimensionLinear::TEXT_CENTERED
   #
-  # @param pos
-  #   an integer specifying the text position
+  # @param [Integer] pos
+  #
   #
   # @return the text position that was set.
   #

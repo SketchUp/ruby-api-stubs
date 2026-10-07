@@ -319,13 +319,25 @@ class Sketchup::LayerFolder < Sketchup::Entity
 
   # The {#visible=} method is used to set if the layer folder is visible.
   #
+  # The method does not raise exceptions, but hiding a folder containing an
+  # active tag (layer) will not change the folder's visibility.
+  #
   # @example
   #   model = Sketchup.active_model
   #   layers = model.layers
-  #   folder = layers.add('Hello')
+  #   folder = layers.add_folder('Hello')
+  #
+  #   # Attempt to hide the folder
+  #   # This will not hide if the folder contains an active tag.
   #   folder.visible = false
   #
+  # @note If the folder contains an active tag (layer), trying to hide said
+  #   folder will fail silently. Make sure that the folder does not contain
+  #   an active tag before attempting to hide it.
+  #
   # @param [Boolean] visible
+  #
+  # @see Layer#visible=
   #
   # @version SketchUp 2021.0
   def visible=(visible)

@@ -4,6 +4,8 @@ debug/
 
 pkg/
 
+.DS_Store
+
 Gemfile\.lock
 
 rubocop-changelog.txt

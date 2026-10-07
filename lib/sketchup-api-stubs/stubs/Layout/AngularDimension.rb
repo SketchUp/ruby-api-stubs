@@ -34,8 +34,6 @@ class Layout::AngularDimension < Layout::Entity
   # The {#angle} method returns the {Layout::AngularDimension}'s angle. The angle
   # is represented in radians.
   #
-  # inner_angle) angle = dim.angle
-  #
   # @example
   #   start_point = Geom::Point2d.new(1, 1)
   #   end_point = Geom::Point2d.new(5, 5)
@@ -43,6 +41,8 @@ class Layout::AngularDimension < Layout::Entity
   #   end_extent = Geom::Point2d.new(5, 6)
   #   inner_angle = true
   #   dim = Layout::AngularDimension.new(start_point, end_point, start_extent, end_extent,
+  #     inner_angle)
+  #   angle = dim.angle
   #
   # @return [Numeric]
   #
@@ -53,8 +53,6 @@ class Layout::AngularDimension < Layout::Entity
   # The {#arc_center_point} method returns the paper space location for the
   # dimension arc center point.
   #
-  # inner_angle) center = dim.arc_center_point
-  #
   # @example
   #   start_point = Geom::Point2d.new(1, 1)
   #   end_point = Geom::Point2d.new(5, 5)
@@ -62,6 +60,8 @@ class Layout::AngularDimension < Layout::Entity
   #   end_extent = Geom::Point2d.new(5, 6)
   #   inner_angle = true
   #   dim = Layout::AngularDimension.new(start_point, end_point, start_extent, end_extent,
+  #     inner_angle)
+  #   center = dim.arc_center_point
   #
   # @return [Geom::Point2d]
   #
@@ -74,8 +74,6 @@ class Layout::AngularDimension < Layout::Entity
   # change. When +false+, the text will display the length measurement and wil
   # update automatically.
   #
-  # inner_angle) dim.custom_text = true
-  #
   # @example
   #   start_point = Geom::Point2d.new(1, 1)
   #   end_point = Geom::Point2d.new(5, 5)
@@ -83,6 +81,8 @@ class Layout::AngularDimension < Layout::Entity
   #   end_extent = Geom::Point2d.new(5, 6)
   #   inner_angle = true
   #   dim = Layout::AngularDimension.new(start_point, end_point, start_extent, end_extent,
+  #     inner_angle)
+  #   dim.custom_text = true
   #
   # @param [Boolean] uses_custom_text
   #
@@ -100,8 +100,6 @@ class Layout::AngularDimension < Layout::Entity
   # doesn't change. When +false+, the text will display the length measurement
   # and will update automatically.
   #
-  # inner_angle) # returns false uses_custom_text = dim.custom_text?
-  #
   # @example
   #   start_point = Geom::Point2d.new(1, 1)
   #   end_point = Geom::Point2d.new(5, 5)
@@ -109,6 +107,9 @@ class Layout::AngularDimension < Layout::Entity
   #   end_extent = Geom::Point2d.new(5, 6)
   #   inner_angle = true
   #   dim = Layout::AngularDimension.new(start_point, end_point, start_extent, end_extent,
+  #     inner_angle)
+  #   # returns false
+  #   uses_custom_text = dim.custom_text?
   #
   # @return [Boolean]
   #
@@ -119,8 +120,6 @@ class Layout::AngularDimension < Layout::Entity
   # The {#end_connection_point} method returns the paper space location for the
   # second connection.
   #
-  # inner_angle) end_connection = dim.end_connection_point
-  #
   # @example
   #   start_point = Geom::Point2d.new(1, 1)
   #   end_point = Geom::Point2d.new(5, 5)
@@ -128,6 +127,8 @@ class Layout::AngularDimension < Layout::Entity
   #   end_extent = Geom::Point2d.new(5, 6)
   #   inner_angle = true
   #   dim = Layout::AngularDimension.new(start_point, end_point, start_extent, end_extent,
+  #     inner_angle)
+  #   end_connection = dim.end_connection_point
   #
   # @return [Geom::Point2d]
   #
@@ -138,8 +139,6 @@ class Layout::AngularDimension < Layout::Entity
   # The {#end_connection_point=} method sets the paper space location for the
   # second connection.
   #
-  # inner_angle) dim.end_connection_point = Geom::Point2d.new(6, 6)
-  #
   # @example
   #   start_point = Geom::Point2d.new(1, 1)
   #   end_point = Geom::Point2d.new(5, 5)
@@ -147,6 +146,8 @@ class Layout::AngularDimension < Layout::Entity
   #   end_extent = Geom::Point2d.new(5, 6)
   #   inner_angle = true
   #   dim = Layout::AngularDimension.new(start_point, end_point, start_extent, end_extent,
+  #     inner_angle)
+  #   dim.end_connection_point = Geom::Point2d.new(6, 6)
   #
   # @param [Geom::Point2d] end_point
   #
@@ -162,8 +163,6 @@ class Layout::AngularDimension < Layout::Entity
   # The {#end_extent_point} method returns the paper space location for the
   # end of the dimension line.
   #
-  # inner_angle) end_ext_point = dim.end_extent_point
-  #
   # @example
   #   start_point = Geom::Point2d.new(1, 1)
   #   end_point = Geom::Point2d.new(5, 5)
@@ -171,6 +170,8 @@ class Layout::AngularDimension < Layout::Entity
   #   end_extent = Geom::Point2d.new(5, 6)
   #   inner_angle = true
   #   dim = Layout::AngularDimension.new(start_point, end_point, start_extent, end_extent,
+  #     inner_angle)
+  #   end_ext_point = dim.end_extent_point
   #
   # @return [Geom::Point2d] end_extent
   #
@@ -181,9 +182,6 @@ class Layout::AngularDimension < Layout::Entity
   # The {#end_extent_point=} method sets the paper space location for the
   # end of the dimension line.
   #
-  # inner_angle) end_ext_point = Geom::Point2d.new(5, 6) dim.end_extent_point = Geom::Point2d.new(6,
-  # 6)
-  #
   # @example
   #   start_point = Geom::Point2d.new(1, 1)
   #   end_point = Geom::Point2d.new(5, 5)
@@ -191,6 +189,9 @@ class Layout::AngularDimension < Layout::Entity
   #   end_extent = Geom::Point2d.new(5, 6)
   #   inner_angle = true
   #   dim = Layout::AngularDimension.new(start_point, end_point, start_extent, end_extent,
+  #     inner_angle)
+  #   end_ext_point = Geom::Point2d.new(5, 6)
+  #   dim.end_extent_point = Geom::Point2d.new(6, 6)
   #
   # @param [Geom::Point2d] end_extent
   #
@@ -207,8 +208,6 @@ class Layout::AngularDimension < Layout::Entity
   # second connection point to the start of the second extension line. The
   # connection and extent points will not move.
   #
-  # inner_angle) end_ext_point = Geom::Point2d.new(5, 6) dim.end_offset_length = 0.5
-  #
   # @example
   #   start_point = Geom::Point2d.new(1, 1)
   #   end_point = Geom::Point2d.new(5, 5)
@@ -216,6 +215,9 @@ class Layout::AngularDimension < Layout::Entity
   #   end_extent = Geom::Point2d.new(5, 6)
   #   inner_angle = true
   #   dim = Layout::AngularDimension.new(start_point, end_point, start_extent, end_extent,
+  #     inner_angle)
+  #   end_ext_point = Geom::Point2d.new(5, 6)
+  #   dim.end_offset_length = 0.5
   #
   # @param [Numeric] offset_length
   #
@@ -232,8 +234,6 @@ class Layout::AngularDimension < Layout::Entity
   # end of the first extension line. The first extension line runs from this
   # offset point to the end extent point.
   #
-  # inner_angle) end_offset = dim.end_offset_point
-  #
   # @example
   #   start_point = Geom::Point2d.new(1, 1)
   #   end_point = Geom::Point2d.new(5, 5)
@@ -241,6 +241,8 @@ class Layout::AngularDimension < Layout::Entity
   #   end_extent = Geom::Point2d.new(5, 6)
   #   inner_angle = true
   #   dim = Layout::AngularDimension.new(start_point, end_point, start_extent, end_extent,
+  #     inner_angle)
+  #   end_offset = dim.end_offset_point
   #
   # @return [Geom::Point2d] end_offset
   #
@@ -254,8 +256,6 @@ class Layout::AngularDimension < Layout::Entity
   # from four to six {Layout::Entity}s: start extension line, end extension line,
   # one or two dimension lines, dimension text, and optionally the leader line.
   #
-  # inner_angle) entites = dim.entities
-  #
   # @example
   #   start_point = Geom::Point2d.new(1, 1)
   #   end_point = Geom::Point2d.new(5, 5)
@@ -263,6 +263,8 @@ class Layout::AngularDimension < Layout::Entity
   #   end_extent = Geom::Point2d.new(5, 6)
   #   inner_angle = true
   #   dim = Layout::AngularDimension.new(start_point, end_point, start_extent, end_extent,
+  #     inner_angle)
+  #   entites = dim.entities
   #
   # @return [Layout::Entities]
   #
@@ -273,8 +275,6 @@ class Layout::AngularDimension < Layout::Entity
   # The {#initialize} method creates a new disconnected
   # {Layout::AngularDimension}.
   #
-  # inner_angle)
-  #
   # @example
   #   start_point = Geom::Point2d.new(1, 1)
   #   end_point = Geom::Point2d.new(5, 5)
@@ -282,6 +282,7 @@ class Layout::AngularDimension < Layout::Entity
   #   end_extent = Geom::Point2d.new(5, 6)
   #   inner_angle = true
   #   dim = Layout::AngularDimension.new(start_point, end_point, start_extent, end_extent,
+  #     inner_angle)
   #
   # @param [Geom::Point2d] start_point
   #   Where the {Layout::AngularDimension}
@@ -318,8 +319,6 @@ class Layout::AngularDimension < Layout::Entity
   # [+Layout::AngularDimension::LEADER_LINE_TYPE_BEZIER+]
   # [+Layout::AngularDimension::LEADER_LINE_TYPE_HIDDEN+]
   #
-  # inner_angle) type = dim.leader_line_type
-  #
   # @example
   #   start_point = Geom::Point2d.new(1, 1)
   #   end_point = Geom::Point2d.new(5, 5)
@@ -327,6 +326,8 @@ class Layout::AngularDimension < Layout::Entity
   #   end_extent = Geom::Point2d.new(5, 6)
   #   inner_angle = true
   #   dim = Layout::AngularDimension.new(start_point, end_point, start_extent, end_extent,
+  #     inner_angle)
+  #   type = dim.leader_line_type
   #
   # @return [Integer]
   #
@@ -343,8 +344,6 @@ class Layout::AngularDimension < Layout::Entity
   # [+Layout::AngularDimension::LEADER_LINE_TYPE_BEZIER+]
   # [+Layout::AngularDimension::LEADER_LINE_TYPE_HIDDEN+]
   #
-  # inner_angle) dim.leader_line_type = Layout::AngularDimension::LEADER_LINE_TYPE_BEZIER
-  #
   # @example
   #   start_point = Geom::Point2d.new(1, 1)
   #   end_point = Geom::Point2d.new(5, 5)
@@ -352,6 +351,8 @@ class Layout::AngularDimension < Layout::Entity
   #   end_extent = Geom::Point2d.new(5, 6)
   #   inner_angle = true
   #   dim = Layout::AngularDimension.new(start_point, end_point, start_extent, end_extent,
+  #     inner_angle)
+  #   dim.leader_line_type = Layout::AngularDimension::LEADER_LINE_TYPE_BEZIER
   #
   # @param [Integer] type
   #   The leader line type
@@ -370,8 +371,6 @@ class Layout::AngularDimension < Layout::Entity
   # The {#radius} method returns the {Layout::AngularDimension}'s radius. This is
   # the distance from the arc center point to the dimension line.
   #
-  # inner_angle) radius = dim.radius
-  #
   # @example
   #   start_point = Geom::Point2d.new(1, 1)
   #   end_point = Geom::Point2d.new(5, 5)
@@ -379,6 +378,8 @@ class Layout::AngularDimension < Layout::Entity
   #   end_extent = Geom::Point2d.new(5, 6)
   #   inner_angle = true
   #   dim = Layout::AngularDimension.new(start_point, end_point, start_extent, end_extent,
+  #     inner_angle)
+  #   radius = dim.radius
   #
   # @return [Numeric]
   #
@@ -389,8 +390,6 @@ class Layout::AngularDimension < Layout::Entity
   # The {#radius=} method sets the the {Layout::AngularDimension}'s radius. This
   # is the distance from the arc center point to the dimension line.
   #
-  # inner_angle) dim.radius = 2.0
-  #
   # @example
   #   start_point = Geom::Point2d.new(1, 1)
   #   end_point = Geom::Point2d.new(5, 5)
@@ -398,6 +397,8 @@ class Layout::AngularDimension < Layout::Entity
   #   end_extent = Geom::Point2d.new(5, 6)
   #   inner_angle = true
   #   dim = Layout::AngularDimension.new(start_point, end_point, start_extent, end_extent,
+  #     inner_angle)
+  #   dim.radius = 2.0
   #
   # @param [Numeric] radius
   #
@@ -415,8 +416,6 @@ class Layout::AngularDimension < Layout::Entity
   # The {#start_connection_point} method returns the paper space location for the
   # first connection.
   #
-  # inner_angle) start_connection = dim.start_connection_point
-  #
   # @example
   #   start_point = Geom::Point2d.new(1, 1)
   #   end_point = Geom::Point2d.new(5, 5)
@@ -424,6 +423,8 @@ class Layout::AngularDimension < Layout::Entity
   #   end_extent = Geom::Point2d.new(5, 6)
   #   inner_angle = true
   #   dim = Layout::AngularDimension.new(start_point, end_point, start_extent, end_extent,
+  #     inner_angle)
+  #   start_connection = dim.start_connection_point
   #
   # @return [Geom::Point2d]
   #
@@ -434,8 +435,6 @@ class Layout::AngularDimension < Layout::Entity
   # The {#start_connection_point=} method sets the paper space location for the
   # first connection.
   #
-  # inner_angle) dim.start_connection_point = Geom::Point2d.new(2, 2)
-  #
   # @example
   #   start_point = Geom::Point2d.new(1, 1)
   #   end_point = Geom::Point2d.new(5, 5)
@@ -443,6 +442,8 @@ class Layout::AngularDimension < Layout::Entity
   #   end_extent = Geom::Point2d.new(5, 6)
   #   inner_angle = true
   #   dim = Layout::AngularDimension.new(start_point, end_point, start_extent, end_extent,
+  #     inner_angle)
+  #   dim.start_connection_point = Geom::Point2d.new(2, 2)
   #
   # @param [Geom::Point2d] start_point
   #
@@ -458,8 +459,6 @@ class Layout::AngularDimension < Layout::Entity
   # The {#start_extent_point} method returns the paper space location for the
   # start of the dimension line.
   #
-  # inner_angle) start_ext_point = dim.start_extent_point
-  #
   # @example
   #   start_point = Geom::Point2d.new(1, 1)
   #   end_point = Geom::Point2d.new(5, 5)
@@ -467,6 +466,8 @@ class Layout::AngularDimension < Layout::Entity
   #   end_extent = Geom::Point2d.new(5, 6)
   #   inner_angle = true
   #   dim = Layout::AngularDimension.new(start_point, end_point, start_extent, end_extent,
+  #     inner_angle)
+  #   start_ext_point = dim.start_extent_point
   #
   # @return [Geom::Point2d] start_extent
   #
@@ -477,9 +478,6 @@ class Layout::AngularDimension < Layout::Entity
   # The {#start_extent_point=} method sets the paper space location for the
   # start of the dimension line.
   #
-  # inner_angle) start_ext_point = Geom::Point2d.new(2, 3) dim.start_extent_point =
-  # Geom::Point2d.new(2, 2)
-  #
   # @example
   #   start_point = Geom::Point2d.new(1, 1)
   #   end_point = Geom::Point2d.new(5, 5)
@@ -487,6 +485,9 @@ class Layout::AngularDimension < Layout::Entity
   #   end_extent = Geom::Point2d.new(5, 6)
   #   inner_angle = true
   #   dim = Layout::AngularDimension.new(start_point, end_point, start_extent, end_extent,
+  #     inner_angle)
+  #   start_ext_point = Geom::Point2d.new(2, 3)
+  #   dim.start_extent_point = Geom::Point2d.new(2, 2)
   #
   # @param [Geom::Point2d] start_extent
   #
@@ -503,8 +504,6 @@ class Layout::AngularDimension < Layout::Entity
   # first connection point to the start of the first extension line. The
   # connection and extent points will not move.
   #
-  # inner_angle) end_ext_point = Geom::Point2d.new(5, 6) dim.start_offset_length = 0.5
-  #
   # @example
   #   start_point = Geom::Point2d.new(1, 1)
   #   end_point = Geom::Point2d.new(5, 5)
@@ -512,6 +511,9 @@ class Layout::AngularDimension < Layout::Entity
   #   end_extent = Geom::Point2d.new(5, 6)
   #   inner_angle = true
   #   dim = Layout::AngularDimension.new(start_point, end_point, start_extent, end_extent,
+  #     inner_angle)
+  #   end_ext_point = Geom::Point2d.new(5, 6)
+  #   dim.start_offset_length = 0.5
   #
   # @param [Numeric] offset_length
   #
@@ -528,8 +530,6 @@ class Layout::AngularDimension < Layout::Entity
   # start of the first extension line. The first extension line runs from this
   # offset point to the start extent point.
   #
-  # inner_angle) start_offset = dim.start_offset_point
-  #
   # @example
   #   start_point = Geom::Point2d.new(1, 1)
   #   end_point = Geom::Point2d.new(5, 5)
@@ -537,6 +537,8 @@ class Layout::AngularDimension < Layout::Entity
   #   end_extent = Geom::Point2d.new(5, 6)
   #   inner_angle = true
   #   dim = Layout::AngularDimension.new(start_point, end_point, start_extent, end_extent,
+  #     inner_angle)
+  #   start_offset = dim.start_offset_point
   #
   # @return [Geom::Point2d] start_offset
   #
@@ -547,8 +549,6 @@ class Layout::AngularDimension < Layout::Entity
   # The {#text} method returns a copy of the {Layout::AngularDimension}'s
   # {Layout::FormattedText}.
   #
-  # inner_angle) text = dim.text
-  #
   # @example
   #   start_point = Geom::Point2d.new(1, 1)
   #   end_point = Geom::Point2d.new(5, 5)
@@ -556,6 +556,8 @@ class Layout::AngularDimension < Layout::Entity
   #   end_extent = Geom::Point2d.new(5, 6)
   #   inner_angle = true
   #   dim = Layout::AngularDimension.new(start_point, end_point, start_extent, end_extent,
+  #     inner_angle)
+  #   text = dim.text
   #
   # @note With the addition of auto-text in dimensions for LayOut 2019.2, the
   #   copy of the dimension text incorrectly provided the plain text when
@@ -570,9 +572,6 @@ class Layout::AngularDimension < Layout::Entity
   # The {#text=} method sets the {Layout::AngularDimension}'s
   # {Layout::FormattedText}.
   #
-  # inner_angle) anchor_type = Layout::FormattedText::ANCHOR_TYPE_TOP_LEFT dim.text =
-  # Layout::FormattedText.new("Hello LayOut", start_point, anchor_type)
-  #
   # @example
   #   start_point = Geom::Point2d.new(1, 1)
   #   end_point = Geom::Point2d.new(5, 5)
@@ -580,6 +579,9 @@ class Layout::AngularDimension < Layout::Entity
   #   end_extent = Geom::Point2d.new(5, 6)
   #   inner_angle = true
   #   dim = Layout::AngularDimension.new(start_point, end_point, start_extent, end_extent,
+  #     inner_angle)
+  #   anchor_type = Layout::FormattedText::ANCHOR_TYPE_TOP_LEFT
+  #   dim.text = Layout::FormattedText.new("Hello LayOut", start_point, anchor_type)
   #
   # @param [Layout::FormattedText] formatted_text
   #

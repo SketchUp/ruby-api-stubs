@@ -6,6 +6,10 @@
 #
 # There are numerous tutorials on 3D vectors available on the internet.
 #
+# @note Compatibility: Many API methods that accept a Geom::Vector3d also
+#   accept a 3-element {Array} of {Numeric} values +[x, y, z]+. Arrays are implicitly
+#   converted where appropriate. See Array and Geom::Point3d.
+#
 # @version SketchUp 6.0
 class Geom::Vector3d
 
@@ -215,13 +219,12 @@ class Geom::Vector3d
   #
   # Returns an Array of three vectors [xaxis, yaxis, zaxis]
   #
-  # Vector3d objects
-  #
   # @example
   #   vector = Geom::Vector3d.new(1, 0, 0)
   #   array = vector.axes
   #
   # @return [Array(Geom::Vector3d, Geom::Vector3d, Geom::Vector3d)] an Array object containing three
+  #   Vector3d objects
   #
   # @version SketchUp 6.0
   def axes
