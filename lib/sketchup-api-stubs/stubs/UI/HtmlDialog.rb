@@ -21,6 +21,10 @@
 #
 # HtmlDialog uses the following versions of CEF (Chromium Embedded Framework):
 #
+# [SketchUp 2027.0]
+#   CEF 149
+# [SketchUp 2026.0]
+#   CEF 137
 # [SketchUp 2025.0]
 #   CEF 128
 # [SketchUp 2024.0]
@@ -88,6 +92,10 @@ class UI::HtmlDialog
   # Basic types such as booleans, numbers, strings, arrays and hashes are
   # automatically converted between Ruby and JavaScript.
   #
+  # Starting with SketchUp 2027.0, this method supports returning structured data from Ruby
+  # callbacks. Arrays and hashes returned by callbacks registered with
+  # the method are delivered to JavaScript through +onCompleted+ callback.
+  #
   # @example Ruby Code
   #   dialog.add_action_callback("say") { |action_context, param1, param2|
   #     puts "JavaScript said #{param1} and #{param2}"
@@ -128,8 +136,29 @@ class UI::HtmlDialog
   #
   #   dialog.show # should be called directly after binding callbacks
   #
+  # @example Handling JavaScript integers exceeding the 32-bit range
+  #   dialog = UI::HtmlDialog.new({})
+  #   html = '<button onclick="sketchup.process_ids(42, 3000000000)">Click</button>'
+  #
+  #   dialog.set_html(html)
+  #
+  #   dialog.add_action_callback("process_ids") { |action_context, small_id, large_id|
+  #     puts "Small ID: #{small_id}"                # => Integer (fits in 32-bit)
+  #     puts "Large ID (Float): #{large_id}"        # => Float   (exceeds 32-bit, arrives as Float)
+  #
+  #     # To guarantee you are working with an Integer:
+  #     puts "Large ID (Integer): #{large_id.to_i}" # => Integer
+  #   }
+  #
+  #   dialog.show
+  #
   # @note When an HtmlDialog is closed, all callbacks to that instance are
   #   cleared. Attach or re-attach them before you show the dialog.
+  #
+  # @note JavaScript integers larger than 2147483647 (2^31 - 1) are stored
+  #   by the underlying V8 engine as 64-bit floats, causing them to be received
+  #   by Ruby as a +Float+ instead of an +Integer+. Small whole numbers within the
+  #   32-bit range will arrive as an +Integer+.
   #
   # @param [String] callback_name
   #   The name of the callback method to be invoked from the html dialog.
@@ -193,7 +222,10 @@ class UI::HtmlDialog
   # html dialog asynchronously.
   #
   # @example
-  #   js_command = "document.getElementById('id').innerHTML = '<b>Hi!</b>'"
+  #   require "json"
+  #
+  #   text = "Hello world"
+  #   js_command = "document.getElementById('id').textContent = #{text.to_json}"
   #   dialog.execute_script(js_command)
   #
   # @param [String] script
@@ -273,17 +305,22 @@ class UI::HtmlDialog
   # When +use_content_size+ is set to +false+ (the default value),
   # the size dimensions will represent the outer frame size.
   #
-  # The +properties+ hash accepts an optional key +style+ where the value is
-  # one of:
+  # The +properties+ hash accepts an optional key +style+ that controls the type
+  # of window, where the value is one of:
   #
-  # [+UI::HtmlDialog::STYLE_DIALOG+]   HtmlDialog stays at the top of SketchUp.
+  # [+UI::HtmlDialog::STYLE_DIALOG+]
+  #   Default window type.
+  # [+UI::HtmlDialog::STYLE_UTILITY+]
+  #   The window is intended to be used as a floating tool.
+  # [+UI::HtmlDialog::STYLE_WINDOW+]
+  #   Deprecated. Used in previous SketchUp versions, but now superseded by
+  #   +UI::HtmlDialog::STYLE_DIALOG+.
   #
-  # [+UI::HtmlDialog::STYLE_WINDOW+]   HtmlDialog can go behind SketchUp and
-  #                                    doesn't disappear when SketchUp looses
-  #                                    focus.
+  # The specific behaviour of these styles is *not* guaranteed for future
+  # SketchUp releases and should not be relied on, but the intended use will not
+  # change. Current and past behaviour is:
   #
-  # [+UI::HtmlDialog::STYLE_UTILITY+]  HtmlDialog is shown with small titlebar
-  #                                    and stays on top of SketchUp.
+  # {include:file:assets/htmldialog_window_styles.md}
   #
   # @bug Prior to SketchUp 2019 the +:width+ and +:height+ provided is ignored
   #   if a +:preference_key+ is also present. To work around this bug on older
@@ -396,6 +433,10 @@ class UI::HtmlDialog
   # The {#set_can_close} method is used to attach a block that is executed just
   # before closing, this block has to return a boolean, if the block returns
   # false the close will be canceled.
+  #
+  # @bug SketchUp 2026.2 introduced a bug where the block was not re-invoked on
+  #   subsequent close attempts once it had returned +false+ — the cancelled
+  #   result was cached.
   #
   # @example
   #   dialog.set_can_close { false }

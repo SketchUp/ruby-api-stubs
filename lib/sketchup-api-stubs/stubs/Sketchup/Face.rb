@@ -723,7 +723,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #
   # @overload position_material(material, points, on_front, projection)
   #
-  #   @version SketchUp 6.0
+  #   @version SketchUp 2021.1
   #
   #   This variant positions a material on the face's plane with projection.
   #
@@ -756,6 +756,8 @@ class Sketchup::Face < Sketchup::Drawingelement
   # @see #get_texture_projection
   #
   # @see #clear_texture_projection
+  #
+  # @version SketchUp 6.0
   def position_material(*args)
   end
 

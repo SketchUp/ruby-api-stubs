@@ -122,7 +122,6 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   ROPSetConstructionColor = nil # Stub value.
   ROPSetDepthQueEdges = nil # Stub value.
   ROPSetDepthQueWidth = nil # Stub value.
-  ROPSetDisplayColorByLayer = nil # Stub value.
   ROPSetDisplayDims = nil # Stub value.
   ROPSetDisplayFog = nil # Stub value.
   ROPSetDisplayInstanceAxes = nil # Stub value.
@@ -148,7 +147,6 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   ROPSetGroundColor = nil # Stub value.
   ROPSetGroundTransparency = nil # Stub value.
   ROPSetHideConstructionGeometry = nil # Stub value.
-  ROPSetHideSpaces = nil # Stub value.
   ROPSetHighlightColor = nil # Stub value.
   ROPSetHorizonColor = nil # Stub value.
   ROPSetJitterEdges = nil # Stub value.
@@ -159,7 +157,6 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   ROPSetLockedColor = nil # Stub value.
   ROPSetMaterialTransparency = nil # Stub value.
   ROPSetModelTransparency = nil # Stub value.
-  ROPSetModelingGrid = nil # Stub value.
   ROPSetPhotomatchBackgroundOpacity = nil # Stub value.
   ROPSetPhotomatchDrawBackground = nil # Stub value.
   ROPSetPhotomatchDrawOverlay = nil # Stub value.
@@ -322,6 +319,35 @@ class Sketchup::RenderingOptions < Sketchup::Entity
   #
   # @version SketchUp 6.0
   def each_pair
+  end
+
+  # Retrieves the default section fill style assigned to the rendering options.
+  #
+  # The returned object is a frozen snapshot detached from the model. To change the default
+  # section fill style, mutate a +dup+ of it (or a new instance) and assign it back via
+  # {Sketchup::RenderingOptions#hatch_pattern=}.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   hatch_pattern_data = model.rendering_options.hatch_pattern
+  #
+  # @return [Sketchup::HatchPatternData]
+  #
+  # @version SketchUp 2027.0
+  def hatch_pattern
+  end
+
+  # Assigns the default section fill style to the rendering options.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   hatch_patterns = model.hatch_patterns
+  #   model.rendering_options.hatch_pattern = hatch_patterns['Pattern1']
+  #
+  # @param [Sketchup::HatchPatternData, Sketchup::HatchPattern, nil] pattern
+  #
+  # @version SketchUp 2027.0
+  def hatch_pattern=(pattern)
   end
 
   # The keys method returns an array with all of the attribute keys.

@@ -293,11 +293,9 @@ class Sketchup::Layers < Sketchup::Entity
   #   folder = manager.add_folder('Windows')
   #   manager.purge_unused_folders
   #
+  # @return [Integer] The number of unused folders that were purged.
+  #
   # @version SketchUp 2021.0
-  #
-  # @yield [folder]
-  #
-  # @yieldparam [Sketchup::LayerFolder] folder
   def purge_unused_folders
   end
 

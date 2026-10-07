@@ -90,6 +90,9 @@ class Sketchup::Model
   # then this is the method to use. Entities selected by the user will be a
   # subset of the active entities.
   #
+  # SketchUp 2027.0 and later: For a Procedural Component, this will return the control
+  # (input) elements.
+  #
   # @example
   #   model = Sketchup.active_model
   #   entities = model.active_entities
@@ -459,6 +462,51 @@ class Sketchup::Model
   #
   # @version SketchUp 6.0
   def commit_operation
+  end
+
+  # The {#crs_location} method returns a copy of the CRSLocation defined for the model (if any).
+  #
+  # When the CRS location is defined and the model is georeferenced,
+  # this CRS overrides the default UTM zone calculated from the shadow info latitude/longitude.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   crs_location = model.crs_location
+  #
+  # @return [Sketchup::CRSLocation, nil]
+  #
+  # @version SketchUp 2027.0
+  def crs_location
+  end
+
+  # The {#crs_location=} method sets the CRS Location for model.
+  #
+  # "HC1G000ZHC400000000000WXA90PP4T133YR4DRF7P4S97764G4R57EX4TK3312DPHRS19GVS5Q6PBS29DVB4V69SS5B4BC448M1XF7S1W2EQGCZT11KVN43T11T39TYF99C8PRFTTDS87KW7D5RA2M9T20PBQNWXYYZEZ9KNHNVFP83WZ8ZTYDXDRTNCN4R92FJV19AY3HPHBHKYJATEYMJ74DW6K9S4VN3HK7PJ8R5DQM0H5GYHCT2RXRPTVGPMYB2DBAW1TV7YPR837XK42BVNGNZQK0SHW91JCD3QB0BB8ZHT5EPQQQYJTZZ3HATDD78N7CS6B5DXJXQGMFMYKXCXAXYX1W7BYVZFD31ZQVYEV4ZDMKBQKRE7YEZZD5JMH9PQWQGJK1T9J2E3EJBE5YBVHJ8BJRFH23F2A48Q1WJE27TVA9H5282641E3BFF3YZKME5HKVQY8KVFQTCPT76X3CYA3TXZNKHFEMQYYQCQPAX7TYTHAMGMA9194Z32PG2ARA00HRMT4EFAT085H4C7NW3GT8W76V06T0Q3758QFG6SN0KQ1HJT74027809ENH42TTWD0W9JN5WMA3ZWEW9R0F468BND87ZABKGBZNWCD6J6Y670CN8985W9BSR8ZB2BATYX2S28GEBBAAVN9NXX7JKYXQBP79TN6WN1BKKA6X8ABHEBPGBT1PX3AMQR3BXN2XDZBEH920B8VY6A5PXQB4GVT5QV8PQHEAH9QRJMWPA73A5C89C3DD40ZR0MGDFFFCB0C000"
+  #   model.crs_location = crs_location
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   crs_location = Sketchup::CRSLocation.new
+  #   crs_location.name = "EPSG:27700"
+  #   crs_location.eastings = 505050
+  #   crs_location.northings = 181818
+  #   crs_location.height = 29
+  #   crs_location.tgl_id =
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   model.crs_location = nil
+  #
+  # @note This method does not geolocate the model.
+  #
+  # @note This method does not lookup tgl_id for the crs
+  #
+  # @param [Sketchup::CRSLocation, nil] crs_location
+  #
+  # @raise [ArgumentError] If the +crs_location+ is invalid
+  #
+  # @version SketchUp 2027.0
+  def crs_location=(crs_location)
   end
 
   # The {#definitions} method retrieves a definition list containing all of the
@@ -892,6 +940,19 @@ class Sketchup::Model
   def guid
   end
 
+  # The {#hatch_patterns} method is used to retrieve the {Sketchup::HatchPatterns} object for
+  # this model.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   hatch_patterns = model.hatch_patterns
+  #
+  # @return [Sketchup::HatchPatterns]
+  #
+  # @version SketchUp 2027.0
+  def hatch_patterns
+  end
+
   # The import method is used to load a file by recognizing the file extension
   # and calling appropriate importer.
   #
@@ -962,10 +1023,9 @@ class Sketchup::Model
   def instance_path_from_pid_path(pid_path)
   end
 
-  # The latlong_to_point method converts a latitude and longitude to a Point3d
-  # object in the model. It does not actually work with a LatLong object, but
-  # operates on a 2-element array. The returned point will always be on the
-  # ground (z=0).
+  # The latlong_to_point method converts geographic coordinates to a model
+  # {Geom::Point3d}. It does not take a {Geom::LatLong} object; pass numeric
+  # values instead.
   #
   # @example
   #   # Draw a point in Boulder, Colorado (40.0170N, 105.2830W)
@@ -974,17 +1034,26 @@ class Sketchup::Model
   #   local_point = model.latlong_to_point(lnglat_array)
   #   model.entities.add_cpoint(local_point)
   #
-  # @param [Array(Numeric, Numeric)] lnglat_array
-  #   A 2-element array containing first the longitude then
-  #   the latitude.
+  # @example With altitude
+  #   local_point = model.latlong_to_point([-105.28300, 40.01700, 1655.0])
+  #
+  # @note This method does not account for the model's North Angle (solar north).
+  #
+  # @overload latlong_to_point(lnglat_array)
+  #
+  #   @param [Array(Numeric, Numeric)] lnglat_array
+  #     A 2-element array: [longitude_deg, latitude_deg]
+  #
+  # @overload latlong_to_point(lnglat_array)
+  #
+  #   @param [Array(Numeric, Numeric, Numeric)] lnglat_array
+  #     A 3-element array: [longitude_deg, latitude_deg, altitude_m]
+  #     where altitude is in meters and defaults to 0 if omitted.
   #
   # @return [Geom::Point3d] A Point3d in model coordinates.
   #
-  # @return [Geom::Point3d] a point3d object if successful, false if
-  #   unsuccessful.
-  #
   # @version SketchUp 6.0
-  def latlong_to_point(lnglat_array)
+  def latlong_to_point(arg)
   end
 
   # The {#layers} method retrieves a collection of all {Sketchup::Layers} objects
@@ -1209,27 +1278,32 @@ class Sketchup::Model
   def place_component(componentdef, repeat = false)
   end
 
-  # The point_to_latlong method converts a point in the model to a LatLong so
-  # that you can get its latitude and longitude.
+  # The point_to_latlong method converts a point in the model to geographic
+  # longitude/latitude.
   #
   # This method uses the location information set in ShadowInfo.
-  #
-  # NOTE: SketchUp 6.0 and higher has a change where this method returns a
-  # Point3d instead of a LatLong, where the x and y values contain the LatLong
-  # coordinates.
   #
   # @example
   #   model = Sketchup.active_model
   #   local_point = Geom::Point3d.new(10, 10, 10)
-  #   world_point = model.point_to_latlong(local_point)
+  #   lonlat = model.point_to_latlong(local_point) # Point3d[lon, lat, meters]
+  #   puts "lon=#{lonlat.x}, lat=#{lonlat.y}, z=#{lonlat.z}m"
+  #
+  # @example Get a Geom::LatLong object
+  #   latlong = model.point_to_utm(local_point).to_latlong
+  #
+  # @note Return value is a {Geom::Point3d}, not a {Geom::LatLong}. Components:
+  #   - +x+: longitude in degrees (east-positive)
+  #   - +y+: latitude in degrees (north-positive)
+  #   - +z+: altitude in meters
+  #
+  # @note This method does not account for the model's North Angle (solar north).
+  #   The result is in the unrotated georeference frame.
   #
   # @param [Geom::Point3d] point
-  #   A Point3d object.
+  #   A point in model coordinates.
   #
   # @return [Geom::Point3d] Point3d[longitude_deg, latitude_deg, altitude_m]
-  #
-  # @return [Geom::Point3d, Geom::LatLong] a LatLong or Point3d object. See
-  #   details for information.
   #
   # @version SketchUp 6.0
   def point_to_latlong(point)
@@ -1348,6 +1422,11 @@ class Sketchup::Model
   #
   # @note A bug in SketchUp 2016 and older caused the +.skb+ backup file
   #   written during save to be empty. The +.skp+ file was however valid.
+  #
+  # @note Silently saving a model can cause data loss, if the user has
+  #   previously made changes they did not intend to be saved. If you need
+  #   to save a model to disk to use for an external action, first ask the
+  #   user if they want to save, similarly to how Send to LayOut functions.
   #
   # @note Starting with SketchUp 2021, SketchUp is using a the same file format across versions.
   #   For instance, SketchUp 2021 can open a file made in SketchUp 2022.
