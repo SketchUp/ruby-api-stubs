@@ -309,7 +309,15 @@ class Sketchup::Layer < Sketchup::Entity
   #   layer = layers.add('Hello World')
   #   layer.visible = false
   #
+  # @note The behavior of +layer.visible = false+ differs from the UI when the layer is active.
+  #
+  #   If the active layer is hidden via the API, another layer will become active automatically.
+  #
+  #   Check active layer after hiding to ensure the desired layer is active.
+  #
   # @param [Boolean] visible
+  #
+  # @see LayerFolder#visible=
   #
   # @version SketchUp 6.0
   def visible=(visible)

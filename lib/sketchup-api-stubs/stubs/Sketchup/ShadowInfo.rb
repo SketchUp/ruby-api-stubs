@@ -8,28 +8,28 @@
 #
 # The following shadow information keys are maintained in SketchUp:
 #
-# - +City+ (in Model Info > Geo-location > Set Manual Location...) Note that
+# - +City+ (in Model Info > Geolocate > Set Manual Location...) Note that
 #   'City' is called 'Location' in the UI
-# - +Country+ (in Model Info > Geo-location > Set Manual Location...)
+# - +Country+ (in Model Info > Geolocate > Set Manual Location...)
 # - +Dark+ (in Window > Shadows)
-# - +DayOfYear+
+# - +DayOfYear+ (Read-only, based on ShadowTime)
 # - +DaylightSavings+
 # - +DisplayNorth+
 # - +DisplayOnAllFaces+ (in Window > Shadows)
 # - +DisplayOnGroundPlane+ (in Window > Shadows)
 # - +DisplayShadows+ (in Window > Shadows)
 # - +EdgesCastShadows+ (in Window > Shadows)
-# - +Latitude+ (in Model Info > Geo-location > Set Manual Location...)
+# - +Latitude+ (in Model Info > Geolocate > Set Manual Location...)
 # - +Light+ (in Window > Shadows)
-# - +Longitude+ (in Model Info > Geo-location > Set Manual Location...)
+# - +Longitude+ (in Model Info > Geolocate > Set Manual Location...)
 # - +NorthAngle+
 # - +ShadowTime+ (in Window > Shadows)
-# - +ShadowTime_time_t+ (ShadowTime in Epoch time)
-# - +SunDirection+ (Generated based on ShadowTime)
-# - +SunRise+ (Generated based on ShadowTime)
-# - +SunRise_time_t+ (SunRise in Epoch time)
-# - +SunSet+ (Generated based on ShadowTime)
-# - +SunSet_time_t+ (SunSet in Epoch time)
+# - +ShadowTime_time_t+ (Read-only, ShadowTime in Epoch time)
+# - +SunDirection+ (Read-only, based on ShadowTime)
+# - +SunRise+ (Read-only, based on ShadowTime)
+# - +SunRise_time_t+ (Read-only, SunRise in Epoch time)
+# - +SunSet+ (Read-only, based on ShadowTime)
+# - +SunSet_time_t+ (Read-only, SunSet in Epoch time)
 # - +TZOffset+ (in Window > Shadows)
 # - +UseSunForAllShading+ (in Window > Shadows)
 #
@@ -96,6 +96,8 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   # For numeric properties like "Dark", "Light", "Latitude", and "Longitude",
   # this method is flexible and accepts any +Numeric+ value (+Integer+ or +Float+).
   #
+  # @bug Starting in SketchUp 2026.1 and ending with 2027.0, a +KeyError+ was raised for read-only values. Now it just warns.
+  #
   # @example
   #   model = Sketchup.active_model
   #   shadowinfo = model.shadow_info
@@ -107,9 +109,9 @@ class Sketchup::ShadowInfo < Sketchup::Entity
   # @param [Object] value
   #   The value to be set.
   #
-  # @raise A KeyError is raised if the key is invalid or read-only.
+  # @raise [KeyError] if the key is invalid, starting with SketchUp 2026.1.
   #
-  # @raise [TypeError] if the value is not the correct type for the key.
+  # @raise [TypeError] if the value is not the correct type for the key, starting with SketchUp 2026.1.
   #
   # @return [Object] the value that was set if successful, or false
   #   if unsuccessful.
