@@ -475,11 +475,6 @@ class Sketchup::Entities
   # For the last form that takes a Curve, the curve must be closed - like a
   # circle.
   #
-  # open operation if:
-  #   - The edges do not form a closed loop
-  #   - The edges are not planar
-  #   In these cases use +$!+ to check for an error message if the face creation fails.
-  #
   # @bug Prior to SketchUp 2027.0 calls to {#add_face} with an array of edges would silently fail
   #   and abort any open operation if an existing face was found.
   #
@@ -498,6 +493,10 @@ class Sketchup::Entities
   #   which case the vertex order is ignored and the face is always facing down.
   #
   # @note When using the edge array or curve overload this method will return +nil+ and abort any
+  #   open operation if:
+  #   - The edges do not form a closed loop
+  #   - The edges are not planar
+  #   In these cases use +$!+ to check for an error message if the face creation fails.
   #
   # @overload add_face(entities)
   #

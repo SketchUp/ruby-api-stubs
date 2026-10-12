@@ -15,10 +15,10 @@
 # Extension}[https://developer.sketchup.com/article-creating-a-sketchup-extension]
 #
 # @example
-#   require 'sketchup.rb'
-#   require 'extensions.rb'
+#   require 'sketchup'
+#   require 'extensions'
 #
-#   stair_extension = SketchupExtension.new('Stair Tools", "stair_tools/core')
+#   stair_extension = SketchupExtension.new('Stair Tools', 'stair_tools/core')
 #   stair_extension.version = '1.0.0'
 #   stair_extension.description = 'Tools to draw stairs automatically.'
 #   Sketchup.register_extension(stair_extension, true)

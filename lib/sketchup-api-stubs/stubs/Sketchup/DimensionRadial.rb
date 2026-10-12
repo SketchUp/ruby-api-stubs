@@ -64,13 +64,8 @@ class Sketchup::DimensionRadial < Sketchup::Dimension
   def leader_break_point=(point)
   end
 
-  # The leader_points method returns the 3 significant points along the dimension
+  # The {#leader_points} method returns the 3 significant points along the dimension
   # line in world coordinates.
-  #
-  # objects. Point 0: leader break point, where the text extension attaches. Point 1: attach point,
-  #                      where leader touches the arc/circle. Point 2: opposite
-  #                      point, where the diameter leader touches the circle on
-  #                      the opposite side.
   #
   # @example
   #   pts = dim.leader_points
@@ -79,6 +74,9 @@ class Sketchup::DimensionRadial < Sketchup::Dimension
   #   puts "Opposite point is #{pts[2]}"
   #
   # @return [Array(Geom::Point3d, Geom::Point3d, Geom::Point3d)] Array of 3 Point3d
+  #   objects. Point 0: leader break point, where the text extension attaches. Point 1: attach
+  #   point, where leader touches the arc/circle. Point 2: opposite point, where the diameter
+  #   leader touches the circle on the opposite side.
   #
   # @version SketchUp 2014
   def leader_points

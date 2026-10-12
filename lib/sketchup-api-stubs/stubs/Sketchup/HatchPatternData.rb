@@ -173,13 +173,13 @@ class Sketchup::HatchPatternData
   def save_fill_pattern_to_file(file_name)
   end
 
-  # the file is loaded; any others are ignored.
   #
   # @example
   #   data = Sketchup.active_model.rendering_options.hatch_pattern
   #   data.set_fill_pattern_from_file('C:/patterns/ansi31.pat')
   #
   # @note A .pat file may hold more than one pattern definition. Only the first definition in
+  #   the file is loaded; any others are ignored.
   #
   # @param [String] file_name
   #
