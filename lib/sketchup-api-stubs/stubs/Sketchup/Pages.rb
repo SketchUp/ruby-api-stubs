@@ -73,10 +73,10 @@ class Sketchup::Pages < Sketchup::Entity
   #   status = pages.add "Page 2"
   #   page = pages["Page 2"]
   #
-  # @param index_or_name
+  # @param [Integer, String] index_or_name
   #   The index or the string name of the specific page.
   #
-  # @return page - a Page object if successful
+  # @return [Sketchup::Page] a Page object if successful
   #
   # @version SketchUp 6.0
   def [](index_or_name)
@@ -148,10 +148,10 @@ class Sketchup::Pages < Sketchup::Entity
   #   pages = Sketchup.active_model.pages
   #   status = pages.add_observer observer
   #
-  # @param observer
+  # @param [Sketchup::PagesObserver] observer
   #   An observer.
   #
-  # @return true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def add_observer(observer)
@@ -232,7 +232,7 @@ class Sketchup::Pages < Sketchup::Entity
   #   status = pages.add "Page 2"
   #   model = pages.parent
   #
-  # @return model - the model that contains the pages if successful
+  # @return [Sketchup::Model] the model that contains the pages if successful
   #
   # @version SketchUp 6.0
   def parent
@@ -245,10 +245,10 @@ class Sketchup::Pages < Sketchup::Entity
   #   pages = Sketchup.active_model.pages
   #   status = pages.remove_observer observer
   #
-  # @param observer
+  # @param [Sketchup::PagesObserver] observer
   #   An observer.
   #
-  # @return true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 6.0
   def remove_observer(observer)
@@ -273,7 +273,7 @@ class Sketchup::Pages < Sketchup::Entity
   #
   # @raise [IndexError] if the given +new_index+ is out of range.
   #
-  # @return nil
+  # @return [nil]
   #
   # @version SketchUp 2025.0
   def reorder(page, new_index)
@@ -288,7 +288,7 @@ class Sketchup::Pages < Sketchup::Entity
   #   status = pages.add "Page 2"
   #   page = pages.selected_page
   #
-  # @return page - the currently selected Page object if successful
+  # @return [Sketchup::Page] the currently selected Page object if successful
   #
   # @version SketchUp 6.0
   def selected_page
@@ -307,7 +307,7 @@ class Sketchup::Pages < Sketchup::Entity
   #
   # @param [Sketchup::Page] page
   #
-  # @return status - true if successful
+  # @return [Boolean] true if successful
   #
   # @version SketchUp 6.0
   def selected_page=(page)
@@ -361,7 +361,7 @@ class Sketchup::Pages < Sketchup::Entity
   #   pages = Sketchup.active_model.pages
   #   time = pages.slideshow_time
   #
-  # @return status - true if successful
+  # @return [Float]
   #
   # @version SketchUp 6.0
   def slideshow_time

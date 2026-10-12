@@ -496,23 +496,39 @@ class Sketchup::View
   # The draw_polyline method is used to draw a series of connected line segments
   # from pt1 to pt2 to pt3, and so on.
   #
+  # Pass +true+ as the last argument to close the polyline back to the first
+  # point (equivalent to +GL_LINE_LOOP+).
+  #
   # This method is usually invoked within the draw method of a tool.
   #
-  # @example
-  #   point12 = Geom::Point3d.new 0,0,0
-  #   point13 = Geom::Point3d.new 10,10,10
-  #   point14 = Geom::Point3d.new 20,20,20
-  #   point15 = Geom::Point3d.new 30,30,30
-  #   status = view.draw_polyline point12, point13, point14, point15
+  # @example Open polyline
+  #   point1 = Geom::Point3d.new(0, 0, 0)
+  #   point2 = Geom::Point3d.new(10, 10, 10)
+  #   point3 = Geom::Point3d.new(20, 20, 20)
+  #   point4 = Geom::Point3d.new(30, 30, 30)
+  #   view.draw_polyline(point1, point2, point3, point4)
+  #
+  # @example Closed polyline (triangle)
+  #   point1 = Geom::Point3d.new(0, 0, 0)
+  #   point2 = Geom::Point3d.new(100, 0, 0)
+  #   point3 = Geom::Point3d.new(100, 100, 0)
+  #   view.draw_polyline(point1, point2, point3, true)
   #
   # @overload draw_polyline(points, ...)
   #
-  #   @param [Array<Geom::Point3d>] points An even number of Point3d objects.
+  #   @param [Array<Geom::Point3d>] points Two or more Point3d objects.
   #   @return [Sketchup::View]
   #
   # @overload draw_polyline(points)
   #
   #   @param [Array<Geom::Point3d>] points An array of Point3d objects.
+  #   @return [Sketchup::View]
+  #
+  # @overload draw_polyline(points, ..., close)
+  #
+  #   @param [Array<Geom::Point3d>] points Two or more Point3d objects.
+  #   @param [Boolean] close When +true+, an extra segment is drawn from the
+  #    last point back to the first, closing the polyline.
   #   @return [Sketchup::View]
   #
   # @version SketchUp 6.0
@@ -1207,12 +1223,15 @@ class Sketchup::View
   # given point on the screen.
   #
   # The +x+ and +y+ values returned correspond to the +x+ and +y+ screen coordinates.
-  # Ignore the +z+ values.  If the referenced point is not in the current
+  # Ignore the +z+ values. If the referenced point is not in the current
   # viewport, the +x+ and/or +y+ value may be negative.
   #
   # @example
   #   view = Sketchup.active_model.active_view
   #   point = view.screen_coords(ORIGIN)
+  #
+  # @note This method will return +nil+ if the point cannot be projected to the
+  #   screen. This is most notably the case for the camera's eye position itself.
   #
   # @note Prior to SketchUp 2025.0 this method returned the points as physical
   #   screen coordinates. As of SketchUp 2025.0 the points are returned in
@@ -1222,12 +1241,12 @@ class Sketchup::View
   #
   #   @note Signature for versions prior to SketchUp 2025.0
   #   @version SketchUp 6.0
-  #   @param [Geom::Point3d] model_point Model coordinate.
+  #   @param [Geom::Point3d, Sketchup::Vertex] model_point Model coordinate.
   #
   # @overload screen_coords(model_point)
   #
   #   @version SketchUp 2025.0
-  #   @param [Geom::Point3d] model_point Model coordinate.
+  #   @param [Geom::Point3d, Sketchup::Vertex] model_point Model coordinate.
   #
   # @return [Geom::Point3d] Screen coordinate in pixels (physical prior to SketchUp 2025.0, logical
   #   from 2025.0).
@@ -1237,24 +1256,61 @@ class Sketchup::View
   end
 
   # Set the drawing color for the view based on the direction of a line that you
-  # want to draw. These colors will match the axes colors in the SketchUp model
-  # (typically blue for straight up and down, etc.)
+  # want to draw. These colors will match the primary model axis colors in the SketchUp model
+  # (red, green, blue for the respective axes).
   #
   # This method is usually invoked within the draw method of a tool.
   #
-  # @example
-  #   view = view.set_color_from_line point1, point2
+  # When two {Sketchup::InputPoint} objects are passed instead of plain
+  # {Geom::Point3d} objects, the method uses only the active axis inference to set
+  # the drawing color (red/green/blue for axes). It does not support advanced inference
+  # coloring (like magenta for perpendicular or cyan for parallel) and does not trigger
+  # visual highlighting of other geometry.
   #
-  # @param [Geom::Point3d] point1
-  #   Point3d object representing first point in the line.
+  # Passing plain {Geom::Point3d} objects also derives an axis-based color unless
+  # you override it with the optional +color+ argument.
   #
-  # @param [Geom::Point3d] point2
-  #   Point3d object representing the second point in the line.
+  # @example Basic usage with 3D points (auto axis color)
+  #   view.set_color_from_line(pt1, pt2)
+  #   view.draw_line(pt1, pt2)
   #
-  # @return [Sketchup::View] a View object
+  # @example Explicit color override
+  #   view.set_color_from_line(pt1, pt2, Sketchup::Color.new(255, 0, 0))
+  #   view.draw_line(pt1, pt2)
+  #
+  # @example Using InputPoints to set color by axis inference
+  #   ip1 = view.inputpoint(x1, y1)
+  #   ip2 = view.inputpoint(x2, y2)
+  #   view.set_color_from_line(ip1, ip2)
+  #   view.draw_line(ip1.position, ip2.position)
+  #
+  # @note Uses only the active axis inference to set the color (red/green/blue).
+  #   Does not support advanced inference coloring (like parallel/perpendicular) and
+  #   does not trigger visual highlighting of other geometry.
+  #
+  # @overload set_color_from_line(point1, point2)
+  #
+  #   @param [Geom::Point3d] point1
+  #   @param [Geom::Point3d] point2
+  #
+  # @overload set_color_from_line(point1, point2, color)
+  #
+  #   @param [Geom::Point3d] point1
+  #   @param [Geom::Point3d] point2
+  #   @param [Sketchup::Color, String] color
+  #     Explicit color to force (skips automatic axis/inference color).
+  #     Note that this override will be ignored if the line is parallel to a model axis,
+  #     in which case the corresponding axis color (red, green, or blue) will be used instead.
+  #
+  # @overload set_color_from_line(inputpoint1, inputpoint2)
+  #
+  #   @param [Sketchup::InputPoint] inputpoint1
+  #   @param [Sketchup::InputPoint] inputpoint2
+  #
+  # @return [Sketchup::View] self
   #
   # @version SketchUp 6.0
-  def set_color_from_line(point1, point2)
+  def set_color_from_line(*args)
   end
 
   # The show_frame method is used to show a frame of an Animation object in the

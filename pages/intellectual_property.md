@@ -20,17 +20,10 @@ No encryption is perfect. Like the lock on your door, it’ll keep out the vast 
 
 Over the years we’ve provided two encrypted file formats for SketchUp extensions: .RBS and .RBE files. RBS (which is no longer offered) used a scrambling technology. RBE is the newer format that uses a more sophisticated encryption. Neither of these have been infallible though and we don’t recommend depending solely on them to protect your code. 
 
-## Encryptors, obfuscators, and minifiers
+## Build a cloud based extensions
 
-Other developers use tools to make their Ruby code harder to understand.  Obfuscators make your code more complex, and minifiers remove all unnecessary characters in your code. Both techniques try not to change the functionality of your code but serve to make it harder to read. 
+One of the bets ways to hide your code is to not run it on the user's machine at all. If you do the heavy lifting as a cloud service and only have a UI in the actual SketchUp extension package, it's harder to bypass licensing checks or access the code that matters.
 
-## Compiling your code into a C library
-
-One of the best ways to hide your code is to write it in C and compile it into a library. Unlike with Ruby where you need to distribute your source code, your compiled C code has been translated into machine language binary files. The machine instructions are still human readable with the right tools but they are much more difficult to understand than the original C.
-
-But make no mistake, even this doesn’t completely obscure your logic. Yes, it protects your source code because there’s no way to rehydrate your exact code (including comments and variable names), but a determined hacker can use decompilation to expose your logic. This is true for all software written in compiled code, not just SketchUp extensions. Decompilation is sometimes referred to as turning a sausage back into a pig.  There’s only so much that can be done, but with the right tools you can at least get the sausage into the shape of a pig.
-
-Your C extension will still need Ruby code but if you keep your Ruby simple (e.g. just the UI code) then you have less to lose from someone stealing this code. 
 
 ## Layering multiple levels of protection
 

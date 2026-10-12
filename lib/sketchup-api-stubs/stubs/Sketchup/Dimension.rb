@@ -32,7 +32,7 @@ class Sketchup::Dimension < Sketchup::Drawingelement
   # @param observer
   #   A DimensionObserver.
   #
-  # @return true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 2014
   def add_observer(observer)
@@ -53,7 +53,7 @@ class Sketchup::Dimension < Sketchup::Drawingelement
   #     puts "Arrow type is closed"
   #   end
   #
-  # @return a numerical representation of the arrow type
+  # @return [Integer] a numerical representation of the arrow type
   #
   # @version SketchUp 2014
   def arrow_type
@@ -100,7 +100,7 @@ class Sketchup::Dimension < Sketchup::Drawingelement
   # @example
   #   aligned = dim.has_aligned_text?
   #
-  # @return [Boolean] status - true if text is aligned to the dimension.
+  # @return [Boolean] - true if text is aligned to the dimension.
   #   False if dimension text is aligned to the screen.
   #
   # @version SketchUp 2014
@@ -113,7 +113,7 @@ class Sketchup::Dimension < Sketchup::Drawingelement
   # @example
   #   plane = dim.plane
   #
-  # @return the plane of the dimension
+  # @return [Float, Float, Float, Float]
   #
   # @version SketchUp 2014
   def plane
@@ -134,7 +134,7 @@ class Sketchup::Dimension < Sketchup::Drawingelement
   # @param observer
   #   A DimensionObserver.
   #
-  # @return true if successful, false if unsuccessful.
+  # @return [Boolean] true if successful, false if unsuccessful.
   #
   # @version SketchUp 2014
   def remove_observer(observer)
@@ -145,7 +145,7 @@ class Sketchup::Dimension < Sketchup::Drawingelement
   # @example
   #   dimtext = dim.text
   #
-  # @return the dimension text
+  # @return [String] the dimension text
   #
   # @version SketchUp 2014
   def text

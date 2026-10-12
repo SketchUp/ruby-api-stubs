@@ -197,7 +197,7 @@ class Sketchup::Material < Sketchup::Entity
   #   material.ao_texture = 'path/to/ao_texture.png'
   #   material.ao_strength = 1.0
   #
-  # @param [Float] strenght
+  # @param [Float] strength
   #   A value between +0.0+ and +1.0+.
   #
   # @see #ao_enabled?
@@ -207,7 +207,7 @@ class Sketchup::Material < Sketchup::Entity
   # @see #ao_texture=
   #
   # @version SketchUp 2025.0
-  def ao_strength=(strenght)
+  def ao_strength=(strength)
   end
 
   #
@@ -266,7 +266,7 @@ class Sketchup::Material < Sketchup::Entity
   # color of the texture.
   #
   # @example
-  #   materials = Sketchup.active_model.materials.add('Example')
+  #   material = Sketchup.active_model.materials.add('Example')
   #   material.color = 'red'
   #   color = material.color
   #
@@ -397,6 +397,69 @@ class Sketchup::Material < Sketchup::Entity
   #
   # @version SketchUp 6.0
   def display_name
+  end
+
+  # The {#duplicate} method creates a copy of the material with all its properties.
+  #
+  # The duplicated material will have a unique name based on the original material's name.
+  #
+  # @example
+  #   materials = Sketchup.active_model.materials
+  #   original = materials.add('Joe')
+  #   original.color = 'red'
+  #   duplicate = original.duplicate
+  #   puts duplicate.name  # Outputs: "Joe1"
+  #   puts duplicate.color # Outputs: Color(255, 0, 0, 255)
+  #
+  # @raise [RuntimeError] if the material is used by a layer or image.
+  #
+  # @return [Sketchup::Material] the newly created material
+  #
+  # @version SketchUp 2026.2
+  def duplicate
+  end
+
+  # Retrieves the hatch pattern assigned to the material.
+  #
+  # The pattern fills the section cut of groups and components painted with this material,
+  # including nested content that inherits the material. A pattern assigned to the group or
+  # component itself takes precedence over its material's pattern, which in turn takes precedence
+  # over the section plane's pattern.
+  #
+  # @example
+  #   material = Sketchup.active_model.materials["Concrete"]
+  #   hatch_pattern = material.hatch_pattern
+  #   puts hatch_pattern.name if hatch_pattern
+  #
+  # @return [Sketchup::HatchPattern, nil]
+  #
+  # @version SketchUp 2027.0
+  def hatch_pattern
+  end
+
+  # Assigns a hatch pattern to the material.
+  #
+  # The pattern fills the section cut of groups and components painted with this material,
+  # including nested content that inherits the material. A pattern assigned to the group or
+  # component itself takes precedence over its material's pattern, which in turn takes precedence
+  # over the section plane's pattern.
+  #
+  # @example
+  #   model = Sketchup.active_model
+  #   hatch_patterns = model.hatch_patterns
+  #   material = model.materials.add("Concrete")
+  #   material.hatch_pattern = hatch_patterns['Pattern1']
+  #
+  # @param [Sketchup::HatchPattern, nil] pattern
+  #   the pattern to assign, or +nil+ to clear the assignment.
+  #
+  # @raise [ArgumentError] if the pattern does not belong to the material's model.
+  #
+  # @raise [ArgumentError] if a pattern is given and the material belongs to a {Sketchup::Layer} or
+  #   a {Sketchup::Image}. Clearing with +nil+ is always allowed.
+  #
+  # @version SketchUp 2027.0
+  def hatch_pattern=(pattern)
   end
 
   # The {#materialType} method retrieves the type of the material.

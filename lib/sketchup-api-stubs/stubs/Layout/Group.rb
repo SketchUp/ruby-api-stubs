@@ -19,6 +19,56 @@ class Layout::Group < Layout::Entity
 
   # Instance Methods
 
+  # The {#clip_mask} method returns the clip mask entity for the
+  # {Layout::Group}, or +nil+ if it does not have one.
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   entities = doc.shared_entities
+  #   entities.each { |entity|
+  #     entity_array.push(entity)
+  #   }
+  #   group = Layout::Group.new(entity_array)
+  #   clip_mask = group.clip_mask
+  #
+  # @return [Layout::Ellipse, Layout::Path, Layout::Rectangle, nil]
+  #
+  # @version LayOut 2026.2
+  def clip_mask
+  end
+
+  # The {#clip_mask=} method sets a clip mask for the {Layout::Group}.
+  # It must not currently exist in a {Layout::Document} or {Layout::Group}.
+  #
+  # @example
+  #   doc = Layout::Document.open("C:/path/to/document.layout")
+  #   entities = doc.shared_entities
+  #   entities.each { |entity|
+  #     entity_array.push(entity)
+  #   }
+  #   group = Layout::Group.new(entity_array)
+  #   rect = Layout::Rectangle.new([[2, 2], [3, 3]]);
+  #   model.clip_mask = rect
+  #
+  # @param [Layout::Ellipse, Layout::Path, Layout::Rectangle, nil] clip_mask
+  #
+  # @raise [ArgumentError] if clip_mask is already in a {Layout::Document} or
+  #   {Layout::Group}
+  #
+  # @raise [ArgumentError] if clip_mask is not a {Layout::Rectangle},
+  #   {Layout::Ellipse}, or {Layout::Path}
+  #
+  # @raise [ArgumentError] if clip_mask and group bounds do not overlap
+  #
+  # @raise [LockedLayerError] if the {Layout::Group} is on a locked
+  #   {Layout::Layer}
+  #
+  # @raise [LockedEntityError] if the {Layout::Group} is locked
+  #
+  # @version LayOut 2026.2
+  def clip_mask=(clip_mask)
+  end
+
   # The {#entities} method returns the {Layout::Entities} that belong to the
   # {Layout::Group}.
   #

@@ -28,6 +28,101 @@
 #   # Attach the observer.
 #   Sketchup.active_model.add_observer(MyModelObserver.new)
 #
+# @example
+#   # This example demonstrates handling both empty and non-empty transactions,
+#   # while also showing how the observer event queuing works.
+#   # The key difference is that onTransactionCommit is called when the transaction
+#   # contains model changes, while onTransactionEmpty is called when no changes were made.
+#   #
+#   # IMPORTANT: Remember that ALL callbacks fire at commit time, not when operations occur.
+#
+#   class TransactionObserver < Sketchup::ModelObserver
+#
+#     # Called for any transaction, but remember this fires at commit time,
+#     # not when start_operation is actually called
+#     def onTransactionStart(model)
+#       puts "Transaction started callback fired: #{Time.now}"
+#       # We can't actually track when the transaction really started,
+#       # so we just record when the callback fired
+#       @callback_time = Time.now
+#     end
+#
+#     # Called for transactions that modified the model
+#     # This fires immediately after onTransactionStart at commit time
+#     def onTransactionCommit(model)
+#       # We can only calculate time between callbacks, not actual operation time
+#       elapsed = Time.now - @callback_time
+#       puts "Transaction committed with changes (#{elapsed.round(3)}s after callback)"
+#       puts "Note: All callbacks fired at commit time, not during operations"
+#       handle_transaction_completion(model, :with_changes)
+#     end
+#
+#     # Called for transactions that didn't modify the model
+#     # This fires immediately after onTransactionStart at commit time
+#     def onTransactionEmpty(model)
+#       # We can only calculate time between callbacks, not actual operation time
+#       elapsed = Time.now - @callback_time
+#       puts "Transaction committed with NO changes (#{elapsed.round(3)}s after callback)"
+#       puts "Note: All callbacks fired at commit time, not during operations"
+#       handle_transaction_completion(model, :empty)
+#     end
+#
+#     # Common handler for both types of transaction completions
+#     def handle_transaction_completion(model, type)
+#       puts "Transaction complete (#{type}): #{Time.now}"
+#       # Perform actions needed for any completed transaction
+#       # (for example, updating UI, logging, etc.)
+#     end
+#
+#     def onTransactionAbort(model)
+#       puts "Transaction aborted: #{Time.now}"
+#     end
+#   end
+#
+#   # Attach the observer
+#   observer = TransactionObserver.new
+#   Sketchup.active_model.add_observer(observer)
+#
+#   # Demonstration of the queuing behavior
+#   puts "DEMONSTRATION OF OBSERVER EVENT QUEUING:"
+#   puts "1. Starting transaction at: #{Time.now}"
+#   model = Sketchup.active_model
+#   model.start_operation("Transaction Test", true)
+#
+#   # Notice that no observer callbacks fire at this point
+#   puts "2. After start_operation - no callbacks fired yet: #{Time.now}"
+#   puts "3. Now adding geometry..."
+#   model.entities.add_line([0,0,0], [100,0,0])
+#
+#   # Still no observer callbacks
+#   puts "4. After adding geometry - still no callbacks: #{Time.now}"
+#   puts "5. Now committing transaction..."
+#
+#   # All observer events will fire when we commit
+#   model.commit_operation
+#
+#   # The callbacks have now fired in sequence at commit time
+#   puts "6. After commit_operation - ALL callbacks have now fired: #{Time.now}"
+#
+#   # Try an empty transaction too
+#   puts "\nEMPTY TRANSACTION TEST:"
+#   puts "1. Starting empty transaction: #{Time.now}"
+#   model.start_operation("Empty Test", true)
+#   puts "2. Committing with no changes..."
+#   model.commit_operation
+#   puts "3. After commit - onTransactionStart and onTransactionEmpty fired: #{Time.now}"
+#
+# @note Since SketchUp 2016, all observer events within a transaction are queued and
+#   fired only after the operation is committed. This means callbacks like
+#   {#onTransactionStart} and other model events do not fire in real-time, but are
+#   delayed until the transaction completes. The callbacks fire in the correct sequence,
+#   but they all occur at commit time, not when the operations themselves happen.
+#   This behavior change was made to improve performance and stability.
+#
+# @note The API currently lacks a method to query the current operation state
+#   (e.g., whether a transaction is currently open). This limitation means
+#   observers cannot be used to monitor the real-time state of transactions.
+#
 # @version SketchUp 6.0
 class Sketchup::ModelObserver
 
@@ -113,6 +208,9 @@ class Sketchup::ModelObserver
 
   # The {#onDeleteModel} method is invoked when a model is deleted.
   #
+  # @deprecated This callback is deprecated. To handle model close events, use
+  #   {Sketchup::AppObserver#onCloseModel} instead.
+  #
   # @example
   #   def onDeleteModel(model)
   #     puts "onDeleteModel: #{model}"
@@ -127,6 +225,9 @@ class Sketchup::ModelObserver
   end
 
   # The {#onEraseAll} method is invoked when everything in a model is erased.
+  #
+  # @deprecated This callback is deprecated. To handle model close events, use
+  #   {Sketchup::AppObserver#onCloseModel} instead.
   #
   # @example
   #   def onEraseAll(model)
@@ -281,7 +382,13 @@ class Sketchup::ModelObserver
   def onTransactionAbort(model)
   end
 
-  # The {#onTransactionCommit} method is invoked when a transaction is completed.
+  # The {#onTransactionCommit} method is invoked when a transaction containing
+  # model changes is completed. This callback is only triggered for transactions
+  # that actually modified the model.
+  #
+  # If a transaction is committed without any model changes, {#onTransactionEmpty} will be
+  # called instead of this method. This is important to understand when implementing
+  # transaction event handlers.
   #
   # @example
   #   def onTransactionCommit(model)
@@ -294,17 +401,27 @@ class Sketchup::ModelObserver
   #
   # @see Sketchup::Model#commit_operation
   #
+  # @see #onTransactionEmpty
+  #
   # @version SketchUp 6.0
   def onTransactionCommit(model)
   end
 
   # The {#onTransactionEmpty} method is invoked when a transaction
   # (aka an undoable operation) starts and then is committed without anything
-  # being altered in between.
+  # being altered in between. This callback is triggered instead of {#onTransactionCommit}
+  # when a transaction contains no model changes.
+  #
+  # This behavior is important to understand when implementing handlers for transaction events.
+  # If you need a unified handler for all committed transactions (both empty and non-empty),
+  # you'll need to implement both callbacks.
   #
   # @example
   #   def onTransactionEmpty(model)
   #     puts "onTransactionEmpty: #{model}"
+  #     # If you need the same handling for both empty and non-empty transactions,
+  #     # you can manually call your onTransactionCommit handler:
+  #     # onTransactionCommit(model)
   #   end
   #
   # @param [Sketchup::Model] model
@@ -313,13 +430,15 @@ class Sketchup::ModelObserver
   #
   # @see Sketchup::Model#start_operation
   #
+  # @see Sketchup::Model#commit_operation
+  #
   # @version SketchUp 6.0
   def onTransactionEmpty(model)
   end
 
   # The {#onTransactionRedo} method is invoked when the user "redoes" a
   # transaction (aka undo operation.) You can programmatically fire a redo by
-  # calling +Sketchup.sendAction("editRedo")+.
+  # calling <code>Sketchup.send_action('editRedo:')</code>.
   #
   # @example
   #   def onTransactionRedo(model)
@@ -339,8 +458,15 @@ class Sketchup::ModelObserver
   #
   # @example
   #   def onTransactionStart(model)
+  #     # Remember: This is triggered at commit time, not when start_operation is called
   #     puts "onTransactionStart: #{model}"
   #   end
+  #
+  # @note This callback is not fired immediately when {Sketchup::Model#start_operation}
+  #   is called. Instead, it is queued and triggered when the transaction is committed,
+  #   firing just before {#onTransactionCommit} or {#onTransactionEmpty}. Since
+  #   SketchUp 2016, all transaction-related events are queued and fired at commit time
+  #   in the appropriate sequence, rather than in real-time when the operations occur.
   #
   # @param [Sketchup::Model] model
   #
@@ -354,7 +480,7 @@ class Sketchup::ModelObserver
 
   # The {#onTransactionUndo method} is invoked when the user "undoes" a
   # transaction (aka undo operation.) You can programmatically fire an undo by
-  # calling +Sketchup.sendAction("editUndo")+.
+  # calling <code>Sketchup.send_action('editUndo:')</code>.
   #
   # @example
   #   def onTransactionUndo(model)

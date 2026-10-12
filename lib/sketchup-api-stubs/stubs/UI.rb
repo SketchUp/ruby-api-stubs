@@ -207,7 +207,15 @@ module UI
   # of SketchUp's menus.
   #
   # Valid menu names are: +'File'+, +'Edit'+, +'View'+, +'Camera'+, +'Draw'+,
-  # +'Tools'+, +'Window'+, +'Extensions'+, +'Help'+ and +'Developer'+.
+  # +'Tools'+, +'Window'+, +'Extensions'+, +'Help'+, +'Developer'+ and
+  # +'Procedures'+.
+  #
+  # The +'Extensions'+ menu was named +'Plugins'+ prior to SketchUp 2015. For
+  # backward compatibility +'Plugins'+ still works.
+  #
+  # The +'Developer'+ menu was added with SketchUp 2021.1.
+  #
+  # The +'Procedures'+ menu was added with SketchUp 2027.0.
   #
   # @bug In versions prior to SketchUp 2018 this would crash if you passed an
   #   empty string.
@@ -217,11 +225,6 @@ module UI
   #   tool_menu.add_item("Cheese Tool") {
   #     UI.messagebox("Cheese activated.")
   #   }
-  #
-  # @note The +'Extensions'+ menu was named +'Plugins'+ prior to SketchUp 2015.
-  #   For backward compatibility +'Plugins'+ still works.
-  #
-  # @note +'Developer'+ menu was added with SketchUp 2021.1.
   #
   # @param [String] menu_name
   #   The name of a supported menu.
@@ -414,6 +417,9 @@ module UI
   # it does not, such as when {Sketchup::Model#start_operation} has disabled UI
   # updates.
   # This only affects macOS, on Windows the toolbars are always refreshing.
+  #
+  # @deprecated As of SketchUp 2027.0 this is no longer needed. Toolbar state
+  #   refreshes automatically on both platforms.
   #
   # @example
   #   UI.refresh_toolbars
@@ -704,8 +710,9 @@ module UI
   # See this blog post for an detailed example of custom animation using timers:
   # http://sketchupapi.blogspot.com/2008/10/animate-yo-cheese.html
   #
-  # Note that there is a bug that if you open a modal window in a non-repeating
-  # timer the timer will repeat until the window is closed.
+  # @bug Prior to SketchUp 2023.1, opening a modal window in a non-repeating
+  #   timer could cause the timer to repeat until the window closed. This issue
+  #   has been fixed and was not reproducible in later versions on Windows or macOS.
   #
   # @example
   #   # Beep once after 10 seconds.

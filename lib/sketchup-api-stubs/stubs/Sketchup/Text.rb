@@ -58,6 +58,12 @@ class Sketchup::Text < Sketchup::Drawingelement
   #   # Have a text annotation attached to a drawing element and selected
   #   Sketchup.active_model.selection[0].attached_to
   #
+  # @note When the text object is inside a component definition, the instance path
+  #   is relative to this parent definition, i.e. it does not include the instance
+  #   of this parent component or its ancestors. Since such a path cannot be
+  #   returned as a {Sketchup::InstancePath}, this method returns +nil+ for it, as
+  #   it does for a leader that is not attached to any entity.
+  #
   # @return [Array(Sketchup::InstancePath, Geom::Point3d), nil]
   #
   # @version SketchUp 2019
@@ -71,6 +77,10 @@ class Sketchup::Text < Sketchup::Drawingelement
   #   # Have a text annotation attached to a drawing element and selected
   #   array = Sketchup.active_model.selection[0].attached_to
   #   Sketchup.active_model.selection[0].attached_to = [array[0], Geom::Point3d.new(0, 0, 0)]
+  #
+  # @note When the text object is inside a component definition, the instance path
+  #   is relative to this parent definition, i.e. it does not include the instance
+  #   of this parent component or its ancestors.
   #
   # @param [Array(Sketchup::InstancePath, Geom::Point3d)] path
   #
@@ -105,6 +115,65 @@ class Sketchup::Text < Sketchup::Drawingelement
   #
   # @version SketchUp 6.0
   def display_leader?
+  end
+
+  # The {#font} method returns the font properties of the Text object as a Hash.
+  #
+  # @example Get font properties
+  #   text = Sketchup.active_model.entities.add_text("Hello", ORIGIN)
+  #   props = text.font
+  #   # => { name: "Arial", size: 12, bold: false, italic: false }
+  #   puts props[:name]  # => "Arial"
+  #   puts props[:size]  # => 12
+  #
+  # @return [Hash{Symbol => String, Integer, Boolean}, nil] A Hash of font
+  #   properties. Text is created with a default font, so a Hash is typically
+  #   always returned. +nil+ only if no per-entity font is associated (the
+  #   model default is used for display in that case).
+  #
+  #   Keys:
+  #
+  #   - +:name+   [String]  Font face name.
+  #   - +:size+   [Integer] Size in points (1–1000).
+  #   - +:bold+   [Boolean] Bold weight.
+  #   - +:italic+ [Boolean] Italic style.
+  #
+  # @version SketchUp 2026.2
+  def font
+  end
+
+  # The {#font=} method sets the font properties of the Text object.
+  #
+  # Keys omitted from the hash inherit their values from the entity's current
+  # font (or the model default if no per-entity font has been set yet).
+  # Passing an empty Hash is a no-op.
+  #
+  # @example Set all properties at once
+  #   text = Sketchup.active_model.entities.add_text("Hello", ORIGIN)
+  #   text.font = { name: "Times New Roman", size: 18, bold: false, italic: true }
+  #
+  # @example Change only the size, keeping all other properties
+  #   text.font = { size: 24 }
+  #
+  # @note If the +:name+ value is not a font installed on the current system,
+  #   SketchUp substitutes a system fallback font without raising an error.
+  #   The stored face name is still set to the requested value and will be
+  #   honored if the font is later installed.
+  #
+  # @param [Hash] properties
+  #   Font properties. Keys:
+  #
+  #   - +:name+   [String]  Font face name.
+  #   - +:size+   [Integer] Size in points. Must be in the range 1–1000.
+  #   - +:bold+   [Boolean] Bold weight.
+  #   - +:italic+ [Boolean] Italic style.
+  #
+  # @raise [TypeError] if +properties+ is not a Hash.
+  #
+  # @raise [RangeError] if +:size+ is outside the range 1–1000.
+  #
+  # @version SketchUp 2026.2
+  def font=(properties)
   end
 
   # The has_leader method is used to determine if the Text object has a leader.
@@ -217,6 +286,11 @@ class Sketchup::Text < Sketchup::Drawingelement
 
   # The set_text method is used to set the text within a Text object without
   # recording an Undo operation.
+  #
+  # @bug {Sketchup::Text} objects without leaders that are attached to the model viewport
+  #   will not immediatly display content changes. Changes can be triggered by the user
+  #   with a view refresh (clicking inside the view) or programmatically by calling
+  #   {Sketchup::View#invalidate}.
   #
   # @example
   #   text = text.set_text "This is another text"
