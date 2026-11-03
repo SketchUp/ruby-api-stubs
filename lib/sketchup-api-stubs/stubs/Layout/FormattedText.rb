@@ -37,11 +37,10 @@ class Layout::FormattedText < Layout::Entity
   # [+ANCHOR_TYPE_CENTER_CENTER+]
   # [+ANCHOR_TYPE_BOTTOM_CENTER+]
   #
-  # Layout::FormattedText::ANCHOR_TYPE_TOP_LEFT)
-  #
   # @example
   #   anchor = Geom::Point2d.new(1, 1)
   #   text = Layout::FormattedText.new("C:/Test.txt", anchor,
+  #     Layout::FormattedText::ANCHOR_TYPE_TOP_LEFT)
   #
   # @overload new_from_file(path, bounds)
   #
@@ -132,12 +131,12 @@ class Layout::FormattedText < Layout::Entity
   # The {#display_text} method returns the display text representation of the
   # {Layout::FormattedText}.
   #
-  # Layout::FormattedText::ANCHOR_TYPE_TOP_LEFT) doc.add_entity(text, doc.layers.first,
-  # doc.pages.first) text = text.display_text(doc.pages.first)
-  #
   # @example
   #   anchor = Geom::Point2d.new(1, 1)
   #   text = Layout::FormattedText.new("<PageNumber>", anchor,
+  #     Layout::FormattedText::ANCHOR_TYPE_TOP_LEFT)
+  #   doc.add_entity(text, doc.layers.first, doc.pages.first)
+  #   text = text.display_text(doc.pages.first)
   #
   # @note Passing an invalid {Layout::Page} will prevent an auto-text tag from
   #   being substituted with its display representation.
@@ -306,12 +305,11 @@ class Layout::FormattedText < Layout::Entity
   # The {#rtf=} method sets the raw RTF representation of the
   # {Layout::FormattedText}.
   #
-  # text.\par}"
-  #
   # @example
   #   anchor = Geom::Point2d.new(1, 1)
   #   text = Layout::FormattedText.new("Test", anchor, Layout::FormattedText::ANCHOR_TYPE_TOP_LEFT)
-  #   text.rtf = "{\rtf1\ansi{\fonttbl\f0\fswiss Helvetica;}\f0\pard This is some {\b bold}
+  #   text.rtf = "{\rtf1\ansi{\fonttbl\f0\fswiss Helvetica;}\f0\pard " \
+  #     "This is some {\b bold} text.\par}"
   #
   # @param [String] rtf_text
   #

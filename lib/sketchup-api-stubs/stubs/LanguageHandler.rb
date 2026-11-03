@@ -8,9 +8,6 @@
 # language folder and encoded in UTF-8. The strings file should include
 # "key"="value" string pairs in the following format:
 #
-# language code gocorp_swiveldriver/Resources/fr/swiveldriver.strings
-#   gocorp_swiveldriver/Resources/es/swiveldriver.strings
-#
 # @example Example code that uses LanguageHandler:
 #   # Create a global language handler object
 #   swiveldriver_lang_handler = LanguageHandler.new('swiveldriver.strings')
@@ -26,7 +23,10 @@
 #   gocorp_swiveldriver.rb <- creates the SketchupExtension instance
 #   gocorp_swiveldriver/
 #   gocorp_swiveldriver/Resources/
-#   gocorp_swiveldriver/Resources/en/swiveldriver.strings <- OPTIONAL localization files by
+#   gocorp_swiveldriver/Resources/en/swiveldriver.strings <- OPTIONAL localization files
+#                                                            by language code
+#   gocorp_swiveldriver/Resources/fr/swiveldriver.strings
+#   gocorp_swiveldriver/Resources/es/swiveldriver.strings
 #
 # @version SketchUp 2014
 class LanguageHandler

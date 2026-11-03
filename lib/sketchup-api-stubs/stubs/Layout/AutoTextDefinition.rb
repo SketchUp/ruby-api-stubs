@@ -457,7 +457,8 @@ class Layout::AutoTextDefinition
   # @example
   #   doc = Layout::Document.open("C:/path/to/document.layout")
   #   page_number_def = doc.auto_text_definitions.add("RomanPageNumbers",
-  #     Layout::AutoTextDefinition::TYPE_PAGE_NUMBER) number_style = page_number_def.number_style
+  #     Layout::AutoTextDefinition::TYPE_PAGE_NUMBER)
+  #   number_style = page_number_def.number_style
   #
   # @raise [ArgumentError] if the {Layout::AutoTextDefinition}'s type is not
   #   +Layout::AutoTextDefinition::TYPE_PAGE_NUMBER+,

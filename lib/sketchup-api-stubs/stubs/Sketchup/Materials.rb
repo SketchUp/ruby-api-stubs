@@ -30,8 +30,8 @@ class Sketchup::Materials < Sketchup::Entity
   # @overload [](index)
   #
   #   @param [Integer] index
-  #    A number representing the material's index in an array of Material
-  #    objects.
+  #     A number representing the material's index in an array of Material
+  #     objects.
   #   @return [Sketchup::Material, nil] a Material object on success, Nil on failure
   #
   # @overload [](name)
@@ -91,8 +91,8 @@ class Sketchup::Materials < Sketchup::Entity
   # @overload [](index)
   #
   #   @param [Integer] index
-  #    A number representing the material's index in an array of Material
-  #    objects.
+  #     A number representing the material's index in an array of Material
+  #     objects.
   #   @return [Sketchup::Material, nil] a Material object on success, Nil on failure
   #
   # @overload [](name)

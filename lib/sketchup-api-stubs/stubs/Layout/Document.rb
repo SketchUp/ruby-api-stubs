@@ -568,7 +568,7 @@ class Layout::Document
   # @overload save
   #
   #   @raise [ArgumentError] if the {Layout::Document} hasn't been saved with a
-  #    path yet
+  #     path yet
   #
   # @overload save(path, version = Layout::Document::VERSION_CURRENT)
   #

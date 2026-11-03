@@ -71,8 +71,8 @@ class Sketchup::Face < Sketchup::Drawingelement
   # @overload area(transform)
   #
   #   @param [Geom::Transformation] transform
-  #    A Transformation object or array that can be interpreted as a
-  #    Transformation object.
+  #     A Transformation object or array that can be interpreted as a
+  #     Transformation object.
   #   @return [Float] the area of the face in square inches.
   #
   # @version SketchUp 6.0
@@ -329,25 +329,25 @@ class Sketchup::Face < Sketchup::Drawingelement
   # @overload get_UVHelper(front = true, back = true)
   #
   #   @param [Boolean] front
-  #    True if you want the texture coordinates for the front
-  #    face, false if not.
+  #     True if you want the texture coordinates for the front
+  #     face, false if not.
   #
   #   @param [Boolean] back
-  #    True if you want the texture coordinates for the back
-  #    face, false if not.
+  #     True if you want the texture coordinates for the back
+  #     face, false if not.
   #
   # @overload get_UVHelper(front = true, back = true, texturewriter)
   #
   #   @param [Boolean] front
-  #    True if you want the texture coordinates for the front
-  #    face, false if not.
+  #     True if you want the texture coordinates for the front
+  #     face, false if not.
   #
   #   @param [Boolean] back
-  #    True if you want the texture coordinates for the back
-  #    face, false if not.
+  #     True if you want the texture coordinates for the back
+  #     face, false if not.
   #
   #   @param [Sketchup::TextureWriter] texturewriter
-  #    An optional TextureWriter object.
+  #     An optional TextureWriter object.
   #
   # @return [Sketchup::UVHelper]
   #
@@ -723,7 +723,7 @@ class Sketchup::Face < Sketchup::Drawingelement
   #
   # @overload position_material(material, points, on_front, projection)
   #
-  #   @version SketchUp 6.0
+  #   @version SketchUp 2021.1
   #
   #   This variant positions a material on the face's plane with projection.
   #
@@ -756,6 +756,8 @@ class Sketchup::Face < Sketchup::Drawingelement
   # @see #get_texture_projection
   #
   # @see #clear_texture_projection
+  #
+  # @version SketchUp 6.0
   def position_material(*args)
   end
 

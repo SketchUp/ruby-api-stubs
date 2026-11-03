@@ -287,4 +287,21 @@ class Layout::Table < Layout::Entity
   def remove_row(index)
   end
 
+  # Resizes all rows and columns in the table to fit their text content.
+  #
+  # @example
+  #   bounds = Geom::Bounds2d.new(1, 1, 4, 4)
+  #   table = Layout::Table.new(bounds, 3, 3)
+  #   table.size_to_fit
+  #
+  # @raise [Layout::LockedLayerError] if the table is on a locked layer
+  #
+  # @raise [Layout::LockedEntityError] if the table is locked
+  #
+  # @return [Layout::Table]
+  #
+  # @version LayOut 2027.0
+  def size_to_fit
+  end
+
 end
