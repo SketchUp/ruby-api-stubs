@@ -15,8 +15,10 @@ permissions:
 
 jobs:
   rake:
-    name: >-
-      OS ${{ matrix.os }}, Ruby ${{ matrix.ruby }}
+    # Keep this name free of version numbers: it is used as a required status
+    # check on `main`, and renaming it would block merges until the ruleset
+    # is updated.
+    name: rake (${{ matrix.os }})
     env:
       CI: true
 
@@ -28,11 +30,11 @@ jobs:
       fail-fast: false
       matrix:
         os: [ macos-latest, windows-latest ]
-        ruby: [ 3.2 ]
+        ruby: [ '3.4' ]
 
     steps:
       - name: Checkout source
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
         with:
           submodules: recursive
 
